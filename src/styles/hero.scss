@@ -7,21 +7,17 @@
   flex-direction: column;
   color: #fff;
 
-  background: #000;
-  background-size: cover;
-  background-position: center;
+  background: url(../images/paint_bg_min.jpg), #000;
+  background-size: cover, cover;
+  background-position: center, center;
 
   h1 {
-    font-size: 18rem;
+    font-size: 16rem;
     font-weight: 900;
     margin: 0;
 
-    background: url('../images/simse.jpg');
-    background-size: 100vw;
-    background-position: center 20%;
-
-    -webkit-text-fill-color: transparent;
-    -webkit-background-clip: text;
+    color: #fff;
+    text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
   }
 
   h2 {
