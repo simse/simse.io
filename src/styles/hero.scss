@@ -1,0 +1,31 @@
+.hero {
+  width: 100%;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #fff;
+
+  background: #000;
+  background-size: cover;
+  background-position: center;
+
+  h1 {
+    font-size: 18rem;
+    font-weight: 900;
+    margin: 0;
+
+    background: url('../images/simse.jpg');
+    background-size: 100vw;
+    background-position: center 20%;
+
+    -webkit-text-fill-color: transparent;
+    -webkit-background-clip: text;
+  }
+
+  h2 {
+    font-size: 4rem;
+    margin-top: 0px;
+  }
+}

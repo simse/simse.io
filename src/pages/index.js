@@ -5,12 +5,14 @@ import Layout from '../components/layout'
 import Image from '../components/image'
 import SEO from '../components/seo'
 
+// Page components
+import Hero from '../components/hero'
+
 const IndexPage = () => (
   <Layout>
-    <SEO title="Home" keywords={[`gatsby`, `application`, `react`]} />
-    <h1>Hello it's Simon Sorensen here.</h1>
+    <SEO title="Welcome" keywords={[`gatsby`, `application`, `react`]} />
 
-    <p>Will you bear with me while I finish this website?</p>
+    <Hero />
   </Layout>
 )
 
