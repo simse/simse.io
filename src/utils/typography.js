@@ -1,11 +1,11 @@
 import Typography from "typography"
 
 const typography = new Typography({
-  baseFontSize: "18px",
+  baseFontSize: "22px",
   headerFontFamily: [
-    "SF Pro Display",
+    "San Fran",
   ],
-  bodyFontFamily: ["Spectral"],
+  bodyFontFamily: ["San Fran"],
 })
 
 export default typography

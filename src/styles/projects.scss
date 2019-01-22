@@ -1,9 +1,79 @@
 .projects {
   color: #fff;
-  padding: 50px 0;
+  padding: 100px 0;
 
   h2 {
     text-align: center;
     font-size: 3rem;
+  }
+
+  .projects-table {
+    max-width: 65%;
+    margin: 0 auto;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+
+    table {
+      margin-bottom: 0;
+    }
+
+    thead {
+      font-weight: bold;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    td {
+      padding: 16px 22px;
+    }
+
+    tr:nth-child(even) {
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    .desc {
+      width: 50%;
+    }
+
+    span {
+      padding: 4px 10px;
+      border-radius: 8px;
+      font-size: .9rem;
+
+      &.blue {
+        background: linear-gradient(to right, #396afc, #2948ff);
+      }
+
+      &.yellow {
+        background: linear-gradient(to right, #f12711, #f5af19);
+      }
+    }
+
+    a.btn {
+      white-space: nowrap;
+      display: inline-block;
+      height: 40px;
+      line-height: 40px;
+      padding: 0 14px;
+      box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+      background: #fff;
+      border-radius: 6px;
+      font-size: .75rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      letter-spacing: .025em;
+      color: #1687ff;
+      text-decoration: none;
+      transition: all .15s ease;
+
+      &:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+      }
+
+      &.blue {
+        color: #fff;
+        background: #1687ff;
+      }
+    }
   }
 }
