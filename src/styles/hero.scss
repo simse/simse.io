@@ -12,7 +12,7 @@
   background-position: center, center;
 
   h1 {
-    font-size: 16rem;
+    font-size: 12rem;
     font-weight: 900;
     margin: 0;
 
@@ -21,7 +21,20 @@
   }
 
   h2 {
-    font-size: 4rem;
-    margin-top: 0px;
+    font-size: 1.9rem;
+    margin: 0px;
+    margin-top: -25px;
+    letter-spacing: .5rem;
+    text-transform: uppercase;
+    font-weight: 400;
+
+  }
+
+  p {
+    font-size: 2rem;
+    text-align: center;
+    text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
+    font-family: 'SF Pro Display';
+    margin-top: 20px;
   }
 }

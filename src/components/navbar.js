@@ -10,7 +10,7 @@ const Navbar = () => (
 
     <div className="links">
       <a className="active">Home</a>
-      <a>Work</a>
+      <a>Projects</a>
     </div>
   </div>
 )

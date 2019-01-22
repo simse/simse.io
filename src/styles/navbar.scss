@@ -4,20 +4,25 @@
   top: 0;
   color: #fff;
   padding: 0 10%;
-  width: 80%;
+  width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  align-items: center;
 
   .logo {
     font-size: 1.3rem;
+    margin-top: 22px;
+
   }
 
   .links {
     margin-left: auto;
     padding: 29px;
     font-size: 1.2rem;
+    margin-top: 2px;
 
     a {
       padding: 20px 12px;
+      font-family: 'SF Pro Display';
 
       &:hover {
         cursor: pointer;

@@ -6,6 +6,7 @@ import SEO from '../components/seo'
 // Page components
 import Navbar from '../components/navbar'
 import Hero from '../components/hero'
+import Projects from '../components/projects'
 
 const IndexPage = () => (
   <Layout>
@@ -14,6 +15,8 @@ const IndexPage = () => (
     <Navbar />
 
     <Hero />
+
+    <Projects />
   </Layout>
 )
 
