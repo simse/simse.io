@@ -1,2 +1,2 @@
-/labs/:lab  https://simse-:lab.netlify.com  200
-/labs/:lab/:splat  https://simse-:lab.netlify.com/:splat  200
+/labs/:lab  https://simse-:lab.netlify.com  200!
+/labs/:lab/*  https://simse-:lab.netlify.com/:splat  200!
