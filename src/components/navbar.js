@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'gatsby'
 
 import '../styles/navbar.scss'
 
@@ -9,8 +10,8 @@ const Navbar = () => (
     </div>
 
     <div className="links">
-      <a className="active">Home</a>
-      <a>Work</a>
+      <Link to="/">Home</Link>
+      <Link to="/labs">Labs</Link>
     </div>
   </div>
 )

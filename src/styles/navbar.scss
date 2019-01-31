@@ -21,10 +21,12 @@
     margin-top: 2px;
 
     a {
-      padding: 20px 12px;
+      padding: 20px 18px;
+      color: #fff;
+      text-decoration: none;
 
-      &:hover {
-        cursor: pointer;
+      &:active {
+        color: #fff;
       }
 
       &.active {

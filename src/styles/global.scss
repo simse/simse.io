@@ -29,5 +29,34 @@
 body {
   font-family: 'SF Pro Display';
   background: #000;
-  color: #fff;
+  color: #fff !important;
+}
+
+a.btn {
+  white-space: nowrap;
+  display: inline-block;
+  height: 40px;
+  line-height: 40px;
+  padding: 0 14px;
+  margin-right: 10px;
+  box-shadow: 0 4px 6px rgba(50,50,93,.11), 0 1px 3px rgba(0,0,0,.08);
+  background: #fff;
+  border-radius: 6px;
+  font-size: .75rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: .025em;
+  color: #1687ff;
+  text-decoration: none;
+  transition: all .15s ease;
+
+  &:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 7px 14px rgba(50,50,93,.1), 0 3px 6px rgba(0,0,0,.08);
+  }
+
+  &.blue {
+    color: #fff;
+    background: #1687ff;
+  }
 }

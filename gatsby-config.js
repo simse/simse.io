@@ -15,6 +15,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `labs`,
+        path: `${__dirname}/src/labs`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-typography`,
       options: {
         pathToConfigModule: 'src/utils/typography'
@@ -22,6 +29,8 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
+    'gatsby-transformer-yaml',
+    `gatsby-transformer-screenshot`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
