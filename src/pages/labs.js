@@ -10,7 +10,7 @@ import Navbar from '../components/navbar'
 
 const LabsPage = ({ data }) => (
   <Layout>
-    <SEO title="Labs" keywords={[`gatsby`, `application`, `react`]} />
+    <SEO title="Labs" keywords={[`experiments`, `tools`, `labs`]} />
 
     <Navbar />
 

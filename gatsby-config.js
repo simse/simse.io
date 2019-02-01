@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
     title: `simse.io`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    description: `This is the personal website for Simon Sorensen (also called Simse). Here you'll find my work, experiments and my blog. I welcome you to my small space on the internet.`,
+    author: `@simse`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,

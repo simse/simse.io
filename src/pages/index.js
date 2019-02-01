@@ -10,7 +10,7 @@ import Projects from '../components/projects'
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Welcome" keywords={[`gatsby`, `application`, `react`]} />
+    <SEO title="Simon Norager Sorensen" keywords={[`simse`, `Simon`, `portfolio`]} />
 
     <Navbar />
 
