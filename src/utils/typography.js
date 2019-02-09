@@ -5,6 +5,10 @@ const typography = new Typography({
   headerFontFamily: [
     "San Fran",
   ],
+  googleFonts: [{
+    name: 'Spectral',
+    styles: ['400', '700']
+  }],
   bodyFontFamily: ["San Fran"],
 })
 

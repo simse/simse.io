@@ -18,7 +18,7 @@ const Layout = ({ children }) => (
     `}
     render={data => (
       <>
-        <div>
+        <div className="main">
           {children}
         </div>
       </>

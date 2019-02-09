@@ -27,7 +27,8 @@ const LabsPage = ({ data }) => (
         }}>Labs</h1>
         <p style={{
           maxWidth: 1000,
-          margin: '0 auto'
+          margin: '0 auto',
+          fontSize: '1.4rem'
         }}>
           Welcome to the labs area! This is a collection of web apps or web
           accessible utilities, that are useful, but doesn't constitute being its
@@ -39,10 +40,9 @@ const LabsPage = ({ data }) => (
       {data.allSitesYaml.edges.map(({ node }, index) => (
         <div key={index} style={{
           display: 'flex',
-          //flexDirection: 'column',
           alignItems: 'center',
           justifyContent: 'center',
-          marginBottom: 50
+          paddingBottom: 50
         }}>
           <div style={{
             paddingRight: 50

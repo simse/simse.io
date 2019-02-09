@@ -13,6 +13,20 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
 
+
+    @media(max-width: 1200px) {
+      max-width: 95%;
+    }
+
+    @media(max-width: 1000px) {
+      overflow-x: scroll;
+      
+      .desc {
+        visibility: collapse;
+        display: none;
+      }
+    }
+
     table {
       margin-bottom: 0;
     }
