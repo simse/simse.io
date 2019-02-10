@@ -22,7 +22,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     createNodeField({
       node,
       name: `featuredImage`,
-      value: '../..' + node.frontmatter.image,
+      value: '../../assets' + node.frontmatter.image,
     })
   }
 }
