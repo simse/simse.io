@@ -1,6 +1,6 @@
 backend:
   name: github
-  repo: simse/simse.io
+  branch: master
 
 media_folder: static/assets
 public_folder: assets
@@ -8,7 +8,7 @@ public_folder: assets
 collections:
   - name: blog
     label: Blog
-    folder: blog
+    folder: src/blog
     create: true
     fields:
       - { name: date, label: Date, widget: date }
