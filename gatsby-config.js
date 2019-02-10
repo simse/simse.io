@@ -35,6 +35,12 @@ module.exports = {
         pathToConfigModule: 'src/utils/typography'
       }
     },
+    {
+      resolve: `gatsby-plugin-netlify-cms-paths`,
+      options: {
+        cmsConfig: `/static/admin/config.yml`,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     'gatsby-transformer-yaml',
@@ -44,6 +50,12 @@ module.exports = {
       options: {
         plugins: [
           `gatsby-remark-prismjs`,
+          {
+            resolve: `gatsby-plugin-netlify-cms-paths`,
+            options: {
+              cmsConfig: `/static/admin/config.yml`,
+            },
+          }
         ],
       }
     },
