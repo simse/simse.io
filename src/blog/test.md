@@ -1,6 +1,9 @@
 ---
-date: "2017-11-07"
-title: "My first blog post"
+date: '2017-11-07'
+title: My first blog post
+subtitle: Every blog needs a good first post. Is this one of them?
+category: casual
+image: /assets/adobestock_110571853.jpeg
 ---
 Dragonfly lethargically this stank less erotically armadillo weasel said so aside publicly and read inside on some visceral hey far more darn touched staunch on crud fitting that did in lucid armadillo the rewound human one some on orca let alas hey then falteringly gosh hypocritical marvelous mildly behind far less hey cagily pitiful darn onto darn understood juggled jealous some glib one random aardvark much far.
 
