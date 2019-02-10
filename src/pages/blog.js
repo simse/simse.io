@@ -1,5 +1,5 @@
 import React from 'react'
-import { graphql } from 'gatsby'
+import { graphql, Link } from 'gatsby'
 import Img from "gatsby-image"
 import { Row, Col } from 'react-grid-system';
 
@@ -47,29 +47,24 @@ const BlogPage = ({ data }) => (
         }}>Recent additions</h2>
 
         <Row>
-        <Col sm={4}>
-          <BlogCard title="Not everything seems to be what meets the eye" />
-        </Col>
+        {data.allMarkdownRemark.edges
+          .map(({ node: post }) => (
+            <Col sm={4}>
+              <Link to={'/blog/' + post.fields.slug} style={{
+                textDecoration: 'none',
+                color: '#000'
+              }}>
+                <Img fluid={post.fields.featuredImage.childImageSharp.fluid}
+                  className="hover-image"
+                  style={{
+                  borderRadius: 8,
+                  marginBottom: 20
+                }} />
 
-        <Col sm={4}>
-          <BlogCard title="Hello" />
-        </Col>
-
-        <Col sm={4}>
-          <BlogCard title="Hello" />
-        </Col>
-
-        <Col sm={4}>
-          <BlogCard title="Not everything seems to be what meets the eye" />
-        </Col>
-
-        <Col sm={4}>
-          <BlogCard title="Hello" />
-        </Col>
-
-        <Col sm={4}>
-          <BlogCard title="Hello" />
-        </Col>
+                <BlogCard title={post.frontmatter.title} excerpt={post.excerpt} category={post.frontmatter.category} />
+              </Link>
+            </Col>
+          ))}
         </Row>
       </div>
     </div>
@@ -77,3 +72,35 @@ const BlogPage = ({ data }) => (
 )
 
 export default BlogPage
+
+export const pageQuery = graphql`
+  query {
+    site {
+      siteMetadata {
+        title
+      }
+    }
+    allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }) {
+      edges {
+        node {
+          excerpt
+          fields {
+            slug
+            featuredImage {
+              childImageSharp{
+                fluid(maxWidth: 700, maxHeight: 500) {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
+          }
+          frontmatter {
+            date(formatString: "MMMM DD, YYYY")
+            title
+            category
+          }
+        }
+      }
+    }
+  }
+`

@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import Img from "gatsby-image"
 
 import Navbar from '../components/navbar'
 
@@ -14,14 +15,14 @@ export default ({ data }) => {
       <div className="post-header">
         <div>
           <h1 className="title">{post.frontmatter.title}</h1>
-          <p className="tagline">Every blog must have a great first post. Is this one of them?</p>
+          <p className="tagline">{post.frontmatter.subtitle}</p>
 
-          <p className="meta">Python &mdash; February 9th &mdash; Simon Sorensen</p>
+          <p className="meta"><span style={{textTransform: 'capitalize'}}>{post.frontmatter.category}</span> &mdash; {post.frontmatter.date} &mdash; Simon Sorensen</p>
         </div>
 
 
         <div className="image">
-          <img className="" src={require('../images/test.jpg')} />
+          <Img fluid={post.fields.featuredImage.childImageSharp.fluid} />
         </div>
       </div>
 
@@ -36,8 +37,20 @@ export const query = graphql`
   query($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
+      fields {
+        featuredImage {
+          childImageSharp{
+            fluid(maxWidth: 3000) {
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
       frontmatter {
+        date(formatString: "MMMM Do, YYYY")
         title
+        subtitle
+        category
       }
     }
   }
