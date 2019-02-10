@@ -10,7 +10,7 @@ import Projects from '../components/projects'
 
 const IndexPage = () => (
   <Layout>
-    <SEO title="Simon Norager Sorensen" keywords={[`simse`, `Simon`, `portfolio`]} />
+    <SEO title="Simon Sørensen" keywords={[`simse`, `Simon`, `portfolio`]} />
 
     <Navbar />
 

@@ -28,8 +28,16 @@
 
 body {
   font-family: 'SF Pro Display';
+}
+
+.main {
   background: #000;
   color: #fff !important;
+}
+
+.blog {
+  background: #fff;
+  color: #111 !important;
 }
 
 a.btn {
@@ -58,5 +66,16 @@ a.btn {
   &.blue {
     color: #fff;
     background: #1687ff;
+  }
+}
+
+.hover-image {
+  transition: .2s all;
+
+
+  &:hover {
+    transform: scale(1.02);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
+    margin-bottom: 22px;
   }
 }

@@ -2,26 +2,51 @@
   display: flex;
   position: absolute;
   top: 0;
-  color: #fff;
-  padding: 0 10%;
+  padding: 24px 10%;
   width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   align-items: center;
 
+  &.blog {
+    background: linear-gradient(to right, #8e2de2, #4a00e0);
+  }
+
+  &.white {
+    background: #fff;
+        box-shadow: 0 4px 12px 0 rgba(0,0,0,.05)!important;
+
+    .logo,
+    .links a {
+      color: #000 !important;
+    }
+
+  }
+
+  @media(max-width: 800px) {
+    .links {
+      margin: 0 auto;
+    }
+
+    .logo {
+      display: none;
+    }
+  }
+
   .logo {
     font-size: 1.3rem;
-    margin-top: 22px;
+    color: #fff;
 
+    h3 {
+      margin: 0;
+    }
   }
 
   .links {
     margin-left: auto;
-    padding: 29px;
     font-size: 1.2rem;
-    margin-top: 2px;
 
     a {
-      padding: 20px 18px;
+      padding: 0 18px;
       color: #fff;
       text-decoration: none;
 

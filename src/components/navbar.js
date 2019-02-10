@@ -3,8 +3,8 @@ import { Link } from 'gatsby'
 
 import '../styles/navbar.scss'
 
-const Navbar = () => (
-  <div className="navbar">
+const Navbar = ({type}) => (
+  <div className={`navbar ${type}`}>
     <div className="logo">
       <h3>Simon Sorensen</h3>
     </div>
@@ -12,6 +12,7 @@ const Navbar = () => (
     <div className="links">
       <Link to="/">Home</Link>
       <Link to="/labs">Labs</Link>
+      <Link to="/blog">Blog</Link>
     </div>
   </div>
 )
