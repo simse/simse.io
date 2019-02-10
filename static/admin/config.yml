@@ -1,5 +1,6 @@
 backend:
   name: test-repo
+publish_mode: editorial_workflow
 
 media_folder: static/assets
 public_folder: assets
@@ -12,4 +13,5 @@ collections:
     fields:
       - { name: date, label: Date, widget: date }
       - { name: title, label: Title }
+      - {label: "Featured Image", name: "image", widget: "image", required: true}
       - { name: body, label: Body, widget: markdown }
