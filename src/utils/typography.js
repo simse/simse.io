@@ -4,6 +4,7 @@ const typography = new Typography({
   baseFontSize: "22px",
   headerFontFamily: [
     "San Fran",
+    "Segoe UI"
   ],
   googleFonts: [
     {
