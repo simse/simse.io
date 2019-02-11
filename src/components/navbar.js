@@ -6,7 +6,7 @@ import '../styles/navbar.scss'
 const Navbar = ({type}) => (
   <div className={`navbar ${type}`}>
     <div className="logo">
-      <h3>Simon Sorensen</h3>
+      <h3><Link to="/">Simon Sørensen</Link></h3>
     </div>
 
     <div className="links">

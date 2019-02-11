@@ -50,7 +50,7 @@ const BlogPage = ({ data }) => (
         {data.allMarkdownRemark.edges
           .map(({ node: post }) => (
             <Col sm={4}>
-              <Link to={'/blog/' + post.fields.slug} style={{
+              <Link to={'/blog' + post.fields.slug} style={{
                 textDecoration: 'none',
                 color: '#000'
               }}>

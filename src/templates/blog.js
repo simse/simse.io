@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
 import Navbar from '../components/navbar'
+import SEO from '../components/seo'
 
 import '../styles/blog-post.scss'
 
@@ -10,6 +11,8 @@ export default ({ data }) => {
   const post = data.markdownRemark
   return (
     <div className="blog-post">
+      <SEO title={post.frontmatter.title} keywords={post.frontmatter.tags} description={post.frontmatter.subtitle + ' — ' + post.excerpt} />
+
       <Navbar type="white" />
 
       <div className="post-header">
@@ -26,7 +29,7 @@ export default ({ data }) => {
         </div>
       </div>
 
-      <div class="content">
+      <div className="content">
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </div>
     </div>
@@ -37,6 +40,7 @@ export const query = graphql`
   query($slug: String!) {
     markdownRemark(fields: { slug: { eq: $slug } }) {
       html
+      excerpt
       fields {
         featuredImage {
           childImageSharp{
