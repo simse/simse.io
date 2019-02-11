@@ -16,7 +16,7 @@ collections:
       - { name: date, label: Date, widget: date }
       - { name: title, label: Title }
       - { name: subtitle, label: Subtitle }
-      - { name: category, label: Category }
+      - { name: category, label: Category, widget: "select",  options: ["Casual", "Python", "Javascript", "Opinion"] }
       - { name: tags, label: Tags, widget: "list" }
       - { label: "Featured Image", name: "image", widget: "image", required: true }
       - { name: body, label: Body, widget: markdown }
