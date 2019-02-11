@@ -4,7 +4,14 @@ const typography = new Typography({
   baseFontSize: "22px",
   headerFontFamily: [
     "San Fran",
-    "Segoe UI"
+    "-apple-system",
+    "system-ui",
+    "BlinkMacSystemFont",
+    "Segoe UI",
+    "Roboto",
+    "Helvetica Neue",
+    "Arial",
+    "sans-serif"
   ],
   googleFonts: [
     {
@@ -12,7 +19,17 @@ const typography = new Typography({
       styles: ['400', '700']
     }
   ],
-  bodyFontFamily: ["San Fran"],
+  bodyFontFamily: [
+    "San Fran",
+    "-apple-system",
+    "system-ui",
+    "BlinkMacSystemFont",
+    "Segoe UI",
+    "Roboto",
+    "Helvetica Neue",
+    "Arial",
+    "sans-serif"
+  ],
 })
 
 export default typography

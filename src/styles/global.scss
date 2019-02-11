@@ -2,32 +2,40 @@
   font-family: "San Fran";
   font-style: normal;
   font-weight: normal;
-  src: url('../fonts/san-fran-regular.woff2');
+  src:
+      local('SF Pro Display Regular'),
+      url('../fonts/san-fran-regular.woff2');
 }
 
 @font-face {
   font-family: "San Fran";
   font-style: normal;
   font-weight: 300;
-  src: url('../fonts/san-fran-thin.woff2');
+  src:
+      local('SF Pro Display Light'),
+      url('../fonts/san-fran-thin.woff2');
 }
 
 @font-face {
   font-family: "San Fran";
   font-style: normal;
   font-weight: 700;
-  src: url('../fonts/san-fran-bold.woff2');
+  src:
+      local('SF Pro Display Bold'),
+      url('../fonts/san-fran-bold.woff2');
 }
 
 @font-face {
   font-family: "San Fran";
   font-style: normal;
   font-weight: 900;
-  src: url('../fonts/san-fran-black.woff2');
+  src:
+      local('SF Pro Display Black'),
+      url('../fonts/san-fran-black.woff2');
 }
 
 body {
-  font-family: 'SF Pro Display';
+  font-family: 'San Fran',-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
 }
 
 .main {
