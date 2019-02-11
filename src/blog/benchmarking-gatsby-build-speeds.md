@@ -14,3 +14,13 @@ image: /assets/space_shuttle.jpeg
 To generate a static site, Gatsby has a build process. During this process, a lot of things happen. JS and CSS is compiled. You can use SASS, LESS, PostCSS CSS-in-JS, really whatever floats your boat, and Gatsby will compile it. It can also compress and generate different sizes for all your images. It will run GraphQL queries, if you have something like a blog on your website. But this raises the question; how well does Gatsby scale? 
 
 Well, since the site is static, the size is irelevant for the speed of the site. But the build time, must increase as the size does. I wanted to put this to the test, so I took this site, and benchmarked the build times as the blog post increased in numbers. The reason this is interesting, is first of all, Netlify and many other hosting providers have build time limits. And if your site takes 4 hours to build, is it really worth it? Alright, enough rambling, let's see how Gatsby scales!
+
+To test this out, I spun up a virtual machine using Hyper-V on my machine, to ensure consistent compute performance. I wrote a small script in Python, to generate blog posts pulling an image from Unsplash, and generating some text.
+
+## Baseline performance
+
+An average how fast Gatsby builds simse.io with no blog posts.
+
+## Performance with blog posts
+
+## Performance with blog posts _and_ featured images
