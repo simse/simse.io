@@ -15,12 +15,20 @@ To generate a static site, Gatsby has a build process. During this process, a lo
 
 Well, since the site is static, the size is irelevant for the speed of the site. But the build time, must increase as the size does. I wanted to put this to the test, so I took this site, and benchmarked the build times as the blog post increased in numbers. The reason this is interesting, is first of all, Netlify and many other hosting providers have build time limits. And if your site takes 4 hours to build, is it really worth it? Alright, enough rambling, let's see how Gatsby scales!
 
-To test this out, I spun up a virtual machine using Hyper-V on my machine, to ensure consistent compute performance. I wrote a small script in Python, to generate blog posts pulling an image from Unsplash, and generating some text.
+To test this out, I wrote a small script in Python, to generate blog posts pulling an image from Unsplash, and generating some text. I ran it on my Windows 10 machine with no background processes running. The system config is not very relevant, because it's not neccesarily about how _fast_ it is, but about how much _slower_ it gets, as it scales.
 
 ## Baseline performance
 
-An average how fast Gatsby builds simse.io with no blog posts.
+On average, it takes 32 seconds to build simse.io without any blog posts or image processing. Nice.
 
 ## Performance with blog posts
+
+Let's see how well Gatsby scales with an increasing amount of posts, with **no** image processing. 
+
+![Linear growth; as blog post increases, so does build time](/assets/graph.png "Build time graphed against blog post number")
+
+This graph is mighty interesting. It shows that Gatsby build times is indeed linear. What that means, is that as blog post amount increases, so does build time, and that they're proportional. This is fantastic, because that means that there is no point where the Gatsby build process is no longer efficient.
+
+However, it looks like images are about to spoil our fun.
 
 ## Performance with blog posts _and_ featured images
