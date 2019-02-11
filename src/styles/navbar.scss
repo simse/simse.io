@@ -9,13 +9,17 @@
 
   &.blog {
     background: linear-gradient(to right, #8e2de2, #4a00e0);
+
+    .logo h3 a {
+      color: #fff !important;
+    }
   }
 
   &.white {
     background: #fff;
         box-shadow: 0 4px 12px 0 rgba(0,0,0,.05)!important;
 
-    .logo,
+    .logo h3 a,
     .links a {
       color: #000 !important;
     }
@@ -41,7 +45,7 @@
 
       a {
         text-decoration: none;
-        color: #111;
+        color: #fff;
       }
     }
   }

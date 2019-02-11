@@ -42,7 +42,9 @@ module.exports = {
           },
           {
             resolve: `gatsby-remark-images`,
-            options: {},
+            options: {
+              maxWidth: 1200
+            },
           },
           `gatsby-remark-prismjs`
         ],
@@ -57,6 +59,7 @@ module.exports = {
     'gatsby-transformer-yaml',
     `gatsby-transformer-screenshot`,
     `gatsby-plugin-netlify-cms`,
+    'gatsby-plugin-netlify-cache',
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
