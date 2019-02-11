@@ -1,6 +1,6 @@
 import React from 'react'
 
-const BlogCard = ({ title, excerpt, image, category }) => (
+const BlogCard = ({ title, excerpt, date, category }) => (
   <div style={{
 
   }}>
@@ -10,7 +10,7 @@ const BlogCard = ({ title, excerpt, image, category }) => (
       textTransform: 'uppercase',
       opacity: .5,
       letterSpacing: '.2rem'
-    }}>{ category }</p>
+    }}>{ category } &mdash; { date }</p>
 
     <h2 style={{
       marginBottom: 10

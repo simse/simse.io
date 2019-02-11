@@ -61,7 +61,7 @@ const BlogPage = ({ data }) => (
                   marginBottom: 20
                 }} />
 
-                <BlogCard title={post.frontmatter.title} excerpt={post.excerpt} category={post.frontmatter.category} />
+                <BlogCard title={post.frontmatter.title} excerpt={post.excerpt} category={post.frontmatter.category} date={post.frontmatter.date} />
               </Link>
             </Col>
           ))}
@@ -88,7 +88,7 @@ export const pageQuery = graphql`
             slug
             featuredImage {
               childImageSharp{
-                fluid(maxWidth: 700, maxHeight: 500) {
+                fluid(maxWidth: 700, maxHeight: 500, quality: 100) {
                   ...GatsbyImageSharpFluid
                 }
               }
