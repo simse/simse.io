@@ -32,3 +32,13 @@ This graph is mighty interesting. It shows that Gatsby build times is indeed lin
 However, it looks like images are about to spoil our fun.
 
 ## Performance with blog posts _and_ featured images
+
+Unfortunately, I can't present the same graph for this set of data, because it's actually quite different. You'll find that the growth is still linear, such that the more picture there are, the longer it takes to build. However, the slope of the graph is much, much steeper. Once you have around 50 very large images, the build time is about 10 minutes (very much depending on image size and processing involved). 
+
+As I was looking at the bad news, I noticed something incredible. Gatsby has an absolutely fantastic cache. While building, Gatsby won't process old pictures again, meaning that build times will remain low, as long as you only a couple of new pictures per post (or any other update).
+
+So yes, if you have 1000 high resolution images that needs to be processed for fluid implementation, the build could easily take an hour to complete. But writing 1000 posts with high resolution images over the span of a year, won't drag down the build time.
+
+The fact of the matter is, that it seems there is no particular size where Gatsby hits a breaking point. A point where it can no longer build fast enough to be useful. This is in part due to it being legimately fast (2000+ pages in one minute, _not bad_) and its fantastic cache.
+
+If you want to implement the caching when using Netlify, check out [this plugin](https://github.com/axe312ger/gatsby-plugin-netlify-cache).
