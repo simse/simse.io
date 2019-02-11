@@ -12,9 +12,11 @@
       .title {
         font-size: 4rem;
         margin-top: 0;
+        padding: 0 50px;
 
         @media(max-width: 900px) {
           font-size: 2rem;
+          padding: 0 15px;
         }
       }
 
