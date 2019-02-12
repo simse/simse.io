@@ -11,4 +11,4 @@ tags:
   - valve
 image: /assets/steam_engine.jpeg
 ---
-Test
+Since Steam's release in 2003, it has pretty much become the de facto game distribution software. It's simple; the store has tens of thousands of games, these games usually go on sale a couple of times a year offering fantastic discounts, the game downloads are blazing fast (even in China), the built-in chat is pretty good, and so on.
