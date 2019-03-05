@@ -70,6 +70,7 @@ module.exports = {
     `gatsby-transformer-screenshot`,
     `gatsby-plugin-netlify-cms`,
     'gatsby-plugin-netlify-cache',
+    `gatsby-plugin-favicon`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
