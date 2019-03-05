@@ -10,6 +10,7 @@ module.exports = {
       options: {
         name: `assets`,
         path: `${__dirname}/static/assets`,
+        ignore: [`_redirects`]
       },
     },
     {
@@ -17,6 +18,13 @@ module.exports = {
       options: {
         name: `labs`,
         path: `${__dirname}/src/labs`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `projects`,
+        path: `${__dirname}/src/projects`,
       },
     },
     {
@@ -46,7 +54,9 @@ module.exports = {
               maxWidth: 1200
             },
           },
+          `gatsby-remark-autolink-headers`,
           `gatsby-remark-prismjs`
+
         ],
       }
     },

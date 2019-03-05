@@ -7,59 +7,15 @@
     font-size: 3rem;
   }
 
-  .projects-table {
-    max-width: 65%;
-    margin: 0 auto;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-radius: 8px;
+  .project-card {
+    transition: .25s ease;
+    &:hover {
+      transform: scale(1.03);
 
-
-    @media(max-width: 1200px) {
-      max-width: 95%;
     }
 
-    @media(max-width: 1000px) {
-      overflow-x: scroll;
-      
-      .desc {
-        visibility: collapse;
-        display: none;
-      }
-    }
-
-    table {
-      margin-bottom: 0;
-    }
-
-    thead {
-      font-weight: bold;
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    td {
-      padding: 16px 22px;
-    }
-
-    tr:nth-child(even) {
-      background-color: rgba(255, 255, 255, 0.05);
-    }
-
-    .desc {
-      width: 50%;
-    }
-
-    span {
-      padding: 4px 10px;
-      border-radius: 8px;
-      font-size: .9rem;
-
-      &.blue {
-        background: linear-gradient(to right, #396afc, #2948ff);
-      }
-
-      &.yellow {
-        background: linear-gradient(to right, #f12711, #f5af19);
-      }
+    &:active {
+      transform: scale(0.99);
     }
   }
 }

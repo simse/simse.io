@@ -19,4 +19,5 @@ collections:
       - { name: category, label: Category, widget: "select",  options: ["Casual", "Python", "Javascript", "Opinion"] }
       - { name: tags, label: Tags, widget: "list" }
       - { label: "Featured Image", name: "image", widget: "image", required: true }
+      - { label: "Type", name: "type", widget: "hidden", default: "blog" }
       - { name: body, label: Body, widget: markdown }

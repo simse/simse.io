@@ -11,8 +11,7 @@ const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 
 exports.onCreateNode = ({ node, getNode, actions }) => {
   const { createNodeField } = actions
-  if (node.internal.type === `MarkdownRemark`) {
-
+  if (node.internal.type === `MarkdownRemark` && node.frontmatter.type === 'blog') {
     const slug = createFilePath({ node, getNode, basePath: `blog` })
     createNodeField({
       node,
@@ -23,6 +22,15 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       node,
       name: `featuredImage`,
       value: '../../static' + node.frontmatter.image,
+    })
+  }
+
+  if (node.internal.type === `MarkdownRemark` && node.frontmatter.type === 'project') {
+    const slug = createFilePath({ node, getNode, basePath: `project` })
+    createNodeField({
+      node,
+      name: `slug`,
+      value: '/project' + slug,
     })
   }
 }
@@ -37,6 +45,9 @@ exports.createPages = ({ graphql, actions }) => {
             fields {
               slug
             }
+            frontmatter {
+              type
+            }
           }
         }
       }
@@ -44,17 +55,29 @@ exports.createPages = ({ graphql, actions }) => {
   `).then(result => {
     result.data.allMarkdownRemark.edges.forEach(({ node }) => {
 
-      console.log()
+      if(node.frontmatter.type == 'blog') {
+        createPage({
+          path: '/blog' + node.fields.slug,
+          component: path.resolve(`./src/templates/blog.js`),
+          context: {
+            // Data passed to context is available
+            // in page queries as GraphQL variables.
+            slug: node.fields.slug,
+          },
+        })
+      }
 
-      createPage({
-        path: '/blog' + node.fields.slug,
-        component: path.resolve(`./src/templates/blog.js`),
-        context: {
-          // Data passed to context is available
-          // in page queries as GraphQL variables.
-          slug: node.fields.slug,
-        },
-      })
+      if(node.frontmatter.type == 'project') {
+        createPage({
+          path: node.fields.slug,
+          component: path.resolve(`./src/templates/project.js`),
+          context: {
+            // Data passed to context is available
+            // in page queries as GraphQL variables.
+            slug: node.fields.slug,
+          },
+        })
+      }
     })
   })
 }

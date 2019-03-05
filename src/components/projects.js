@@ -1,42 +1,46 @@
 import React from 'react'
+import { StaticQuery, graphql } from "gatsby"
 
+import ProjectCard from './project-card'
 import '../styles/projects.scss'
 
 const Projects = () => (
-  <div className="projects">
-    <h2>Work</h2>
+  <StaticQuery
+    query={graphql`
+      query Projects {
+        allMarkdownRemark(filter: {frontmatter: {type: {eq: "project"}}}) {
+          edges {
+            node {
+              fields {
+                slug
+              }
+              frontmatter {
+                name
+                description
+                language
+                status
+                image
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={data => (
+      <div className="projects">
+        <h2>Work</h2>
 
-    <div className="projects-table">
-      <table>
-        <thead>
-          <tr>
-            <td>Name</td>
-            <td className="desc">Description</td>
-            <td>Language</td>
-            <td className="status">Status</td>
-            <td>Links</td>
-          </tr>
-        </thead>
-
-        <tbody>
-          <tr>
-            <td><code>pymitv</code></td>
-            <td className="desc">A small Python module that can control Xiaomi TVs</td>
-            <td>Python</td>
-            <td className="status"><span className="blue">Mantained</span></td>
-            <td><a className="btn" target="_blank" rel="noopener noreferrer" href="https://github.com/simse/pymitv">Github</a></td>
-          </tr>
-          <tr>
-            <td>Datahoarder</td>
-            <td className="desc">Program that allows anyone to download and keep track of large amounts of data</td>
-            <td>Python, Javascript</td>
-            <td className="status"><span className="yellow">Beta</span></td>
-            <td><a className="btn" target="_blank" rel="noopener noreferrer" href="https://github.com/simse/datahoarder">Github</a></td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  </div>
+        {data.allMarkdownRemark.edges
+          .map(({ node: project }) => (
+            <ProjectCard
+              name={project.frontmatter.name}
+              description={project.frontmatter.description}
+              image={project.frontmatter.image}
+              link={project.fields.slug} />
+          ))}
+      </div>
+    )}
+  />
 )
 
 export default Projects
