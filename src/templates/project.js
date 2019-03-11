@@ -12,12 +12,9 @@ export default ({ data }) => {
     <div className="project">
       <SEO title={project.frontmatter.name} description={project.frontmatter.description} />
 
-      <Navbar />
+      <Navbar type="white" />
 
-      <img className="project-image" alt={project.description} src={require('../../static/assets/pymitv.svg')} />
 
-      <h1>{ project.frontmatter.name }</h1>
-      <h2>{ project.frontmatter.description }</h2>
 
       <div className="project-content">
 
@@ -26,7 +23,18 @@ export default ({ data }) => {
           <div dangerouslySetInnerHTML={{ __html: project.tableOfContents }}></div>
         </div>
 
-        <div className="content" dangerouslySetInnerHTML={{ __html: project.html }} />
+        <div className="content">
+          <div className="wrapper">
+            <div className="header">
+              <img className="project-image" alt={project.description} src={require('../../static/assets/pymitv.svg')} />
+
+              <h1>{ project.frontmatter.name }</h1>
+              <h2 className="subtitle">{ project.frontmatter.description }</h2>
+            </div>
+
+            <div dangerouslySetInnerHTML={{ __html: project.html }} />
+          </div>
+        </div>
       </div>
     </div>
   )

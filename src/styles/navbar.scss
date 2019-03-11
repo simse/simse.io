@@ -6,6 +6,7 @@
   width: 100%;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   align-items: center;
+  z-index: 19;
 
   &.blog {
     background: linear-gradient(to right, #8e2de2, #4a00e0);
@@ -17,7 +18,7 @@
 
   &.white {
     background: #fff;
-        box-shadow: 0 4px 12px 0 rgba(0,0,0,.05)!important;
+    box-shadow: 0 4px 12px 0 rgba(0,0,0,.05) !important;
 
     .logo h3 a,
     .links a {
