@@ -7,20 +7,15 @@ const ProjectCard = ({ name, description, link, image }) => (
   }}>
     <div className="project-card" style={{
       background: 'rgba(255, 255, 255, 0.07)',
-      padding: '50px',
       borderRadius: 8,
       margin: '0 auto',
-      maxWidth: '60%',
       display: 'flex',
       color: '#fff',
       alignItems: 'center'
     }}>
 
       <div>
-      <img src={require('../../static' + image)} alt={name} style={{
-        margin: '0 30px 0 0',
-        maxHeight: 100
-      }} />
+      <img src={require('../../static' + image)} alt={name} />
       </div>
 
       <div style={{

@@ -10,7 +10,7 @@ module.exports = {
       options: {
         name: `assets`,
         path: `${__dirname}/static/assets`,
-        ignore: [`_redirects`]
+        ignore: [`../_redirects`]
       },
     },
     {

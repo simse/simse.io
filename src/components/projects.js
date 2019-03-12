@@ -28,7 +28,7 @@ const Projects = () => (
     `}
     render={data => (
       <div className="projects">
-        <h2>Work</h2>
+        <h2 className="title">Work</h2>
 
         {data.allMarkdownRemark.edges
           .map(({ node: project }) => (

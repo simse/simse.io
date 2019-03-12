@@ -86,3 +86,25 @@ a.btn {
     box-shadow: 0 3px 8px rgba(0, 0, 0, 0.05);
   }
 }
+
+h2.title {
+  font-size: 3rem;
+
+  @media(max-width: 1000px) {
+    font-size: 1.6rem;
+  }
+}
+
+.blog-posts {
+  padding: 50px 20%;
+
+  @media(max-width: 1000px) {
+    padding: 50px 20px;
+  }
+}
+
+.post-wrapper {
+  @media(max-width: 1000px) {
+    flex-direction: column;
+  }
+}
