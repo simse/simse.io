@@ -96,10 +96,25 @@ h2.title {
 }
 
 .blog-posts {
-  padding: 50px 20%;
+  padding: 50px 10%;
 
   @media(max-width: 1000px) {
     padding: 50px 20px;
+  }
+
+  .post-inner {
+    @media(max-width: 1000px) {
+      flex-direction: column;
+    }
+  }
+
+  .image {
+    margin: auto 30px auto 0;
+
+    @media(max-width: 1000px) {
+      margin: 0 auto 25px auto;
+      width: 150px;
+    }
   }
 }
 
