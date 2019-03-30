@@ -61,6 +61,10 @@
 
     .wrapper {
       padding: 0 22%;
+
+      @media(max-width: 1000px) {
+        padding: 0 4%;
+      }
     }
 
     h2:not(.subtitle) {
@@ -106,6 +110,8 @@
       th {
         padding: 15px;
       }
+
+      
 
       thead tr:first-child th {
         &:first-child {

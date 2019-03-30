@@ -14,7 +14,7 @@ const LabsPage = ({ data }) => (
 
     <Navbar />
 
-    <div style={{
+    <div className="labs" style={{
       paddingTop: 130
     }}>
       <div style={{
