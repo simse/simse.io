@@ -41,6 +41,7 @@
     line-height: 1.65rem;
     overflow-y: scroll;
     overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
     max-height: calc(100vh - 87px);
 
     @media(max-width: 1000px) {
