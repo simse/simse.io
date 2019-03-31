@@ -26,7 +26,7 @@ const Contact = () => (
 
         <h3>Talk to AI-Simon</h3>
 
-        <a className="btn blue" href="https://google.com">Visit the lab</a>
+        <a className="btn blue" href="https://assistant-chat-eu-de.watsonplatform.net/web/public/fc4efbac-67cc-47bf-9102-b113832fded8">Visit the lab</a>
       </div>
     </div>
   </div>
