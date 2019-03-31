@@ -7,6 +7,7 @@ import SEO from '../components/seo'
 
 // Page components
 import Navbar from '../components/navbar'
+import Footer from '../components/footer'
 
 const LabsPage = ({ data }) => (
   <Layout>
@@ -23,8 +24,9 @@ const LabsPage = ({ data }) => (
         padding: '50px 0'
       }}>
         <h1 style={{
-          fontSize: '5rem'
-        }}>Labs</h1>
+          fontSize: '5rem',
+          fontWeight: '300',
+        }}>labs.</h1>
         <p style={{
           maxWidth: 1000,
           margin: '0 auto',
@@ -75,6 +77,8 @@ const LabsPage = ({ data }) => (
       ))}
       </div>
     </div>
+
+    <Footer />
   </Layout>
 )
 

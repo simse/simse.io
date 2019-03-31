@@ -9,6 +9,7 @@ import SEO from '../components/seo'
 // Page components
 import Navbar from '../components/navbar'
 import BlogCard from '../components/blog-card'
+import Footer from '../components/footer'
 
 const BlogPage = ({ data }) => (
   <BlogLayout>
@@ -22,24 +23,23 @@ const BlogPage = ({ data }) => (
       overflowX: 'hidden'
     }}>
       <div style={{
-        textAlign: 'center',
-        marginBottom: 50
-      }}>
-        <h1 style={{
-          fontSize: '5rem',
-        }}>Blog</h1>
-
-        <p style={{
-          maxWidth: '50%',
-          margin: '0 auto',
-          fontSize: '1.4rem',
-        }}>Welcome to my blog. Here you'll find anything from opinion pieces to helpful advice. Oh, and I've turned the lights on for this page.</p>
-      </div>
-
-      <div style={{
         maxWidth: '90%',
         margin: '0 auto'
       }}>
+        <div style={{
+          marginBottom: 50
+        }}>
+          <h1 style={{
+            fontSize: '5rem',
+            fontWeight: '300'
+          }}>blog.</h1>
+
+          <p style={{
+            maxWidth: '70%',
+            fontSize: '1.4rem',
+          }}>Welcome to my blog. Here you'll find anything from opinion pieces to helpful advice. Oh, and I've turned the lights on for this page.</p>
+        </div>
+
         <h2 style={{
           fontWeight: '400',
           textTransform: 'uppercase',
@@ -49,7 +49,9 @@ const BlogPage = ({ data }) => (
         <Row>
         {data.allMarkdownRemark.edges
           .map(({ node: post }) => (
-            <Col sm={4}>
+            <Col sm={4} style={{
+              marginBottom: 50
+            }}>
               <Link to={'/blog' + post.fields.slug} style={{
                 textDecoration: 'none',
                 color: '#000'
@@ -68,6 +70,8 @@ const BlogPage = ({ data }) => (
         </Row>
       </div>
     </div>
+
+    <Footer />
   </BlogLayout>
 )
 

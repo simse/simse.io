@@ -7,7 +7,7 @@ const BlogPosts = () => (
   <StaticQuery
     query={graphql`
       query BlogPosts {
-        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC } filter: {frontmatter: {type: {eq: "blog"}}} limit: 2) {
+        allMarkdownRemark(sort: { fields: [frontmatter___date], order: DESC }, filter: {frontmatter: {type: {eq: "blog"}}}, limit: 2) {
           edges {
             node {
               fields {
@@ -35,8 +35,9 @@ const BlogPosts = () => (
       <div className="blog-posts">
         <h2 style={{
           textAlign: 'center',
-          marginTop: 50
-        }} className="title">From the blog</h2>
+          marginTop: 50,
+          fontWeight: '300'
+        }} className="title">blog.</h2>
 
         <div className="post-wrapper" style={{
           display: 'flex'

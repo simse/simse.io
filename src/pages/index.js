@@ -8,6 +8,8 @@ import Navbar from '../components/navbar'
 import Hero from '../components/hero'
 import Projects from '../components/projects'
 import BlogPosts from '../components/blog-posts'
+import Contact from '../components/contact'
+import Footer from '../components/footer'
 
 const IndexPage = () => (
   <Layout>
@@ -20,6 +22,10 @@ const IndexPage = () => (
     <Projects />
 
     <BlogPosts />
+
+    <Contact />
+
+    <Footer />
   </Layout>
 )
 

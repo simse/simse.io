@@ -5,6 +5,8 @@ import Img from "gatsby-image"
 import Navbar from '../components/navbar'
 import SEO from '../components/seo'
 
+import Footer from '../components/footer'
+
 import '../styles/blog-post.scss'
 
 export default ({ data }) => {
@@ -32,6 +34,8 @@ export default ({ data }) => {
       <div className="content">
         <div dangerouslySetInnerHTML={{ __html: post.html }} />
       </div>
+
+      <Footer />
     </div>
   )
 }

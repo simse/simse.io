@@ -12,6 +12,7 @@
       .title {
         font-size: 4rem;
         margin-top: 0;
+        font-weight: 300;
         padding: 0 50px;
 
         @media(max-width: 900px) {
@@ -40,7 +41,7 @@
 
   .content {
     max-width: 65%;
-    margin: 0 auto;
+    margin: 0 auto 150px auto;
     font-family: 'Spectral';
 
     @media(max-width: 1400px) {
@@ -62,7 +63,7 @@
 
     p {
       margin: 35px 100px;
-      line-height: 2rem;
+      line-height: 1.8rem;
       font-size: 1.1rem;
       color: rgba(0, 0, 0, 0.84);
       text-rendering: optimizeLegibility;
