@@ -1,5 +1,5 @@
 import React from 'react'
-import {Link} from 'gatsby'
+import { Link } from 'gatsby'
 
 const ProjectCard = ({ name, description, link, image }) => (
   <Link to={link} style={{
