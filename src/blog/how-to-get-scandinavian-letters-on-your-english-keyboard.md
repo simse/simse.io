@@ -26,7 +26,7 @@ On Windows you can use [AutoHotKey ](https://www.autohotkey.com/)to bind charact
 
 I've taken the liberty of creating a script that binds the Scandinavian letters to those keys. You should be able to change the keys, if you'd like them elsewhere, as it's quite intuitive. Each letter also has a shift modifier, so you can write the capital letter as well.
 
-**danish_letters.ahk/norwegian_letters.ahk**
+**danish\_letters.ahk/norwegian\_letters.ahk**
 
 ```
 #NoEnv
@@ -42,7 +42,7 @@ F15::å
 +F15::Å
 ```
 
-**swedish_letters.ahk/finnish_letters.ahk**
+**swedish\_letters.ahk/finnish\_letters.ahk**
 
 ```
 #NoEnv
