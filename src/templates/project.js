@@ -26,7 +26,7 @@ export default ({ data }) => {
         <div className="content">
           <div className="wrapper">
             <div className="header">
-              <img className="project-image" alt={project.description} src={require('../../static/assets/pymitv.svg')} />
+              <img className="project-image" alt={project.description} src={require('../../static' + project.frontmatter.image)} />
 
               <h1>{ project.frontmatter.name }</h1>
               <h2 className="subtitle">{ project.frontmatter.description }</h2>
