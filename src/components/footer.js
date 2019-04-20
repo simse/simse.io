@@ -45,7 +45,7 @@ const Footer = () => (
 
             <ul>
               <li><Link to='/project/pymitv'>pymitv</Link></li>
-
+              <li><Link to='/project/chronos'>Chronos</Link></li>
             </ul>
           </div>
 

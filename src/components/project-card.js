@@ -8,7 +8,7 @@ const ProjectCard = ({ name, description, link, image }) => (
     <div className="project-card" style={{
       background: 'rgba(255, 255, 255, 0.07)',
       borderRadius: 8,
-      margin: '0 auto',
+      margin: '0 auto 25px auto',
       display: 'flex',
       color: '#fff',
       alignItems: 'center'
