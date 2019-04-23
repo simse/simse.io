@@ -12,9 +12,7 @@ export default ({ data }) => {
     <div className="project">
       <SEO title={project.frontmatter.name} description={project.frontmatter.description} />
 
-      <Navbar type="white" />
-
-
+      <Navbar type="slim" />
 
       <div className="project-content">
 
@@ -46,7 +44,7 @@ export const query = graphql`
       html
       tableOfContents(
         pathToSlugField: "fields.slug"
-        maxDepth: 3
+        maxDepth: 2
       )
       frontmatter {
         name

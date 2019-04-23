@@ -7,7 +7,7 @@ const Hero = () => (
     <h1>Simse</h1>
     <h2>Hobby developer</h2>
 
-    <p>I'm good at Javascript and Python, and definitely <strong>not</strong> design!<br />Check out some of my stuff by scrolling down.</p>
+    <p><span className="lang">Python</span> and <span className="lang">Javascript</span> is my bread and butter</p>
   </div>
 )
 

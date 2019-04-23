@@ -27,6 +27,22 @@
 
   }
 
+  &.slim {
+    background: #fff;
+    padding: 16px 10%;
+    border-bottom: 1px solid #EFEFEF;
+
+    .logo h3 a {
+      //color: #fff !important;
+      font-size: 1.1rem;
+    }
+
+    .logo h3 a,
+    .links a {
+      color: #000 !important;
+    }
+  }
+
   @media(max-width: 800px) {
     .links {
       margin: 0 auto;

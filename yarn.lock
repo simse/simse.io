@@ -11054,10 +11054,10 @@ react-frame-component@^4.0.2:
   resolved "https://registry.yarnpkg.com/react-frame-component/-/react-frame-component-4.0.2.tgz#408f137ab4ba14cd13a5844b86ac972903dda021"
   integrity sha512-846zt81ijEC0ul6sBWzxkI5EGIE39ft9EaNzQUcszV/WWWDnldFJ+tKU7Et2GhZ4OHT/cy1GHcjsLLsdiOXhBg==
 
-react-grid-system@^4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-4.4.2.tgz#0ddb8938cb0902ae7394d0f26d9e61d4d7294c75"
-  integrity sha512-wlCNgsKDe8eq7jvz912nFX6uuG1Zwjhir6IrkhS2SeUhqbv4RpPGmbs+n3NykTfmnpwXpnVPdRd+nZaGq8VtuA==
+react-grid-system@^4.4.5:
+  version "4.4.5"
+  resolved "https://registry.yarnpkg.com/react-grid-system/-/react-grid-system-4.4.5.tgz#deb0120a2f83de4c48c828a555afdcf6ad9d8d1e"
+  integrity sha512-RnWh6h8/19xLUw3rJmrvFuj+tJh6uo/n/Z4M7tw6gcejRcX2fp8TpxwmKd2JDzTLdQuZzrzBM6NhV8S6ROpDjA==
   dependencies:
     prop-types "^15.6.2"
 

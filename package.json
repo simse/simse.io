@@ -32,7 +32,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.6.3",
     "react-dom": "^16.6.3",
-    "react-grid-system": "^4.4.2",
+    "react-grid-system": "^4.4.5",
     "react-helmet": "^5.2.0",
     "react-protected-mailto": "^1.0.3",
     "react-typography": "^0.16.18",
