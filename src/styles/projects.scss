@@ -2,39 +2,35 @@
   color: #fff;
   padding: 100px 0;
 
+
   h2 {
     text-align: center;
     font-weight: 300;
   }
 
-  .project-card {
-    transition: .25s ease;
-    max-width: 60%;
-    padding: 50px;
-    &:hover {
-      transform: scale(1.03);
+  .projects-wrapper {
+    padding: 0 150px;
+    overflow-x: hidden;
+    max-width: 100%;
 
+    @media(max-width: 1200px) {
+      padding: 0 30px;
     }
+  }
 
-    &:active {
-      transform: scale(0.99);
+  .project-card {
+    text-align: center;
+    transition: .25s ease;
+    padding: 50px;
+
+    span.tag {
+      background: linear-gradient(to right, #8e2de2, #4a00e0);
+      border-radius: 8px;
+      padding: 3px 7px;
     }
 
     img {
-      margin: 0 30px 0 0;
       max-height: 100px;
-    }
-
-    @media(max-width: 1000px) {
-      max-width: 90%;
-      text-align: center;
-      flex-direction: column;
-      padding: 20px;
-
-      img {
-        margin: 10px 0;
-        max-height: 70px;
-      }
     }
   }
 }
