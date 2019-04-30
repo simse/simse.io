@@ -5,7 +5,7 @@ language: Python
 status: maintained
 type: project
 image: /assets/chronos.png
-downloads: '350'
+downloads: '1.8k'
 ---
 ![Chronos Screenshot](https://i.imgur.com/vq1XSkr.png)
 
