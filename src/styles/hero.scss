@@ -3,34 +3,43 @@
   min-height: 100vh;
   display: flex;
   justify-content: center;
-  align-items: center;
+  //align-items: left;
   flex-direction: column;
   color: #fff;
+  padding: 0 0 0 200px;
 
-  background: url(../images/paint_bg_min.jpg), #000;
+  background: url(../images/simse_2.jpg), #000;
   background-size: cover, cover;
   background-position: center, center;
 
+  @media(max-width: 1200px) {
+    padding: 0 0 0 100px;
+  }
+
+  @media(max-width: 800px) {
+    padding: 0 0 0 50px;
+  }
+
   h1 {
-    font-size: 12rem;
+    font-size: 4rem;
     font-weight: 900;
     margin: 0;
     color: #fff;
     text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
 
     @media(max-width: 1200px) {
-      font-size: 7rem;
+      font-size: 3rem;
     }
 
     @media(max-width: 800px) {
-      font-size: 4rem;
+      font-size: 2rem;
     }
   }
 
   h2 {
     font-size: 1.6rem;
     margin: 0px;
-    margin-top: -25px;
+    margin-top: 0;
     letter-spacing: .5rem;
     text-transform: uppercase;
     font-weight: 400;
@@ -44,25 +53,5 @@
       letter-spacing: .2rem;
       margin-top: 0;
     }
-  }
-
-  p {
-    font-size: 2rem;
-    text-align: center;
-    text-shadow: 0px 3px 3px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
-
-    @media(max-width: 1200px) {
-      font-size: 1.35rem;
-    }
-
-    @media(max-width: 800px) {
-      font-size: 1rem;
-    }
-  }
-
-  span.lang {
-    font-weight: bold;
-    text-decoration: underline;
   }
 }
