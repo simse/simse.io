@@ -4,8 +4,10 @@ description: A Python 3 module to discover and control Xiaomi TVs on the local n
 language: Python
 status: maintained
 type: project
-downloads: '23k'
+downloads: '26k'
 image: /assets/pymitv.svg
+hero_image: /assets/pymitv_hero.jpg
+github: https://github.com/simse/pymitv
 ---
 ![The Mi TV 3s 65-inch](https://i.imgur.com/kOLWhWU.jpg)
 

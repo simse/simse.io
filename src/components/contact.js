@@ -5,7 +5,7 @@ import '../styles/contact.scss'
 
 const Contact = () => (
   <div className="contact">
-    <h2 className="title">contact.</h2>
+    <h2 className="title">contact</h2>
 
     <div className="contact-methods">
       <div className="method">

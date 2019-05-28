@@ -1,11 +1,13 @@
 ---
 name: Chronos
 description: A Docker container to run and schedule Python 3 scripts
-language: Python
+language: Python, Javascript
 status: maintained
 type: project
 image: /assets/chronos.png
-downloads: '1.8k'
+downloads: '6.6k'
+hero_image: /assets/chronos_hero.jpg
+github: https://github.com/simse/chronos
 ---
 ![Chronos Screenshot](https://i.imgur.com/vq1XSkr.png)
 

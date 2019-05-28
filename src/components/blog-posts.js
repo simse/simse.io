@@ -37,7 +37,7 @@ const BlogPosts = () => (
           textAlign: 'center',
           marginTop: 50,
           fontWeight: '300'
-        }} className="title">blog.</h2>
+        }} className="title">blog</h2>
 
         <div className="post-wrapper" style={{
           display: 'flex'

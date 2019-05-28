@@ -22,6 +22,8 @@ const Projects = () => (
                 status
                 image
                 downloads
+                hero_image
+                github
               }
             }
           }
@@ -30,7 +32,7 @@ const Projects = () => (
     `}
     render={data => (
       <div className="projects">
-        <h2 className="title">projects.</h2>
+        <h2 className="title">projects</h2>
 
         <Row className="projects-wrapper">
         {data.allMarkdownRemark.edges
@@ -39,10 +41,12 @@ const Projects = () => (
             <ProjectCard
               name={project.frontmatter.name}
               description={project.frontmatter.description}
-              image={project.frontmatter.image}
+              image={project.frontmatter.hero_image}
               link={project.fields.slug}
               language={project.frontmatter.language}
-              downloads={project.frontmatter.downloads} />
+              downloads={project.frontmatter.downloads}
+              status={project.frontmatter.status}
+              github_url={project.frontmatter.github} />
             </Col>
           ))}
         </Row>
