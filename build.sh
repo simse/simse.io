@@ -1,6 +1,6 @@
 #/bin/bash
 pip install buster
-buster generate --domain https://simse.io --dir publish/
+buster generate --domain https://ghost.simse.io --dir publish/
 find . -name '*.html' -type f -exec sed -i 's/jpgg/jpg/g' {} +
 find . -name '*.html' -type f -exec sed -i 's/jpgpg/jpg/g' {} +
 find . -name '*.html' -type f -exec sed -i 's/jpgjpg/jpg/g' {} +
