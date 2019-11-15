@@ -3,6 +3,7 @@ path: /blog/the-ethics-of-pirating
 thumbnail: /assets/audio-cassette-cassette-tape-1626481.jpg
 date: 2019-11-15T18:07:33.491Z
 title: The Ethics of Pirating
+category: Opinion
 ---
 Pirating is the act of illegally obtaining copyrighted digital media[^1] such as movies, tv shows and music. Downloading media online is most often done using the peer-to-peer protocol called BitTorrent, because it's extremely difficult to shut down, since there is no central source. 
 
