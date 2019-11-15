@@ -1,0 +1,15 @@
+navigation:
+- title: Pages
+  items:
+    - name: Home
+      url: /
+    - name: About
+      url: /about
+- title: Projects
+  items:
+    - name: pymitv
+      url: 'https://simse.io/pymitv'
+    - name: pyunraid
+      url: 'https://simse.io/pyunraid'
+    - name: Chronos
+      url: 'https://simse.io/chronos'

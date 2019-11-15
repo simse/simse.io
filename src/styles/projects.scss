@@ -1,0 +1,25 @@
+.projects {
+    padding: 50px;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    @media(max-width: 640px) {
+        padding: 50px 20px;
+    }
+}
+
+.projects-group {
+    display: flex;
+    justify-content: space-between;
+    flex-flow: wrap;
+    
+    .project-card {
+        @media(max-width: 1050px) {
+            flex: 0 48%;
+        }
+
+        @media(max-width: 720px) {
+            flex: 0 100%;
+        }
+    }
+}

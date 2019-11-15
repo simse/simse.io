@@ -1,0 +1,137 @@
+.navbar {
+    margin: 0 auto;
+    padding: 50px 160px;
+    display: flex;
+    justify-content: space-between;
+
+    @media(max-width: 1100px) {
+        padding: 50px 100px;
+    }
+
+    @media(max-width: 720px) {
+        padding: 50px 30px;
+    }
+}
+
+.menu-icon {
+    width: 40px;
+    height: 50px;
+    z-index: 1001;
+    margin-top: 13px;
+    position: fixed;
+    top: 50px;
+    right: 160px;
+
+    @media(max-width: 1100px) {
+        right: 100px;
+    }
+
+    @media(max-width: 720px) {
+        right: 30px;
+    }
+    
+    &:hover {
+        cursor: pointer;
+    }
+
+    &.active {
+        span {
+            background: #fff;
+        }
+
+        span:first-child {
+            transform: rotate(45deg) translateY(10px) translateX(12px);
+        }
+
+        span:last-child {
+            transform: rotate(-45deg) translateY(0px) translateX(1px);
+        }
+    }
+
+    span {
+        width: 40px;
+        height: 3px;
+        position: absolute;
+        background: #000;
+        transition: all .2s;
+    }
+
+    span:last-child {
+        top: 18px;
+    }
+}
+
+.overlay-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0);
+    z-index: 1000;
+    pointer-events: none;
+    transition: .25s all;
+    padding: 10% 20%;
+    color: #fff;
+    display: flex;
+
+    @media(max-width: 750px) {
+        flex-direction: column;
+        padding: 10%;
+    }
+
+    .nav-group {
+        margin-right: 120px;
+
+        h2 {
+            font-size: 4rem;
+        }
+
+        ul {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            padding: 10px 0;
+        }
+
+        a {
+            color: rgba(255, 255, 255, 0.9);
+            font-size: 2rem;
+            text-decoration: none;
+            font-weight: 300;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            transition: all .2s;
+
+            &:hover {
+                border-bottom: 1px solid rgba(255, 255, 255, 0.8);
+                color: rgba(255, 255, 255, 1);
+            }
+        }
+
+        @media(max-width: 1060px) {
+            h2 {
+                font-size: 2.6rem;
+            }
+
+            a {
+                font-size: 1.4rem;
+            }
+        }
+    }
+
+    &.opened {
+        background: rgba(0, 0, 0, 0.9);
+        pointer-events: all;
+
+        * {
+            opacity: 1;
+        }
+    }
+
+    * {
+        opacity: 0;
+    }
+}

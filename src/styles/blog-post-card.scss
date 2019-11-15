@@ -1,0 +1,41 @@
+$border-radius: 8px;
+
+.blog-post-card {
+    border-radius: $border-radius;
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
+    transition: all .2s;
+
+    &:hover {
+        cursor: pointer;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+        transform: translateY(-1%);
+    }
+
+    a {
+        color: #000;
+        text-decoration: none;
+    }
+
+    img {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+    }
+
+    .meta {
+        padding: 25px 18px;
+
+        h2 {
+            margin: 0 0 10px 0;
+        }
+
+        span {
+            opacity: .6;
+        }
+
+        p {
+            line-height: 1.5em;
+            opacity: .9;
+            font-size: 1.1rem;
+        }
+    }
+}

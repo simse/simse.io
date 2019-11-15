@@ -1,0 +1,31 @@
+.blog {
+    padding: 50px;
+    max-width: 1400px;
+    margin: 0 auto;
+
+    h2 {
+        font-weight: 400;
+        margin-bottom: 5px;
+    }
+
+    h3.subtitle {
+        font-size: 1.1rem;
+        opacity: .5;
+        margin-bottom: 20px;
+        margin-top: 0;
+        font-weight: 500;
+    }
+
+    @media(max-width: 640px) {
+        padding: 50px 20px;
+    }
+}
+
+.blog-posts {
+    display: flex;
+
+    .blog-post-card {
+        width: 23%;
+        margin-right: 2%;
+    }
+}
