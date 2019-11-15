@@ -6,18 +6,19 @@ import Layout from "../components/layout"
 import SEO from "../components/seo"
 import '../styles/404.scss'
 
-const NotFoundPage = ({data}) => (
-  <Layout>
-    <SEO title="404: Not found" />
-    
+const NotFoundPage = ({ data }) => (
     <div className={"fourohfour"}>
-    <Img fixed={data.file.childImageSharp.fixed} />
+        <Layout>
+            <SEO title="404: Not found" />
 
-        <h1>This page doesn't exist!</h1>
-        <h2>If you typed in the URL yourself, please double-check it's right. If you clicked your way here, then I'm very sorry :(</h2>
+            <div className={"fourohfour-inner"}>
+                <Img fixed={data.file.childImageSharp.fixed} />
+
+                <h1>This page doesn't exist!</h1>
+                <h2>If you typed in the URL yourself, please double-check it's right. If you clicked your way here, then I'm very sorry :(</h2>
+            </div>
+        </Layout>
     </div>
-    
-  </Layout>
 )
 
 export default NotFoundPage
