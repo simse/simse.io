@@ -13,3 +13,13 @@ h3.subtitle {
     margin-top: 0;
     font-weight: 500;
 }
+
+.location {
+    opacity: 0.4;
+}
+
+@media(max-width: 1500px) {
+    .location { 
+        display: none;
+    }
+}

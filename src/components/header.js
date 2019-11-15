@@ -1,13 +1,36 @@
 import { Link, graphql, StaticQuery } from "gatsby"
 import React from "react"
 import { Location } from '@reach/router'
+import titleCase from 'ap-style-title-case'
 
 import '../styles/header.scss'
 
 class Header extends React.Component {
-    state = { 'navOpened': false }
-    location = this.props.location.pathname
-    nav = []
+    stylizeLocation = (location) => {
+        if(location === '/') return ''
+
+        let subpage = location.split('/')[1]
+        let stylizedLocation = ''
+
+        // Check website area is the blog
+        if(subpage === 'blog') {
+            // Add space around slashes
+            stylizedLocation = location.replace(/\//g, " / ")
+            // Replaces dashes with spaces
+            stylizedLocation = stylizedLocation.replace(/-/g, " ")
+
+            // AP capitalize only the blog title
+            stylizedLocation = stylizedLocation.replace(
+                stylizedLocation.split(' / ')[2],
+                titleCase(stylizedLocation.split(' / ')[2])
+            )
+        }
+
+        
+        
+
+        return stylizedLocation
+    }
 
     toggleNav = () => {
         this.setState({
@@ -16,12 +39,17 @@ class Header extends React.Component {
     }
 
     navItem = (url, name) => {
-        if (url.indexOf('://') > 0 || url.indexOf('//') === 0 ) {
+        if (url.indexOf('://') > 0 || url.indexOf('//') === 0) {
             return (<li><a href={url}>{name}</a></li>)
         } else {
             return (<li><Link to={url}>{name}</Link></li>)
         }
     }
+
+    state = { 'navOpened': false }
+    location = this.stylizeLocation(this.props.location.pathname)
+    
+    nav = []
 
     constructor(props) {
         super(props)
@@ -50,6 +78,7 @@ class Header extends React.Component {
                                 fontSize: '1.6rem'
                             }}>
                             Simon Sørensen
+                            <span className="location">{this.location}</span>
                         </Link>
                     </h1>
                     <div className={menuClassName} onClick={this.toggleNav}>

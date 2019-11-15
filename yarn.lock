@@ -1809,6 +1809,11 @@ anymatch@~3.1.1:
     normalize-path "^3.0.0"
     picomatch "^2.0.4"
 
+ap-style-title-case@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/ap-style-title-case/-/ap-style-title-case-1.1.0.tgz#14266cbaa6b7d17881c09760ca373c45258457e1"
+  integrity sha512-2hQDKWPwncNrw01Vkgf0BwFC1OLA8LdVidV0nPlZzSxU1AM/+1s3np0lzy5AXpsM6iyUHPWKGBEUUgcX7UR2Tw==
+
 aproba@^1.0.3, aproba@^1.1.1:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/aproba/-/aproba-1.2.0.tgz#6802e6264efd18c790a1b0d517f0f2627bf2c94a"
