@@ -19,15 +19,23 @@ class Header extends React.Component {
             // Replaces dashes with spaces
             stylizedLocation = stylizedLocation.replace(/-/g, " ")
 
+            // Capitalize the word 'blog'
+            stylizedLocation = stylizedLocation.replace("blog", "Blog")
+
             // AP capitalize only the blog title
             stylizedLocation = stylizedLocation.replace(
                 stylizedLocation.split(' / ')[2],
                 titleCase(stylizedLocation.split(' / ')[2])
             )
         }
+        
+        // Check website area is about
+        if(subpage === 'about') {
+            // Add space around slashes
+            stylizedLocation = location.replace(/\//g, " / ")
 
-        
-        
+            stylizedLocation = stylizedLocation.replace("about", "About")
+        }
 
         return stylizedLocation
     }
