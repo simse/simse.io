@@ -19,4 +19,5 @@ collections:
             multiple: true
       - { name: date, label: Date, widget: datetime }
       - { name: title, label: Title }
+      - { name: category, label: Category }
       - { name: body, label: Body, widget: markdown }
