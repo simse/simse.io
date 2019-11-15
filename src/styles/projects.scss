@@ -12,14 +12,27 @@
     display: flex;
     justify-content: space-between;
     flex-flow: wrap;
-    
+
+    &::after {
+        content: "";
+        flex: auto;
+    }
+
     .project-card {
+        max-width: 32%;
+        margin-right: 2%;
+
+        &:nth-child(3) {
+            margin-right: 0;
+        }
+
         @media(max-width: 1050px) {
-            flex: 0 48%;
+            max-width: 48%;
         }
 
         @media(max-width: 720px) {
-            flex: 0 100%;
+            max-width: 100%;
+            margin-right: 0;
         }
     }
 }

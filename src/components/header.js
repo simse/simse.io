@@ -26,6 +26,7 @@ class Header extends React.Component {
     render() {
         const navClassName = 'overlay-nav' + (this.state.navOpened ? ' opened' : '')
         const menuClassName = 'menu-icon' + (this.state.navOpened ? ' active' : '')
+
         return (
             <header>
                 <div className={'navbar'}>
