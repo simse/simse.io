@@ -7,8 +7,8 @@ import '../styles/blog.scss'
 const Blog = () => {
     const data = useStaticQuery(graphql`
         query {
-            allMarkdownRemark {
-              nodes {
+            allMarkdownRemark(limit: 4) {
+              nodes  {
                 excerpt(pruneLength: 200)
                 frontmatter {
                   title
