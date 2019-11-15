@@ -32,7 +32,8 @@ class Projects extends React.Component {
                         website={project.website}
                         github={project.github}
                         color={project.color}
-                        icon={project.icon} />
+                        icon={project.icon}
+                        stat={project.stat} />
                 ))}
                 </div>
             </section>
@@ -53,6 +54,7 @@ export default () => (
                                 github
                                 color
                                 icon
+                                stat
                             }
                         }
                     }

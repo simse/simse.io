@@ -6,6 +6,7 @@ projects:
   github: https://github.com/simse/pymitv
   color: '#FFDFDF'
   icon: two_fingers.png
+  stat: pip=pymitv
 
 - name: pyunraid
   desc: pyunraid is a Python 3 module to interface
@@ -14,6 +15,7 @@ projects:
   github: https://github.com/simse/pyunraid
   color: '#DFFFE4'
   icon: wink.png
+  stat: pip=pyunraid
 
 - name: Chronos
   desc: Chronos is an application that schedules
@@ -23,3 +25,4 @@ projects:
   github: https://github.com/simse/chronos
   color: '#EDDFFF'
   icon: chronos.png
+  stat: dockerhub=simsemand/chronos
