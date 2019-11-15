@@ -1,13 +1,12 @@
 ---
-title: 'The Masterlist of Worldwide Excellent Food'
-category: 'Opinion'
+path: /blog/the-masterlist-of-worldwide-excellent-food
+thumbnail: /assets/ti8wzfbbvdspxo8dg1ci.jpeg
 date: 2019-05-24T12:55:00.000Z
-thumbnail: /indian_food.jpg
-path: '/blog/the-masterlist-of-worldwide-excellent-food'
+title: The Masterlist of Worldwide Excellent Food
 ---
 
 A simpler and more lenient Michelin alternative. These are restaurants I've been to where the food as been beyond incredible. I don't travel too much, but I often find myself in cities with great food and diverse cuisines. If you ever find yourself in one these cities, please go to one of these restaurants.  
-![](./lucknow49.jpg)Food you can order at Lucknow 49
+
 ## Lucknow 49
 
 **London, United Kingdom — Indian — $$$**
