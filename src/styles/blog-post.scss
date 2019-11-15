@@ -13,13 +13,29 @@
         font-weight: 400;
         font-size: 4rem;
         margin-bottom: 10px;
+        padding: 0 10px;
+
+        @media(max-width: 720px) {
+            font-size: 3rem;
+        }
+
+        @media(max-width: 420px) {
+            font-size: 2.2rem;
+        }
     }
 
     .blog-post-meta {
         text-align: center;
         font-weight: 500;
         font-size: 1.3rem;
-        
+
+        @media(max-width: 720px) {
+            font-size: 1rem;
+        }
+
+        @media(max-width: 420px) {
+            font-size: 0.9rem;
+        } 
     }
 }
 
