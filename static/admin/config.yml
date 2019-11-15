@@ -1,5 +1,6 @@
 backend:
-  name: test-repo
+  name: github
+  repo: simse/simse.io
 
 media_folder: static/assets
 public_folder: assets
@@ -10,7 +11,13 @@ collections:
     folder: blog
     create: true
     fields:
-      - { name: path, label: Path }
+      - { name: path, label: URL }
+      - label: "Featured Image"
+        name: "thumbnail"
+        widget: "image"
+        media_library:
+          config:
+            multiple: true
       - { name: date, label: Date, widget: datetime }
       - { name: title, label: Title }
       - { name: body, label: Body, widget: markdown }
