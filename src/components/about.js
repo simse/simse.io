@@ -34,6 +34,7 @@ const About = () => {
     return (
         <section className={'about'}>
             <h2>About me</h2>
+            <h3 className={'subtitle'}>A couple of things about me</h3>
 
             <div className={'row'}>
             <div className={'col'}>

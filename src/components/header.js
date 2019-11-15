@@ -1,10 +1,12 @@
 import { Link, graphql, StaticQuery } from "gatsby"
 import React from "react"
+import { Location } from '@reach/router'
 
 import '../styles/header.scss'
 
 class Header extends React.Component {
-    state = {'navOpened': false}
+    state = { 'navOpened': false }
+    location = this.props.location.pathname
     nav = []
 
     toggleNav = () => {
@@ -13,11 +15,19 @@ class Header extends React.Component {
         })
     }
 
+    navItem = (url, name) => {
+        if (url.indexOf('://') > 0 || url.indexOf('//') === 0 ) {
+            return (<li><a href={url}>{name}</a></li>)
+        } else {
+            return (<li><Link to={url}>{name}</Link></li>)
+        }
+    }
+
     constructor(props) {
         super(props)
 
         props.nav.forEach((value) => {
-            if(value.navigation !== null) {
+            if (value.navigation !== null) {
                 this.nav = value.navigation
             }
         });
@@ -32,15 +42,14 @@ class Header extends React.Component {
                 <div className={'navbar'}>
                     <h1 style={{ margin: 0 }}>
                         <Link
-                        to="/"
-                        style={{
-                            color: '#000',
-                            textDecoration: `none`,
-                            fontWeight: 400,
-                            fontSize: '1.6rem'
-                        }}
-                        >
-                        Simon Sørensen
+                            to="/"
+                            style={{
+                                color: '#000',
+                                textDecoration: `none`,
+                                fontWeight: 400,
+                                fontSize: '1.6rem'
+                            }}>
+                            Simon Sørensen
                         </Link>
                     </h1>
                     <div className={menuClassName} onClick={this.toggleNav}>
@@ -50,17 +59,17 @@ class Header extends React.Component {
                 </div>
 
                 <div className={navClassName}>
-                {this.nav.map(group => (
-                    <div className={'nav-group'}>
-                        <h2>{ group.title }</h2>
+                    {this.nav.map(group => (
+                        <div className={'nav-group'}>
+                            <h2>{group.title}</h2>
 
-                        <ul>
-                            {group.items.map(item => (
-                                <li><a href={ item.url }>{ item.name }</a></li>
-                            ))}
-                        </ul>
-                    </div>
-                ))}
+                            <ul>
+                                {group.items.map(item => (
+                                    this.navItem(item.url, item.name)
+                                ))}
+                            </ul>
+                        </div>
+                    ))}
                 </div>
             </header>
         )
@@ -69,7 +78,7 @@ class Header extends React.Component {
 
 export default () => (
     <StaticQuery
-      query={graphql`
+        query={graphql`
         query {
             allDataYaml {
               nodes {
@@ -85,8 +94,12 @@ export default () => (
           }
           
       `}
-      render={(data) => (
-        <Header nav={data.allDataYaml.nodes} />
-      )}
+        render={(data) => (
+            <Location>
+                {({ location }) => (
+                    <Header nav={data.allDataYaml.nodes} location={location} />
+                )}
+            </Location>
+        )}
     />
-  )
+)
