@@ -5,6 +5,8 @@ navigation:
       url: /
     - name: About
       url: /about
+    - name: Blog
+      url: /blog
 - title: Projects
   items:
     - name: pymitv

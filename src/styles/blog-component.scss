@@ -19,28 +19,27 @@
     @media(max-width: 640px) {
         padding: 50px 20px;
     }
-}
 
-.blog-posts {
-    display: flex;
-
-    .blog-post-card {
-        width: 23%;
-        margin-right: 2%;
+    .blog-posts {
+        display: grid;
+        grid-template-columns: 24% 24% 24% 24%;
+        grid-gap: 1%;
 
         @media(max-width: 1320px) {
-            width: 32%;
-            margin-right: 1%;
+            grid-template-columns: 32% 32% 32%;
         }
 
         @media(max-width: 960px) {
-            width: 49%;
-            margin-right: 1%;
+            grid-template-columns: 49% 49%;
         }
 
         @media(max-width: 680px) {
-            width: 100%;
-            margin-right: 0%;
+            grid-template-columns: 100%;
+            grid-gap: 0%;
+
+            .blog-post-card {
+                margin-bottom: 15px;
+            }
         }
     }
 }

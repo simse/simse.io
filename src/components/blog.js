@@ -2,7 +2,7 @@ import { useStaticQuery, graphql } from "gatsby"
 import React from "react"
 
 import BlogPostCard from "./blog-post-card"
-import '../styles/blog.scss'
+import '../styles/blog-component.scss'
 
 const Blog = () => {
     const data = useStaticQuery(graphql`
