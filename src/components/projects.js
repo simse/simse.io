@@ -27,6 +27,7 @@ class Projects extends React.Component {
                 <div className={'projects-group'}>
                 {this.projects.map(project => (
                    <ProjectCard
+                        key={project.name}
                         name={project.name}
                         desc={project.desc}
                         website={project.website}

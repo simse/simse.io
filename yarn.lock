@@ -5833,6 +5833,12 @@ gatsby-page-utils@^0.0.29:
     micromatch "^3.1.10"
     slash "^3.0.0"
 
+"gatsby-plugin-ackee-tracker@https://github.com/burnsy/gatsby-plugin-ackee-tracker":
+  version "1.1.1"
+  resolved "https://github.com/burnsy/gatsby-plugin-ackee-tracker#08c9e964151bb0294d3d3c1d43b8cd87e607dfcf"
+  dependencies:
+    ackee-tracker "^3.2.2"
+
 gatsby-plugin-manifest@^2.2.27:
   version "2.2.27"
   resolved "https://registry.yarnpkg.com/gatsby-plugin-manifest/-/gatsby-plugin-manifest-2.2.27.tgz#19848ad1876362ac3a76981f77dca857b878ac68"

@@ -48,9 +48,9 @@ class Header extends React.Component {
 
     navItem = (url, name) => {
         if (url.indexOf('://') > 0 || url.indexOf('//') === 0) {
-            return (<li><a href={url}>{name}</a></li>)
+            return (<li key={name}><a href={url}>{name}</a></li>)
         } else {
-            return (<li><Link to={url}>{name}</Link></li>)
+            return (<li key={name}><Link to={url}>{name}</Link></li>)
         }
     }
 
@@ -97,7 +97,7 @@ class Header extends React.Component {
 
                 <div className={navClassName}>
                     {this.nav.map(group => (
-                        <div className={'nav-group'}>
+                        <div className={'nav-group'} key={group.title}>
                             <h2>{group.title}</h2>
 
                             <ul>
