@@ -7,7 +7,10 @@ import '../styles/blog-component.scss'
 const Blog = () => {
     const data = useStaticQuery(graphql`
         query {
-            allMarkdownRemark(limit: 4) {
+            allMarkdownRemark(
+                limit: 4,
+                filter: {fileAbsolutePath: {regex: "\/blog/"}}
+            ) {
               nodes  {
                 excerpt(pruneLength: 200)
                 frontmatter {

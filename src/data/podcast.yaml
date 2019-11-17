@@ -1,0 +1,12 @@
+podcasts:
+- name: Casual Computer Science
+  path: /podcast/casual-computer-science
+  id: cash_compsci
+  desc: We just chillin
+  podcasters:
+    - name: Simon
+      avatar: wink.png
+      color: yellow
+    - name: Alastair
+      avatar: love.png
+      color: blue
