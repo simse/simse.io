@@ -3,6 +3,17 @@
     max-width: 1200px;
     margin: 0 auto;
 
+    .go-back {
+        svg {
+            height: 12px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #2151ff;
+        }
+    }
+
     h1.podcast-episode-title {
         font-weight: 300;
         font-size: 5.2rem;

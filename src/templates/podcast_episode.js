@@ -4,6 +4,8 @@ import { Location } from '@reach/router'
 
 import Image from '../components/image'
 import Layout from '../components/layout'
+import SEO from '../components/seo'
+import ArrowLeft from "../assets/arrow_left.svg"
 import '../styles/podcast-episode.scss'
 
 export default function Template({
@@ -14,14 +16,21 @@ export default function Template({
 
     const { podcast_data } = data
     const podcast = podcast_data.nodes[0].podcasts[0]
+    const title = podcast.name + ' - ' + frontmatter.name
 
     return (
         <Layout>
+            <SEO title={title} />
+
             <div className="podcast-episode">
                 <Location>
                     {({ location }) => {
-                        const path = location.pathname.replace(location.pathname.split('/').pop(), '')
-                        return <Link to={path}>🠜 Go back</Link>
+                        const path = location.pathname.replace(location.pathname.replace(/\/$/, '').split('/').pop(), '')
+                        return (
+                            <span className="go-back">
+                                <Link to={path}><ArrowLeft /> Go back</Link>
+                            </span>
+                        )
                     }}
                 </Location>
 
@@ -40,7 +49,7 @@ export default function Template({
                 <h2 className="podcasters-title">Podcasters</h2>
                 <div className="podcast-podcasters">
                     {podcast.podcasters.map((podcaster) => (
-                        <div className="podcaster">
+                        <div className="podcaster" key={podcaster.name}>
                             <div className="podcaster-image" style={{
                                 background: podcaster.color
                             }}>

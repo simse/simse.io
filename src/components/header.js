@@ -7,13 +7,13 @@ import '../styles/header.scss'
 
 class Header extends React.Component {
     stylizeLocation = (location) => {
-        if(location === '/') return ''
+        if (location === '/') return ''
 
         let subpage = location.split('/')[1]
         let stylizedLocation = ''
 
         // Check website area is the blog
-        if(subpage === 'blog') {
+        if (subpage === 'blog') {
             // Add space around slashes
             stylizedLocation = location.replace(/\//g, " / ")
             // Replaces dashes with spaces
@@ -28,14 +28,42 @@ class Header extends React.Component {
                 titleCase(stylizedLocation.split(' / ')[2])
             )
         }
-        
+
+        // Check website area is podcast
+        if (subpage === 'podcast') {
+            // Add space around slashes
+            stylizedLocation = location.replace(/\//g, " / ")
+            // Replaces dashes with spaces
+            stylizedLocation = stylizedLocation.replace(/-/g, " ")
+
+            // Capitalize the word 'podcast'
+            stylizedLocation = stylizedLocation.replace("podcast", "Podcast")
+
+            // AP capitalize podcast and episode title
+            stylizedLocation = stylizedLocation.replace(
+                stylizedLocation.split(' / ')[2],
+                titleCase(stylizedLocation.split(' / ')[2])
+            )
+
+            stylizedLocation = stylizedLocation.replace(
+                stylizedLocation.split(' / ')[3],
+                titleCase(stylizedLocation.split(' / ')[3])
+            )
+        }
+
         // Check website area is about
-        if(subpage === 'about') {
+        if (subpage === 'about') {
             // Add space around slashes
             stylizedLocation = location.replace(/\//g, " / ")
 
             stylizedLocation = stylizedLocation.replace("about", "About")
         }
+
+        // Remove last space
+        stylizedLocation = stylizedLocation.trimRight()
+
+        // Remove ending slash if present
+        stylizedLocation = stylizedLocation.replace(/\/$/, '');
 
         return stylizedLocation
     }
@@ -56,7 +84,7 @@ class Header extends React.Component {
 
     state = { 'navOpened': false }
     location = this.stylizeLocation(this.props.location.pathname)
-    
+
     nav = []
 
     constructor(props) {

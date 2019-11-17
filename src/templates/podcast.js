@@ -3,6 +3,8 @@ import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 
 import Layout from '../components/layout'
+import Image from '../components/image'
+import SEO from '../components/seo'
 import '../styles/podcast.scss'
 
 export default function Template({
@@ -14,12 +16,27 @@ export default function Template({
 
     return (
         <Layout>
+            <SEO title={name} />
             <div className="podcast">
                 <h1 className="podcast-title">{name}</h1>
                 <h2 className="podcast-subtitle">{desc}</h2>
 
-                <h3 className="section-title">Episodes</h3>
+                <h3 className="section-title">Podcasters</h3>
+                <div className="podcast-podcasters">
+                    {podcasters.map((podcaster) => (
+                        <div className="podcaster" key={podcaster.name}>
+                            <div className="podcaster-image" style={{
+                                background: podcaster.color
+                            }}>
+                                <Image filename={podcaster.avatar} />
+                            </div>
 
+                            <h3>{podcaster.name}</h3>
+                        </div>
+                    ))}
+                </div>
+
+                <h3 className="section-title">Episodes</h3>
                 <div className="podcast-episodes">
                     {episodes.map((episode) => (
                         <div className="podcast-episode-card" key={episode.frontmatter.id}>
@@ -50,6 +67,7 @@ export const pageQuery = graphql`
           podcasters {
             avatar
             name
+            color
           }
         }
       }
@@ -63,7 +81,7 @@ export const pageQuery = graphql`
                 duration
                 image {
                     childImageSharp {
-                        fluid(maxWidth: 400, maxHeight: 250) {
+                        fluid(maxWidth: 400, maxHeight: 200) {
                             ...GatsbyImageSharpFluid
                         }
                     }
