@@ -1,33 +1,42 @@
 @font-face {
+    font-display: swap;
     font-family: "Playfair Display";
     src: url("/assets/fonts/PlayfairDisplay-Regular.ttf") format("ttf"),
          url("/assets/fonts/PlayfairDisplay-Regular.woff") format("woff");
 }
 
 @font-face {
+    font-display: swap;
     font-family: "SF Display";
     font-weight: 400;
-    src: url("/assets/fonts/SF-Pro-Display-Regular.otf") format("otf"),
+    src: local("SF Pro Display")
+         url("/assets/fonts/SF-Pro-Display-Regular.otf") format("otf"),
          url("/assets/fonts/SF-Pro-Display-Regular.woff") format("woff");
 }
 
 @font-face {
+    font-display: swap;
     font-family: "SF Display";
     font-weight: 500;
-    src: url("/assets/fonts/SF-Pro-Display-Medium.otf") format("otf"),
+    src: local("SF Pro Display")
+         url("/assets/fonts/SF-Pro-Display-Medium.otf") format("otf"),
          url("/assets/fonts/SF-Pro-Display-Medium.woff") format("woff");
 }
 
 @font-face {
+    font-display: swap;
     font-family: "SF Display";
     font-weight: 600;
-    src: url("/assets/fonts/SF-Pro-Display-Semibold.otf") format("otf"),
+    src: local("SF Pro Display")
+         url("/assets/fonts/SF-Pro-Display-Semibold.otf") format("otf"),
          url("/assets/fonts/SF-Pro-Display-Semibold.woff") format("woff");
 }
 
 @font-face {
+    font-display: swap;
     font-family: "SF Display";
     font-weight: 700;
-    src: url("/assets/fonts/SF-Pro-Display-Bold.otf") format("otf"),
+    src: local("SF Pro Display")
+         url("/assets/fonts/SF-Pro-Display-Bold.otf") format("otf"),
          url("/assets/fonts/SF-Pro-Display-Bold.woff") format("woff");
 }
