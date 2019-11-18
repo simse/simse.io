@@ -29,6 +29,10 @@ class Header extends React.Component {
             )
         }
 
+        if (subpage === 'podcasts') {
+            stylizedLocation = ' / Podcasts'
+        }
+
         // Check website area is podcast
         if (subpage === 'podcast') {
             // Add space around slashes

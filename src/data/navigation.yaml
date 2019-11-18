@@ -5,6 +5,8 @@ navigation:
       url: /
     - name: About
       url: /about
+    - name: Podcasts
+      url: /podcasts
     - name: Blog
       url: /blog
 - title: Projects

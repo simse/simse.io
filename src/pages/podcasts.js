@@ -2,13 +2,14 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 import React from "react"
 
 import Layout from "../components/layout"
+import ImagePodcast from "../components/image-podcast.js"
 import SEO from "../components/seo"
 import "../styles/podcast-page.scss"
 
 const Podcasts = () => {
     const data = useStaticQuery(graphql`
         query {
-            allDataYaml(filter: {podcasts: {elemMatch: {id: {regex: ""}}}}) {
+            podcasts: allDataYaml(filter: {podcasts: {elemMatch: {id: {regex: ""}}}}) {
                 nodes {
                     podcasts {
                         path
@@ -18,7 +19,7 @@ const Podcasts = () => {
                 }
             }
         }
-    `).allDataYaml.nodes[0].podcasts
+    `).podcasts.nodes[0].podcasts
 
     return (
         <Layout>
@@ -26,12 +27,18 @@ const Podcasts = () => {
 
             <section className={'podcast-page'}>
                 <h1>Podcasts</h1>
+                <p className="subtitle">Sorry about this page, it ain't completely done</p>
 
                 <div className={"podcasts"}>
                     {data.map((podcast) => (
-                        <div>
-                            <h2>{podcast.name}</h2>
-                            <Link to={podcast.path}>Navigate</Link>
+                        <div className="p">
+                            <Link to={podcast.path}>
+                                <ImagePodcast filename="compsci.jpg" />
+
+                                <span>
+                                    <h2>{podcast.name}</h2>
+                                </span>
+                            </Link>
                         </div>
                     ))}
                 </div>

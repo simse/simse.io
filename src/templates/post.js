@@ -3,6 +3,7 @@ import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
 import Layout from '../components/layout'
+import SEO from '../components/seo'
 import '../styles/blog-post.scss'
 
 export default function Template({
@@ -14,6 +15,7 @@ export default function Template({
 
     return (
         <Layout>
+            <SEO title={frontmatter.title} />
             <div className="blog-post-container">
                 <div className="blog-post">
                     <h1 className="blog-post-title">{frontmatter.title}</h1>

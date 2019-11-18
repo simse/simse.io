@@ -1,5 +1,7 @@
 .podcast-page {
-    padding: 10px 50px;
+    padding: 10px;
+    margin: 0 auto;
+    max-width: 1200px;
 
     @media(max-width: 760px) {
         padding: 10px 15px;
@@ -9,5 +11,46 @@
         text-align: center;
         font-size: 4rem;
         font-weight: 400;
+        margin-bottom: 10px;
+    }
+
+    .podcasts {
+        display: grid;
+        grid-template-columns: 49% 49%;
+        grid-gap: 1%;
+        padding: 50px 0;
+    }
+
+    a {
+        text-decoration: none;
+        color: #000;
+    }
+
+    .subtitle {
+        text-align: center;
+        opacity: .6;
+        font-size: 1.6rem;
+    }
+
+    .p {
+        //padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.05);
+
+        img {
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        svg {
+            max-height: 16px;
+        }
+
+        h2 {
+            margin: 0;
+            font-weight: 400;
+            font-family: "Playfair Display";
+            padding: 25px;
+        }
     }
 }
