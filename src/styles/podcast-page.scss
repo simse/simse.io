@@ -12,6 +12,10 @@
         font-size: 4rem;
         font-weight: 400;
         margin-bottom: 10px;
+
+        @media(max-width: 720px) {
+            font-size: 3rem;
+        }
     }
 
     .podcasts {
@@ -19,6 +23,11 @@
         grid-template-columns: 49% 49%;
         grid-gap: 1%;
         padding: 50px 0;
+
+        @media(max-width: 720px) {
+            grid-gap: 0%;
+            grid-template-columns: 100%;
+        }
     }
 
     a {
@@ -30,6 +39,10 @@
         text-align: center;
         opacity: .6;
         font-size: 1.6rem;
+
+        @media(max-width: 720px) {
+            font-size: 1.2rem;
+        }
     }
 
     .p {
