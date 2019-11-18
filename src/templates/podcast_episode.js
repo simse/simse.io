@@ -9,14 +9,27 @@ import ArrowLeft from "../assets/arrow_left.svg"
 import '../styles/podcast-episode.scss'
 
 export default function Template({
-    data, // this prop will be injected by the GraphQL query below.
+    data,
+    pageContext // this prop will be injected by the GraphQL query below.
 }) {
     const { episode } = data // data.markdownRemark holds your post data
     const { frontmatter } = episode
 
     const { podcast_data } = data
-    const podcast = podcast_data.nodes[0].podcasts[0]
-    const title = podcast.name + ' - ' + frontmatter.name
+    let name;
+    let desc;
+    let podcasters;
+
+    //console.log(podcast_data)
+
+    podcast_data.nodes[0].podcasts.forEach((podcast) => {
+        if(podcast.id === pageContext.podcast) {
+            name = podcast.name
+            desc = podcast.desc
+            podcasters = podcast.podcasters
+        }
+    })
+    const title = name + ' - ' + frontmatter.name
 
     return (
         <Layout>
@@ -35,7 +48,7 @@ export default function Template({
                 </Location>
 
                 <h1 className="podcast-episode-title">{frontmatter.name}</h1>
-                <h2 className="podcast-name">{podcast.name}</h2>
+                <h2 className="podcast-name">{name}</h2>
 
                 <div className="podcast-player">
                     <audio
@@ -48,7 +61,7 @@ export default function Template({
 
                 <h2 className="podcasters-title">Podcasters</h2>
                 <div className="podcast-podcasters">
-                    {podcast.podcasters.map((podcaster) => (
+                    {podcasters.map((podcaster) => (
                         <div className="podcaster" key={podcaster.name}>
                             <div className="podcaster-image" style={{
                                 background: podcaster.color

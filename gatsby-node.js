@@ -67,12 +67,14 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
     }
     podcasts.data.allDataYaml.nodes.forEach((podcasts) => {
         if(podcasts.podcasts !== null) {
-            createPage({
-                path: podcasts.podcasts[0].path,
-                component: podcastTemplate,
-                context: {
-                    id: podcasts.podcasts[0].id
-                }
+            podcasts.podcasts.forEach((podcast) => {
+                createPage({
+                    path: podcast.path,
+                    component: podcastTemplate,
+                    context: {
+                        id: podcast.id
+                    }
+                })
             })
         }
     })
@@ -107,7 +109,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
             path: node.frontmatter.path,
             component: podcastEpisodeTemplate,
             context: {
-                podcast: node.frontmatter.podcast
+                podcast: node.frontmatter.podcast,
             }, // additional data can be passed via context
         })
     })

@@ -8,10 +8,22 @@ import SEO from '../components/seo'
 import '../styles/podcast.scss'
 
 export default function Template({
-    data, // this prop will be injected by the GraphQL query below.
+    data,
+    pageContext // this prop will be injected by the GraphQL query below.
 }) {
     const { podcast } = data // data.markdownRemark holds your post data
-    const { name, desc, podcasters } = podcast.nodes[0].podcasts[0]
+    let name;
+    let desc;
+    let podcasters;
+
+    podcast.nodes[0].podcasts.forEach((podcast) => {
+        if(podcast.id === pageContext.id) {
+            name = podcast.name
+            desc = podcast.desc
+            podcasters = podcast.podcasters
+        }
+    })
+
     const episodes = data.episodes.nodes
 
     return (
