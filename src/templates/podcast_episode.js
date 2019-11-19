@@ -17,7 +17,6 @@ export default function Template({
 
     const { podcast_data } = data
     let name;
-    let desc;
     let podcasters;
 
     //console.log(podcast_data)
@@ -25,7 +24,6 @@ export default function Template({
     podcast_data.nodes[0].podcasts.forEach((podcast) => {
         if(podcast.id === pageContext.podcast) {
             name = podcast.name
-            desc = podcast.desc
             podcasters = podcast.podcasters
         }
     })
@@ -92,7 +90,6 @@ export const pageQuery = graphql`
             podcasts {
                 id
                 name
-                desc
                 podcasters {
                     name
                     avatar

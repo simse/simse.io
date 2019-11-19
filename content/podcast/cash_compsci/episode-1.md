@@ -1,4 +1,5 @@
 ---
+episode: 1
 id: cc_e1
 name: Episode 1
 duration: "01:12:09"

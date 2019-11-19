@@ -1,4 +1,5 @@
 ---
+episode: 8
 id: "10ICUB1R09"
 name: "Episode 8"
 duration: "0:39:16"

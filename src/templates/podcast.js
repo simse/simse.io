@@ -84,7 +84,10 @@ export const pageQuery = graphql`
         }
       }
     }
-    episodes: allMarkdownRemark(filter: {frontmatter: {podcast: {eq: $id}}}) {
+    episodes: allMarkdownRemark(
+        filter: {frontmatter: {podcast: {eq: $id}}},
+        sort: {fields: frontmatter___episode, order: DESC}
+    ) {
         nodes {
             frontmatter {
                 path

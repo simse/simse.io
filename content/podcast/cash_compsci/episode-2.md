@@ -1,4 +1,5 @@
 ---
+episode: 2
 id: "2BJE8A59V9"
 name: "Episode 2"
 duration: "0:03:22"

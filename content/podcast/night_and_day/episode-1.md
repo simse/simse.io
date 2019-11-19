@@ -1,4 +1,5 @@
 ---
+episode: 1
 id: "GWXLD1AB8N"
 name: "Episode 1"
 duration: "0:29:51"
