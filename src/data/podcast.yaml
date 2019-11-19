@@ -6,10 +6,10 @@ podcasts:
   podcasters:
     - name: Simon
       avatar: wink.png
-      color: yellow
+      color: "#FFE0B7"
     - name: Alastair
-      avatar: love.png
-      color: blue
+      avatar: alastair.png
+      color: "#a6d3ff"
 - name: Night and Day
   path: /podcast/night-and-day
   id: night_and_day
