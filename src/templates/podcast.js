@@ -5,7 +5,7 @@ import Img from "gatsby-image"
 import Layout from '../components/layout'
 import Image from '../components/image'
 import SEO from '../components/seo'
-import '../styles/podcast.scss'
+import styles from '../styles/pages/podcast.module.scss'
 
 export default function Template({
     data,
@@ -29,18 +29,18 @@ export default function Template({
     return (
         <Layout>
             <SEO title={name} />
-            <div className="podcast">
-                <h1 className="podcast-title">{name}</h1>
-                <h2 className="podcast-subtitle">{desc}</h2>
+            <div className={styles.podcast}>
+                <h1 className={styles.title}>{name}</h1>
+                <h2 className={styles.subtitle}>{desc}</h2>
 
-                <h3 className="section-title">Podcasters</h3>
-                <div className="podcast-podcasters">
+                <h3 className={styles.sectionTitle}>Podcasters</h3>
+                <div className={styles.podcasters}>
                     {podcasters.map((podcaster) => (
-                        <div className="podcaster" key={podcaster.name}>
-                            <div className="podcaster-image" style={{
+                        <div className={styles.podcaster} key={podcaster.name}>
+                            <div className={styles.podcasterImage} style={{
                                 background: podcaster.color
                             }}>
-                                <Image filename={podcaster.avatar} />
+                                <Image filename={podcaster.avatar} width={90} />
                             </div>
 
                             <h3>{podcaster.name}</h3>
@@ -48,14 +48,14 @@ export default function Template({
                     ))}
                 </div>
 
-                <h3 className="section-title">Episodes</h3>
-                <div className="podcast-episodes">
+                <h3 className={styles.sectionTitle}>Episodes</h3>
+                <div className={styles.episodes}>
                     {episodes.map((episode) => (
-                        <div className="podcast-episode-card" key={episode.frontmatter.id}>
+                        <div className={styles.episodeCard} key={episode.frontmatter.id}>
                             <Link to={episode.frontmatter.path}>
                                 <Img fluid={episode.frontmatter.image.childImageSharp.fluid} />
 
-                                <div className="podcast-episode-meta">
+                                <div className={styles.episodeMeta}>
                                     <h4>{episode.frontmatter.name}</h4>
                                     <span>{episode.frontmatter.duration}</span>
                                 </div>

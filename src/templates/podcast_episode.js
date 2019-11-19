@@ -6,20 +6,17 @@ import Image from '../components/image'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import ArrowLeft from "../assets/arrow_left.svg"
-import '../styles/podcast-episode.scss'
+import styles from '../styles/pages/podcast-episode.module.scss'
 
 export default function Template({
     data,
-    pageContext // this prop will be injected by the GraphQL query below.
+    pageContext
 }) {
-    const { episode } = data // data.markdownRemark holds your post data
+    const { episode } = data
     const { frontmatter } = episode
 
     const { podcast_data } = data
-    let name;
-    let podcasters;
-
-    //console.log(podcast_data)
+    let name, podcasters;
 
     podcast_data.nodes[0].podcasts.forEach((podcast) => {
         if(podcast.id === pageContext.podcast) {
@@ -33,22 +30,22 @@ export default function Template({
         <Layout>
             <SEO title={title} />
 
-            <div className="podcast-episode">
+            <div className={styles.episode}>
                 <Location>
                     {({ location }) => {
                         const path = location.pathname.replace(location.pathname.replace(/\/$/, '').split('/').pop(), '')
                         return (
-                            <span className="go-back">
+                            <span className={styles.back}>
                                 <Link to={path}><ArrowLeft /> Go back</Link>
                             </span>
                         )
                     }}
                 </Location>
 
-                <h1 className="podcast-episode-title">{frontmatter.name}</h1>
-                <h2 className="podcast-name">{name}</h2>
+                <h1 className={styles.title}>{frontmatter.name}</h1>
+                <h2 className={styles.podcastName}>{name}</h2>
 
-                <div className="podcast-player">
+                <div className={styles.player}>
                     <audio
                         controls
                         src={frontmatter.audio}>
@@ -57,14 +54,14 @@ export default function Template({
                 </audio>
                 </div>
 
-                <h2 className="podcasters-title">Podcasters</h2>
-                <div className="podcast-podcasters">
+                <h2 className={styles.podcastersTitle}>Podcasters</h2>
+                <div className={styles.podcasters}>
                     {podcasters.map((podcaster) => (
-                        <div className="podcaster" key={podcaster.name}>
-                            <div className="podcaster-image" style={{
+                        <div className={styles.podcaster} key={podcaster.name}>
+                            <div className={styles.podcasterImage} style={{
                                 background: podcaster.color
                             }}>
-                                <Image filename={podcaster.avatar} />
+                                <Image filename={podcaster.avatar} width={90} />
                             </div>
 
                             <h3>{podcaster.name}</h3>

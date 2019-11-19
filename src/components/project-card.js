@@ -34,7 +34,7 @@ class ProjectCard extends React.Component {
                 <div className={'project-image'} style={{
                     background: color
                 }}>
-                    <Image filename={icon} />
+                    <Image filename={icon} width={120} />
                 </div>
     
                 <div className={'project-inner'}>
@@ -53,7 +53,6 @@ class ProjectCard extends React.Component {
             </div>
         )
     }
-    
 }
 
 

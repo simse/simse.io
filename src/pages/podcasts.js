@@ -4,7 +4,7 @@ import React from "react"
 import Layout from "../components/layout"
 import ImagePodcast from "../components/image-podcast.js"
 import SEO from "../components/seo"
-import "../styles/podcast-page.scss"
+import styles from "../styles/pages/podcasts.module.scss"
 
 const Podcasts = () => {
     const data = useStaticQuery(graphql`
@@ -25,13 +25,13 @@ const Podcasts = () => {
         <Layout>
             <SEO title="Podcasts" />
 
-            <section className={'podcast-page'}>
-                <h1>Podcasts</h1>
-                <p className="subtitle">Sorry about this page, it ain't completely done</p>
+            <section className={styles.container}>
+                <h1 className={styles.title}>Podcasts</h1>
+                <p className={styles.subtitle}>Sorry about this page, it ain't completely done</p>
 
-                <div className={"podcasts"}>
+                <div className={styles.podcasts}>
                     {data.map((podcast) => (
-                        <div className="p">
+                        <div className={styles.podcast}>
                             <Link to={podcast.path}>
                                 <ImagePodcast filename="compsci.jpg" />
 
