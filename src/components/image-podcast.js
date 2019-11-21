@@ -15,7 +15,7 @@ const ImagePodcast = props => (
               name
               childImageSharp {
                 fluid(maxWidth: 1000, maxHeight: 250) {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }

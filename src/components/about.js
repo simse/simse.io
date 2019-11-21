@@ -9,22 +9,22 @@ const About = () => {
         query {
             love: file(relativePath: { eq: "love.png" }) {
                 childImageSharp {
-                    fluid(maxWidth: 300) {
-                        ...GatsbyImageSharpFluid
+                    fluid(maxWidth: 130) {
+                        ...GatsbyImageSharpFluid_withWebp
                     }
                 }
             }
             crossing_fingers: file(relativePath: { eq: "crossing_fingers.png" }) {
                 childImageSharp {
-                    fluid(maxWidth: 300) {
-                        ...GatsbyImageSharpFluid
+                    fluid(maxWidth: 130) {
+                        ...GatsbyImageSharpFluid_withWebp
                     }
                 }
             }
             two_fingers: file(relativePath: { eq: "two_fingers.png" }) {
                 childImageSharp {
-                    fluid(maxWidth: 300) {
-                        ...GatsbyImageSharpFluid
+                    fluid(maxWidth: 130) {
+                        ...GatsbyImageSharpFluid_withWebp
                     }
                 }
             }

@@ -10,7 +10,7 @@ const Hero = () => {
             placeholderImage: file(relativePath: { eq: "wink.png" }) {
                 childImageSharp {
                     fluid(maxWidth: 300) {
-                        ...GatsbyImageSharpFluid
+                        ...GatsbyImageSharpFluid_withWebp
                     }
                 }
             }

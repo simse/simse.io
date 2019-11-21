@@ -21,7 +21,7 @@ const Blog = () => {
                   thumbnail {
                     childImageSharp {
                         fluid(maxWidth: 400, maxHeight: 250) {
-                            ...GatsbyImageSharpFluid
+                          ...GatsbyImageSharpFluid_withWebp
                         }
                     }
                   }
