@@ -27,6 +27,7 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
                     node {
                         frontmatter {
                             path
+                            category
                         }
                     }
                 }
@@ -42,7 +43,9 @@ exports.createPages = async ({ actions, graphql, reporter }) => {
         createPage({
             path: node.frontmatter.path,
             component: blogPostTemplate,
-            context: {}, // additional data can be passed via context
+            context: {
+                category: node.frontmatter.category
+            }, // additional data can be passed via context
         })
     })
 

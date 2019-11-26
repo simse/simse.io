@@ -17,7 +17,7 @@ const BlogPostCard = (post) => {
 
                     <p>{post.excerpt}</p>
                 </div>
-                </Link>
+            </Link>
         </div>
     )
 }

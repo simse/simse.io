@@ -2,7 +2,17 @@
 //                                                                    //
 ////////////////////////////////////////////////////////////////////////
 
-body {
-    //background: red;
-    
+
+a.footnote-backref {
+    display: none;
+}
+
+.footnotes {
+    ol:before {
+        content: 'References';
+    }
+
+    p {
+        margin-left: 15px;
+    }
 }

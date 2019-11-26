@@ -1,0 +1,144 @@
+.image {
+    margin-top: 120px;
+}
+
+.title {
+    text-align: center;
+    font-weight: 400;
+    font-size: 4rem;
+    margin-bottom: 10px;
+    padding: 0 10px;
+    font-family: "Playfair Display";
+
+    @media(max-width: 720px) {
+        font-size: 3rem;
+    }
+
+    @media(max-width: 420px) {
+        font-size: 2.2rem;
+    }
+}
+
+.meta {
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.3rem;
+
+    @media(max-width: 720px) {
+        font-size: 1rem;
+    }
+
+    @media(max-width: 420px) {
+        font-size: 0.9rem;
+    } 
+}
+
+
+.content {
+    max-width: 1000px;
+    padding: 0 10px;
+    margin: 100px auto;
+    font-size: 1.2rem;
+    line-height: 1.6em;
+
+    /*p {
+        //margin-bottom: 35px;
+    }*/
+
+    a {
+        text-decoration: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+        transition: all .2s;
+        color: #0377fc;
+
+        &:hover {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.8);
+            color: darken(#0377fc, 20%);
+        }
+    }
+
+    sup {
+        a {
+            color: #111;
+
+            &:hover {
+                color: #000;
+            }
+        }
+
+        &:before {
+            content: '[';
+        }
+
+        &:after {
+            content: ']';
+        }
+    }
+
+    img {
+        border-radius: 4px;
+    }
+
+    span.gatsby-resp-image-wrapper {
+        max-width: 100%;
+        margin: 30px 0;
+    }
+
+    hr {
+        border: 0;
+        border-bottom: lightgrey 1px solid;
+        margin: 45px 0;
+    }
+}
+
+.relatedBlogPosts {
+    padding: 50px 100px;
+
+    @media(max-width: 1400px) {
+        padding: 15px 20px;
+    }
+
+    h2 {
+        font-weight: 400;
+        opacity: .7;
+    }
+
+    .inner {
+        display: grid;
+        grid-gap: 2%;
+        grid-template-columns: 23% 23% 23% 23%;
+
+        div {
+            display: none;
+        }
+
+        @media(min-width: 1200px) {
+            div:nth-child(-n+4){
+                display: block;
+            }
+        }
+
+        @media(min-width: 960px) {
+            div:nth-child(-n+3){
+                display: block;
+            }
+        }
+
+        @media(max-width: 1200px) {
+            grid-template-columns: 32% 32% 32%;            
+        }
+
+        @media(max-width: 960px) {
+            grid-template-columns: 48% 48%;
+
+            div:nth-child(-n+2){
+                display: block;
+            }
+        }
+
+        @media(max-width: 690px) {
+            grid-template-columns: 100%;
+        }
+    }
+}
+
