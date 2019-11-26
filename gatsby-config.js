@@ -1,13 +1,23 @@
 module.exports = {
     siteMetadata: {
         title: `Simon Sørensen`,
-        description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-        author: `@gatsbyjs`,
+        description: `Simon's personal website.`,
+        author: `@simse`,
+        siteUrl: 'https://simse.io'
     },
     plugins: [
+        `gatsby-plugin-sitemap`,
+        `gatsby-plugin-robots-txt`,
         `gatsby-plugin-netlify-cms`,
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-sass`,
+        {
+            resolve: `gatsby-plugin-nprogress`,
+            options: {
+                // Disable the loading spinner.
+                showSpinner: false,
+            },
+        },
         {
             resolve: `gatsby-source-filesystem`,
             options: {
@@ -65,6 +75,7 @@ module.exports = {
             options: {
                 plugins: [
                     'gatsby-remark-relative-images',
+                    `gatsby-remark-smartypants`,
                     {
                         resolve: `gatsby-remark-images`,
                         options: {
@@ -72,19 +83,6 @@ module.exports = {
                         },
                     },
                 ],
-            },
-        },
-        {
-            resolve: "gatsby-plugin-ackee-tracker",
-            options: {
-                // Domatin ID found when adding a domain in the admin panel.
-                domainId: '389453d6-2eb6-4142-9dd1-c03f0d3a2ce7',
-                // URL to Server eg: "https://analytics.test.com".
-                server: 'https://analytics.simse.io',
-                // Disabled analytic tracking when running localy
-                ignoreLocalhost: true,
-                // If enabled it will collect info on OS, BrowserInfo, Device  & ScreenSize
-                detailed: false
             },
         },
         {
