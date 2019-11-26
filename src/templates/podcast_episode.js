@@ -18,10 +18,14 @@ export default function Template({
     const { podcast_data } = data
     let name, podcasters;
 
+    podcasters = JSON.parse(frontmatter.podcasters)
+
     podcast_data.nodes[0].podcasts.forEach((podcast) => {
         if(podcast.id === pageContext.podcast) {
             name = podcast.name
-            podcasters = podcast.podcasters
+            if(podcasters === null) {
+                podcasters = podcast.podcasters
+            }
         }
     })
     const title = name + ' - ' + frontmatter.name
@@ -80,6 +84,7 @@ export const pageQuery = graphql`
       frontmatter {
         name
         audio
+        podcasters
       }
     }
     podcast_data: allDataYaml(filter: {podcasts: {elemMatch: {id: {eq: $podcast}}}}) {
