@@ -2,7 +2,7 @@ projects:
 - name: pymitv
   desc: pymitv is a Python 3 module designed to 
         control Xiaomi TVs
-  website: https://simse.io/pymitv
+  website: https://simse.io/pymitv/
   github: https://github.com/simse/pymitv
   color: '#FFDFDF'
   icon: two_fingers.png
@@ -11,7 +11,7 @@ projects:
 - name: pyunraid
   desc: pyunraid is a Python 3 module to interface
         directly with Unraid servers
-  website: https://simse.io/pyunraid
+  website: https://simse.io/pyunraid/
   github: https://github.com/simse/pyunraid
   color: '#DFFFE4'
   icon: wink.png
@@ -21,7 +21,7 @@ projects:
   desc: Chronos is an application that schedules
         the execution of Python scripts through a 
         sleek Web UI.
-  website: https://simse.io/chronos
+  website: https://simse.io/chronos/
   github: https://github.com/simse/chronos
   color: '#EDDFFF'
   icon: chronos.png
