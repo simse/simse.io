@@ -4,6 +4,7 @@ $border-radius: 8px;
     border-radius: $border-radius;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
     transition: all .2s;
+    background: var(--blog-card-bg);
 
     &:hover {
         cursor: pointer;
@@ -12,7 +13,7 @@ $border-radius: 8px;
     }
 
     a {
-        color: #000;
+        color: var(--blog-card-color);
         text-decoration: none;
     }
 

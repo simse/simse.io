@@ -2,6 +2,43 @@
 //                                                                    //
 ////////////////////////////////////////////////////////////////////////
 
+/* Color variables */
+:root {
+    --body-bg: #fff;
+    --text-color: #000;
+
+    --menu-icon-color: #000;
+
+    --project-card-bg: #fff;
+
+    --blog-card-bg: #fff;
+    --blog-card-color: #111;
+
+    --podcast-bg-bg: #fff;
+
+    --footer-bg: #f5f5f5;
+
+    @media (prefers-color-scheme: dark) {
+        --body-bg: #000;
+        --text-color: #fff;
+
+        --menu-icon-color: #fff;
+
+        --project-card-bg: #111;
+
+        --blog-card-bg: #111;
+        --blog-card-color: #fff;
+
+        --podcast-bg-bg: #111;
+
+        --footer-bg: #111;
+    }
+}
+
+body {
+    background: var(--body-bg);
+    color: var(--text-color);
+}
 
 a.footnote-backref {
     display: none;

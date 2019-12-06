@@ -88,12 +88,12 @@ const IndexPage = () => (
 
                         <li>
                             <div className="heading">
-                                C
+                                C++
                             </div>
 
                             <ul>
                                 <li>1 month</li>
-                                <li>Just learning C</li>
+                                <li>Just learning C++</li>
                                 <li><span role="img" aria-label="heart">❤️</span> Love it</li>
                             </ul>
                         </li>

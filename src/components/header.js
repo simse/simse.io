@@ -112,7 +112,6 @@ class Header extends React.Component {
                         <Link
                             to="/"
                             style={{
-                                color: '#000',
                                 textDecoration: `none`,
                                 fontWeight: 400,
                                 fontSize: '1.6rem'

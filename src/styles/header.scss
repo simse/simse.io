@@ -4,6 +4,10 @@
     display: flex;
     justify-content: space-between;
 
+    h1 a {
+        color: var(--text-color);
+    }
+
     @media(max-width: 1100px) {
         padding: 50px 100px;
     }
@@ -56,7 +60,7 @@
         width: 40px;
         height: 3px;
         position: absolute;
-        background: #000;
+        background: var(--menu-icon-color);
         transition: all .2s;
     }
 
@@ -127,8 +131,9 @@
     }
 
     &.opened {
-        background: rgba(0, 0, 0, 0.9);
+        background: rgba(0, 0, 0, 0.65);
         pointer-events: all;
+        backdrop-filter: blur(12px);
 
         * {
             opacity: 1;

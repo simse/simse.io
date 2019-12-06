@@ -1,7 +1,6 @@
 .footer {
     padding: 20px 25px;
-    background: darken(#fff, 5%);
-    //color: #fff;
+    background: var(--footer-bg);
 
     p {
         margin: 0;

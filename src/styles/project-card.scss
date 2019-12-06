@@ -3,8 +3,8 @@ $border-radius: 8px;
 .project-card {
     border-radius: $border-radius;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
-    //width: 30%;
     margin-bottom: 35px;
+    background: var(--project-card-bg);
 
     .project-inner {
         padding: 28px;
@@ -19,7 +19,7 @@ $border-radius: 8px;
     }
 
     span {
-        opacity: 0.5;
+        opacity: 0.7;
     }
 
     p {

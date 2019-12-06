@@ -9,21 +9,21 @@ const About = () => {
         query {
             love: file(relativePath: { eq: "love.png" }) {
                 childImageSharp {
-                    fluid(maxWidth: 130) {
+                    fluid(maxWidth: 125, quality: 90) {
                         ...GatsbyImageSharpFluid_withWebp
                     }
                 }
             }
             crossing_fingers: file(relativePath: { eq: "crossing_fingers.png" }) {
                 childImageSharp {
-                    fluid(maxWidth: 130) {
+                    fluid(maxWidth: 130, quality: 90) {
                         ...GatsbyImageSharpFluid_withWebp
                     }
                 }
             }
             two_fingers: file(relativePath: { eq: "two_fingers.png" }) {
                 childImageSharp {
-                    fluid(maxWidth: 130) {
+                    fluid(maxWidth: 130, quality: 90) {
                         ...GatsbyImageSharpFluid_withWebp
                     }
                 }
@@ -39,7 +39,8 @@ const About = () => {
             <div className={'row'}>
             <div className={'col'}>
                     <Img style={{
-                        width: 130
+                        width: 125,
+                        marginBottom: 5
                     }} fluid={data.love.childImageSharp.fluid} />
 
                     <h3>Passionate</h3>

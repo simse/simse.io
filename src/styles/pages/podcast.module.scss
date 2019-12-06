@@ -72,6 +72,7 @@
         box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
         transition: all .2s;
         margin-bottom: 10px;
+        background: var(--podcast-bg-bg);
 
         &:hover {
             transform: translateY(-1%);
@@ -79,7 +80,7 @@
 
         a {
             text-decoration: none;
-            color: #000;
+            color: var(--text-color);
         }
 
         img {
