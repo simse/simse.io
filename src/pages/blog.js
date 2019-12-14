@@ -31,7 +31,7 @@ const Blog = () => {
               }
             }
           }
-    `).allMarkdownRemark.nodes
+    `).allMdx.nodes
 
     return (
         <Layout>
