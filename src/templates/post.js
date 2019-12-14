@@ -1,5 +1,6 @@
 import React from "react"
 import { graphql } from "gatsby"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 import Img from "gatsby-image"
 
 import Layout from '../components/layout'
@@ -11,7 +12,7 @@ export default function Template({
     data, // this prop will be injected by the GraphQL query below.
 }) {
     const { post } = data // data.markdownRemark holds your post data
-    const { frontmatter, html } = post
+    const { frontmatter } = post
     let thumbnail  = frontmatter.thumbnail.childImageSharp.fluid
 
     const { postsFromCategory } = data
@@ -32,10 +33,9 @@ export default function Template({
                         <Img fluid={thumbnail} />
                     </div>
 
-                    <div
-                        className={styles.content}
-                        dangerouslySetInnerHTML={{ __html: html }}
-                    />
+                    <div className={styles.content}>
+                        <MDXRenderer>{post.body}</MDXRenderer>
+                    </div>
                 </div>
             </div>
 
@@ -75,12 +75,12 @@ export default function Template({
 }
 
 export const pageQuery = graphql`
-    query($path: String!, $category: String!) {
-        post: markdownRemark(frontmatter: { path: { eq: $path } }) {
-            html
+    query($id: String!, $category: String!) {
+        post: mdx(id: { eq: $id }) {
+            id
+            body
             frontmatter {
                 date(formatString: "MMMM DD, YYYY")
-                path
                 title
                 category
                 thumbnail {
@@ -92,7 +92,7 @@ export const pageQuery = graphql`
                 }
             }
         }
-        postsFromCategory: allMarkdownRemark(
+        postsFromCategory: allMdx(
             filter: {frontmatter: {category: {eq: $category}}},
             limit: 4,
             sort: {fields: frontmatter___date}
@@ -114,7 +114,7 @@ export const pageQuery = graphql`
                 }
             }
         }
-        lastFour: allMarkdownRemark(
+        lastFour: allMdx(
             limit: 4,
             sort: {fields: frontmatter___date, order: DESC},
             filter: {fileAbsolutePath: {regex: "\/blog/"}}

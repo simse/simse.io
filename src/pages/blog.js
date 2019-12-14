@@ -10,7 +10,7 @@ import "../styles/blog-page.scss"
 const Blog = () => {
     const data = useStaticQuery(graphql`
         query {
-            allMarkdownRemark(
+            allMdx(
                 filter: {fileAbsolutePath: {regex: "\/blog/"}}
             ) {
               nodes  {

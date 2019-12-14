@@ -53,7 +53,7 @@ module.exports = {
             options: {
                 useMozJpeg: false,
                 stripMetadata: true,
-                defaultQuality: 75,
+                defaultQuality: 85,
             },
         },
         {
@@ -74,6 +74,21 @@ module.exports = {
             resolve: `gatsby-transformer-remark`,
             options: {
                 plugins: [
+                    'gatsby-remark-relative-images',
+                    `gatsby-remark-smartypants`,
+                    {
+                        resolve: `gatsby-remark-images`,
+                        options: {
+                            maxWidth: 1200,
+                        },
+                    },
+                ],
+            },
+        },
+        {
+            resolve: `gatsby-plugin-mdx`,
+            options: {
+                gatsbyRemarkPlugins: [
                     'gatsby-remark-relative-images',
                     `gatsby-remark-smartypants`,
                     {

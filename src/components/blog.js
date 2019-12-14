@@ -7,7 +7,7 @@ import '../styles/blog-component.scss'
 const Blog = () => {
     const data = useStaticQuery(graphql`
         query {
-            allMarkdownRemark(
+          allMdx(
                 limit: 4,
                 filter: {fileAbsolutePath: {regex: "\/blog/"}}
             ) {
@@ -29,7 +29,7 @@ const Blog = () => {
               }
             }
           }
-    `).allMarkdownRemark.nodes
+    `).allMdx.nodes
 
     return (
         <section className={'blog'}>
