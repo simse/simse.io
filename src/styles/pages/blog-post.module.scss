@@ -1,14 +1,19 @@
 .image {
     //margin-top: 150px;
-    max-width: 55%;
-    margin: 0 auto;
+    /*max-width: 55%;
+    margin: 0 auto;*/
+    margin: 0 20.5%;
 
     @media(max-width: 1360px) {
-        max-width: 80%;
+        margin: 0 11%;
     }
 
     @media(max-width: 720px) {
-        max-width: 95%;
+        margin: 0 7%;
+    }
+
+    @media(max-width: 420px) {
+        margin: 0 3%;
     }
 }
 
@@ -92,6 +97,7 @@
 
         @media(max-width: 760px) {
             padding: 0 5%;
+            font-size: 0.9em;
         }
     }
 
@@ -146,6 +152,7 @@
 
         li {
             margin: 15px 0;
+            word-break: break-all;
         }
 
         @media(max-width: 1360px) {
