@@ -16,6 +16,10 @@
     src: url("/assets/fonts/SanomatAlt-Extrabold.woff2") format("woff2");
 }
 
+* {
+    text-rendering: optimizeLegibility;
+}
+
 /* Color variables */
 :root {
     --body-bg: #fff;
