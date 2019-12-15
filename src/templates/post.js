@@ -12,7 +12,7 @@ export default function Template({
     data, // this prop will be injected by the GraphQL query below.
 }) {
     const { post } = data // data.markdownRemark holds your post data
-    const { frontmatter } = post
+    const { frontmatter, tableOfContents } = post
     let thumbnail  = frontmatter.thumbnail.childImageSharp.fluid
 
     const { postsFromCategory } = data
@@ -21,13 +21,28 @@ export default function Template({
     const { lastFour } = data
     const lastFourPosts = lastFour.nodes
 
+    if(!tableOfContents.items) {
+        tableOfContents.items = []
+    }
+
     return (
         <Layout>
             <SEO title={frontmatter.title} />
+
+            <ul>
+                {tableOfContents.items.map((item) => {
+                    /*return (
+                    <li>
+                        {item.title}
+                    </li>)*/
+                })}
+            </ul>
+            
+
             <div className={styles.container}>
                 <div>
+                    <h2 className={styles.meta}>{frontmatter.date} — {frontmatter.category}</h2>
                     <h1 className={styles.title}>{frontmatter.title}</h1>
-                    <h2 className={styles.meta}>{frontmatter.date}</h2>
 
                     <div className={styles.image}>
                         <Img fluid={thumbnail} />
@@ -79,6 +94,7 @@ export const pageQuery = graphql`
         post: mdx(id: { eq: $id }) {
             id
             body
+            tableOfContents(maxDepth: 2)
             frontmatter {
                 date(formatString: "MMMM DD, YYYY")
                 title

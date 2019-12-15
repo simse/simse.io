@@ -1,50 +1,99 @@
 .image {
-    margin-top: 120px;
+    //margin-top: 150px;
+    max-width: 55%;
+    margin: 0 auto;
+
+    @media(max-width: 1360px) {
+        max-width: 80%;
+    }
+
+    @media(max-width: 720px) {
+        max-width: 95%;
+    }
 }
 
 .title {
-    text-align: center;
     font-weight: 400;
-    font-size: 4rem;
-    margin-bottom: 10px;
+    font-size: 3.5rem;
+    max-width: 800px;
+    margin-bottom: 60px;
     padding: 0 10px;
-    font-family: "Playfair Display";
+    font-family: 'Sanomat Alt';
+    font-weight: 900;
+    margin-left: 20%;
+
+    @media(max-width: 1360px) {
+        margin-left: 10%;
+    }
 
     @media(max-width: 720px) {
         font-size: 3rem;
+        margin-left: 5%;
     }
 
     @media(max-width: 420px) {
         font-size: 2.2rem;
+        margin-left: 1%;
     }
 }
 
 .meta {
-    text-align: center;
+    margin-top: 40px;
     font-weight: 500;
-    font-size: 1.3rem;
+    font-size: 1rem;
+    margin-left: 20.5%;
+    text-transform: uppercase;
+    opacity: .7;
+
+    @media(max-width: 1360px) {
+        margin-left: 11%;
+    }
 
     @media(max-width: 720px) {
-        font-size: 1rem;
+        margin-left: 7%;
     }
 
     @media(max-width: 420px) {
         font-size: 0.9rem;
+        margin-left: 4%;
     } 
 }
 
-
 .content {
-    max-width: 900px;
-    padding: 0 10px;
-    margin: 100px auto;
+    margin: 100px 0;
     font-size: 1.25rem;
     line-height: 1.7em;
-    font-family: 'Lora';
+    font-family: 'Guardian Egyptian', 'Georgia', serif;
 
-    /*p {
-        //margin-bottom: 35px;
-    }*/
+    h1,
+    h2,
+    h3 {
+        font-family: 'Sanomat Alt';
+        font-weight: 900;
+        margin-top: 45px;
+        padding: 0 25%;
+
+        @media(max-width: 1360px) {
+            padding: 0 15%;
+        }
+
+        @media(max-width: 760px) {
+            padding: 0 5%;
+        }
+    }
+
+    p {
+        margin-bottom: 35px;
+        padding: 0 25%;
+
+        @media(max-width: 1360px) {
+            padding: 0 15%;
+        }
+
+        @media(max-width: 760px) {
+            padding: 0 5%;
+        }
+    }
 
     a {
         text-decoration: none;
@@ -88,7 +137,24 @@
     hr {
         border: 0;
         border-bottom: lightgrey 1px solid;
-        margin: 45px 0;
+        margin: 45px auto;
+        width: 50%;
+    }
+
+    ol {
+        padding: 0 25%;
+
+        li {
+            margin: 15px 0;
+        }
+
+        @media(max-width: 1360px) {
+            padding: 0 15%;
+        }
+
+        @media(max-width: 760px) {
+            padding: 0 5%;
+        }
     }
 }
 
