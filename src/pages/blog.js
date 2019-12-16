@@ -11,10 +11,14 @@ const Blog = () => {
     const data = useStaticQuery(graphql`
         query {
             allMdx(
-                filter: {fileAbsolutePath: {regex: "\/blog/"}}
+                filter: {fileAbsolutePath: {regex: "\/blog/"}},
+                sort: {fields: frontmatter___date, order: DESC}
             ) {
               nodes  {
                 excerpt(pruneLength: 200)
+                fields {
+                    slug
+                }
                 frontmatter {
                   title
                   category
@@ -46,7 +50,7 @@ const Blog = () => {
                             title={post.frontmatter.title}
                             category={post.frontmatter.category}
                             excerpt={post.excerpt}
-                            link={post.frontmatter.path}
+                            link={post.fields.slug}
                             image={post.frontmatter.thumbnail.childImageSharp.fluid}
                             date={post.frontmatter.date} />
                     ))}

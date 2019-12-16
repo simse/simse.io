@@ -31,6 +31,7 @@ export default function Template({
 
             <ul>
                 {tableOfContents.items.map((item) => {
+                    return (<></>)
                     /*return (
                     <li>
                         {item.title}
