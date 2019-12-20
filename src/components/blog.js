@@ -9,7 +9,7 @@ const Blog = () => {
         query {
           allMdx(
                 limit: 4,
-                filter: {fileAbsolutePath: {regex: "\/blog/"}},
+                filter: {fileAbsolutePath: {regex: "\/blog/"}, frontmatter: {status: {eq: "published"}}},
                 sort: {fields: frontmatter___date, order: DESC}
             ) {
               nodes  {

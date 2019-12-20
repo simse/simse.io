@@ -11,7 +11,7 @@ const Blog = () => {
     const data = useStaticQuery(graphql`
         query {
             allMdx(
-                filter: {fileAbsolutePath: {regex: "\/blog/"}},
+                filter: {fileAbsolutePath: {regex: "\/blog/"}, frontmatter: {status: {eq: "published"}}},
                 sort: {fields: frontmatter___date, order: DESC}
             ) {
               nodes  {
