@@ -49,6 +49,8 @@ export default function Template({
                         <Img fluid={thumbnail} />
                     </div>
 
+                    <h2 className={styles.subtitle}>{frontmatter.subtitle}</h2>
+
                     <div className={styles.content}>
                         <MDXRenderer>{post.body}</MDXRenderer>
                     </div>
@@ -63,7 +65,7 @@ export default function Template({
                     <BlogPostCard 
                         title={post.frontmatter.title}
                         image={post.frontmatter.thumbnail.childImageSharp.fluid}
-                        link={post.frontmatter.path}
+                        link={post.fields.slug}
                         date={post.frontmatter.date}
                         category={post.frontmatter.category}
                         excerpt={post.excerpt} />
@@ -79,7 +81,7 @@ export default function Template({
                     <BlogPostCard 
                         title={post.frontmatter.title}
                         image={post.frontmatter.thumbnail.childImageSharp.fluid}
-                        link={post.frontmatter.path}
+                        link={post.fields.slug}
                         date={post.frontmatter.date}
                         category={post.frontmatter.category}
                         excerpt={post.excerpt} />
@@ -99,10 +101,11 @@ export const pageQuery = graphql`
             frontmatter {
                 date(formatString: "MMMM DD, YYYY")
                 title
+                subtitle
                 category
                 thumbnail {
                     childImageSharp {
-                        fluid(maxWidth: 1600, quality: 80) {
+                        fluid(maxWidth: 1000, quality: 80) {
                             ...GatsbyImageSharpFluid_withWebp
                         }
                     }
@@ -110,12 +113,15 @@ export const pageQuery = graphql`
             }
         }
         postsFromCategory: allMdx(
-            filter: {frontmatter: {category: {eq: $category}}},
+            filter: {frontmatter: {category: {eq: $category},status: {eq: "published"}}},
             limit: 4,
-            sort: {fields: frontmatter___date}
+            sort: {fields: frontmatter___date, order: DESC}
         ) {
             nodes {
                 excerpt
+                fields {
+                    slug
+                }
                 frontmatter {
                     category
                     path
@@ -134,10 +140,13 @@ export const pageQuery = graphql`
         lastFour: allMdx(
             limit: 4,
             sort: {fields: frontmatter___date, order: DESC},
-            filter: {fileAbsolutePath: {regex: "\/blog/"}}
+            filter: {fileAbsolutePath: {regex: "\/blog/"}, frontmatter: {status: {eq: "published"}}},
         ) {
             nodes {
                 excerpt
+                fields {
+                    slug
+                }
                 frontmatter {
                     category
                     path

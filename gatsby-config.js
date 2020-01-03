@@ -87,6 +87,8 @@ module.exports = {
                         resolve: `gatsby-remark-images`,
                         options: {
                             maxWidth: 1200,
+                            withWebp: true,
+                            wrapperStyle: 'transform: scale(1.1);'
                         },
                     },
                 ],
@@ -96,12 +98,15 @@ module.exports = {
             resolve: `gatsby-plugin-mdx`,
             options: {
                 gatsbyRemarkPlugins: [
+                    'gatsby-remark-embed-video',
                     'gatsby-remark-relative-images',
                     `gatsby-remark-smartypants`,
                     {
                         resolve: `gatsby-remark-images`,
                         options: {
                             maxWidth: 1200,
+                            withWebp: true,
+                            wrapperStyle: 'transform: scale(1.2);margin:100px 0;display:block;'
                         },
                     },
                 ],
@@ -110,7 +115,7 @@ module.exports = {
         {
             resolve: `gatsby-plugin-manifest`,
             options: {
-                name: `gatsby-starter-default`,
+                name: `simse.io`,
                 short_name: `starter`,
                 start_url: `/`,
                 background_color: `#663399`,
