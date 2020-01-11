@@ -109,11 +109,7 @@ class Header extends React.Component {
             <header>
                 <div className={'navbar'}>
                     <Link to="/" >
-                        <img className="logo" style={{
-                            maxHeight: 62,
-                            marginTop: 5,
-                            margin: '0 auto'
-                        }} src={require('../images/logo.svg')} />
+                        <img className="logo" src={require('../images/logo.svg')} />
                     </Link>
 
                     <div className={menuClassName} onClick={this.toggleNav}>

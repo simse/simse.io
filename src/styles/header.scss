@@ -145,6 +145,12 @@
 }
 
 .logo {
+    max-height: 50px;
+
+    @media(max-width: 1200px) {
+        max-height: 46px;
+    }
+
     @media(prefers-color-scheme: dark) {
         filter: invert(100%);
     }
