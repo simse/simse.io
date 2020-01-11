@@ -5,10 +5,10 @@ podcasts:
   desc: We just chillin
   podcasters:
     - name: Simon
-      avatar: wink.png
+      avatar: ../images/wink.png
       color: "#FFE0B7"
     - name: Alastair
-      avatar: alastair.png
+      avatar: ../images/alastair.png
       color: "#a6d3ff"
 - name: Night and Day
   path: /podcast/night-and-day
@@ -16,8 +16,8 @@ podcasts:
   desc: An unintentionally political podcast by two centrists, that have no idea about what is going on in the world and what politics is. Sometimes the episodes are pretty funny. This podcast has pretty much ended, and this page serves as the memory.
   podcasters:
     - name: Simon
-      avatar: wink.png
+      avatar: ../images/wink.png
       color: "#FFE0B7"
     - name: Zach
-      avatar: zach.png
+      avatar: ../images/zach.png
       color: "#ffabab"

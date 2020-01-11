@@ -2,7 +2,6 @@ import { useStaticQuery, graphql, Link } from "gatsby"
 import React from "react"
 
 import Layout from "../components/layout"
-import ImagePodcast from "../components/image-podcast.js"
 import SEO from "../components/seo"
 import styles from "../styles/pages/podcasts.module.scss"
 
@@ -33,8 +32,6 @@ const Podcasts = () => {
                     {data.map((podcast) => (
                         <div className={styles.podcast}>
                             <Link to={podcast.path}>
-                                <ImagePodcast filename="compsci.jpg" />
-
                                 <span>
                                     <h2>{podcast.name}</h2>
                                 </span>

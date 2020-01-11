@@ -30,6 +30,13 @@ exports.onCreateNode = ({
             node,
             getNode
         })
+
+        let slug;
+        if(node.fileAbsolutePath.includes("/project/")) {
+            slug = `/project${value}`
+        } else {
+            slug = `/blog${value}`
+        }
         createNodeField({
             // Name of the field you are adding
             name: "slug",
@@ -38,7 +45,7 @@ exports.onCreateNode = ({
             // Generated value based on filepath with "blog" prefix. you
             // don't need a separating "/" before the value because
             // createFilePath returns a path with the leading "/".
-            value: `/blog${value}`,
+            value: slug,
         })
     }
 };
@@ -56,7 +63,7 @@ exports.createPages = async ({
 
     const result = await graphql(`
     query {
-      allMdx {
+      allMdx(filter: {fileAbsolutePath: {regex: "\/blog/"}}) {
         edges {
           node {
             id
@@ -91,6 +98,44 @@ exports.createPages = async ({
             context: {
                 id: node.id,
                 category: node.frontmatter.category
+            },
+        })
+    })
+
+    /* Add project pages */
+    const result_projects = await graphql(`
+    query {
+      allMdx(filter: {fileAbsolutePath: {regex: "\/project/"}}) {
+        edges {
+          node {
+            id
+            fields {
+              slug
+            }
+          }
+        }
+      }
+    }
+  `)
+    if (result_projects.errors) {
+        reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
+    }
+    // Create blog post pages.
+    const projects = result_projects.data.allMdx.edges
+    // you'll call `createPage` for each result
+    projects.forEach(({
+        node
+    }, index) => {
+        createPage({
+            // This is the slug you created before
+            // (or `node.frontmatter.slug`)
+            path: node.fields.slug,
+            // This component will wrap our MDX content
+            component: path.resolve(`./src/templates/project.js`),
+            // You can use the values in this context in
+            // our page layout component
+            context: {
+                id: node.id
             },
         })
     })

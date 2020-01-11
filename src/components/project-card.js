@@ -1,6 +1,6 @@
 import axios from "axios"
-import Image from "./image.js"
 import React from "react"
+import Image from "gatsby-image"
 
 import '../styles/project-card.scss'
 import ExternalUrl from "../assets/external_url.svg"
@@ -27,14 +27,15 @@ class ProjectCard extends React.Component {
     }
 
     render() {
-        const { name, color, desc, icon, website, github } = this.props;
+        const { name, color, desc, website, github } = this.props;
+        const icon = this.props.icon;
 
         return (
             <div className={'project-card'}>
                 <div className={'project-image'} style={{
                     background: color
                 }}>
-                    <Image filename={icon} width={120} />
+                    <Image fixed={icon} />
                 </div>
     
                 <div className={'project-inner'}>

@@ -1,8 +1,8 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
+import Img from "gatsby-image"
 import { Location } from '@reach/router'
 
-import Image from '../components/image'
 import Layout from '../components/layout'
 import SEO from '../components/seo'
 import ArrowLeft from "../assets/arrow_left.svg"
@@ -18,13 +18,16 @@ export default function Template({
     const { podcast_data } = data
     let name, podcasters;
 
-    podcasters = JSON.parse(frontmatter.podcasters)
+    //podcasters = JSON.parse(frontmatter.podcasters)
+    podcasters = frontmatter.podcasters
+    console.log(podcasters)
 
     podcast_data.nodes[0].podcasts.forEach((podcast) => {
         if(podcast.id === pageContext.podcast) {
             name = podcast.name
             if(podcasters === null) {
                 podcasters = podcast.podcasters
+                console.log(podcasters)
             }
         }
     })
@@ -65,7 +68,7 @@ export default function Template({
                             <div className={styles.podcasterImage} style={{
                                 background: podcaster.color
                             }}>
-                                <Image filename={podcaster.avatar} width={90} />
+                                <Img fixed={podcaster.avatar.childImageSharp.fixed} />
                             </div>
 
                             <h3>{podcaster.name}</h3>
@@ -84,7 +87,17 @@ export const pageQuery = graphql`
       frontmatter {
         name
         audio
-        podcasters
+        podcasters {
+            name
+            color
+            avatar {
+                childImageSharp {
+                    fixed(width: 90) {
+                      ...GatsbyImageSharpFixed_withWebp
+                    }
+                }
+            }
+        }
       }
     }
     podcast_data: allDataYaml(filter: {podcasts: {elemMatch: {id: {eq: $podcast}}}}) {
@@ -94,7 +107,13 @@ export const pageQuery = graphql`
                 name
                 podcasters {
                     name
-                    avatar
+                    avatar {
+                        childImageSharp {
+                            fixed(width: 90) {
+                              ...GatsbyImageSharpFixed_withWebp
+                            }
+                        }
+                    }
                     color
                 }
             }

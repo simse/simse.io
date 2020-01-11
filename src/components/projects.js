@@ -9,12 +9,7 @@ class Projects extends React.Component {
 
     constructor(props) {
         super(props)
-
-        props.projects.forEach((value) => {
-            if(value.projects !== null) {
-                this.projects = value.projects
-            }
-        });
+        this.projects = props.projects;
     }
 
     render() {
@@ -27,14 +22,14 @@ class Projects extends React.Component {
                 <div className={'projects-group'}>
                 {this.projects.map(project => (
                    <ProjectCard
-                        key={project.name}
-                        name={project.name}
-                        desc={project.desc}
-                        website={project.website}
-                        github={project.github}
-                        color={project.color}
-                        icon={project.icon}
-                        stat={project.stat} />
+                        key={project.frontmatter.name}
+                        name={project.frontmatter.name}
+                        desc={project.frontmatter.desc}
+                        website={project.frontmatter.website}
+                        github={project.frontmatter.github}
+                        color={project.frontmatter.color}
+                        icon={project.frontmatter.icon.childImageSharp.fixed}
+                        stat={project.frontmatter.stat} />
                 ))}
                 </div>
             </section>
@@ -45,24 +40,30 @@ class Projects extends React.Component {
 export default () => (
     <StaticQuery
       query={graphql`
-                query {
-                    allDataYaml {
-                        nodes {
-                            projects {
-                                name
-                                desc
-                                website
-                                github
-                                color
-                                icon
-                                stat
+            query {
+                allMdx(filter: {fileAbsolutePath: {regex: "/project/"}}) {
+                    nodes {
+                        frontmatter {
+                        color
+                        website
+                        github
+                        icon {
+                            childImageSharp {
+                                fixed(width: 130) {
+                                  ...GatsbyImageSharpFixed_withWebp
+                                }
                             }
+                          }
+                        stat
+                        name
+                        desc
                         }
                     }
                 }
+                }
       `}
       render={(data) => (
-        <Projects projects={data.allDataYaml.nodes} />
+        <Projects projects={data.allMdx.nodes} />
       )}
     />
   )

@@ -25,9 +25,9 @@ const Hero = () => {
                 }} fluid={data.placeholderImage.childImageSharp.fluid} />
             </div>
 
-            <h1 class={styles.title}>Hello! I'm Simon, and this is my website.</h1>
+            <h1 className={styles.title}>Hello! I'm Simon, and this is my website.</h1>
 
-            <h2 class={styles.subtitle}>I'm a Computer Science student at the University of Sussex, and a big fan of Python, C++ and JAMstack.</h2>
+            <h2 className={styles.subtitle}>I'm a Computer Science student at the University of Sussex, and a big fan of Python, C++ and JAMstack.</h2>
         </section>
     )
 }

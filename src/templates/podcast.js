@@ -3,7 +3,6 @@ import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 
 import Layout from '../components/layout'
-import Image from '../components/image'
 import SEO from '../components/seo'
 import styles from '../styles/pages/podcast.module.scss'
 
@@ -40,7 +39,7 @@ export default function Template({
                             <div className={styles.podcasterImage} style={{
                                 background: podcaster.color
                             }}>
-                                <Image filename={podcaster.avatar} width={90} />
+                               <Img fixed={podcaster.avatar.childImageSharp.fixed} />
                             </div>
 
                             <h3>{podcaster.name}</h3>
@@ -53,7 +52,7 @@ export default function Template({
                     {episodes.map((episode) => (
                         <div className={styles.episodeCard} key={episode.frontmatter.id}>
                             <Link to={episode.frontmatter.path}>
-                                <Img fluid={episode.frontmatter.image.childImageSharp.fluid} />
+                                
 
                                 <div className={styles.episodeMeta}>
                                     <h4>{episode.frontmatter.name}</h4>
@@ -77,7 +76,13 @@ export const pageQuery = graphql`
           name
           desc
           podcasters {
-            avatar
+            avatar {
+                childImageSharp {
+                    fixed(width: 90) {
+                      ...GatsbyImageSharpFixed_withWebp
+                    }
+                }
+            }
             name
             color
           }

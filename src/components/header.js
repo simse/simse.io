@@ -108,18 +108,14 @@ class Header extends React.Component {
         return (
             <header>
                 <div className={'navbar'}>
-                    <h1 style={{ margin: 0 }}>
-                        <Link
-                            to="/"
-                            style={{
-                                textDecoration: `none`,
-                                fontWeight: 400,
-                                fontSize: '1.6rem'
-                            }}>
-                            Simon Sørensen
-                            <span className="location">{this.location}</span>
-                        </Link>
-                    </h1>
+                    <Link to="/" >
+                        <img className="logo" style={{
+                            maxHeight: 62,
+                            marginTop: 5,
+                            margin: '0 auto'
+                        }} src={require('../images/logo.svg')} />
+                    </Link>
+
                     <div className={menuClassName} onClick={this.toggleNav}>
                         <span></span>
                         <span></span>

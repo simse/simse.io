@@ -12,20 +12,6 @@ module.exports = {
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-sass`,
         {
-
-            resolve: "gatsby-plugin-ackee-tracker",
-            options: {
-              // Domatin ID found when adding a domain in the admin panel.
-              domain_id: "389453d6-2eb6-4142-9dd1-c03f0d3a2ce7",
-              // URL to Server eg: "https://analytics.test.com".
-              server: "https://analytics.simse.io",
-              // Disabled analytic tracking when running localy
-              ignore_localhost: true,
-              // If enabled it will collect info on OS, BrowserInfo, Device  & ScreenSize
-              detailed: true
-            },
-        },
-        {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `images`,
@@ -75,6 +61,13 @@ module.exports = {
             options: {
                 name: `podcast`,
                 path: `${__dirname}/content/podcast`,
+            },
+        },
+        {
+            resolve: `gatsby-source-filesystem`,
+            options: {
+                name: `projects`,
+                path: `${__dirname}/content/project`,
             },
         },
         {

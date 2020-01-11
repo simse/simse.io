@@ -24,6 +24,7 @@
 :root {
     --body-bg: #fff;
     --text-color: #000;
+    --link-color: #315dff;
 
     --menu-icon-color: #000;
 
@@ -39,6 +40,7 @@
     @media (prefers-color-scheme: dark) {
         --body-bg: #000;
         --text-color: #fff;
+        --link-color: #6b8bff;
 
         --menu-icon-color: #fff;
 
