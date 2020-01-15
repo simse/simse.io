@@ -25,7 +25,7 @@ class Projects extends React.Component {
                         key={project.frontmatter.name}
                         name={project.frontmatter.name}
                         desc={project.frontmatter.desc}
-                        website={project.frontmatter.website}
+                        website={project.fields.slug}
                         github={project.frontmatter.github}
                         color={project.frontmatter.color}
                         icon={project.frontmatter.icon.childImageSharp.fixed}
@@ -43,24 +43,27 @@ export default () => (
             query {
                 allMdx(filter: {fileAbsolutePath: {regex: "/project/"}}) {
                     nodes {
+                        fields {
+                            slug
+                        }
                         frontmatter {
-                        color
-                        website
-                        github
-                        icon {
-                            childImageSharp {
-                                fixed(width: 130) {
-                                  ...GatsbyImageSharpFixed_withWebp
+                            color
+                            website
+                            github
+                            icon {
+                                childImageSharp {
+                                    fixed(width: 110, quality: 100) {
+                                    ...GatsbyImageSharpFixed_withWebp
+                                    }
                                 }
                             }
-                          }
-                        stat
-                        name
-                        desc
+                            stat
+                            name
+                            desc
                         }
                     }
                 }
-                }
+            }
       `}
       render={(data) => (
         <Projects projects={data.allMdx.nodes} />

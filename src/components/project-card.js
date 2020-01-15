@@ -1,5 +1,6 @@
 import axios from "axios"
 import React from "react"
+import { Link } from "gatsby"
 import Image from "gatsby-image"
 
 import '../styles/project-card.scss'
@@ -46,7 +47,7 @@ class ProjectCard extends React.Component {
                     <p>{ desc }</p>
     
                     <div className={'project-links'}>
-                        <a href={website} target="_blank" rel="noopener noreferrer"><ExternalUrl /> Website</a>
+                        <Link to={website}><ExternalUrl /> Website</Link>
     
                         <a href={github} target="_blank" rel="noopener noreferrer"><Github /> Github</a>
                     </div>

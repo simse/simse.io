@@ -1,0 +1,85 @@
+---
+thumbnail: /assets/shutterstock_1466280032.jpg
+date: 2020-01-15T12:55:00.000Z
+title: How to Type Nordic Letters on Foreign Keyboards
+subtitle: It's really hard to press a key that's not there...
+category: Technology
+status: published
+---
+Early programming languages were created mostly by Americans and Brits. These early languages shaped syntax that most modern languages more or less share. Basic C code will look familiar to many programmers mainly because C was likely the starting point for the syntax design of those languages. Here's a small example:
+
+```c
+#include <stdio.h>
+
+int main(void) {
+    int num1 = 10;
+    int num2 = 8;
+    printf("No, I am not a minor, I am %d years old.", num1 + num2);
+
+    return 0;
+}
+```
+
+And the same in Javscript 😖 (forgive the if statement, that's a surprise tool for later)
+
+```javascript
+let num1 = 10;
+let num2 = 8;
+if(true) {
+    console.log("No, I am not a minor, I am " + num1 + num2 + " years old.");
+}
+```
+
+As you can see you, there's several similarities. `{` and `}` denote code blocks. `;` to end lines. `(` and `)` to call functions. `"` for strings. All of these choices are brilliant when you're programming on American (or derivative) keyboards, but on other keyboards it can ruin the flow.
+
+I am Danish, so when I talk to my friends back home, I need my trusty æ, ø and å. I am also a programmer, so Danish keyboard layout is out of the question. Are you in a similiar boat? Here's how I solved it.
+
+
+# æ, ø, å on Windows
+
+Install [AutoHotKey](https://www.autohotkey.com/) and put the script below that fits your needs in your startup folder. You can find your startup folder by pressing Win+R and then `shell:startup`.
+
+## Spare keys
+I have a trusty Apple Keyboard where the F keys go all the way up to F19. So it works quite to map the new letters to F13, F14 and F15.
+```autohotkey
+#NoEnv
+
+F13::æ
++F13::Æ
+
+F14::ø
++F14::Ø
+
+F15::å
++F15::Å
+```
+
+## Sacrifice keys
+If you don't have any spare keys, you can override three existing ones. Overriding F10, F11 and F12 is probably not a good idea.
+```autohotkey
+#NoEnv
+
+F10::æ
++F10::Æ
+
+F11::ø
++F11::Ø
+
+F12::å
++F12::Å
+```
+
+## Peaceful co-existence
+You could assign the letters to three existing keys but use a modifier such as alt. The modifier symbol for alt is `!`. Control is `^`. `#` is the Windows key.
+```autohotkey
+#NoEnv
+
+!F10::æ
+!+F10::Æ
+
+!F11::ø
+!+F11::Ø
+
+!F12::å
+!+F12::Å
+```

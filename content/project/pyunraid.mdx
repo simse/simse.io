@@ -7,4 +7,21 @@ color: '#DFFFE4'
 icon: /assets/wink.png
 stat: pip=pyunraid
 ---
-test
+import Hero from "../../src/components/project/hero"
+
+<Hero title="pyunraid" subtitle="A Python 3 module ton control Unraid servers" />
+
+```python
+from pyunraid import Unraid
+
+# Create Unraid server object
+unraid = Unraid('192.168.1.4', 'root', 'your-secure-password')
+
+# Get all Docker containers
+containers = unraid.containers()
+```
+
+## Get started
+
+## Documentation
+You can read the full, auto-generated documentation [here](https://google.com).

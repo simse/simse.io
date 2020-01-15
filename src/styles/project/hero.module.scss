@@ -1,0 +1,20 @@
+.hero {
+    padding: 50px 0;
+    text-align: center;
+
+    .title,
+    .subtitle {
+        font-family: "Product Sans";
+        font-weight: 400;
+    }
+
+    .title {
+        font-size: 4rem;
+        margin: 0;
+    }
+
+    .subtitle {
+        opacity: .7;
+        margin-left: 0;
+    }
+}
