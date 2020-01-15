@@ -98,6 +98,10 @@ a.footnote-backref {
     }
 }
 
+.gatsby-resp-image-image {
+    box-shadow: none !important;
+}
+
 /* Code highlighting */
 code[class*=language-],
 pre[class*=language-] {
