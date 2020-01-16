@@ -30,7 +30,7 @@ const Podcasts = () => {
 
                 <div className={styles.podcasts}>
                     {data.map((podcast) => (
-                        <div className={styles.podcast}>
+                        <div className={styles.podcast} key={podcast.id}>
                             <Link to={podcast.path}>
                                 <span>
                                     <h2>{podcast.name}</h2>

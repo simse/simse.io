@@ -12,8 +12,8 @@ navigation:
 - title: Projects
   items:
     - name: pymitv
-      url: 'https://simse.io/pymitv/'
+      url: /project/pymitv
     - name: pyunraid
-      url: 'https://simse.io/pyunraid/'
+      url: /project/pyunraid
     - name: Chronos
-      url: 'https://simse.io/chronos/'
+      url: /project/chronos

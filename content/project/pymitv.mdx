@@ -7,4 +7,28 @@ color: '#FFDFDF'
 icon: /assets/two_fingers.png
 stat: pip=pymitv
 ---
-This is a test
+import Hero from "../../src/components/project/hero"
+import GetStarted from "../../src/components/project/get-started"
+
+<Hero title="pymitv" subtitle="A Python 3 module to control Xiaomi TVs and projectors" />
+
+```python
+from pymitv import TV
+
+# Connect to TV IP
+tv = TV('192.168.0.32')
+
+# Wake screen
+tv.turn_on()
+```
+
+## Get started
+<GetStarted
+step1Title="Install using pip"
+step1Content="To install, open your command line and pop in the following: <code>pip install pymitv</code>."
+step2Title="Start using"
+step2Content="To start using, look at the example above or look at the documentation."
+/>
+
+## Documentation
+You can read the documentation on [Github](https://github.com/simse/pymitv).

@@ -16,6 +16,18 @@
     src: url("/assets/fonts/SanomatAlt-Extrabold.woff2") format("woff2");
 }
 
+@font-face {
+    font-family: "Product Sans";
+    font-display: swap;
+    src: url("/assets/fonts/Product-Sans-Regular.woff2") format("woff2");
+}
+
+@font-face {
+    font-family: "Fira Code";
+    font-display: swap;
+    src: url("/assets/fonts/FiraCode-Regular.woff2") format("woff2");
+}
+
 * {
     text-rendering: optimizeLegibility;
 }
@@ -32,6 +44,7 @@
 
     --blog-card-bg: #fff;
     --blog-card-color: #111;
+    --blog-post-color: #111;
 
     --podcast-bg-bg: #fff;
 
@@ -60,6 +73,7 @@
 
         --blog-card-bg: #111;
         --blog-card-color: #fff;
+        --blog-post-color: #d9d7e0;
 
         --podcast-bg-bg: #111;
 
@@ -100,6 +114,17 @@ a.footnote-backref {
 
 .gatsby-resp-image-image {
     box-shadow: none !important;
+}
+
+a {
+    color: #0097e6;
+    text-decoration: none;
+    transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
+    border-bottom: 1px solid rgba(0, 151, 230, 0.4);
+
+    &:hover {
+       border-bottom-color: rgba(0, 151, 230, 0.6);
+    }
 }
 
 /* Code highlighting */

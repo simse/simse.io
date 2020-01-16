@@ -148,7 +148,7 @@
     ul {
         margin-bottom: 35px;
         padding: 0 25%;
-        color: #d9d7e0;
+        color: var(--blog-post-color);
 
         @media(max-width: 1360px) {
             padding: 0 15%;
@@ -174,17 +174,6 @@
         p:last-child {
             font-size: 1.3rem;
             opacity: .7;
-        }
-    }
-
-    a {
-        color: #0097e6;
-        text-decoration: none;
-        transition: all 100ms cubic-bezier(0.4, 0, 0.2, 1) 0s;
-        border-bottom: 1px solid rgba(0, 151, 230, 0.4);
-
-        &:hover {
-           border-bottom-color: rgba(0, 151, 230, 0.6);
         }
     }
 

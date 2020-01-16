@@ -1,0 +1,59 @@
+.getStarted {
+    margin: 0 15% 100px 15%;
+    
+    @media(max-width: 720px) {
+        margin: 0 5% 100px 5%;
+    }
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: 30% 30% 30%;
+    grid-gap: 3%;
+
+    @media(max-width: 1100px) {
+        grid-template-columns: 100%;
+        grid-gap: 0%;
+
+        div {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    }
+
+    p {
+        margin: 0 !important;
+    }
+
+    code {
+        font-family: 'Fira Code';
+        font-size: 1.1rem;
+        color: #d9008d;
+    }
+}
+
+.stepNumber {
+    text-align: center;
+    font-size: 1.5rem;
+    width: 1.1em;
+    line-height: 1.5rem;
+    padding: 12px 10px;
+    border-radius: 100%;
+    background: #0078ed;
+    color: #fff;
+    display: block;
+    font-weight: 700;
+    margin: 0 auto;
+}
+
+.stepTitle {
+    text-align: center;
+    font-size: 1.8rem;
+    margin: 20px 0 20px 0 !important;
+    font-family: 'Product Sans';
+}
+
+.stepContent {
+    font-size: 1.2rem;
+    line-height: 1.9rem;
+}

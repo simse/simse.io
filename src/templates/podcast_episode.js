@@ -17,17 +17,14 @@ export default function Template({
 
     const { podcast_data } = data
     let name, podcasters;
-
-    //podcasters = JSON.parse(frontmatter.podcasters)
+    
     podcasters = frontmatter.podcasters
-    console.log(podcasters)
 
     podcast_data.nodes[0].podcasts.forEach((podcast) => {
         if(podcast.id === pageContext.podcast) {
             name = podcast.name
             if(podcasters === null) {
                 podcasters = podcast.podcasters
-                console.log(podcasters)
             }
         }
     })

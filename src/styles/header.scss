@@ -4,8 +4,8 @@
     display: flex;
     justify-content: space-between;
 
-    h1 a {
-        color: var(--text-color);
+    a {
+        border-bottom: 0;
     }
 
     @media(max-width: 1100px) {

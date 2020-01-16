@@ -43,7 +43,7 @@ const Blog = () => {
             <div className={"blog-posts"}>
             {data.map((post) => (
                 <BlogPostCard
-                    key={post.frontmatter.path}
+                    key={post.fields.slug}
                     title={post.frontmatter.title}
                     category={post.frontmatter.category}
                     excerpt={post.excerpt}

@@ -12,7 +12,7 @@ export default function Template({
 }) {
     return (
         <Layout>
-            <SEO title={"hello world"} />
+            <SEO title={data.mdx.frontmatter.name} />
             
             <div className="project-page">
                 <MDXRenderer>{data.mdx.body}</MDXRenderer>
