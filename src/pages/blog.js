@@ -5,7 +5,7 @@ import BlogPostCard from "../components/blog-post-card"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
-import "../styles/blog-page.scss"
+import styles from "../styles/pages/blog.module.scss"
 
 const Blog = () => {
     const data = useStaticQuery(graphql`
@@ -22,7 +22,7 @@ const Blog = () => {
                 frontmatter {
                   title
                   category
-                  date(formatString: "DD, MMMM YYYY")
+                  date(formatString: "DD MMMM YYYY")
                   path
                   thumbnail {
                     childImageSharp {
@@ -41,10 +41,10 @@ const Blog = () => {
         <Layout>
             <SEO title="Blog" />
 
-            <section className={'blog-page'}>
+            <section className={styles.page}>
                 <h1>Blog</h1>
 
-                <div className={"blog-posts"}>
+                <div className={styles.posts}>
                     {data.map((post) => (
                         <BlogPostCard
                             title={post.frontmatter.title}

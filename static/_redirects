@@ -1,6 +1,6 @@
-/pyunraid https://nostalgic-minsky-0424d8.netlify.com/  200!
-/pyunraid/* https://nostalgic-minsky-0424d8.netlify.com/:splat  200!
-/chronos https://jolly-boyd-a69821.netlify.com/ 200!
-/chronos/* https://jolly-boyd-a69821.netlify.com/:splat 200!
-/pymitv https://stoic-bartik-0169e4.netlify.com/ 200!
-/pymitv/* https://stoic-bartik-0169e4.netlify.com/:splat 200!
+/pyunraid /project/pyunraid  200!
+/pyunraid/* /project/pyunraid:splat  200!
+/chronos /project/chronos 200!
+/chronos/* /project/chronos:splat 200!
+/pymitv /project/pymitv 200!
+/pymitv/* /project/pymitv:splat 200!

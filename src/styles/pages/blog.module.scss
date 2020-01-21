@@ -1,5 +1,5 @@
-.blog-page {
-    padding: 10px 50px;
+.page {
+    padding: 0 50px;
 
     @media(max-width: 760px) {
         padding: 10px 15px;
@@ -9,10 +9,18 @@
         text-align: center;
         font-size: 4rem;
         font-weight: 400;
+        font-family: 'Sanomat Alt';
+        margin: 0;
+
+        @media(max-width: 760px) {
+            font-size: 2.5rem;
+        }
     }
 
-    .blog-posts {
+    .posts {
         padding: 50px 0;
+        max-width: 1600px;
+        margin: 0 auto;
         display: grid;
         grid-template-columns: 24% 24% 24% 24%;
         grid-gap: 1%;
