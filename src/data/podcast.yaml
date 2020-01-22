@@ -1,8 +1,8 @@
 podcasts:
-- name: Casual Computer Science
-  path: /podcast/casual-computer-science
-  id: cash_compsci
-  desc: We just chillin
+- name: Goodbye world, hello Mars!
+  path: /podcast/goodbye-world-hello-mars
+  id: goodbye_world_hello_mars
+  desc: A podcast about technology, space and other sheninigans hosted by two computer science students.
   podcasters:
     - name: Simon
       avatar: ../images/wink.png
