@@ -42,7 +42,7 @@ const Blog = () => {
             <SEO title="Blog" />
 
             <section className={styles.page}>
-                <h1>Blog</h1>
+                <h1 className="pageTitle">Blog</h1>
 
                 <div className={styles.posts}>
                     {data.map((post) => (

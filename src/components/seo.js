@@ -26,7 +26,7 @@ function SEO({ description, lang, meta, title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
-  let pageTitle = title + " | " + site.siteMetadata.title
+  let pageTitle = title + " / " + site.siteMetadata.title
   if(title == null) {
     pageTitle = site.siteMetadata.title
   }

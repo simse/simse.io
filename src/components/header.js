@@ -78,6 +78,12 @@ class Header extends React.Component {
         })
     }
 
+    handleKeyPress = (event) => {
+        if(event.key === 'Enter') {
+            this.toggleNav()
+        }
+    }
+
     navItem = (url, name) => {
         if (url.indexOf('://') > 0 || url.indexOf('//') === 0) {
             return (<li key={name}><a href={url}>{name}</a></li>)
@@ -112,24 +118,21 @@ class Header extends React.Component {
                         <img className="logo" src={require('../images/logo.svg')}  alt="Simon Sorensen website logo"/>
                     </Link>
 
-                    <div className={menuClassName} onClick={this.toggleNav}>
+                    <div className={menuClassName} onClick={this.toggleNav} onKeyPress={this.handleKeyPress} role="menu" tabIndex="0">
                         <span></span>
                         <span></span>
                     </div>
                 </div>
 
                 <div className={navClassName}>
-                    {this.nav.map(group => (
-                        <div className={'nav-group'} key={group.title}>
-                            <h2>{group.title}</h2>
-
-                            <ul>
-                                {group.items.map(item => (
-                                    this.navItem(item.url, item.name)
-                                ))}
-                            </ul>
-                        </div>
-                    ))}
+                    <ul>
+                        <li><Link to="/">Home</Link></li>
+                        <li><Link to="/about">About me</Link></li>
+                        <li><Link to="/contact">Contact</Link></li>
+                        
+                        <li><Link to="/blog">Blog</Link></li>
+                        <li><Link to="/podcasts">Podcasts</Link></li>
+                    </ul>
                 </div>
             </header>
         )

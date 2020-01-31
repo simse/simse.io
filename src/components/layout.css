@@ -8,14 +8,14 @@ body {
 
 h3.subtitle {
     font-size: 1.1rem;
-    opacity: .5;
+    opacity: .7;
     margin-bottom: 20px;
     margin-top: 0;
     font-weight: 500;
 }
 
 .location {
-    opacity: 0.4;
+    opacity: 0.7;
 }
 
 @media(max-width: 1500px) {

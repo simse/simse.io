@@ -27,18 +27,7 @@ export default function Template({
 
     return (
         <Layout>
-            <SEO title={frontmatter.title} />
-
-            <ul>
-                {tableOfContents.items.map((item) => {
-                    return (<></>)
-                    /*return (
-                    <li>
-                        {item.title}
-                    </li>)*/
-                })}
-            </ul>
-            
+            <SEO title={frontmatter.title} />            
 
             <div className={styles.container}>
                 <div>
@@ -47,6 +36,7 @@ export default function Template({
 
                     <div className={styles.image}>
                         <Img fluid={thumbnail} />
+                        <p className={styles.photoCredit}>{frontmatter.photo_credit}</p>
                     </div>
 
                     <h2 className={styles.subtitle}>{frontmatter.subtitle}</h2>
@@ -103,6 +93,7 @@ export const pageQuery = graphql`
                 title
                 subtitle
                 category
+                photo_credit
                 thumbnail {
                     childImageSharp {
                         fluid(maxWidth: 1000, quality: 90) {

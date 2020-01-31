@@ -79,54 +79,31 @@
     z-index: 1000;
     pointer-events: none;
     transition: .25s all;
-    padding: 10% 20%;
+    padding: 5% 0;
     color: #fff;
-    display: flex;
 
-    @media(max-width: 750px) {
-        flex-direction: column;
-        padding: 10%;
-    }
-
-    .nav-group {
-        margin-right: 120px;
-
-        h2 {
-            font-size: 4rem;
-            font-family: 'Sanomat Alt';
-        }
-
-        ul {
-            list-style: none;
-            margin: 0;
-            padding: 0;
-        }
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        width: 100%;
 
         li {
-            padding: 10px 0;
+            text-align: center;
+            padding: 20px 0;
         }
 
         a {
-            color: rgba(255, 255, 255, 0.9);
-            font-size: 2rem;
-            text-decoration: none;
-            font-weight: 300;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
-            transition: all .2s;
+            color: #fff;
+            border: 0;
+            font-size: 3rem;
+            padding: 15px;
+            text-transform: uppercase;
+            font-weight: 900;
 
             &:hover {
-                border-bottom: 1px solid rgba(255, 255, 255, 0.8);
-                color: rgba(255, 255, 255, 1);
-            }
-        }
-
-        @media(max-width: 1060px) {
-            h2 {
-                font-size: 2.6rem;
-            }
-
-            a {
-                font-size: 1.4rem;
+                color: transparent;
+                -webkit-text-stroke: 1px #fff;
             }
         }
     }
@@ -147,6 +124,7 @@
 
 .logo {
     max-height: 50px;
+    z-index: 1002;
 
     @media(max-width: 1200px) {
         max-height: 46px;
