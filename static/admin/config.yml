@@ -1,7 +1,9 @@
 backend:
   name: git-gateway
+  squash_merges: true
 
 media_folder: /static/assets
+media_folder_relative: true
 public_folder: /assets
 publish_mode: editorial_workflow
 
