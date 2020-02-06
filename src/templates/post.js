@@ -96,7 +96,7 @@ export const pageQuery = graphql`
                 photo_credit
                 thumbnail {
                     childImageSharp {
-                        fluid(maxWidth: 1000, quality: 90) {
+                        fluid(maxWidth: 1000, quality: 100, cropFocus: CENTER) {
                             ...GatsbyImageSharpFluid_withWebp
                         }
                     }
@@ -104,7 +104,7 @@ export const pageQuery = graphql`
             }
         }
         postsFromCategory: allMdx(
-            filter: {frontmatter: {category: {eq: $category},status: {eq: "published"}}},
+            filter: {frontmatter: {category: {eq: $category}}},
             limit: 4,
             sort: {fields: frontmatter___date, order: DESC}
         ) {
@@ -120,7 +120,7 @@ export const pageQuery = graphql`
                     title
                     thumbnail {
                         childImageSharp {
-                            fluid(maxWidth: 450, maxHeight: 250, quality: 80) {
+                            fluid(maxWidth: 450, maxHeight: 250, quality: 80, cropFocus: CENTER) {
                                 ...GatsbyImageSharpFluid_withWebp
                             }
                         }
@@ -131,7 +131,7 @@ export const pageQuery = graphql`
         lastFour: allMdx(
             limit: 4,
             sort: {fields: frontmatter___date, order: DESC},
-            filter: {fileAbsolutePath: {regex: "\/blog/"}, frontmatter: {status: {eq: "published"}}},
+            filter: {fileAbsolutePath: {regex: "\/blog/"}},
         ) {
             nodes {
                 excerpt
@@ -145,7 +145,7 @@ export const pageQuery = graphql`
                     title
                     thumbnail {
                         childImageSharp {
-                            fluid(maxWidth: 450, maxHeight: 250, quality: 80) {
+                            fluid(maxWidth: 450, maxHeight: 250, quality: 80, cropFocus: CENTER) {
                                 ...GatsbyImageSharpFluid_withWebp
                             }
                         }

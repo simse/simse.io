@@ -9,7 +9,7 @@ const BlogPostCard = (post) => {
     return (
         <div className={'blog-post-card'}>
             <Link to={post.link}>
-                <Img fluid={post.image} />
+                <Img fluid={{ ...post.image }} />
 
                 <div className={"meta"}>
                     <h2>{post.title}</h2>

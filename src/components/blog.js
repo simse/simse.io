@@ -9,7 +9,7 @@ const Blog = () => {
         query {
           allMdx(
                 limit: 4,
-                filter: {fileAbsolutePath: {regex: "\/blog/"}, frontmatter: {status: {eq: "published"}}},
+                filter: {fileAbsolutePath: {regex: "\/blog/"}},
                 sort: {fields: frontmatter___date, order: DESC}
             ) {
               nodes  {
@@ -20,12 +20,12 @@ const Blog = () => {
                 frontmatter {
                   title
                   category
-                  date(formatString: "DD, MMMM YYYY")
+                  date(formatString: "DD MMMM YYYY")
                   path
                   thumbnail {
                     childImageSharp {
-                        fluid(maxWidth: 400, maxHeight: 250) {
-                          ...GatsbyImageSharpFluid
+                        fluid(maxWidth: 400, maxHeight: 250, cropFocus: CENTER, quality: 90) {
+                          ...GatsbyImageSharpFluid_withWebp
                         }
                     }
                   }
