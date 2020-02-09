@@ -1,7 +1,4 @@
 .image {
-    //margin-top: 150px;
-    /*max-width: 55%;
-    margin: 0 auto;*/
     margin: 0 20.5%;
 
     @media(max-width: 1360px) {
@@ -81,6 +78,10 @@
     margin-left: 20.5%;
     text-transform: uppercase;
     opacity: .7;
+
+    a {
+        color: inherit;
+    }
 
     @media(max-width: 1360px) {
         margin-left: 11%;

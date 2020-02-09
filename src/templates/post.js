@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Img from "gatsby-image"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 import Layout from '../components/layout'
 import SEO from '../components/seo'
@@ -25,13 +26,31 @@ export default function Template({
         tableOfContents.items = []
     }
 
+    let str = frontmatter.category
+    str = str.replace(/^\s+|\s+$/g, ''); // trim
+    str = str.toLowerCase();
+
+    // remove accents, swap ñ for n, etc
+    var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+    var to   = "aaaaeeeeiiiioooouuuunc------";
+    for (var i=0, l=from.length ; i<l ; i++) {
+        str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+    }
+
+    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+        .replace(/\s+/g, '-') // collapse whitespace and replace by -
+        .replace(/-+/g, '-'); // collapse dashes
+    const categoryLink = 'blog/category/' + str;
+
     return (
         <Layout>
             <SEO title={frontmatter.title} />            
 
             <div className={styles.container}>
                 <div>
-                    <h2 className={styles.meta}>{frontmatter.date} — {frontmatter.category}</h2>
+                    <h2 className={styles.meta}>
+                        {frontmatter.date} — <AniLink to={categoryLink} cover bg="#3f00de">{frontmatter.category}</AniLink>
+                        </h2>
                     <h1 className={styles.title}>{frontmatter.title}</h1>
 
                     <div className={styles.image}>
