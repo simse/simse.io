@@ -1,6 +1,7 @@
 import {Link} from "gatsby"
 import Img from "gatsby-image"
 import React from "react"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 import '../styles/blog-post-card.scss'
 
@@ -8,7 +9,7 @@ const BlogPostCard = (post) => {
 
     return (
         <div className={'blog-post-card'}>
-            <Link to={post.link}>
+            <AniLink cover bg="#3f00de" to={post.link}>
                 <Img fluid={{ ...post.image }} />
 
                 <div className={"meta"}>
@@ -17,7 +18,7 @@ const BlogPostCard = (post) => {
 
                     <p>{post.excerpt}</p>
                 </div>
-            </Link>
+            </AniLink>
         </div>
     )
 }

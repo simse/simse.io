@@ -2,6 +2,7 @@ import axios from "axios"
 import React from "react"
 import { Link } from "gatsby"
 import Image from "gatsby-image"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 import '../styles/project-card.scss'
 import ExternalUrl from "../assets/external_url.svg"
@@ -47,7 +48,7 @@ class ProjectCard extends React.Component {
                     <p>{ desc }</p>
     
                     <div className={'project-links'}>
-                        <Link to={website}><ExternalUrl /> Website</Link>
+                        <AniLink cover bg="#3f00de" to={website}><ExternalUrl /> Website</AniLink>
     
                         <a href={github} target="_blank" rel="noopener noreferrer"><Github /> Github</a>
                     </div>

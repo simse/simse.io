@@ -1,7 +1,7 @@
 import { Link, graphql, StaticQuery } from "gatsby"
 import React from "react"
 import { Location } from '@reach/router'
-import titleCase from 'ap-style-title-case'
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 import '../styles/header.scss'
 
@@ -31,9 +31,9 @@ class Header extends React.Component {
                 <div className={overlayClassName}></div>
 
                 <div className={'navbar'}>
-                    <Link to="/" className={logoClassName}>
+                    <AniLink paintDrip duration={.5} hex="#3f00de" to="/" className={logoClassName}>
                         <img className="logo" src={require('../images/logo.svg')}  alt="Simon Sorensen website logo"/>
-                    </Link>
+                    </AniLink>
 
                     <div className={menuClassName} onClick={this.toggleNav} onKeyPress={this.handleKeyPress} role="menu" tabIndex="0">
                         <span></span>
@@ -45,11 +45,11 @@ class Header extends React.Component {
 
                 <div className={navClassName}>
                     <ul>
-                        <li><Link to="/">Home</Link></li>
-                        <li><Link to="/about">About me</Link></li>
-                        <li><Link to="/projects">Projects</Link></li>
-                        <li><Link to="/blog">Blog</Link></li>
-                        <li><Link to="/podcasts">Podcasts</Link></li>
+                        <li><AniLink paintDrip duration={.5} hex="#3f00de" to="/">Home</AniLink></li>
+                        <li><AniLink paintDrip duration={.5} hex="#3f00de" to="/about">About me</AniLink></li>
+                        <li><AniLink paintDrip duration={.5} hex="#3f00de" to="/projects">Projects</AniLink></li>
+                        <li><AniLink paintDrip duration={.5} hex="#3f00de" to="/blog">Blog</AniLink></li>
+                        <li><AniLink paintDrip duration={.5} hex="#3f00de" to="/podcasts">Podcasts</AniLink></li>
                     </ul>
 
                     <div className="contact">

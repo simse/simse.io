@@ -1,6 +1,7 @@
 import { useStaticQuery, graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 import React from "react"
+import AniLink from "gatsby-plugin-transition-link/AniLink"
 
 import Layout from "../components/layout"
 import SEO from "../components/seo"
@@ -43,13 +44,13 @@ const Podcasts = () => {
 
             <div className={styles.projects}>
             {data.allMdx.nodes.map((project) => (
-                <Link to={project.fields.slug}>
+                <AniLink cover bg="#3f00de" to={project.fields.slug}>
                     <div className={styles.project}>
                         <Img fixed={project.frontmatter.icon.childImageSharp.fixed} />
                         <h1>{project.frontmatter.name}</h1>
                         <p>{project.frontmatter.desc}</p>
                     </div>
-                </Link>
+                </AniLink>
             ))}
             </div>
         </Layout>
