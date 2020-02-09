@@ -1,0 +1,29 @@
+.projects {
+    padding: 50px 20px;
+    max-width: 1000px;
+    margin: 0 auto;
+
+    a {
+        color: #fff;
+        //border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+}
+
+.project {
+    padding: 50px 20px;
+    border: 2px solid transparent;
+    border-radius: 8px;
+
+    &:hover {
+        border: 2px solid #fff;
+    }
+
+    h1 {
+        font-size: 2rem;
+        font-family: 'Product Sans';
+    }
+
+    p {
+        font-size: 1.2rem;
+    }
+}

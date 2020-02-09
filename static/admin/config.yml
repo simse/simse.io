@@ -15,7 +15,6 @@ collections:
     extension: mdx
     format: frontmatter
     fields:
-      - { name: status, label: Status, options: ["draft", "published"] }
       - label: "Featured Image"
         name: "thumbnail"
         widget: "image"

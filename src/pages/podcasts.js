@@ -25,8 +25,8 @@ const Podcasts = () => {
             <SEO title="Podcasts" />
 
             <section className={styles.container}>
-                <h1 className={styles.title}>Podcasts</h1>
-                <p className={styles.subtitle}>Sorry about this page, it ain't completely done</p>
+                <h1 className="pageTitle">Podcasts</h1>
+                <h2 className="pageSubtitle">Sorry about this page, it ain't completely done</h2>
 
                 <div className={styles.podcasts}>
                     {data.map((podcast) => (

@@ -43,6 +43,7 @@ const Blog = () => {
 
             <section className={styles.page}>
                 <h1 className="pageTitle">Blog</h1>
+                <h2 className="pageSubtitle">Ramblings of a crazy person</h2>
 
                 <div className={styles.posts}>
                     {data.map((post) => (

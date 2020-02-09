@@ -102,6 +102,59 @@ exports.createPages = async ({
         })
     })
 
+    /* Add blog category pages */
+    const resultCategories = await graphql(`
+    query {
+        allMdx(filter: {fileAbsolutePath: {regex: "/blog/"}}) {
+            edges {
+                node {
+                    frontmatter {
+                        category
+                    }
+                }
+            }
+        }
+    }
+  `)
+    if (result.errors) {
+        reporter.panicOnBuild('🚨  ERROR: Loading "createPages" query')
+    }
+    // Create blog post pages.
+    const categories = result.data.allMdx.edges
+    // you'll call `createPage` for each result
+    posts.forEach(({
+        node
+    }, index) => {
+        let str = node.frontmatter.category
+        str = str.replace(/^\s+|\s+$/g, ''); // trim
+        str = str.toLowerCase();
+    
+        // remove accents, swap ñ for n, etc
+        var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
+        var to   = "aaaaeeeeiiiioooouuuunc------";
+        for (var i=0, l=from.length ; i<l ; i++) {
+            str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
+        }
+
+        str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
+            .replace(/\s+/g, '-') // collapse whitespace and replace by -
+            .replace(/-+/g, '-'); // collapse dashes
+
+
+        createPage({
+            // This is the slug you created before
+            // (or `node.frontmatter.slug`)
+            path: 'blog/category/' + str,
+            // This component will wrap our MDX content
+            component: path.resolve(`./src/templates/category.js`),
+            // You can use the values in this context in
+            // our page layout component
+            context: {
+                category: node.frontmatter.category
+            },
+        })
+    })
+
     /* Add project pages */
     const result_projects = await graphql(`
     query {

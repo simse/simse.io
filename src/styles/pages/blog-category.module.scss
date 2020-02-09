@@ -1,0 +1,11 @@
+.pageTitle {
+    text-align: center;
+    font-family: 'Sanomat Alt';
+}
+
+.container {
+    padding: 20px;
+    display: grid;
+    grid-template-columns: 24% 24% 24% 24%;
+    grid-gap: 1%;
+}

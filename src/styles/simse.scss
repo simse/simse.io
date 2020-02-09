@@ -131,11 +131,22 @@ h1.pageTitle {
     text-align: center;
     font-size: 4rem;
     font-weight: 400;
+    margin-bottom: 10px;
     font-family: 'Sanomat Alt';
-    margin: 0;
 
-    @media(max-width: 760px) {
-        font-size: 2.5rem;
+    @media(max-width: 720px) {
+        font-size: 3rem;
+    }
+}
+
+h2.pageSubtitle {
+    text-align: center;
+    opacity: .6;
+    font-size: 1.6rem;
+    font-weight: 400;
+
+    @media(max-width: 720px) {
+        font-size: 1.2rem;
     }
 }
 
