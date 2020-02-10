@@ -1,4 +1,4 @@
-import { Link, graphql, StaticQuery } from "gatsby"
+import { graphql, StaticQuery } from "gatsby"
 import React from "react"
 import { Location } from '@reach/router'
 import AniLink from "gatsby-plugin-transition-link/AniLink"
@@ -46,7 +46,7 @@ class Header extends React.Component {
                 <div className={navClassName}>
                     <ul>
                         <li><AniLink paintDrip duration={.5} hex="#3f00de" to="/">Home</AniLink></li>
-                        <li><AniLink paintDrip duration={.5} hex="#3f00de" to="/about">About me</AniLink></li>
+                        <li><AniLink paintDrip duration={.5} hex="#3f00de" to="/about">About</AniLink></li>
                         <li><AniLink paintDrip duration={.5} hex="#3f00de" to="/projects">Projects</AniLink></li>
                         <li><AniLink paintDrip duration={.5} hex="#3f00de" to="/blog">Blog</AniLink></li>
                         <li><AniLink paintDrip duration={.5} hex="#3f00de" to="/podcasts">Podcasts</AniLink></li>

@@ -1,6 +1,5 @@
 import axios from "axios"
 import React from "react"
-import { Link } from "gatsby"
 import Image from "gatsby-image"
 import AniLink from "gatsby-plugin-transition-link/AniLink"
 
@@ -29,11 +28,11 @@ class ProjectCard extends React.Component {
     }
 
     render() {
-        const { name, color, desc, website, github } = this.props;
+        const { name, color, desc, website, github, vertical } = this.props;
         const icon = this.props.icon;
 
         return (
-            <div className={'project-card'}>
+            <div className={'project-card' + (vertical ? ' vertical' : '')}>
                 <div className={'project-image'} style={{
                     background: color
                 }}>

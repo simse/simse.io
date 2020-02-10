@@ -3,8 +3,27 @@ $border-radius: 8px;
 .project-card {
     border-radius: $border-radius;
     box-shadow: 0 6px 12px rgba(0, 0, 0, 0.05);
-    margin-bottom: 35px;
     background: var(--project-card-bg);
+    display: flex;
+    flex-direction: column;
+
+    @media(min-width: 960px) {
+        &.vertical {
+            flex-direction: row;
+    
+            .project-image {
+                border-top-right-radius: 0;
+                border-bottom-left-radius: $border-radius;
+                height: 140px;
+                padding: 40px;
+    
+                .gatsby-image-wrapper {
+                    margin-top: 12px;
+                }
+            }
+        }
+    }
+    
 
     .project-inner {
         padding: 28px;

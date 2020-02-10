@@ -2,28 +2,29 @@
     padding: 50px 20px;
     max-width: 1000px;
     margin: 0 auto;
-
-    a {
-        color: #fff;
-        //border-bottom: 1px solid rgba(255, 255, 255, 0.2);
-    }
 }
 
-.project {
-    padding: 50px 20px;
-    border: 2px solid transparent;
-    border-radius: 8px;
+.sectionTitle {
+    font-family: 'Sanomat Alt';
+    font-size: 1.6rem;
+}
 
-    &:hover {
-        border: 2px solid #fff;
+.projectSection {
+    margin-bottom: 70px;
+}
+
+.row {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-gap: 2%;
+
+    @media(max-width: 960px) {
+        grid-template-columns: 49% 49%;
     }
 
-    h1 {
-        font-size: 2rem;
-        font-family: 'Product Sans';
-    }
-
-    p {
-        font-size: 1.2rem;
+    @media(max-width: 660px) {
+        grid-template-columns: 100%;
+        grid-gap: 0%;
+        grid-row-gap: 1%;
     }
 }

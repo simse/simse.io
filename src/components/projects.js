@@ -41,7 +41,7 @@ export default () => (
     <StaticQuery
       query={graphql`
             query {
-                allMdx(filter: {fileAbsolutePath: {regex: "/project/"}}) {
+                allMdx(filter: {fileAbsolutePath: {regex: "/project/"}, frontmatter: {featured: {eq: true}}}, limit: 3) {
                     nodes {
                         fields {
                             slug
