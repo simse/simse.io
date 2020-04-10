@@ -17,12 +17,6 @@
 }
 
 @font-face {
-    font-family: "Product Sans";
-    font-display: swap;
-    src: url("/assets/fonts/Product-Sans-Regular.woff2") format("woff2");
-}
-
-@font-face {
     font-family: "Fira Code";
     font-display: swap;
     src: url("/assets/fonts/FiraCode-Regular.woff2") format("woff2");
@@ -34,7 +28,7 @@
 
 /* Color variables */
 :root {
-    --body-bg: #fff;
+    /*--body-bg: #fff;
     --text-color: #000;
     --link-color: #315dff;
 
@@ -60,9 +54,9 @@
     --code-attr: #f6a434;
     --code-class: #6182b8;
     --code-var: #e53935;
-    --code-comment: #aabfc9;
+    --code-comment: #aabfc9;*/
 
-    @media (prefers-color-scheme: dark) {
+    /*@media (prefers-color-scheme: dark) {*/
         --body-bg: #000;
         --text-color: #fff;
         --link-color: #6b8bff;
@@ -90,12 +84,13 @@
         --code-class: #ffcb6b;
         --code-var: #0074d9;
         --code-comment: #616161;
-    }
+    /*}*/
 }
 
 body {
     background: var(--body-bg);
     color: var(--text-color);
+    letter-spacing: -0.005em;
 }
 
 a.footnote-backref {

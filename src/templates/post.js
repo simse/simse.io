@@ -58,9 +58,9 @@ export default function Template({
                         <p className={styles.photoCredit}>{frontmatter.photo_credit}</p>
                     </div>
 
-                    <h2 className={styles.subtitle}>{frontmatter.subtitle}</h2>
-
                     <div className={styles.content}>
+                        <h2 className={styles.subtitle}>{frontmatter.subtitle}</h2>
+
                         <MDXRenderer>{post.body}</MDXRenderer>
                     </div>
                 </div>

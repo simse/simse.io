@@ -45,15 +45,15 @@
 }
 
 .subtitle {
-    margin-left: 16%;
-    opacity: .8;
+    //margin-left: 16%;
+    //opacity: .8;
     font-size: 1.6rem;
     line-height: 1.7em;
     max-width: 80%;
     font-weight: 400;
-    font-family: 'Guardian Egyptian', 'Georgia', serif;
-    margin-top: 70px;
-    margin-bottom: 70px;
+    font-family: 'Guardian Egyptian', 'Georgia', serif !important;
+    //margin-top: 70px;
+    margin-bottom: 30px;
 
     @media(max-width: 1360px) {
         margin-left: 12%;
