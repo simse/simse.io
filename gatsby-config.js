@@ -13,6 +13,13 @@ module.exports = {
         `gatsby-plugin-sass`,
         `gatsby-plugin-transition-link`,
         {
+            resolve: `gatsby-plugin-google-analytics`,
+            options: {
+              trackingId: "UA-131675946-2",
+              defer: true,
+            },
+        },
+        {
             resolve: `gatsby-source-filesystem`,
             options: {
                 name: `images`,
