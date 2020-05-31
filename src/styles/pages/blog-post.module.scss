@@ -25,7 +25,7 @@
     max-width: 1000px;
     margin-bottom: 60px;
     padding: 0 10px;
-    font-family: 'Sanomat Alt';
+    font-family: 'Inter';
     font-weight: 900;
     margin-left: 20%;
 
@@ -45,14 +45,10 @@
 }
 
 .subtitle {
-    //margin-left: 16%;
-    //opacity: .8;
     font-size: 1.6rem;
     line-height: 1.7em;
     max-width: 80%;
     font-weight: 400;
-    font-family: 'Guardian Egyptian', 'Georgia', serif !important;
-    //margin-top: 70px;
     margin-bottom: 30px;
 
     @media(max-width: 1360px) {
@@ -101,7 +97,7 @@
     margin: 100px 0;
     font-size: 1.25rem;
     line-height: 1.7em;
-    font-family: 'Guardian Egyptian', 'Georgia', serif;
+    font-family: "Inter";
 
     iframe {
         width: 100%;
@@ -124,7 +120,7 @@
     h1,
     h2,
     h3 {
-        font-family: 'Sanomat Alt';
+        font-family: "Inter";
         font-weight: 900;
         margin-top: 45px;
         padding: 0 25%;
@@ -140,16 +136,18 @@
 
     h1 {
         font-size: 2.1rem;
+        margin: 2.5em auto 1.5em;
     }
 
     h2 {
+        font-weight: 400;
         font-size: 1.6rem;
-        margin-top: 50px;
+        margin: 3em auto 1em;
     }
 
     h3 {
         font-size: 1.2rem;
-        margin-top: 60px;
+        margin: 3em auto 1em;
     }
 
     p ,

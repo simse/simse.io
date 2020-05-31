@@ -33,39 +33,23 @@ const About = () => {
 
     return (
         <section className={'about'}>
-            <h2>About me</h2>
-            <h3 className={'subtitle'}>A couple of things about me</h3>
+            <h2>About my software</h2>
+            <h3 className={'subtitle'}>Here's some inflated statistics about my open source software</h3>
 
             <div className={'row'}>
-            <div className={'col'}>
-                    <Img style={{
-                        width: 125,
-                        marginBottom: 5
-                    }} fluid={data.love.childImageSharp.fluid} />
-
-                    <h3>Passionate</h3>
-
-                    <p>I absolutely love computer science, and I am very passionate about the subject. I love pushing myself to learn new things everyday, and I hope I get to work with technology to the day I die.</p>
+                <div className={'col'}>
+                    <h1>200k</h1>
+                    <p>total software downloads</p>
                 </div>
 
                 <div className={'col'}>
-                    <Img style={{
-                        width: 130
-                    }} fluid={data.crossing_fingers.childImageSharp.fluid} />
-
-                    <h3>Optimistic</h3>
-
-                    <p>When (IF, haha) I finish my Computer Science degree, I hope to work on interstellar communications technology. Space as a whole has always fascinated me.</p>
+                    <h1>52</h1>
+                    <p>total Github stars</p>
                 </div>
 
                 <div className={'col'}>
-                    <Img style={{
-                        width: 130
-                    }} fluid={data.two_fingers.childImageSharp.fluid} />
-
-                    <h3>Excited</h3>
-
-                    <p>I'm excited to create new software. If you have an idea be sure to contact me, I may just agree. And yes, I kind of ran out of things to say.</p>
+                    <h1>1000s</h1>
+                    <p>active users</p>
                 </div>
             </div>
         </section>

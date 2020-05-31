@@ -54,7 +54,7 @@ module.exports = {
             options: {
                 useMozJpeg: false,
                 stripMetadata: true,
-                defaultQuality: 85,
+                defaultQuality: 100,
             },
         },
         {
@@ -107,7 +107,7 @@ module.exports = {
                         options: {
                             maxWidth: 1200,
                             withWebp: true,
-                            wrapperStyle: 'transform: scale(1.2);margin:100px 0;display:block;'
+                            wrapperStyle: 'transform: scale(1.2);margin:70px 0;display:block;'
                         },
                     },
                     {
