@@ -13,6 +13,17 @@ module.exports = {
         `gatsby-plugin-sass`,
         `gatsby-plugin-transition-link`,
         {
+            resolve: `gatsby-plugin-prefetch-google-fonts`,
+            options: {
+                fonts: [
+                    {
+                        family: `Inter`,
+                        variants: [`400`, `700`, `900`]
+                    },
+                ],
+            },
+        },
+        {
             resolve: `gatsby-plugin-google-analytics`,
             options: {
               trackingId: "UA-131675946-2",

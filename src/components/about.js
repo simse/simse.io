@@ -1,36 +1,8 @@
-import { useStaticQuery, graphql } from "gatsby"
-import Img from "gatsby-image"
 import React from "react"
 
 import '../styles/about.scss'
 
 const About = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            love: file(relativePath: { eq: "love.png" }) {
-                childImageSharp {
-                    fluid(maxWidth: 125, quality: 90) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
-            crossing_fingers: file(relativePath: { eq: "crossing_fingers.png" }) {
-                childImageSharp {
-                    fluid(maxWidth: 130, quality: 90) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
-            two_fingers: file(relativePath: { eq: "two_fingers.png" }) {
-                childImageSharp {
-                    fluid(maxWidth: 130, quality: 90) {
-                        ...GatsbyImageSharpFluid_withWebp
-                    }
-                }
-            }
-        }
-    `)
-
     return (
         <section className={'about'}>
             <h2>About my software</h2>
