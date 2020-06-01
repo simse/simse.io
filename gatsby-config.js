@@ -13,15 +13,14 @@ module.exports = {
         `gatsby-plugin-sass`,
         `gatsby-plugin-transition-link`,
         {
-            resolve: `gatsby-plugin-prefetch-google-fonts`,
+            resolve: `gatsby-plugin-google-fonts`,
             options: {
-                fonts: [
-                    {
-                        family: `Inter`,
-                        variants: [`400`, `700`, `900`]
-                    },
-                ],
-            },
+              fonts: [
+                `limelight`,
+                `inter\:400,400i,700,900` // you can also specify font weights and styles
+              ],
+              display: 'swap'
+            }
         },
         {
             resolve: `gatsby-plugin-google-analytics`,
