@@ -20,8 +20,8 @@ const About = () => {
                 </div>
 
                 <div className={'col'}>
-                    <h1>1000s</h1>
-                    <p>active users</p>
+                    <h1>23</h1>
+                    <p>closed issues</p>
                 </div>
             </div>
         </section>

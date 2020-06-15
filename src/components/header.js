@@ -31,7 +31,7 @@ class Header extends React.Component {
                 <div className={overlayClassName}></div>
 
                 <div className={'navbar'}>
-                    <AniLink paintDrip duration={.5} hex="#3f00de" to="/" className={logoClassName}>
+                    <AniLink paintDrip duration={.4} hex="#3f00de" to="/" className={logoClassName}>
                         <img className="logo" src={require('../images/logo.svg')}  alt="Simon Sorensen website logo"/>
                     </AniLink>
 

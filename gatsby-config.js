@@ -16,7 +16,7 @@ module.exports = {
             resolve: `gatsby-plugin-google-fonts`,
             options: {
               fonts: [
-                `limelight`,
+                `amiri`,
                 `inter\:400,400i,700,900` // you can also specify font weights and styles
               ],
               display: 'swap'
@@ -117,7 +117,7 @@ module.exports = {
                         options: {
                             maxWidth: 1200,
                             withWebp: true,
-                            wrapperStyle: 'transform: scale(1.2);margin:70px 0;display:block;'
+                            wrapperStyle: 'transform: scale(1.2);margin:100px 0;display:block;'
                         },
                     },
                     {
