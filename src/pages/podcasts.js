@@ -18,7 +18,9 @@ const Podcasts = () => {
                 }
             }
         }
-    `).podcasts.nodes[0].podcasts
+    `).podcasts.nodes[1].podcasts
+
+    //console.log(data)
 
     return (
         <Layout>
