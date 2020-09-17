@@ -7,7 +7,7 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import Helmet from "react-helmet"
+import { Helmet } from "react-helmet"
 import { useStaticQuery, graphql } from "gatsby"
 
 function SEO({ description, lang, meta, title }) {
@@ -26,9 +26,12 @@ function SEO({ description, lang, meta, title }) {
   )
 
   const metaDescription = description || site.siteMetadata.description
-  let pageTitle = title + " / " + site.siteMetadata.title
-  if(title == null) {
-    pageTitle = site.siteMetadata.title
+
+    let pageTitle
+  if (title === "") {
+    pageTitle = "Simon Sorensen"
+  } else {
+    pageTitle = title + " | Simon Sorensen"
   }
 
   return (
@@ -79,6 +82,7 @@ SEO.defaultProps = {
   lang: `en`,
   meta: [],
   description: ``,
+  title: ''
 }
 
 SEO.propTypes = {

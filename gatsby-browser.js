@@ -3,4 +3,7 @@
  *
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
-import './src/styles/simse.scss'
+
+// You can delete this file if you're not using it
+import "./src/styles/simse.scss"
+import "./src/styles/fonts.scss"

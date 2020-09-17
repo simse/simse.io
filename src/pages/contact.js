@@ -1,51 +1,28 @@
 import React from "react"
-import { graphql } from "gatsby"
-import Img from "gatsby-image"
+import { Link } from "gatsby"
+//import { graphql } from "gatsby"
+//import Img from "gatsby-image"
 
-import Layout from "../components/layout"
 import SEO from "../components/seo"
-import styles from "../styles/pages/contact.module.scss"
 
-const ContactPage = ({data}) => (
-    <Layout>
-        <SEO title="Contact" />
+import style from "../styles/pages/contact.module.scss"
 
-        <section className={styles.wrapper}>
+const ContactPage = () => (
+  <div>
+    <SEO />
+    
+    <Link to={"/"}>
+      <img src={require("../images/logo.svg")} className={style.logo} alt="Simon's signature" />
+    </Link>
 
-            <div className={styles.image}>
-                <Img fluid={data.file.childImageSharp.fluid} />
-            </div>
+    <div className={style.contact}>
+      <p>send me an email:</p>
 
-            <div className={styles.info}>
-                <h1>Contact info</h1>
+      <h1><a href="mailto:hello@simse.io">hello@simse.io</a></h1>
 
-                <div className={styles.group}>
-                    <span>email</span>
-                    <br />
-                    <a href="mailto:hello@simse.io" target="_blank" rel="noopener noreferrer">hello@simse.io</a>
-                </div>
-
-                <div className={styles.group}>
-                    <span>discord</span>
-                    <br />
-                    <a href="https://discordapp.com" target="_blank" rel="noopener noreferrer">simse#7584</a>
-                </div>
-            </div>
-
-        </section>
-    </Layout>
+      <p>spam is certainly welcome</p>
+    </div>
+  </div>
 )
 
 export default ContactPage
-
-export const query = graphql`
-  query {
-    file(relativePath: { eq: "simse.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 600, quality: 100) {
-          ...GatsbyImageSharpFluid
-        }
-      }
-    }
-  }
-`

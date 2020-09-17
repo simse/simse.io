@@ -1,0 +1,124 @@
+.hero {
+    //background: ;
+    color: #fff;
+    width: 100%;
+    padding: 100px 20%;
+    display: flex;
+    align-items: center;
+
+    @media(max-width: 1360px) {
+        padding: 100px 10%;
+    }
+
+    @media(max-width: 1020px) {
+        padding: 100px 5%;
+    }
+
+    @media(max-width: 910px) {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .text {
+        width: 50%;
+        z-index: 20;
+        margin-left: auto;
+        padding-left: 80px;
+
+        @media(max-width: 910px) {
+            margin: 0;
+            padding: 0 5px;
+            width: 100%;
+        }
+
+        .signature {
+            max-width: 170px;
+        }
+
+        .title {
+            color: #FF20CE;
+            font-size: 4rem;
+            
+            @media(max-width: 1800px) {
+                font-size: 3.6rem;
+            }
+
+            @media(max-width: 1640px) {
+                font-size: 3.2rem;
+            }
+
+            @media(max-width: 1480px) {
+                font-size: 2.9rem;
+            }
+        }
+
+        p {
+            max-width: 300px;
+            opacity: 0.8;
+
+            @media(max-width: 910px) {
+                max-width: 910px;
+            }
+        }
+
+        a {
+            color: #fff;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.4);
+            transition: 300ms ease border-bottom;
+
+            &:hover {
+                border-bottom-color: rgba(255, 255, 255, 1);
+            }
+        }
+    }
+
+    .image {
+        width: 60%;
+        margin-left: -80px;
+        
+        @media(max-width: 910px) {
+            width: 100%;
+            margin: 0 2.5vw;
+            max-width: 95vw;
+        }
+    }
+}
+
+.languages {
+    color: #fff;
+    padding: 50px 10%;
+    text-align: center;
+
+    .title {
+        margin-bottom: 70px;
+        opacity: 0.8;
+
+        h2 {
+            margin-bottom: 10px;
+        }
+    }
+
+    .list {
+        display: grid;
+        grid-template-columns: 33.3% 33.3% 33.3%;
+
+        @media(max-width: 910px) {
+            grid-template-columns: 100%;
+        }
+
+        h1 {
+            &:nth-child(1) {
+                color: #00C9E4;
+            }
+
+            &:nth-child(2) {
+                color: #1694DB;
+            }
+
+            &:nth-child(3) {
+                color: #E0E400;
+            }
+        }
+    }
+}

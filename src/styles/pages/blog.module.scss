@@ -1,54 +1,59 @@
-.page {
-    padding: 0 50px;
+.blog {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 30px;
 
-    @media(max-width: 760px) {
-        padding: 10px 15px;
+    .title {
+        text-align: center;
+        margin: 30px 0 60px 0;
+    }
+
+    .logo {
+        max-width: 180px;
+        margin: 70px auto 100px auto;
+        display: block;
     }
 
     .posts {
-        padding: 50px 0;
-        max-width: 1600px;
-        margin: 0 auto;
         display: grid;
-        grid-template-columns: 24% 24% 24% 24%;
-        grid-gap: 1%;
+        grid-template-columns: 32.6% 32.6% 32.6%;
+        grid-column-gap: 1%;
 
-        @media(max-width: 1400px) {
-            grid-template-columns: 32% 32% 32%;
-        }
-
-        @media(max-width: 1100px) {
+        @media(max-width: 920px) {
             grid-template-columns: 49% 49%;
         }
 
-        @media(max-width: 760px) {
+        @media(max-width: 740px) {
             grid-template-columns: 100%;
-            grid-gap: 0%;
+            grid-column-gap: 0%;
+        }
 
-            .blog-post-card {
-                margin-bottom: 15px;
+        .post {
+            transition: transform 250ms ease;
+
+            &:hover {
+               transform: translateY(-1%);
+            }
+
+            img {
+                transition: all 200ms ease;
+                border-radius: 6px;
+            }
+
+            .meta {
+                margin-top: 20px;
+                display: block;
+                opacity: 0.7;
+            }
+            
+            h2 {
+                margin-top: 12px;
             }
         }
     }
 }
 
-.categoryBar {
-    width: 100%;
-    background: #101010;
-    display: flex;
-    border-radius: 12px;
-
-    @media(max-width: 1000px) {
-        flex-direction: column;
-    }
-
-    .categoryButton {
-        padding: 20px;
-        background: #101010;
-        transition: cubic-bezier(1, 0, 0, 1) 300ms background;
-
-        &:hover {
-            background: darken(#101010, 3%);
-        }
-    }
+a {
+    color: #fff;
+    text-decoration: none;
 }

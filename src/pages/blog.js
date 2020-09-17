@@ -1,117 +1,58 @@
-import { useStaticQuery, graphql } from "gatsby"
 import React from "react"
-import AniLink from "gatsby-plugin-transition-link/AniLink"
+import { Link, graphql } from "gatsby"
+import Img from "gatsby-image"
 
-import BlogPostCard from "../components/blog-post-card"
-
-import Layout from "../components/layout"
+//import Layout from "../components/layout"
 import SEO from "../components/seo"
+
 import styles from "../styles/pages/blog.module.scss"
 
+const BlogPage = ({data}) => (
+  <div className={styles.blog}>
+    <SEO title="Blog" />
 
-function categoryLink(str) {
-    str = str.replace(/^\s+|\s+$/g, ''); // trim
-    str = str.toLowerCase();
+    <Link to={"/"}>
+      <img src={require("../images/logo.svg")} className={styles.logo} alt="Simon's signature" />
+    </Link>
 
-    // remove accents, swap ñ for n, etc
-    var from = "àáäâèéëêìíïîòóöôùúüûñç·/_,:;";
-    var to   = "aaaaeeeeiiiioooouuuunc------";
-    for (var i=0, l=from.length ; i<l ; i++) {
-        str = str.replace(new RegExp(from.charAt(i), 'g'), to.charAt(i));
-    }
+    {/*<h1 className={styles.title}>Da blog</h1>*/}
 
-    str = str.replace(/[^a-z0-9 -]/g, '') // remove invalid chars
-        .replace(/\s+/g, '-') // collapse whitespace and replace by -
-        .replace(/-+/g, '-'); // collapse dashes
-    return "/blog/category/" + str;
-}
+    <div className={styles.posts}>
+      {data.allGhostPost.nodes.map(post => (
+        <Link to={"/blog/" + post.slug}>
+          <div className={styles.post}>
+            <Img fluid={post.localFeatureImage.childImageSharp.fluid} />
 
-const Blog = () => {
-    const data = useStaticQuery(graphql`
-        query {
-            posts: allMdx(
-                filter: {fileAbsolutePath: {regex: "\/blog/"}},
-                sort: {fields: frontmatter___date, order: DESC}
-            ) {
-            nodes  {
-                excerpt(pruneLength: 200)
-                fields {
-                    slug
-                }
-                frontmatter {
-                  title
-                  category
-                  date(formatString: "DD MMMM YYYY")
-                  path
-                  thumbnail {
-                    childImageSharp {
-                        fluid(maxWidth: 400, maxHeight: 250, cropFocus: CENTER, quality: 100) {
-                            ...GatsbyImageSharpFluid_withWebp
-                        }
-                    }
-                  }
-                }
-            }
-            }
-            categories: allMdx(
-                filter: {fileAbsolutePath: {regex: "\/blog/"}}
-            ) {
-                nodes{
-                    frontmatter {
-                        category
-                    }
-                }
-            }
+            <span className={styles.meta}>{post.tags[0].name} — {post.published_at}</span>
+
+            <h2>{ post.title }</h2>
+          </div>
+        </Link>
+      ))}
+    </div>
+  </div>
+)
+
+export default BlogPage
+
+export const query = graphql`
+  query {
+    allGhostPost(filter: {slug: {ne: "data-schema"}}) {
+      nodes {
+        title
+        slug
+        published_at(formatString: "MMMM DD, YYYY")
+        tags {
+            name
         }
-    `)
-
-    let categories = [];
-
-    data.categories.nodes.forEach(category => {
-        let categoryName = category.frontmatter.category;
-
-        if (!categories.includes(categoryName)) {
-            categories.push(categoryName);
+        localFeatureImage {
+            childImageSharp {
+              fluid(maxWidth: 300, maxHeight: 200, quality: 100) {
+                  ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
         }
-    });
-
-    return (
-        <Layout>
-            <SEO title="Blog" />
-
-            <section className={styles.page}>
-                <h1 className="pageTitle">Blog</h1>
-                <h2 className="pageSubtitle">Ramblings of a crazy person</h2>
-
-                <div className={styles.categoryBar}>
-                    {categories.map(category => (
-                        <AniLink
-                            className={styles.categoryButton}
-                            key={category}
-                            to={categoryLink(category)}
-                            paintDrip
-                            duration={.4}
-                            hex="#3f00de"
-                        >{category}</AniLink>
-                    ))}
-
-                </div>
-
-                <div className={styles.posts}>
-                    {data.posts.nodes.map((post) => (
-                        <BlogPostCard
-                            key={post.fields.slug}
-                            title={post.frontmatter.title}
-                            category={post.frontmatter.category}
-                            excerpt={post.excerpt}
-                            link={post.fields.slug}
-                            image={post.frontmatter.thumbnail.childImageSharp.fluid}
-                            date={post.frontmatter.date} />
-                    ))}
-                </div>
-            </section>
-        </Layout>
-    )
-}
-
-export default Blog
+      }
+  }
+`
