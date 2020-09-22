@@ -44,6 +44,19 @@
                 border-bottom-color: rgba(255, 255, 255, 1);
             }
         }
+
+        h1,
+        h2 {
+            margin: 55px 70px 20px 70px;
+        }
+
+        img {
+            /*margin-left: -70px;
+            margin-right: -70px;
+            width: calc(100% + 140px);*/
+            padding: 50px 0;
+            transform: scale(1.25);
+        }
     }
 
     p {
