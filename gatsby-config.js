@@ -21,7 +21,7 @@ module.exports = {
         contentApiKey: `1701af313f55d48b5f07abd057`,
       },
     },
-    {
+    /*{
       resolve: `gatsby-transformer-rehype`,
       options: {
           filter: node => (
@@ -42,7 +42,7 @@ module.exports = {
               },
           ],
       },
-    },
+    },*/
     {
       resolve: `gatsby-plugin-typography`,
       options: {

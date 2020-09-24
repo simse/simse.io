@@ -33,6 +33,11 @@
 
             &:hover {
                transform: translateY(-1%);
+
+               h2 {
+                    transition: 500ms cubic-bezier(0.075, 0.82, 0.165, 1) color;
+                    color: #FF20CE;
+               }
             }
 
             img {
