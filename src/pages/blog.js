@@ -23,9 +23,11 @@ const BlogPage = ({data}) => (
           <div className={styles.post}>
             <Img fluid={post.localFeatureImage.childImageSharp.fluid} />
 
-            <span className={styles.meta}>{post.tags[0].name} — {post.published_at}</span>
+            <div className={styles.text}>
+              <span className={styles.meta}>{post.tags[0].name} — {post.published_at}</span>
 
-            <h2>{ post.title }</h2>
+              <h2>{ post.title }</h2>
+            </div>
           </div>
         </Link>
       ))}
@@ -37,7 +39,7 @@ export default BlogPage
 
 export const query = graphql`
   query {
-    allGhostPost(filter: {slug: {ne: "data-schema"}}) {
+    allGhostPost(filter: {slug: {ne: "data-schema"}}, sort: {fields: published_at, order: DESC}) {
       nodes {
         title
         slug
@@ -47,7 +49,7 @@ export const query = graphql`
         }
         localFeatureImage {
             childImageSharp {
-              fluid(maxWidth: 300, maxHeight: 200, quality: 100, cropFocus: CENTER) {
+              fluid(maxWidth: 600, maxHeight: 400, quality: 100, cropFocus: CENTER) {
                   ...GatsbyImageSharpFluid_withWebp
               }
             }

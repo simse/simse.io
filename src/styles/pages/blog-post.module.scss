@@ -70,6 +70,14 @@
             width: calc(100% + 140px);*/
             padding: 50px 0;
             transform: scale(1.25);
+
+            @media(max-width: 1200px) {
+                transform: scale(1.1);
+            }
+
+            @media(max-width: 720px) {
+                transform: scale(1.05);
+            }
         }
 
         section {
