@@ -1,7 +1,7 @@
 .blog {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 164px 30px 30px 30px;
 
     .title {
         text-align: center;
@@ -74,11 +74,16 @@
                 //margin-top: 20px;
                 display: block;
                 opacity: 0.7;
+                font-family: Monolisa;
+                font-size: 0.9em;
             }
             
             h2 {
                 margin-top: 12px;
                 margin-bottom: 0px;
+                font-family: Inter;
+                font-weight: 300;
+                letter-spacing: -0.03em;
             }
         }
     }

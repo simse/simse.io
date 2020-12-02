@@ -4,6 +4,7 @@ import Img from "gatsby-image"
 
 //import Layout from "../components/layout"
 import SEO from "../components/seo"
+import Navbar from "../components/navbar"
 
 import styles from "../styles/pages/blog.module.scss"
 
@@ -11,11 +12,7 @@ const BlogPage = ({data}) => (
   <div className={styles.blog}>
     <SEO title="Blog" />
 
-    <Link to={"/"}>
-      <img src={require("../images/logo.svg")} className={styles.logo} alt="Simon's signature" />
-    </Link>
-
-    {/*<h1 className={styles.title}>Da blog</h1>*/}
+    <Navbar />
 
     <div className={styles.posts}>
       {data.allGhostPost.nodes.map(post => (

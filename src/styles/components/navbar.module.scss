@@ -1,0 +1,18 @@
+.navbar {
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    //background: blue;
+    z-index: 20;
+    display: flex;
+
+    .logo {
+        margin: 0 auto;
+
+        img {
+            max-width: 230px;
+            padding: 50px 20px;
+        }
+    }
+}

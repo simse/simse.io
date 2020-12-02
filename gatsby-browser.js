@@ -7,3 +7,5 @@
 // You can delete this file if you're not using it
 import "./src/styles/simse.scss"
 import "./src/styles/fonts.scss"
+
+require("prism-themes/themes/prism-shades-of-purple.css")

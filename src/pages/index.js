@@ -1,59 +1,78 @@
 import React from "react"
-import { Link } from "gatsby"
-import { graphql } from "gatsby"
+import { graphql, StaticQuery, Link } from "gatsby"
 import Img from "gatsby-image"
 
 import SEO from "../components/seo"
+import Gradient from "../utils/gradient"
+import Navbar from "../components/navbar"
+
+import BlogIcon from "../icons/blog.svg"
+
+import EmailIcon from "../icons/email.svg"
 
 import style from "../styles/pages/index.module.scss"
 
-const IndexPage = ({data}) => (
-  <div>
-    <SEO />
+let gradient = new Gradient();
+
+class IndexPage extends React.Component {
+  constructor(props) {
+    super(props);
+    this.background = React.createRef();
+  }
+
+  componentDidMount() {
+    gradient.initGradient(this.background);
+  }
+
+  render() {
+    return (
+      <div>
+        <SEO />
+
+        <Navbar />
+        
+        <div className={style.hero}>
+          <canvas className={style.background} ref={this.background}></canvas>
     
-    <div className={style.hero}>
-      <div className={style.text}>
-        <img src={require("../images/logo.svg")} className={style.signature} alt="Simon's signature" />
+          <div className={style.text}>   
+            <h1 className={style.title}>That's me right here on the picture</h1>
+    
+            <p>and my name is Simon, and below are some handy links for you!</p>
+    
+            <div className={style.links}>
+              <Link to={"/blog"}><BlogIcon /> my blog</Link>
 
-        <h1 className={style.title}>Hobby Programmer</h1>
+              <br />
 
-        <p>welcome to my artistic experiment of a website</p>
+              
 
-        <p>we got da <Link to={"blog"}>blog</Link>, we got da <Link to={"contact"}>contact</Link></p>
+              <Link to={"/contact"}><EmailIcon /> send me a holler</Link>
+            </div>
+          </div>
+    
+          <div className={style.image}>
+            <Img fluid={this.props.data.file.childImageSharp.fluid} alt="Picture of Simon" />
+          </div>
+        </div>
       </div>
+    )
+  }
+}
 
-      <div className={style.image}>
-        <Img fluid={data.file.childImageSharp.fluid} alt="Picture of Simon" />
-      </div>
-    </div>
-
-    <div className={style.languages}>
-      <div className={style.title}>
-        <h2>Languages I write and love</h2>
-        <small>Except you Javascript, I just know that one</small>
-      </div>
-
-      <div className={style.list}>
-        <h1>Go</h1>
-
-        <h1>Python</h1>
-
-        <h1>Javascript</h1>
-      </div>
-    </div>
-  </div>
-)
-
-export default IndexPage
-
-export const query = graphql`
-  query {
-    file(relativePath: { eq: "simse.jpg" }) {
-      childImageSharp {
-        fluid(maxWidth: 800) {
-          ...GatsbyImageSharpFluid
+export default () => (
+  <StaticQuery 
+    query={graphql`
+    query {
+      file(relativePath: { eq: "simse.jpg" }) {
+        childImageSharp {
+          fluid(maxWidth: 800) {
+            ...GatsbyImageSharpFluid
+          }
         }
       }
     }
-  }
-`
+  `}
+  render={(data) => (
+    <IndexPage data={data} />
+  )} />
+)

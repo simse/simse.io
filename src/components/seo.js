@@ -31,7 +31,7 @@ function SEO({ description, lang, meta, title }) {
   if (title === "") {
     pageTitle = "Simon Sorensen"
   } else {
-    pageTitle = title + " | Simon Sorensen"
+    pageTitle = title + " / Simon Sorensen"
   }
 
   return (

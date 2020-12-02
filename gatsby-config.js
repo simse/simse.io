@@ -15,34 +15,39 @@ module.exports = {
       },
     },
     {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /icons/ // See below to configure properly
+        }
+      }
+    },
+    {
+      resolve: `gatsby-transformer-rehype`,
+      options: {
+        filter: node => (
+          node.internal.type === `GhostPost`
+        ),
+        plugins: [
+          {
+            resolve: `gatsby-rehype-prismjs`,
+            options: {
+              divClassNames: "kg-card kg-code-card",
+              classPrefix: "language-",
+              inlineCodeMarker: null,
+              noInlineHighlight: true,
+            },
+          },
+        ],
+      },
+    },
+    {
       resolve: `gatsby-source-ghost`,
       options: {
         apiUrl: `https://ghost.simse.io`,
         contentApiKey: `1701af313f55d48b5f07abd057`,
       },
     },
-    /*{
-      resolve: `gatsby-transformer-rehype`,
-      options: {
-          filter: node => (
-              // this is an example (any node type can be selected)
-              node.internal.type === `GhostPost`
-          ),
-          plugins: [
-              {
-                  resolve: `gatsby-rehype-inline-images`,
-                  // all options are optional and can be omitted
-                  options: {
-                      // all images larger are scaled down to maxWidth (default: maxWidth = imageWidth)
-                      // maxWidth: 2000,
-                      withWebp: true,
-                      // disable, if you need to save memory
-                      useImageCache: true,
-                  }
-              },
-          ],
-      },
-    },*/
     {
       resolve: `gatsby-plugin-typography`,
       options: {
@@ -80,7 +85,7 @@ module.exports = {
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-       icon: `src/images/wink.png`, // This path is relative to the root of the site.
+        icon: `src/images/wink.png`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

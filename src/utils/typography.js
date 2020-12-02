@@ -3,7 +3,7 @@ const typography = new Typography({
   baseFontSize: "18px",
   baseLineHeight: 1.666,
   headerFontFamily: [
-    "Recoletta",
+    "Inter",
     "Helvetica Neue",
     "Segoe UI",
     "Helvetica",

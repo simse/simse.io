@@ -1,6 +1,7 @@
 @font-face {
     font-family: Recoletta;
     font-weight: 900;
+    font-display: swap;
     src: url(../../static/fonts/RecoletaAlt-Black.woff2) format("woff2");
   }
 
@@ -11,4 +12,18 @@
     font-style: normal;
     font-named-instance: 'Regular';
     src: url(../../static/fonts/Inter.var.woff2) format("woff2");
+  }
+
+  @font-face {
+    font-family: Monolisa;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../../static/fonts/MonoLisa-Regular.woff2) format("woff2");
+  }
+
+  @font-face {
+    font-family: Monolisa;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../../static/fonts/MonoLisa-Bold.woff2) format("woff2");
   }

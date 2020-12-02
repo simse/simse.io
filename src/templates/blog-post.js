@@ -1,8 +1,9 @@
 import React from "react"
-import { graphql, Link } from "gatsby"
+import { graphql } from "gatsby"
 import Img from "gatsby-image"
 
 import SEO from "../components/seo"
+import Navbar from "../components/navbar"
 
 import styles from "../styles/pages/blog-post.module.scss"
 
@@ -13,11 +14,9 @@ export default function BlogPost({data}) {
         <>
             <SEO title={post.title} />
 
-            <div className={styles.post}>
-                <Link to={"/"}>
-                    <img src={require("../images/logo.svg")} className={styles.logo} alt="Simon's signature" />
-                </Link>
+            <Navbar />
 
+            <div className={styles.post}>
                 <h1 className={styles.title}>{post.title}</h1>
 
                 <div className={styles.tags}>
@@ -32,7 +31,7 @@ export default function BlogPost({data}) {
 
                 <Img fluid={post.localFeatureImage.childImageSharp.fluid} />
 
-                <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.html }}></div>
+                <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.childHtmlRehype.html }}></div>
             </div>
         </>
     )
@@ -41,7 +40,9 @@ export default function BlogPost({data}) {
 export const query = graphql`
   query($ghostId: String!) {
     ghostPost(ghostId: {eq: $ghostId}) {
-        html
+        childHtmlRehype {
+            html
+          }
         title
         published_at(formatString: "MMMM DD, YYYY")
         tags {
