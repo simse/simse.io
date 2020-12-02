@@ -6,6 +6,7 @@
   "author": "Simon Sorensen",
   "dependencies": {
     "@draftbox-co/gatsby-rehype-inline-images": "^1.0.2",
+    "aws-sdk": "^2.802.0",
     "gatsby": "^2.24",
     "gatsby-cli": "^2.12.88",
     "gatsby-image": "^2.4.16",
@@ -33,7 +34,8 @@
     "react-helmet": "^6.1.0",
     "react-typography": "^0.16.19",
     "slugify": "^1.4.5",
-    "typography": "^0.16.19"
+    "typography": "^0.16.19",
+    "uuid": "^8.3.1"
   },
   "devDependencies": {
     "prettier": "2.0.5"
