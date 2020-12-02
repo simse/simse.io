@@ -295,19 +295,25 @@ class Gradient {
             if (0 !== this.last && this.isStatic) return this.minigl.render(), void this.disconnect();
             (/*this.isIntersecting && */this.conf.playing || this.isMouseDown) && requestAnimationFrame(this.animate)
         }), e(this, "addIsLoadedClass", () => {
-            /*this.isIntersecting && */!this.isLoadedClass && (this.isLoadedClass = !0, this.el.classList.add("isLoaded"), setTimeout(() => {
-            this.el.parentElement.classList.add("isLoaded")
+            /*this.isIntersecting && */!this.isLoadedClass && (this.isLoadedClass = !0, this.el.classList.add(this.shownClass), setTimeout(() => {
+            this.el.parentElement.classList.add(this.shownClass)
         }, 3e3))
         }), e(this, "pause", () => {
             this.conf.playing = false
         }), e(this, "play", () => {
             requestAnimationFrame(this.animate), this.conf.playing = true
-        }), e(this, "initGradient", (ref) => {
+        }), e(this, "initGradient", (ref, shownClass) => {
             console.log("creating background");
             //this.el = document.querySelector("#background");
             //this.el.innerHTML = "hello";
             //console.log(ref)
             this.el = ref.current;
+            this.shownClass = shownClass;
+
+            /*window.setTimeout(() => {
+                ref.current.classList.add(shownClass)
+            }, 1000)*/
+
             this.connect();
             return this;
         })

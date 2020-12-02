@@ -7,7 +7,7 @@ import Gradient from "../utils/gradient"
 import Navbar from "../components/navbar"
 
 import BlogIcon from "../icons/blog.svg"
-
+import AIIcon from "../icons/ai.svg"
 import EmailIcon from "../icons/email.svg"
 
 import style from "../styles/pages/index.module.scss"
@@ -21,7 +21,7 @@ class IndexPage extends React.Component {
   }
 
   componentDidMount() {
-    gradient.initGradient(this.background);
+    gradient.initGradient(this.background, style.shown);
   }
 
   render() {
@@ -44,7 +44,9 @@ class IndexPage extends React.Component {
 
               <br />
 
-              
+              <Link to={"/chat"}><AIIcon /> chat with an AI version of <strong>me</strong></Link>
+
+              <br />
 
               <Link to={"/contact"}><EmailIcon /> send me a holler</Link>
             </div>
