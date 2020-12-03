@@ -2,6 +2,7 @@ import React, { createRef } from 'react'
 
 import SEO from "../components/seo"
 import Navbar from "../components/navbar"
+import ArrowUpIcon from "../icons/arrow-up.svg"
 
 import styles from "../styles/pages/chat.module.scss"
 
@@ -11,10 +12,11 @@ class ChatPage extends React.Component {
 
         this.state = {
             messages: [
-                { from: "them", message: "Hello, I am an AI version of Simon. Ask me anything.", id: 1 }
+                /*{ from: "them", message: "Hello, I am an AI version of Simon. Ask me anything.", id: 1 }*/
             ],
             userId: null,
-            currentMessage: ""
+            currentMessage: "",
+            senderLoading: true
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -43,6 +45,9 @@ class ChatPage extends React.Component {
                     this.setState({
                         userId: data.userId
                     })
+
+                    this.removeLoadingIndicator()
+                    this.addMessage("Hello, I am an AI version of Simon. Ask me anything.", "them")
                 }
             })
     }
@@ -62,13 +67,17 @@ class ChatPage extends React.Component {
 
         this.setState({ messages: tempArray })
 
-        this.messagesDiv.current.scrollTop = this.messagesDiv.current.scrollHeight
+
     }
 
     sendMessage(message) {
+        this.addLoadingIndicator()
+
         fetch(`/api/chat/message?userId=${this.state.userId}&message=${message}`)
             .then(response => response.json())
             .then(data => {
+                this.removeLoadingIndicator()
+
                 if (data.status === "OK") {
                     this.addMessage(data.response, "them")
                 }
@@ -80,11 +89,27 @@ class ChatPage extends React.Component {
     }
 
     handleSubmit(event) {
-        this.addMessage(this.state.currentMessage, "me")
-        this.sendMessage(this.state.currentMessage)
         event.preventDefault();
 
+        if (this.state.currentMessage === "") return
+
+        this.addMessage(this.state.currentMessage, "me")
+        this.sendMessage(this.state.currentMessage)
+
         this.setState({ currentMessage: "" })
+    }
+
+    addLoadingIndicator() {
+        this.setState({ senderLoading: true })
+    }
+
+    removeLoadingIndicator() {
+        this.setState({ senderLoading: false })
+    }
+
+    componentDidUpdate() {
+        this.messagesDiv.current.scrollTop = this.messagesDiv.current.scrollHeight
+        //this.scrollToTop(this.messagesDiv.current, this.messagesDiv.current.scrollHeight, 250)
     }
 
     render() {
@@ -97,13 +122,19 @@ class ChatPage extends React.Component {
                 <div className={styles.chat}>
                     <div className={styles.messages} ref={this.messagesDiv}>
                         {this.state.messages.map(message => this.renderMessage(message))}
+
+                        {this.state.senderLoading && <div className={styles.typingIndicator}>
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>}
                     </div>
 
                     <div className={styles.input}>
                         <form onSubmit={this.handleSubmit}>
                             <input type="text" placeholder="Enter a message" value={this.state.currentMessage} onChange={this.handleChange} />
 
-                            <input type="submit" value="Send message" />
+                            <button type="submit" aria-label="send message"><ArrowUpIcon /></button>
                         </form>
                     </div>
                 </div>
