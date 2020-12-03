@@ -16,7 +16,7 @@ const BlogPage = ({data}) => (
 
     <div className={styles.posts}>
       {data.allGhostPost.nodes.map(post => (
-        <Link to={"/blog/" + post.slug}>
+        <Link to={"/blog/" + post.slug} key={post.slug}>
           <div className={styles.post}>
             <Img fluid={post.localFeatureImage.childImageSharp.fluid} />
 

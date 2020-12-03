@@ -12,15 +12,14 @@ import EmailIcon from "../icons/email.svg"
 
 import style from "../styles/pages/index.module.scss"
 
-let gradient = new Gradient();
-
 class IndexPage extends React.Component {
   constructor(props) {
     super(props);
-    this.background = React.createRef();
+    this.background = React.createRef();  
   }
 
   componentDidMount() {
+    let gradient = new Gradient();
     gradient.initGradient(this.background, style.shown);
   }
 

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { createRef } from 'react'
 
 import SEO from "../components/seo"
 import Navbar from "../components/navbar"
@@ -11,11 +11,17 @@ class ChatPage extends React.Component {
 
         this.state = {
             messages: [
-                {from: "them", message: "Hello, I am an AI version of Simon. Ask me anything."},
-                {from: "me", message: "Yooo my slime"}
-            ]
+                { from: "them", message: "Hello, I am an AI version of Simon. Ask me anything.", id: 1 }
+            ],
+            userId: null,
+            currentMessage: ""
         }
+
+        this.handleChange = this.handleChange.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+        this.messagesDiv = createRef();
     }
+
 
     renderMessage(message) {
         let messageClass = styles["fromThem"]
@@ -25,8 +31,60 @@ class ChatPage extends React.Component {
         }
 
         return (
-            <p className={messageClass} key={message.message}>{message.message}</p>
+            <p className={messageClass} key={message.id}>{message.message}</p>
         )
+    }
+
+    createSession() {
+        fetch("/api/chat/session")
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "OK") {
+                    this.setState({
+                        userId: data.userId
+                    })
+                }
+            })
+    }
+
+    componentDidMount() {
+        this.createSession()
+    }
+
+    addMessage(message, from) {
+        let tempArray = this.state.messages
+
+        tempArray.push({
+            message: message,
+            from: from,
+            id: tempArray.length + 1
+        })
+
+        this.setState({ messages: tempArray })
+
+        this.messagesDiv.current.scrollTop = this.messagesDiv.current.scrollHeight
+    }
+
+    sendMessage(message) {
+        fetch(`/api/chat/message?userId=${this.state.userId}&message=${message}`)
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === "OK") {
+                    this.addMessage(data.response, "them")
+                }
+            })
+    }
+
+    handleChange(event) {
+        this.setState({ currentMessage: event.target.value });
+    }
+
+    handleSubmit(event) {
+        this.addMessage(this.state.currentMessage, "me")
+        this.sendMessage(this.state.currentMessage)
+        event.preventDefault();
+
+        this.setState({ currentMessage: "" })
     }
 
     render() {
@@ -37,12 +95,16 @@ class ChatPage extends React.Component {
                 <Navbar />
 
                 <div className={styles.chat}>
-                    <div className={styles.messages}>
+                    <div className={styles.messages} ref={this.messagesDiv}>
                         {this.state.messages.map(message => this.renderMessage(message))}
                     </div>
 
                     <div className={styles.input}>
-                        <input type="text" placeholder="Enter a message" />
+                        <form onSubmit={this.handleSubmit}>
+                            <input type="text" placeholder="Enter a message" value={this.state.currentMessage} onChange={this.handleChange} />
+
+                            <input type="submit" value="Send message" />
+                        </form>
                     </div>
                 </div>
             </>

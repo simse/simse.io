@@ -303,7 +303,7 @@ class Gradient {
         }), e(this, "play", () => {
             requestAnimationFrame(this.animate), this.conf.playing = true
         }), e(this, "initGradient", (ref, shownClass) => {
-            console.log("creating background");
+            // console.log("creating background");
             //this.el = document.querySelector("#background");
             //this.el.innerHTML = "hello";
             //console.log(ref)
