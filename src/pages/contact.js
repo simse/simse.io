@@ -1,9 +1,7 @@
 import React from "react"
-import { Link } from "gatsby"
-//import { graphql } from "gatsby"
-//import Img from "gatsby-image"
 
 import SEO from "../components/seo"
+import Navbar from "../components/navbar"
 
 import style from "../styles/pages/contact.module.scss"
 
@@ -11,16 +9,14 @@ const ContactPage = () => (
   <div>
     <SEO />
     
-    <Link to={"/"}>
-      <img src={require("../images/logo.svg")} className={style.logo} alt="Simon's signature" />
-    </Link>
+    <Navbar />
 
     <div className={style.contact}>
       <p>send me an email:</p>
 
       <h1><a href="mailto:hello@simse.io">hello@simse.io</a></h1>
 
-      <p>spam is certainly welcome</p>
+      <p>send me anything! if I don't reply, you've made me unnaturally uncomfortable.</p>
     </div>
   </div>
 )
