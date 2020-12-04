@@ -64,8 +64,10 @@
         }
 
         h1,
-        h2 {
+        h2,
+        h3 {
             margin: 55px 70px 20px 70px;
+            // font-weight: 400;
         }
 
         img {
@@ -84,13 +86,29 @@
             }
         }
 
+        ul {
+            margin-left: 90px;
+        }
+
         section {
             margin: 0 70px 0 70px;
 
-            ol {
+            ol,
+            ul {
                 margin: 0;
                 padding-left: 15px;
             }
+        }
+
+        pre {
+            border-radius: 8px;
+            margin: 40px 0 40px 0;
+        }
+
+        figcaption {
+            opacity: 0.7;
+            margin-top: -25px;
+            margin-bottom: 50px;
         }
     }
 
