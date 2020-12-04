@@ -1,17 +1,14 @@
 var AWS = require('aws-sdk');
 
-let access_id = process.env.AWS_ID
-let access_key = process.env.AWS_SECRET
-
 AWS.config.update(
     {
-        accessKeyId: access_id,
-        secretAccessKey: access_key,
+        accessKeyId: process.env.AWS_ID,
+        secretAccessKey: process.env.AWS_SECRET,
         region: "eu-west-2"
     }
 );
 
-var lexruntime = new AWS.LexRuntime({apiVersion: '2016-11-28'});
+var lexruntime = new AWS.LexRuntime({ apiVersion: '2016-11-28' });
 
 
 module.exports = (req, res) => {
@@ -24,20 +21,17 @@ module.exports = (req, res) => {
             userId: userId,
             accept: 'text/plain; charset=utf-8'
         }, (error, data) => {
-            if (error === null) {
-                res.status(200).send({
-                    status: "OK",
-                    userId: userId
-                })
-            } else {
+            if (error) {
                 res.status(500).send({
                     status: "ERROR",
                     error: error
                 })
+            } else {
+                res.status(200).send({
+                    status: "OK",
+                    userId: userId
+                })
             }
-
         }
     )
-
-    
 }

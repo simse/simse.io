@@ -7,9 +7,9 @@ class Navbar extends React.Component {
     render() {
         return (
             <div className={styles.navbar}>
-                <div className={styles.back}>
+                {/*<div className={styles.back}>
                     Go back
-                </div>
+        </div>*/}
 
                 <div className={styles.logo}>
                     <Link to="/">
