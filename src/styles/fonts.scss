@@ -27,3 +27,17 @@
     font-display: swap;
     src: url(../../static/fonts/MonoLisa-Bold.woff2) format("woff2");
   }
+
+  @font-face {
+    font-family: Juana;
+    font-weight: 200;
+    font-display: swap;
+    src: url(../../static/fonts/Juana-Thin.woff2) format("woff2");
+  }
+
+  @font-face {
+    font-family: Juana;
+    font-weight: 400;
+    font-display: swap;
+    src: url(../../static/fonts/Juana-Regular.woff2) format("woff2");
+  }

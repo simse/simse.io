@@ -29,9 +29,9 @@ function SEO({ description, lang, meta, title }) {
 
     let pageTitle
   if (title === "") {
-    pageTitle = "Simon Sorensen"
+    pageTitle = site.siteMetadata.title + " / Hobby programmer"
   } else {
-    pageTitle = title + " / Simon Sorensen"
+    pageTitle = title + " / " + site.siteMetadata.title
   }
 
   return (

@@ -1,15 +1,15 @@
 import React from "react"
-import { graphql, StaticQuery, Link } from "gatsby"
+import { graphql, StaticQuery } from "gatsby"
 import Img from "gatsby-image"
 
 import SEO from "../components/seo"
 import Gradient from "../utils/gradient"
 import Navbar from "../components/navbar"
-
+/*
 import BlogIcon from "../icons/blog.svg"
-import AIIcon from "../icons/ai.svg"
+// import AIIcon from "../icons/ai.svg"
 import EmailIcon from "../icons/email.svg"
-
+*/
 import style from "../styles/pages/index.module.scss"
 
 class IndexPage extends React.Component {
@@ -34,21 +34,9 @@ class IndexPage extends React.Component {
           <canvas className={style.background} ref={this.background}></canvas>
     
           <div className={style.text}>   
-            <h1 className={style.title}>That's me right here on the picture</h1>
+            <h1 className={style.title}>Hello! My name is Simon</h1>
     
-            <p>and my name is Simon, and below are some handy links for you!</p>
-    
-            <div className={style.links}>
-              <Link to={"/blog"}><BlogIcon /> my blog</Link>
-
-              <br />
-
-              <Link to={"/chat"}><AIIcon /> chat with an AI version of <strong>me</strong></Link>
-
-              <br />
-
-              <Link to={"/contact"}><EmailIcon /> send me a holler</Link>
-            </div>
+            <p>and I am a creative programmer.</p>
           </div>
     
           <div className={style.image}>

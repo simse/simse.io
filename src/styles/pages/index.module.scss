@@ -48,10 +48,10 @@
         //animation-name: fadeIn;
         //animation-duration: 2s;
 
-        --gradient-color-1: #3d00a0; 
-        --gradient-color-2: #0B001E; 
-        --gradient-color-3: #801167;  
-        --gradient-color-4: #0B001E;
+        --gradient-color-1: #3d00a0;
+        --gradient-color-2: #000;
+        --gradient-color-3: #801167;
+        --gradient-color-4: #000;
     }
 
     .text {
@@ -73,8 +73,8 @@
         .title {
             color: #FF20CE;
             font-size: 4rem;
-            font-family: Inter;
-            font-weight: 300;
+            font-family: Juana;
+            font-weight: 200;
             
             @media(max-width: 1800px) {
                 font-size: 3.6rem;

@@ -21,7 +21,7 @@ export default function BlogPost({data}) {
 
                 <div className={styles.tags}>
                     {post.tags.map(tag => (
-                        <span>{tag.name}</span>
+                        <span key={tag.name}>{tag.name}</span>
                     ))}
 
                     <span> — </span>
