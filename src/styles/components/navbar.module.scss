@@ -64,6 +64,38 @@
     }
 }
 
+.breadcrumbs {
+    position: fixed;
+    top: 82px;
+    left: 0;
+    width: 100%;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 12px 16%;
+    z-index: 15;
+    background: rgba(12, 0, 30, 0.85);
+    backdrop-filter: blur(8px);
+    display: flex;
+
+    &.hidden {
+        display: none;
+    }
+
+    span {
+        margin: 0 12px;
+        opacity: 0.6;
+    }
+
+    a {
+        opacity: 0.8;
+        font-family: Juana;
+        transition: cubic-bezier(0.075, 0.82, 0.165, 1) 250ms opacity;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+}
+
 @keyframes fadeIn {
     0% {
         opacity: 0;

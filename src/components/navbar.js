@@ -1,5 +1,6 @@
 import React from 'react'
 import { graphql, Link, StaticQuery } from 'gatsby'
+import anime from 'animejs'
 
 import MenuIcon from "../icons/menu.svg"
 import CloseIcon from "../icons/close.svg"
@@ -10,13 +11,31 @@ class Navbar extends React.Component {
     constructor(props) {
         super(props)
 
+        let breadcrumbs
+
+        if (!props.breadcrumbs) {
+            breadcrumbs = []
+        } else {
+            breadcrumbs = [
+                {
+                    "name": "simse.io",
+                    "href": "/"
+                }
+            ].concat(props.breadcrumbs)
+        }
+
         this.state = {
             navbarMinimised: false,
             menuOpen: false,
-            menuClass: ""
+            menuClass: "",
+            breadcrumbsShown: true,
+            breadcrumbs: breadcrumbs
         }
 
-
+        this.homeRef = React.createRef();
+        this.blogRef = React.createRef();
+        this.projectsRef = React.createRef();
+        this.breadcrumbsRef = React.createRef();
     }
 
     componentDidMount = () => {
@@ -29,17 +48,21 @@ class Navbar extends React.Component {
     
     handleScroll = (event) => {
         if (window.scrollY > 10 && !this.state.navbarMinimised) {
-            console.log("hello")
-
             this.setState({
                 navbarMinimised: true
             })
+
+            if (this.state.breadcrumbsShown) {
+                this.toggleBreadcrumbs();
+            }
         } else if(window.scrollY <= 10 && this.state.navbarMinimised) {
             this.setState({
                 navbarMinimised: false
             })
 
-            console.log("hello too")
+            if (!this.state.breadcrumbsShown) {
+                this.toggleBreadcrumbs();
+            }
         }
 
         //console.log(window.scrollY)
@@ -68,6 +91,49 @@ class Navbar extends React.Component {
                     menuClass: styles.open
                 })
             }, 200)
+
+            var basicTimeline = anime.timeline()
+            basicTimeline
+                .add({
+                    targets: [
+                        this.homeRef.current,
+                        this.blogRef.current,
+                        this.projectsRef.current
+                    ],
+                    translateX: [-120, 0],
+                    opacity: [0, 1],
+                    duration: 400,
+                    delay: anime.stagger(100),
+                    easing: "easeInOutQuart"
+                })
+        }
+    }
+
+    toggleBreadcrumbs = () => {
+        if (this.state.breadcrumbsShown) {
+            this.setState({
+                breadcrumbsShown: false
+            })
+
+            anime({
+                targets: this.breadcrumbsRef.current,
+                translateY: "-100%",
+                opacity: 0,
+                duration: 300,
+                easing: 'easeInOutQuart'
+            })
+        } else {
+            this.setState({
+                breadcrumbsShown: true
+            })
+
+            anime({
+                targets: this.breadcrumbsRef.current,
+                translateY: "0%",
+                opacity: 1,
+                duration: 300,
+                easing: 'easeInOutQuart'
+            })
         }
     }
 
@@ -80,6 +146,7 @@ class Navbar extends React.Component {
     }
 
     render() {
+
         return (
             <StaticQuery query={graphql`
         query MyQuery {
@@ -103,6 +170,17 @@ class Navbar extends React.Component {
                         </div>
                     </div>
 
+                    <div className={`${styles.breadcrumbs} ${this.state.breadcrumbs.length === 0 ? styles.hidden : ""}`} ref={this.breadcrumbsRef}>
+                        {this.state.breadcrumbs.map((crumb, i) => (
+                            <div key={i}>
+                                <Link to={crumb.href}>{crumb.name}</Link>
+
+                                {i !== (this.state.breadcrumbs.length - 1) &&
+                                <span>/</span>}
+                            </div>
+                        ))}
+                    </div>
+
                     <div className={`${styles.overlayMenu} ${this.state.menuClass}`}>
                         <div className={styles.close} onClick={this.toggleMenu} onKeyPress={this.handleKeyPress} role="button" tabIndex={0}>
                             <button aria-label="Close menu"><CloseIcon /></button>
@@ -110,15 +188,15 @@ class Navbar extends React.Component {
 
                         <div className={styles.inner}>
                             <div className={styles.items}>
-                                <Link to="/">
+                                <Link to="/" ref={this.homeRef}>
                                     <h1>Home</h1>
                                 </Link>
 
-                                <Link to="/blog">
+                                <Link to="/blog" ref={this.blogRef}>
                                     <h1>Blog <sup>{data.allGhostPost.nodes.length}</sup></h1>
                                 </Link>
 
-                                <Link to="/contact">
+                                <Link to="/contact" ref={this.projectsRef}>
                                     <h1>Contact</h1>
                                 </Link>
                             </div>

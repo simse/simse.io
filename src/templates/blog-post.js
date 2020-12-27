@@ -10,11 +10,22 @@ import styles from "../styles/pages/blog-post.module.scss"
 export default function BlogPost({data}) {
     const post = data.ghostPost
 
+    let breadcrumbs = [
+      {
+        "name": "Blog",
+        "href": "/blog"
+      },
+      {
+        "name": post.title,
+        "href": "/blog/" + post.slug
+      }
+    ]
+
     return (
         <>
             <SEO title={post.title} />
 
-            <Navbar />
+            <Navbar breadcrumbs={breadcrumbs} />
 
             <div className={styles.post}>
                 <h1 className={styles.title}>{post.title}</h1>
@@ -40,6 +51,7 @@ export default function BlogPost({data}) {
 export const query = graphql`
   query($ghostId: String!) {
     ghostPost(ghostId: {eq: $ghostId}) {
+      slug
         childHtmlRehype {
             html
           }

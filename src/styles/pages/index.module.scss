@@ -55,7 +55,7 @@
     }
 
     .text {
-        width: 50%;
+        width: 52%;
         z-index: 20;
         margin-left: auto;
         padding-left: 80px;
@@ -66,15 +66,15 @@
             width: 100%;
         }
 
-        .signature {
+        /*.signature {
             max-width: 170px;
-        }
+        }*/
 
         .title {
             color: #FF20CE;
             font-size: 4rem;
             font-family: Juana;
-            font-weight: 200;
+            font-weight: 400;
             
             @media(max-width: 1800px) {
                 font-size: 3.6rem;

@@ -12,7 +12,14 @@ const BlogPage = ({data}) => (
   <div className={styles.blog}>
     <SEO title="Blog" />
 
-    <Navbar />
+    <Navbar breadcrumbs={
+      [
+        {
+          "name": "Blog",
+          "href": "/blog"
+        }
+      ]
+    } />
 
     <div className={styles.posts}>
       {data.allGhostPost.nodes.map(post => (
