@@ -41,3 +41,10 @@
     font-display: swap;
     src: url(../../static/fonts/Juana-Regular.woff2) format("woff2");
   }
+
+  @font-face {
+    font-family: Juana;
+    font-weight: 700;
+    font-display: swap;
+    src: url(../../static/fonts/Juana-Bold.woff2) format("woff2");
+  }

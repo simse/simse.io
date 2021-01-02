@@ -26,9 +26,9 @@
     .tags {
         margin: 30px 70px 50px 70px;
         text-transform: uppercase;
-        font-weight: 300;
+        font-weight: 400;
         opacity: 0.6;
-        font-family: Monolisa;
+        font-family: Inter;
         
         @media(max-width: 700px) {
             margin: 30px 30px 50px 30px;
@@ -68,6 +68,7 @@
         h3 {
             margin: 55px 70px 20px 70px;
             // font-weight: 400;
+            font-family: Juana;
         }
 
         img {
@@ -117,6 +118,61 @@
 
         @media(max-width: 700px) {
             padding: 0 30px;
+        }
+    }
+
+    .post-nav {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        padding: 60px 10px 0 10px;
+
+        a {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 15px 22px;
+            border-radius: 12px;
+
+            &.first-link {
+                margin-right: auto;
+            }
+
+            &.second-link {
+                margin-left: auto;
+            }
+        }
+
+        svg {
+            fill: #fff;
+            margin-right: 20px;
+            height: 36px;
+            width: 36px;
+            padding: 2px;
+        }
+
+        span {
+            font-family: Juana;
+        }
+
+        .post-link {
+            display: flex;
+            align-items: center;
+            height: 100%;
+            width: 25vw;
+            max-width: 300px;
+
+            &.reverse {
+                flex-direction: row-reverse;
+
+                span {
+                    margin-left: auto;
+                }
+
+                svg {
+                    margin-right: 0;
+                    margin-left: 20px;
+                    transform: rotate(180deg);
+                }
+            }
         }
     }
 }

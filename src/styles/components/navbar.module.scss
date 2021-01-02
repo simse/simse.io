@@ -76,6 +76,10 @@
     backdrop-filter: blur(8px);
     display: flex;
 
+    @media(max-width: 860px) {
+        display: none;
+    }
+
     &.hidden {
         display: none;
     }
@@ -121,7 +125,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    background: #000;
+    background: #0c001e;
     width: 100vw;
     height: 100vh;
     display: none;
@@ -204,15 +208,15 @@
                 display: inline-block;
                 font-family: Inter;
             }
-
-            &:hover {
-                opacity: 1 !important;
-            }
         }
 
         a {
             padding: 10px 0;
             display: block;
+
+            &:hover h1 {
+                opacity: 1 !important;
+            }
         }
 
         .items {

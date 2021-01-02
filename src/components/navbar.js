@@ -29,13 +29,16 @@ class Navbar extends React.Component {
             menuOpen: false,
             menuClass: "",
             breadcrumbsShown: true,
-            breadcrumbs: breadcrumbs
+            breadcrumbs: breadcrumbs,
+            previousScrollPosition: 0
         }
 
         this.homeRef = React.createRef();
         this.blogRef = React.createRef();
         this.projectsRef = React.createRef();
         this.breadcrumbsRef = React.createRef();
+        this.emailRef = React.createRef();
+        this.moreLinksRef = React.createRef();
     }
 
     componentDidMount = () => {
@@ -46,26 +49,38 @@ class Navbar extends React.Component {
         window.removeEventListener('scroll', this.handleScroll);
     }
     
-    handleScroll = (event) => {
+    handleScroll = () => {
+        let scrollUp = ((this.state.previousScrollPosition - window.scrollY) > 0)
+        // let scrollDown = !scrollUp
+
         if (window.scrollY > 10 && !this.state.navbarMinimised) {
             this.setState({
                 navbarMinimised: true
             })
 
-            if (this.state.breadcrumbsShown) {
-                this.toggleBreadcrumbs();
-            }
-        } else if(window.scrollY <= 10 && this.state.navbarMinimised) {
+            
+        } else if((window.scrollY <= 10 && this.state.navbarMinimised)) {
             this.setState({
                 navbarMinimised: false
             })
 
+        }
+
+        if (scrollUp) {
             if (!this.state.breadcrumbsShown) {
+                this.toggleBreadcrumbs();
+            }
+        } else if(window.scrollY > 250) {
+            if (this.state.breadcrumbsShown) {
                 this.toggleBreadcrumbs();
             }
         }
 
-        //console.log(window.scrollY)
+        console.log(window.scrollY)
+
+        this.setState({
+            previousScrollPosition: window.scrollY
+        })
     }
 
     toggleMenu = () => {
@@ -92,20 +107,31 @@ class Navbar extends React.Component {
                 })
             }, 200)
 
-            var basicTimeline = anime.timeline()
-            basicTimeline
-                .add({
-                    targets: [
-                        this.homeRef.current,
-                        this.blogRef.current,
-                        this.projectsRef.current
-                    ],
-                    translateX: [-120, 0],
-                    opacity: [0, 1],
-                    duration: 400,
-                    delay: anime.stagger(100),
-                    easing: "easeInOutQuart"
-                })
+            anime({
+                targets: [
+                    this.homeRef.current,
+                    this.blogRef.current,
+                    this.projectsRef.current
+                ],
+                translateX: [-180, 0],
+                opacity: [0, 1],
+                duration: 550,
+                delay: anime.stagger(100),
+                easing: "easeOutExpo"
+            })
+
+            anime({
+                targets: [
+                    this.emailRef.current,
+                    this.moreLinksRef.current
+                ],
+                translateY: [-100, 0],
+                opacity: [0, 1],
+                duration: 800,
+                delay: anime.stagger(100),
+                easing: "easeOutQuart"
+            })
+
         }
     }
 
@@ -188,26 +214,26 @@ class Navbar extends React.Component {
 
                         <div className={styles.inner}>
                             <div className={styles.items}>
-                                <Link to="/" ref={this.homeRef}>
+                                <Link to="/" ref={this.homeRef} onClick={this.toggleMenu}>
                                     <h1>Home</h1>
                                 </Link>
 
-                                <Link to="/blog" ref={this.blogRef}>
+                                <Link to="/blog" ref={this.blogRef} onClick={this.toggleMenu}>
                                     <h1>Blog <sup>{data.allGhostPost.nodes.length}</sup></h1>
                                 </Link>
 
-                                <Link to="/contact" ref={this.projectsRef}>
+                                <Link to="/contact" ref={this.projectsRef} onClick={this.toggleMenu}>
                                     <h1>Contact</h1>
                                 </Link>
                             </div>
 
                             <div className={styles.sidebar}>
-                                <div className={styles.contact}>
+                                <div className={styles.contact} ref={this.emailRef}>
                                     <h2>Email</h2>
                                     <span className={styles.email}>hello@simse.io</span>
                                 </div>
 
-                                {/* <div className={styles.moreLinks}>
+                                <div className={styles.moreLinks} ref={this.moreLinksRef}>
                                     <h2>Additional links</h2>
 
                                     <div className={styles.links}>
@@ -215,7 +241,7 @@ class Navbar extends React.Component {
                                         <a href="https://archive.simse.io">Archive</a>
                                         <a href="https://labs.simse.io">Labs</a>
                                     </div>
-                                </div> */}
+                                </div>
                             </div>
                         </div>
                     </div>

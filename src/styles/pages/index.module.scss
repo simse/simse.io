@@ -18,6 +18,10 @@
     align-items: center;
     position: relative;
 
+    @media(max-width: 1520px) {
+        padding: 100px 10%;
+    }
+
     @media(max-width: 1360px) {
         padding: 100px 10%;
     }
@@ -27,9 +31,9 @@
     }
 
     @media(max-width: 910px) {
-        flex-direction: column-reverse;
+        flex-direction: column;
         text-align: center;
-        padding: 154px 5%;
+        padding: 154px 3%;
     }
 
     .background {
@@ -56,7 +60,7 @@
 
     .text {
         width: 52%;
-        z-index: 20;
+        z-index: 10;
         margin-left: auto;
         padding-left: 80px;
 

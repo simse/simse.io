@@ -1,13 +1,14 @@
 import React from "react"
-import { graphql } from "gatsby"
+import { graphql, Link } from "gatsby"
 import Img from "gatsby-image"
 
 import SEO from "../components/seo"
 import Navbar from "../components/navbar"
 
+import ArrowLeft from "../icons/arrow-left.svg"
 import styles from "../styles/pages/blog-post.module.scss"
 
-export default function BlogPost({data}) {
+export default function BlogPost({data, pageContext}) {
     const post = data.ghostPost
 
     let breadcrumbs = [
@@ -20,6 +21,8 @@ export default function BlogPost({data}) {
         "href": "/blog/" + post.slug
       }
     ]
+
+    // console.log(pageContext)
 
     return (
         <>
@@ -43,6 +46,24 @@ export default function BlogPost({data}) {
                 <Img fluid={post.localFeatureImage.childImageSharp.fluid} />
 
                 <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.childHtmlRehype.html }}></div>
+
+                <div className={styles.postNav}>
+                  {pageContext.previousPost && <Link to={"/blog/" + pageContext.previousPost.slug} className={styles.firstLink}>
+                    <div className={styles.postLink}>
+                      <ArrowLeft />
+
+                      <span>{pageContext.previousPost.title}</span>
+                    </div>
+                  </Link>}
+
+                  {pageContext.nextPost && <Link to={"/blog/" + pageContext.nextPost.slug} className={styles.secondLink}>
+                    <div className={`${styles.postLink} ${styles.reverse}`}>
+                      <ArrowLeft />
+
+                      <span>{pageContext.nextPost.title}</span>
+                    </div>
+                  </Link>}
+                </div>
             </div>
         </>
     )

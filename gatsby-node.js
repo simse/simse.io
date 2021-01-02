@@ -17,35 +17,36 @@ exports.onCreateNode = async ({
   // Check that we are modifying right node types.
   const nodeTypes = [`GhostPost`, `GhostPage`];
   if (!nodeTypes.includes(node.internal.type)) {
-      return;
+    return;
   }
 
   const { createNode } = actions;
 
   // Download image and create a File node with gatsby-transformer-sharp.
   const fileNode = await createRemoteFileNode({
-      url: node.feature_image,
-      store,
-      cache,
-      createNode,
-      parentNodeId: node.id,
-      createNodeId
+    url: node.feature_image,
+    store,
+    cache,
+    createNode,
+    parentNodeId: node.id,
+    createNodeId
   });
 
   if (fileNode) {
-      // Link File node to GhostPost node at field image.
-      node.localFeatureImage___NODE = fileNode.id;
+    // Link File node to GhostPost node at field image.
+    node.localFeatureImage___NODE = fileNode.id;
   }
 };
 
 exports.createPages = async ({ graphql, actions }) => {
-    const { createPage } = actions
-    const result = await graphql(`
+  const { createPage } = actions
+  const result = await graphql(`
       query {
         allGhostPost {
             edges {
                 node {
                     slug
+                    title
                     ghostId
                 }
             }
@@ -53,18 +54,37 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     `)
 
-    result.data.allGhostPost.edges.forEach(({ node }) => {
-        // Ignore data schema "ghost" post
-        if (node.slug === "data-schema") return
+  result.data.allGhostPost.edges.forEach(({ node }, i, edges) => {
+    // Ignore data schema "ghost" post
+    if (node.slug === "data-schema") return
 
-      createPage({
-        path: "blog/" + node.slug,
-        component: path.resolve(`./src/templates/blog-post.js`),
-        context: {
-          // Data passed to context is available
-          // in page queries as GraphQL variables.
-          ghostId: node.ghostId,
-        },
-      })
+    let previousPost = null
+    let nextPost = null
+
+    if (edges[i - 1]) {
+      previousPost = {
+        title: edges[i - 1].node.title,
+        slug: edges[i - 1].node.slug,
+      }
+    }
+
+    if (edges[i + 1]) {
+      nextPost = {
+        title: edges[i + 1].node.title,
+        slug: edges[i + 1].node.slug,
+      }
+    }
+
+    createPage({
+      path: "blog/" + node.slug,
+      component: path.resolve(`./src/templates/blog-post.js`),
+      context: {
+        // Data passed to context is available
+        // in page queries as GraphQL variables.
+        ghostId: node.ghostId,
+        previousPost: previousPost,
+        nextPost: nextPost
+      },
     })
-  }
+  })
+}

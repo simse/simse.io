@@ -30,6 +30,7 @@
     "gatsby-rehype-prismjs": "^1.2.5",
     "gatsby-source-filesystem": "^2.3.24",
     "gatsby-source-ghost": "^4.0.5",
+    "gatsby-source-wordpress-experimental": "^6.0.0",
     "gatsby-transformer-rehype": "^1.9.8",
     "gatsby-transformer-sharp": "^2.5.13",
     "hamburgers": "^1.1.3",
