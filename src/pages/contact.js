@@ -3,7 +3,7 @@ import React from "react"
 import SEO from "../components/seo"
 import Navbar from "../components/navbar"
 
-import style from "../styles/pages/contact.module.scss"
+import * as style from "../styles/pages/contact.module.scss"
 
 const ContactPage = () => (
   <div>

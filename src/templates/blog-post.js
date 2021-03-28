@@ -1,15 +1,17 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image";
 
 import SEO from "../components/seo"
 import Navbar from "../components/navbar"
 
 import ArrowLeft from "../icons/arrow-left.svg"
-import styles from "../styles/pages/blog-post.module.scss"
+import * as styles from "../styles/pages/blog-post.module.scss"
 
 export default function BlogPost({data, pageContext}) {
     const post = data.ghostPost
+
+   // console.log(pageContext)
 
     let breadcrumbs = [
       {
@@ -43,7 +45,8 @@ export default function BlogPost({data, pageContext}) {
                     <span>{post.published_at}</span>
                 </div>
 
-                <Img fluid={post.localFeatureImage.childImageSharp.fluid} />
+              {post.localFeatureImage && <GatsbyImage
+                image={post.localFeatureImage.childImageSharp.gatsbyImageData} alt="a picture" />}
 
                 <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.childHtmlRehype.html }}></div>
 
@@ -70,25 +73,29 @@ export default function BlogPost({data, pageContext}) {
   }
 
 export const query = graphql`
-  query($ghostId: String!) {
-    ghostPost(ghostId: {eq: $ghostId}) {
-      slug
-        childHtmlRehype {
-            html
-          }
-        title
-        published_at(formatString: "MMMM DD, YYYY")
-        tags {
-            name
-        }
-        localFeatureImage {
-            childImageSharp {
-              fluid(maxHeight: 600, quality: 90) {
-                  ...GatsbyImageSharpFluid_withWebp
-              }
-            }
-          }
-        
+  query($id: String!) {
+    ghostPost(ghostId: {eq: $id}) {
+      childHtmlRehype {
+        htmlAst
+        html
       }
+      title
+      tags {
+        name
+        id
+      }
+      slug
+      localFeatureImage {
+        childImageSharp {
+          gatsbyImageData(
+            width: 1600
+            placeholder: BLURRED
+            formats: AUTO
+            layout: CONSTRAINED
+          )
+        }
+      }
+      published_at(formatString: "MMMM DD, YYYY")
+    }
   }
 `

@@ -1,0 +1,13 @@
+- id: chronos
+  name: Chronos
+  github: https://github.com/simse/chronos
+  maintained: false
+  website: https://github.com/simse/chronos
+  description: Chronos is a small program for scheduling Python scripts
+
+- id: qc
+  name: qc
+  github: https://github.com/qc
+  maintained: true
+  website: https://qc.simse.io
+  description: qc is a command line tool for converting between file formats

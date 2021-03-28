@@ -1,3 +1,6 @@
+const prismjs = require('prismjs');
+const DomParser = require('dom-parser');
+
 module.exports = {
   siteMetadata: {
     title: `Simon Sørensen`,
@@ -9,6 +12,7 @@ module.exports = {
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -23,6 +27,76 @@ module.exports = {
           include: /icons/ // See below to configure properly
         }
       }
+    },
+    /*{
+      resolve: `gatsby-source-wordpress`,
+      options: {
+        url: `https://editor.simse.io/graphql`,
+        type: {
+          __all: {
+            beforeChangeNode: async ({ remoteNode, actionType, typeSettings }) => {
+              // Only act on WP nodes of type Post
+              if (remoteNode.type === "Post") {
+                //console.log(remoteNode)
+
+                // Set up an HTML parser and parse the post HTML
+                const parse = new DomParser()
+                const document = parse.parseFromString(remoteNode.content)
+
+                // Find all WP Code blocks
+                const codeBlocks = document.getElementsByClassName("wp-block-code")
+
+                // Parse every code block
+                codeBlocks.forEach(block => {
+                  if (block.innerHTML) {
+                    console.log(block.innerHTML)
+                    let innerHTML = block.innerHTML
+                    innerHTML = innerHTML.substr(6)
+                    innerHTML = innerHTML.slice(0, -7)
+
+                    //  console.log(block.outerHTML)
+
+                    // Get language
+                    let language = ""
+
+                    block.getAttribute("class").split(" ").forEach(blockClass => {
+                      if (blockClass !== "wp-block-code") {
+                        language = blockClass
+                      }
+                    })
+
+                    // Determine Prism.js dialect
+                    if (!prismjs.languages[language]) {
+                      require(`prismjs/components/prism-${language}.js`)
+                    }
+
+                    let prismLanguage = prismjs.languages[language]
+
+                    // Highlight code
+                    let toHighlight = innerHTML.replaceAll("&lt;", "<").replaceAll("&gt;", ">")
+                    let highlightedCode = prismjs.highlight(toHighlight, prismLanguage, language)
+
+                    remoteNode.content = remoteNode.content.replace(innerHTML, highlightedCode)
+                  }
+                })
+              }
+
+
+              return {
+                remoteNode,
+              }
+            }
+          }
+        }
+      },
+    },*/
+    `gatsby-plugin-build-date`,
+    `gatsby-transformer-yaml`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `./src/data/`,
+      },
     },
     {
       resolve: `gatsby-transformer-rehype`,
@@ -47,7 +121,7 @@ module.exports = {
       resolve: `gatsby-source-ghost`,
       options: {
         apiUrl: `https://ghost.simse.io`,
-        contentApiKey: `1701af313f55d48b5f07abd057`,
+        contentApiKey: `4a509adc98a9b5f7fa4e7d4924`,
       },
     },
     {
@@ -58,26 +132,6 @@ module.exports = {
     },
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
-    /*{
-      resolve: `gatsby-plugin-ghost-images`,
-      options: {
-          // An array of node types and image fields per node
-          // Image fields must contain a valid absolute path to the image to be downloaded
-          lookup: [
-              {
-                  type: `GhostPost`,
-                  imgTags: [`feature_image`],
-              }
-          ],
-          // Additional condition to exclude nodes 
-          // Takes precedence over lookup
-          exclude: node => (
-              node.ghostId === undefined
-          ),
-          // Additional information messages useful for debugging
-          verbose: true,
-      },
-  },*/
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -90,8 +144,5 @@ module.exports = {
         icon: `src/images/wink.png`, // This path is relative to the root of the site.
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 }

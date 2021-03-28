@@ -1,12 +1,12 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import Img from "gatsby-image"
+import { GatsbyImage } from "gatsby-plugin-image";
 
 //import Layout from "../components/layout"
 import SEO from "../components/seo"
 import Navbar from "../components/navbar"
 
-import styles from "../styles/pages/blog.module.scss"
+import * as styles from "../styles/pages/blog.module.scss"
 
 const BlogPage = ({data}) => (
   <div className={styles.blog}>
@@ -25,7 +25,9 @@ const BlogPage = ({data}) => (
       {data.allGhostPost.nodes.map(post => (
         <Link to={"/blog/" + post.slug} key={post.slug}>
           <div className={styles.post}>
-            <Img fluid={post.localFeatureImage.childImageSharp.fluid} />
+            {post.localFeatureImage && <GatsbyImage
+              image={post.localFeatureImage.childImageSharp.gatsbyImageData}
+              alt="Picture of Simon" />}
 
             <div className={styles.text}>
               <span className={styles.meta}>{post.tags[0].name} — {post.published_at}</span>
@@ -43,22 +45,28 @@ export default BlogPage
 
 export const query = graphql`
   query {
-    allGhostPost(filter: {slug: {ne: "data-schema"}}, sort: {fields: published_at, order: DESC}) {
+    allGhostPost(sort: {fields: published_at, order: DESC}) {
       nodes {
+        id
         title
         slug
         published_at(formatString: "MMMM DD, YYYY")
         tags {
-            name
+          name
         }
         localFeatureImage {
-            childImageSharp {
-              fluid(maxWidth: 600, maxHeight: 400, quality: 100, cropFocus: CENTER) {
-                  ...GatsbyImageSharpFluid_withWebp
-              }
-            }
+          childImageSharp {
+            gatsbyImageData(
+              height: 300
+              width: 500
+              placeholder: BLURRED
+              formats: AUTO
+              layout: CONSTRAINED
+              transformOptions: {cropFocus: CENTER}
+            )
           }
         }
       }
+    }
   }
 `

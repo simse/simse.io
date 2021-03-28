@@ -5,7 +5,8 @@ import anime from 'animejs'
 import MenuIcon from "../icons/menu.svg"
 import CloseIcon from "../icons/close.svg"
 
-import styles from "../styles/components/navbar.module.scss"
+import * as styles from "../styles/components/navbar.module.scss"
+import signature from "../images/logo.svg"
 
 class Navbar extends React.Component {
     constructor(props) {
@@ -76,7 +77,7 @@ class Navbar extends React.Component {
             }
         }
 
-        console.log(window.scrollY)
+        // .log(window.scrollY)
 
         this.setState({
             previousScrollPosition: window.scrollY
@@ -177,17 +178,17 @@ class Navbar extends React.Component {
             <StaticQuery query={graphql`
         query MyQuery {
             allGhostPost {
-              nodes {
-                id
+                nodes {
+                  id
+                }
               }
-            }
           }
         `} render={data => (
                 <>
                     <div className={`${styles.navbar} ${this.state.navbarMinimised ? "" : styles.transparent}`}>
                         <div className={styles.logo}>
                             <Link to="/">
-                                <img src={require("../images/logo.svg")} className={styles.logo} alt="Simon's signature" />
+                                <img src={signature} className={styles.logo} alt="Simon's signature" />
                             </Link>
                         </div>
 
@@ -233,7 +234,7 @@ class Navbar extends React.Component {
                                     <span className={styles.email}>hello@simse.io</span>
                                 </div>
 
-                                <div className={styles.moreLinks} ref={this.moreLinksRef}>
+                                <div /* className={styles.moreLinks} */ ref={this.moreLinksRef}>
                                     <h2>Additional links</h2>
 
                                     <div className={styles.links}>

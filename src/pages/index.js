@@ -1,37 +1,69 @@
 import React from "react"
-import { graphql, StaticQuery } from "gatsby"
-import Img from "gatsby-image"
+import { graphql, StaticQuery, Link } from "gatsby"
+import { GatsbyImage } from "gatsby-plugin-image";
 
 import SEO from "../components/seo"
 import Gradient from "../utils/gradient"
 import Navbar from "../components/navbar"
-/*
-import BlogIcon from "../icons/blog.svg"
-// import AIIcon from "../icons/ai.svg"
-import EmailIcon from "../icons/email.svg"
-*/
-import style from "../styles/pages/index.module.scss"
+import Footer from "../components/footer"
+
+import * as style from "../styles/pages/index.module.scss"
 
 class IndexPage extends React.Component {
   constructor(props) {
     super(props);
-    this.background = React.createRef();  
+
+    this.heroCircles = [
+      {
+        id: "one",
+        ref: React.createRef(),
+        gradient: new Gradient(),
+      },
+      {
+        id: "two",
+        ref: React.createRef(),
+        gradient: new Gradient(),
+      },
+      {
+        id: "three",
+        ref: React.createRef(),
+        gradient: new Gradient(),
+      }
+    ]
+
+    //this.background = React.createRef();  
   }
 
   componentDidMount() {
-    let gradient = new Gradient();
-    gradient.initGradient(this.background, style.shown);
+    //gradient.initGradient(this.background, style.shown);
+
+    this.heroCircles.forEach((circle, index) => {
+      
+      setTimeout(() => {
+        circle.gradient.initGradient(circle.ref, style.shown)
+      }, (index+1) * 400)
+    })
   }
 
   render() {
     return (
-      <div>
+      <div style={{
+        maxWidth: "100vw",
+        overflowX: "hidden"
+      }}>
         <SEO />
 
         <Navbar />
         
         <div className={style.hero}>
-          <canvas className={style.background} ref={this.background}></canvas>
+          <div className={style.circles}>
+            {this.heroCircles.map(circle => (
+              <canvas 
+                className={`${style.background}`} 
+                ref={circle.ref} 
+                key={circle.id}></canvas>
+            ))}
+          </div>
     
           <div className={style.text}>   
             <h1 className={style.title}>Hello! My name is Simon</h1>
@@ -40,28 +72,100 @@ class IndexPage extends React.Component {
           </div>
     
           <div className={style.image}>
-            <Img fluid={this.props.data.file.childImageSharp.fluid} alt="Picture of Simon" />
+            <GatsbyImage
+              image={this.props.data.file.childImageSharp.gatsbyImageData}
+              alt="Picture of Simon" />
           </div>
         </div>
+
+        <div className={style.blog}>
+          <h1>Latest blog posts</h1>
+
+          <div className={style.list}>
+          {this.props.data.allGhostPost.nodes.map(post => (
+            <Link to={`blog/${post.slug}`}>
+              <div className={style.post}>
+              {post.localFeatureImage && <GatsbyImage
+                image={post.localFeatureImage.childImageSharp.gatsbyImageData}
+                alt="Picture of Simon" />}
+
+                <div className={style.meta}>
+                  <h2>{post.title}</h2>
+                  <span></span>
+                </div>
+              </div>
+            </Link>
+          ))}
+          </div>
+        </div>
+
+        <div className={style.projects}>
+          <h1>My projects</h1>
+
+          <div className={style.list}>
+            {this.props.data.allProjectsYaml.nodes.map(project => (
+              <a href={project.website} target="_blank" rel="noreferrer">
+                <div className={style.project}>
+                  <h2>{ project.name }</h2>
+
+                  <p>{ project.description }</p>
+                </div>
+              </a>
+            ))}
+          </div>
+        </div>
+
+        <Footer />
       </div>
-    )
+    );
   }
 }
 
-export default () => (
+const Index = () => (
   <StaticQuery 
-    query={graphql`
-    query {
-      file(relativePath: { eq: "simse.jpg" }) {
+    query={graphql`{
+      file(relativePath: {eq: "simse.jpg"}) {
         childImageSharp {
-          fluid(maxWidth: 800) {
-            ...GatsbyImageSharpFluid
+          gatsbyImageData(width: 800, layout: CONSTRAINED, placeholder: BLURRED)
+        }
+      }
+      allProjectsYaml {
+        nodes {
+          id
+          name
+          github
+          maintained
+          website
+          description
+        }
+      }
+      allGhostPost(limit: 4, sort: {fields: published_at, order: DESC}) {
+        nodes {
+          title
+          slug
+          excerpt
+          tags {
+            name
+          }
+          localFeatureImage {
+            childImageSharp {
+              gatsbyImageData(
+                height: 427
+                width: 640
+                placeholder: BLURRED
+                formats: [AUTO, WEBP, AVIF]
+                transformOptions: {cropFocus: CENTER}
+                quality: 100
+              )
+            }
           }
         }
       }
     }
-  `}
+`}
   render={(data) => (
     <IndexPage data={data} />
   )} />
 )
+
+export default Index

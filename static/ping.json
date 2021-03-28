@@ -1,0 +1,13 @@
+[
+    {
+        "name": "Cloudflare",
+        "ipv4_ranges": [],
+        "ipv6_ranges": [],
+        "nodes": {
+            "CPH": {
+                "city": "Copenhagen",
+                "country": "Denmark"
+            }
+        }
+    }
+]
