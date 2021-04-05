@@ -16,7 +16,7 @@ const ContactPage = () => (
 
       <h1><a href="mailto:hello@simse.io">hello@simse.io</a></h1>
 
-      <p>send me anything! if I don't reply, you've made me unnaturally uncomfortable.</p>
+      <p>send me anything! I do my best to reply :)</p>
     </div>
   </div>
 )

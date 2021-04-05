@@ -60,7 +60,7 @@ export const query = graphql`
               height: 300
               width: 500
               placeholder: BLURRED
-              formats: AUTO
+              formats: [AUTO, WEBP, AVIF]
               layout: CONSTRAINED
               transformOptions: {cropFocus: CENTER}
             )

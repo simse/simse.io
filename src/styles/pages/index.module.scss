@@ -256,12 +256,17 @@
         &:hover {
             background: rgba(255, 255, 255, 0.1);
             transform: translateY(-5px);
+
+            h2 {
+                color: #FF20CE;
+            }
         }
 
         h2 {
             font-family: Juana;
             font-weight: 400;
             font-size: 1.3em;
+            transition: all 200ms ease-in-out;
         }
 
         p {
@@ -291,31 +296,40 @@
     }
 
     .post {
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        border-radius: 8px;
+        // border: 1px solid rgba(255, 255, 255, 0.1);
+        
         height: 100%;
         margin-top: 15px;
         transition: all 200ms ease-in-out;
 
         &:hover {
-            background: rgba(255, 255, 255, 0.1);
+            //background: rgba(255, 255, 255, 0.1);
             transform: translateY(-5px);
+
+            h2 {
+                color: #FF20CE;
+            }
         }
 
         h2 {
             font-family: Juana;
             font-weight: 400;
-            font-size: 1.3em;
+            font-size: 1.4em;
+            transition: all 200ms ease-in-out;
+            margin-top: 12px;
         }
 
         img,
         picture {
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
+            border-radius: 8px;
         }
 
         .meta {
-            padding: 20px;
+            padding-top: 20px;
+        }
+
+        span {
+            opacity: 0.7;
         }
     }
 }

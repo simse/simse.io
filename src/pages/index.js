@@ -90,8 +90,8 @@ class IndexPage extends React.Component {
                 alt="Picture of Simon" />}
 
                 <div className={style.meta}>
+                  <span>{post.tags[0].name} — {post.published_at}</span>
                   <h2>{post.title}</h2>
-                  <span></span>
                 </div>
               </div>
             </Link>
@@ -126,7 +126,7 @@ const Index = () => (
     query={graphql`{
       file(relativePath: {eq: "simse.jpg"}) {
         childImageSharp {
-          gatsbyImageData(width: 800, layout: CONSTRAINED, placeholder: BLURRED)
+          gatsbyImageData(width: 800, layout: CONSTRAINED, placeholder: BLURRED, quality: 100)
         }
       }
       allProjectsYaml {
@@ -144,6 +144,7 @@ const Index = () => (
           title
           slug
           excerpt
+          published_at(formatString: "MMMM DD, YYYY")
           tags {
             name
           }
@@ -152,10 +153,11 @@ const Index = () => (
               gatsbyImageData(
                 height: 427
                 width: 640
+                layout: CONSTRAINED
                 placeholder: BLURRED
                 formats: [AUTO, WEBP, AVIF]
                 transformOptions: {cropFocus: CENTER}
-                quality: 100
+                quality: 80
               )
             }
           }
