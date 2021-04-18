@@ -20,6 +20,7 @@ resource "cloudflare_zone_settings_override" "simse" {
     //automatic_https_rewrites = "on"
     always_use_https = "on"
     always_online    = "off"
+    ssl = "flexible"
     minify {
       css  = "off"
       js   = "off"
