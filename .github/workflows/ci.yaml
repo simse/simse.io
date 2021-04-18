@@ -29,6 +29,7 @@ jobs:
   build_site:
     runs-on: ubuntu-latest
     name: Build and deploy simse.io
+    needs: infrastructure
     defaults:
       run:
         working-directory: ./www
