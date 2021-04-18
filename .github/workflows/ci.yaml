@@ -71,7 +71,7 @@ jobs:
         run: yarn global add gatsby gatsby-cli
 
       - name: Build site
-        run: gatsby build
+        run: yarn build
 
       - name: Publish site
         run: |
