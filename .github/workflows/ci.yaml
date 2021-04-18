@@ -8,6 +8,8 @@ jobs:
   infrastructure:
     runs-on: ubuntu-latest
     name: Set up infrastructure
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     steps:
       - name: Check out repository code
         uses: actions/checkout@v2
@@ -28,8 +30,6 @@ jobs:
       - name: Terraform Init
         id: init
         run: terraform init -var-file=prod.tfvars -backend-config=prod.hcl
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
