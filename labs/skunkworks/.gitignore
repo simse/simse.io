@@ -67,9 +67,3 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
-
-.vercel
-.terraform
-.terraform.tfstate.lock.info
-.vscode
-terraform.tfvars

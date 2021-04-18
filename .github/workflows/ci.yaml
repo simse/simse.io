@@ -1,0 +1,65 @@
+name: The whole gang
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  infrastructure:
+    runs-on: ubuntu-latest
+    name: Set up infrastructure
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          # terraform_version: 0.13.0
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+
+      - name: Terraform Init
+        id: init
+        run: terraform init -var-file=prod.tfvars -backend-config=prod.hcl
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        run: terraform apply -auto-approve -var-file=prod.tfvars -backend-config=prod.hcl
+
+  build_site:
+    runs-on: ubuntu-latest
+    name: Build and deploy simse.io
+    defaults:
+      run:
+        working-directory: ./www
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Install Node v14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: './node_modules'
+          key: simse-io-node-modules
+
+      - name: Install Yarn dependencies
+        run: yarn install
+
+      - name: Build site
+        run: gatsby build
+
+      - name: Publish site
+        run: |
+          aws s3 sync ./public s3://simse.io
