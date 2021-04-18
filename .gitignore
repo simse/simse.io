@@ -73,3 +73,4 @@ yarn-error.log
 .terraform.tfstate.lock.info
 .vscode
 terraform.tfvars
+*.backup

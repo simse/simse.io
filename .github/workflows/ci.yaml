@@ -24,7 +24,7 @@ jobs:
 
       - name: Terraform Apply
         if: github.ref == 'refs/heads/master' && github.event_name == 'push'
-        run: terraform apply -auto-approve -var-file=prod.tfvars -backend-config=prod.hcl
+        run: terraform apply -auto-approve -var-file=prod.tfvars
 
   build_site:
     runs-on: ubuntu-latest
