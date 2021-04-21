@@ -61,7 +61,7 @@ jobs:
       - name: Cache node_modules
         uses: actions/cache@v2
         with:
-          path: './node_modules'
+          path: './www/node_modules'
           key: simse-io-node-modules
 
       - name: Install Yarn dependencies
@@ -103,7 +103,7 @@ jobs:
       - name: Cache node_modules
         uses: actions/cache@v2
         with:
-          path: './node_modules'
+          path: './labs/www/node_modules'
           key: simse-labs-node-modules
 
       - name: Install Yarn dependencies
@@ -145,7 +145,7 @@ jobs:
       - name: Cache node_modules
         uses: actions/cache@v2
         with:
-          path: './node_modules'
+          path: './labs/skunkworks/node_modules'
           key: simse-labs-skunkworks-node-modules
 
       - name: Install Yarn dependencies
@@ -159,4 +159,4 @@ jobs:
 
       - name: Publish site
         run: |
-          aws s3 sync ./public s3://skunkworks.labs.simse.io
+          aws s3 sync ./public s3://skunkworks-labs.simse.io
