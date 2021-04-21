@@ -146,11 +146,11 @@ jobs:
         run: yarn install
 
       - name: Build site
-        run: yarn build
+        run: yarn build --prefix-paths
 
       - name: Publish site
         run: |
-          aws s3 sync ./public s3://skunkworks-labs.simse.io
+          aws s3 sync ./public s3://labs.simse.io/skunkworks
 
   build_bar_maker_labs:
     runs-on: ubuntu-latest
@@ -189,4 +189,4 @@ jobs:
 
       - name: Publish site
         run: |
-          aws s3 sync ./dist s3://bar-maker-labs.simse.io
+          aws s3 sync ./dist s3://labs.simse.io/bar-maker
