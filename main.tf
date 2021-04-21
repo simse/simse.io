@@ -93,7 +93,7 @@ module "lab_site" {
 }
 
 module "lab_sites" {
-  for_each    = toset(["assets", "media"])
+  for_each    = toset(["skunkworks", "bar-maker"])
   source      = "./bucket"
   name        = "${each.key}.labs.${var.site_domain}"
   site_domain = var.site_domain
