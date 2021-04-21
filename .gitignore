@@ -74,3 +74,4 @@ yarn-error.log
 .vscode
 terraform.tfvars
 *.backup
+terraform.tfstate.d

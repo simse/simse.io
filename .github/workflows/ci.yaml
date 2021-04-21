@@ -67,9 +67,6 @@ jobs:
       - name: Install Yarn dependencies
         run: yarn install
 
-      - name: Install Gatsby
-        run: yarn global add gatsby gatsby-cli
-
       - name: Build site
         run: yarn build
 
@@ -108,9 +105,6 @@ jobs:
 
       - name: Install Yarn dependencies
         run: yarn install
-
-      - name: Install Gatsby
-        run: yarn global add gatsby gatsby-cli
 
       - name: Build site
         run: yarn build
@@ -151,12 +145,48 @@ jobs:
       - name: Install Yarn dependencies
         run: yarn install
 
-      - name: Install Gatsby
-        run: yarn global add gatsby gatsby-cli
-
       - name: Build site
         run: yarn build
 
       - name: Publish site
         run: |
           aws s3 sync ./public s3://skunkworks-labs.simse.io
+
+  build_bar_maker_labs:
+    runs-on: ubuntu-latest
+    name: Build and deploy bar-maker lab
+    needs: infrastructure
+    defaults:
+      run:
+        working-directory: ./labs/bar-maker
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
+
+      - name: Install Node v14
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Cache node_modules
+        uses: actions/cache@v2
+        with:
+          path: './labs/bar-maker/node_modules'
+          key: simse-labs-bar-maker-node-modules
+
+      - name: Install Yarn dependencies
+        run: yarn install
+
+      - name: Build site
+        run: yarn build
+
+      - name: Publish site
+        run: |
+          aws s3 sync ./dist s3://bar-maker-labs.simse.io
