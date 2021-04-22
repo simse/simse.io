@@ -16,7 +16,7 @@ resource "cloudflare_zone_settings_override" "simse" {
 
   settings {
     brotli = "on"
-    //opportunistic_encryption = "on"
+    opportunistic_encryption = "on"
     //automatic_https_rewrites = "on"
     always_use_https = "on"
     always_online    = "off"
@@ -45,20 +45,7 @@ resource "cloudflare_page_rule" "redirect_www" {
     }
   }
 }
-/*
-resource "cloudflare_page_rule" "redirect_labs" {
-  zone_id  = data.cloudflare_zones.domain.zones[0].id
-  target   = "labs.${var.site_domain}/*"
-  priority = 1
 
-  actions {
-    forwarding_url {
-        url = "https://$1.labs.${var.site_domain}"
-        status_code = 301
-    }
-  }
-}
-*/
 // Set up static DNS records
 resource "cloudflare_record" "ghost_address" {
   zone_id = data.cloudflare_zones.domain.zones[0].id
@@ -91,10 +78,3 @@ module "lab_site" {
   name        = "labs.${var.site_domain}"
   site_domain = var.site_domain
 }
-/*
-module "lab_sites" {
-  for_each    = toset(["skunkworks", "bar-maker"])
-  source      = "./bucket"
-  name        = "${each.key}-labs.${var.site_domain}"
-  site_domain = var.site_domain
-}*/
