@@ -24,10 +24,16 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Cache .terraform
+        uses: actions/cache@v2
+        with:
+          path: './.terraform'
+          key: terraform_cache
+
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
-          # terraform_version: 0.13.0
+          terraform_version: 0.15.0
           cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
       - name: Terraform Init
@@ -40,7 +46,7 @@ jobs:
 
   build_site:
     runs-on: ubuntu-latest
-    name: Build and deploy simse.io
+    name: simse.io
     needs: infrastructure
     defaults:
       run:
@@ -67,8 +73,14 @@ jobs:
           path: './www/node_modules'
           key: simse-io-node-modules
 
+      - name: .gatsby
+        uses: actions/cache@v2
+        with:
+          path: './www/.gatsby'
+          key: www_gatsby_cache
+
       - name: Install Yarn dependencies
-        run: yarn install
+        run: yarn
 
       - name: Build site
         run: yarn build
@@ -79,7 +91,7 @@ jobs:
 
   build_labs:
     runs-on: ubuntu-latest
-    name: Build and deploy simse.io labs
+    name: labs.simse.io
     needs: infrastructure
     defaults:
       run:
@@ -104,10 +116,10 @@ jobs:
         uses: actions/cache@v2
         with:
           path: './labs/www/node_modules'
-          key: simse-labs-node-modules
+          key: labs_cache
 
       - name: Install Yarn dependencies
-        run: yarn install
+        run: yarn
 
       - name: Build site
         run: yarn build
@@ -118,7 +130,7 @@ jobs:
 
   build_skunkwork_labs:
     runs-on: ubuntu-latest
-    name: Build and deploy skunkworks.labs.simse.io
+    name: labs.simse.io/skunkworks
     needs: infrastructure
     defaults:
       run:
@@ -146,7 +158,7 @@ jobs:
           key: simse-labs-skunkworks-node-modules
 
       - name: Install Yarn dependencies
-        run: yarn install
+        run: yarn
 
       - name: Build site
         run: yarn build --prefix-paths
@@ -157,7 +169,7 @@ jobs:
 
   build_bar_maker_labs:
     runs-on: ubuntu-latest
-    name: Build and deploy bar-maker lab
+    name: labs.simse.io/bar-maker
     needs: infrastructure
     defaults:
       run:
@@ -185,7 +197,7 @@ jobs:
           key: simse-labs-bar-maker-node-modules
 
       - name: Install Yarn dependencies
-        run: yarn install
+        run: yarn
 
       - name: Build site
         run: yarn build
