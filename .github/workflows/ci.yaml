@@ -73,10 +73,10 @@ jobs:
           path: './www/node_modules'
           key: simse-io-node-modules
 
-      - name: .gatsby
+      - name: Gatsby cache
         uses: actions/cache@v2
         with:
-          path: './www/.gatsby'
+          path: './www/.cache'
           key: www_gatsby_cache
 
       - name: Install Yarn dependencies

@@ -71,8 +71,12 @@
         h2,
         h3 {
             margin: 55px 70px 20px 70px;
-            // font-weight: 400;
-            font-family: Juana;
+            //font-weight: 400;
+            //font-family: Juana;
+
+            @media(max-width: 700px) {
+                margin: 55px 70px 20px 30px;
+            }
         }
 
         img {
@@ -122,6 +126,7 @@
 
     p {
         padding: 0 70px;
+        //line-height: 33px;
 
         @media(max-width: 700px) {
             padding: 0 30px;

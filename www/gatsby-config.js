@@ -1,6 +1,3 @@
-const prismjs = require('prismjs');
-const DomParser = require('dom-parser');
-
 module.exports = {
   siteMetadata: {
     title: `Simon Sørensen`,
@@ -12,6 +9,8 @@ module.exports = {
     `gatsby-plugin-sitemap`,
     `gatsby-plugin-sass`,
     `gatsby-plugin-react-helmet`,
+    `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     `gatsby-plugin-image`,
     {
       resolve: `gatsby-source-filesystem`,
@@ -28,68 +27,6 @@ module.exports = {
         }
       }
     },
-    /*{
-      resolve: `gatsby-source-wordpress`,
-      options: {
-        url: `https://editor.simse.io/graphql`,
-        type: {
-          __all: {
-            beforeChangeNode: async ({ remoteNode, actionType, typeSettings }) => {
-              // Only act on WP nodes of type Post
-              if (remoteNode.type === "Post") {
-                //console.log(remoteNode)
-
-                // Set up an HTML parser and parse the post HTML
-                const parse = new DomParser()
-                const document = parse.parseFromString(remoteNode.content)
-
-                // Find all WP Code blocks
-                const codeBlocks = document.getElementsByClassName("wp-block-code")
-
-                // Parse every code block
-                codeBlocks.forEach(block => {
-                  if (block.innerHTML) {
-                    console.log(block.innerHTML)
-                    let innerHTML = block.innerHTML
-                    innerHTML = innerHTML.substr(6)
-                    innerHTML = innerHTML.slice(0, -7)
-
-                    //  console.log(block.outerHTML)
-
-                    // Get language
-                    let language = ""
-
-                    block.getAttribute("class").split(" ").forEach(blockClass => {
-                      if (blockClass !== "wp-block-code") {
-                        language = blockClass
-                      }
-                    })
-
-                    // Determine Prism.js dialect
-                    if (!prismjs.languages[language]) {
-                      require(`prismjs/components/prism-${language}.js`)
-                    }
-
-                    let prismLanguage = prismjs.languages[language]
-
-                    // Highlight code
-                    let toHighlight = innerHTML.replaceAll("&lt;", "<").replaceAll("&gt;", ">")
-                    let highlightedCode = prismjs.highlight(toHighlight, prismLanguage, language)
-
-                    remoteNode.content = remoteNode.content.replace(innerHTML, highlightedCode)
-                  }
-                })
-              }
-
-
-              return {
-                remoteNode,
-              }
-            }
-          }
-        }
-      },
-    },*/
     `gatsby-plugin-build-date`,
     `gatsby-transformer-yaml`,
     {
@@ -130,8 +67,6 @@ module.exports = {
         pathToConfigModule: `src/utils/typography`,
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {

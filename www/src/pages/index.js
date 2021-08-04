@@ -37,12 +37,12 @@ class IndexPage extends React.Component {
   componentDidMount() {
     //gradient.initGradient(this.background, style.shown);
 
-    this.heroCircles.forEach((circle, index) => {
+    /*this.heroCircles.forEach((circle, index) => {
       
       setTimeout(() => {
         circle.gradient.initGradient(circle.ref, style.shown)
       }, (index+1) * 400)
-    })
+    })*/
   }
 
   render() {
@@ -56,14 +56,14 @@ class IndexPage extends React.Component {
         <Navbar />
         
         <div className={style.hero}>
-          <div className={style.circles}>
+          {/* <div className={style.circles}>
             {this.heroCircles.map(circle => (
               <canvas 
                 className={`${style.background}`} 
                 ref={circle.ref} 
                 key={circle.id}></canvas>
             ))}
-          </div>
+          </div> */}
     
           <div className={style.text}>   
             <h1 className={style.title}>Hello! My name is Simon</h1>
