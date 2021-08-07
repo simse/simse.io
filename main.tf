@@ -49,7 +49,7 @@ resource "cloudflare_page_rule" "redirect_www" {
 resource "cloudflare_page_rule" "aggresive_cache" {
   zone_id  = data.cloudflare_zones.domain.zones[0].id
   target   = "*"
-  priority = 1
+  priority = 2
 
   actions {
     cache_level = "cache_everything"
