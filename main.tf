@@ -46,7 +46,7 @@ resource "cloudflare_page_rule" "redirect_www" {
   }
 }
 
-resource "cloudflare_page_rule" "aggresive_cache" {
+/* resource "cloudflare_page_rule" "aggresive_cache" {
   zone_id  = data.cloudflare_zones.domain.zones[0].id
   target   = "*"
   priority = 2
@@ -54,7 +54,7 @@ resource "cloudflare_page_rule" "aggresive_cache" {
   actions {
     cache_level = "cache_everything"
   }
-}
+} */
 
 // Set up static DNS records
 resource "cloudflare_record" "gatsby_cloud_1" {
