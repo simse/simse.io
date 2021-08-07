@@ -22,15 +22,15 @@ const BlogPage = ({data}) => (
     } />
 
     <div className={styles.posts}>
-      {data.allGhostPost.nodes.map(post => (
+      {data.allWpPost.nodes.map(post => (
         <Link to={"/blog/" + post.slug} key={post.slug}>
           <div className={styles.post}>
-            {post.localFeatureImage && <GatsbyImage
-              image={post.localFeatureImage.childImageSharp.gatsbyImageData}
+            {post.featuredImage && <GatsbyImage
+              image={post.featuredImage.node.localFile.childImageSharp.gatsbyImageData}
               alt="Picture of Simon" />}
 
             <div className={styles.text}>
-              <span className={styles.meta}>{post.tags[0].name} — {post.published_at}</span>
+              <span className={styles.meta}>{post.categories.nodes[0].name} — {post.date}</span>
 
               <h2>{ post.title }</h2>
             </div>
@@ -45,25 +45,31 @@ export default BlogPage
 
 export const query = graphql`
   query {
-    allGhostPost(sort: {fields: published_at, order: DESC}) {
+    allWpPost(sort: {fields: date, order: DESC}) {
       nodes {
-        id
+        databaseId
         title
         slug
-        published_at(formatString: "MMMM DD, YYYY")
-        tags {
-          name
+        date(formatString: "MMMM DD, YYYY")
+        categories {
+          nodes {
+            name
+          }
         }
-        localFeatureImage {
-          childImageSharp {
-            gatsbyImageData(
-              height: 300
-              width: 500
-              placeholder: BLURRED
-              formats: [AUTO, WEBP, AVIF]
-              layout: CONSTRAINED
-              transformOptions: {cropFocus: CENTER}
-            )
+        featuredImage {
+          node {
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
+                  height: 300
+                  width: 500
+                  placeholder: BLURRED
+                  formats: [AUTO, WEBP, AVIF]
+                  layout: CONSTRAINED
+                  transformOptions: {cropFocus: CENTER}
+                )
+              }
+            }
           }
         }
       }

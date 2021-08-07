@@ -5,7 +5,7 @@
  */
 
 const path = require(`path`)
-const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
+/*const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
 
 exports.onCreateNode = async ({
   node,
@@ -36,25 +36,25 @@ exports.onCreateNode = async ({
     // Link File node to GhostPost node at field image.
     node.localFeatureImage___NODE = fileNode.id;
   }
-};
+};*/
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const result = await graphql(`
       query {
-        allGhostPost {
+        allWpPost {
             edges {
                 node {
                     slug
                     title
-                    ghostId
+                    databaseId
                 }
             }
           }
       }
     `)
 
-  result.data.allGhostPost.edges.forEach(({ node }, i, edges) => {
+  result.data.allWpPost.edges.forEach(({ node }, i, edges) => {
     // Ignore data schema "ghost" post
     if (node.slug === "data-schema") return
 
@@ -81,7 +81,7 @@ exports.createPages = async ({ graphql, actions }) => {
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
-        id: node.ghostId,
+        id: node.databaseId,
         previousPost: previousPost,
         nextPost: nextPost
       },

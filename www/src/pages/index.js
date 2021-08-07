@@ -82,15 +82,15 @@ class IndexPage extends React.Component {
           <h1>Latest blog posts</h1>
 
           <div className={style.list}>
-          {this.props.data.allGhostPost.nodes.map(post => (
+          {this.props.data.allWpPost.nodes.map(post => (
             <Link to={`blog/${post.slug}`}>
               <div className={style.post}>
-              {post.localFeatureImage && <GatsbyImage
-                image={post.localFeatureImage.childImageSharp.gatsbyImageData}
+              {post.featuredImage && <GatsbyImage
+                image={post.featuredImage.node.localFile.childrenImageSharp[0].gatsbyImageData}
                 alt="Picture of Simon" />}
 
                 <div className={style.meta}>
-                  <span>{post.tags[0].name} — {post.published_at}</span>
+                  <span>{post.categories.nodes[0].name} — {post.date}</span>
                   <h2>{post.title}</h2>
                 </div>
               </div>
@@ -139,26 +139,33 @@ const Index = () => (
           description
         }
       }
-      allGhostPost(limit: 4, sort: {fields: published_at, order: DESC}) {
+
+      allWpPost(limit: 4, sort: {fields: date, order: DESC})  {
         nodes {
           title
           slug
           excerpt
-          published_at(formatString: "MMMM DD, YYYY")
-          tags {
-            name
+          date(formatString: "MMMM DD, YYYY")
+          featuredImage {
+            node {
+              localFile {
+                childrenImageSharp {
+                  gatsbyImageData(
+                    height: 427
+                    width: 640
+                    layout: CONSTRAINED
+                    placeholder: BLURRED
+                    formats: [AUTO, WEBP, AVIF]
+                    transformOptions: {cropFocus: CENTER}
+                    quality: 90
+                  )
+                }
+              }
+            }
           }
-          localFeatureImage {
-            childImageSharp {
-              gatsbyImageData(
-                height: 427
-                width: 640
-                layout: CONSTRAINED
-                placeholder: BLURRED
-                formats: [AUTO, WEBP, AVIF]
-                transformOptions: {cropFocus: CENTER}
-                quality: 80
-              )
+          categories {
+            nodes {
+              name
             }
           }
         }

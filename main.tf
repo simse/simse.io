@@ -46,7 +46,47 @@ resource "cloudflare_page_rule" "redirect_www" {
   }
 }
 
+resource "cloudflare_page_rule" "aggresive_cache" {
+  zone_id  = data.cloudflare_zones.domain.zones[0].id
+  target   = "*"
+  priority = 1
+
+  actions {
+    cache_level = "cache_everything"
+  }
+}
+
 // Set up static DNS records
+resource "cloudflare_record" "gatsby_cloud_1" {
+  zone_id = data.cloudflare_zones.domain.zones[0].id
+  name    = "@"
+  value   = "199.232.194.78"
+  type    = "A"
+
+  ttl     = 3600
+  proxied = false
+}
+
+resource "cloudflare_record" "gatsby_cloud_2" {
+  zone_id = data.cloudflare_zones.domain.zones[0].id
+  name    = "@"
+  value   = "199.232.198.78"
+  type    = "A"
+
+  ttl     = 3600
+  proxied = false
+}
+
+resource "cloudflare_record" "gatsby_cloud_3" {
+  zone_id = data.cloudflare_zones.domain.zones[0].id
+  name    = "www"
+  value   = "simse.gatsbyjs.io"
+  type    = "CNAME"
+
+  ttl     = 3600
+  proxied = false
+}
+
 resource "cloudflare_record" "ghost_address" {
   zone_id = data.cloudflare_zones.domain.zones[0].id
   name    = "ghost"
@@ -76,11 +116,11 @@ resource "cloudflare_record" "google_ownership" {
 }
 
 // Set up main domain
-module "main_site" {
+/* module "main_site" {
   source      = "./bucket"
   name        = var.site_domain
   site_domain = var.site_domain
-}
+} */
 
 // Set up labs sites
 module "lab_site" {

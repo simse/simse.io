@@ -1,3 +1,6 @@
+const DomParser = require('dom-parser');
+const prismjs = require("prismjs")
+
 module.exports = {
   siteMetadata: {
     title: `Simon Sørensen`,
@@ -12,6 +15,56 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-image`,
+    {
+      resolve: `gatsby-source-wordpress`,
+      options: {
+        url: `https://editor.simse.io/graphql`,
+        type: {
+          __all: {
+            beforeChangeNode: async ({ remoteNode, actionType, typeSettings }) => {
+              // Only act on WP nodes of type Post
+              if (remoteNode.type === "Post") {
+                //console.log(remoteNode)
+                // Set up an HTML parser and parse the post HTML
+                const parse = new DomParser()
+                const document = parse.parseFromString(remoteNode.content)
+                // Find all WP Code blocks
+                const codeBlocks = document.getElementsByClassName("wp-block-code")
+                // Parse every code block
+                codeBlocks.forEach(block => {
+                  if (block.innerHTML) {
+                    console.log(typeof block.innerHTML)
+                    let innerHTML = block.innerHTML
+                    innerHTML = innerHTML.substr(6)
+                    innerHTML = innerHTML.slice(0, -7)
+                    //  console.log(block.outerHTML)
+                    // Get language
+                    let language = ""
+                    block.getAttribute("class").split(" ").forEach(blockClass => {
+                      if (blockClass !== "wp-block-code") {
+                        language = blockClass
+                      }
+                    })
+                    // Determine Prism.js dialect
+                    if (!prismjs.languages[language]) {
+                      require(`prismjs/components/prism-${language}.js`)
+                    }
+                    let prismLanguage = prismjs.languages[language]
+                    // Highlight code
+                    let toHighlight = innerHTML.replace(/&lt;/g, "<").replace(/&gt;/g, ">")
+                    let highlightedCode = prismjs.highlight(toHighlight, prismLanguage, language)
+                    remoteNode.content = remoteNode.content.replace(innerHTML, highlightedCode)
+                  }
+                })
+              }
+              return {
+                remoteNode,
+              }
+            }
+          }
+        }
+      },
+    },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
@@ -35,7 +88,7 @@ module.exports = {
         path: `./src/data/`,
       },
     },
-    {
+    /*{
       resolve: `gatsby-transformer-rehype`,
       options: {
         filter: node => (
@@ -53,14 +106,14 @@ module.exports = {
           },
         ],
       },
-    },
-    {
+    },*/
+    /*{
       resolve: `gatsby-source-ghost`,
       options: {
         apiUrl: `https://ghost.simse.io`,
         contentApiKey: `4a509adc98a9b5f7fa4e7d4924`,
       },
-    },
+    },*/
     {
       resolve: `gatsby-plugin-typography`,
       options: {

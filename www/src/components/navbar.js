@@ -177,9 +177,9 @@ class Navbar extends React.Component {
         return (
             <StaticQuery query={graphql`
         query MyQuery {
-            allGhostPost {
+            allWpPost {
                 nodes {
-                  id
+                  databaseId
                 }
               }
           }
@@ -220,7 +220,7 @@ class Navbar extends React.Component {
                                 </Link>
 
                                 <Link to="/blog" ref={this.blogRef} onClick={this.toggleMenu}>
-                                    <h1>Blog <sup>{data.allGhostPost.nodes.length}</sup></h1>
+                                    <h1>Blog <sup>{data.allWpPost.nodes.length}</sup></h1>
                                 </Link>
 
                                 <Link to="/contact" ref={this.projectsRef} onClick={this.toggleMenu}>

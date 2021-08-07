@@ -74,4 +74,5 @@ yarn-error.log
 .vscode
 terraform.tfvars
 *.backup
-terraform.tfstate.d
+terraform.tfstate.d/*
+.terraform.lock.hcl
