@@ -52,82 +52,6 @@
         display: block;
     }
 
-    .background {
-        position: absolute;
-        opacity: 0;
-        transition: all 2s cubic-bezier(0.76, 0, 0.24, 1);
-        border-radius: 100%;
-
-        &.shown {
-            opacity: 1;
-        }
-
-        &:first-child {
-            top: -100px;
-            left: 16%;
-            width: 550px;
-            height: 550px;
-            --gradient-color-1: #3d00a0;
-            --gradient-color-2: #000;
-            --gradient-color-3: #801167;
-            --gradient-color-4: #000;
-
-            @media(max-width: 1350px) {
-                left: -1%;
-            }
-
-            @media(max-width: 1100px) {
-                top: 15%;
-                left: -5%;
-            }
-
-            @media(max-width: 800px) {
-                width: 500px;
-                height: 500px;
-                left: -20%;
-            }
-        }
-
-        &:nth-child(2) {
-            top: initial;
-            bottom: -30px;
-            right: -45px;
-            left: initial;
-            width: 700px;
-            height: 700px;
-            --gradient-color-1: #ff99c8;
-            --gradient-color-2: #fcf6bd;
-            --gradient-color-3: #a9def9;
-            --gradient-color-4: #e4c1f9;
-
-            @media(max-width: 1200px) {
-                width: 600px;
-                height: 600px;
-            }
-
-            @media(max-width: 900px) {
-                width: 200px;
-                height: 200px;
-                top: 100px;
-            }
-        }
-
-        &:nth-child(3) {
-            top: initial;
-            left: -145px;
-            bottom: -230px;
-            width: 700px;
-            height: 700px;
-            --gradient-color-1: #5bc0eb;
-            --gradient-color-2: #9bc53d;
-            --gradient-color-3: #e55934;
-            --gradient-color-4: #fde74c;
-
-            @media(max-width: 1500px) {
-                opacity: 0;
-            }
-        }
-    }
 
     .text {
         width: 52%;
@@ -147,7 +71,7 @@
 
         .title {
             color: #FF20CE;
-            font-size: 4rem;
+            font-size: 4em;
             font-family: Juana;
             font-weight: 400;
             

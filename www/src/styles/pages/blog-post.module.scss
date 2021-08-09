@@ -126,7 +126,9 @@
 
     p {
         padding: 0 70px;
+        opacity: .9;
         //line-height: 33px;
+        //font-family: "Freight Sans Pro";
 
         @media(max-width: 700px) {
             padding: 0 30px;

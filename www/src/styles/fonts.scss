@@ -1,50 +1,80 @@
 @font-face {
-    font-family: Recoletta;
-    font-weight: 900;
-    font-display: swap;
-    src: url(../../static/fonts/RecoletaAlt-Black.woff2) format("woff2");
-  }
+  font-family: Recoletta;
+  font-weight: 900;
+  font-display: swap;
+  src: url(../../static/fonts/RecoletaAlt-Black.woff2) format("woff2");
+}
 
-  @font-face {
-    font-family: 'Inter';
-    font-weight: 100 900;
-    font-display: swap;
-    font-style: normal;
-    font-named-instance: 'Regular';
-    src: url(../../static/fonts/Inter.var.woff2) format("woff2");
-  }
+@font-face {
+  font-family: "Inter";
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  font-named-instance: "Regular";
+  src: url(../../static/fonts/Inter.var.woff2) format("woff2");
+}
 
-  @font-face {
-    font-family: Monolisa;
-    font-weight: 400;
-    font-display: swap;
-    src: url(../../static/fonts/MonoLisa-Regular.woff2) format("woff2");
-  }
+@font-face {
+  font-family: "Freight Sans Pro";
+  font-weight: 400;
+  font-display: swap;
+  src: url(../../static/fonts/FreightSansProBook-Regular.woff2) format("woff2");
+}
 
-  @font-face {
-    font-family: Monolisa;
-    font-weight: 700;
-    font-display: swap;
-    src: url(../../static/fonts/MonoLisa-Bold.woff2) format("woff2");
-  }
+@font-face {
+  font-family: "Freight Sans Pro";
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+  src: url(../../static/fonts/FreightSansProBook-Italic.woff2) format("woff2");
+}
 
-  @font-face {
-    font-family: Juana;
-    font-weight: 200;
-    font-display: swap;
-    src: url(../../static/fonts/Juana-Thin.woff2) format("woff2");
-  }
+@font-face {
+  font-family: "Freight Sans Pro";
+  font-weight: 700;
+  font-display: swap;
+  src: url(../../static/fonts/FreightSansProBold-Regular.woff2) format("woff2");
+}
 
-  @font-face {
-    font-family: Juana;
-    font-weight: 400;
-    font-display: swap;
-    src: url(../../static/fonts/Juana-Regular.woff2) format("woff2");
-  }
+@font-face {
+  font-family: "Freight Sans Pro";
+  font-weight: 700;
+  font-style: italic;
+  font-display: swap;
+  src: url(../../static/fonts/FreightSansProBold-Italic.woff2) format("woff2");
+}
 
-  @font-face {
-    font-family: Juana;
-    font-weight: 700;
-    font-display: swap;
-    src: url(../../static/fonts/Juana-Bold.woff2) format("woff2");
-  }
+@font-face {
+  font-family: Monolisa;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../../static/fonts/MonoLisa-Regular.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: Monolisa;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../../static/fonts/MonoLisa-Bold.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: Juana;
+  font-weight: 200;
+  font-display: swap;
+  src: url(../../static/fonts/Juana-Thin.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: Juana;
+  font-weight: 400;
+  font-display: swap;
+  src: url(../../static/fonts/Juana-Regular.woff2) format("woff2");
+}
+
+@font-face {
+  font-family: Juana;
+  font-weight: 700;
+  font-display: swap;
+  src: url(../../static/fonts/Juana-Bold.woff2) format("woff2");
+}
