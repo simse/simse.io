@@ -115,6 +115,17 @@ resource "cloudflare_record" "google_ownership" {
   ttl     = 3600
 }
 
+// health.simse.io
+resource "cloudflare_record" "simse_health_api" {
+  zone_id = data.cloudflare_zones.domain.zones[0].id
+  name    = "api.health"
+  value   = "199.232.198.78"
+  type    = "A"
+
+  ttl     = 3600
+  proxied = false
+}
+
 // Set up main domain
 /* module "main_site" {
   source      = "./bucket"
