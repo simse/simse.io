@@ -119,7 +119,7 @@ resource "cloudflare_record" "google_ownership" {
 resource "cloudflare_record" "simse_health_api" {
   zone_id = data.cloudflare_zones.domain.zones[0].id
   name    = "api.health"
-  value   = "199.232.198.78"
+  value   = "116.202.234.197"
   type    = "A"
 
   ttl     = 3600
