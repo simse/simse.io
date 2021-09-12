@@ -1,0 +1,16 @@
+.container {
+    max-width: 1200px;
+    margin: 120px auto 20px auto;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-gap: 20px;
+}
+
+h1 {
+    font-size: 3.2em;
+    font-weight: 700;
+    margin-bottom: 50px;
+}
