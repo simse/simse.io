@@ -126,6 +126,16 @@ resource "cloudflare_record" "simse_health_api" {
   proxied = false
 }
 
+resource "cloudflare_record" "simse_health" {
+  zone_id = data.cloudflare_zones.domain.zones[0].id
+  name    = "health"
+  value   = "simsehealth.gatsbyjs.io"
+  type    = "CNAME"
+
+  ttl     = 3600
+  proxied = false
+}
+
 // Set up main domain
 /* module "main_site" {
   source      = "./bucket"
