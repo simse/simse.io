@@ -1,5 +1,5 @@
 .vital {
-    background: #fff;
+    background: #1c1c1e;
     border-radius: 36px;
     padding: 24px;
     width: 220px;
@@ -14,6 +14,12 @@
     max-width: 200px;
 }
 
+.value,
+.unit,
+.trend {
+    font-family: "SF Pro Rounded";
+}
+
 .value {
     font-size: 3.4rem;
 }
@@ -22,10 +28,23 @@
     margin-bottom: 5px;
     font-weight: 700;
     font-size: 1.3em;
+    color: #3b82f8;
 }
 
 .unit {
     font-size: 1.4em;
     margin-bottom: 4px;
     margin-left: 4px;
+    opacity: 0.75;
+}
+
+.trend {
+    margin-top: 8px;
+    font-weight: 500;
+    font-size: 1.3em;
+    color: #64d964;
+
+    &.red {
+        color: red;
+    }
 }

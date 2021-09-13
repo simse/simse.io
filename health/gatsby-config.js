@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    siteUrl: "https://www.yourdomain.tld",
+    siteUrl: "https://health.simse.io",
     title: "Simon's Health",
   },
   plugins: [

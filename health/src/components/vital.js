@@ -12,6 +12,8 @@ const Vital = (props) => {
             <h2 className={styles.value}>{props.value}</h2>
             <span className={styles.unit}>{props.unit}</span>
         </div>
+
+        {props.trend && <p className={styles.trend}>{props.trend.amount}{props.unit}</p>}
     </div>
   )
 }
