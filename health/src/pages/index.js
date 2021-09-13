@@ -35,11 +35,11 @@ class IndexPage extends React.Component {
           <title>Simon's Health</title>
         </Helmet>
 
-        <h1>The Weight Loss Journey</h1>
-        <p>Below is an overview of my current weight and related metrics. They are updated automatically and regularly. I hope that by sharing my progress with friends and family, and everyone, I will stick to my goals, and finally lose weight.</p>
+        <h1 className={styles.title}>The Weight Loss Journey</h1>
+        <p className={styles.subtitle}>Below is an overview of my current weight and related metrics. They are updated automatically and regularly. I hope that by sharing my progress with friends and family, and everyone, I will stick to my goals, and finally lose weight.</p>
 
         <div className={styles.grid}>
-          <Vital value={this.state.weight} label={"Weight"} unit={"kg"} /*trend={{direction: "up", amount: -0.7}}*/ />
+          <Vital value={this.state.weight} label={"Weight"} unit={"kg"} /*trend={{direction: "up", amount: -0.7}} *//>
 
           <Vital value={this.state.fatPercentage} label={"Fat Percentage"} unit={"%"} />
         </div>
