@@ -12,7 +12,8 @@ class IndexPage extends React.Component {
 
     this.state = {
       weight: 0,
-      fatPercentage: 0
+      fatPercentage: 0,
+      bmi: 0
     }
   }
 
@@ -22,7 +23,8 @@ class IndexPage extends React.Component {
       .then(data => this.setState(
         {
           weight: Math.round((data.current.weight + Number.EPSILON/10) * 10) / 10,
-          fatPercentage: Math.round((data.current.fat_percentage + Number.EPSILON/10) * 10) / 10
+          fatPercentage: Math.round((data.current.fat_percentage + Number.EPSILON/10) * 10) / 10,
+          bmi: Math.round(((data.current.weight/172/172)*10000 + Number.EPSILON/10) * 10) / 10
         }
       ));
 
@@ -42,6 +44,8 @@ class IndexPage extends React.Component {
           <Vital value={this.state.weight} label={"Weight"} unit={"kg"} /*trend={{direction: "up", amount: -0.7}} *//>
 
           <Vital value={this.state.fatPercentage} label={"Fat Percentage"} unit={"%"} />
+
+          <Vital value={this.state.bmi} label={"BMI"} />
         </div>
       </main>
     )
