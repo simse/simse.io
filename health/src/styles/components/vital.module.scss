@@ -9,7 +9,7 @@
 
 .value-container {
     display: flex;
-    align-items: end;
+    //align-items: end;
     margin-top: 16px;
     max-width: 200px;
 }
@@ -17,7 +17,7 @@
 .value,
 .unit,
 .trend {
-    font-family: "SF Pro Rounded", Nunito;
+    font-family: "SF Pro Rounded", sans-serif;
 }
 
 .value {
@@ -36,6 +36,7 @@
     margin-bottom: 4px;
     margin-left: 4px;
     opacity: 0.75;
+    margin-top: auto;
 }
 
 .trend {
