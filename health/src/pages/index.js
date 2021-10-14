@@ -122,7 +122,7 @@ const IndexPage = ({ data }) => {
   ]
 
   // Modal
-  const [modalOpen, setModalOpen] = useState(true)
+  const [modalOpen, setModalOpen] = useState(false)
   const [vitalShown, setVitalShown] = useState(0)
 
  //  console.log(predictFutureData('weight', 10))
