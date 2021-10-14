@@ -21,9 +21,13 @@
     "gatsby-plugin-react-helmet": "^4.13.0",
     "gatsby-plugin-sass": "^4.13.0",
     "node-fetch": "^3.0.0",
+    "performance-now": "^2.1.0",
     "react": "^17.0.1",
+    "react-charts": "^2.0.0-beta.7",
     "react-dom": "^17.0.1",
     "react-helmet": "^6.1.0",
-    "sass": "^1.39.2"
+    "react-modal": "^3.14.3",
+    "sass": "^1.39.2",
+    "victory": "^36.0.1"
   }
 }

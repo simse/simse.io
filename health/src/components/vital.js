@@ -5,7 +5,7 @@ import * as styles from "../styles/components/vital.module.scss"
 // markup
 const Vital = (props) => {
   return (
-    <div className={styles.vital}>
+    <div className={`${styles.vital} ${props.noPadding ? styles.noPadding : ''}`}>
         <strong className={styles.label}>{props.label}</strong>
 
         <div className={styles.valueContainer}>

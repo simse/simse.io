@@ -4,6 +4,10 @@
     padding: 24px;
     //width: 220px;
     //height: 220px;
+
+    &.no-padding {
+        padding: 0;
+    }
 }
 
 
