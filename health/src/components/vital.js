@@ -13,7 +13,7 @@ const Vital = (props) => {
             <span className={styles.unit}>{props.unit}</span>
         </div>
 
-        {props.trend && <p className={styles.trend}>{props.trend.amount}{props.unit}</p>}
+        {(props.trend && props.trend.amount) && <p className={styles.trend}>{props.trend.amount > 0 && '+'}{props.trend.amount}{props.unit}</p>}
     </div>
   )
 }

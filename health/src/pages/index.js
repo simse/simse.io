@@ -115,10 +115,37 @@ const IndexPage = ({ data }) => {
       label: "Fat Percentage",
       unit: "%",
       key: "fat_percentage"
-    }/*,
-      bmi: {
-        value: round(weightNode.weight / 172 / 172 * 10000)
-      }*/
+    },
+    {
+      value: round(weightNode.bmi),
+      trend: round(calculateTrend(data.allWeightNode.nodes, "bmi")),
+      label: "BMI",
+      unit: "",
+      key: "bmi"
+    },
+    {
+      value: round(weightNode.muscle_mass),
+      trend: round(calculateTrend(data.allWeightNode.nodes, "muscle_mass")),
+      label: "Muscle Mass",
+      unit: "kg",
+      key: "muscle_mass"
+    },
+    {
+      value: round(weightNode.bone_mass),
+      trend: round(calculateTrend(data.allWeightNode.nodes, "bone_mass")),
+      label: "Bone Mass",
+      unit: "kg",
+      key: "bone_mass",
+      hideTrend: true
+    },
+    {
+      value: round(weightNode.hydration),
+      trend: round(calculateTrend(data.allWeightNode.nodes, "hydration")),
+      label: "Hydration",
+      unit: "%",
+      key: "hydration",
+      hideTrend: true
+    }
   ]
 
   // Modal
@@ -141,7 +168,13 @@ const IndexPage = ({ data }) => {
         style={customModalStyles}
       >
         <div className={styles.modal}>
-          <Vital noPadding={true} value={vitals[vitalShown].value} label={vitals[vitalShown].label} unit={vitals[vitalShown].unit} trend={{ direction: vitals[vitalShown].trend > 0 ? "down" : "up", amount: vitals[vitalShown].trend }} />
+          <Vital 
+            noPadding={true}
+            value={vitals[vitalShown].value}
+            label={vitals[vitalShown].label}
+            unit={vitals[vitalShown].unit}
+            trend={vitals[vitalShown].hideTrend ? {} : { direction: vitals[vitalShown].trend > 0 ? "down" : "up", amount: vitals[vitalShown].trend }}
+          />
 
           <p className={styles.label}>Historical and predicted</p>
           <div className={styles.chart}>
@@ -149,12 +182,24 @@ const IndexPage = ({ data }) => {
               theme={V.VictoryTheme.material}
               width={750}
               height={500}
+              padding={{
+                left: 75,
+                right: 60,
+                top: 30,
+                bottom: 30
+              }}
               scale={{ x: "time", y: "linear" }}
               domainPadding={{x: [0, 0], y: 20}}
+              containerComponent={
+                <V.VictoryVoronoiContainer
+                  labels={({ datum }) => `${datum.y}${vitals[vitalShown].unit}\n${datum.x.toLocaleDateString()}`}
+                  voronoiBlacklist={["predicted"]}
+                />
+              }
             >
               <V.VictoryLine
                 style={{
-                  data: { stroke: "#3b82f8", strokeWidth: 2 },
+                  data: { stroke: "#3b82f8", strokeWidth: 3 },
                   // parent: { border: "1px solid #ccc" }
                 }}
                 animate={{
@@ -169,7 +214,7 @@ const IndexPage = ({ data }) => {
                   data: {
                     stroke: "#fff",
                     opacity: 0.4,
-                    strokeWidth: 2,
+                    strokeWidth: 3,
                     strokeDasharray: 8
                   },
                   // parent: { border: "1px solid #ccc" }
@@ -178,37 +223,41 @@ const IndexPage = ({ data }) => {
                   duration: 2000,
                   onLoad: { duration: 2000 }
                 }}
+                name={"predicted"}
                 interpolation="catmullRom"
                 data={chartFromHistorical(predictFutureData(vitals[vitalShown].key, 4))}
               />
               <V.VictoryAxis 
                 style={{
                   tickLabels: {
-                    fontSize: 14,
-                    padding: 5,
+                    fontSize: 16,
+                    padding: 12,
                     fill: "#fff",
-                    opacity: 0.8,
+                    opacity: 0.6,
                     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
                   },
                   grid: {
                     stroke: '#fff',
+                    strokeDasharray: 0,
                     opacity: 0.3
                   }
                 }}
               />
               <V.VictoryAxis
+                tickFormat={(t) => `${t}${vitals[vitalShown].unit}`}
                 dependentAxis
                 style={{
                   tickLabels: {
-                    fontSize: 14,
-                    padding: 5,
+                    fontSize: 16,
+                    padding: 12,
                     fill: "#fff",
-                    opacity: 0.8,
+                    opacity: 0.6,
                     fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"'
                   },
                   grid: {
                     stroke: '#fff',
-                    opacity: 0
+                    opacity: 0,
+                    strokeDasharray: 0
                   }
                 }}
               />
@@ -238,7 +287,7 @@ const IndexPage = ({ data }) => {
               value={vital.value}
               label={vital.label}
               unit={vital.unit}
-              trend={{ direction: vital.trend > 0 ? "down" : "up", amount: vital.trend }}
+              trend={vital.hideTrend ? {} : { direction: vital.trend > 0 ? "down" : "up", amount: vital.trend }}
             />
           </div>
         ))}
@@ -253,6 +302,10 @@ query MyQuery {
     nodes {
       weight
       fat_percentage
+      bmi
+      bone_mass
+      muscle_mass
+      hydration
       date
     }
   }
