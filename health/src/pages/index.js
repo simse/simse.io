@@ -127,21 +127,21 @@ const IndexPage = ({ data }) => {
       value: round(weightNode.muscle_mass),
       trend: round(calculateTrend(data.allWeightNode.nodes, "muscle_mass")),
       label: "Muscle Mass",
-      unit: "kg",
+      unit: "%",
       key: "muscle_mass"
     },
     {
       value: round(weightNode.bone_mass),
       trend: round(calculateTrend(data.allWeightNode.nodes, "bone_mass")),
       label: "Bone Mass",
-      unit: "kg",
+      unit: "%",
       key: "bone_mass",
       hideTrend: true
     },
     {
       value: round(weightNode.hydration),
       trend: round(calculateTrend(data.allWeightNode.nodes, "hydration")),
-      label: "Hydration",
+      label: "Water Pecentage",
       unit: "%",
       key: "hydration",
       hideTrend: true
