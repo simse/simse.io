@@ -10,41 +10,6 @@ import Footer from "../components/footer"
 import * as style from "../styles/pages/index.module.scss"
 
 class IndexPage extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.heroCircles = [
-      {
-        id: "one",
-        ref: React.createRef(),
-        gradient: new Gradient(),
-      },
-      {
-        id: "two",
-        ref: React.createRef(),
-        gradient: new Gradient(),
-      },
-      {
-        id: "three",
-        ref: React.createRef(),
-        gradient: new Gradient(),
-      }
-    ]
-
-    //this.background = React.createRef();  
-  }
-
-  componentDidMount() {
-    //gradient.initGradient(this.background, style.shown);
-
-    /*this.heroCircles.forEach((circle, index) => {
-      
-      setTimeout(() => {
-        circle.gradient.initGradient(circle.ref, style.shown)
-      }, (index+1) * 400)
-    })*/
-  }
-
   render() {
     return (
       <div style={{
@@ -56,19 +21,11 @@ class IndexPage extends React.Component {
         <Navbar />
         
         <div className={style.hero}>
-          {/* <div className={style.circles}>
-            {this.heroCircles.map(circle => (
-              <canvas 
-                className={`${style.background}`} 
-                ref={circle.ref} 
-                key={circle.id}></canvas>
-            ))}
-          </div> */}
     
           <div className={style.text}>   
             <h1 className={style.title}>Hello! My name is Simon</h1>
     
-            <p>and I am a creative programmer.</p>
+            <p>and I am a Computer Science student in London</p>
           </div>
     
           <div className={style.image}>
