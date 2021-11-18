@@ -107,6 +107,16 @@ resource "cloudflare_record" "wp_address" {
   proxied = false
 }
 
+resource "cloudflare_record" "simse_telemetry" {
+  zone_id = data.cloudflare_zones.domain.zones[0].id
+  name    = "telemetry"
+  value   = "simse-telemetry.fly.dev"
+  type    = "CNAME"
+
+  ttl     = 3600
+  proxied = false
+}
+
 resource "cloudflare_record" "google_ownership" {
   zone_id = data.cloudflare_zones.domain.zones[0].id
   name    = "simse.io"
