@@ -110,8 +110,8 @@ resource "cloudflare_record" "wp_address" {
 resource "cloudflare_record" "simse_telemetry" {
   zone_id = data.cloudflare_zones.domain.zones[0].id
   name    = "telemetry"
-  value   = "simse-telemetry.fly.dev"
-  type    = "CNAME"
+  value   = "78.46.46.239"
+  type    = "A"
 
   ttl     = 3600
   proxied = false
