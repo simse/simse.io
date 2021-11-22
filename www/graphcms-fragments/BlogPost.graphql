@@ -5,7 +5,6 @@ fragment BlogPost on BlogPost {
   updatedAt
   publishedAt
   overridePublishDate
-  formattedDate
   title
   slug
   content {

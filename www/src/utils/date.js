@@ -9,4 +9,13 @@ const formatDate = (date) => {
     return dateFormat.format(parsedDate)
 }
 
-export default formatDate
+const overrideDate = (date, override) => {
+    if (override) {
+        return formatDate(override)
+    }
+
+    return formatDate(date)
+}
+
+
+export { formatDate, overrideDate }

@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import formatDate from "../utils/date"
+import { overrideDate } from "../utils/date"
 
 import Seo from "../components/seo"
 import Navbar from "../components/navbar"
@@ -41,7 +41,7 @@ export default function BlogPost({data, pageContext}) {
 
                     <span> — </span>
 
-                    <span>{formatDate(post.publishedAt)}</span>
+                    <span>{overrideDate(post.publishedAt, post.overridePublishDate)}</span>
                 </div>
 
               {post.featuredImage && <GatsbyImage
@@ -76,6 +76,7 @@ export const query = graphql`
     graphCmsBlogPost(id: {eq: $id}) {
       title
       publishedAt
+      overridePublishDate
       featuredImage {
         gatsbyImageData(
                 width: 1600

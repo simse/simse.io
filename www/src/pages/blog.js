@@ -1,7 +1,7 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import formatDate from "../utils/date"
+import { overrideDate } from "../utils/date"
 
 import Seo from "../components/seo"
 import Navbar from "../components/navbar"
@@ -30,7 +30,7 @@ const BlogPage = ({data}) => (
               alt="Picture of Simon" />}
 
             <div className={styles.text}>
-              <span className={styles.meta}>{post.category.name} — {formatDate(post.publishedAt)}</span>
+              <span className={styles.meta}>{post.category.name} — {overrideDate(post.publishedAt, post.overridePublishDate)}</span>
 
               <h2>{ post.title }</h2>
             </div>
@@ -50,6 +50,7 @@ export const query = graphql`
         title
         slug
         publishedAt
+        overridePublishDate
         category {
           name
         }
