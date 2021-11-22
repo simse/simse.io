@@ -78,7 +78,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
 // Add ability to override publish date on blog posts
 exports.onCreateNode = ({ node, actions }) => {
-  const { createNodeField } = actions
+  // const { createNodeField } = actions
 
   if (node.internal.type === `GraphCMS_BlogPost`) {
     //console.log(node)
@@ -87,13 +87,18 @@ exports.onCreateNode = ({ node, actions }) => {
     }
 
     // Attach formatted date string since it's used so many times throughout the website
-    const parsedDate = new Date(node.publishedAt)
+    /*const parsedDate = new Date(node.publishedAt)
     const dateFormat = new Intl.DateTimeFormat('en-US', {
       month: 'long',
       day: 'numeric',
       year: 'numeric',
     })
 
-    node.formattedDate = dateFormat.format(parsedDate)
+    node.publishedAt = dateFormat.format(parsedDate)*/
+    /*createNodeField({
+      node,
+      name: `formattedDate`,
+      value: node.formattedDate,
+    })*/
   }
 }

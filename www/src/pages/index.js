@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql, StaticQuery, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image";
+import formatDate from "../utils/date";
 
 import Seo from "../components/seo"
 import Navbar from "../components/navbar"
@@ -46,7 +47,7 @@ class IndexPage extends React.Component {
                 alt="Picture of Simon" />}
 
                 <div className={style.meta}>
-                  <span>{post.category.name} — {post.formattedDate}</span>
+                  <span>{post.category.name} — {formatDate(post.publishedAt)}</span>
                   <h2>{post.title}</h2>
                 </div>
               </div>
@@ -91,7 +92,7 @@ const Index = () => (
         nodes {
           title
           slug
-          formattedDate
+          publishedAt
           category {
             name
           }

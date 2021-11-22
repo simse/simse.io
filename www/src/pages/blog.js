@@ -1,8 +1,8 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
-import { GatsbyImage } from "gatsby-plugin-image";
+import { GatsbyImage } from "gatsby-plugin-image"
+import formatDate from "../utils/date"
 
-//import Layout from "../components/layout"
 import Seo from "../components/seo"
 import Navbar from "../components/navbar"
 
@@ -30,7 +30,7 @@ const BlogPage = ({data}) => (
               alt="Picture of Simon" />}
 
             <div className={styles.text}>
-              <span className={styles.meta}>{post.category.name} — {post.formattedDate}</span>
+              <span className={styles.meta}>{post.category.name} — {formatDate(post.publishedAt)}</span>
 
               <h2>{ post.title }</h2>
             </div>
@@ -49,7 +49,7 @@ export const query = graphql`
       nodes {
         title
         slug
-        formattedDate
+        publishedAt
         category {
           name
         }
