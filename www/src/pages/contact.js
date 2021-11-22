@@ -1,13 +1,13 @@
 import React from "react"
 
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import Navbar from "../components/navbar"
 
 import * as style from "../styles/pages/contact.module.scss"
 
 const ContactPage = () => (
   <div>
-    <SEO />
+    <Seo />
     
     <Navbar />
 

@@ -29,10 +29,11 @@
 
     .tags {
         margin: 30px 70px 50px 70px;
-        text-transform: uppercase;
+        //text-transform: uppercase;
         font-weight: 400;
         opacity: 0.6;
-        font-family: Inter;
+        font-family: "Freight Sans Pro";
+        font-size: 1.4em;
         
         @media(max-width: 700px) {
             margin: 30px 30px 50px 30px;

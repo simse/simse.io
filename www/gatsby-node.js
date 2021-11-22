@@ -5,63 +5,26 @@
  */
 
 const path = require(`path`)
-/*const { createRemoteFileNode } = require(`gatsby-source-filesystem`)
-
-exports.onCreateNode = async ({
-  node,
-  actions,
-  store,
-  createNodeId,
-  cache
-}) => {
-  // Check that we are modifying right node types.
-  const nodeTypes = [`GhostPost`, `GhostPage`];
-  if (!nodeTypes.includes(node.internal.type)) {
-    return;
-  }
-
-  const { createNode } = actions;
-
-  // Download image and create a File node with gatsby-transformer-sharp.
-  const fileNode = await createRemoteFileNode({
-    url: node.feature_image,
-    store,
-    cache,
-    createNode,
-    parentNodeId: node.id,
-    createNodeId
-  });
-
-  if (fileNode) {
-    // Link File node to GhostPost node at field image.
-    node.localFeatureImage___NODE = fileNode.id;
-  }
-};*/
 
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const result = await graphql(`
       query {
-        allWpPost {
-            edges {
-                node {
-                    slug
-                    title
-                    databaseId
-                }
-            }
+        allGraphCmsBlogPost {
+          nodes {
+            title
+            slug
+            id
           }
+        }
       }
     `)
 
-  result.data.allWpPost.edges.forEach(({ node }, i, edges) => {
-    // Ignore data schema "ghost" post
-    if (node.slug === "data-schema") return
-
+  result.data.allGraphCmsBlogPost.nodes.forEach((post) => {
     let previousPost = null
     let nextPost = null
 
-    if (edges[i - 1]) {
+    /*if (edges[i - 1]) {
       previousPost = {
         title: edges[i - 1].node.title,
         slug: edges[i - 1].node.slug,
@@ -73,18 +36,64 @@ exports.createPages = async ({ graphql, actions }) => {
         title: edges[i + 1].node.title,
         slug: edges[i + 1].node.slug,
       }
-    }
+    }*/
+
+    // console.log(post)
 
     createPage({
-      path: "blog/" + node.slug,
+      path: "blog/" + post.slug,
       component: path.resolve(`./src/templates/blog-post.js`),
       context: {
         // Data passed to context is available
         // in page queries as GraphQL variables.
-        id: node.databaseId,
+        id: post.id,
         previousPost: previousPost,
         nextPost: nextPost
       },
     })
   })
+
+  // Create project pages
+  const projects = await graphql(`
+      query {
+        allGraphCmsProject {
+          nodes {
+            id
+            slug
+          }
+        }
+      }
+    `)
+
+  projects.data.allGraphCmsProject.nodes.forEach((project) => {
+    createPage({
+      path: "project/" + project.slug,
+      component: path.resolve(`./src/templates/project-page.js`),
+      context: {
+        id: project.id,
+      },
+    })
+  })
+}
+
+// Add ability to override publish date on blog posts
+exports.onCreateNode = ({ node, actions }) => {
+  const { createNodeField } = actions
+
+  if (node.internal.type === `GraphCMS_BlogPost`) {
+    //console.log(node)
+    if (node.overridePublishDate) {
+      node.publishedAt = node.overridePublishDate
+    }
+
+    // Attach formatted date string since it's used so many times throughout the website
+    const parsedDate = new Date(node.publishedAt)
+    const dateFormat = new Intl.DateTimeFormat('en-US', {
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    })
+
+    node.formattedDate = dateFormat.format(parsedDate)
+  }
 }

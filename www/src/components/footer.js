@@ -8,12 +8,12 @@ class Footer extends React.Component {
         return (
             <StaticQuery
                 query={graphql`
-            query {
-                currentBuildDate {
-                  currentDate
-                }
-              }
-            `}
+                    query {
+                        currentBuildDate {
+                            currentDate
+                        }
+                    }
+                `}
                 render={data => (
                     <footer className={styles.footer}>
                         <div className={styles.sections}>

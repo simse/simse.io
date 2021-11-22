@@ -2,14 +2,14 @@ import React from "react"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image";
 
-import SEO from "../components/seo"
+import Seo from "../components/seo"
 import Navbar from "../components/navbar"
 
 import ArrowLeft from "../icons/arrow-left.svg"
 import * as styles from "../styles/pages/blog-post.module.scss"
 
 export default function BlogPost({data, pageContext}) {
-    const post = data.wpPost
+    const post = data.graphCmsBlogPost
 
    // console.log(pageContext)
 
@@ -28,7 +28,7 @@ export default function BlogPost({data, pageContext}) {
 
     return (
         <>
-            <SEO title={post.title} />
+            <Seo title={post.title} />
 
             <Navbar breadcrumbs={breadcrumbs} />
 
@@ -36,19 +36,17 @@ export default function BlogPost({data, pageContext}) {
                 <h1 className={styles.title}>{post.title}</h1>
 
                 <div className={styles.tags}>
-                    {post.categories.nodes.map(category => (
-                        <span key={category.name}>{category.name}</span>
-                    ))}
+                    <span>{post.category.name}</span>
 
                     <span> — </span>
 
-                    <span>{post.date}</span>
+                    <span>{post.formattedDate}</span>
                 </div>
 
               {post.featuredImage && <GatsbyImage
-                image={post.featuredImage.node.localFile.childImageSharp.gatsbyImageData} alt="a picture" />}
+                image={post.featuredImage.gatsbyImageData} alt="a picture" />}
 
-                <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.content }}></div>
+                <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.content.html }}></div>
 
                 <div className={styles.postNav}>
                   {pageContext.previousPost && <Link to={"/blog/" + pageContext.previousPost.slug} className={styles.firstLink}>
@@ -73,8 +71,29 @@ export default function BlogPost({data, pageContext}) {
   }
 
 export const query = graphql`
-  query($id: Int!) {
-    wpPost(databaseId: {eq: $id}) {
+  query($id: String!) {
+    graphCmsBlogPost(id: {eq: $id}) {
+      title
+      formattedDate
+      featuredImage {
+        gatsbyImageData(
+                width: 1600
+                placeholder: BLURRED
+                layout: CONSTRAINED
+        )
+      }
+      category {
+        name
+      }
+      content {
+        html
+      }
+      slug
+    }
+  }
+`
+/*
+wpPost(databaseId: {eq: $id}) {
       content
       title
       categories {
@@ -99,5 +118,4 @@ export const query = graphql`
       }
       date(formatString: "MMMM DD, YYYY")
     }
-  }
-`
+    */

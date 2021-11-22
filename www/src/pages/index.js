@@ -2,8 +2,7 @@ import React from "react"
 import { graphql, StaticQuery, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image";
 
-import SEO from "../components/seo"
-import Gradient from "../utils/gradient"
+import Seo from "../components/seo"
 import Navbar from "../components/navbar"
 import Footer from "../components/footer"
 
@@ -16,7 +15,7 @@ class IndexPage extends React.Component {
         maxWidth: "100vw",
         overflowX: "hidden"
       }}>
-        <SEO />
+        <Seo />
 
         <Navbar />
         
@@ -39,15 +38,15 @@ class IndexPage extends React.Component {
           <h1>Latest blog posts</h1>
 
           <div className={style.list}>
-          {this.props.data.allWpPost.nodes.map(post => (
+          {this.props.data.allGraphCmsBlogPost.nodes.map(post => (
             <Link to={`blog/${post.slug}`}>
               <div className={style.post}>
               {post.featuredImage && <GatsbyImage
-                image={post.featuredImage.node.localFile.childrenImageSharp[0].gatsbyImageData}
+                image={post.featuredImage.gatsbyImageData}
                 alt="Picture of Simon" />}
 
                 <div className={style.meta}>
-                  <span>{post.categories.nodes[0].name} — {post.date}</span>
+                  <span>{post.category.name} — {post.formattedDate}</span>
                   <h2>{post.title}</h2>
                 </div>
               </div>
@@ -60,10 +59,12 @@ class IndexPage extends React.Component {
           <h1>My projects</h1>
 
           <div className={style.list}>
-            {this.props.data.allProjectsYaml.nodes.map(project => (
-              <a href={project.website} target="_blank" rel="noreferrer">
+            {this.props.data.allGraphCmsProject.nodes.map(project => (
+              <a href={project.githubUrl} target="_blank" rel="noreferrer">
                 <div className={style.project}>
                   <h2>{ project.name }</h2>
+
+                  <span className={style.maintenenceStatus}>{ project.projectStatus.replaceAll("_", " ") }</span>
 
                   <p>{ project.description }</p>
                 </div>
@@ -86,45 +87,32 @@ const Index = () => (
           gatsbyImageData(width: 800, layout: CONSTRAINED, placeholder: BLURRED, quality: 100)
         }
       }
-      allProjectsYaml {
-        nodes {
-          id
-          name
-          github
-          maintained
-          website
-          description
-        }
-      }
-
-      allWpPost(limit: 4, sort: {fields: date, order: DESC})  {
+      allGraphCmsBlogPost(sort: {fields: publishedAt, order: DESC}, limit: 4) {
         nodes {
           title
           slug
-          excerpt
-          date(formatString: "MMMM DD, YYYY")
+          formattedDate
+          category {
+            name
+          }
           featuredImage {
-            node {
-              localFile {
-                childrenImageSharp {
-                  gatsbyImageData(
+            gatsbyImageData(
                     height: 427
                     width: 640
                     layout: CONSTRAINED
                     placeholder: BLURRED
-                    formats: [AUTO, WEBP, AVIF]
-                    transformOptions: {cropFocus: CENTER}
                     quality: 90
-                  )
-                }
-              }
-            }
+            )
           }
-          categories {
-            nodes {
-              name
-            }
-          }
+        }
+      }
+      allGraphCmsProject {
+        nodes {
+          id
+          githubUrl
+          description
+          name
+          projectStatus
         }
       }
     }
