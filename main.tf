@@ -117,6 +117,16 @@ resource "cloudflare_record" "simse_telemetry" {
   proxied = false
 }
 
+resource "cloudflare_record" "simse_pmam" {
+  zone_id = data.cloudflare_zones.domain.zones[0].id
+  name    = "pmam"
+  value   = "78.46.46.239"
+  type    = "A"
+
+  ttl     = 3600
+  proxied = false
+}
+
 resource "cloudflare_record" "google_ownership" {
   zone_id = data.cloudflare_zones.domain.zones[0].id
   name    = "simse.io"
