@@ -79,9 +79,11 @@ export const query = graphql`
       overridePublishDate
       featuredImage {
         gatsbyImageData(
-                width: 1600
+                width: 1000
+                height: 600
                 placeholder: BLURRED
                 layout: CONSTRAINED
+                quality: 80
         )
       }
       category {
