@@ -87,26 +87,6 @@ resource "cloudflare_record" "gatsby_cloud_3" {
   proxied = false
 }
 
-resource "cloudflare_record" "ghost_address" {
-  zone_id = data.cloudflare_zones.domain.zones[0].id
-  name    = "ghost"
-  value   = "116.202.234.197"
-  type    = "A"
-
-  ttl     = 3600
-  proxied = false
-}
-
-resource "cloudflare_record" "wp_address" {
-  zone_id = data.cloudflare_zones.domain.zones[0].id
-  name    = "editor"
-  value   = "116.202.234.197"
-  type    = "A"
-
-  ttl     = 3600
-  proxied = false
-}
-
 resource "cloudflare_record" "simse_telemetry" {
   zone_id = data.cloudflare_zones.domain.zones[0].id
   name    = "telemetry"
@@ -139,7 +119,7 @@ resource "cloudflare_record" "google_ownership" {
 resource "cloudflare_record" "simse_health_api" {
   zone_id = data.cloudflare_zones.domain.zones[0].id
   name    = "api.health"
-  value   = "116.202.234.197"
+  value   = "78.46.46.239"
   type    = "A"
 
   ttl     = 3600
