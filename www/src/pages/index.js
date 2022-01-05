@@ -16,7 +16,7 @@ class IndexPage extends React.Component {
         maxWidth: "100vw",
         overflowX: "hidden"
       }}>
-        <Seo />
+        <Seo description="My name is Simon and I love writing software. Welcome to my slice of the internet." />
 
         <Navbar />
         
@@ -43,7 +43,7 @@ class IndexPage extends React.Component {
             <Link to={`blog/${post.slug}`}>
               <div className={style.post}>
               {post.featuredImage && <GatsbyImage
-                image={post.featuredImage.gatsbyImageData}
+                image={post.featuredImage.localFile.childImageSharp.gatsbyImageData}
                 alt="Picture of Simon" />}
 
                 <div className={style.meta}>
@@ -61,7 +61,7 @@ class IndexPage extends React.Component {
 
           <div className={style.list}>
             {this.props.data.allGraphCmsProject.nodes.map(project => (
-              <a href={project.githubUrl} target="_blank" rel="noreferrer">
+              <a href={project.githubUrl} target="_blank" rel="noreferrer" key={project.id}>
                 <div className={style.project}>
                   <h2>{ project.name }</h2>
 
@@ -85,7 +85,7 @@ const Index = () => (
     query={graphql`{
       file(relativePath: {eq: "simse.jpg"}) {
         childImageSharp {
-          gatsbyImageData(width: 800, layout: CONSTRAINED, placeholder: BLURRED, quality: 100)
+          gatsbyImageData(width: 800, layout: CONSTRAINED, placeholder: BLURRED, quality: 80)
         }
       }
       allGraphCmsBlogPost(sort: {fields: publishedAt, order: DESC}, limit: 4) {
@@ -98,13 +98,17 @@ const Index = () => (
             name
           }
           featuredImage {
-            gatsbyImageData(
+            localFile {
+              childImageSharp {
+                gatsbyImageData(
                     height: 427
                     width: 640
                     layout: CONSTRAINED
                     placeholder: BLURRED
                     quality: 90
-            )
+                )
+              }
+            }
           }
         }
       }

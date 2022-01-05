@@ -29,7 +29,7 @@ function Seo({ description, lang, meta, title }) {
 
     let pageTitle
   if (title === "") {
-    pageTitle = site.siteMetadata.title + " / Hobby programmer"
+    pageTitle = site.siteMetadata.title + " / Computer Science student"
   } else {
     pageTitle = title + " / " + site.siteMetadata.title
   }

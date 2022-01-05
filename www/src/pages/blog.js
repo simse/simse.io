@@ -26,7 +26,7 @@ const BlogPage = ({data}) => (
         <Link to={"/blog/" + post.slug} key={post.slug}>
           <div className={styles.post}>
             {post.featuredImage && <GatsbyImage
-              image={post.featuredImage.gatsbyImageData}
+              image={post.featuredImage.localFile.childImageSharp.gatsbyImageData}
               alt="Picture of Simon" />}
 
             <div className={styles.text}>
@@ -55,12 +55,16 @@ export const query = graphql`
           name
         }
         featuredImage {
-          gatsbyImageData(
+          localFile {
+            childImageSharp {
+              gatsbyImageData(
                   height: 300
                   width: 500
                   placeholder: BLURRED
                   layout: CONSTRAINED
-          )
+              )
+            }
+          }
         }
       }
     }

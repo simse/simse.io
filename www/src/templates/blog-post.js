@@ -45,7 +45,7 @@ export default function BlogPost({data, pageContext}) {
                 </div>
 
               {post.featuredImage && <GatsbyImage
-                image={post.featuredImage.gatsbyImageData} alt="a picture" />}
+                image={post.featuredImage.localFile.childImageSharp.gatsbyImageData} alt="a picture" />}
 
                 <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.content.html }}></div>
 
@@ -78,13 +78,17 @@ export const query = graphql`
       publishedAt
       overridePublishDate
       featuredImage {
-        gatsbyImageData(
+        localFile {
+          childImageSharp {
+            gatsbyImageData(
                 width: 1000
                 height: 600
                 placeholder: BLURRED
                 layout: CONSTRAINED
                 quality: 80
-        )
+            )
+          }
+        }
       }
       category {
         name
