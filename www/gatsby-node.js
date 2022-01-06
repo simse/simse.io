@@ -10,17 +10,19 @@ exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions
   const result = await graphql(`
       query {
-        allGraphCmsBlogPost {
+        allMdx(filter: {frontmatter: {stage: {eq: "published"}}}) {
           nodes {
-            title
             slug
+            frontmatter {
+              title
+            }
             id
           }
         }
       }
     `)
 
-  result.data.allGraphCmsBlogPost.nodes.forEach((post) => {
+  result.data.allMdx.nodes.forEach((post) => {
     let previousPost = null
     let nextPost = null
 
@@ -41,7 +43,7 @@ exports.createPages = async ({ graphql, actions }) => {
     // console.log(post)
 
     createPage({
-      path: "blog/" + post.slug,
+      path: "blog/" + post.slug.split("/")[0],
       component: path.resolve(`./src/templates/blog-post.js`),
       context: {
         // Data passed to context is available

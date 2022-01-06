@@ -1,16 +1,18 @@
 import React from "react"
 import { graphql, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { overrideDate } from "../utils/date"
+import { MDXRenderer } from "gatsby-plugin-mdx"
 
 import Seo from "../components/seo"
 import Navbar from "../components/navbar"
+import Footer from "../components/footer"
 
 import ArrowLeft from "../icons/arrow-left.svg"
 import * as styles from "../styles/pages/blog-post.module.scss"
 
+
 export default function BlogPost({data, pageContext}) {
-    const post = data.graphCmsBlogPost
+    const post = data.mdx
 
    // console.log(pageContext)
 
@@ -20,8 +22,8 @@ export default function BlogPost({data, pageContext}) {
         "href": "/blog"
       },
       {
-        "name": post.title,
-        "href": "/blog/" + post.slug
+        "name": post.frontmatter.title,
+        "href": "/blog/" + post.slug.split("/")[0]
       }
     ]
 
@@ -29,25 +31,27 @@ export default function BlogPost({data, pageContext}) {
 
     return (
         <>
-            <Seo title={post.title} />
+            <Seo title={post.frontmatter.title} />
 
             <Navbar breadcrumbs={breadcrumbs} />
 
             <div className={styles.post}>
-                <h1 className={styles.title}>{post.title}</h1>
+                <h1 className={styles.title}>{post.frontmatter.title}</h1>
 
                 <div className={styles.tags}>
-                    <span>{post.category.name}</span>
+                    <span>{post.frontmatter.categories[0]}</span>
 
                     <span> — </span>
 
-                    <span>{overrideDate(post.publishedAt, post.overridePublishDate)}</span>
+                    <span>{post.frontmatter.publishedAt}</span>
                 </div>
 
-              {post.featuredImage && <GatsbyImage
-                image={post.featuredImage.localFile.childImageSharp.gatsbyImageData} alt="a picture" />}
+              {post.frontmatter.featuredImage && <GatsbyImage
+                image={post.frontmatter.featuredImage.childImageSharp.gatsbyImageData} alt="a picture" />}
 
-                <div className={styles.content} dangerouslySetInnerHTML={{ __html: post.content.html }}></div>
+                <div className={styles.content}>
+                  <MDXRenderer>{post.body}</MDXRenderer>
+                </div>
 
                 <div className={styles.postNav}>
                   {pageContext.previousPost && <Link to={"/blog/" + pageContext.previousPost.slug} className={styles.firstLink}>
@@ -67,63 +71,34 @@ export default function BlogPost({data, pageContext}) {
                   </Link>}
                 </div>
             </div>
+
+            <Footer />
         </>
     )
   }
 
 export const query = graphql`
   query($id: String!) {
-    graphCmsBlogPost(id: {eq: $id}) {
-      title
-      publishedAt
-      overridePublishDate
-      featuredImage {
-        localFile {
+    mdx(id: {eq: $id}) {
+      frontmatter {
+        categories
+        publishedAt(formatString: "YYYY, MMM DD")
+        title
+        featuredImage {
           childImageSharp {
             gatsbyImageData(
                 width: 1000
                 height: 600
                 placeholder: BLURRED
                 layout: CONSTRAINED
-                quality: 80
+                transformOptions: { cropFocus: CENTER }
+                quality: 75
             )
           }
         }
       }
-      category {
-        name
-      }
-      content {
-        html
-      }
+      body
       slug
     }
   }
 `
-/*
-wpPost(databaseId: {eq: $id}) {
-      content
-      title
-      categories {
-        nodes {
-          name
-        }
-      }
-      slug
-      featuredImage {
-        node {
-          localFile {
-            childImageSharp {
-              gatsbyImageData(
-                width: 1600
-                placeholder: BLURRED
-                formats: AUTO
-                layout: CONSTRAINED
-              )
-            }
-          }
-        }
-      }
-      date(formatString: "MMMM DD, YYYY")
-    }
-    */

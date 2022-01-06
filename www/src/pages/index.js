@@ -1,7 +1,6 @@
 import React from "react"
 import { graphql, StaticQuery, Link } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image";
-import { overrideDate } from "../utils/date";
 
 import Seo from "../components/seo"
 import Navbar from "../components/navbar"
@@ -39,16 +38,16 @@ class IndexPage extends React.Component {
           <h1>Latest blog posts</h1>
 
           <div className={style.list}>
-          {this.props.data.allGraphCmsBlogPost.nodes.map(post => (
-            <Link to={`blog/${post.slug}`}>
+          {this.props.data.allMdx.nodes.map(post => (
+            <Link to={`blog/${post.slug.split("/")[0]}`}>
               <div className={style.post}>
-              {post.featuredImage && <GatsbyImage
-                image={post.featuredImage.localFile.childImageSharp.gatsbyImageData}
+              {post.frontmatter.featuredImage && <GatsbyImage
+                image={post.frontmatter.featuredImage.childImageSharp.gatsbyImageData}
                 alt="Picture of Simon" />}
 
                 <div className={style.meta}>
-                  <span>{post.category.name} — {overrideDate(post.publishedAt, post.overridePublishDate)}</span>
-                  <h2>{post.title}</h2>
+                  <span>{post.frontmatter.categories[0]} — {post.frontmatter.publishedAt}</span>
+                  <h2>{post.frontmatter.title}</h2>
                 </div>
               </div>
             </Link>
@@ -88,28 +87,26 @@ const Index = () => (
           gatsbyImageData(width: 800, layout: CONSTRAINED, placeholder: BLURRED, quality: 80)
         }
       }
-      allGraphCmsBlogPost(sort: {fields: publishedAt, order: DESC}, limit: 4) {
+      allMdx(limit: 4, sort: {fields: frontmatter___publishedAt, order: DESC}, filter: {frontmatter: {stage: {eq: "published"}}}) {
         nodes {
-          title
           slug
-          publishedAt
-          overridePublishDate
-          category {
-            name
-          }
-          featuredImage {
-            localFile {
+          frontmatter {
+            title
+            publishedAt(formatString: "YYYY, MMM DD")
+            categories
+            featuredImage {
               childImageSharp {
                 gatsbyImageData(
-                    height: 427
-                    width: 640
-                    layout: CONSTRAINED
-                    placeholder: BLURRED
-                    quality: 90
+                  height: 427
+                  width: 640
+                  layout: CONSTRAINED
+                  placeholder: BLURRED
+                  quality: 90
                 )
               }
             }
           }
+
         }
       }
       allGraphCmsProject {

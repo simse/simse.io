@@ -1,7 +1,6 @@
 import React from "react"
 import { Link, graphql } from "gatsby"
 import { GatsbyImage } from "gatsby-plugin-image"
-import { overrideDate } from "../utils/date"
 
 import Seo from "../components/seo"
 import Navbar from "../components/navbar"
@@ -22,17 +21,17 @@ const BlogPage = ({data}) => (
     } />
 
     <div className={styles.posts}>
-      {data.allGraphCmsBlogPost.nodes.map(post => (
-        <Link to={"/blog/" + post.slug} key={post.slug}>
+      {data.allMdx.nodes.map(post => (
+        <Link to={"/blog/" + post.slug.split("/")[0]} key={post.slug.split("/")[0]}>
           <div className={styles.post}>
-            {post.featuredImage && <GatsbyImage
-              image={post.featuredImage.localFile.childImageSharp.gatsbyImageData}
-              alt="Picture of Simon" />}
+            {post.frontmatter.featuredImage && <GatsbyImage
+              image={post.frontmatter.featuredImage.childImageSharp.gatsbyImageData}
+              alt="Blog post featured image" />}
 
             <div className={styles.text}>
-              <span className={styles.meta}>{post.category.name} — {overrideDate(post.publishedAt, post.overridePublishDate)}</span>
+              <span className={styles.meta}>{post.frontmatter.categories[0]} — {post.frontmatter.publishedAt}</span>
 
-              <h2>{ post.title }</h2>
+              <h2>{ post.frontmatter.title }</h2>
             </div>
           </div>
         </Link>
@@ -45,17 +44,14 @@ export default BlogPage
 
 export const query = graphql`
   query {
-    allGraphCmsBlogPost(sort: {fields: publishedAt, order: DESC}) {
+    allMdx(sort: {fields: frontmatter___publishedAt, order: DESC}, filter: {frontmatter: {stage: {eq: "published"}}}) {
       nodes {
-        title
         slug
-        publishedAt
-        overridePublishDate
-        category {
-          name
-        }
-        featuredImage {
-          localFile {
+        frontmatter {
+          title
+          publishedAt(formatString: "YYYY, MMM DD")
+          categories
+          featuredImage {
             childImageSharp {
               gatsbyImageData(
                   height: 300

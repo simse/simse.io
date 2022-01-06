@@ -139,7 +139,6 @@
 .blog,
 .projects {
     padding: 80px 150px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
     @media(max-width: 1400px) {
         padding: 80px 5%;
@@ -210,6 +209,8 @@
 }
 
 .blog {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    
     .list {
         display: grid;
         grid-template-columns: repeat(auto-fill, 350px);

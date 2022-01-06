@@ -177,7 +177,7 @@ class Navbar extends React.Component {
         return (
             <StaticQuery query={graphql`
         query MyQuery {
-            allGraphCmsBlogPost {
+            allMdx(filter: {frontmatter: {stage: {eq: "published"}}}) {
                 nodes {
                   id
                 }
@@ -220,7 +220,7 @@ class Navbar extends React.Component {
                                 </Link>
 
                                 <Link to="/blog" ref={this.blogRef} onClick={this.toggleMenu}>
-                                    <h1>Blog <sup>{data.allGraphCmsBlogPost.nodes.length}</sup></h1>
+                                    <h1>Blog <sup>{data.allMdx.nodes.length}</sup></h1>
                                 </Link>
 
                                 <Link to="/contact" ref={this.projectsRef} onClick={this.toggleMenu}>
