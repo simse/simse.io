@@ -9,15 +9,15 @@ const ai = {
         console.log("test")
     },
     load: () => {
-        tf.loadLayersModel('/model/model.json').then(model => {
+        tf.loadLayersModel('/ai-simon/model/model.json').then(model => {
             ai.model = model
         })
         
-        fetch("/model/classes.json").then(response => response.json()).then(data => {
+        fetch("/ai-simon/model/classes.json").then(response => response.json()).then(data => {
             ai.classes = data
         })
 
-        fetch("/model/words.json").then(response => response.json()).then(data => {
+        fetch("/ai-simon/model/words.json").then(response => response.json()).then(data => {
             ai.words = data
         })
     },
