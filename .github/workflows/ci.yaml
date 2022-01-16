@@ -194,8 +194,11 @@ jobs:
         with:
           python-version: '3.8'
 
+      - name: Install Python wheel package
+        run: pip install wheel
+
       - name: Install Python dependencies
-        run: pip install nltk numpy tensorflow tensorflowjs keras
+        run: pip install nltk numpy tensorflow tensorflowjs keras pandas
 
       - name: Cache node_modules
         uses: actions/cache@v2
