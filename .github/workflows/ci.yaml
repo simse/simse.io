@@ -190,6 +190,13 @@ jobs:
         with:
           node-version: '14'
 
+      - uses: actions/setup-python@v2
+        with:
+          python-version: '3.8'
+
+      - name: Install Python dependencies
+        run: pip install nltk numpy tensorflow tensorflowjs keras
+
       - name: Cache node_modules
         uses: actions/cache@v2
         with:
@@ -200,7 +207,7 @@ jobs:
         run: yarn
 
       - name: Build site
-        run: yarn build --prefix-paths
+        run: bash build.sh
 
       - name: Publish site
         run: |
