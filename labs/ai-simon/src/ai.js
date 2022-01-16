@@ -9,15 +9,17 @@ const ai = {
         console.log("test")
     },
     load: () => {
-        tf.loadLayersModel('/ai-simon/model/model.json').then(model => {
+        let prefix = process.env.NODE_ENV === "development" ? "" : "/ai-simon"
+
+        tf.loadLayersModel(prefix + '/model/model.json').then(model => {
             ai.model = model
         })
         
-        fetch("/ai-simon/model/classes.json").then(response => response.json()).then(data => {
+        fetch(prefix + "/model/classes.json").then(response => response.json()).then(data => {
             ai.classes = data
         })
 
-        fetch("/ai-simon/model/words.json").then(response => response.json()).then(data => {
+        fetch(prefix + "/model/words.json").then(response => response.json()).then(data => {
             ai.words = data
         })
     },
