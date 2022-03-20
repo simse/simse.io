@@ -55,25 +55,28 @@ exports.createPages = async ({ graphql, actions }) => {
     })
   })
 
+  /*
   // Create project pages
   const projects = await graphql(`
-      query {
-        allGraphCmsProject {
-          nodes {
-            id
-            slug
-          }
+  query AllProjects {
+    allMdx(filter: {fileAbsolutePath: {regex: "/projects/"}}) {
+      nodes {
+        frontmatter {
+          name
+          id
         }
       }
-    `)
+    }
+  }
+  `)
 
-  projects.data.allGraphCmsProject.nodes.forEach((project) => {
+  projects.data.allMdx.nodes.forEach((project) => {
     createPage({
-      path: "project/" + project.slug,
+      path: "project/" + project.id,
       component: path.resolve(`./src/templates/project-page.js`),
       context: {
         id: project.id,
       },
     })
-  })
+  })*/
 }

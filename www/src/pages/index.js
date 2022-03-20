@@ -38,7 +38,7 @@ class IndexPage extends React.Component {
           <h1>Latest blog posts</h1>
 
           <div className={style.list}>
-          {this.props.data.allMdx.nodes.map(post => (
+          {this.props.data.latestPosts.nodes.map(post => (
             <Link to={`blog/${post.slug.split("/")[0]}`}>
               <div className={style.post}>
               {post.frontmatter.featuredImage && <GatsbyImage
@@ -59,14 +59,14 @@ class IndexPage extends React.Component {
           <h1>My projects</h1>
 
           <div className={style.list}>
-            {this.props.data.allGraphCmsProject.nodes.map(project => (
-              <a href={project.githubUrl} target="_blank" rel="noreferrer" key={project.id}>
+            {this.props.data.projects.nodes.map(project => (
+              <a href={project.frontmatter.githubUrl} target="_blank" rel="noreferrer" key={project.frontmatter.id}>
                 <div className={style.project}>
-                  <h2>{ project.name }</h2>
+                  <h2>{ project.frontmatter.name }</h2>
 
-                  <span className={style.maintenenceStatus}>{ project.projectStatus.replaceAll("_", " ") }</span>
+                  <span className={style.maintenenceStatus}>{ project.frontmatter.projectStatus }</span>
 
-                  <p>{ project.description }</p>
+                  <p>{ project.frontmatter.description }</p>
                 </div>
               </a>
             ))}
@@ -87,7 +87,7 @@ const Index = () => (
           gatsbyImageData(width: 800, layout: CONSTRAINED, placeholder: BLURRED, quality: 80)
         }
       }
-      allMdx(limit: 4, sort: {fields: frontmatter___publishedAt, order: DESC}, filter: {frontmatter: {stage: {eq: "published"}}}) {
+      latestPosts: allMdx(limit: 4, sort: {fields: frontmatter___publishedAt, order: DESC}, filter: {frontmatter: {stage: {eq: "published"}}, fileAbsolutePath: {regex: "/blog/"}}) {
         nodes {
           slug
           frontmatter {
@@ -109,13 +109,15 @@ const Index = () => (
 
         }
       }
-      allGraphCmsProject {
+      projects: allMdx(filter: {fileAbsolutePath: {regex: "/projects/"}}) {
         nodes {
-          id
-          githubUrl
-          description
-          name
-          projectStatus
+          frontmatter {
+            name
+            id
+            githubUrl
+            description
+            projectStatus
+          }
         }
       }
     }

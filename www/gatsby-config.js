@@ -18,14 +18,6 @@ module.exports = {
     `gatsby-plugin-image`,
     `gatsby-source-build-date`,
     {
-      resolve: 'gatsby-source-graphcms',
-      options: {
-        endpoint: process.env.GRAPHCMS_ENDPOINT,
-      //  token: process.env.GRAPHCMS_TOKEN,
-        downloadLocalImages: true,
-      },
-    },
-    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
@@ -37,6 +29,13 @@ module.exports = {
       options: {
         name: `blog`,
         path: `${__dirname}/content/blog`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `blog`,
+        path: `${__dirname}/content/projects`,
       },
     },
     {

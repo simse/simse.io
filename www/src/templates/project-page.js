@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react"
+/*import React, { useState, useEffect } from "react"
 import { graphql } from "gatsby"
 
 import Seo from "../components/seo"
@@ -99,4 +99,4 @@ export const query = graphql`
         insights
     }
   }
-`
+`*/
