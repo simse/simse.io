@@ -1,4 +1,0 @@
-tasks:
-  - init: |
-      yarn --cwd www/
-      yarn --cwd health/
