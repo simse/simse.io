@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* fonts */
+@font-face {
+    font-family: Univers;
+    src: url('/fonts/Univers-Regular.woff2') format('woff2');
+    font-weight: 400;
+}
+
+@font-face {
+    font-family: Univers;
+    src: url('/fonts/Univers-Bold.woff2') format('woff2');
+    font-weight: 700;
+}
