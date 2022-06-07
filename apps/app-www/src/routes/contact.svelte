@@ -1,12 +1,7 @@
 <script lang="ts">
-    import { breadcrumbs } from "../stores";
-    
-    breadcrumbs.update(_ => [
-        {
-            path: "/contact",
-            name: "Contact"
-        }
-    ])
+    import { setBreadcrumbs } from "$lib/breadcrumbs"
+
+    setBreadcrumbs([["/contact", "Contact"]])
 </script>
 
 <h1 class="text-3xl mb-8">Contact</h1>

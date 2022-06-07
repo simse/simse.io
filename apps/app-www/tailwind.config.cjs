@@ -3,9 +3,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Univers', 'sans-serif'],
+        sans: ['Unica', 'sans-serif'],
       },
     },
   },
-  plugins: [],
 }

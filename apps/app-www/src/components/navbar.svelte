@@ -34,7 +34,7 @@ import { breadcrumbs } from "../stores.js";
     $: currentPath = $page.url.pathname;
 </script>
 
-<nav class="flex justify-between py-4 container mx-auto border-b">
+<nav class="flex justify-between py-4 max-w-6xl mx-auto border-b">
 	<div>
 		<a href="/" class="hover:underline">
             <span class="font-bold text-xl">Simon Sorensen</span>
@@ -50,7 +50,7 @@ import { breadcrumbs } from "../stores.js";
 	</div>
 </nav>
 
-<nav class="container mx-auto py-2 border-b flex gap-2">
+<nav class="max-w-6xl mx-auto py-2 border-b flex gap-2">
 		<a href="/" class="hover:underline">~</a>
 
 		{#each $breadcrumbs as crumb}

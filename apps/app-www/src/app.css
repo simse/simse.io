@@ -7,10 +7,33 @@
     font-family: Univers;
     src: url('/fonts/Univers-Regular.woff2') format('woff2');
     font-weight: 400;
+    font-display: swap;
 }
 
 @font-face {
     font-family: Univers;
     src: url('/fonts/Univers-Bold.woff2') format('woff2');
     font-weight: 700;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "IBM Plex Mono";
+    src: url('/fonts/IBMPlexMono-Regular-Latin1.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Unica;
+    src: url('/fonts/Unica-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: Unica;
+    src: url('/fonts/Unica-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
 }

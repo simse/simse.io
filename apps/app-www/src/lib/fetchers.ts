@@ -1,0 +1,5 @@
+const getArticles = () => {}
+
+export {
+    getArticles
+}

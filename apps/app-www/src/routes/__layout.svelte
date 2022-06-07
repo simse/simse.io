@@ -8,6 +8,6 @@
 
 <Navbar />
 
-<main class="container mx-auto mt-16">
+<main class="max-w-6xl mx-auto">
 	<slot />
 </main>
