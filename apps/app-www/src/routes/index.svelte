@@ -14,7 +14,7 @@
 </script>
 
 <main class="py-32 border-b">
-    <h1 class="text-3xl mb-4">Howdy! 👋🤠</h1>
+    <h1 class="text-3xl mb-4">Good evening 👋</h1>
     <p class="text-xl">Welcome to my slice of the internet.</p>
 </main>
 

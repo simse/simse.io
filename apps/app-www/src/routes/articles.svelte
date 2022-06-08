@@ -36,7 +36,7 @@
     export let posts: any;
 </script>
 
-<main class="mb-32">
+<main class="mb-32 pt-16">
     <Title title="Articles" />
 
     <div>

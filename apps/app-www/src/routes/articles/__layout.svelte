@@ -42,7 +42,7 @@
 	<title>{post.title} / Simon Sorensen</title>
 </svelte:head>
 
-<main class="max-w-5xl mb-32">
+<main class="max-w-5xl mb-32 pt-16">
 	<div class="mb-8">
 
 		
