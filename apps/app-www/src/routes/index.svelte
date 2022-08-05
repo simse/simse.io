@@ -6,9 +6,10 @@
     const personalInformation = [
         ["Name", "Simon Sorensen"],
         ["City", "London 😎"],
-        ["Occupation", "Software Engineer Intern, Computer Science Undergraduate"],
+        ["Occupation", "Software Engineering Intern"],
         ["Employer", "LEGO"],
         ["University", "Kingston University"],
+        ["Degree", "Computer Science"],
         ["Social Security", "078-05-1120"]
     ]
 </script>

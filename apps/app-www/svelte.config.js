@@ -2,7 +2,6 @@ import { mdsvex } from 'mdsvex';
 import mdsvexConfig from './mdsvex.config.js';
 import adapter from '@sveltejs/adapter-static';
 import preprocess from 'svelte-preprocess';
-import {imagetools} from 'vite-imagetools';
 
 /** @type {import('@sveltejs/kit').Config} */
 const config = {
@@ -22,12 +21,6 @@ const config = {
 		prerender: {
 			default: true,
 			onError: 'continue'
-		},
-		vite: {
-			plugins: [imagetools({
-				include: '**/*.{heic,heif,avif,jpeg,jpg,png,tiff,webp,gif}*',
-				defaultDirectives: new URLSearchParams('?width=400;1200;1600&aspect=5:3&webp'),
-			})]
 		},
 	}
 };
