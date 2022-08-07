@@ -8,15 +8,9 @@
 		let posts = await fetch('/articles.json').then((res: any) => res.json());
 
         // inject pictures
-        posts = await Promise.all(posts.map(async (post: any)  => {
-            if (post.image) {
-                const { default: srcset } = await import(`../../static/images/${post.image}.jpg`);
-
-                post.srcset = srcset[0];
-            }
-
+        /*posts = await Promise.all(posts.map(async (post: any)  => {
             return post
-        }))
+        }))*/
 
 		return {
 			props: {
@@ -24,6 +18,8 @@
 			}
 		};
 	}
+
+    
 </script>
 
 <script lang="ts">
@@ -43,7 +39,7 @@
         {#each posts as post}
         <a href={"/articles/" + post.slug} class="first:border-t border-b border-gray-200 block">
             <div class="my-1 py-1 flex items-center gap-3">
-                <Image css="h-8" srcset={post.srcset} />
+                <Image css="h-8" src={post.image} />
 
                 <span>{post.date}</span>
                 <h2 class="font-bold hover:underline text-blue-800 hover:text-blue-900">{post.title}</h2>

@@ -13,12 +13,6 @@
 			};
 		}
 
-		if (post.image) {
-			const { default: srcset } = await import(`../../../static/images/${post.image}.jpg`);
-
-			post.srcset = srcset[2];
-		}
-
 		return {
 			props: {
 				post
@@ -52,7 +46,7 @@
 		</div>
 		
 		{#if post.image}
-		<Image srcset={post.srcset} credit={post.imageCredit} css="my-8" />
+		<Image src={post.image} credit={post.imageCredit} css="my-8" />
 		{/if}
 	</div>
 

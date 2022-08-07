@@ -14,9 +14,15 @@
     ]
 </script>
 
-<main class="py-32 border-b">
-    <h1 class="text-3xl mb-4">Good evening 👋</h1>
-    <p class="text-xl">Welcome to my slice of the internet.</p>
+<main class="py-32 border-b flex items-center">
+    <div>
+        <img class="w-28 mr-8" src="/images/wink.png" />
+    </div>
+
+    <div>
+        <h1 class="text-3xl mb-4">Good evening 👋</h1>
+        <p class="text-xl">Welcome to my slice of the internet.</p>
+    </div>
 </main>
 
 <div class="py-8 border-b">
