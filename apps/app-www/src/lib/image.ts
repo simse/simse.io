@@ -18,6 +18,10 @@ const createImageUrl = (source: string, width: number, height: number): string =
 const createSrcset = (source: string): string => {
     const sizes = [200, 400, 600, 1000, 1200, 1400, 2000]
 
+    if (source === "") {
+        return ""
+    }
+
     return sizes.map(size => {
         return createImageUrl(source, size, size/5*3) + ` ${size}w`
     }).join(', ')

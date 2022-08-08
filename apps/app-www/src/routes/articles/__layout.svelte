@@ -46,7 +46,7 @@
 		</div>
 		
 		{#if post.image}
-		<Image src={post.image} credit={post.imageCredit} css="my-8" />
+		<Image src={post.image} sizes="" credit={post.imageCredit} css="my-8" />
 		{/if}
 	</div>
 

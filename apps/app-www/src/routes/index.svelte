@@ -1,5 +1,24 @@
-<script>
+<script context="module" lang="ts">
+	/**
+	 * @type {import('@sveltejs/kit').Load}
+	 */
+	export async function load({ fetch }: any) {
+		let posts = await fetch('/articles.json?limit=10').then((res: any) => res.json());
+
+		return {
+			props: {
+				posts
+			}
+		};
+	}
+</script>
+
+<script lang="ts">
+    // import parts
     import { setBreadcrumbs } from "$lib/breadcrumbs"
+    import ArticleList from "../components/articleList.svelte";
+
+    export let posts: any;
 
     setBreadcrumbs([])
 
@@ -11,7 +30,9 @@
         ["University", "Kingston University"],
         ["Degree", "Computer Science"],
         ["Social Security", "078-05-1120"]
-    ]
+    ];
+
+    
 </script>
 
 <main class="py-32 border-b flex items-center">
@@ -41,8 +62,8 @@
     </table>
 </div>
 
-<div class="py-8 border-b">
+<div class="py-8 ">
     <h2 class="text-lg font-bold mb-4">Articles</h2>
 
-    
+    <ArticleList posts={posts} />
 </div>

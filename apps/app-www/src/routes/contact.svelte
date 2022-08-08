@@ -4,8 +4,10 @@
     setBreadcrumbs([["/contact", "Contact"]])
 </script>
 
-<h1 class="text-3xl mb-8">Contact</h1>
+<div class="pt-16">
+    <h1 class="text-3xl mb-8">Contact</h1>
 
-<p class="text-lg">
-    <strong>email:</strong> hello@simse.io
-</p>
+    <p class="text-lg">
+        <strong>email:</strong> hello@simse.io
+    </p>
+</div>
