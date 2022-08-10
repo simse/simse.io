@@ -1,18 +1,22 @@
 lockfileVersion: 5.4
 
 specifiers:
-  '@astrojs/cloudflare': ^1.0.1
+  '@astrojs/deno': ^1.0.0
   '@astrojs/mdx': ^0.8.1
+  '@astrojs/node': ^1.0.0
   '@astrojs/svelte': ^1.0.0
   '@astrojs/tailwind': ^1.0.0
   astro: ^1.0.1
   astro-compress: ^0.0.17
   sass: ^1.54.4
   svelte: ^3.46.4
+  web-streams-polyfill: ^3.2.1
 
 dependencies:
-  '@astrojs/cloudflare': 1.0.1
+  '@astrojs/deno': 1.0.0
+  '@astrojs/node': 1.0.0
   sass: 1.54.4
+  web-streams-polyfill: 3.2.1
 
 devDependencies:
   '@astrojs/mdx': 0.8.1
@@ -32,15 +36,15 @@ packages:
       '@jridgewell/trace-mapping': 0.3.14
     dev: true
 
-  /@astrojs/cloudflare/1.0.1:
-    resolution: {integrity: sha512-brEyIAjwjlzqBT3JDWcWoK5WN/CHU1wVhGbv8fy8jjSzF2O8q7cCPOWugLPCRQX+VBiWSX9BV/KQrHaJ7DyKaQ==}
-    dependencies:
-      esbuild: 0.14.54
-    dev: false
-
   /@astrojs/compiler/0.23.1:
     resolution: {integrity: sha512-KsoDrASGwTKZoWXbjy8SlIeoDv7y1OfBJtHVLuPuzhConA8e0SZpGzFqIuVRfG4bhisSTptZLDQZ7oxwgPv2jA==}
     dev: true
+
+  /@astrojs/deno/1.0.0:
+    resolution: {integrity: sha512-uWmCn/ix2OCSLv6vC8aD2sELxEFip3DobyxHikdlGGu9x4TKpyJmqHbhQs9e42ia3Eo+1zdWidKgSONkq/N5tg==}
+    dependencies:
+      esbuild: 0.14.54
+    dev: false
 
   /@astrojs/language-server/0.20.3:
     resolution: {integrity: sha512-MuzTsSpUjtmMXfrBThtZwgO39Jc+Bbl5hLevumkp01N/YCKE+Iipd3ELSdbk7+TPiuBV+/SKrVmaQPvJBnWPkA==}
@@ -124,6 +128,12 @@ packages:
       vfile-message: 3.1.2
     dev: true
 
+  /@astrojs/node/1.0.0:
+    resolution: {integrity: sha512-w2QSYICDf9JC43bf9cLiiCMHaSfP6Nh07Ss8mDAJScG30Sc73stS/mkPxdnISABo2SQbtXjNe8rxwdu7Sus7Ag==}
+    dependencies:
+      '@astrojs/webapi': 1.0.0
+    dev: false
+
   /@astrojs/prism/1.0.0:
     resolution: {integrity: sha512-hRsHDw/y4p7bFpq9XSeDTJtIvhdajU5ZahfAh+n9I7VKsKUHTYI3xTkImcXgkkUoEWs6UI0gk4GgJjiiLEgfYQ==}
     engines: {node: ^14.18.0 || >=16.12.0}
@@ -191,7 +201,6 @@ packages:
     resolution: {integrity: sha512-+klQ75oQbRdAMEbvAgrKE14hxh6GVHsQWZE4j/eJ2qhnvMSu7pw13MVQtFaAV96+pUkcYSjwWd1k+Oxoxkuo3g==}
     dependencies:
       node-fetch: 3.2.10
-    dev: true
 
   /@babel/code-frame/7.18.6:
     resolution: {integrity: sha512-TDCmlK5eOvH+eH7cdAFlNXeVJqWIQ7gW9tY1GJIpUtFb6CmjVyq2VM3u71bOyR8CRihcCgMUYoDNyLXao3+70Q==}
@@ -1273,7 +1282,6 @@ packages:
   /data-uri-to-buffer/4.0.0:
     resolution: {integrity: sha512-Vr3mLBA8qWmcuschSLAOogKgQ/Jwxulv3RNE4FXnYWRGujzrRWQI4m12fQqRkwX06C0KanhLr4hK+GydchZsaA==}
     engines: {node: '>= 12'}
-    dev: true
 
   /debug/4.3.4:
     resolution: {integrity: sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==}
@@ -1758,7 +1766,6 @@ packages:
     dependencies:
       node-domexception: 1.0.0
       web-streams-polyfill: 3.2.1
-    dev: true
 
   /fill-range/7.0.1:
     resolution: {integrity: sha512-qOo9F+dMUmC2Lcb4BbVvnKJxTPjCm+RRpe4gDuGrzkL7mEVl/djYSu2OdQ2Pa302N4oqkSg9ir6jaLWJ2USVpQ==}
@@ -1799,7 +1806,6 @@ packages:
     engines: {node: '>=12.20.0'}
     dependencies:
       fetch-blob: 3.2.0
-    dev: true
 
   /fraction.js/4.2.0:
     resolution: {integrity: sha512-MhLuK+2gUcnZe8ZHlaaINnQLl0xRIGRfcGk2yl8xoQAfHrSsL3rYu6FCmBdkdbhc9EPlwyGHewaRsvwRMJtAlA==}
@@ -2988,7 +2994,6 @@ packages:
   /node-domexception/1.0.0:
     resolution: {integrity: sha512-/jKZoMpw0F8GRwl4/eLROPA3cfcXtLApP0QzLmUT/HuPCZWyB7IY9ZrMeKw2O/nFIqPQB3PVM9aYm0F312AXDQ==}
     engines: {node: '>=10.5.0'}
-    dev: true
 
   /node-fetch/3.2.10:
     resolution: {integrity: sha512-MhuzNwdURnZ1Cp4XTazr69K0BTizsBroX7Zx3UgDSVcZYKF/6p0CBe4EUb/hLqmzVhl0UpYfgRljQ4yxE+iCxA==}
@@ -2997,7 +3002,6 @@ packages:
       data-uri-to-buffer: 4.0.0
       fetch-blob: 3.2.0
       formdata-polyfill: 4.0.10
-    dev: true
 
   /node-releases/2.0.6:
     resolution: {integrity: sha512-PiVXnNuFm5+iYkLBNeq5211hvO38y63T0i2KKh2KnUs3RpzJ+JtODFjkD8yjLwnDkTYF1eKXheUwdssR+NRZdg==}
@@ -4366,7 +4370,6 @@ packages:
   /web-streams-polyfill/3.2.1:
     resolution: {integrity: sha512-e0MO3wdXWKrLbL0DgGnUV7WHVuw9OUvL4hjgnPkIeEvESk74gAITi5G606JtZPp39cd8HA9VQzCIvA49LpPN5Q==}
     engines: {node: '>= 8'}
-    dev: true
 
   /which-pm-runs/1.1.0:
     resolution: {integrity: sha512-n1brCuqClxfFfq/Rb0ICg9giSZqCS+pLtccdag6C2HyufBrh3fBOiy9nb6ggRMvWOVH5GrdJskj5iGTZNxd7SA==}
