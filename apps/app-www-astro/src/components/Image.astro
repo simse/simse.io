@@ -1,0 +1,56 @@
+---
+export interface Props {
+	src: string;
+	credit?: string;
+	css: string;
+    sizes: string;
+}
+
+const { src, credit, css, sizes } = Astro.props as Props;
+
+const dev = Astro.site?.host === "localhost";
+
+// constructs an image url asking the Sorensen Cloud Image service to resize
+const createImageUrl = (source: string, width: number, height: number): string => {
+    if (!source) return ""
+
+    // in dev mode and img src is relative, use picture of a dog
+    if (dev && !source.startsWith("http")) {
+        source = "https://i.imgur.com/AlAZW4U.jpg"
+    } else if (!source.startsWith("http")) {
+        source = "https://simse.io/images/" + source
+    }
+
+    return `https://images.sorensen.cloud/unsafe/${width}x${height}/smart/filters:format(webp)/${source}`
+}
+
+// generate a srcset group
+const createSrcset = (source: string): string => {
+    const sizes = [200, 400, 600, 1000, 1200, 1400, 2000]
+
+    if (source === "") {
+        return ""
+    }
+
+    return sizes.map(size => {
+        return createImageUrl(source, size, size/5*3) + ` ${size}w`
+    }).join(', ')
+}
+
+const srcset = createSrcset(src)
+---
+
+<div class={"aspect-[5/3] relative " + css}>
+    <img class="w-full h-full" src="/images/placeholder.svg" alt="placeholder holder" />
+    
+    <img 
+        class="top-0 max-h-full absolute"
+        src={src}
+        srcset={srcset}
+        sizes={sizes}
+        alt="" />
+
+    {credit !== "" &&
+    <p class="mt-4 text-gray-500">{credit}</p>}
+    
+</div>

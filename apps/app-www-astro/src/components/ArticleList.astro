@@ -1,0 +1,20 @@
+---
+import Image from "./Image.astro";
+
+const articles = await Astro.glob('../pages/articles/*.mdx');
+---
+<div>
+    {articles.map(article => (
+        <a href={article.url} class="first:border-t border-b border-gray-200 block">
+            <div class="my-1 py-1 flex items-center gap-3">
+                <Image css="h-8" src={article.frontmatter.image} sizes="200w" />
+
+                <span>{article.frontmatter.date}</span>
+                <h2 class="font-bold hover:underline text-blue-800 hover:text-blue-900">{article.frontmatter.title}</h2>
+                    
+                <button class="ml-auto text-white bg-blue-700 py-0.5 px-4 text-sm border border-black hover:bg-black">Read →</button>
+            </div>
+        </a>
+    ))}
+    
+</div>
