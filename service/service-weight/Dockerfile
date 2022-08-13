@@ -8,4 +8,6 @@ COPY . /app
 RUN go build
 RUN chmod +x service-weight
 
+EXPOSE 8080
+
 ENTRYPOINT [ "./service-weight" ]

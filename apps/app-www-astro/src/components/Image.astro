@@ -1,14 +1,17 @@
 ---
 export interface Props {
-	src: string;
-	credit?: string;
-	css: string;
+    src: string;
+    credit?: string;
+    css: string;
     sizes: string;
+    height?: number;
 }
 
-const { src, credit, css, sizes } = Astro.props as Props;
+const { src, credit, css, sizes, height } = Astro.props as Props;
 
 const dev = Astro.site?.host === "localhost";
+
+const aspectRatio = "5/3";
 
 // constructs an image url asking the Sorensen Cloud Image service to resize
 const createImageUrl = (source: string, width: number, height: number): string => {
@@ -20,6 +23,9 @@ const createImageUrl = (source: string, width: number, height: number): string =
     } else if (!source.startsWith("http")) {
         source = "https://simse.io/images/" + source
     }
+
+    width = Math.round(width)
+    height = Math.round(height)
 
     return `https://images.sorensen.cloud/unsafe/${width}x${height}/smart/filters:format(webp)/${source}`
 }
@@ -33,7 +39,7 @@ const createSrcset = (source: string): string => {
     }
 
     return sizes.map(size => {
-        return createImageUrl(source, size, size/5*3) + ` ${size}w`
+        return createImageUrl(source, size, size / 5 * 3) + ` ${size}w`
     }).join(', ')
 }
 
@@ -41,16 +47,15 @@ const srcset = createSrcset(src)
 ---
 
 <div class={"aspect-[5/3] relative " + css}>
-    <img class="w-full h-full" src="/images/placeholder.svg" alt="placeholder holder" />
-    
-    <img 
-        class="top-0 max-h-full absolute"
-        src={src}
-        srcset={srcset}
-        sizes={sizes}
-        alt="" />
+    <img class=" w-full h-full" src="/images/placeholder.svg" alt="placeholder holder" />
 
-    {credit !== "" &&
-    <p class="mt-4 text-gray-500">{credit}</p>}
-    
+{!height &&
+<img class="top-0 max-h-full absolute" src={src} srcset={srcset} sizes={sizes} alt="" />}
+
+{height &&
+<img class="top-0 max-h-full absolute" src={createImageUrl(src, height / 3 * 5, height)} alt="" />}
+
+{credit !== "" &&
+<p class="mt-4 text-gray-500">{credit}</p>}
+
 </div>

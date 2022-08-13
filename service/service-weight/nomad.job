@@ -4,7 +4,7 @@ job "simse.io/service-weight" {
   type        = "service"
 
   meta {
-    version = "2"
+    version = "4"
   }
 
   group "service-weight" {
@@ -34,7 +34,7 @@ job "simse.io/service-weight" {
 
       service {
         port = "http"
-	    name = "simse-io-service-weight"
+	      name = "simse-io-service-weight"
         tags = [
           "traefik.enable=true",
           "traefik.http.routers.simse-io-service-weight_insecure.rule=Host(`weight.simse.io`)",

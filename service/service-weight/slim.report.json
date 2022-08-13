@@ -1,0 +1,479 @@
+{
+  "version": "1.0",
+  "engine": "linux|Transformer|1.37.6|26a36c88a94c677efd734e874ba081dabb84a224|2022-04-23_06:03:56AM",
+  "containerized": false,
+  "host_distro": {
+    "name": "Ubuntu",
+    "version": "20.04",
+    "display_name": "Ubuntu 20.04.4 LTS"
+  },
+  "type": "build",
+  "state": "done",
+  "target_reference": "ghcr.io/simse/service-weight:latest",
+  "system": {
+    "type": "Linux",
+    "release": "5.10.16.3-microsoft-standard-WSL2",
+    "distro": {
+      "name": "Debian GNU/Linux",
+      "version": "11",
+      "display_name": "Debian GNU/Linux 11 (bullseye)"
+    }
+  },
+  "source_image": {
+    "identity": {
+      "id": "sha256:ad007ec1f864d83008ceff0ba9f5d2bdaf11c36938ae4bd376dd7abba6b5b993",
+      "tags": [
+        "latest"
+      ],
+      "names": [
+        "ghcr.io/simse/service-weight:latest"
+      ]
+    },
+    "size": 1164531162,
+    "size_human": "1.2 GB",
+    "create_time": "2022-08-13T19:45:55Z",
+    "docker_version": "",
+    "architecture": "amd64",
+    "exposed_ports": [
+      "8080/tcp"
+    ],
+    "os": "linux",
+    "labels": {
+      "org.opencontainers.image.source": "https://github.com/simse/simse.io"
+    },
+    "env_vars": [
+      "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+      "GOLANG_VERSION=1.18.4",
+      "GOPATH=/go",
+      "DB_FILE=metrics.db",
+      "INGEST_PASSWORD=test"
+    ],
+    "container_entry": {
+      "exe_path": ""
+    }
+  },
+  "minified_image_size": 17403577,
+  "minified_image_size_human": "17 MB",
+  "minified_image": "ghcr.io/simse/service-weight:latest",
+  "minified_image_has_data": true,
+  "minified_by": 66.91332258879885,
+  "artifact_location": "/tmp/docker-slim-state/.docker-slim-state/images/ad007ec1f864d83008ceff0ba9f5d2bdaf11c36938ae4bd376dd7abba6b5b993/artifacts",
+  "container_report_name": "creport.json",
+  "seccomp_profile_name": "ghcr.io-simse-service-weight-seccomp.json",
+  "apparmor_profile_name": "ghcr.io-simse-service-weight-apparmor-profile",
+  "image_stack": [
+    {
+      "is_top_image": true,
+      "id": "sha256:ad007ec1f864d83008ceff0ba9f5d2bdaf11c36938ae4bd376dd7abba6b5b993",
+      "full_name": "ghcr.io/simse/service-weight:latest",
+      "repo_name": "ghcr.io/simse/service-weight",
+      "version_tag": "latest",
+      "raw_tags": [
+        "ghcr.io/simse/service-weight:latest"
+      ],
+      "create_time": "2022-08-13T19:45:55Z",
+      "new_size": 1164531162,
+      "new_size_human": "1.2 GB",
+      "instructions": [
+        {
+          "type": "ADD",
+          "time": "2022-07-12T01:19:57Z",
+          "is_nop": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 123984533,
+          "size_human": "124 MB",
+          "params": "file:3451708ab45bc1bcfc1ebb2075d3af16767477cbeb79334959e0d1ff02b0864b in /",
+          "command_snippet": "ADD file:3451708ab45bc1bcfc1ebb2075d3af16767...",
+          "command_all": "ADD file:3451708ab45bc1bcfc1ebb2075d3af16767477cbeb79334959e0d1ff02b0864b /",
+          "target": "/",
+          "source_type": "file"
+        },
+        {
+          "type": "CMD",
+          "time": "2022-07-12T01:19:58Z",
+          "is_nop": true,
+          "is_exec_form": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "params": "[\"bash\"]\n",
+          "command_snippet": "CMD [\"bash\"]\n",
+          "command_all": "CMD [\"bash\"]\n"
+        },
+        {
+          "type": "RUN",
+          "time": "2022-07-12T02:48:04Z",
+          "is_nop": false,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 10687463,
+          "size_human": "11 MB",
+          "command_snippet": "RUN set -eux; \tapt-get update; \tapt-get inst...",
+          "command_all": "RUN set -eux; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tca-certificates \t\tcurl \t\tnetbase \t\twget \t; \trm -rf /var/lib/apt/lists/*",
+          "system_commands": [
+            "set -eux",
+            "apt-get update",
+            "apt-get install -y --no-install-recommends ca-certificates curl netbase wget",
+            "rm -rf /var/lib/apt/lists/*"
+          ]
+        },
+        {
+          "type": "RUN",
+          "time": "2022-07-12T02:48:10Z",
+          "is_nop": false,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 18951711,
+          "size_human": "19 MB",
+          "command_snippet": "RUN set -ex; \tif ! command -v gpg > /dev/nul...",
+          "command_all": "RUN set -ex; \tif ! command -v gpg > /dev/null; then \t\tapt-get update; \t\tapt-get install -y --no-install-recommends \t\t\tgnupg \t\t\tdirmngr \t\t; \t\trm -rf /var/lib/apt/lists/*; \tfi",
+          "system_commands": [
+            "set -ex",
+            "if ! command -v gpg > /dev/null",
+            "then apt-get update",
+            "apt-get install -y --no-install-recommends gnupg dirmngr",
+            "rm -rf /var/lib/apt/lists/*",
+            "fi"
+          ]
+        },
+        {
+          "type": "RUN",
+          "time": "2022-07-12T02:48:25Z",
+          "is_nop": false,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 151941205,
+          "size_human": "152 MB",
+          "command_snippet": "RUN apt-get update && \\\n\tapt-get install -y ...",
+          "command_all": "RUN apt-get update && \\\n\tapt-get install -y --no-install-recommends \t\tgit \t\tmercurial \t\topenssh-client \t\tsubversion \t\t\t\tprocps && \\\n\trm -rf /var/lib/apt/lists/*",
+          "system_commands": [
+            "apt-get update",
+            "apt-get install -y --no-install-recommends git mercurial openssh-client subversion procps",
+            "rm -rf /var/lib/apt/lists/*"
+          ]
+        },
+        {
+          "type": "RUN",
+          "time": "2022-07-12T23:54:54Z",
+          "is_nop": false,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 227634697,
+          "size_human": "228 MB",
+          "command_snippet": "RUN set -eux; \tapt-get update; \tapt-get inst...",
+          "command_all": "RUN set -eux; \tapt-get update; \tapt-get install -y --no-install-recommends \t\tg++ \t\tgcc \t\tlibc6-dev \t\tmake \t\tpkg-config \t; \trm -rf /var/lib/apt/lists/*",
+          "system_commands": [
+            "set -eux",
+            "apt-get update",
+            "apt-get install -y --no-install-recommends g++ gcc libc6-dev make pkg-config",
+            "rm -rf /var/lib/apt/lists/*"
+          ]
+        },
+        {
+          "type": "ENV",
+          "time": "2022-07-12T23:54:54Z",
+          "is_nop": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "params": "PATH=/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "command_snippet": "ENV PATH=/usr/local/go/bin:/usr/local/sbin:/...",
+          "command_all": "ENV PATH=/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        },
+        {
+          "type": "ENV",
+          "time": "2022-07-12T23:59:35Z",
+          "is_nop": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "params": "GOLANG_VERSION=1.18.4",
+          "command_snippet": "ENV GOLANG_VERSION=1.18.4",
+          "command_all": "ENV GOLANG_VERSION=1.18.4"
+        },
+        {
+          "type": "RUN",
+          "time": "2022-07-12T23:59:49Z",
+          "is_nop": false,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 431398674,
+          "size_human": "431 MB",
+          "command_snippet": "RUN set -eux; \tarch=\"$(dpkg --print-architec...",
+          "command_all": "RUN set -eux; \tarch=\"$(dpkg --print-architecture)\"; arch=\"${arch##*-}\"; \turl=; \tcase \"$arch\" in \t\t'amd64') \t\t\turl='https://dl.google.com/go/go1.18.4.linux-amd64.tar.gz'; \t\t\tsha256='c9b099b68d93f5c5c8a8844a89f8db07eaa58270e3a1e01804f17f4cf8df02f5'; \t\t\t;; \t\t'armel') \t\t\texport GOARCH='arm' GOARM='5' GOOS='linux'; \t\t\t;; \t\t'armhf') \t\t\turl='https://dl.google.com/go/go1.18.4.linux-armv6l.tar.gz'; \t\t\tsha256='7dfeab572e49638b0f3d9901457f0622c27b73301c2b99db9f5e9568ff40460c'; \t\t\t;; \t\t'arm64') \t\t\turl='https://dl.google.com/go/go1.18.4.linux-arm64.tar.gz'; \t\t\tsha256='35014d92b50d97da41dade965df7ebeb9a715da600206aa59ce1b2d05527421f'; \t\t\t;; \t\t'i386') \t\t\turl='https://dl.google.com/go/go1.18.4.linux-386.tar.gz'; \t\t\tsha256='418232d905e18ece6cb13c4884bb1c68963d7d3b4d889671b3e5be8bd4059862'; \t\t\t;; \t\t'mips64el') \t\t\texport GOARCH='mips64le' GOOS='linux'; \t\t\t;; \t\t'ppc64el') \t\t\turl='https://dl.google.com/go/go1.18.4.linux-ppc64le.tar.gz'; \t\t\tsha256='f80acc4dc054ddc89ccc4869664e331bf16e0ac6e07830e94554162e66f66961'; \t\t\t;; \t\t's390x') \t\t\turl='https://dl.google.com/go/go1.18.4.linux-s390x.tar.gz'; \t\t\tsha256='7e932f36e8f347feea2e706dcd32c1a464b1e5767ab2928ae460a37a975fe4a3'; \t\t\t;; \t\t*) echo >&2 \"error: unsupported architecture '$arch' (likely packaging update needed)\"; exit 1 ;; \tesac; \tbuild=; \tif [ -z \"$url\" ]; then \t\tbuild=1; \t\turl='https://dl.google.com/go/go1.18.4.src.tar.gz'; \t\tsha256='4525aa6b0e3cecb57845f4060a7075aafc9ab752bb7b6b4cf8a212d43078e1e4'; \t\techo >&2; \t\techo >&2 \"warning: current architecture ($arch) does not have a compatible Go binary release; will be building from source\"; \t\techo >&2; \tfi; \t\twget -O go.tgz.asc \"$url.asc\"; \twget -O go.tgz \"$url\" --progress=dot:giga; \techo \"$sha256 *go.tgz\" | sha256sum -c -; \t\tGNUPGHOME=\"$(mktemp -d)\"; export GNUPGHOME; \tgpg --batch --keyserver keyserver.ubuntu.com --recv-keys 'EB4C 1BFD 4F04 2F6D DDCC  EC91 7721 F63B D38B 4796'; \tgpg --batch --keyserver keyserver.ubuntu.com --recv-keys '2F52 8D36 D67B 69ED F998  D857 78BD 6547 3CB3 BD13'; \tgpg --batch --verify go.tgz.asc go.tgz; \tgpgconf --kill all; \trm -rf \"$GNUPGHOME\" go.tgz.asc; \t\ttar -C /usr/local -xzf go.tgz; \trm go.tgz; \t\tif [ -n \"$build\" ]; then \t\tsavedAptMark=\"$(apt-mark showmanual)\"; \t\tapt-get update; \t\tapt-get install -y --no-install-recommends golang-go; \t\t\t\texport GOCACHE='/tmp/gocache'; \t\t\t\t( \t\t\tcd /usr/local/go/src; \t\t\texport GOROOT_BOOTSTRAP=\"$(go env GOROOT)\" GOHOSTOS=\"$GOOS\" GOHOSTARCH=\"$GOARCH\"; \t\t\t./make.bash; \t\t); \t\t\t\tapt-mark auto '.*' > /dev/null; \t\tapt-mark manual $savedAptMark > /dev/null; \t\tapt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; \t\trm -rf /var/lib/apt/lists/*; \t\t\t\trm -rf \t\t\t/usr/local/go/pkg/*/cmd \t\t\t/usr/local/go/pkg/bootstrap \t\t\t/usr/local/go/pkg/obj \t\t\t/usr/local/go/pkg/tool/*/api \t\t\t/usr/local/go/pkg/tool/*/go_bootstrap \t\t\t/usr/local/go/src/cmd/dist/dist \t\t\t\"$GOCACHE\" \t\t; \tfi; \t\tgo version",
+          "system_commands": [
+            "set -eux",
+            "arch=\"$(dpkg --print-architecture)\"",
+            "arch=\"${arch##*-}\"",
+            "url=",
+            "case \"$arch\" in 'amd64') url='https://dl.google.com/go/go1.18.4.linux-amd64.tar.gz'",
+            "sha256='c9b099b68d93f5c5c8a8844a89f8db07eaa58270e3a1e01804f17f4cf8df02f5'",
+            "",
+            "",
+            "'armel') export GOARCH='arm' GOARM='5' GOOS='linux'",
+            "",
+            "",
+            "'armhf') url='https://dl.google.com/go/go1.18.4.linux-armv6l.tar.gz'",
+            "sha256='7dfeab572e49638b0f3d9901457f0622c27b73301c2b99db9f5e9568ff40460c'",
+            "",
+            "",
+            "'arm64') url='https://dl.google.com/go/go1.18.4.linux-arm64.tar.gz'",
+            "sha256='35014d92b50d97da41dade965df7ebeb9a715da600206aa59ce1b2d05527421f'",
+            "",
+            "",
+            "'i386') url='https://dl.google.com/go/go1.18.4.linux-386.tar.gz'",
+            "sha256='418232d905e18ece6cb13c4884bb1c68963d7d3b4d889671b3e5be8bd4059862'",
+            "",
+            "",
+            "'mips64el') export GOARCH='mips64le' GOOS='linux'",
+            "",
+            "",
+            "'ppc64el') url='https://dl.google.com/go/go1.18.4.linux-ppc64le.tar.gz'",
+            "sha256='f80acc4dc054ddc89ccc4869664e331bf16e0ac6e07830e94554162e66f66961'",
+            "",
+            "",
+            "'s390x') url='https://dl.google.com/go/go1.18.4.linux-s390x.tar.gz'",
+            "sha256='7e932f36e8f347feea2e706dcd32c1a464b1e5767ab2928ae460a37a975fe4a3'",
+            "",
+            "",
+            "*) echo >&2 \"error: unsupported architecture '$arch' (likely packaging update needed)\"",
+            "exit 1",
+            "",
+            "esac",
+            "build=",
+            "if [ -z \"$url\" ]",
+            "then build=1",
+            "url='https://dl.google.com/go/go1.18.4.src.tar.gz'",
+            "sha256='4525aa6b0e3cecb57845f4060a7075aafc9ab752bb7b6b4cf8a212d43078e1e4'",
+            "echo >&2",
+            "echo >&2 \"warning: current architecture ($arch) does not have a compatible Go binary release",
+            "will be building from source\"",
+            "echo >&2",
+            "fi",
+            "wget -O go.tgz.asc \"$url.asc\"",
+            "wget -O go.tgz \"$url\" --progress=dot:giga",
+            "echo \"$sha256 *go.tgz\" | sha256sum -c -",
+            "GNUPGHOME=\"$(mktemp -d)\"",
+            "export GNUPGHOME",
+            "gpg --batch --keyserver keyserver.ubuntu.com --recv-keys 'EB4C 1BFD 4F04 2F6D DDCC  EC91 7721 F63B D38B 4796'",
+            "gpg --batch --keyserver keyserver.ubuntu.com --recv-keys '2F52 8D36 D67B 69ED F998  D857 78BD 6547 3CB3 BD13'",
+            "gpg --batch --verify go.tgz.asc go.tgz",
+            "gpgconf --kill all",
+            "rm -rf \"$GNUPGHOME\" go.tgz.asc",
+            "tar -C /usr/local -xzf go.tgz",
+            "rm go.tgz",
+            "if [ -n \"$build\" ]",
+            "then savedAptMark=\"$(apt-mark showmanual)\"",
+            "apt-get update",
+            "apt-get install -y --no-install-recommends golang-go",
+            "export GOCACHE='/tmp/gocache'",
+            "( cd /usr/local/go/src",
+            "export GOROOT_BOOTSTRAP=\"$(go env GOROOT)\" GOHOSTOS=\"$GOOS\" GOHOSTARCH=\"$GOARCH\"",
+            "./make.bash",
+            ")",
+            "apt-mark auto '.*' > /dev/null",
+            "apt-mark manual $savedAptMark > /dev/null",
+            "apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false",
+            "rm -rf /var/lib/apt/lists/*",
+            "rm -rf /usr/local/go/pkg/*/cmd /usr/local/go/pkg/bootstrap /usr/local/go/pkg/obj /usr/local/go/pkg/tool/*/api /usr/local/go/pkg/tool/*/go_bootstrap /usr/local/go/src/cmd/dist/dist \"$GOCACHE\"",
+            "fi",
+            "go version"
+          ]
+        },
+        {
+          "type": "ENV",
+          "time": "2022-07-12T23:59:50Z",
+          "is_nop": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "params": "GOPATH=/go",
+          "command_snippet": "ENV GOPATH=/go",
+          "command_all": "ENV GOPATH=/go"
+        },
+        {
+          "type": "ENV",
+          "time": "2022-07-12T23:59:50Z",
+          "is_nop": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "params": "PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin",
+          "command_snippet": "ENV PATH=/go/bin:/usr/local/go/bin:/usr/loca...",
+          "command_all": "ENV PATH=/go/bin:/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+        },
+        {
+          "type": "RUN",
+          "time": "2022-07-12T23:59:51Z",
+          "is_nop": false,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "command_snippet": "RUN mkdir -p \"$GOPATH/src\" \"$GOPATH/bin\" && ...",
+          "command_all": "RUN mkdir -p \"$GOPATH/src\" \"$GOPATH/bin\" && \\\n\tchmod -R 777 \"$GOPATH\"",
+          "system_commands": [
+            "mkdir -p \"$GOPATH/src\" \"$GOPATH/bin\"",
+            "chmod -R 777 \"$GOPATH\""
+          ]
+        },
+        {
+          "type": "WORKDIR",
+          "time": "2022-07-12T23:59:51Z",
+          "is_nop": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "params": "/go",
+          "command_snippet": "WORKDIR /go",
+          "command_all": "WORKDIR /go",
+          "system_commands": [
+            "mkdir -p /go"
+          ]
+        },
+        {
+          "type": "RUN",
+          "time": "2022-07-24T16:12:02Z",
+          "is_nop": false,
+          "is_exec_form": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "command_snippet": "RUN [\"LABEL\",\"org.opencontainers.image.sourc...",
+          "command_all": "RUN [\"LABEL\",\"org.opencontainers.image.source=https://github.com/simse/simse.io\"]",
+          "system_commands": [
+            "[\"LABEL\",\"org.opencontainers.image.source=https://github.com/simse/simse.io\"]"
+          ],
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "type": "RUN",
+          "time": "2022-07-24T16:12:02Z",
+          "is_nop": false,
+          "is_exec_form": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "command_snippet": "RUN [\"WORKDIR\",\"/app\"]",
+          "command_all": "RUN [\"WORKDIR\",\"/app\"]",
+          "system_commands": [
+            "[\"WORKDIR\",\"/app\"]"
+          ],
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "type": "RUN",
+          "time": "2022-08-13T19:45:50Z",
+          "is_nop": false,
+          "is_exec_form": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 19540,
+          "size_human": "20 kB",
+          "command_snippet": "RUN [\"COPY\",\".\",\"/app\"]",
+          "command_all": "RUN [\"COPY\",\".\",\"/app\"]",
+          "system_commands": [
+            "[\"COPY\",\".\",\"/app\"]"
+          ],
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "type": "RUN",
+          "time": "2022-08-13T19:45:54Z",
+          "is_nop": false,
+          "is_exec_form": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 185137394,
+          "size_human": "185 MB",
+          "command_snippet": "RUN [\"RUN\",\"/bin/sh\",\"-c\",\"go\",\"build\"]",
+          "command_all": "RUN [\"RUN\",\"/bin/sh\",\"-c\",\"go\",\"build\"]",
+          "system_commands": [
+            "[\"RUN\",\"/bin/sh\",\"-c\",\"go\",\"build\"]"
+          ],
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "type": "RUN",
+          "time": "2022-08-13T19:45:55Z",
+          "is_nop": false,
+          "is_exec_form": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 14775945,
+          "size_human": "15 MB",
+          "command_snippet": "RUN [\"RUN\",\"/bin/sh\",\"-c\",\"chmod\",\"+x\",\"serv...",
+          "command_all": "RUN [\"RUN\",\"/bin/sh\",\"-c\",\"chmod\",\"+x\",\"service-weight\"]",
+          "system_commands": [
+            "[\"RUN\",\"/bin/sh\",\"-c\",\"chmod\",\"+x\",\"service-weight\"]"
+          ],
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "type": "RUN",
+          "time": "2022-08-13T19:45:55Z",
+          "is_nop": false,
+          "is_exec_form": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "command_snippet": "RUN [\"ENV\",\"DB_FILE=metrics.db\"]",
+          "command_all": "RUN [\"ENV\",\"DB_FILE=metrics.db\"]",
+          "system_commands": [
+            "[\"ENV\",\"DB_FILE=metrics.db\"]"
+          ],
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "type": "RUN",
+          "time": "2022-08-13T19:45:55Z",
+          "is_nop": false,
+          "is_exec_form": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "command_snippet": "RUN [\"ENV\",\"INGEST_PASSWORD=test\"]",
+          "command_all": "RUN [\"ENV\",\"INGEST_PASSWORD=test\"]",
+          "system_commands": [
+            "[\"ENV\",\"INGEST_PASSWORD=test\"]"
+          ],
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "type": "RUN",
+          "time": "2022-08-13T19:45:55Z",
+          "is_nop": false,
+          "is_exec_form": true,
+          "local_image_exists": false,
+          "layer_index": 0,
+          "size": 0,
+          "command_snippet": "RUN [\"EXPOSE\",\"map[8080/tcp:{}]\"]",
+          "command_all": "RUN [\"EXPOSE\",\"map[8080/tcp:{}]\"]",
+          "system_commands": [
+            "[\"EXPOSE\",\"map[8080/tcp:{}]\"]"
+          ],
+          "comment": "buildkit.dockerfile.v0"
+        },
+        {
+          "type": "RUN",
+          "time": "2022-08-13T19:45:55Z",
+          "is_last_instruction": true,
+          "is_nop": false,
+          "is_exec_form": true,
+          "local_image_exists": true,
+          "layer_index": 0,
+          "size": 0,
+          "command_snippet": "RUN [\"ENTRYPOINT\",\"[./service-weight]\"]",
+          "command_all": "RUN [\"ENTRYPOINT\",\"[./service-weight]\"]",
+          "system_commands": [
+            "[\"ENTRYPOINT\",\"[./service-weight]\"]"
+          ],
+          "comment": "buildkit.dockerfile.v0",
+          "raw_tags": [
+            "ghcr.io/simse/service-weight:latest"
+          ]
+        }
+      ]
+    }
+  ]
+}

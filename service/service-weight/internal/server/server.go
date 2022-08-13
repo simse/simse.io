@@ -1,12 +1,13 @@
 package server
 
 import (
-	"io/ioutil"
+	"encoding/base64"
 	"net/http"
 	"os"
 
 	"github.com/gin-gonic/gin"
 	"github.com/simse/simse.io/service/service-weight/internal/database"
+	"github.com/simse/simse.io/service/service-weight/internal/output"
 )
 
 func StartServer() {
@@ -23,16 +24,10 @@ func StartServer() {
 			return
 		}
 
-		jsonData, err := ioutil.ReadAll(c.Request.Body)
-		if err != nil {
-			c.JSON(http.StatusInternalServerError, gin.H{
-				"message": "ERROR",
-			})
-
-			return
-		}
-
 		// fmt.Println(string(jsonData))
+		jsonDataBase64 := c.Request.FormValue("payload")
+		jsonData, _ := base64.StdEncoding.DecodeString(jsonDataBase64)
+
 		database.IngestAppleHealthData(jsonData)
 
 		c.JSON(http.StatusOK, gin.H{
@@ -52,6 +47,10 @@ func StartServer() {
 		database.DB.All(&metrics)
 
 		c.JSON(http.StatusOK, metrics)
+	})
+
+	r.GET("/summary", func(c *gin.Context) {
+		c.JSON(http.StatusOK, output.GetSummary())
 	})
 
 	r.GET("/grouped", func(c *gin.Context) {
