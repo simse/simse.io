@@ -1,5 +1,0 @@
-const getArticles = () => {}
-
-export {
-    getArticles
-}

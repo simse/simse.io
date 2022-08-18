@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import ArticleList from '../components/ArticleList.astro';
+import PageTitle from '../components/PageTitle.astro';
+
+const breadcrumbs = [
+	{
+		name: 'Articles',
+        path: '/articles'
+	}
+]
+---
+
+<Layout title="Articles" breadcrumbs={breadcrumbs}>
+	<PageTitle>Articles</PageTitle>
+
+	<ArticleList />
+</Layout>
+

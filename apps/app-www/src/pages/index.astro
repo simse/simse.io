@@ -1,0 +1,83 @@
+---
+import { Image } from '@astrojs/image/components';
+import wink from '../images/wink.png';
+
+import Layout from '../layouts/Layout.astro';
+import ArticleList from '../components/ArticleList.astro';
+
+const personalInformation = [
+	{
+		key: 'Name',
+		value: 'Simon Sorensen'
+	},
+	/*{
+		key: 'Weight',
+		value: '93.3kg',
+		href: '/weight-loss-journey'
+	},*/
+	{
+		key: 'City',
+		value: 'London 😎'
+	},
+	{
+		key: 'Occupation',
+		value: 'Software Engineering Intern'
+	},
+	{
+		key: 'Employer',
+		value: 'LEGO'
+	},
+	{
+		key: 'University',
+		value: 'Kingston University'
+	},
+	{
+		key: 'Degree',
+		value: 'Computer Science'
+	},
+	{
+		key: 'Social Security',
+		value: '078-05-1120'
+	},
+];
+---
+
+<Layout title="Welcome" noSpacing={true}>
+	<main class="py-32 border-b flex items-center">
+		<div class="mr-8">
+			<Image src={wink} width={112} aspectRatio={1} />
+		</div>
+	
+		<div>
+			<h1 class="text-3xl mb-4">Good evening 👋</h1>
+			<p class="text-xl">Welcome to my slice of the internet.</p>
+		</div>
+	</main>
+	
+	<div class="py-8 border-b">
+		<h2 class="text-lg font-bold mb-4">About</h2>
+	
+		<table>
+			<tbody>
+				{personalInformation.map(pi => (
+					<tr class="border-b border-x first:border-t">
+						<td class="py-2 px-2 min-w-[8rem] first:font-bold">{pi.key}</td>
+						<td class="py-2 px-2 min-w-[8rem] first:font-bold">
+							{!pi.href && 
+							<>{pi.value}</>}
+
+							{pi.href && 
+							<a href={pi.href} class="hover:underline text-blue-800 hover:text-blue-900">{pi.value}</a>}
+						</td>
+					</tr>
+				))}
+			</tbody>
+		</table>
+	</div>
+	
+	<div class="py-8 ">
+		<h2 class="text-lg font-bold mb-4">Articles</h2>
+	
+		<ArticleList />
+	</div>
+</Layout>

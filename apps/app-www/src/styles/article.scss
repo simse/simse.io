@@ -6,6 +6,10 @@
         line-break: auto;
     }
 
+    h2 {
+        font-size: 1.4rem;
+    }
+
     h2, h3, h4, h5, h6 {
         font-weight: 700;
         margin-bottom: 0.5em;
@@ -14,5 +18,13 @@
         &:first-child {
             padding-top: 0;
         }
+    }
+
+    a {
+        text-decoration: underline;
+    }
+
+    pre.shiki {
+        margin: 32px 0;
     }
 }

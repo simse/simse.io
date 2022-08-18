@@ -1,0 +1,38 @@
+---
+// load props
+export interface Props {
+  category?: string;
+}
+
+const { category = "" } = Astro.props as Props;
+
+// import components
+import Image from "./Image.astro";
+
+// load articles
+let articles = await Astro.glob('../pages/articles/*.mdx');
+
+// sort articles by date (newest first)
+articles.sort((a, b) => (new Date(a.frontmatter.date) > new Date(b.frontmatter.date) ? -1 : 1));
+
+// filter by category
+if (category !== "") {
+    articles = articles.filter(article => article.frontmatter.categories.includes(category))
+}
+---
+<div>
+    {articles.map(article => (
+        <a href={article.url} class="first:border-t border-b border-gray-200 block">
+            <div class="my-1 py-1 flex items-center gap-3">
+                <Image css="h-8" src={article.frontmatter.image} height={64} />
+
+                <span class="min-w-[82px]">{article.frontmatter.date}</span>
+                <h2 class="font-bold hover:underline text-blue-800 hover:text-blue-900">{article.frontmatter.title}</h2>
+                    
+                <button class="ml-auto text-white bg-blue-700 py-0.5 px-4 text-sm border border-black hover:bg-black">Read →</button>
+            </div>
+        </a>
+    ))}
+    
+    <p class="mt-8 text-gray-500">Showing {articles.length} of {articles.length} articles</p>
+</div>

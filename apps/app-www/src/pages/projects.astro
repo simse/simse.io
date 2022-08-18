@@ -1,0 +1,28 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageTitle from '../components/PageTitle.astro';
+
+const breadcrumbs = [
+	{
+		name: 'Projects',
+        path: '/projects'
+	}
+]
+
+const projects = await Astro.glob('../pages/projects/*.mdx');
+---
+
+<Layout title="Projects" breadcrumbs={breadcrumbs}>
+	<PageTitle>Projects</PageTitle>
+
+	<div class="grid grid-cols-3 gap-2">
+		{projects.map(p => (
+			<a href={`/projects/${p.frontmatter.slug}`}>
+				<div class="p-4 border">
+					<h2 class="text-xl">{p.frontmatter.title}</h2>
+				</div>
+			</a>
+		))}
+	</div>
+</Layout>
+
