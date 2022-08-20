@@ -1,4 +1,4 @@
-FROM golang:1.18.4
+FROM golang:1.18.4-alpine
 
 LABEL org.opencontainers.image.source https://github.com/simse/simse.io
 

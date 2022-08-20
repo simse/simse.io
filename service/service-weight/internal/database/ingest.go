@@ -43,7 +43,7 @@ func IngestAppleHealthData(data []byte) error {
 }
 
 func generateMetricId(name string, value float64, timestamp time.Time) string {
-	concattedString := fmt.Sprintf("%s:%f:%s", name, value, timestamp.String())
+	concattedString := fmt.Sprintf("%s:%s", name, timestamp.String())
 	sha256 := sha256.Sum256([]byte(concattedString))
 
 	return fmt.Sprintf("%x", sha256)

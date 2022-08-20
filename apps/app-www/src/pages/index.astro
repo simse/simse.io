@@ -10,6 +10,11 @@ const personalInformation = [
 		key: 'Name',
 		value: 'Simon Sorensen'
 	},
+	{
+		key: 'Email',
+		value: 'hello@simse.io',
+		href: 'mailto:hello@simse.io'
+	},
 	/*{
 		key: 'Weight',
 		value: '93.3kg',
@@ -45,7 +50,7 @@ const personalInformation = [
 <Layout title="Welcome" noSpacing={true}>
 	<main class="py-32 border-b flex items-center">
 		<div class="mr-8">
-			<Image src={wink} width={112} aspectRatio={1} />
+			<Image src={wink} width={112} aspectRatio={1} format="webp" quality={100} />
 		</div>
 	
 		<div>

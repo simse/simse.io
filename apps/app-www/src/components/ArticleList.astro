@@ -2,9 +2,13 @@
 // load props
 export interface Props {
   category?: string;
+  pagination?: boolean;
 }
 
-const { category = "" } = Astro.props as Props;
+const { 
+    category = "",
+    pagination = false
+ } = Astro.props as Props;
 
 // import components
 import Image from "./Image.astro";
@@ -34,5 +38,6 @@ if (category !== "") {
         </a>
     ))}
     
-    <p class="mt-8 text-gray-500">Showing {articles.length} of {articles.length} articles</p>
+    {pagination &&
+    <p class="mt-8 text-gray-500">Showing {articles.length} of {articles.length} articles</p>}
 </div>

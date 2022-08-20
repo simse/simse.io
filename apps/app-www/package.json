@@ -19,6 +19,8 @@
     "svelte": "^3.46.4"
   },
   "dependencies": {
+    "@sveltejs/pancake": "^0.0.18",
+    "lodash": "^4.17.21",
     "sass": "^1.54.4"
   }
 }

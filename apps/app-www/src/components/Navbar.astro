@@ -16,10 +16,6 @@ const pages = [
         path: '/'
     },
     {
-        name: 'Contact',
-        path: '/contact'
-    },
-    {
         name: 'Articles',
         path: '/articles'
     },
@@ -39,7 +35,7 @@ const matchPath = (itemPath: string): boolean => {
 
 const itemClass = (itemPath: string): string => {
     if (matchPath(itemPath)) {
-        return "font-bold"
+        return "font-bold relative before:h-1 before:w-2 before:absolute before:bg-blue-700 before:rounded before:left-1/2 before:bottom-1 before:translate-x-[-50%]"
     }
 
     return ""
@@ -62,12 +58,15 @@ const itemClass = (itemPath: string): string => {
     </div>
 </nav>
 
-<nav class="max-w-6xl mx-auto py-2 border-b flex gap-2 ">
-        <a href="/" class="hover:underline">simse.io</a>
+<nav class="max-w-6xl mx-auto py-2 border-b flex gap-2">
+    <span>~</span>
+    <span>/</span>
 
-        {breadcrumbs.map(crumb => (
-            <span>/</span>
+    <a href="/" class="hover:underline">simse.io</a>
 
-            <a href={crumb.path} class="hover:underline">{crumb.name}</a>
-        ))}
+    {breadcrumbs.map(crumb => (
+        <span>/</span>
+
+        <a href={crumb.path} class="hover:underline">{crumb.name}</a>
+    ))}
 </nav>
