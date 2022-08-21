@@ -4,6 +4,7 @@ import wink from '../images/wink.png';
 
 import Layout from '../layouts/Layout.astro';
 import ArticleList from '../components/ArticleList.astro';
+import Hero from '../parts/Hero.astro';
 
 const personalInformation = [
 	{
@@ -48,16 +49,7 @@ const personalInformation = [
 ---
 
 <Layout title="Welcome" noSpacing={true}>
-	<main class="py-32 border-b flex items-center">
-		<div class="mr-8">
-			<Image src={wink} width={112} aspectRatio={1} format="webp" quality={100} />
-		</div>
-	
-		<div>
-			<h1 class="text-3xl mb-4">Good evening 👋</h1>
-			<p class="text-xl">Welcome to my slice of the internet.</p>
-		</div>
-	</main>
+	<Hero />
 	
 	<div class="py-8 border-b">
 		<h2 class="text-lg font-bold mb-4">About</h2>

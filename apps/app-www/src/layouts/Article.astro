@@ -19,7 +19,7 @@ const breadcrumbs = [
     }
 ]
 ---
-<Layout title={content.title} breadcrumbs={breadcrumbs}>
+<Layout title={content.title} description={content.description} breadcrumbs={breadcrumbs}>
     <div class="mb-8">
 		<div class="">
 			<h1 class="text-3xl mb-5">{content.title}</h1>
@@ -40,7 +40,7 @@ const breadcrumbs = [
 		</div>
 		
 		{content.image &&
-        <Image src={content.image} width={1200} credit={content.imageCredit} css="my-8" />}
+        <Image src={content.image} width={1200} credit={content.imageCredit} css="my-8" alt={content.imageAlt} />}
 	</div>
 
 	<div class="article max-w-3xl text-lg">

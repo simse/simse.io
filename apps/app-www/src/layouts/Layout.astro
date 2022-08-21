@@ -3,11 +3,12 @@ import type { Breadcrumbs } from '../types';
 
 export interface Props {
 	title: string;
+	description?: string;
 	breadcrumbs?: Breadcrumbs;
 	noSpacing?: boolean;
 }
 
-const { title, breadcrumbs = [], noSpacing = false } = Astro.props as Props
+const { title, description = "", breadcrumbs = [], noSpacing = false } = Astro.props as Props
 
 import Navbar from '../components/Navbar.astro';
 import Footer from '../components/Footer.astro';
@@ -17,6 +18,7 @@ import Footer from '../components/Footer.astro';
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
+		<meta name="description" content={description}>
 		<meta name="viewport" content="width=device-width" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -39,23 +41,16 @@ import Footer from '../components/Footer.astro';
 </html>
 <style>
 	@font-face {
-		font-family: Univers;
-		src: url('/fonts/Univers-Regular.woff2') format('woff2');
-		font-weight: 400;
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family: Univers;
-		src: url('/fonts/Univers-Bold.woff2') format('woff2');
-		font-weight: 700;
-		font-display: swap;
-	}
-
-	@font-face {
 		font-family: "IBM Plex Mono";
 		src: url('/fonts/IBMPlexMono-Regular-Latin1.woff2') format('woff2');
 		font-weight: 400;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: Unica;
+		src: url('/fonts/Unica-Light.woff2') format('woff2');
+		font-weight: 300;
 		font-display: swap;
 	}
 

@@ -7,9 +7,10 @@ export interface Props {
     css?: string;
     height?: number;
     width?: number;
+    alt: string;
 }
 
-const { src, credit, height, width, css } = Astro.props as Props;
+const { src, credit, height, width, css, alt } = Astro.props as Props;
 
 const dev = Astro.site?.host === "localhost";
 
@@ -49,9 +50,9 @@ const srcset = createSrcset(src)*/
 ---
 
 <div class={"aspect-[5/3] relative " + css}>
-    <img class=" w-full h-full" src="/images/placeholder.svg" alt="placeholder holder" />
+    <img class=" w-full h-full" src="/images/placeholder.svg" alt="" />
 
-    <Image src={src} height={height} width={width} aspectRatio={5/3} format="webp" class="top-0 max-h-full absolute" />
+    <Image src={src} height={height} width={width} aspectRatio={5/3} format="webp" class="top-0 max-h-full absolute" alt={alt} />
 
 {credit !== "" &&
 <p class="mt-4 text-gray-500">{credit}</p>}
