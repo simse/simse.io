@@ -87,65 +87,10 @@ resource "cloudflare_record" "gatsby_cloud_3" {
   proxied = false
 }
 
-resource "cloudflare_record" "simse_telemetry" {
-  zone_id = data.cloudflare_zones.domain.zones[0].id
-  name    = "telemetry"
-  value   = "78.46.46.239"
-  type    = "A"
-
-  ttl     = 3600
-  proxied = false
-}
-
-resource "cloudflare_record" "simse_pmam" {
-  zone_id = data.cloudflare_zones.domain.zones[0].id
-  name    = "pmam"
-  value   = "78.46.46.239"
-  type    = "A"
-
-  ttl     = 3600
-  proxied = false
-}
-
 resource "cloudflare_record" "google_ownership" {
   zone_id = data.cloudflare_zones.domain.zones[0].id
   name    = "simse.io"
   value   = "google-site-verification=a4GWEe3RrWowXPam8oJq51UFVx_-RcJRcf0q8xDaSyg"
   type    = "TXT"
   ttl     = 3600
-}
-
-// health.simse.io
-resource "cloudflare_record" "simse_health_api" {
-  zone_id = data.cloudflare_zones.domain.zones[0].id
-  name    = "api.health"
-  value   = "78.46.46.239"
-  type    = "A"
-
-  ttl     = 3600
-  proxied = false
-}
-
-resource "cloudflare_record" "simse_health" {
-  zone_id = data.cloudflare_zones.domain.zones[0].id
-  name    = "health"
-  value   = "simsehealth.gatsbyjs.io"
-  type    = "CNAME"
-
-  ttl     = 3600
-  proxied = false
-}
-
-// Set up main domain
-/* module "main_site" {
-  source      = "./bucket"
-  name        = var.site_domain
-  site_domain = var.site_domain
-} */
-
-// Set up labs sites
-module "lab_site" {
-  source      = "./bucket"
-  name        = "labs.${var.site_domain}"
-  site_domain = var.site_domain
 }
