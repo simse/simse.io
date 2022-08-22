@@ -9,7 +9,7 @@
     }
 
     // get browser hour
-    const browserHour = 5;
+    const browserHour = new Date().getHours();
 
     // map message
     let message = "Howdy!";

@@ -20,10 +20,10 @@ const breadcrumbs = [
 ]
 ---
 <Layout title={content.title} description={content.description} breadcrumbs={breadcrumbs}>
-    <div class="mb-8">
+    <div class="mb-16">
 		<div class="">
 			<h1 class="text-3xl mb-5">{content.title}</h1>
-			<p class="text-md text-gray-600">
+			<p class="text-md text-gray-600 dark:text-gray-300">
 				{content.date} — 
 				{content.categories.map(
 					(cat, i) => {
@@ -43,7 +43,7 @@ const breadcrumbs = [
         <Image src={content.image} width={1200} credit={content.imageCredit} css="my-8" alt={content.imageAlt} />}
 	</div>
 
-	<div class="article max-w-3xl text-lg">
+	<div class="article max-w-3xl prose prose-lg dark:prose-invert">
 		<slot />
 	</div>
 </Layout>

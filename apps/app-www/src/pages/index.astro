@@ -51,20 +51,20 @@ const personalInformation = [
 <Layout title="Welcome" noSpacing={true}>
 	<Hero />
 	
-	<div class="py-8 border-b">
+	<div class="py-8 border-b dark:border-gray-800">
 		<h2 class="text-lg font-bold mb-4">About</h2>
 	
-		<table>
+		<table class="dark:border-gray-800">
 			<tbody>
 				{personalInformation.map(pi => (
-					<tr class="border-b border-x first:border-t">
+					<tr class="border-b dark:border-gray-800 border-x first:border-t">
 						<td class="py-2 px-2 min-w-[8rem] first:font-bold">{pi.key}</td>
 						<td class="py-2 px-2 min-w-[8rem] first:font-bold">
 							{!pi.href && 
 							<>{pi.value}</>}
 
 							{pi.href && 
-							<a href={pi.href} class="hover:underline text-blue-800 hover:text-blue-900">{pi.value}</a>}
+							<a href={pi.href} class="hover:underline text-blue-800 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-600">{pi.value}</a>}
 						</td>
 					</tr>
 				))}

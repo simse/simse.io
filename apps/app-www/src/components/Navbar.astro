@@ -42,7 +42,7 @@ const itemClass = (itemPath: string): string => {
 }
 ---
 
-<nav class="flex justify-between py-4 max-w-6xl mx-auto border-b">
+<nav class="flex justify-between py-4 max-w-6xl mx-auto border-b dark:border-gray-800">
     <div>
         <a href="/" class="hover:underline">
             <span class="font-bold text-xl">Simon Sorensen</span>
@@ -58,7 +58,7 @@ const itemClass = (itemPath: string): string => {
     </div>
 </nav>
 
-<nav class="max-w-6xl mx-auto py-2 border-b flex gap-2">
+<div class="max-w-6xl mx-auto py-2 border-b flex gap-2 dark:border-gray-800">
     <span>~</span>
     <span>/</span>
 
@@ -69,4 +69,4 @@ const itemClass = (itemPath: string): string => {
 
         <a href={crumb.path} class="hover:underline">{crumb.name}</a>
     ))}
-</nav>
+</div>
