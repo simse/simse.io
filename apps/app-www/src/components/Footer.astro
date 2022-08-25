@@ -1,10 +1,33 @@
 ---
 import { Image } from '@astrojs/image/components';
 import wink from '../images/wink.png';
+
+const links = [
+    {
+        name: 'Notes',
+        url: '/notes'
+    },
+    {
+        name: 'Archive',
+        url: 'https://archive.simse.io',
+        target: 'blank'
+    },
+    {
+        name: 'Source',
+        url: 'https://github.com/simse/simse.io',
+        target: 'blank'
+    }
+]
 ---
 
 <footer class="max-w-6xl mx-auto mt-16 py-8 border-t dark:border-gray-800">
     <Image class="mb-4" src={wink} width={32} aspectRatio={1} format="webp" quality={100} alt="" />
 
-    End of page.
+    <ul class="flex">
+        {links.map(link => (
+            <li class="text-gray-400 hover:underline">
+                <a class="mr-8 first:ml-0" href={link.url} target={link.target}>{link.name}</a>
+            </li>
+        ))}
+    </ul>
 </footer>

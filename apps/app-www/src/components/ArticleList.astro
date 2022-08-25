@@ -19,7 +19,7 @@ let articles = await Astro.glob('../pages/articles/*.mdx');
 // sort articles by date (newest first)
 articles.sort((a, b) => (new Date(a.frontmatter.date) > new Date(b.frontmatter.date) ? -1 : 1));
 
-// filter by category
+// filter by category if category prop is set
 if (category !== "") {
     articles = articles.filter(article => article.frontmatter.categories.includes(category))
 }
@@ -29,11 +29,16 @@ if (category !== "") {
         <a href={article.url} class="first:border-t border-b border-gray-200 dark:border-gray-800 block">
             <div class="my-1 py-1 flex items-center gap-3">
                 <Image css="h-8" src={article.frontmatter.image} height={64} alt={article.frontmatter.imageAlt} />
+            
+                <!-- full date -->
+                <span class="min-w-[82px] hidden sm:block">{article.frontmatter.date}</span>
 
-                <span class="min-w-[82px]">{article.frontmatter.date}</span>
+                <!-- shorter date -->
+                <span class="min-w-[60px] sm:hidden block">{article.frontmatter.date.slice(0, -3)}</span>
+
                 <h2 class="font-bold hover:underline text-blue-800 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-600">{article.frontmatter.title}</h2>
                     
-                <button class="ml-auto text-white bg-blue-700 py-0.5 px-4 text-sm border border-black hover:bg-black dark:hover:bg-gray-800">Read →</button>
+                <button class="ml-auto text-white bg-blue-700 py-0.5 px-4 text-sm border border-black hover:bg-black dark:hover:bg-gray-800 min-w-fit hidden sm:block">Read →</button>
             </div>
         </a>
     ))}

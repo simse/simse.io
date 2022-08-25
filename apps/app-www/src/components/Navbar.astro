@@ -45,14 +45,16 @@ const itemClass = (itemPath: string): string => {
 <nav class="flex justify-between py-4 max-w-6xl mx-auto border-b dark:border-gray-800">
     <div>
         <a href="/" class="hover:underline">
-            <span class="font-bold text-xl">Simon Sorensen</span>
+            <span class="font-bold text-xl sm:hidden">Simon</span>
+
+            <span class="font-bold text-xl hidden sm:block">Simon Sorensen</span>
         </a>
     </div>
 
     <div class="flex items-center">
         <ul class="p-0 m-0 flex">
             {pages.map(page => (
-                <li><a class={`p-4 mx-2 hover:underline ${itemClass(page.path)}`} href={page.path}>{page.name}</a></li>
+                <li><a class={`p-2 py-4 sm:p-4 sm:mx-2 hover:underline ${itemClass(page.path)}`} href={page.path}>{page.name}</a></li>
             ))}
         </ul>
     </div>
