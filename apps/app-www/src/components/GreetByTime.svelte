@@ -14,7 +14,7 @@
     // map message
     let message = "Howdy!";
     Object.keys(messageMap).forEach(hour => {
-        if (hour < browserHour) {
+        if (hour <= browserHour) {
             message = messageMap[hour];
         }
     });

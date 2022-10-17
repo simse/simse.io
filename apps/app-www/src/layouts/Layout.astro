@@ -29,10 +29,10 @@ import Footer from '../components/Footer.astro';
 		<meta name="generator" content={Astro.generator} />
 		<title>{`${title} / simse.io`}</title>
 	</head>
-	<body class="dark:bg-black dark:text-gray-200 px-4">
+	<body class="dark:bg-[#001C0E] dark:text-gray-200">
 		<Navbar breadcrumbs={breadcrumbs} />
 
-		<main class={`max-w-6xl mx-auto ${noSpacing ? '': 'pt-16'}`}>
+		<main class={`${noSpacing ? '': 'pt-16'}`}>
 			<slot />
 		</main>
 
@@ -64,6 +64,27 @@ import Footer from '../components/Footer.astro';
 	@font-face {
 		font-family: Unica;
 		src: url('/fonts/Unica-Bold.woff2') format('woff2');
+		font-weight: 700;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: Recoleta;
+		src: url('/fonts/Recoleta-Light.woff2') format('woff2');
+		font-weight: 300;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: Recoleta;
+		src: url('/fonts/Recoleta-Regular.woff2') format('woff2');
+		font-weight: 400;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: Recoleta;
+		src: url('/fonts/Recoleta-Bold.woff2') format('woff2');
 		font-weight: 700;
 		font-display: swap;
 	}

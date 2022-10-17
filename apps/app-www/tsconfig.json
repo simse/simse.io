@@ -20,7 +20,8 @@
       "@layouts/*": ["src/layouts/*"],
       "@data/*":  ["src/data/*"],
       "@components/*":  ["src/components/*"],
-      "@content/*": ["content/*"]
+      "@content/*": ["content/*"],
+      "@images/*": ["src/images/*"]
     }
   }
 }

@@ -1,6 +1,8 @@
 ---
 import { Image } from '@astrojs/image/components';
 import wink from '../images/wink.png';
+import bg from '../images/bg2.png';
+import simse from '../images/simse.webp';
 
 import Layout from '../layouts/Layout.astro';
 import ArticleList from '../components/ArticleList.astro';
@@ -16,11 +18,11 @@ const personalInformation = [
 		value: 'hello@simse.io',
 		href: 'mailto:hello@simse.io'
 	},
-	/*{
+	{
 		key: 'Weight',
 		value: '93.3kg',
 		href: '/weight-loss-journey'
-	},*/
+	},
 	{
 		key: 'City',
 		value: 'London 😎'
@@ -49,7 +51,22 @@ const personalInformation = [
 ---
 
 <Layout title="Welcome" noSpacing={true}>
-	<Hero />
+	<div>
+		<Image src={bg} width={3000} format="webp" quality={90} alt="bruh" />
+
+		<div class="absolute top-[15vw] min-w-full">
+			<h1 class="text-9xl text-center text-[#FFE7E9] font-[Recoleta] font-light select-none">Is this picture real?</h1>
+		</div>
+	</div>
+
+	<div class="my-40">
+		<h1 class="text-5xl font-[Recoleta] font-light text-center mb-16">Some of it is real.</h1>
+
+		<Image class="mx-auto" src={simse} width={600} format="webp" quality={90} alt="bruh" />
+
+		<h1 class="text-5xl font-[Recoleta] font-light text-center mt-40">The rest? That's thanks to AI.</h1>
+		<p class="text-center mt-8">Thank you, DALL·E!</p>
+	</div>
 	
 	<div class="py-8 border-b dark:border-gray-800">
 		<h2 class="text-lg font-bold mb-4">About</h2>

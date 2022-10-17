@@ -47,12 +47,25 @@ const createSrcset = (source: string): string => {
 }
 
 const srcset = createSrcset(src)*/
+let image = src;
+
+if (!src.startsWith("http")) {
+    /*if (import.meta.env.DEV) {
+        // Dev
+        image = import(`../images/wink.png`)
+    } else {
+        // Prod
+        image = import(`../images/wink.png`)
+    }*/
+
+    image = import(`../images/${src}.png`);
+}
 ---
 
 <div class={"aspect-[5/3] relative " + css}>
     <img class=" w-full h-full" src="/images/placeholder.svg" alt="" />
 
-    <Image src={src} height={height} width={width} aspectRatio={5/3} format="webp" class="top-0 max-h-full absolute" alt={alt} />
+    <Image src={image} height={height} width={width} aspectRatio={5/3} format="webp" class="top-0 max-h-full absolute" alt={alt} />
 
 {credit !== "" &&
 <p class="mt-4 text-gray-500 dark:text-gray-400">{credit}</p>}

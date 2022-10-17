@@ -7,25 +7,29 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy:dev": "CLOUDFLARE_ACCOUNT_ID=ffa300f532eaaec071135605899f7bf8 astro build && npx wrangler pages publish dist --project-name simse-io-dev --commit-dirty",
+    "deploy:prod": "CLOUDFLARE_ACCOUNT_ID=ffa300f532eaaec071135605899f7bf8 astro build && npx wrangler pages publish dist --project-name simse-io-prod --commit-dirty"
   },
   "devDependencies": {
-    "@astrojs/image": "^0.3.4",
-    "@astrojs/mdx": "0.10.0",
-    "@astrojs/sitemap": "^1.0.0",
-    "@astrojs/svelte": "^1.0.0",
-    "@astrojs/tailwind": "^1.0.0",
-    "astro": "^1.0.6",
-    "astro-compress": "^0.0.17",
-    "svelte": "^3.46.4"
+    "@astrojs/image": "0.5.1",
+    "@astrojs/mdx": "0.11.1",
+    "@astrojs/sitemap": "1.0.0",
+    "@astrojs/svelte": "1.0.0",
+    "@astrojs/tailwind": "1.0.0",
+    "astro": "1.1.6",
+    "astro-compress": "1.0.6",
+    "svelte": "3.50.0",
+    "astro-robots-txt": "0.3.8",
+    "@sveltejs/pancake": "0.0.18",
+    "@tailwindcss/typography": "0.5.7",
+    "tailwindcss": "3.1.8",
+    "lodash": "4.17.21",
+    "rollup": "2.79.0",
+    "sass": "1.54.8",
+    "typescript": "4.8.2",
+    "wrangler": "2.0.29"
   },
-  "dependencies": {
-    "@sveltejs/pancake": "^0.0.18",
-    "@tailwindcss/typography": "^0.5.4",
-    "lodash": "^4.17.21",
-    "rollup": "^2.78.1",
-    "sass": "^1.54.4",
-    "tailwindcss": "^3.1.8",
-    "typescript": "^4.7.4"
+  "dependencies": {  
   }
 }

@@ -23,6 +23,9 @@ articles.sort((a, b) => (new Date(a.frontmatter.date) > new Date(b.frontmatter.d
 if (category !== "") {
     articles = articles.filter(article => article.frontmatter.categories.includes(category))
 }
+
+// filter out unlisted articles
+articles = articles.filter(article => !article.frontmatter.unlisted)
 ---
 <div>
     {articles.map(article => (
