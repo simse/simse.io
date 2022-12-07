@@ -1,0 +1,16 @@
+---
+import * as prism from 'prismjs';
+
+export interface Props {
+    snippet: string;
+    language: string;
+}
+
+const { snippet, language } = Astro.props as Props;
+
+
+---
+<pre class=`language-${language} max-w-3xl mx-auto border-2 border-gray-900`>
+    <code class=`language-${language}` set:html={prism.highlight(snippet, prism.languages[language], language)}>
+    </code>
+</pre>

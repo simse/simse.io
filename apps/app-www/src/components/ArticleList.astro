@@ -11,7 +11,7 @@ const {
  } = Astro.props as Props;
 
 // import components
-import Image from "./Image.astro";
+import { Image } from '@astrojs/image/components';
 
 // load articles
 let articles = await Astro.glob('../pages/articles/*.mdx');
@@ -27,25 +27,17 @@ if (category !== "") {
 // filter out unlisted articles
 articles = articles.filter(article => !article.frontmatter.unlisted)
 ---
-<div>
+<div class="grid grid-cols-3 gap-4">
     {articles.map(article => (
-        <a href={article.url} class="first:border-t border-b border-gray-200 dark:border-gray-800 block">
-            <div class="my-1 py-1 flex items-center gap-3">
-                <Image css="h-8" src={article.frontmatter.image} height={64} alt={article.frontmatter.imageAlt} />
-            
-                <!-- full date -->
-                <span class="min-w-[82px] hidden sm:block">{article.frontmatter.date}</span>
+        <a href={`/articles/${article.frontmatter.slug}`} class="group">
+            <div class="border-2 border-purple-900/50 h-64 p-8 flex flex-col justify-between relative">
+                <h2 class="text-2xl">{article.frontmatter.title}</h2>
 
-                <!-- shorter date -->
-                <span class="min-w-[60px] sm:hidden block">{article.frontmatter.date.slice(0, -3)}</span>
+                <p class="text-gray-400">{article.frontmatter.date}</p>
 
-                <h2 class="font-bold hover:underline text-blue-800 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-600">{article.frontmatter.title}</h2>
-                    
-                <button class="ml-auto text-white bg-blue-700 py-0.5 px-4 text-sm border border-black hover:bg-black dark:hover:bg-gray-800 min-w-fit hidden sm:block">Read →</button>
+                <div class="absolute top-0 left-0 -z-10 bg-black w-full h-full opacity-70 group-hover:opacity-80 transition-opacity"></div>
             </div>
         </a>
     ))}
-    
-    {pagination &&
-    <p class="mt-8 text-gray-500">Showing {articles.length} of {articles.length} articles</p>}
 </div>
+

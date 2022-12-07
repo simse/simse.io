@@ -1,17 +1,34 @@
 ---
 import { Image } from '@astrojs/image/components';
 import wink from '../images/wink.png';
+import CodeSnippet from '@components/CodeSnippet.astro';
 
-import GreetByTime from '@components/GreetByTime.svelte';
+const snippet = "float InvSqrt(float x) { \n\
+    float xhalf = 0.5f * x; \n\
+    int i = *(int*)&x; // store floating-point bits in integer \n\
+    i = 0x5f3759df - (i >> 1); // initial guess for Newton's method \n\
+    x = *(float*)&i; // convert new bits into float \n\
+    x = x*(1.5f - xhalf*x*x); // One round of Newton's method \n\
+    return x; \n\
+}"
 ---
 
-<div class="py-32 border-b flex items-center dark:border-gray-800">
-    <div class="mr-8">
-        <Image src={wink} width={112} aspectRatio={1} format="webp" quality={100} alt="Winking memoji loosely resembling Simon" />
+<div class="py-16 border-b flex items-center flex-col dark:border-gray-800">
+    <div class="bg-gray-900 p-10 rounded-full w-fit">
+        <Image src={wink} width={132} aspectRatio={1} format="webp" quality={100} alt="Winking memoji resembling Simon" />
+    </div>
+
+    <div class="text-center mb-16">
+        <h1 class="lg:text-4xl text-3xl mt-8">Simon Sorensen</h1>
+        <p class="mt-6 text-gray-300 lg:text-lg">Computer Science student & Software Engineer Intern</p>
     </div>
 
     <div>
-        <h1 class="text-2xl sm:text-3xl mb-4"><GreetByTime client:load /> 👋</h1>
-        <p class="text-lg sm:text-xl">Welcome to my slice of the internet.</p>
+        <h2 class="text-lg font-bold mb-4">Snippet of the Day</h2>
+        <CodeSnippet snippet={snippet} language="clike" />
+        <code class="mb-4 mt-2 text-gray-400 block">quake/inverse_square_root.c</code>
+
+        <p>Makes me feel inspired</p>
     </div>
+    
 </div>

@@ -11,7 +11,9 @@ import robotsTxt from 'astro-robots-txt';
 // https://astro.build/config
 export default defineConfig({
   site: 'https://simse.io',
-  integrations: [tailwind(), svelte(), mdx(), compress(), image(), sitemap(), robotsTxt()],
+  integrations: [tailwind(), svelte(), mdx(), compress(), image({
+    serviceEntryPoint: '@astrojs/image/sharp'
+  }), sitemap(), robotsTxt()],
   markdown: {
     syntaxHighlight: 'prism'
   }
