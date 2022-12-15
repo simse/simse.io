@@ -1,126 +1,56 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import ArticleList from '@components/ArticleList.astro';
-import Hero from '../parts/Hero.astro';
-import { Image } from '@astrojs/image/components';
 import BackgroundImage from '../images/bg_smaller.jpg';
-import Logo from '../images/logo.png';
-
-/*
-const personalInformation = [
-	{
-		key: 'Name',
-		value: 'Simon Sorensen'
-	},
-	{
-		key: 'Email',
-		value: 'hello@simse.io',
-		href: 'mailto:hello@simse.io'
-	},
-	{
-		key: 'Weight',
-		value: '93.3kg',
-		href: '/weight-loss-journey'
-	},
-	{
-		key: 'City',
-		value: 'London 😎'
-	},
-	{
-		key: 'Occupation',
-		value: 'Software Engineering Intern'
-	},
-	{
-		key: 'Employer',
-		value: 'LEGO'
-	},
-	{
-		key: 'Degree',
-		value: 'Computer Science'
-	},
-	{
-		key: 'University',
-		value: 'Kingston University'
-	},
-	{
-		key: 'Social Security',
-		value: '078-05-1120'
-	},
-];*/
+import BackgroundMusic from 'src/parts/BackgroundMusic.astro';
+import PlayingIcon from '../icons/volume-2.svg';
+import StoppedIcon from '../icons/volume-x.svg';
+import HeroImage from 'src/parts/HeroImage.astro';
 ---
 <Layout title="Welcome" noSpacing={true}>
-	<div class="absolute -top-10 left-0 w-full h-full -z-10">
-		<div class="h-1/3 w-full bg-gradient-to-b from-purple-800 to-black"></div>
+	<div class="absolute -top-10 left-0 w-full h-full -z-50">
+		<div class="h-1/4 xl:h-1/3 w-full bg-gradient-to-b from-purple-800/60 to-black"></div>
 
 		<svg class="absolute h-full w-full z-0" xmlns="http://www.w3.org/2000/svg" version="1.1">
 			<defs>
 				<filter id="heat" filterUnits="objectBoundingBox" x="0" y="0" width="100%" height="100%">
-					<feTurbulence id="heatturb" type="fractalNoise" numOctaves="1" seed="2" baseFrequency="0.005"></feTurbulence>
-					<feDisplacementMap xChannelSelector="G" yChannelSelector="B" scale="30" in="SourceGraphic"></feDisplacementMap>
+					<feTurbulence id="heatturb" type="fractalNoise" numOctaves="1" seed="10" baseFrequency="0.005"></feTurbulence>
+					<feDisplacementMap xChannelSelector="G" yChannelSelector="R" scale="30" in="SourceGraphic"></feDisplacementMap>
 				  </filter>
-				  <animate xlink:href="#heatturb"
+				  <!--animate xlink:href="#heatturb"
 				  	id="anim-heatturb"
 					attributeName="baseFrequency"
-					values="0.003; 0.005; 0.003"
-					dur="20s"
+					values="0.003; 0.008; 0.003"
+					dur="60s"
 					restart="always"
-					repeatCount="indefinite" />
+					repeatCount="indefinite" /-->
 			</defs>
 			
 			<image id="img" x="0" y="0" width="100%" height="100%" xlink:href={BackgroundImage.src} filter="url(#heat)" />
-		  </svg>
-
-		{/*<Image style="filter: url(#heat);" src={BackgroundImage} width="3840" height="2160" alt="" />*/}
+		</svg>
 	</div>
 
 	{/*<Hero />*/}
 
-	<div class="w-3/4 mx-auto my-32">
-		<Image src={Logo} height="500" aspectRatio={2.68} alt="logo" />
+	<div class="w-fit mx-auto relative">
+		<HeroImage />
+		<h2 class="absolute bottom-8 text-center w-full text-2xl font-bold text-purple-200">Software Engineering Intern @ LEGO<br />ChatGPT Plagiariser @ Kingston University</h2>
+		<p class="w-full text-center">Just kidding... or am I?</p>
 	</div>
-	
-	<div>
-		<a href="#" id="music">Play BACKGROUND MUSIC</a>
 
-		<audio src="https://sweet-ass-music.simse.io/540_loop3_space-invaders_0017.wav" class="hidden"></audio>
+	<BackgroundMusic>
+		<div class="w-full flex" id="stopped">
+			<img src={StoppedIcon} class="ml-auto" />
+		</div>
 
-		<script lang="js">
-			(async function() {
-				const AudioContext = window.AudioContext || window.webkitAudioContext;
-				const audioCtx = new AudioContext();
-				
-				const source = audioCtx.createBufferSource();
-				const arrayBuffer = await fetch(
-					'https://sweet-ass-music.simse.io/540_loop5_space-invaders_0017.wav',
-				).then((res) => res.arrayBuffer());
+		<div class="w-full flex hidden" id="playing">
+			<img src={PlayingIcon} class="ml-auto" />
+		</div>
 
-				const audioBuffer = await audioCtx.decodeAudioData(arrayBuffer);
-
-				source.buffer = audioBuffer;
-				source.loop = true;
-				source.connect(audioCtx.destination);
-
-				let hasStarted = false;
-				let playing = false;
-
-				document.getElementById('music').onclick = () => {
-					if (hasStarted) {
-						if (playing) {
-							audioCtx.suspend();
-							playing = false;
-						} else {
-							audioCtx.resume();
-							playing = true;
-						}
-					} else {
-						source.start();
-						hasStarted = true;
-						playing = true;
-					}
-				}
-			})();
-		</script>
-	</div>
+		<div class="w-full flex hidden" id="loading">
+			<p class="ml-auto">loading...</p>
+		</div>
+	</BackgroundMusic>
 
 	<div class="py-8 ">
 		<h2 class="text-lg font-bold mb-4">Articles</h2>

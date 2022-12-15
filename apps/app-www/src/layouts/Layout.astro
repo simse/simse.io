@@ -1,5 +1,6 @@
 ---
 import type { Breadcrumbs } from '../types';
+import BackgroundMusic from 'src/parts/BackgroundMusic.astro';
 
 export interface Props {
 	title: string;
@@ -29,14 +30,16 @@ import Footer from '../components/Footer.astro';
 		<meta name="generator" content={Astro.generator} />
 		<title>{`${title} / simse.io`}</title>
 	</head>
-	<body class="dark:bg-black dark:text-gray-200 max-w-7xl mx-auto">
+	<body class="dark:bg-black dark:text-gray-200">
 		<Navbar breadcrumbs={breadcrumbs} />
 
-		<main class={`${noSpacing ? '': 'pt-16'}`}>
-			<slot />
-		</main>
-
-		<Footer />
+		<div class="max-w-[1600px] mx-auto border-x border-white/20 px-16">
+			<main class={`${noSpacing ? '': 'pt-16'}`}>
+				<slot />
+			</main>
+	
+			<Footer />
+		</div>
 	</body>
 </html>
 <style>
@@ -47,7 +50,7 @@ import Footer from '../components/Footer.astro';
 		font-display: swap;
 	}
 
-	@font-face {
+	/*@font-face {
 		font-family: Unica;
 		src: url('/fonts/Unica-Light.woff2') format('woff2');
 		font-weight: 300;
@@ -87,5 +90,5 @@ import Footer from '../components/Footer.astro';
 		src: url('/fonts/Recoleta-Bold.woff2') format('woff2');
 		font-weight: 700;
 		font-display: swap;
-	}
+	}*/
 </style>
