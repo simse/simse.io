@@ -33,7 +33,7 @@ import Footer from '../components/Footer.astro';
 	<body class="dark:bg-black dark:text-gray-200">
 		<Navbar breadcrumbs={breadcrumbs} />
 
-		<div class="max-w-[1600px] mx-auto border-x border-white/20 px-16">
+		<div class="max-w-7xl mx-auto">
 			<main class={`${noSpacing ? '': 'pt-16'}`}>
 				<slot />
 			</main>
@@ -50,45 +50,32 @@ import Footer from '../components/Footer.astro';
 		font-display: swap;
 	}
 
-	/*@font-face {
-		font-family: Unica;
-		src: url('/fonts/Unica-Light.woff2') format('woff2');
-		font-weight: 300;
-		font-display: swap;
-	}
-
 	@font-face {
-		font-family: Unica;
-		src: url('/fonts/Unica-Regular.woff2') format('woff2');
+		font-family: "IBM Plex Sans";
+		src: url('/fonts/IBMPlexSans-Regular.woff2') format('woff2');
 		font-weight: 400;
 		font-display: swap;
 	}
 
 	@font-face {
-		font-family: Unica;
-		src: url('/fonts/Unica-Bold.woff2') format('woff2');
-		font-weight: 700;
+		font-family: "IBM Plex Sans";
+		src: url('/fonts/IBMPlexSans-Italic.woff2') format('woff2');
+		font-weight: 400;
+		font-style: italic;
 		font-display: swap;
 	}
 
 	@font-face {
-		font-family: Recoleta;
-		src: url('/fonts/Recoleta-Light.woff2') format('woff2');
+		font-family: "IBM Plex Sans";
+		src: url('/fonts/IBMPlexSans-Light.woff2') format('woff2');
 		font-weight: 300;
 		font-display: swap;
 	}
 
 	@font-face {
-		font-family: Recoleta;
-		src: url('/fonts/Recoleta-Regular.woff2') format('woff2');
-		font-weight: 400;
-		font-display: swap;
-	}
-
-	@font-face {
-		font-family: Recoleta;
-		src: url('/fonts/Recoleta-Bold.woff2') format('woff2');
+		font-family: "IBM Plex Sans";
+		src: url('/fonts/IBMPlexSans-Bold.woff2') format('woff2');
 		font-weight: 700;
 		font-display: swap;
-	}*/
+	}
 </style>
