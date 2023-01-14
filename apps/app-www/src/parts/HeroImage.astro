@@ -1,0 +1,15 @@
+---
+import { Image } from '@astrojs/image/components';
+import AnimatedLogo from '../images/animated_logo.webp';
+import Logo from '../images/logo.png';
+
+---
+
+<Image id="animated_logo" class="invisible" src={AnimatedLogo} height="500" aspectRatio={16/9} alt="" format="webp" onload="document.getElementById('logo').classList.add('invisible');this.classList.remove('invisible');" />
+<Image id="logo" class="absolute top-0" src={Logo} height="500" aspectRatio={16/9} alt="logo" format="webp" />
+
+<style is:inline>
+    img:-moz-loading {
+        visibility: hidden;
+    }
+</style>

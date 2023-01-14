@@ -1,0 +1,86 @@
+---
+import { Image } from '@astrojs/image/components';
+import wink from '../images/wink.png';
+
+// get breadcrumbs
+import type { Breadcrumb } from '../types';
+
+export interface Props {
+	breadcrumbs: Array<Breadcrumb>;
+}
+
+const { breadcrumbs } = Astro.props as Props
+
+const page = Astro.url.pathname;
+
+const pages = [
+    {
+        name: 'Home',
+        path: '/'
+    },
+    {
+        name: 'Articles',
+        path: '/articles'
+    },
+    {
+        name: 'Projects',
+        path: '/projects'
+    }
+];
+
+const matchPath = (itemPath: string): boolean => {
+    if (itemPath === "/") {
+        return itemPath === page
+    }
+
+    return page.startsWith(itemPath)
+}
+
+const itemClass = (itemPath: string): string => {
+    if (matchPath(itemPath)) {
+        return "font-bold"
+    }
+
+    return ""
+}
+---
+
+<nav class="flex justify-between py-2 bg-black pl-4 border-b border-white/20 items-center">
+    <div class="flex items-center">
+        <a href="/">
+            <Image class="" src={wink} width={32} aspectRatio={1} format="webp" quality={100} alt="" />
+        </a>
+
+        <div class="border-l border-white/20 ml-4 pl-4 gap-2 flex font-mono text-purple-100">
+            <a href="/" class="hover:underline">simse.io</a>
+
+            {breadcrumbs.map(crumb => (
+                <span>/</span>
+
+                <a href={crumb.path} class="hover:underline">{crumb.name}</a>
+            ))}
+        </div>
+        
+    </div>
+
+    <div class="flex items-center">
+        <ul class="p-0 m-0 flex">
+            {pages.map(page => (
+                <li><a class={`p-2 py-4 sm:p-4 sm:mx-2 hover:underline ${itemClass(page.path)}`} href={page.path}>{page.name}</a></li>
+            ))}
+        </ul>
+    </div>
+</nav>
+
+<!--div class="py-2 px-4 flex gap-2 bg-gray-900/80">
+    <span>~</span>
+    <span>/</span>
+
+    <a href="/" class="hover:underline">simse.io</a>
+
+    {breadcrumbs.map(crumb => (
+        <span>/</span>
+
+        <a href={crumb.path} class="hover:underline">{crumb.name}</a>
+    ))}
+</!div-->
