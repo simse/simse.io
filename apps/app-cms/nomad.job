@@ -1,4 +1,4 @@
-job "simse.io/app-cms-prod" {
+job "simse.io/app-cms-[[ env "ENV" ]]" {
   region = "global"
   datacenters = ["dc1"]
   type        = "service"
@@ -26,7 +26,7 @@ job "simse.io/app-cms-prod" {
       driver = "docker"
       
       config {
-        image = "${DOCKER_IMAGE}"
+        image = "[[ env "DOCKER_IMAGE" ]]"
         ports = ["http"]
         force_pull = true
       }
@@ -39,7 +39,7 @@ job "simse.io/app-cms-prod" {
 
       service {
         port = "http"
-	    name = "simse-io-app-cms-prod"
+	    name = "simse-io-app-cms-[[ env "ENV" ]]"
 
         tags = [
           "traefik.enable=true",
@@ -66,7 +66,7 @@ job "simse.io/app-cms-prod" {
       config {
         image = "mongo:6.0.3"
         volumes = [
-          "/nomad/simse.io/app-cms-prod/db:/data/db",
+          "/nomad/simse.io/app-cms-[[ env "ENV" ]]/db:/data/db",
         ]
         ports = ["db"]
       }
