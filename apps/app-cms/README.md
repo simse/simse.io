@@ -1,9 +1,3 @@
 # app-cms
 
-This project was created using create-payload-app using the ts-blank template.
-
-## How to Use
-
-`yarn dev` will start up your application and reload on any changes.
-
-If you have docker and docker-compose installed, you can run `docker-compose up`
+The CMS powering content for simse.io and other projects. It's built with Payload CMS and deployed my very own server in Helsinki :) 
