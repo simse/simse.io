@@ -28,11 +28,39 @@ const Articles: CollectionConfig = {
       label: 'Title'
     },
     {
+      name: 'subtitle',
+      type: 'text',
+      label: 'Subtitle'
+    },
+    {
       name: 'category',
       type: 'relationship',
       relationTo: 'article-categories',
       label: 'Categories',
       hasMany: true
+    },
+    {
+      name: 'featured_image',
+      label: 'Featured Image',
+      type: 'group',
+      fields: [
+        {
+          name: 'media',
+          type: 'relationship',
+          relationTo: 'media',
+          label: 'Image'
+        },
+        {
+          name: 'credit',
+          type: 'text',
+          label: 'Credit'
+        },
+        {
+          name: 'alt',
+          type: 'text',
+          label: 'Alt'
+        },
+      ]
     },
     {
       name: 'content',
