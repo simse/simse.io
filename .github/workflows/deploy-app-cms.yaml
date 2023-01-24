@@ -16,14 +16,13 @@ jobs:
       - 
         uses: extractions/setup-just@v1
       -
-        run: cd apps/app-cms
-      -
         run: just build
         working-directory: apps/app-cms
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
+    environment: production
     steps:
       - 
         uses: actions/checkout@v3
