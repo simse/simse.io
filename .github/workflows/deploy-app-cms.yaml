@@ -19,7 +19,7 @@ jobs:
         run: cd apps/app-cms
       -
         run: just build
-        working_directory: apps/app-cms
+        working-directory: apps/app-cms
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,6 +44,6 @@ jobs:
         run: mv ./levant /usr/bin/
       -
         run: just deploy
-        working_directory: apps/app-cms
+        working-directory: apps/app-cms
         env:
           NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
