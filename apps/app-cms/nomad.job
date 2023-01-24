@@ -1,4 +1,4 @@
-job "simse.io/app-cms-dev" {
+job "simse.io/app-cms-prod" {
   region = "global"
   datacenters = ["dc1"]
   type        = "service"
@@ -39,7 +39,7 @@ job "simse.io/app-cms-dev" {
 
       service {
         port = "http"
-	    name = "simse-io-app-cms-${ENV}"
+	    name = "simse-io-app-cms-prod"
 
         tags = [
           "traefik.enable=true",
@@ -66,7 +66,7 @@ job "simse.io/app-cms-dev" {
       config {
         image = "mongo:6.0.3"
         volumes = [
-          "/nomad/simse.io/app-cms-${ENV}/db:/data/db",
+          "/nomad/simse.io/app-cms-prod/db:/data/db",
         ]
         ports = ["db"]
       }

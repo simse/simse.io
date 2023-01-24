@@ -46,3 +46,4 @@ jobs:
         working-directory: apps/app-cms
         env:
           NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
+          PAYLOAD_SECRET: ${{ secrets.APP_CMS_PAYLOAD_SECRET }}
