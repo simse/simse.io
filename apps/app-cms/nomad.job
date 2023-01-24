@@ -44,8 +44,10 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
         tags = [
           "traefik.enable=true",
           "traefik.http.routers.${NOMAD_TASK_NAME}.rule=Host(`cms.simse.io`)",
+          "traefik.http.routers.${NOMAD_TASK_NAME}.rule=Host(`cms.simse.io`)",
           "traefik.http.routers.${NOMAD_TASK_NAME}.tls.certresolver=sample",
         ]
+
         check {
           type     = "http"
           path     = "/admin"
