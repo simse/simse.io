@@ -7,7 +7,7 @@ import Articles from './collections/Articles';
 import ArticleCategories from './collections/ArticleCategories';
 
 export default buildConfig({
-  serverURL: 'http://localhost:3000',
+  serverURL: (process.env.NODE_ENV === "production") ? 'https://cms.simse.io' : 'http://localhost:3000',
   admin: {
     user: Users.slug,
   },
