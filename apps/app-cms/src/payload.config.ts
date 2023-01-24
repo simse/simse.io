@@ -1,17 +1,22 @@
 import { buildConfig } from 'payload/config';
 import path from 'path';
-// import Examples from './collections/Examples';
+
+// collections
 import Users from './collections/Users';
+import Articles from './collections/Articles';
+import ArticleCategories from './collections/ArticleCategories';
+import Media from './collections/Media';
 
 export default buildConfig({
-  serverURL: 'http://localhost:3000',
+  serverURL: (process.env.NODE_ENV === "production") ? 'https://cms.simse.io' : 'http://localhost:3000',
   admin: {
     user: Users.slug,
   },
   collections: [
     Users,
-    // Add Collections here
-    // Examples,
+    Articles,
+    ArticleCategories,
+    Media
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),

@@ -1,0 +1,52 @@
+name: deploy-app-cms
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        uses: actions/checkout@v3
+      -
+        name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - 
+        uses: extractions/setup-just@v1
+      -
+        run: just build
+        working-directory: apps/app-cms
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: production
+    steps:
+      - 
+        uses: actions/checkout@v3
+      - 
+        uses: extractions/setup-just@v1
+      - 
+        name: Connect to Tailscale network
+        uses: tailscale/github-action@v1
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTH_KEY }}
+      -
+        run: wget https://releases.hashicorp.com/levant/0.3.2/levant_0.3.2_linux_amd64.zip
+      -
+        run: unzip levant_0.3.2_linux_amd64.zip
+      -
+        run: chmod +x ./levant
+      -
+        run: sudo mv levant /usr/bin/
+      -
+        run: just deploy
+        working-directory: apps/app-cms
+        env:
+          NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
+          PAYLOAD_SECRET: ${{ secrets.APP_CMS_PAYLOAD_SECRET }}
