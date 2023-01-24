@@ -1,7 +1,11 @@
 import { CollectionConfig } from 'payload/types';
+import { publicRead } from '../utils/publicRead';
 
 const Media: CollectionConfig = {
   slug: 'media',
+  access: {
+    read: publicRead
+  },
   upload: {
     staticURL: '/media',
     staticDir: '/media',

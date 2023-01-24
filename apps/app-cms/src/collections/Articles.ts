@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload/types';
 import { createSlug } from '../hooks/slugFromName';
+import { publicRead } from '../utils/publicRead';
 
 // Example Collection - For reference only, this must be added to payload.config.ts to be used.
 const Articles: CollectionConfig = {
@@ -9,6 +10,9 @@ const Articles: CollectionConfig = {
   },
   hooks: {
     beforeChange: [createSlug]
+  },
+  access: {
+    read: publicRead
   },
   versions: {
     drafts: true
