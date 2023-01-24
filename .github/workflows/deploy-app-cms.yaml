@@ -40,7 +40,7 @@ jobs:
       -
         run: chmod +x ./levant
       -
-        run: mv ./levant /usr/bin/
+        run: mv levant apps/app-cms/
       -
         run: just deploy
         working-directory: apps/app-cms
