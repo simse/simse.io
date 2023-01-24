@@ -1,5 +1,5 @@
 {
-  "name": "payload-template-ts-blank",
+  "name": "app-cms",
   "description": "Payload project created from ts-blank template",
   "version": "1.0.0",
   "main": "dist/server.js",

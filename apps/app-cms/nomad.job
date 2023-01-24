@@ -1,0 +1,75 @@
+job "simse.io/app-cms-${ENV}" {
+  region = "global"
+  datacenters = ["dc1"]
+  type        = "service"
+
+  meta {
+    version = "1"
+  }
+
+  group "app-cms" {
+    count = 1
+
+    network {
+      port "http" {
+        to = 3000
+        host_network = "private"
+      }
+
+      port "db" {
+        to = 27017
+        host_network = "private"
+      }
+    }
+
+    task "payload" {
+      driver = "docker"
+      
+      config {
+        image = "${DOCKER_IMAGE}"
+        ports = ["http"]
+        force_pull = true
+      }
+
+      env {
+        MONGODB_URI = "mongodb://${NOMAD_ADDR_db}/payload"
+        PORT = "3000"
+        PAYLOAD_SECRET = "${PAYLOAD_SECRET}"
+      }
+
+      service {
+        port = "http"
+	    name = "simse-io-app-cms-${ENV}"
+
+        check {
+          type     = "http"
+          path     = "/admin"
+          interval = "10s"
+          timeout  = "2s"
+        }
+      }
+
+      resources {
+        cpu    = 100
+        memory = 1024
+      }
+    }
+
+    task "db" {
+      driver = "docker"
+      
+      config {
+        image = "mongo:6.0.3"
+        volumes = [
+          "/nomad/simse.io/app-cms-${ENV}/db:/data/db",
+        ]
+        ports = ["db"]
+      }
+
+      resources {
+        cpu    = 500
+        memory = 1024
+      }
+    }
+  }
+}
