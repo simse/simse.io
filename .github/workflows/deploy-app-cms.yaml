@@ -19,6 +19,7 @@ jobs:
         run: cd apps/app-cms
       -
         run: just build
+        working_directory: apps/app-cms
 
   deploy:
     runs-on: ubuntu-latest
@@ -34,14 +35,15 @@ jobs:
         with:
           authkey: ${{ secrets.TAILSCALE_AUTH_KEY }}
       -
-        run: cd apps/app-cms
-      -
         run: wget https://releases.hashicorp.com/levant/0.3.2/levant_0.3.2_linux_amd64.zip
       -
         run: unzip levant_0.3.2_linux_amd64.zip
       -
         run: chmod +x ./levant
       -
+        run: mv ./levant /usr/bin/
+      -
         run: just deploy
+        working_directory: apps/app-cms
         env:
           NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
