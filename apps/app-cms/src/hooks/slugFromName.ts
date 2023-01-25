@@ -4,7 +4,7 @@ import slugify from 'slugify';
 export const createSlug: CollectionBeforeChangeHook = async ({
   data,
 }) => {
-    if (!data.slug) {
+    if (!data.slug || data.draft) {
         data.slug = slugify(data.name, {
           lower: true
         });

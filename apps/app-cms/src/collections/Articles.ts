@@ -2,11 +2,10 @@ import { CollectionConfig } from 'payload/types';
 import { createSlug } from '../hooks/slugFromName';
 import { publicRead } from '../utils/publicRead';
 
-// Example Collection - For reference only, this must be added to payload.config.ts to be used.
 const Articles: CollectionConfig = {
   slug: 'articles',
   admin: {
-    useAsTitle: 'title'
+    useAsTitle: 'name'
   },
   hooks: {
     beforeChange: [createSlug]
