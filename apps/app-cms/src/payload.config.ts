@@ -6,6 +6,9 @@ import Users from './collections/Users';
 import Articles from './collections/Articles';
 import ArticleCategories from './collections/ArticleCategories';
 import Media from './collections/Media';
+import Projects from './collections/Projects';
+import ProjectCategories from './collections/ProjectCategories';
+import ProjectLanguages from './collections/ProjectLanguages';
 
 export default buildConfig({
   serverURL: (process.env.NODE_ENV === "production") ? 'https://cms.simse.io' : 'http://localhost:3000',
@@ -16,7 +19,10 @@ export default buildConfig({
     Users,
     Articles,
     ArticleCategories,
-    Media
+    Media,
+    Projects,
+    ProjectCategories,
+    ProjectLanguages
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
