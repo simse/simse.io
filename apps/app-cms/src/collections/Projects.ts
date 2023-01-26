@@ -31,7 +31,8 @@ const Projects: CollectionConfig = {
       name: 'language',
       type: 'relationship',
       relationTo: 'project-languages',
-      label: 'Language'
+      label: 'Language',
+      hasMany: true
     },
     {
       name: 'category',

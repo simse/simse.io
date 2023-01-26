@@ -28,9 +28,19 @@ const ProjectCategories: CollectionConfig = {
       label: 'Name'
     },
     {
+      name: 'plural',
+      type: 'text',
+      label: 'Plural'
+    },
+    {
       name: 'description',
       type: 'text',
       label: 'Description'
+    },
+    {
+      name: 'sort_hint',
+      type: 'number',
+      label: 'Sort Hint'
     },
   ],
 }
