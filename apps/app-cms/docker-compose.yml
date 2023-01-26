@@ -19,7 +19,10 @@ services:
       PORT: 3000
       NODE_ENV: development
       PAYLOAD_SECRET: TESTING
-
+      CLOUDFLARE_IMAGES_ACCOUNT_ID: ffa300f532eaaec071135605899f7bf8
+      PAYLOAD_PUBLIC_CLOUDFLARE_IMAGES_ACCOUNT_HASH: momKfEj2XLFFfTO94YnvIg
+      CLOUDFLARE_IMAGES_TOKEN: CctmbG3LzQzRVTtIVPFaMJNBi2C-KR_3yRQgmfIP
+      
   mongo:
     image: mongo:latest
     ports:

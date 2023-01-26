@@ -43,27 +43,10 @@ const Articles: CollectionConfig = {
       hasMany: true
     },
     {
-      name: 'featured_image',
-      label: 'Featured Image',
-      type: 'group',
-      fields: [
-        {
-          name: 'media',
-          type: 'relationship',
-          relationTo: 'media',
-          label: 'Image'
-        },
-        {
-          name: 'credit',
-          type: 'text',
-          label: 'Credit'
-        },
-        {
-          name: 'alt',
-          type: 'text',
-          label: 'Alt'
-        },
-      ]
+      name: 'media',
+      type: 'relationship',
+      relationTo: 'media',
+      label: 'Featured Image'
     },
     {
       name: 'content',
