@@ -29,15 +29,15 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
         image = "[[ env "DOCKER_IMAGE" ]]"
         ports = ["http"]
         force_pull = true
-        volumes = [
-           "/nomad/simse.io/app-cms-[[ env "ENV" ]]/media:/media",
-        ]
       }
 
       env {
         MONGODB_URI = "mongodb://${NOMAD_ADDR_db}/payload"
         PORT = "3000"
         PAYLOAD_SECRET = "${PAYLOAD_SECRET}"
+        CLOUDFLARE_IMAGES_ACCOUNT_ID = "[[ env "CLOUDFLARE_IMAGES_ACCOUNT_ID" ]]"
+        PAYLOAD_PUBLIC_CLOUDFLARE_IMAGES_ACCOUNT_HASH = "[[ env "CLOUDFLARE_IMAGES_ACCOUNT_HASH" ]]"
+        CLOUDFLARE_IMAGES_TOKEN = "[[ env "CLOUDFLARE_IMAGES_TOKEN" ]]"
       }
 
       service {
