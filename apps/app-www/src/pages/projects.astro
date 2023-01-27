@@ -4,7 +4,7 @@ import Layout from "@layouts/Layout.astro";
 import PageTitle from "@components/PageTitle.astro";
 
 // import data
-import { projectLanguages, projectTypes } from "@data/taxonomy";
+// import { projectLanguages, projectTypes } from "@data/taxonomy";
 
 // create breadcrumbs
 const breadcrumbs = [
@@ -28,7 +28,7 @@ let projectByType = projects.reduce(
 );
 ---
 
-<Layout title="Projects" breadcrumbs={breadcrumbs}>
+<!--Layout title="Projects" breadcrumbs={breadcrumbs}>
 	<PageTitle>Projects</PageTitle>
 
 	{
@@ -82,4 +82,4 @@ let projectByType = projects.reduce(
 			</div>
 		))
 	}
-</Layout>
+</!--Layout-->
