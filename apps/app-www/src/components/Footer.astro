@@ -1,6 +1,5 @@
 ---
-import { Image } from '@astrojs/image/components';
-import wink from '../images/wink.png';
+import Image from "./Image.astro";
 
 const links = [
     {
@@ -21,7 +20,7 @@ const links = [
 ---
 
 <footer class="mt-16 py-8 border-t dark:border-white/20">
-    <Image class="mb-4" src={wink} width={32} aspectRatio={1} format="webp" quality={100} alt="" />
+    <Image id="e016d6ff-aad5-4173-2770-8411ac77fd00" width={32} height={32} responsive={false} css="mb-4" />
 
     <ul class="flex">
         {links.map(link => (

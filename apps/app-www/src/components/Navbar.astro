@@ -1,15 +1,5 @@
 ---
-import { Image } from '@astrojs/image/components';
-import wink from '../images/wink.png';
-
-// get breadcrumbs
-import type { Breadcrumb } from '../types';
-
-export interface Props {
-	breadcrumbs: Array<Breadcrumb>;
-}
-
-const { breadcrumbs } = Astro.props as Props
+import Image from "./Image.astro";
 
 const page = Astro.url.pathname;
 
@@ -48,7 +38,7 @@ const itemClass = (itemPath: string): string => {
 <nav class="flex justify-between py-2 bg-black pl-4 border-b border-white/20 items-center">
     <div class="flex items-center">
         <a href="/">
-            <Image class="" src={wink} width={32} aspectRatio={1} format="webp" quality={100} alt="" />
+            <Image id="e016d6ff-aad5-4173-2770-8411ac77fd00" width={32} height={32} responsive={false} />
         </a>
 
         <div class="border-l border-white/20 ml-4 pl-4">

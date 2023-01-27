@@ -1,11 +1,11 @@
 ---
+import { getAllArticles } from 'src/lib/cms';
+
 // load props
 export interface Props {
   category?: string;
   pagination?: boolean;
 }
-
-import TestImage from '../images/cardboard-box-in-space.png';
 
 const { 
     category = "",
@@ -13,33 +13,23 @@ const {
  } = Astro.props as Props;
 
 // import components
-import { Image } from '@astrojs/image/components';
+import Image from './Image.astro';
 
 // load articles
-let articles = await Astro.glob('../pages/articles/*.mdx');
+let articles = await getAllArticles();
 
-// sort articles by date (newest first)
-articles.sort((a, b) => (new Date(a.frontmatter.date) > new Date(b.frontmatter.date) ? -1 : 1));
-
-// filter by category if category prop is set
-if (category !== "") {
-    articles = articles.filter(article => article.frontmatter.categories.includes(category))
-}
-
-// filter out unlisted articles
-articles = articles.filter(article => !article.frontmatter.unlisted)
 ---
 <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
     {articles.map(article => (
-        <a href={`/articles/${article.frontmatter.slug}`} class="group">
+        <a href={`/articles/${article.slug}`} class="group">
             <div class="border-2 border-purple-900/50 h-64 p-8 flex flex-col justify-between relative">
-                <h2 class="text-2xl mb-4">{article.frontmatter.title}</h2>
+                <h2 class="text-2xl mb-4">{article.name}</h2>
 
-                <p class="text-gray-400">{article.frontmatter.date}</p>
+                <p class="text-gray-400">{article.createdAt}</p>
 
                 <div class="absolute top-0 left-0 -z-10 bg-black w-full h-full opacity-70 group-hover:opacity-80 transition-opacity"></div>
 
-                <Image class="absolute top-0 -z-20 overflow-hidden h-full w-full object-cover left-0" src={TestImage} width={600} height={350} alt="" />
+                <Image css="" id={article.media?.cloudflareImageId} width={600} height={350} alt="" />
             </div>
         </a>
     ))}

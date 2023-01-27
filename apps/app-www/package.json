@@ -12,7 +12,6 @@
     "deploy:prod": "CLOUDFLARE_ACCOUNT_ID=ffa300f532eaaec071135605899f7bf8 astro build && npx wrangler pages publish dist --project-name simse-io-prod --commit-dirty"
   },
   "devDependencies": {
-    "@astrojs/image": "0.11.6",
     "@astrojs/mdx": "0.12.0",
     "@astrojs/sitemap": "1.0.0",
     "@astrojs/svelte": "1.0.2",
@@ -31,5 +30,9 @@
     "typescript": "4.9.3",
     "vite": "3.2.4",
     "wrangler": "2.4.4"
+  },
+  "dependencies": {
+    "@simse/app-cms": "workspace:^1.0.0",
+    "axios": "^1.2.5"
   }
 }
