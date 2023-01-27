@@ -29,6 +29,9 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
         image = "[[ env "DOCKER_IMAGE" ]]"
         ports = ["http"]
         force_pull = true
+        volumes = [
+          "/nomad/simse.io/app-cms-prod/media:/media"
+        ]
       }
 
       env {
@@ -71,7 +74,7 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
       config {
         image = "mongo:6.0.3"
         volumes = [
-          "/nomad/simse.io/app-cms-[[ env "ENV" ]]/db:/data/db",
+          "/nomad/simse.io/app-cms-dev/db:/data/db",
         ]
         ports = ["db"]
       }

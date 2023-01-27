@@ -14,6 +14,12 @@ export default buildConfig({
   serverURL: (process.env.NODE_ENV === "production") ? 'https://cms.simse.io' : 'http://localhost:3000',
   admin: {
     user: Users.slug,
+    webpack: (config) => {
+      // Do something with the config here
+      config.resolve.alias['process'] = 'process/browser';
+
+      return config;
+    }
   },
   collections: [
     Users,
