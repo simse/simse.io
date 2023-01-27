@@ -21,6 +21,8 @@ jobs:
       -
         run: just build
         working-directory: apps/app-cms
+        env:
+          PAYLOAD_PUBLIC_CLOUDFLARE_IMAGES_ACCOUNT_HASH: ${{ secrets.CLOUDFLARE_IMAGES_ACCOUNT_HASH }}
 
   deploy:
     runs-on: ubuntu-latest
