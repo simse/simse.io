@@ -74,7 +74,7 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
       config {
         image = "mongo:6.0.3"
         volumes = [
-          "/nomad/simse.io/app-cms-dev/db:/data/db",
+          "/nomad/simse.io/app-cms-[[ env "ENV" ]]/db:/data/db",
         ]
         ports = ["db"]
       }
