@@ -17,16 +17,16 @@ import Image from './Image.astro';
 
 // load articles
 let articles = await getAllArticles();
-
+articles = articles.slice(0, 3);
 ---
-<div>
+<div class="grid grid-cols-3 gap-2">
 {articles.map(article => (
-    <a href={`/articles/${article.slug}`} class="border-b py-16 border-b border-white/20 block last:border-transparent first:pt-0">
+    <a href={`/articles/${article.slug}`} class="">
         <div class="flex flex-col justify-between relative">
-            {typeof article.media == 'object' && <Image css="mb-12" id={article.media?.cloudflareImageId} width={1600} height={960} alt="" responsive={true} />}
+            {typeof article.media == 'object' && <Image css="mb-12" id={article.media?.cloudflareImageId} width={1600} height={960} alt="" responsive={true} placeholder={false} />}
 
             <div class="">
-                <h2 class="text-5xl font-light mb-4">{article.name}</h2>
+                <h2 class="text-3xl mb-4">{article.name}</h2>
 
                 <p class="text-gray-400">{article.updatedAt}</p>
             </div>

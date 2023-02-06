@@ -45,19 +45,21 @@ const createCloudflareUrl = (id?: string, height?: number, width?: number) => {
 ---
 
 <div
-    class={"aspect-[5/3] relative " + (css ? css : "")}
+    class={"relative h-fit aspect-[5/3] " + (css ? css : "")}
     style={responsive ? '' : `height:${height}px;width:${width}px;`}
 >
-    {placeholder && <img class="w-full h-full" src="/images/placeholder.svg" alt="" />}
+    <div>
+        {placeholder && <img class="top-0 absolute w-full h-full -z-10" src="/images/placeholder.svg" alt="" />}
 
-    <img
-        class="top-0 max-h-full absolute w-full"
-        src={createCloudflareUrl(image.cloudflareImageId, height, width)}
-        alt={image.alt}
-    />
+        <img
+            class="max-h-full w-full object-cover"
+            src={createCloudflareUrl(image.cloudflareImageId, height, width)}
+            alt={image.alt}
+        />
+    </div>
 
     {
-        image.credit !== "" && (
+        (image.credit !== "" && image.credit) && (
             <p class="mt-4 text-gray-500 dark:text-gray-400">{image.credit}</p>
         )
     }
