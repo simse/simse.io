@@ -19,14 +19,16 @@ const links = [
 ]
 ---
 
-<footer class="mt-16 py-8 border-t dark:border-white/20">
-    <Image id="e016d6ff-aad5-4173-2770-8411ac77fd00" width={32} height={32} responsive={false} css="mb-4" />
+<footer class="mt-16 px-8">
+    <div class="py-8 border-t dark:border-white/20">
+        <Image id="e016d6ff-aad5-4173-2770-8411ac77fd00" width={32} height={32} responsive={false} css="mb-4" />
 
-    <ul class="flex">
-        {links.map(link => (
-            <li class="text-gray-400 hover:underline">
-                <a class="mr-8 first:ml-0" href={link.url} target={link.target}>{link.name}</a>
-            </li>
-        ))}
-    </ul>
+        <ul class="flex">
+            {links.map(link => (
+                <li class="text-gray-400 hover:underline">
+                    <a class="mr-8 first:ml-0" href={link.url} target={link.target}>{link.name}</a>
+                </li>
+            ))}
+        </ul>
+    </div>
 </footer>
