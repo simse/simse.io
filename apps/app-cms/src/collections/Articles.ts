@@ -22,7 +22,7 @@ const Articles: CollectionConfig = {
       type: 'text',
       label: 'Slug',
       admin: {
-        readOnly: true
+        description: 'this field is programmatically set. careful!'
       }
     },
     {
