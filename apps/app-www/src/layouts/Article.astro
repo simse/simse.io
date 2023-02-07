@@ -6,7 +6,6 @@ import Image from "../components/Image.astro";
 import "../styles/article.scss";
 import "../styles/prism.css";
 
-import { articleCategories } from "../data/taxonomy.ts";
 
 const breadcrumbs = [
 	{
@@ -25,22 +24,8 @@ const breadcrumbs = [
 			<h1 class="text-3xl mb-5">{content.title}</h1>
 			<p class="text-md text-gray-600 dark:text-gray-300">
 				{content.date} — 
-				{content.categories.map(
-					(cat, i) => {
-						const href = "/articles/category/" + articleCategories[cat].id
-						const name = articleCategories[cat].name
-
-						return <>
-							<a class="hover:underline text-blue-600 hover:text-blue-800" href={href}>{name}</a>
-							<span>{(i+1 !== content.categories.length) ? ', ': ''}</span>
-						</>
-					}
-				)}
 			</p>
 		</div>
-		
-		{content.image &&
-        <Image src={content.image} width={1200} credit={content.imageCredit} css="my-8 max-w-6xl" alt={content.imageAlt} />}
 	</div>
 
 	<div class="article max-w-3xl prose prose-lg dark:prose-invert">

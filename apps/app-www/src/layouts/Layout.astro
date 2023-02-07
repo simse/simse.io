@@ -30,6 +30,7 @@ import Footer from '../components/Footer.astro';
 		<meta name="theme-color" content="#ffffff">
 		<meta name="generator" content={Astro.generator} />
 		<title>{`${title} / simse.io`}</title>
+		<link rel="preconnect" href="https://cdn.simse.io">
 	</head>
 	<body class="dark:bg-black dark:text-gray-200">
 		<Navbar breadcrumbs={breadcrumbs} />
@@ -38,9 +39,9 @@ import Footer from '../components/Footer.astro';
 			<main class={`${noSpacing ? '': 'pt-16'}`}>
 				<slot />
 			</main>
-	
-			<Footer />
 		</div>
+
+		<Footer />
 	</body>
 </html>
 <style>
@@ -53,14 +54,14 @@ import Footer from '../components/Footer.astro';
 
 	@font-face {
 		font-family: "IBM Plex Sans";
-		src: url('/fonts/IBMPlexSans-Regular.woff2') format('woff2');
+		src: url('https://cdn.simse.io/fonts/IBMPlexSans-Regular.woff2') format('woff2');
 		font-weight: 400;
 		font-display: swap;
 	}
 
 	@font-face {
 		font-family: "IBM Plex Sans";
-		src: url('/fonts/IBMPlexSans-Italic.woff2') format('woff2');
+		src: url('https://cdn.simse.io/fonts/IBMPlexSans-Italic.woff2') format('woff2');
 		font-weight: 400;
 		font-style: italic;
 		font-display: swap;
@@ -68,15 +69,45 @@ import Footer from '../components/Footer.astro';
 
 	@font-face {
 		font-family: "IBM Plex Sans";
-		src: url('/fonts/IBMPlexSans-Light.woff2') format('woff2');
+		src: url('https://cdn.simse.io/fonts/IBMPlexSans-Light.woff2') format('woff2');
 		font-weight: 300;
 		font-display: swap;
 	}
 
 	@font-face {
 		font-family: "IBM Plex Sans";
-		src: url('/fonts/IBMPlexSans-Bold.woff2') format('woff2');
+		src: url('https://cdn.simse.io/fonts/IBMPlexSans-Bold.woff2') format('woff2');
 		font-weight: 700;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url('https://cdn.simse.io/fonts/Cormorant-Regular.woff2') format('woff2');
+		font-weight: 400;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url('https://cdn.simse.io/fonts/Cormorant-Bold.woff2') format('woff2');
+		font-weight: 700;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url('https://cdn.simse.io/fonts/Cormorant-Italic.woff2') format('woff2');
+		font-weight: 400;
+		font-style: italic;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Cormorant";
+		src: url('https://cdn.simse.io/fonts/Cormorant-BoldItalic.woff2') format('woff2');
+		font-weight: 700;
+		font-style: italic;
 		font-display: swap;
 	}
 </style>
