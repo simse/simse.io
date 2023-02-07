@@ -15,6 +15,11 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
         to = 3000
         host_network = "private"
       }
+
+      port "db" {
+        to = 27017
+        host_network = "private"
+      }
     }
 
     task "payload" {
@@ -60,15 +65,6 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
       resources {
         cpu    = 100
         memory = 1024
-      }
-    }
-  }
-
-  group "app-cms-db" {
-    network {
-      port "db" {
-        to = 27017
-        host_network = "private"
       }
     }
 
