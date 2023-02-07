@@ -21,7 +21,7 @@ let articles = await getAllArticles();
 ---
 <div>
 {articles.map(article => (
-    <a href={`/articles/${article.slug}`} class="border-b py-16 border-b border-white/20 block last:border-transparent first:pt-0">
+    <a href={`/articles/${article.slug}`} class="border-b py-16 border-white/20 block last:border-transparent first:pt-0">
         <div class="flex flex-col justify-between relative">
             {typeof article.media == 'object' && <Image css="mb-12" id={article.media?.cloudflareImageId} width={1600} height={960} alt="" responsive={true} />}
 

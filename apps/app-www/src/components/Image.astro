@@ -14,12 +14,13 @@ export interface Props {
     css?: string;
     height?: number;
     width?: number;
+    gravity?: string;
     placeholder?: boolean;
     responsive?: boolean;
 }
 
 // get props
-const { id, alt, credit, height, width, css, placeholder = true, responsive = true } = Astro.props as Props;
+const { id, alt, credit, height, width, css, placeholder = true, responsive = true, gravity = "auto" } = Astro.props as Props;
 let { image } = Astro.props as Props;
 
 // synth image object if not given
@@ -40,7 +41,7 @@ const createCloudflareUrl = (id?: string, height?: number, width?: number) => {
         return "";
     }
 
-    return `https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/${id}/format=auto,h=${height},w=${width},fit=cover`;
+    return `https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/${id}/format=auto,h=${height},w=${width},fit=cover,gravity=${gravity}`;
 };
 ---
 
