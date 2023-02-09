@@ -1,6 +1,7 @@
 import axios from 'axios';
 import * as qs from 'qs';
-import type { Article } from '@simse/app-cms/src/payload-types';
+import { groupBy } from 'lodash-es';
+import type { Article, Project } from '@simse/app-cms/src/payload-types';
 
 // stuff that should probably be environment variables
 const CMS_URL = "https://cms.simse.io/api/";
@@ -92,9 +93,49 @@ const getAllArticleSlugs = async (): Promise<String[]> => {
     return [];
 }
 
+const getAllProjects = async (): Promise<Project[]> => {
+    const query = {
+        /*_status: {
+            equals: 'published',
+        },*/
+    }
+
+    const stringifiedQuery = qs.stringify({
+        where: query,
+        limit: 10000,
+        depth: 1
+    });
+
+    try {
+        const response = await axios.get(`${CMS_URL}projects?${stringifiedQuery}`);
+
+        if (response.status == 200) {
+            return response.data['docs'] as Project[];
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+    return [];
+}
+
+interface GroupedProjects {
+    [key: string]: Project[];
+}
+
+const getAllProjectsGroupByCategory = async (): Promise<GroupedProjects> => {
+    const projects = await getAllProjects();
+
+    return groupBy(projects, 'category.name');
+}
+
 export {
     getAllArticles,
     getArticleById,
     getArticleBySlug,
-    getAllArticleSlugs
+    getAllArticleSlugs,
+    
+    // projects
+    getAllProjects,
+    getAllProjectsGroupByCategory
 }

@@ -6,7 +6,7 @@ import Image from '@components/Image.astro';
 import CompactArticleList from '@components/CompactArticleList.astro';
 ---
 <Layout title="Welcome" disableMaxWidth={true}>
-	<div class="flex gap-8 max-w-[1800px] mx-auto px-8">
+	<div class="flex gap-8 max-w-[2000px] mx-auto px-8">
 		<div class="flex-none w-96">
 			<!-- About -->
 			<h1 class="text-5xl font-serif mb-8">Simon Sorensen</h1>
@@ -29,6 +29,8 @@ import CompactArticleList from '@components/CompactArticleList.astro';
 
 				<CompactArticleList />
 			</div>
+
+			<a class="underline decoration-from-font mt-8 block font-serif text-2xl" href="/projects">Want to see my <em>work</em>?</a>
 		</div>
 
 		<div class="flex-auto">

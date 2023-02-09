@@ -1,5 +1,6 @@
 ---
 import { getAllArticles } from 'src/lib/cms';
+import { prettyDate } from 'src/utils/date';
 
 // load props
 export interface Props {
@@ -21,14 +22,14 @@ let articles = await getAllArticles();
 ---
 <div>
 {articles.map(article => (
-    <a href={`/articles/${article.slug}`} class="border-b py-16 border-white/20 block last:border-transparent first:pt-0">
-        <div class="flex flex-col justify-between relative">
-            {typeof article.media == 'object' && <Image css="mb-12" id={article.media?.cloudflareImageId} width={1600} height={960} alt="" responsive={true} />}
+    <a href={`/articles/${article.slug}`} class="border-t py-8 border-white/20 block last:pb-0">
+        <div class="flex gap-8 items-center">
+            <Image width={150} height={150} gravity={"center"} responsive={false} id="d56330f2-41d4-484a-e488-8c2566378100" />
 
             <div class="">
-                <h2 class="text-5xl font-light mb-4">{article.name}</h2>
+                <h2 class="text-3xl mb-4 font-serif">{article.name}</h2>
 
-                <p class="text-gray-400">{article.updatedAt}</p>
+                <p class="max-w-5xl"><span class="text-xl font-serif mr-2">{prettyDate(article.updatedAt)}</span><span class="text-gray-400">Balhfkoahfjksdbfjhksbfhj asijfbsjh b efjhsbfh sd Balhfkoahfjksdbfjhksbfhj asijfbsjh b efjhsbfh sd Balhfkoahfjksdbfjhksbfhj asijfbsjh b efjhsbfh sdbgf hjsdbgf jhsdbfjhs bjhdsbf jhsbfjh dsbfjhsb jdfbsdj bfjhsdbf j</span></p>
             </div>
         </div>
     </a>
