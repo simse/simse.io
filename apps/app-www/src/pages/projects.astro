@@ -1,0 +1,31 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PageTitle from '../components/PageTitle.astro';
+import { getAllProjectsGroupByCategory } from 'src/lib/cms';
+import TableCell from '@components/TableCell.astro';
+
+const projectCategories = await getAllProjectsGroupByCategory();
+---
+
+<Layout title="Projects">
+	<PageTitle>Projects</PageTitle>
+
+	{Object.keys(projectCategories).map(category => (
+		<div class="mb-8">
+			<h2 class="text-lg font-bold pb-2 mt-2 w-full border-b border-white/20">{category}</h2>
+
+			<div class="grid grid-cols-12 auto-rows-fr">
+			{projectCategories[category].map(project => (
+				<TableCell span={2}>
+					<h3 class="text-3xl font-serif">{project.name}</h3>
+				</TableCell>
+
+				<div class="table-cell py-4 border-b border-white/20 col-span-3">{project.id}</div>
+				<div class="table-cell py-4 border-b border-white/20 col-span-3">{project.id}</div>
+				<TableCell span={4}>{project.demo}</TableCell>
+			))}
+			</div>
+		</div>
+	))}
+</Layout>
+

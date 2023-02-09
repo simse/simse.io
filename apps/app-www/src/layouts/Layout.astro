@@ -1,6 +1,5 @@
 ---
 import type { Breadcrumbs } from '../types';
-import BackgroundMusic from 'src/parts/BackgroundMusic.astro';
 
 export interface Props {
 	title: string;
@@ -29,13 +28,13 @@ import Footer from '../components/Footer.astro';
 		<meta name="msapplication-TileColor" content="#2d89ef">
 		<meta name="theme-color" content="#ffffff">
 		<meta name="generator" content={Astro.generator} />
-		<title>{`${title} / simse.io`}</title>
+		<title>{`${title} / Simon Sorensen`}</title>
 		<link rel="preconnect" href="https://cdn.simse.io">
 	</head>
 	<body class="dark:bg-black dark:text-gray-200">
 		<Navbar breadcrumbs={breadcrumbs} />
 
-		<div class={`mx-auto ${disableMaxWidth ? '' : 'max-w-7xl'}`}>
+		<div class={`mx-auto ${disableMaxWidth ? '' : 'max-w-[2000px] px-8'}`}>
 			<main class={`${noSpacing ? '': 'pt-16'}`}>
 				<slot />
 			</main>
