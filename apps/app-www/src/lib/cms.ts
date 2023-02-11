@@ -18,7 +18,8 @@ const getAllArticles = async (page = 1, pageSize = PAGE_SIZE): Promise<Article[]
     const stringifiedQuery = qs.stringify({
         where: query,
         page,
-        limit: pageSize
+        limit: pageSize,
+        sort: '-createdAt'
     })
 
     try {

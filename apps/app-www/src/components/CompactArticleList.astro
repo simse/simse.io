@@ -27,4 +27,5 @@ articles = articles.slice(0, limit);
         <p class="font-serif text-xl italic">{prettyDate(article.createdAt)}</p>
     </a>
 ))}
+{(articles.length === 0) && <p>I haven't published any articles yet :(</p>}
 </div>

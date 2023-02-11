@@ -50,6 +50,7 @@ importers:
       astro-robots-txt: 0.3.11
       axios: 1.3.2
       escape-html: ^1.0.3
+      font-color-contrast: ^11.1.0
       lodash-es: ^4.17.21
       prismjs: 1.29.0
       qs: ^6.11.0
@@ -62,6 +63,7 @@ importers:
       '@astrojs/cloudflare': 6.1.2_astro@2.0.7
       '@simse/app-cms': link:../app-cms
       axios: 1.3.2
+      font-color-contrast: 11.1.0
     devDependencies:
       '@astrojs/tailwind': 3.0.1_gj5idc4fqpyteameornnqjyr2i
       '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.4
@@ -4114,6 +4116,10 @@ packages:
     peerDependenciesMeta:
       debug:
         optional: true
+    dev: false
+
+  /font-color-contrast/11.1.0:
+    resolution: {integrity: sha512-PxpFaesCSsDwaciw7MF6B2thUkH7skqZlz4BzUnvapR6+Es2877q7ru/tqfsITuaraPz+TGfsOfdtU4D0qjqEw==}
     dev: false
 
   /for-each/0.3.3:

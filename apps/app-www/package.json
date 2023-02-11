@@ -33,6 +33,7 @@
   "dependencies": {
     "@astrojs/cloudflare": "6.1.2",
     "@simse/app-cms": "workspace:^1.0.0",
-    "axios": "1.3.2"
+    "axios": "1.3.2",
+    "font-color-contrast": "^11.1.0"
   }
 }

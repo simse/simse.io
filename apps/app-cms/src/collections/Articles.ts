@@ -28,7 +28,8 @@ const Articles: CollectionConfig = {
     {
       name: 'name',
       type: 'text',
-      label: 'Title'
+      label: 'Title',
+      required: true
     },
     {
       name: 'subtitle',
@@ -36,11 +37,16 @@ const Articles: CollectionConfig = {
       label: 'Subtitle'
     },
     {
+      name: 'summary',
+      type: 'textarea',
+      label: 'Summary'
+    },
+    {
       name: 'category',
       type: 'relationship',
       relationTo: 'article-categories',
       label: 'Categories',
-      hasMany: true
+      hasMany: true,
     },
     {
       name: 'media',

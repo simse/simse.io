@@ -34,13 +34,15 @@ import Footer from '../components/Footer.astro';
 	<body class="dark:bg-black dark:text-gray-200">
 		<Navbar breadcrumbs={breadcrumbs} />
 
-		<div class={`mx-auto ${disableMaxWidth ? '' : 'max-w-[2000px] px-8'}`}>
+		<div class={`mx-auto ${disableMaxWidth ? '' : 'max-w-7xl px-8'}`}>
 			<main class={`${noSpacing ? '': 'pt-16'}`}>
 				<slot />
 			</main>
-		</div>
 
-		<Footer />
+			<div class={`${disableMaxWidth ? 'px-8' : ''}`}>
+				<Footer />
+			</div>
+		</div>
 	</body>
 </html>
 <style>

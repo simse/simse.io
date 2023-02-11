@@ -4,6 +4,8 @@ import PageTitle from '../components/PageTitle.astro';
 import { getAllProjectsGroupByCategory } from 'src/lib/cms';
 import TableCell from '@components/TableCell.astro';
 
+import fontColorContrast from 'font-color-contrast';
+
 const projectCategories = await getAllProjectsGroupByCategory();
 ---
 
@@ -16,13 +18,31 @@ const projectCategories = await getAllProjectsGroupByCategory();
 
 			<div class="grid grid-cols-12 auto-rows-fr">
 			{projectCategories[category].map(project => (
-				<TableCell span={2}>
+				<TableCell span={3}>
 					<h3 class="text-3xl font-serif">{project.name}</h3>
 				</TableCell>
 
-				<div class="table-cell py-4 border-b border-white/20 col-span-3">{project.id}</div>
-				<div class="table-cell py-4 border-b border-white/20 col-span-3">{project.id}</div>
-				<TableCell span={4}>{project.demo}</TableCell>
+				<TableCell span={4}>
+					<div class="flex gap-2 items-center h-full">
+					{project.language?.map(language => {
+						if (typeof language === "string") {
+							return;
+						}
+
+						return (
+							<p class="font-monospace font-bold py-1 px-3" style={`background:#${language.colour};color:${fontColorContrast(language.colour || "")}`}>{language.name}</p>
+						)
+					})}
+					</div>
+				</TableCell>
+
+				<TableCell span={5}>
+					<div class="flex items-center h-full gap-8">
+						<a class="text-blue-500 hover:underline" href={project.source_code} target="_blank">Source Code</a>
+
+						{project.demo && <a class="text-blue-500 hover:underline" href={project.demo} target="_blank">Demo</a>}
+					</div>
+				</TableCell>
 			))}
 			</div>
 		</div>

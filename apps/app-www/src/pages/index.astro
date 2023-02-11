@@ -6,8 +6,8 @@ import Image from '@components/Image.astro';
 import CompactArticleList from '@components/CompactArticleList.astro';
 ---
 <Layout title="Welcome" disableMaxWidth={true}>
-	<div class="flex gap-8 max-w-[2000px] mx-auto px-8">
-		<div class="flex-none w-96">
+	<div class="flex gap-8 max-w-[2000px] mx-auto px-8 flex-col-reverse md:flex-row">
+		<div class="flex-none w-full sm:w-96">
 			<!-- About -->
 			<h1 class="text-5xl font-serif mb-8">Simon Sorensen</h1>
 
@@ -34,7 +34,7 @@ import CompactArticleList from '@components/CompactArticleList.astro';
 		</div>
 
 		<div class="flex-auto">
-			<Image id="d56330f2-41d4-484a-e488-8c2566378100" width={1600} height={1000} gravity="center" alt="A picture of me (Simon) from May 2019" />
+			<Image id="d56330f2-41d4-484a-e488-8c2566378100" width={1600} height={1000} gravity="center" alt="80s style graphic with my full name: Simon Sorensen" />
 		</div>
 	</div>
 </Layout>
