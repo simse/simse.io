@@ -1,8 +1,8 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PageTitle from '../components/PageTitle.astro';
+import Layout from '@layouts/Layout.astro';
+import PageTitle from '@components/PageTitle.astro';
 import { getAllProjectsGroupByCategory } from 'src/lib/cms';
-import TableCell from '@components/TableCell.astro';
+import Image from '@components/Image.astro';
 
 import fontColorContrast from 'font-color-contrast';
 
@@ -14,35 +14,17 @@ const projectCategories = await getAllProjectsGroupByCategory();
 
 	{Object.keys(projectCategories).map(category => (
 		<div class="mb-8">
-			<h2 class="text-lg font-bold pb-2 mt-2 w-full border-b border-white/20">{category}</h2>
+			<h2 class="text-lg font-bold pb-2 mt-2 mb-4 w-full border-b border-white/20">{category}</h2>
 
-			<div class="grid grid-cols-12 auto-rows-fr">
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
 			{projectCategories[category].map(project => (
-				<TableCell span={3}>
-					<h3 class="text-3xl font-serif">{project.name}</h3>
-				</TableCell>
+				<a href={`/project/${project.slug}`}>
+					<div class="mb-4 md:mb-0">
+						<Image image={project.media} />
 
-				<TableCell span={4}>
-					<div class="flex gap-2 items-center h-full">
-					{project.language?.map(language => {
-						if (typeof language === "string") {
-							return;
-						}
-
-						return (
-							<p class="font-monospace font-bold py-1 px-3" style={`background:#${language.colour};color:${fontColorContrast(language.colour || "")}`}>{language.name}</p>
-						)
-					})}
+						<h2 class="mt-2 font-bold text-xl">{project.name}</h2>
 					</div>
-				</TableCell>
-
-				<TableCell span={5}>
-					<div class="flex items-center h-full gap-8">
-						<a class="text-blue-500 hover:underline" href={project.source_code} target="_blank">Source Code</a>
-
-						{project.demo && <a class="text-blue-500 hover:underline" href={project.demo} target="_blank">Demo</a>}
-					</div>
-				</TableCell>
+				</a>
 			))}
 			</div>
 		</div>

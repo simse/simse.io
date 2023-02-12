@@ -1,5 +1,5 @@
 ---
-import type { Article } from "@simse/app-cms/src/payload-types";
+import type { Article } from "@simse/app-cms/src/types";
 
 export interface Props {
 	article: Article
@@ -18,7 +18,13 @@ import { prettyDate } from "src/utils/date";
 		<div class="">
 			<h1 class="text-5xl mb-5 font-serif">{article?.name}</h1>
 			<p class="text-md text-gray-600 dark:text-gray-300">
-				{prettyDate(article?.updatedAt)} — 
+				{prettyDate(article?.updatedAt)} — {article.category.map((category) => {
+					return (
+						<a href={`/articles/category/${category.slug}`} class="text-purple-600 font-bold uppercase">
+							#{category.name}
+						</a>
+					);
+				})}
 			</p>
 		</div>
 	</div>

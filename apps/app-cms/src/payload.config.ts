@@ -11,7 +11,7 @@ import ProjectCategories from './collections/ProjectCategories';
 import ProjectLanguages from './collections/ProjectLanguages';
 
 export default buildConfig({
-  serverURL: (process.env.NODE_ENV === "production") ? 'https://cms.simse.io' : 'http://localhost:3000',
+  serverURL: process.env.PAYLOAD_SERVER_URL,
   admin: {
     user: Users.slug,
     webpack: (config) => {

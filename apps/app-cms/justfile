@@ -1,11 +1,14 @@
+set dotenv-load
+
 build_tag := `git rev-parse --short HEAD`
 app_name := "app-cms"
 env := env_var_or_default("ENV", "dev")
 docker_image := "ghcr.io/simse/simse.io/app-cms:" + build_tag + "-" + env
+domain := if env == "dev" { "cms.simse.dev" } else { "cms.simse.io" }
 
 build:
     cd ../.. && docker build -f apps/app-cms/Dockerfile . -t {{docker_image}} --progress=plain
     docker push {{docker_image}}
 
 deploy:
-    ENV=prod DOCKER_IMAGE={{docker_image}} levant deploy nomad.job
+    ENV={{env}} DOCKER_IMAGE={{docker_image}} DOMAIN={{domain}} levant deploy nomad.job

@@ -47,6 +47,7 @@ importers:
   apps/app-www:
     specifiers:
       '@astrojs/cloudflare': 6.1.2
+      '@astrojs/prefetch': ^0.1.2
       '@astrojs/tailwind': 3.0.1
       '@simse/app-cms': workspace:^1.0.0
       '@tailwindcss/typography': 0.5.9
@@ -56,10 +57,13 @@ importers:
       '@types/qs': ^6.9.7
       astro: 2.0.7
       astro-robots-txt: 0.3.11
+      autoprefixer: ^10.4.13
       axios: 1.3.2
+      cssnano: ^5.1.14
       escape-html: ^1.0.3
       font-color-contrast: ^11.1.0
       lodash-es: ^4.17.21
+      postcss: ^8.4.21
       prismjs: 1.29.0
       qs: ^6.11.0
       sass: 1.58.0
@@ -69,9 +73,13 @@ importers:
       wrangler: 2.9.1
     dependencies:
       '@astrojs/cloudflare': 6.1.2_astro@2.0.7
+      '@astrojs/prefetch': 0.1.2
       '@simse/app-cms': link:../app-cms
+      autoprefixer: 10.4.13_postcss@8.4.21
       axios: 1.3.2
+      cssnano: 5.1.14_postcss@8.4.21
       font-color-contrast: 11.1.0
+      postcss: 8.4.21
     devDependencies:
       '@astrojs/tailwind': 3.0.1_gj5idc4fqpyteameornnqjyr2i
       '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.4
@@ -87,7 +95,7 @@ importers:
       qs: 6.11.0
       sass: 1.58.0
       slate: 0.90.0
-      tailwindcss: 3.2.4
+      tailwindcss: 3.2.4_postcss@8.4.21
       typescript: 4.9.5
       wrangler: 2.9.1
 
@@ -155,6 +163,12 @@ packages:
     transitivePeerDependencies:
       - supports-color
 
+  /@astrojs/prefetch/0.1.2:
+    resolution: {integrity: sha512-Plf1GLKDyvTHjEKVMH922wc1AmvlFYvEXrbdaMAlgJuoqTRXirP1CennildFHndTetH8swWMlVGwxdG57dN7cA==}
+    dependencies:
+      throttles: 1.0.1
+    dev: false
+
   /@astrojs/prism/2.0.0:
     resolution: {integrity: sha512-YgeoeEPqsxaEpg0rwe/bUq3653LqSQnMjrLlpYwrbQQMQQqz6Y5yXN+RX3SfLJ6ppNb4+Fu2+Z49EXjk48Ihjw==}
     engines: {node: '>=16.12.0'}
@@ -172,7 +186,7 @@ packages:
       autoprefixer: 10.4.13_postcss@8.4.21
       postcss: 8.4.21
       postcss-load-config: 4.0.1_postcss@8.4.21
-      tailwindcss: 3.2.4
+      tailwindcss: 3.2.4_postcss@8.4.21
     transitivePeerDependencies:
       - ts-node
     dev: true
@@ -1617,7 +1631,7 @@ packages:
       lodash.isplainobject: 4.0.6
       lodash.merge: 4.6.2
       postcss-selector-parser: 6.0.10
-      tailwindcss: 3.2.4
+      tailwindcss: 3.2.4_postcss@8.4.21
     dev: true
 
   /@tokenizer/token/0.3.0:
@@ -8743,10 +8757,12 @@ packages:
     resolution: {integrity: sha512-QD9qKY3StfbZqWOPLp0++pOrAVb/HbUi5xCc8cUo4XjP19808oaMiDzn0leBY5mCespIBM0CIZePzZjgzR83kA==}
     dev: false
 
-  /tailwindcss/3.2.4:
+  /tailwindcss/3.2.4_postcss@8.4.21:
     resolution: {integrity: sha512-AhwtHCKMtR71JgeYDaswmZXhPcW9iuI9Sp2LvZPo9upDZ7231ZJ7eA9RaURbhpXGVlrjX4cFNlB4ieTetEb7hQ==}
     engines: {node: '>=12.13.0'}
     hasBin: true
+    peerDependencies:
+      postcss: ^8.0.9
     dependencies:
       arg: 5.0.2
       chokidar: 3.5.3
@@ -8847,6 +8863,11 @@ packages:
     resolution: {integrity: sha512-RVZSIV5IG10Hk3enotrhvz0T9em6cyHBLkH/YAZuKqd8hRkKhSfCGIcP2KUY0EPxndzANBmNllzWPwak+bheSw==}
     dependencies:
       any-promise: 1.3.0
+    dev: false
+
+  /throttles/1.0.1:
+    resolution: {integrity: sha512-fab7Xg+zELr9KOv4fkaBoe/b3L0GMGLd0IBSCn16GoE/Qx6/OfCr1eGNyEcDU2pUA79qQfZ8kPQWlRuok4YwTw==}
+    engines: {node: '>=6'}
     dev: false
 
   /through2/2.0.5:

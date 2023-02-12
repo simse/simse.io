@@ -1,7 +1,7 @@
 import axios from 'axios';
 import * as qs from 'qs';
 import { groupBy } from 'lodash-es';
-import type { Article, Project } from '@simse/app-cms/src/payload-types';
+import type { Article, Project } from '@simse/app-cms/src/types';
 
 // stuff that should probably be environment variables
 const CMS_URL = "https://cms.simse.io/api/";
