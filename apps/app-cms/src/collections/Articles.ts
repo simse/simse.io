@@ -1,6 +1,7 @@
 import { CollectionConfig } from 'payload/types';
 import { createSlug } from '../hooks/slugFromName';
 import { publicRead } from '../utils/publicRead';
+import { summarise } from '../hooks/summarise';
 
 const Articles: CollectionConfig = {
   slug: 'articles',
@@ -8,7 +9,7 @@ const Articles: CollectionConfig = {
     useAsTitle: 'name'
   },
   hooks: {
-    beforeChange: [createSlug]
+    beforeChange: [createSlug, summarise]
   },
   access: {
     read: publicRead
@@ -39,7 +40,10 @@ const Articles: CollectionConfig = {
     {
       name: 'summary',
       type: 'textarea',
-      label: 'Summary'
+      label: 'Summary',
+      admin: {
+        description: 'AI generated summary'
+      }
     },
     {
       name: 'category',

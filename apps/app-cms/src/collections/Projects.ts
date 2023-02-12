@@ -78,6 +78,12 @@ const Projects: CollectionConfig = {
       label: 'Demo URL'
     },
     {
+      name: 'media',
+      type: 'relationship',
+      relationTo: 'media',
+      label: 'Image'
+    },
+    {
       name: 'description',
       type: 'richText',
       label: 'Description'
