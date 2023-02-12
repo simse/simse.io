@@ -19,8 +19,11 @@
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
     "form-data": "^4.0.0",
+    "monaco-editor": "^0.35.0",
     "openai": "^3.1.0",
     "payload": "1.5.9",
+    "scheduler": "^0.23.0",
+    "slate": "^0.90.0",
     "slugify": "^1.6.5"
   },
   "devDependencies": {
