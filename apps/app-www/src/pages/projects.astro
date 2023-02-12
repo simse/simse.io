@@ -1,85 +1,51 @@
 ---
-// import components
-import Layout from "@layouts/Layout.astro";
-import PageTitle from "@components/PageTitle.astro";
+import Layout from '../layouts/Layout.astro';
+import PageTitle from '../components/PageTitle.astro';
+import { getAllProjectsGroupByCategory } from 'src/lib/cms';
+import TableCell from '@components/TableCell.astro';
 
-// import data
-import { projectLanguages, projectTypes } from "@data/taxonomy";
+import fontColorContrast from 'font-color-contrast';
 
-// create breadcrumbs
-const breadcrumbs = [
-	{
-		name: "Projects",
-		path: "/projects",
-	},
-];
-
-// import projects
-let projects = await Astro.glob("../pages/projects/*.mdx");
-
-// group by type
-let projectByType = projects.reduce(
-	(r, a) => {
-        r[a.frontmatter.type] = r[a.frontmatter.type] || [];
-        r[a.frontmatter.type].push(a);
-
-        return r;
-    }, Object.create(null)
-);
+const projectCategories = await getAllProjectsGroupByCategory();
 ---
 
-<Layout title="Projects" breadcrumbs={breadcrumbs}>
+<Layout title="Projects">
 	<PageTitle>Projects</PageTitle>
 
-	{
-		Object.keys(projectByType).map((pt) => (
-			<div class="mb-8">
-				<h2 class="mb-4 font-bold text-lg">
-					{projectTypes[pt].plural}
-				</h2>
+	{Object.keys(projectCategories).map(category => (
+		<div class="mb-8">
+			<h2 class="text-lg font-bold pb-2 mt-2 w-full border-b border-white/20">{category}</h2>
 
-				<div>
-					{projectByType[pt].map((project) => (
-						<a
-							href={`${project.frontmatter.repo}`}
-							target="blank"
-							class="first:border-t border-b border-gray-200 dark:border-gray-800 block"
-						>
-							<div class="my-1 py-1 flex items-center gap-3">
-								<span class="min-w-[82px]">
-									{project.frontmatter.releaseDate}
-								</span>
+			<div class="grid grid-cols-12 auto-rows-fr">
+			{projectCategories[category].map(project => (
+				<TableCell span={3}>
+					<h3 class="text-3xl font-serif">{project.name}</h3>
+				</TableCell>
 
-								<h2 class="font-bold hover:underline text-blue-800 hover:text-blue-900 dark:text-blue-500 dark:hover:text-blue-600">
-									{project.frontmatter.title}
-								</h2>
+				<TableCell span={4}>
+					<div class="flex gap-2 items-center h-full">
+					{project.language?.map(language => {
+						if (typeof language === "string") {
+							return;
+						}
 
-								<div class="flex">
-									{project.frontmatter.languages.map((l) => {
-										let colour = projectLanguages[l].colour;
-										let textColour =
-											projectLanguages[l].textColour;
-										let short = projectLanguages[l].short;
+						return (
+							<p class="font-monospace font-bold py-1 px-3" style={`background:#${language.colour};color:${fontColorContrast(language.colour || "")}`}>{language.name}</p>
+						)
+					})}
+					</div>
+				</TableCell>
 
-										return (
-											<p
-												class="px-2 font-bold text-sm mr-2"
-												style={`background:#${colour};color:#${textColour};font-family:'IBM Plex Mono';`}
-											>
-												{short}
-											</p>
-										);
-									})}
-								</div>
+				<TableCell span={5}>
+					<div class="flex items-center h-full gap-8">
+						<a class="text-blue-500 hover:underline" href={project.source_code} target="_blank">Source Code</a>
 
-								<button class="ml-auto text-white bg-blue-700 py-0.5 px-4 text-sm border border-black hover:bg-black dark:hover:bg-gray-800">
-									More →
-								</button>
-							</div>
-						</a>
-					))}
-				</div>
+						{project.demo && <a class="text-blue-500 hover:underline" href={project.demo} target="_blank">Demo</a>}
+					</div>
+				</TableCell>
+			))}
 			</div>
-		))
-	}
+		</div>
+	))}
 </Layout>
+

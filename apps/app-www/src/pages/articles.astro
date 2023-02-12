@@ -2,19 +2,12 @@
 import Layout from '../layouts/Layout.astro';
 import ArticleList from '../components/ArticleList.astro';
 import PageTitle from '../components/PageTitle.astro';
-
-const breadcrumbs = [
-	{
-		name: 'Articles',
-        path: '/articles'
-	}
-]
 ---
 
-<Layout title="Articles" breadcrumbs={breadcrumbs}>
-	<div class="">
-		<PageTitle>Articles</PageTitle>
+<Layout title="Articles">
+	<PageTitle>Articles</PageTitle>
 
+	<div class="mt-8">
 		<ArticleList pagination={true} />
 	</div>
 </Layout>

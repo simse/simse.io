@@ -1,73 +1,67 @@
 ---
-import { Image } from '@astrojs/image/components';
+import type { Media } from "@simse/app-cms/src/payload-types";
 
 export interface Props {
-    src: string;
+    // this or
+    image?: Media;
+
+    // this
+    id?: string;
+    alt?: string;
     credit?: string;
+
+    // all the other stuff
     css?: string;
     height?: number;
     width?: number;
-    alt: string;
+    gravity?: string;
+    placeholder?: boolean;
+    responsive?: boolean;
 }
 
-const { src, credit, height, width, css, alt } = Astro.props as Props;
+// get props
+const { id, alt, credit, height, width, css, placeholder = true, responsive = true, gravity = "auto" } = Astro.props as Props;
+let { image } = Astro.props as Props;
 
-const dev = Astro.site?.host === "localhost";
+// synth image object if not given
+if (!image) {
+    image = {
+        id: "",
+        createdAt: "",
+        updatedAt: "",
+        cloudflareImageId: id,
+        alt,
+        credit,
+    };
+}
 
-const aspectRatio = "5/3";
-/*
-// constructs an image url asking the Sorensen Cloud Image service to resize
-const createImageUrl = (source: string, width: number, height: number): string => {
-    if (!source) return ""
-
-    // in dev mode and img src is relative, use picture of a dog
-    if (dev && !source.startsWith("http")) {
-        source = "https://i.imgur.com/AlAZW4U.jpg"
-    } else if (!source.startsWith("http")) {
-        source = "https://simse.io/images/" + source
+// create cloudflare images url given id, height and width
+const createCloudflareUrl = (id?: string, height?: number, width?: number) => {
+    if (!id) {
+        return "";
     }
 
-    width = Math.round(width)
-    height = Math.round(height)
-
-    return `https://images.sorensen.cloud/unsafe/${width}x${height}/smart/filters:format(webp)/${source}`
-}
-
-// generate a srcset group
-const createSrcset = (source: string): string => {
-    const sizes = [200, 400, 600, 1000, 1200, 1400, 2000]
-
-    if (source === "") {
-        return ""
-    }
-
-    return sizes.map(size => {
-        return createImageUrl(source, size, size / 5 * 3) + ` ${size}w`
-    }).join(', ')
-}
-
-const srcset = createSrcset(src)*/
-let image = src;
-
-if (!src.startsWith("http")) {
-    /*if (import.meta.env.DEV) {
-        // Dev
-        image = import(`../images/wink.png`)
-    } else {
-        // Prod
-        image = import(`../images/wink.png`)
-    }*/
-
-    image = import(`../images/${src}.png`);
-}
+    return `https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/${id}/format=auto,h=${height},w=${width},fit=cover,gravity=${gravity}`;
+};
 ---
 
-<div class={"aspect-[5/3] relative " + css}>
-    <img class=" w-full h-full" src="/images/placeholder.svg" alt="" />
+<div
+    class={"relative h-fit aspect-[5/3] " + (css ? css : "")}
+    style={responsive ? '' : `height:${height}px;width:${width}px;`}
+>
+    <div>
+        {placeholder && <img class="top-0 absolute w-full h-full -z-10" src="/images/placeholder.svg" alt="" />}
 
-    <Image src={image} height={height} width={width} aspectRatio={5/3} format="webp" class="top-0 max-h-full absolute" alt={alt} />
+        <img
+            class="max-h-full w-full object-cover"
+            src={createCloudflareUrl(image.cloudflareImageId, height, width)}
+            alt={image.alt}
+        />
+    </div>
 
-{credit !== "" &&
-<p class="mt-4 text-gray-500 dark:text-gray-400">{credit}</p>}
-
+    {
+        (image.credit !== "" && image.credit) && (
+            <p class="mt-4 text-gray-500 dark:text-gray-400">{image.credit}</p>
+        )
+    }
 </div>

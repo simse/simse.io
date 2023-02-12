@@ -2,54 +2,39 @@
 import Layout from '../layouts/Layout.astro';
 
 // components
-import ArticleList from '@components/ArticleList.astro';
-import BackgroundMusic from 'src/parts/BackgroundMusic.astro';
-import Chat from '@components/Chat.svelte';
-
-// images
-import BackgroundImage from '../images/bg_smaller.jpg';
-import PlayingIcon from '../icons/volume-2.svg';
-import StoppedIcon from '../icons/volume-x.svg';
-import HeroImage from 'src/parts/HeroImage.astro';
+import Image from '@components/Image.astro';
+import CompactArticleList from '@components/CompactArticleList.astro';
 ---
-<Layout title="Welcome" noSpacing={true}>
-	<div class="absolute -top-10 left-0 w-full h-full -z-50">
-		<div class="h-1/4 xl:h-1/3 w-full bg-gradient-to-b from-purple-800/60 to-black"></div>
+<Layout title="Welcome" disableMaxWidth={true}>
+	<div class="flex gap-8 max-w-[2000px] mx-auto px-8 flex-col-reverse md:flex-row">
+		<div class="flex-none w-full sm:w-96">
+			<!-- About -->
+			<h1 class="text-5xl font-serif mb-8">Simon Sorensen</h1>
 
-		<!--svg class="absolute h-full w-full z-0" xmlns="http://www.w3.org/2000/svg" version="1.1">			
-			<image id="img" x="0" y="0" width="100%" height="100%" xlink:href={BackgroundImage.src} filter="url(#heat)" />
-		</svg-->
+			<h2 class="font-bold text-xl font-serif">About me</h2>
+			<h3 class="text-3xl font-serif">Computer Science student</h3>
+			<p class="text-gray-400">by day</p>
+
+			<h3 class="text-3xl font-serif mt-4">Software Engineering Intern @ LEGO</h3>
+			<p class="mb-4 text-gray-400">also by day</p>
+
+			<h3 class="text-3xl font-serif mt-4"><a href="https://www.youtube.com/@simon.sorensen" target="_blank" class="underline decoration-from-font">Youtube</a> Programming Educator</h3>
+			<p class="mb-4 text-gray-400">by night</p>
+
+			<a class="underline decoration-from-font font-serif text-xl" href="https://simon-sorensen.com" target="_blank">Curriculum Vitae</a>
+
+			<!-- Articles -->
+			<div class="mt-8">
+				<h2 class="font-bold text-xl font-serif mb-2">Articles</h2>
+
+				<CompactArticleList />
+			</div>
+
+			<a class="underline decoration-from-font mt-8 block font-serif text-2xl" href="/projects">Want to see my <em>work</em>?</a>
+		</div>
+
+		<div class="flex-auto">
+			<Image id="d56330f2-41d4-484a-e488-8c2566378100" width={1600} height={1000} gravity="center" alt="80s style graphic with my full name: Simon Sorensen" />
+		</div>
 	</div>
-
-	<div class="w-fit mx-auto relative mb-32">
-		<HeroImage />
-		<h2 class="absolute bottom-8 text-center w-full text-2xl font-bold text-purple-200">Software Engineering Intern @ LEGO<br />CS Student @ Kingston University</h2>
-		<p class="w-full text-center">See my CV right <a class="underline" href="https://cv.simse.io">here</a></p>
-	</div>
-
-	<BackgroundMusic>
-		<div class="w-full flex" id="stopped">
-			<img src={StoppedIcon} class="ml-auto" />
-		</div>
-
-		<div class="w-full flex hidden" id="playing">
-			<img src={PlayingIcon} class="ml-auto" />
-		</div>
-
-		<div class="w-full flex hidden" id="loading">
-			<p class="ml-auto">loading...</p>
-		</div>
-	</BackgroundMusic>
-
-	<!--div class="py-8 ">
-		<h2 class="text-lg font-bold mb-4">Articles</h2>
-	
-		<ArticleList />
-	</div-->
-
-	<!--div class="py-8">
-		<h2 class="text-lg font-bold mb-8">Chatbot Experiment</h2>
-
-		<Chat client:load />
-	</div-->
 </Layout>

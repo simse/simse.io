@@ -1,11 +1,13 @@
 ---
+import type { Article } from '@simse/app-cms/src/payload-types';
+import { getAllArticles } from 'src/lib/cms';
+import { prettyDate } from 'src/utils/date';
+
 // load props
 export interface Props {
   category?: string;
   pagination?: boolean;
 }
-
-import TestImage from '../images/cardboard-box-in-space.png';
 
 const { 
     category = "",
@@ -13,35 +15,38 @@ const {
  } = Astro.props as Props;
 
 // import components
-import { Image } from '@astrojs/image/components';
+import Image from './Image.astro';
 
 // load articles
-let articles = await Astro.glob('../pages/articles/*.mdx');
+let articles = await getAllArticles();
 
-// sort articles by date (newest first)
-articles.sort((a, b) => (new Date(a.frontmatter.date) > new Date(b.frontmatter.date) ? -1 : 1));
+// helper function to return article featured image or empty string if missing
+const getImage = (article: Article): string => {
+    if (typeof article.media === "string") {
+        return ""; // returning empty string leads to image placeholder
+    }
 
-// filter by category if category prop is set
-if (category !== "") {
-    articles = articles.filter(article => article.frontmatter.categories.includes(category))
+    if (!article.media) {
+        return "";
+    }
+
+    return article.media?.cloudflareImageId || "";
 }
-
-// filter out unlisted articles
-articles = articles.filter(article => !article.frontmatter.unlisted)
 ---
-<div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
-    {articles.map(article => (
-        <a href={`/articles/${article.frontmatter.slug}`} class="group">
-            <div class="border-2 border-purple-900/50 h-64 p-8 flex flex-col justify-between relative">
-                <h2 class="text-2xl mb-4">{article.frontmatter.title}</h2>
+<div>
+{articles.map(article => (
+    <a href={`/articles/${article.slug}`} class="border-t py-8 border-white/20 block last:pb-0">
+        <div class="flex gap-8 items-center">
+            <Image width={150} height={150} gravity={"center"} responsive={false} id={getImage(article)} />
 
-                <p class="text-gray-400">{article.frontmatter.date}</p>
+            <div class="">
+                <h2 class="text-3xl mb-4 font-serif">{article.name}</h2>
 
-                <div class="absolute top-0 left-0 -z-10 bg-black w-full h-full opacity-70 group-hover:opacity-80 transition-opacity"></div>
-
-                <Image class="absolute top-0 -z-20 overflow-hidden h-full w-full object-cover left-0" src={TestImage} width={600} height={350} alt="" />
+                <p class="max-w-5xl"><span class="text-xl font-serif mr-2">{prettyDate(article.createdAt)}</span><span class="text-gray-400">{article.subtitle}</span></p>
             </div>
-        </a>
-    ))}
-</div>
+        </div>
+    </a>
+))}
 
+{(articles.length === 0) && <p>I haven't published any articles yet :(</p>}
+</div>

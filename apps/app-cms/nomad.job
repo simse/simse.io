@@ -41,6 +41,7 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
         CLOUDFLARE_IMAGES_ACCOUNT_ID = "[[ env "CLOUDFLARE_IMAGES_ACCOUNT_ID" ]]"
         PAYLOAD_PUBLIC_CLOUDFLARE_IMAGES_ACCOUNT_HASH = "[[ env "CLOUDFLARE_IMAGES_ACCOUNT_HASH" ]]"
         CLOUDFLARE_IMAGES_TOKEN = "[[ env "CLOUDFLARE_IMAGES_TOKEN" ]]"
+        OPENAI_API_KEY = "[[ env "OPENAI_API_KEY" ]]"
       }
 
       service {
