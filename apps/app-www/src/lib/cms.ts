@@ -1,10 +1,10 @@
 import axios from 'axios';
 import * as qs from 'qs';
 import { groupBy } from 'lodash-es';
-import type { Article, Project } from '@simse/app-cms/src/payload-types';
+import type { Article, Project } from '@simse/app-cms/src/types';
 
 // stuff that should probably be environment variables
-const CMS_URL = "https://cms.simse.io/api/";
+const CMS_URL = "https://cms.simse.dev/api/";
 const PAGE_SIZE = 24;
 
 // getAllArticles returns all published articles from the CMS given page and page size
@@ -120,14 +120,66 @@ const getAllProjects = async (): Promise<Project[]> => {
     return [];
 }
 
-interface GroupedProjects {
-    [key: string]: Project[];
+const getAllProjectSlugs = async (): Promise<String[]> => {
+    const stringifiedQuery = qs.stringify({
+        limit: 10000,
+        depth: 1
+    });
+
+    try {
+        const response = await axios.get(`${CMS_URL}projects?${stringifiedQuery}`);
+
+        if (response.status == 200) {
+            return response.data['docs'].map((project: Project) => project.slug)
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+    return [];
+}
+        
+const getProjectBySlug = async (slug: string): Promise<Project> => {
+    const query = {
+        slug: {
+            equals: slug,
+        },
+    }
+
+    const stringifiedQuery = qs.stringify({
+        where: query,
+        page: 1,
+        limit: 1
+    })
+
+    const response = await axios.get(`${CMS_URL}projects?${stringifiedQuery}`);
+
+    if (response.status == 200) {
+        return (response.data['docs'] as Project[])[0];
+    } else {
+        throw Error("could not find project");
+    }
 }
 
-const getAllProjectsGroupByCategory = async (): Promise<GroupedProjects> => {
+
+interface ProjectGroup {
+    name: string;
+    plural?: string;
+    projects: Project[];
+}
+
+const getAllProjectsGroupByCategory = async (): Promise<ProjectGroup[]> => {
     const projects = await getAllProjects();
 
-    return groupBy(projects, 'category.name');
+    const groupedProjects = groupBy(projects, 'category.name');
+
+    return Object.keys(groupedProjects).map((key) => {
+        return {
+            name: key,
+            plural: groupedProjects[key][0].category.plural,
+            projects: groupedProjects[key]
+        }
+    });
 }
 
 export {
@@ -138,5 +190,7 @@ export {
     
     // projects
     getAllProjects,
+    getAllProjectSlugs,
+    getProjectBySlug,
     getAllProjectsGroupByCategory
 }

@@ -29,9 +29,6 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
         image = "[[ env "DOCKER_IMAGE" ]]"
         ports = ["http"]
         force_pull = true
-        volumes = [
-          "/nomad/simse.io/app-cms-prod/media:/media"
-        ]
       }
 
       env {
@@ -42,17 +39,17 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
         PAYLOAD_PUBLIC_CLOUDFLARE_IMAGES_ACCOUNT_HASH = "[[ env "CLOUDFLARE_IMAGES_ACCOUNT_HASH" ]]"
         CLOUDFLARE_IMAGES_TOKEN = "[[ env "CLOUDFLARE_IMAGES_TOKEN" ]]"
         OPENAI_API_KEY = "[[ env "OPENAI_API_KEY" ]]"
+        PAYLOAD_SERVER_URL = "https://[[ env "DOMAIN" ]]"
       }
 
       service {
         port = "http"
-	    name = "simse-io-app-cms-[[ env "ENV" ]]"
+	      name = "simse-io-app-cms-[[ env "ENV" ]]"
 
         tags = [
           "traefik.enable=true",
-          "traefik.http.routers.${NOMAD_TASK_NAME}.rule=Host(`cms.simse.io`)",
-          "traefik.http.routers.${NOMAD_TASK_NAME}.rule=Host(`cms.simse.io`)",
-          "traefik.http.routers.${NOMAD_TASK_NAME}.tls.certresolver=sample",
+          "traefik.http.routers.simse-cms-[[ env "ENV" ]].rule=Host(`[[ env "DOMAIN" ]]`)",
+          "traefik.http.routers.simse-cms-[[ env "ENV" ]].tls.certresolver=sample",
         ]
 
         check {

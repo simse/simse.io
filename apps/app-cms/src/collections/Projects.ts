@@ -28,6 +28,14 @@ const Projects: CollectionConfig = {
       label: 'Name'
     },
     {
+      name: 'summary',
+      type: 'text',
+      label: 'Summary',
+      admin: {
+        description: 'quick one liner about the project'
+      }
+    },
+    {
       name: 'language',
       type: 'relationship',
       relationTo: 'project-languages',

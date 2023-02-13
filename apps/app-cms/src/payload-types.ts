@@ -27,8 +27,9 @@ export interface User {
 export interface Article {
   id: string;
   slug?: string;
-  name?: string;
+  name: string;
   subtitle?: string;
+  summary?: string;
   category?: string[] | ArticleCategory[];
   media?: string | Media;
   content?: {
@@ -75,11 +76,13 @@ export interface Project {
   id: string;
   slug?: string;
   name?: string;
+  summary?: string;
   language?: string[] | ProjectLanguage[];
   category?: string | ProjectCategory;
   status?: 'maintained' | 'security_fixes' | 'done' | 'archived' | 'wont_complete';
   source_code?: string;
   demo?: string;
+  media?: string | Media;
   description?: {
     [k: string]: unknown;
   }[];

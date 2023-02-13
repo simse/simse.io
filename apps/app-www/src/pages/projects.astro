@@ -1,10 +1,11 @@
 ---
-import Layout from '../layouts/Layout.astro';
-import PageTitle from '../components/PageTitle.astro';
+import Layout from '@layouts/Layout.astro';
+import PageTitle from '@components/PageTitle.astro';
 import { getAllProjectsGroupByCategory } from 'src/lib/cms';
-import TableCell from '@components/TableCell.astro';
+import Image from '@components/Image.astro';
 
-import fontColorContrast from 'font-color-contrast';
+// import font-colour-contrast
+import getContrast from 'font-color-contrast';
 
 const projectCategories = await getAllProjectsGroupByCategory();
 ---
@@ -12,37 +13,25 @@ const projectCategories = await getAllProjectsGroupByCategory();
 <Layout title="Projects">
 	<PageTitle>Projects</PageTitle>
 
-	{Object.keys(projectCategories).map(category => (
+	{projectCategories.map(category => (
 		<div class="mb-8">
-			<h2 class="text-lg font-bold pb-2 mt-2 w-full border-b border-white/20">{category}</h2>
+			<h2 class="text-lg font-bold pb-2 mt-2 mb-4 w-full border-b border-white/20">{category.plural || category.name}</h2>
 
-			<div class="grid grid-cols-12 auto-rows-fr">
-			{projectCategories[category].map(project => (
-				<TableCell span={3}>
-					<h3 class="text-3xl font-serif">{project.name}</h3>
-				</TableCell>
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+			{category.projects.map(project => (
+					<div class="mb-4 md:mb-0">
+						<Image image={project.media} aspectRatio="5/3" height={500} width={300} />
 
-				<TableCell span={4}>
-					<div class="flex gap-2 items-center h-full">
-					{project.language?.map(language => {
-						if (typeof language === "string") {
-							return;
-						}
+						<h2 class="my-2 font-bold text-xl">{project.name}</h2>
 
-						return (
-							<p class="font-monospace font-bold py-1 px-3" style={`background:#${language.colour};color:${fontColorContrast(language.colour || "")}`}>{language.name}</p>
-						)
-					})}
+						<div class="flex gap-2 mb-2">
+							{project.language?.map(language => (
+								<span class="text-sm font-bold py-1 px-2 rounded-full" style={`background:#${language.colour};color:${getContrast('#' + language.colour)}`}>{language.name}</span>
+							))}
+						</div>
+
+						<p class=" text-gray-400">{project.summary}</p>
 					</div>
-				</TableCell>
-
-				<TableCell span={5}>
-					<div class="flex items-center h-full gap-8">
-						<a class="text-blue-500 hover:underline" href={project.source_code} target="_blank">Source Code</a>
-
-						{project.demo && <a class="text-blue-500 hover:underline" href={project.demo} target="_blank">Demo</a>}
-					</div>
-				</TableCell>
 			))}
 			</div>
 		</div>
