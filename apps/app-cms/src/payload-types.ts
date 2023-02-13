@@ -76,6 +76,7 @@ export interface Project {
   id: string;
   slug?: string;
   name?: string;
+  summary?: string;
   language?: string[] | ProjectLanguage[];
   category?: string | ProjectCategory;
   status?: 'maintained' | 'security_fixes' | 'done' | 'archived' | 'wont_complete';

@@ -5,8 +5,10 @@ interface Article extends Omit<pt.Article, 'category' | 'slug'> {
     slug: string;
 }
 
-interface Project extends Omit<pt.Project, 'media'> {
+interface Project extends Omit<pt.Project, 'media' | 'category' | 'language'> {
     media?: pt.Media;
+    category: pt.ProjectCategory;
+    language: pt.ProjectLanguage[];
 }
 
 interface Media extends pt.Media {}

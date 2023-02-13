@@ -1,0 +1,28 @@
+---
+import { getAllProjectSlugs, getProjectBySlug } from "src/lib/cms";
+
+export async function getStaticPaths() {
+  const slugs = await getAllProjectSlugs();
+
+  return slugs.map(slug => ({
+    params: {
+        slug
+    }
+  }))
+}
+
+import Layout from "@layouts/Layout.astro";
+
+// get the slug from params
+let slug = "";
+
+if (Astro.params.slug) {
+  slug = Astro.params.slug;
+}
+
+// get project data
+const project = await getProjectBySlug(slug);
+---
+<Layout title={`${project.name}`}>
+    hello ?
+</Layout>

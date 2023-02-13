@@ -17,10 +17,11 @@ export interface Props {
     gravity?: string;
     placeholder?: boolean;
     responsive?: boolean;
+    aspectRatio?: string;
 }
 
 // get props
-const { id, alt, credit, height, width, css, placeholder = true, responsive = true, gravity = "auto" } = Astro.props as Props;
+let { id, alt, credit, height, width, css, placeholder = true, responsive = true, gravity = "auto", aspectRatio } = Astro.props as Props;
 let { image } = Astro.props as Props;
 
 // synth image object if not given
@@ -35,6 +36,11 @@ if (!image) {
     };
 }
 
+// if no aspect ratio is given, calculate from height and width
+if (!aspectRatio) {
+    aspectRatio = `${height}/${width}`;
+}
+
 // create cloudflare images url given id, height and width
 const createCloudflareUrl = (id?: string, height?: number, width?: number) => {
     if (!id) {
@@ -46,17 +52,18 @@ const createCloudflareUrl = (id?: string, height?: number, width?: number) => {
 ---
 
 <div
-    class={"relative h-fit aspect-[5/3] " + (css ? css : "")}
-    style={responsive ? '' : `height:${height}px;width:${width}px;`}
+    class={"relative h-fit " + (css ? css : "")}
+    style={(responsive ? '' : `height:${height}px;width:${width}px;`) + `aspect-ratio:${aspectRatio};`}
 >
     <div>
         {placeholder && <img class="top-0 absolute w-full h-full -z-10" src="/images/placeholder.svg" alt="" />}
 
-        <img
+        {createCloudflareUrl(image.cloudflareImageId) !== "" && <img
             class="max-h-full w-full object-cover"
+            style={`aspect-ratio:${aspectRatio};`}
             src={createCloudflareUrl(image.cloudflareImageId, height, width)}
             alt={image.alt}
-        />
+        />}
     </div>
 
     {
