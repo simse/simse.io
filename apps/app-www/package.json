@@ -8,8 +8,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy:dev": "CLOUDFLARE_ACCOUNT_ID=ffa300f532eaaec071135605899f7bf8 astro build && npx wrangler pages publish dist --project-name simse-io-dev --commit-dirty",
-    "deploy:prod": "CLOUDFLARE_ACCOUNT_ID=ffa300f532eaaec071135605899f7bf8 astro build && npx wrangler pages publish dist --project-name simse-io-prod --commit-dirty"
+    "deploy:dev": "CLOUDFLARE_ACCOUNT_ID=ffa300f532eaaec071135605899f7bf8 astro build && npx wrangler pages publish dist --project-name simse-io-dev --commit-dirty --branch main",
+    "deploy:prod": "CLOUDFLARE_ACCOUNT_ID=ffa300f532eaaec071135605899f7bf8 astro build && npx wrangler pages publish dist --project-name simse-io-prod --commit-dirty --branch main"
   },
   "devDependencies": {
     "@astrojs/tailwind": "3.0.1",

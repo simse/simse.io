@@ -4,9 +4,6 @@ import PageTitle from '@components/PageTitle.astro';
 import { getAllProjectsGroupByCategory } from 'src/lib/cms';
 import Image from '@components/Image.astro';
 
-// import font-colour-contrast
-import getContrast from 'font-color-contrast';
-
 const projectCategories = await getAllProjectsGroupByCategory();
 ---
 
@@ -26,7 +23,7 @@ const projectCategories = await getAllProjectsGroupByCategory();
 
 						<div class="flex gap-2 mb-2">
 							{project.language?.map(language => (
-								<span class="text-sm font-bold py-1 px-2 rounded-full" style={`background:#${language.colour};color:${getContrast('#' + language.colour)}`}>{language.name}</span>
+								<span class="text-sm font-bold py-1 px-2 rounded-full" style={`background:#${language.colour};color:#${language.text_colour};`}>{language.name}</span>
 							))}
 						</div>
 

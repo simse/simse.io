@@ -25,12 +25,20 @@ const ProjectLanguages: CollectionConfig = {
     {
       name: 'name',
       type: 'text',
-      label: 'Name'
+      label: 'Name',
+      required: true
     },
     {
       name: 'colour',
       type: 'text',
-      label: 'Colour'
+      label: 'Colour',
+      required: true
+    },
+    {
+      name: 'text_colour',
+      type: 'text',
+      label: 'Text Colour',
+      required: true
     },
   ],
 }

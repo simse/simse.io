@@ -96,8 +96,9 @@ export interface Project {
 export interface ProjectLanguage {
   id: string;
   slug?: string;
-  name?: string;
-  colour?: string;
+  name: string;
+  colour: string;
+  text_colour: string;
   createdAt: string;
   updatedAt: string;
 }

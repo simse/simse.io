@@ -50,6 +50,7 @@ jobs:
         run: just deploy
         working-directory: apps/app-cms
         env:
+          ENV: prod
           NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
           PAYLOAD_SECRET: ${{ secrets.APP_CMS_PAYLOAD_SECRET }}
           CLOUDFLARE_IMAGES_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_IMAGES_ACCOUNT_ID }}
