@@ -1,31 +1,31 @@
 ---
-import { getAllArticles } from 'src/lib/cms';
-import { prettyDate } from 'src/utils/date';
+import { getAllArticles } from "src/lib/cms";
+import { prettyDate } from "src/utils/date";
 
 // load props
 export interface Props {
-  limit?: number;
+    limit?: number;
 }
 
-const { 
-    limit = 3
- } = Astro.props as Props;
-
-// import components
-import Image from './Image.astro';
+const { limit = 3 } = Astro.props as Props;
 
 // load articles
 let articles = await getAllArticles();
 
 articles = articles.slice(0, limit);
 ---
-<div>
-{articles.map(article => (
-    <a href={`/articles/${article.slug}`} class="mb-3 block">
-        <h3>{article.name}</h3>
 
-        <p class="font-serif text-xl italic">{prettyDate(article.createdAt)}</p>
-    </a>
-))}
-{(articles.length === 0) && <p>I haven't published any articles yet :(</p>}
+<div>
+    {
+        articles.map((article) => (
+            <a href={`/article/${article.slug}`} class="mb-3 block">
+                <h3>{article.name}</h3>
+
+                <p class="font-serif text-xl italic">
+                    {prettyDate(article.createdAt)}
+                </p>
+            </a>
+        ))
+    }
+    {articles.length === 0 && <p>I haven't published any articles yet :(</p>}
 </div>

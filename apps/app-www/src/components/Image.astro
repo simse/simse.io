@@ -65,10 +65,10 @@ const createCloudflareUrl = (id?: string, height?: number, width?: number) => {
             alt={image.alt}
         />}
     </div>
-
-    {
-        (image.credit !== "" && image.credit) && (
-            <p class="mt-4 text-gray-500 dark:text-gray-400">{image.credit}</p>
-        )
-    }
 </div>
+
+{
+    (image.credit !== "" && image.credit) && (
+        <p class="mt-4 text-gray-500 dark:text-gray-400">{image.credit}</p>
+    )
+}

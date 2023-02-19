@@ -1,0 +1,28 @@
+name: deploy-app-www
+on: 
+  push:
+    # branches:
+    #   - master
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - 
+        uses: actions/checkout@v3
+      - 
+        uses: pnpm/action-setup@v2
+        with:
+          version: 7.27.0
+      -
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      - 
+        run: pnpm install --frozen-lockfile
+      -
+        run: cd apps/app-www
+      -
+        run: pnpm deploy:prod
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

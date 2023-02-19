@@ -1,8 +1,9 @@
 import * as pt from './payload-types';
 
-interface Article extends Omit<pt.Article, 'category' | 'slug'> {
+interface Article extends Omit<pt.Article, 'category' | 'slug' | 'media'> {
     category: pt.ArticleCategory[];
     slug: string;
+    media?: pt.Media;
 }
 
 interface Project extends Omit<pt.Project, 'media' | 'category' | 'language' | 'slug'> {
