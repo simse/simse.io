@@ -1,8 +1,9 @@
 name: deploy-app-www
-on: 
+on:
+  workflow_dispatch:
   push:
-    # branches:
-    #   - master
+    branches:
+      - master
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
