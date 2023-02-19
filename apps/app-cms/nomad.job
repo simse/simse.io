@@ -40,6 +40,7 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
         CLOUDFLARE_IMAGES_TOKEN = "[[ env "CLOUDFLARE_IMAGES_TOKEN" ]]"
         OPENAI_API_KEY = "[[ env "OPENAI_API_KEY" ]]"
         PAYLOAD_SERVER_URL = "https://[[ env "DOMAIN" ]]"
+        GITHUB_WEBHOOK_TOKEN = "[[ env "GITHUB_WEBHOOK_TOKEN" ]]"
       }
 
       service {

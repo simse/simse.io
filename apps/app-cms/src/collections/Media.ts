@@ -3,6 +3,7 @@ import { publicRead } from '../utils/publicRead';
 import { getIncomingFiles } from '../utils/getIncomingFiles';
 import FormData from 'form-data';
 import axios from 'axios';
+import { triggerAfterChange } from '../hooks/triggerBuild';
 
 const forwardToCloudflareImages: CollectionBeforeChangeHook = async ({
   data, // incoming data to update or create with
@@ -44,7 +45,8 @@ const Media: CollectionConfig = {
     read: publicRead
   },
   hooks: {
-    beforeChange: [forwardToCloudflareImages]
+    beforeChange: [forwardToCloudflareImages],
+    afterChange: [triggerAfterChange]
   },
   upload: {
     staticURL: '/images',

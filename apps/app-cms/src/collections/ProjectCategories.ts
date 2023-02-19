@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload/types';
 import { createSlug } from '../hooks/slugFromName';
+import { triggerAfterChange } from '../hooks/triggerBuild';
 import { publicRead } from '../utils/publicRead';
 
 const ProjectCategories: CollectionConfig = {
@@ -11,7 +12,8 @@ const ProjectCategories: CollectionConfig = {
     read: publicRead
   },
   hooks: {
-    beforeChange: [createSlug]
+    beforeChange: [createSlug],
+    afterChange: [triggerAfterChange]
   },
   fields: [
     {

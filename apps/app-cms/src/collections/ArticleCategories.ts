@@ -1,5 +1,6 @@
 import { CollectionConfig } from 'payload/types';
 import { createSlug } from '../hooks/slugFromName';
+import { triggerAfterChange } from '../hooks/triggerBuild';
 import { publicRead } from '../utils/publicRead';
 
 // Example Collection - For reference only, this must be added to payload.config.ts to be used.
@@ -12,7 +13,8 @@ const ArticleCategories: CollectionConfig = {
     read: publicRead
   },
   hooks: {
-    beforeChange: [createSlug]
+    beforeChange: [createSlug],
+    afterChange: [triggerAfterChange]
   },
   fields: [
     {

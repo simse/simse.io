@@ -2,6 +2,7 @@ import { CollectionConfig } from 'payload/types';
 import { createSlug } from '../hooks/slugFromName';
 import { publicRead } from '../utils/publicRead';
 import { summarise } from '../hooks/summarise';
+import { triggerAfterChange } from '../hooks/triggerBuild';
 
 const Articles: CollectionConfig = {
   slug: 'articles',
@@ -9,7 +10,8 @@ const Articles: CollectionConfig = {
     useAsTitle: 'name'
   },
   hooks: {
-    beforeChange: [createSlug, summarise]
+    beforeChange: [createSlug, summarise],
+    afterChange: [triggerAfterChange]
   },
   access: {
     read: publicRead
