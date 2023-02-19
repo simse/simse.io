@@ -21,8 +21,7 @@ jobs:
       - 
         run: pnpm install --frozen-lockfile
       -
-        run: cd apps/app-www
-      -
         run: pnpm deploy:prod
+        working-directory: apps/app-www
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
