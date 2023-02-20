@@ -1,0 +1,43 @@
+---
+import { getAllProjectSlugs, getProjectBySlug } from "src/lib/cms";
+
+export async function getStaticPaths() {
+  const slugs = await getAllProjectSlugs();
+
+  return slugs.map(slug => ({
+    params: {
+        slug
+    }
+  }))
+}
+
+import Layout from "@layouts/Layout.astro";
+import ProjectLanguageTags from "@components/ProjectLanguageTags.astro";
+import SlateToHtml from "@components/SlateToHtml.astro";
+
+// get the slug from params
+let slug = "";
+
+if (Astro.params.slug) {
+  slug = Astro.params.slug;
+}
+
+// get project data
+const project = await getProjectBySlug(slug);
+---
+<Layout title={`${project.name}`}>
+  <!-- header -->
+  <div class="mb-8">
+    <h1 class="text-4xl mb-4">{project.name}</h1>
+    <h2 class="text-xl text-gray-400 mb-3">{project.summary}</h2>
+    <ProjectLanguageTags languages={project.language} />
+  </div>
+  
+
+  <!-- content -->
+  <h3 class="text-lg font-bold">About this Project</h3>
+  <div class="max-w-3xl prose prose-lg dark:prose-invert">
+    <SlateToHtml children={project.description} />
+    {!project.description && <p>No description provided, because I am lazy! <em>You hear that SIMON?</em> <strong>YOU'RE LAZY!!</strong><br /></p>}
+  </div>
+</Layout>

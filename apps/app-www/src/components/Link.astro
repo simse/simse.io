@@ -1,0 +1,24 @@
+---
+// imports
+import type { FeatherIcon } from 'feather-icons';
+
+// props
+interface Props {
+    text: string;
+    href: string;
+    target?: string;
+    icon?: FeatherIcon;
+}
+
+const {
+    text,
+    href,
+    target = '_self',
+    icon,
+} = Astro.props;
+---
+
+<a class="hover:underline flex gap-2 items-center text-blue-400" href={href} target={target}>
+    {icon && <Fragment set:html={icon.toSvg({color: '60a5fa', height: 20, width: 20})} />}
+    {text}
+</a>

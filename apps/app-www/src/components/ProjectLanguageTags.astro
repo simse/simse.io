@@ -1,0 +1,14 @@
+---
+import type { ProjectLanguage } from "@simse/app-cms/src/payload-types";
+
+interface Props {
+    languages: ProjectLanguage[];
+}
+
+const { languages } = Astro.props;
+---
+<div class="flex gap-2 mb-2">
+    {languages.map(language => (
+        <span class="text-sm font-bold py-1 px-2 rounded-full" style={`background:#${language.colour};color:#${language.text_colour};`}>{language.name}</span>
+    ))}
+</div>

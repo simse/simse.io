@@ -4,7 +4,15 @@ import PageTitle from '@components/PageTitle.astro';
 import { getAllProjectsGroupByCategory } from 'src/lib/cms';
 import Image from '@components/Image.astro';
 
+// icons
+import feather from 'feather-icons';
+import Link from '@components/Link.astro';
+import ProjectLanguageTags from '@components/ProjectLanguageTags.astro';
+
 const projectCategories = await getAllProjectsGroupByCategory();
+
+// sort project categories by name
+projectCategories.sort((a, b) => a.name.localeCompare(b.name));
 ---
 
 <Layout title="Projects">
@@ -17,17 +25,21 @@ const projectCategories = await getAllProjectsGroupByCategory();
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
 			{category.projects.map(project => (
 					<div class="mb-4 md:mb-0">
-						<Image image={project.media} aspectRatio="5/3" height={500} width={300} />
+						<a href={`/projects/${project.slug}`}>
+							<Image image={project.media} aspectRatio="5/3" height={420} width={700} gravity={"center"} />
 
-						<h2 class="my-2 font-bold text-xl">{project.name}</h2>
+							<h2 class="my-2 font-bold text-xl">{project.name}</h2>
 
-						<div class="flex gap-2 mb-2">
-							{project.language?.map(language => (
-								<span class="text-sm font-bold py-1 px-2 rounded-full" style={`background:#${language.colour};color:#${language.text_colour};`}>{language.name}</span>
-							))}
+							<ProjectLanguageTags languages={project.language} />
+
+							<p class=" text-gray-400">{project.summary}</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							{project.source_code && <Link text="Source Code" href={project.source_code} icon={feather.icons.code} />}
+							
+							{project.demo && <Link text="Demo" href={project.demo} icon={feather.icons['external-link']} />}
 						</div>
-
-						<p class=" text-gray-400">{project.summary}</p>
 					</div>
 			))}
 			</div>
