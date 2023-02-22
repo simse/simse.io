@@ -3,6 +3,7 @@ import { createSlug } from '../hooks/slugFromName';
 import { publicRead } from '../utils/publicRead';
 import { summarise } from '../hooks/summarise';
 import { triggerAfterChange } from '../hooks/triggerBuild';
+import codeBlock from '../fields/codeBlock';
 
 const Articles: CollectionConfig = {
   slug: 'articles',
@@ -63,7 +64,29 @@ const Articles: CollectionConfig = {
     {
       name: 'content',
       type: 'richText',
-      label: 'Article Content'
+      label: 'Article Content',
+      admin: {
+        elements: [
+          'h1',
+          'h2',
+          'h3',
+          'h4',
+          'h5',
+          'h6',
+          codeBlock,
+          'link',
+          'upload',
+          'ol',
+          'ul',
+        ],
+        leaves: [
+          'underline',
+          'bold',
+          'code',
+          'italic',
+          'strikethrough',
+        ],
+      }
     }
   ],
 }
