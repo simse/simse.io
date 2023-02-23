@@ -73,11 +73,12 @@ const Articles: CollectionConfig = {
           'h4',
           'h5',
           'h6',
-          codeBlock,
+          // codeBlock,
           'link',
           'upload',
           'ol',
           'ul',
+          'relationship'
         ],
         leaves: [
           'underline',

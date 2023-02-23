@@ -19,7 +19,7 @@ import { prettyDate } from "src/utils/date";
 			<h1 class="text-5xl mb-5 font-light">{article?.name}</h1>
 
 			<p class="text-md text-gray-600 dark:text-gray-300">
-				{prettyDate(article?.updatedAt)} — {article.category.map((category) => {
+				{prettyDate(article?.updatedAt)} — {article.category && article.category.map((category) => {
 					return (
 						<a href={`/articles/category/${category.slug}`} class="text-purple-600 font-bold uppercase">
 							#{category.name}

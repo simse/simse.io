@@ -8,6 +8,7 @@ importers:
   apps/app-cms:
     specifiers:
       '@types/express': ^4.17.9
+      '@types/prismjs': 1.26.0
       axios: ^1.2.5
       copyfiles: ^2.4.1
       cross-env: ^7.0.3
@@ -19,6 +20,7 @@ importers:
       octokit: ^2.0.14
       openai: ^3.1.0
       payload: 1.5.9
+      prismjs: 1.29.0
       process: ^0.11.10
       scheduler: ^0.23.0
       slate: ^0.90.0
@@ -26,6 +28,7 @@ importers:
       ts-node: ^9.1.1
       typescript: ^4.8.4
     dependencies:
+      '@types/prismjs': 1.26.0
       axios: 1.2.5
       dotenv: 8.6.0
       express: 4.18.2
@@ -34,6 +37,7 @@ importers:
       octokit: 2.0.14
       openai: 3.1.0
       payload: 1.5.9_bbqm6noihnurj6hfisqe2b3foq
+      prismjs: 1.29.0
       scheduler: 0.23.0
       slate: 0.90.0
       slugify: 1.6.5
@@ -2096,7 +2100,6 @@ packages:
 
   /@types/prismjs/1.26.0:
     resolution: {integrity: sha512-ZTaqn/qSqUuAq1YwvOFQfVW1AR/oQJlLSZVustdjwI+GZ8kr0MSHBj0tsXPW1EqHubx50gtBEjbPGsdZwQwCjQ==}
-    dev: true
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}

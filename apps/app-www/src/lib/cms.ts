@@ -4,7 +4,7 @@ import { groupBy } from 'lodash-es';
 import type { Article, Project } from '@simse/app-cms/src/types';
 
 // stuff that should probably be environment variables
-const CMS_URL = "https://cms.simse.dev/api/";
+const CMS_URL = "http://localhost:3000/api/";
 const PAGE_SIZE = 24;
 
 // getAllArticles returns all published articles from the CMS given page and page size

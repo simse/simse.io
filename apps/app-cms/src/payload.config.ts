@@ -9,6 +9,7 @@ import Media from './collections/Media';
 import Projects from './collections/Projects';
 import ProjectCategories from './collections/ProjectCategories';
 import ProjectLanguages from './collections/ProjectLanguages';
+import CodeSnippet from './collections/CodeSnippet';
 
 export default buildConfig({
   serverURL: process.env.PAYLOAD_SERVER_URL,
@@ -28,7 +29,8 @@ export default buildConfig({
     Media,
     Projects,
     ProjectCategories,
-    ProjectLanguages
+    ProjectLanguages,
+    CodeSnippet
   ],
   typescript: {
     outputFile: path.resolve(__dirname, 'payload-types.ts'),
