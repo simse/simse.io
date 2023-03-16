@@ -24,7 +24,7 @@ projectCategories.sort((a, b) => a.name.localeCompare(b.name));
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
 			{category.projects.map(project => (
-					<div class="mb-4 md:mb-0">
+					<div class="mb-4 md:mb-0 ">
 						<a href={`/projects/${project.slug}`}>
 							<Image image={project.media} aspectRatio="5/3" height={420} width={700} gravity={"center"} />
 

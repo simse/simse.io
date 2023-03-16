@@ -65,6 +65,8 @@ const serialize = (children: unknown[]): string => {
         return (
           `<ul>${serialize(node.children)}</ul>`
         );
+      case 'code-block':
+        return serialize(node.children);
       /*case 'ol':
         return (
           <ol key={i}>

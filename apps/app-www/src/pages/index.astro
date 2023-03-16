@@ -5,11 +5,15 @@ import Layout from '../layouts/Layout.astro';
 import Image from '@components/Image.astro';
 import CompactArticleList from '@components/CompactArticleList.astro';
 ---
-<Layout title="Welcome" disableMaxWidth={true}>
+<Layout title="Welcome" disableMaxWidth={true} noSpacing={true}>
+	<div class="max-w-[2000px] mx-auto px-8 py-16">
+		<h1 class="text-4xl font-serif max-w-5xl"><strong>Hello and welcome!</strong> How does the synthesis of human consciousness and artificial intelligence redefine the concept of existence? <em class="text-xl">asks GPT-4</em></h1>
+	</div>
+
 	<div class="flex gap-8 max-w-[2000px] mx-auto px-8 flex-col-reverse md:flex-row">
 		<div class="flex-none w-full sm:w-96">
 			<!-- About -->
-			<h1 class="text-5xl font-serif mb-8">Simon Sorensen</h1>
+			<!--h1 class="text-4xl font-serif mb-8">Simon Sorensen</h1-->
 
 			<h2 class="font-bold text-xl font-serif">About me</h2>
 			<h3 class="text-3xl font-serif">Computer Science student</h3>
