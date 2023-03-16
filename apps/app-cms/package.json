@@ -16,6 +16,7 @@
   },
   "dependencies": {
     "@types/prismjs": "1.26.0",
+    "@types/react": "^18.0.28",
     "axios": "^1.2.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -25,6 +26,7 @@
     "openai": "^3.1.0",
     "payload": "1.5.9",
     "prismjs": "1.29.0",
+    "react": "^18.2.0",
     "scheduler": "^0.23.0",
     "slate": "^0.90.0",
     "slugify": "^1.6.5"

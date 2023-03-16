@@ -9,6 +9,7 @@ importers:
     specifiers:
       '@types/express': ^4.17.9
       '@types/prismjs': 1.26.0
+      '@types/react': ^18.0.28
       axios: ^1.2.5
       copyfiles: ^2.4.1
       cross-env: ^7.0.3
@@ -22,6 +23,7 @@ importers:
       payload: 1.5.9
       prismjs: 1.29.0
       process: ^0.11.10
+      react: ^18.2.0
       scheduler: ^0.23.0
       slate: ^0.90.0
       slugify: ^1.6.5
@@ -29,6 +31,7 @@ importers:
       typescript: ^4.8.4
     dependencies:
       '@types/prismjs': 1.26.0
+      '@types/react': 18.0.28
       axios: 1.2.5
       dotenv: 8.6.0
       express: 4.18.2
@@ -38,6 +41,7 @@ importers:
       openai: 3.1.0
       payload: 1.5.9_bbqm6noihnurj6hfisqe2b3foq
       prismjs: 1.29.0
+      react: 18.2.0
       scheduler: 0.23.0
       slate: 0.90.0
       slugify: 1.6.5
@@ -2025,7 +2029,7 @@ packages:
   /@types/hoist-non-react-statics/3.3.1:
     resolution: {integrity: sha512-iMIqiko6ooLrTh1joXodJK5X9xeEALT1kM5G3ZLhD3hszxBdIEd5C75U834D9mLcINgD4OyZf5uQXjkuYydWvA==}
     dependencies:
-      '@types/react': 18.0.27
+      '@types/react': 18.0.28
       hoist-non-react-statics: 3.3.2
     dev: false
 
@@ -2117,13 +2121,13 @@ packages:
     resolution: {integrity: sha512-bAGh4e+w5D8dajd6InASVIyCo4pZLJ66oLb80F9OBLO1gKESbZcRCJpTT6uLXX+HAB57zw1WTdwJdAsewuTweg==}
     dependencies:
       '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 18.0.27
+      '@types/react': 18.0.28
       hoist-non-react-statics: 3.3.2
       redux: 4.2.0
     dev: false
 
-  /@types/react/18.0.27:
-    resolution: {integrity: sha512-3vtRKHgVxu3Jp9t718R9BuzoD4NcQ8YJ5XRzsSKxNDiDonD2MXIT1TmSkenxuCycZJoQT5d2vE8LwWJxBC1gmA==}
+  /@types/react/18.0.28:
+    resolution: {integrity: sha512-RD0ivG1kEztNBdoAK7lekI9M+azSnitIn85h4iOiaLjaTrMjzslhaqCGaI4IyCJ1RljWiLCEu4jyrLLgqxBTew==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.2
