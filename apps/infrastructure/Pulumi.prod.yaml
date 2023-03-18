@@ -1,0 +1,5 @@
+config:
+  cloudflare:apiToken:
+    secure: AAABAMjpNYYgQjJql3Z+6cIIyjETFSUpCWCJEckDtIFPAQOlGsfJ2YBn3FOBSAgEDAraQmL9DiiJZLBsRlETHk0LCx98KRA6
+  simse:domain: simse.io
+  simse:rootHost: simse-io-app-www-prod.sorensen.cloud

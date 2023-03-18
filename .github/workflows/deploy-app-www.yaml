@@ -23,7 +23,7 @@ jobs:
         run: just build
         working-directory: apps/app-www
         env:
-          BRANCH: ${{ env.GITHUB_REF_NAME }}
+          BRANCH: ${{ github.ref_name }}
 
   deploy:
     runs-on: ubuntu-latest
@@ -51,5 +51,5 @@ jobs:
         run: just deploy
         working-directory: apps/app-www
         env:
-          BRANCH: ${{ env.GITHUB_REF_NAME }}
+          BRANCH: ${{ github.ref_name }}
           NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}

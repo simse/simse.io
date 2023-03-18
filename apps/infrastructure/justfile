@@ -1,0 +1,10 @@
+env := if branch == "master" {
+    "prod"
+} else if branch == "develop" {
+    "staging"
+} else {
+    "dev"
+}
+
+deploy:
+    pulumi up -y --stack {{env}}
