@@ -4,6 +4,9 @@ on:
     branches:
       - master
       - develop
+    paths:
+      - "apps/app-www/**"
+      - ".github/workflows/deploy-app-www.yaml"
 jobs:
   build:
     runs-on: ubuntu-latest
