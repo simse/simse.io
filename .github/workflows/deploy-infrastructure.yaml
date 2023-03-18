@@ -1,0 +1,22 @@
+name: deploy-app-www
+on: 
+  push:
+    branches:
+      - master
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - 
+        uses: actions/checkout@v3
+      - 
+        uses: extractions/setup-just@v1
+      - 
+        name: Install pulumi
+        uses: pulumi/actions@v4
+      -
+        run: just deploy
+        working-directory: apps/infrastructure
+        env:
+          BRANCH: ${{ env.GITHUB_REF_NAME }}

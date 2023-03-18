@@ -1,7 +1,0 @@
-config:
-  aws:region: us-east-1
-  simse.io:domain: simse.dev
-  simse.io:zoneId: ed91aab5cfb845dcd7c93847c9785e6b
-  cloudflare:apiToken:
-    secure: AAABALG2Wf9U0mMinAqrIGt7odOUmbQfPnpSfIbT127uOqDDZ6UY7JEHeOfDG5DRHVMmXvAVlFqsEmBushA8aXodPd548JrO
-  pulumi:template: aws-go

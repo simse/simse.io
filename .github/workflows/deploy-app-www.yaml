@@ -1,29 +1,55 @@
 name: deploy-app-www
-on:
-  workflow_dispatch:
+on: 
   push:
     branches:
       - master
+      - develop
 jobs:
-  build-and-deploy:
+  build:
     runs-on: ubuntu-latest
     steps:
       - 
         uses: actions/checkout@v3
-      - 
-        uses: pnpm/action-setup@v2
-        with:
-          version: 7.27.0
       -
-        uses: actions/setup-node@v3
+        name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
         with:
-          node-version: 18
-          cache: 'pnpm'
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - 
-        run: pnpm install --frozen-lockfile
+        uses: extractions/setup-just@v1
       -
-        run: pnpm deploy:prod
+        run: just build
         working-directory: apps/app-www
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ffa300f532eaaec071135605899f7bf8
+          BRANCH: ${{ env.GITHUB_REF_NAME }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    environment: production
+    steps:
+      - 
+        uses: actions/checkout@v3
+      - 
+        uses: extractions/setup-just@v1
+      - 
+        name: Connect to Tailscale network
+        uses: tailscale/github-action@v1
+        with:
+          authkey: ${{ secrets.TAILSCALE_AUTH_KEY }}
+      -
+        run: wget https://releases.hashicorp.com/levant/0.3.2/levant_0.3.2_linux_amd64.zip
+      -
+        run: unzip levant_0.3.2_linux_amd64.zip
+      -
+        run: chmod +x ./levant
+      -
+        run: sudo mv levant /usr/bin/
+      -
+        run: just deploy
+        working-directory: apps/app-www
+        env:
+          BRANCH: ${{ env.GITHUB_REF_NAME }}
+          NOMAD_ADDR: ${{ secrets.NOMAD_ADDR }}
