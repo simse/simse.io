@@ -17,7 +17,7 @@ const triggerBuild = async () => {
 }
 
 const triggerAfterChange: CollectionAfterChangeHook = async () => {
-    await triggerBuild();
+    // await triggerBuild();
 }
 
 export {
