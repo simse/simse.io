@@ -1,6 +1,6 @@
 config:
   aws:region: us-east-1
   cloudflare:apiToken:
-    secure: AAABAMjpNYYgQjJql3Z+6cIIyjETFSUpCWCJEckDtIFPAQOlGsfJ2YBn3FOBSAgEDAraQmL9DiiJZLBsRlETHk0LCx98KRA6
+    secure: AAABAEsOCK1LcgaiobMQoOA4LBs6O8QbmRzfIALjiCyf035teS6z1rK4ryUXxLraVfjDR45ukzeHDOIU0jMwATQvij29tqL3
   simse:domain: simse.cloud
   simse:rootHost: simse-io-app-www-staging.sorensen.cloud
