@@ -1,4 +1,4 @@
-name: deploy-app-www
+name: deploy-infrastructure
 on: 
   push:
     branches:

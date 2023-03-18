@@ -1,3 +1,4 @@
+branch := env_var_or_default("BRANCH", "none")
 env := if branch == "master" {
     "prod"
 } else if branch == "develop" {
