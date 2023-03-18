@@ -14,12 +14,18 @@ jobs:
       - 
         uses: actions/checkout@v3
       - 
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      -
+        run: npm install -g pnpm
+      -
+        run: pnpm install --frozen-lockfile --filter infrastructure
+      - 
         uses: extractions/setup-just@v1
       - 
         name: Install pulumi
         uses: pulumi/actions@v4
-        env:
-          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
       -
         run: just deploy
         working-directory: apps/infrastructure
