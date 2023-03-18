@@ -11,12 +11,17 @@ const certificate = new aws.acm.Certificate("simse", {
     validationMethod: "DNS"
 });
 
+// find zone by domain
+const zone = cloudflare.getZone({
+    name: config.require("domain")
+});
+
 // create validation records
 certificate.domainValidationOptions.apply((opts) => {
     return opts.map((opt) => {
         return new cloudflare.Record(opt.resourceRecordName, {
             name: opt.resourceRecordName,
-            zoneId: config.require("zoneId"),
+            zoneId: zone.then(zone => zone.id),
             type: opt.resourceRecordType,
             value: opt.resourceRecordValue,
             ttl: 3600,
@@ -87,10 +92,7 @@ const distribution = new aws.cloudfront.Distribution("simse", {
     aliases: [config.require("domain")],
 })
 
-// find zone by domain
-const zone = cloudflare.getZone({
-    name: config.require("domain")
-});
+
 
 // domain records
 new cloudflare.Record("@", {
