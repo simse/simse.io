@@ -25,3 +25,4 @@ jobs:
         working-directory: apps/infrastructure
         env:
           BRANCH: ${{ env.GITHUB_REF_NAME }}
+          PULUMI_ACCESS_TOKEN: ${{ secrets.PULUMI_ACCESS_TOKEN }}
