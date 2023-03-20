@@ -1,10 +1,11 @@
 ---
 // imports
-import escapeHTML from 'escape-html';
-import { Text, Element } from 'slate';
+import feather from "feather-icons"
+import escapeHTML from "escape-html";
+import { Text, Element } from "slate";
 
 interface Props {
-    children: any;
+  children: any;
 }
 
 const { children } = Astro.props;
@@ -14,42 +15,49 @@ const serialize = (children: unknown[]): string => {
     return "";
   }
 
-  return children.map((node: any) => {
-    if (Text.isText(node)) {
-      let text = escapeHTML(node.text);
+  return children
+    .map((node: any) => {
+      if (Text.isText(node)) {
+        let text = escapeHTML(node.text);
 
-      let thisNode = node as any;
+        let thisNode = node as any;
 
-      if (thisNode.bold) {
-        text = `<strong>${text}</strong>`;
+        if (thisNode.bold) {
+          text = `<strong>${text}</strong>`;
+        }
+
+        if (thisNode.code) {
+          text = `<code>${text}</code>`;
+        }
+
+        if (thisNode.italic) {
+          text = `<em>${text}</em>`;
+        }
+
+        // Handle other leaf types here...
+
+        return text;
       }
 
-      if (thisNode.code) {
-        text = `<code>${text}</code>`;
+      if (!node) {
+        return "";
       }
 
-      if (thisNode.italic) {
-        text = `<em>${text}</em>`;
-      }
-
-      // Handle other leaf types here...
-
-      return text;
-    }
-
-    if (!node) {
-      return "";
-    }
-
-    switch (node.type) {
-      /*case 'h1':
-        return (
-          <h1 key={i}>
-            {serialize(node.children)}
-          </h1>
-        );
-      // Iterate through all headings here...
-      case 'h6':
+      switch (node.type) {
+        case "h1":
+          return `<h1>${serialize(node.children)}</h1>`;
+        case "h2":
+          return `<h2>${serialize(node.children)}</h2>`;
+        case "h3":
+          return `<h3>${serialize(node.children)}</h3>`;
+        case "h4":
+          return `<h4>${serialize(node.children)}</h4>`;
+        case "h5":
+          return `<h5>${serialize(node.children)}</h5>`;
+        case "h6":
+          return `<h6>${serialize(node.children)}</h6>`;
+        // Iterate through all headings here...
+        /*case 'h6':
         return (
           <h6 key={i}>
             {serialize(node.children)}
@@ -61,33 +69,29 @@ const serialize = (children: unknown[]): string => {
             {serialize(node.children)}
           </blockquote>
         );*/
-      case 'ul':
-        return (
-          `<ul>${serialize(node.children)}</ul>`
-        );
-      case 'code-block':
-        return serialize(node.children);
-      /*case 'ol':
+        case "ul":
+          return `<ul>${serialize(node.children)}</ul>`;
+        case "code-block":
+          return serialize(node.children);
+        /*case 'ol':
         return (
           <ol key={i}>
             {serialize(node.children)}
           </ol>
         );*/
-      case 'li':
-        return (
-          `<li>${serialize(node.children)}</li>`
-        );
-      case 'link':
-        return (
-          `<a href=${escapeHTML(node.url)}>${serialize(node.children)}</a>`
-        );
+        case "li":
+          return `<li>${serialize(node.children)}</li>`;
+        case "link":
+          return `<a class="text-blue-500 flex gap-1 items-center no-underline hover:underline" href=${escapeHTML(node.url)} target="${node.newTab ? '_blank' : ''}">${feather.icons["external-link"].toSvg({ height: 20 })}${serialize(
+            node.children
+          )}</a>`;
 
-      default:
-        return (
-        `<p>${serialize(node.children)}</p>`);
-    }
-  }).join('');
-
-}
+        default:
+          return `<p>${serialize(node.children)}</p>`;
+      }
+    })
+    .join("");
+};
 ---
-<Fragment set:html={serialize(children)}></Fragment>
+
+<Fragment set:html={serialize(children)} />

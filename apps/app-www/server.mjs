@@ -9,6 +9,7 @@ const app = Fastify({ logger: true });
 await app
   .register(fastifyStatic, {
     root: fileURLToPath(new URL('./dist/client', import.meta.url)),
+    maxAge: 31536000,
   })
   .register(fastifyMiddie);
 app.use(ssrHandler);
