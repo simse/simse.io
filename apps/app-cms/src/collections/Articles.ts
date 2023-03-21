@@ -1,9 +1,9 @@
 import { CollectionConfig } from 'payload/types';
 import { createSlug } from '../hooks/slugFromName';
-import { publicRead } from '../utils/publicRead';
 import { summarise } from '../hooks/summarise';
 import { triggerAfterChange } from '../hooks/triggerBuild';
 import { publishedAt } from '../hooks/publishedAt';
+import { publicReadPublished } from '../utils/publicReadPublished';
 
 const Articles: CollectionConfig = {
   slug: 'articles',
@@ -15,7 +15,7 @@ const Articles: CollectionConfig = {
     afterChange: [triggerAfterChange]
   },
   access: {
-    read: publicRead
+    read: publicReadPublished
   },
   versions: {
     drafts: {

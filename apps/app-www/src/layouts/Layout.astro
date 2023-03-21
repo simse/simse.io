@@ -48,8 +48,16 @@ import Footer from '../components/Footer.astro';
 <style>
 	@font-face {
 		font-family: "IBM Plex Mono";
-		src: url('/fonts/IBMPlexMono-Regular-Latin1.woff2') format('woff2');
+		src: url('/static/fonts/IBMPlexMono-Regular-Latin1.woff2') format('woff2');
 		font-weight: 400;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "IBM Plex Mono";
+		src: url('/static/fonts/IBMPlexMono-Italic-Latin1.woff2') format('woff2');
+		font-weight: 400;
+		font-style: italic;
 		font-display: swap;
 	}
 

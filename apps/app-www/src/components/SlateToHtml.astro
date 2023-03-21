@@ -2,7 +2,8 @@
 // imports
 import feather from "feather-icons"
 import escapeHTML from "escape-html";
-import { Text, Element } from "slate";
+import { Text } from "slate";
+import hljs from 'highlight.js';
 
 interface Props {
   children: any;
@@ -56,19 +57,12 @@ const serialize = (children: unknown[]): string => {
           return `<h5>${serialize(node.children)}</h5>`;
         case "h6":
           return `<h6>${serialize(node.children)}</h6>`;
-        // Iterate through all headings here...
-        /*case 'h6':
-        return (
-          <h6 key={i}>
-            {serialize(node.children)}
-          </h6>
-        );
-      case 'quote':
-        return (
-          <blockquote key={i}>
-            {serialize(node.children)}
-          </blockquote>
-        );*/
+        case "relationship":
+          if (node.relationTo !== "code-snippet") return;
+
+          return `<pre class="text-lg p-0 font-monospace">
+            <code class="hljs px-5 py-3">${hljs.highlight(node.value.code, { language: node.value.language }).value}</code>
+          </pre>`;
         case "ul":
           return `<ul>${serialize(node.children)}</ul>`;
         case "code-block":
@@ -85,7 +79,10 @@ const serialize = (children: unknown[]): string => {
           return `<a class="text-blue-500 flex gap-1 items-center no-underline hover:underline" href=${escapeHTML(node.url)} target="${node.newTab ? '_blank' : ''}">${feather.icons["external-link"].toSvg({ height: 20 })}${serialize(
             node.children
           )}</a>`;
+        case "upload":
+          const aspectRatio = `${node.value.width} / ${node.value.height}`;
 
+          return `<img src="https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/${node.value.cloudflareImageId}/format=auto,w=800" class="w-full" style="aspect-ratio:${aspectRatio}" />`
         default:
           return `<p>${serialize(node.children)}</p>`;
       }

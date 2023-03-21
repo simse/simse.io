@@ -67,7 +67,6 @@ importers:
       '@types/feather-icons': ^4.29.1
       '@types/lodash-es': ^4.17.6
       '@types/node': ^18.15.3
-      '@types/prismjs': 1.26.0
       '@types/qs': ^6.9.7
       astro: 2.1.3
       astro-robots-txt: 0.3.11
@@ -78,9 +77,9 @@ importers:
       fastify: ^4.14.1
       feather-icons: ^4.29.0
       font-color-contrast: ^11.1.0
+      highlight.js: ^11.7.0
       lodash-es: ^4.17.21
       postcss: ^8.4.21
-      prismjs: 1.29.0
       qs: ^6.11.0
       sass: 1.58.0
       slate: ^0.90.0
@@ -100,6 +99,7 @@ importers:
       fastify: 4.14.1
       feather-icons: 4.29.0
       font-color-contrast: 11.1.0
+      highlight.js: 11.7.0
       postcss: 8.4.21
     devDependencies:
       '@astrojs/tailwind': 3.0.1_h4zgj5sjpevkaicetl7dajpvqy
@@ -107,13 +107,11 @@ importers:
       '@types/escape-html': 1.0.2
       '@types/feather-icons': 4.29.1
       '@types/lodash-es': 4.17.6
-      '@types/prismjs': 1.26.0
       '@types/qs': 6.9.7
       astro: 2.1.3_bpzliq3zvo2karqyncclypus74
       astro-robots-txt: 0.3.11
       escape-html: 1.0.3
       lodash-es: 4.17.21
-      prismjs: 1.29.0
       qs: 6.11.0
       sass: 1.58.0
       slate: 0.90.0
@@ -2458,6 +2456,7 @@ packages:
 
   /@types/prismjs/1.26.0:
     resolution: {integrity: sha512-ZTaqn/qSqUuAq1YwvOFQfVW1AR/oQJlLSZVustdjwI+GZ8kr0MSHBj0tsXPW1EqHubx50gtBEjbPGsdZwQwCjQ==}
+    dev: false
 
   /@types/prop-types/15.7.5:
     resolution: {integrity: sha512-JCB8C6SnDoQf0cNycqd/35A7MjcnK+ZTqE7judS6o7utxUCg6imJg3QK2qzHKszlTjcj2cn+NwMB2i96ubpj7w==}
@@ -5239,6 +5238,11 @@ packages:
     dependencies:
       glob: 8.1.0
       readable-stream: 3.6.0
+    dev: false
+
+  /highlight.js/11.7.0:
+    resolution: {integrity: sha512-1rRqesRFhMO/PRF+G86evnyJkCgaZFOI+Z6kdj15TA18funfoqJXvgPCLSf0SWq3SRfg1j3HlDs8o4s3EGq1oQ==}
+    engines: {node: '>=12.0.0'}
     dev: false
 
   /history/4.10.1:

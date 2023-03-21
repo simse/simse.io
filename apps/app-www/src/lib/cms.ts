@@ -4,7 +4,7 @@ import { groupBy } from 'lodash-es';
 import type { Article, Project } from '@simse/app-cms/src/types';
 
 // stuff that should probably be environment variables
-const CMS_URL = "https://cms.simse.io/api/";
+const CMS_URL = "https://cms.simse.dev/api/";
 const PAGE_SIZE = 24;
 
 // getAllArticles returns all published articles from the CMS given page and page size
@@ -58,7 +58,7 @@ const getArticleBySlug = async (slug?: string): Promise<Article> => {
         limit: 1
     })
 
-    const response = await axios.get(`${CMS_URL}articles?${stringifiedQuery}`);
+    const response = await axios.get(`${CMS_URL}articles?${stringifiedQuery}`)
 
     if (response.status == 200) {
         return (response.data['docs'] as Article[])[0];

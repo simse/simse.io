@@ -1,16 +1,6 @@
 ---
 import { getAllArticleSlugs, getArticleBySlug } from "src/lib/cms";
 
-export async function getStaticPaths() {
-  const slugs = await getAllArticleSlugs();
-
-  return slugs.map(slug => ({
-    params: {
-        slug
-    }
-  }))
-}
-
 import Article from "@layouts/Article.astro";
 import SlateToHtml from "@components/SlateToHtml.astro";
 

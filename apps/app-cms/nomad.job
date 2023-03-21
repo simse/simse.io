@@ -4,7 +4,7 @@ job "simse.io/app-cms-[[ env "ENV" ]]" {
   type        = "service"
 
   meta {
-    version = "1"
+    version = "2"
   }
 
   group "app-cms" {

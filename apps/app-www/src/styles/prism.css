@@ -1,1 +1,168 @@
-@media (prefers-color-scheme:light){code[class*=language-],pre[class*=language-]{color:#403f53;font-family:"IBM Plex Mono",Consolas,Monaco,"Andale Mono","Ubuntu Mono",monospace;font-size:.96rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;border-radius:4px;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#fbfbfb}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#fbfbfb}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{color:#fff;background:#fbfbfb}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.changed,.token.deleted{color:#a2bffc;font-style:italic}.token.deleted{color:#ef535090}.token.attr-name,.token.comment,.token.inserted{color:#4876d6;font-style:italic}.token.comment{color:#989fb1}.token.builtin,.token.char,.token.constant,.token.string,.token.url{color:#4876d6}.token.variable{color:#c96765}.token.hexcode,.token.number{color:#aa0982}.token.doctype,.token.function,.token.punctuation,.token.selector{color:#994cc3;font-style:italic}.token.regex{color:#5ca7e4}.token.class-name{color:#111}.token.tag{color:#994cc3}.token.keyword,.token.namespace,.token.operator,.token.property{color:#0c969b}.token.boolean{color:#bc5454}.token.exports,.token.imports{color:#403f53}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}}@media (prefers-color-scheme:dark){code[class*=language-],pre[class*=language-]{color:#403f53;font-family:"IBM Plex Mono",Consolas,Monaco,"Andale Mono","Ubuntu Mono",monospace;font-size:.96rem;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.5;border-radius:4px;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#fbfbfb}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#fbfbfb}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{color:#fff;background:#fbfbfb}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.changed,.token.deleted{color:#a2bffc;font-style:italic}.token.deleted{color:#ef535090}.token.attr-name,.token.comment,.token.inserted{color:#4876d6;font-style:italic}.token.comment{color:#989fb1}.token.builtin,.token.char,.token.constant,.token.string,.token.url{color:#4876d6}.token.variable{color:#c96765}.token.hexcode,.token.number{color:#aa0982}.token.doctype,.token.function,.token.punctuation,.token.selector{color:#994cc3;font-style:italic}.token.regex{color:#5ca7e4}.token.class-name{color:#111}.token.tag{color:#994cc3}.token.keyword,.token.namespace,.token.operator,.token.property{color:#0c969b}.token.boolean{color:#bc5454}.token.exports,.token.imports{color:#403f53}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}@media (prefers-color-scheme:dark){code[class*=language-],pre[class*=language-]{color:#d6deeb;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}code[class*=language-] ::-moz-selection,code[class*=language-]::-moz-selection,pre[class*=language-] ::-moz-selection,pre[class*=language-]::-moz-selection{text-shadow:none;background:#011627}code[class*=language-] ::selection,code[class*=language-]::selection,pre[class*=language-] ::selection,pre[class*=language-]::selection{text-shadow:none;background:#011627}@media print{code[class*=language-],pre[class*=language-]{text-shadow:none}}pre[class*=language-]{padding:1em;overflow:auto}:not(pre)>code[class*=language-],pre[class*=language-]{color:#fff;background:#011627}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal}.token.changed,.token.deleted{color:#a2bffc;font-style:italic}.token.deleted{color:#ef535090}.token.attr-name,.token.comment,.token.inserted{color:#c5e478;font-style:italic}.token.comment{color:#637777}.token.string,.token.variable{color:#ecc48d}.token.builtin,.token.char,.token.constant{color:#82aaff}.token.number{color:#f78c6c}.token.doctype,.token.function,.token.punctuation,.token.selector{color:#c792ea;font-style:italic}.token.regex{color:#5ca7e4}.token.class-name{color:#ffcb8b}.token.tag{color:#caece6}.token.keyword,.token.operator{color:#7fdbca}.token.boolean{color:#ff5874}.token.property{color:#80cbc4}.token.hexcode{color:#ffeb95}.token.namespace{color:#b2ccd6}.token.exports,.token.imports{color:#d6deeb}.token.url{color:#c5e478}.token.bold,.token.important{font-weight:700}.token.italic{font-style:italic}}}
+pre code.hljs {
+    display: block;
+    overflow-x: auto;
+}
+
+.hljs {
+    background: #011627;
+    color: #d6deeb
+}
+
+.hljs-keyword {
+    color: #c792ea;
+    font-style: italic
+}
+
+.hljs-built_in {
+    color: #addb67;
+    font-style: italic
+}
+
+.hljs-type {
+    color: #82aaff
+}
+
+.hljs-literal {
+    color: #ff5874
+}
+
+.hljs-number {
+    color: #f78c6c
+}
+
+.hljs-regexp {
+    color: #5ca7e4
+}
+
+.hljs-string {
+    color: #ecc48d
+}
+
+.hljs-subst {
+    color: #d3423e
+}
+
+.hljs-symbol {
+    color: #82aaff
+}
+
+.hljs-class {
+    color: #ffcb8b
+}
+
+.hljs-function {
+    color: #82aaff
+}
+
+.hljs-title {
+    color: #dcdcaa;
+    font-style: italic
+}
+
+.hljs-params {
+    color: #7fdbca
+}
+
+.hljs-comment {
+    color: #637777;
+    font-style: italic
+}
+
+.hljs-doctag {
+    color: #7fdbca
+}
+
+.hljs-meta,
+.hljs-meta .hljs-keyword {
+    color: #82aaff
+}
+
+.hljs-meta .hljs-string {
+    color: #ecc48d
+}
+
+.hljs-section {
+    color: #82b1ff
+}
+
+.hljs-attr,
+.hljs-name,
+.hljs-tag {
+    color: #7fdbca
+}
+
+.hljs-attribute {
+    color: #80cbc4
+}
+
+.hljs-variable {
+    color: #addb67
+}
+
+.hljs-bullet {
+    color: #d9f5dd
+}
+
+.hljs-code {
+    color: #80cbc4
+}
+
+.hljs-emphasis {
+    color: #c792ea;
+    font-style: italic
+}
+
+.hljs-strong {
+    color: #addb67;
+    font-weight: 700
+}
+
+.hljs-formula {
+    color: #c792ea
+}
+
+.hljs-link {
+    color: #ff869a
+}
+
+.hljs-quote {
+    color: #697098;
+    font-style: italic
+}
+
+.hljs-selector-tag {
+    color: #ff6363
+}
+
+.hljs-selector-id {
+    color: #fad430
+}
+
+.hljs-selector-class {
+    color: #addb67;
+    font-style: italic
+}
+
+.hljs-selector-attr,
+.hljs-selector-pseudo {
+    color: #c792ea;
+    font-style: italic
+}
+
+.hljs-template-tag {
+    color: #c792ea
+}
+
+.hljs-template-variable {
+    color: #addb67
+}
+
+.hljs-addition {
+    color: #addb67ff;
+    font-style: italic
+}
+
+.hljs-deletion {
+    color: #ef535090;
+    font-style: italic
+}

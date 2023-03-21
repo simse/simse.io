@@ -12,7 +12,4 @@ export default defineConfig({
   }),
   site: 'https://simse.io',
   integrations: [tailwind(), robotsTxt(), prefetch()],
-  markdown: {
-    syntaxHighlight: 'prism'
-  }
 });
