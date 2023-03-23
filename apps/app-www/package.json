@@ -30,6 +30,7 @@
   "dependencies": {
     "@astrojs/node": "^5.1.0",
     "@astrojs/prefetch": "^0.1.2",
+    "@astrojs/svelte": "^2.1.0",
     "@fastify/middie": "^8.1.0",
     "@fastify/static": "^6.9.0",
     "@simse/app-cms": "workspace:^1.0.0",
@@ -41,6 +42,7 @@
     "feather-icons": "^4.29.0",
     "font-color-contrast": "^11.1.0",
     "highlight.js": "^11.7.0",
-    "postcss": "^8.4.21"
+    "postcss": "^8.4.21",
+    "svelte": "^3.54.0"
   }
 }

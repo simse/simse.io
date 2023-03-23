@@ -76,9 +76,9 @@ const serialize = (children: unknown[]): string => {
         case "li":
           return `<li>${serialize(node.children)}</li>`;
         case "link":
-          return `<a class="text-blue-500 flex gap-1 items-center no-underline hover:underline" href=${escapeHTML(node.url)} target="${node.newTab ? '_blank' : ''}">${feather.icons["external-link"].toSvg({ height: 20 })}${serialize(
+          return `<a class="text-blue-500 items-center no-underline hover:underline inline-flex -mt-1" href=${escapeHTML(node.url)} target="${node.newTab ? '_blank' : ''}">${feather.icons["external-link"].toSvg({ height: 20 })}<span class="mt-1">${serialize(
             node.children
-          )}</a>`;
+          )}</span></a>`;
         case "upload":
           const aspectRatio = `${node.value.width} / ${node.value.height}`;
 

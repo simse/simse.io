@@ -10,7 +10,7 @@ export const createSlug: CollectionBeforeChangeHook = async ({
           lower: true
         });
       } catch {
-        console.log("could not create slug at this time");
+        // console.log("could not create slug at this time");
       }
     }
 

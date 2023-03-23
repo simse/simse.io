@@ -4,6 +4,10 @@ import { summarise } from '../hooks/summarise';
 import { triggerAfterChange } from '../hooks/triggerBuild';
 import { publishedAt } from '../hooks/publishedAt';
 import { publicReadPublished } from '../utils/publicReadPublished';
+import RichTextBlock from '../blocks/richText';
+import CodeSnippetBlock from '../blocks/codeSnippetBlock';
+import EmailBlock from '../blocks/emailBlock';
+import ImageBlock from '../blocks/imageBlock';
 
 const Articles: CollectionConfig = {
   slug: 'articles',
@@ -83,6 +87,20 @@ const Articles: CollectionConfig = {
         },
         {
           label: 'Content',
+          fields: [{
+            name: 'contentBlocks',
+            label: 'Content',
+            type: 'blocks',
+            blocks: [
+              RichTextBlock,
+              CodeSnippetBlock,
+              EmailBlock,
+              ImageBlock
+            ]
+          }]
+        },
+        {
+          label: 'Content (legacy)',
           fields: [
             {
               name: 'content',
