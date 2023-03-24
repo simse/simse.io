@@ -5,11 +5,18 @@
  * and re-run `payload generate:types` to regenerate this file.
  */
 
-export interface Config {}
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
- */
+export interface Config {
+  collections: {
+    users: User;
+    articles: Article;
+    'article-categories': ArticleCategory;
+    media: Media;
+    projects: Project;
+    'project-categories': ProjectCategory;
+    'project-languages': ProjectLanguage;
+  };
+  globals: {};
+}
 export interface User {
   id: string;
   email?: string;
@@ -19,19 +26,54 @@ export interface User {
   lockUntil?: string;
   createdAt: string;
   updatedAt: string;
+  password?: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "articles".
- */
 export interface Article {
   id: string;
+  published_at?: string;
   slug?: string;
-  name: string;
+  name?: string;
   subtitle?: string;
   summary?: string;
   category?: string[] | ArticleCategory[];
   media?: string | Media;
+  contentBlocks?: (
+    | {
+        richText: {
+          [k: string]: unknown;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'richText';
+      }
+    | {
+        title?: string;
+        code: string;
+        language?: string;
+        highlightedLines?: string;
+        id?: string;
+        blockName?: string;
+        blockType: 'codeSnippet';
+      }
+    | {
+        from: string;
+        to: string;
+        subject: string;
+        date: string;
+        body: {
+          [k: string]: unknown;
+        }[];
+        id?: string;
+        blockName?: string;
+        blockType: 'email';
+      }
+    | {
+        media: string | Media;
+        id?: string;
+        blockName?: string;
+        blockType: 'image';
+      }
+  )[];
   content?: {
     [k: string]: unknown;
   }[];
@@ -39,10 +81,6 @@ export interface Article {
   createdAt: string;
   updatedAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "article-categories".
- */
 export interface ArticleCategory {
   id: string;
   slug?: string;
@@ -50,10 +88,6 @@ export interface ArticleCategory {
   createdAt: string;
   updatedAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "media".
- */
 export interface Media {
   id: string;
   alt?: string;
@@ -68,10 +102,6 @@ export interface Media {
   createdAt: string;
   updatedAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "projects".
- */
 export interface Project {
   id: string;
   slug?: string;
@@ -89,10 +119,6 @@ export interface Project {
   createdAt: string;
   updatedAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "project-languages".
- */
 export interface ProjectLanguage {
   id: string;
   slug?: string;
@@ -102,10 +128,6 @@ export interface ProjectLanguage {
   createdAt: string;
   updatedAt: string;
 }
-/**
- * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "project-categories".
- */
 export interface ProjectCategory {
   id: string;
   slug?: string;

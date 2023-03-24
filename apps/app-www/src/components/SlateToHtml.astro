@@ -61,7 +61,7 @@ const serialize = (children: unknown[]): string => {
           if (node.relationTo !== "code-snippet") return;
 
           return `<pre class="text-lg p-0 font-monospace">
-            <code class="hljs px-5 py-3">${hljs.highlight(node.value.code, { language: node.value.language }).value}</code>
+            <code class="hljs px-5 py-3">${hljs.highlightAuto(node.value.code).value}</code>
           </pre>`;
         case "ul":
           return `<ul>${serialize(node.children)}</ul>`;

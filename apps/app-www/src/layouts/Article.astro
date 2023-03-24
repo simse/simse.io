@@ -17,7 +17,7 @@ import { prettyDate } from "src/utils/date";
 	<Image image={article.media}  height={600} width={2000} gravity={"center"} />
 
 	<!-- Heading Metadata -->
-	<div class="px-2 py-8 mb-8 max-w-4xl mx-auto">
+	<div class="px-4 py-8 mb-8 max-w-4xl mx-auto">
 		<div class="mb-4">
 		{article.category.map((category) => (
 			<a href={`/category/${category.slug}`} class="bg-blue-700 px-3 py-1 mr-2 rounded-full inline-block">{category.name}</a>
