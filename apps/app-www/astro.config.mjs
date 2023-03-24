@@ -3,8 +3,7 @@ import tailwind from "@astrojs/tailwind";
 import robotsTxt from 'astro-robots-txt';
 import prefetch from '@astrojs/prefetch';
 import node from '@astrojs/node';
-
-import svelte from "@astrojs/svelte";
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
@@ -13,5 +12,5 @@ export default defineConfig({
     mode: 'middleware'
   }),
   site: 'https://simse.io',
-  integrations: [tailwind(), robotsTxt(), prefetch(), svelte()]
+  integrations: [tailwind(), robotsTxt(), prefetch(), react()]
 });
