@@ -84,6 +84,7 @@ importers:
       qs: ^6.11.0
       react: ^18.0.0
       react-dom: ^18.0.0
+      react-feather: ^2.0.10
       sass: 1.58.0
       slate: ^0.90.0
       tailwindcss: 3.2.4
@@ -109,6 +110,7 @@ importers:
       postcss: 8.4.21
       react: 18.2.0
       react-dom: 18.2.0_react@18.2.0
+      react-feather: 2.0.10_react@18.2.0
     devDependencies:
       '@astrojs/tailwind': 3.0.1_h4zgj5sjpevkaicetl7dajpvqy
       '@tailwindcss/typography': 0.5.9_tailwindcss@3.2.4
@@ -8205,6 +8207,15 @@ packages:
 
   /react-fast-compare/3.2.0:
     resolution: {integrity: sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==}
+    dev: false
+
+  /react-feather/2.0.10_react@18.2.0:
+    resolution: {integrity: sha512-BLhukwJ+Z92Nmdcs+EMw6dy1Z/VLiJTzEQACDUEnWMClhYnFykJCGWQx+NmwP/qQHGX/5CzQ+TGi8ofg2+HzVQ==}
+    peerDependencies:
+      react: '>=16.8.6'
+    dependencies:
+      prop-types: 15.8.1
+      react: 18.2.0
     dev: false
 
   /react-helmet/6.1.0_react@18.2.0:

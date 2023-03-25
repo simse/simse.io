@@ -1,9 +1,9 @@
 import { Fragment } from 'react';
 import escapeHTML from 'escape-html';
+import { ExternalLink } from 'react-feather';
 
 interface Node {
     text?: string;
-
     children?: Node[];
     type?: string;
     url?: string;
@@ -138,11 +138,9 @@ const serialize = (children: Node[]) => children.map((node, i) => {
             );
         case 'link':
             return (
-                <a
-                    href={escapeHTML(node.url)}
-                    key={i}
-                >
-                    {serialize(node.children)}
+                <a className="text-blue-500 gap-1 no-underline hover:border-blue-500 border-b-2 border-transparent inline-flex items-baseline " href={escapeHTML(node.url)} target="${node.newTab ? '_blank' : ''}">
+                    {serialize(node.children )}
+                    <ExternalLink size={16} className="self-center" />
                 </a>
             );
 
