@@ -15,15 +15,21 @@ const BlocksContent = ({ blocks }: BlocksContentProps) => {
                 switch (block.blockType) {
                     case "richText":
                         return (
-                            <RichTextBlock key={i} elements={block.richText} />
+                            <div className="max-w-4xl">
+                                <RichTextBlock key={i} elements={block.richText} />
+                            </div>
                         );
                     case "codeSnippet":
                         return (
-                            <CodeSnippetBlock key={i} code={block.code} language={block.language} />
+                            <div className="max-w-4xl">
+                                <CodeSnippetBlock key={i} code={block.code} language={block.language} />
+                            </div>
                         );
                     case "email":
                         return (
-                            <EmailBlock key={i} to={block.to} from={block.from} subject={block.subject} date={block.date} body={block.body} />
+                            <div className="max-w-4xl">
+                                <EmailBlock key={i} to={block.to} from={block.from} subject={block.subject} date={block.date} body={block.body} />
+                            </div>
                         );
                 }
             })}

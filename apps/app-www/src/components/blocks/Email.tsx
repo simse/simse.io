@@ -11,7 +11,7 @@ interface EmailBlockProps {
 
 const EmailBlock = ({ to, from, subject, date, body }: EmailBlockProps) => {
     return (
-        <div className="border-2 border-white/20 rounded py-2 px-4">
+        <div className="border-2 border-white/20 rounded py-2 px-4 mb-4">
             <div className="gap-2 ">
                 <div><span className="text-sm font-bold text-zinc-400 mr-2">TO</span> {to}</div>
                 <div><span className="text-sm font-bold text-zinc-400 mr-2">FROM</span> {from}</div>

@@ -77,7 +77,7 @@ const serialize = (children: Node[]) => children.map((node, i) => {
     switch (node.type) {
         case 'h1':
             return (
-                <h1 key={i}>
+                <h1 className="font-light my-16" key={i}>
                     {serialize(node.children)}
                 </h1>
             );

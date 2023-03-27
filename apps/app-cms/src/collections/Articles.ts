@@ -22,9 +22,7 @@ const Articles: CollectionConfig = {
     read: publicReadPublished
   },
   versions: {
-    drafts: {
-      autosave: true
-    }
+    drafts: true,
   },
   fields: [
     {
