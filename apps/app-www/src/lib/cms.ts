@@ -94,6 +94,33 @@ const getAllArticleSlugs = async (): Promise<String[]> => {
     return [];
 }
 
+interface QueryArticlesInput {
+    limit?: number;
+    sortBy?: string;
+    sortOrder?: 'asc' | 'desc';
+}
+
+const queryArticles = async ({ limit = 5, sortOrder = 'desc', sortBy = 'createdAt' }: QueryArticlesInput): Promise<Article[]> => {
+    const stringifiedQuery = qs.stringify({
+        //where: query,
+        limit: limit,
+        depth: 1,
+        sort: `${sortOrder === 'desc' ? '-' : ''}${sortBy}`
+    });
+
+    try {
+        const response = await axios.get(`${CMS_URL}articles?${stringifiedQuery}`);
+
+        if (response.status == 200) {
+            return response.data['docs'] as Article[];
+        }
+    } catch (err) {
+        console.log(err);
+    }
+
+    return [];
+}
+
 const getAllProjects = async (): Promise<Project[]> => {
     const query = {
         /*_status: {
@@ -187,10 +214,15 @@ export {
     getArticleById,
     getArticleBySlug,
     getAllArticleSlugs,
+    queryArticles,
     
     // projects
     getAllProjects,
     getAllProjectSlugs,
     getProjectBySlug,
     getAllProjectsGroupByCategory
+}
+
+export type {
+    QueryArticlesInput
 }

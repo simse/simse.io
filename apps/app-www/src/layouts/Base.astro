@@ -2,29 +2,40 @@
 export interface Props {
 	title: string;
 	description?: string;
-	noSpacing?: boolean;
-	disableMaxWidth?: boolean;
 }
 
-const { title, description = "", noSpacing = false, disableMaxWidth = false } = Astro.props as Props
+const { title, description = ""} = Astro.props as Props
 
-import Navbar from '../components/Navbar.astro';
-import Footer from '../components/Footer.astro';
-import Base from './Base.astro';
 ---
 
-<Base title={title} description={description}>
-		<Navbar  />
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description}>
+		<meta name="viewport" content="width=device-width" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
+		<meta name="msapplication-TileColor" content="#2d89ef">
+		<meta name="theme-color" content="#ffffff">
+		<meta name="generator" content={Astro.generator} />
+		<title>{`${title} / Simon Sorensen`}</title>
+		<link rel="preconnect" href="https://cdn.simse.io">
+	</head>
 
-		<div class={`mx-auto ${disableMaxWidth ? '' : 'max-w-7xl px-8'}`}>
-			<main class={`${noSpacing ? '': 'pt-16'}`}>
-				<slot />
-			</main>
-
-			<div class={`${disableMaxWidth ? 'px-8' : ''}`}>
-				<Footer />
-			</div>
-		</div>
+	<body class="bg-black text-white min-h-screen">
+		<slot />
+	</body>
+</html>
+<style>
+	@font-face {
+		font-family: "IBM Plex Mono";
+		src: url('/static/fonts/IBMPlexMono-Regular-Latin1.woff2') format('woff2');
+		font-weight: 400;
+		font-display: swap;
+	}
 
 	@font-face {
 		font-family: "IBM Plex Mono";
@@ -94,16 +105,32 @@ import Base from './Base.astro';
 	}
 
 	@font-face {
-		font-family: "Wotfard";
-		src: url('/static/fonts/Wotfard-Regular.woff2') format('woff2');
+		font-family: "Univers";
+		src: url('https://cdn.simse.io/fonts/Univers-Regular.woff2') format('woff2');
 		font-weight: 400;
 		font-display: swap;
 	}
 
 	@font-face {
-		font-family: "Wotfard";
-		src: url('/static/fonts/Wotfard-Bold.woff2') format('woff2');
+		font-family: "Univers";
+		src: url('https://cdn.simse.io/fonts/Univers-Bold.woff2') format('woff2');
 		font-weight: 700;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Univers";
+		src: url('https://cdn.simse.io/fonts/Univers-Italic.woff2') format('woff2');
+		font-weight: 400;
+		font-style: italic;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "Univers";
+		src: url('https://cdn.simse.io/fonts/Univers-BoldItalic.woff2') format('woff2');
+		font-weight: 700;
+		font-style: italic;
 		font-display: swap;
 	}
 </style>
