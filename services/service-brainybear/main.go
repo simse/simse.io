@@ -14,7 +14,7 @@ func main() {
 	/*testMessage := types.Message{
 		ID:        "123",
 		Entity:    "assistant",
-		Message:   "DISPLAY /articles?limit=1\u0026sortBy=date&sortOrder=desc Here's the latest article on simse.io. Enjoy reading!",
+		Message:   "Here's the latest article on simse.io. Enjoy reading! GE",
 		Timestamp: time.Now(),
 	}
 

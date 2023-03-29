@@ -1,7 +1,6 @@
 package runtime
 
 import (
-	"encoding/json"
 	"regexp"
 	"strings"
 
@@ -23,14 +22,18 @@ func ProcessMessage(message types.Message) types.Message {
 			// process data request
 			result := HandleRequest(match)
 
-			// marshal to json
-			var jsonResult []byte
-			jsonResult, _ = json.Marshal(result)
-
 			// replace data request with result
-			message.Message = strings.Replace(message.Message, match, string(jsonResult), 1)
+			message.Message = strings.Replace(message.Message, match, "", 1)
+
+			// add result to message
+			message.Cards = append(message.Cards, result...)
 		}
 	}
+
+	// look for partially formed data request and remove
+	r, _ = regexp.Compile(`(GET\s|GE\s|G\s)`)
+
+	message.Message = r.ReplaceAllString(message.Message+" ", "")
 
 	return message
 }

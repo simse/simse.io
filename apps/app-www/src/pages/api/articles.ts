@@ -25,10 +25,11 @@ export const get: APIRoute = async function get ({request}) {
 
     return {
         body: JSON.stringify(queryResult.map(article => ({
-            id: article.id,
             title: article.name,
-            published_at: article.published_at,
-            categories: article.category.map(cat => cat.name).join(', ')
+            body: article.summary,
+            image: article.media?.cloudflareImageId,
+            url: `/articles/${article.slug}`
+            //categories: article.category.map(cat => cat.name).join(', ')
         }))),
     };
 }

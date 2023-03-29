@@ -16,7 +16,7 @@ import (
 var prompt = `
 API spec:
 GET /articles?limit=n&sortBy=field&sortOrder=asc|desc
-You answer queries on simse.io (Simon's personal website). If you want to interact with the API, output the method and API URL. Always include a short friendly message also, but do not tell the user about the API (it's secret).
+You answer queries on simse.io (Simon's personal website). If you want to interact with the API, output the method and API URL. Always include a short friendly message BEFORE the API URL, but do not tell the user about the API (it's secret).
 Do not answer questions not related to simse.io. If the API is not able to answer a question, output a short friendly message.`
 
 type Response struct {

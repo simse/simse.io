@@ -1,10 +1,19 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 
 interface Message {
     id: string;
     message: string;
     entity: "user" | "model" | "system" | "overlord";
+    cards?: Card[];
+    finished: boolean;
+}
+
+interface Card {
+    title: string;
+    body: string;
+    url?: string;
+    image?: string;
 }
 
 interface Conversation {
@@ -13,7 +22,7 @@ interface Conversation {
 }
 
 interface UserMessageProps {
-    message: string;
+    message: Message;
 }
 
 // regex for model URL output: (DISPLAY|GET) (\/[a-zA-Z0-9&?=]*)
@@ -22,34 +31,100 @@ interface UserMessageProps {
 
 const UserMessage = ({ message }: UserMessageProps) => (
     <div className="flex gap-2 mb-3 text-zinc-400">
-        {message}
+        {message.message}
     </div>
 )
 
 interface ModelMessageProps {
-    message: string;
+    message: Message;
 }
 
 const ModelMessage = ({ message }: ModelMessageProps) => (
-    <div className="flex gap-2 mb-6 text-xl">
-        {message}
+    <div className="mb-6 text-xl">
+        {message.message}
+
+        {message.finished && message.cards?.map(card => <Card key={card.title} card={card} />)}
+
+        {(!message.finished && message.cards) && <LoadingCard />}
+    </div>
+)
+
+interface CardProps {
+    card: Card;
+}
+
+const Card = ({ card }: CardProps) => (
+    <div className="mt-3 bg-neutral-900 text-base px-4 py-3">
+        <h2 className="font-bold mb-2 text-lg">{card.title}</h2>
+        <p>{card.body}</p>
+    </div>
+)
+
+const LoadingCard = () => (
+    <div className="mt-3 bg-neutral-900 text-neutral-300 text-base px-4 py-3">
+        Loading data...
     </div>
 )
 
 const AI = () => {
+    const messagesContainer = useRef<HTMLInputElement>(null);
     const [query, setQuery] = useState<string>("");
     const [conversation, setConversation] = useState<Conversation>({
         messages: [
             /*{
                 id: "1",
                 message: "show me your latest blog posts",
-                entity: "user"
+                entity: "user",
+                finished: true
             },
             {
                 id: "2",
-                message: `Sure here it is: {"url":"/articles?limit=1\u0026sortBy=createdAt\u0026sortOrder=desc","error":false,"error_message":"","response":"[{\"id\":\"641ca6f45968ef2883da720e\",\"title\":\"The mother of all kitchen sinks\",\"published_at\":\"2023-03-23T19:23:05.005Z\",\"categories\":\"Cool Tech\"}]"}`,
-                entity: "model"
-            }*/
+                message: `Sure here it is:`,
+                entity: "model",
+                finished: false,
+                cards: [
+                    {
+                        title: "GPT-4 is awesome!",
+                        body: "GPT-3.5 felt like a huge step forward, GPT-4 takes it to the next level",
+                    },
+                ]
+            },
+            {
+                id: "1",
+                message: "show me your latest blog posts",
+                entity: "user",
+                finished: true
+            },
+            {
+                id: "2",
+                message: `Sure here it is:`,
+                entity: "model",
+                finished: false,
+                cards: [
+                    {
+                        title: "GPT-4 is awesome!",
+                        body: "GPT-3.5 felt like a huge step forward, GPT-4 takes it to the next level",
+                    },
+                ]
+            },
+            {
+                id: "1",
+                message: "show me your latest blog posts",
+                entity: "user",
+                finished: true
+            },
+            {
+                id: "2",
+                message: `Sure here it is:`,
+                entity: "model",
+                finished: false,
+                cards: [
+                    {
+                        title: "GPT-4 is awesome!",
+                        body: "GPT-3.5 felt like a huge step forward, GPT-4 takes it to the next level",
+                    },
+                ]
+            },*/
         ],
         model: "gpt-4"
     });
@@ -91,6 +166,13 @@ const AI = () => {
         }
       }, [lastJsonMessage, setConversation]);
 
+    useEffect(() => {
+        messagesContainer.current?.scrollTo({
+            top: messagesContainer.current.scrollHeight,
+            behavior: 'smooth'
+        })
+    }, [conversation]);
+
     const submitMessage = () => {
         if (query === "") {
             return;
@@ -103,7 +185,8 @@ const AI = () => {
                 {
                     id: (conversation.messages.length + 1).toString(),
                     message: query,
-                    entity: "user"
+                    entity: "user",
+                    finished: true
                 }
             ]
         });
@@ -142,14 +225,14 @@ const AI = () => {
 
     return (
         <div>
-            <div className="max-h-[50vh] overflow-y-auto ">
+            <div ref={messagesContainer} className="pr-2 max-h-[30vh] overflow-y-auto scrollbar-thumb-neutral-800 scrollbar-track-neutral-900 scrollbar-thin scrollbar-rounded">
                 {conversation.messages.map((message, i) => {
                     if (message.entity === "user") {
-                        return <UserMessage key={message.id} message={message.message} />
+                        return <UserMessage key={message.id} message={message} />
                     }
 
                     if (message.entity === "model") {
-                        return <ModelMessage key={message.id} message={message.message} />
+                        return <ModelMessage key={message.id} message={message} />
                     }
                 })}
             </div>

@@ -1,10 +1,12 @@
 package runtime
 
 import (
+	"encoding/json"
 	"os"
 	"strings"
 
 	"github.com/imroc/req/v3"
+	"github.com/simse/simse.io/services/service-brainybear/internal/types"
 )
 
 type DataRequest struct {
@@ -14,24 +16,26 @@ type DataRequest struct {
 	Response     interface{} `json:"response"`
 }
 
-func HandleRequest(request string) DataRequest {
+func HandleRequest(request string) []types.Card {
 	// remove GET or DISPLAY
 	request = strings.Replace(request, "GET ", "", 1)
 	request = strings.Replace(request, "DISPLAY ", "", 1)
 
 	// make request
 	response, requestError := MakeRequest(request)
-	errorMessage := ""
 	if requestError != nil {
-		errorMessage = requestError.Error()
+		return []types.Card{
+			{
+				Title: "Error fetching data",
+				Body:  "Error: " + requestError.Error(),
+			},
+		}
 	}
 
-	return DataRequest{
-		URL:          request,
-		Error:        requestError != nil,
-		ErrorMessage: errorMessage,
-		Response:     string(response),
-	}
+	var cards []types.Card
+	json.Unmarshal(response, &cards)
+
+	return cards
 }
 
 func MakeRequest(path string) ([]byte, error) {

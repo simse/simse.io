@@ -14,9 +14,17 @@ type Conversation struct {
 type Message struct {
 	ID        string    `json:"id"`
 	Message   string    `json:"message"`
+	Cards     []Card    `json:"cards"`
 	Entity    string    `json:"entity"` // user, model
 	Timestamp time.Time `json:"timestamp"`
 	Finished  bool      `json:"finished"`
+}
+
+type Card struct {
+	Title string `json:"title"`
+	Body  string `json:"body"`
+	URL   string `json:"url"`
+	Image string `json:"image"`
 }
 
 func (c *Conversation) AddMessage(m Message) {
@@ -37,4 +45,10 @@ func (c *Conversation) LastMessage() Message {
 
 func (m *Message) PrettyPrint() {
 	fmt.Printf("%s: %s\n", m.Entity, m.Message)
+	for _, card := range m.Cards {
+		fmt.Printf("Card: %s\n", card.Title)
+		fmt.Printf("Body: %s\n", card.Body)
+		fmt.Printf("URL: %s\n", card.URL)
+		fmt.Printf("Image: %s\n", card.Image)
+	}
 }
