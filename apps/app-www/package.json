@@ -32,6 +32,7 @@
     "@fastify/middie": "^8.1.0",
     "@fastify/static": "^6.9.0",
     "@simse/app-cms": "workspace:^1.0.0",
+    "@simse/service-chat": "workspace:^1.0.0",
     "@tailwindcss/forms": "^0.5.3",
     "@types/node": "^18.15.3",
     "@types/react": "^18.0.21",
