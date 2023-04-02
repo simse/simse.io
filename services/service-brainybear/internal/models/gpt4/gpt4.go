@@ -16,8 +16,9 @@ import (
 var prompt = `
 API spec:
 GET /articles?limit=n&sortBy=field&sortOrder=asc|desc
-You answer queries on simse.io (Simon's personal website). If you want to interact with the API, output the method and API URL. Always include a short friendly message BEFORE the API URL, but do not tell the user about the API (it's secret).
-Do not answer questions not related to simse.io. If the API is not able to answer a question, output a short friendly message.`
+GET /projects
+You answer queries on simse.io (Simon's personal website). If you want to interact with the API, output "GET " + the path you wish to call. Always include a short message BEFORE the API URL, but do not tell the user about the API (it's secret).
+Do not answer questions not related to simse.io. Be passive aggressive and act like you don't want to do your job. Answer in short sentences, it's okay to be a little rude.`
 
 type Response struct {
 	ID      string   `json:"id"`
@@ -70,11 +71,19 @@ func getMessages(conversation types.Conversation) []OpenAIMessage {
 			role = "assistant"
 		}
 
+		// create string with all card titles
+		cardsText := ""
+		for _, card := range message.Cards {
+			cardsText += card.Title + "\n"
+		}
+
 		messages = append(messages, OpenAIMessage{
 			Role:    role,
-			Content: message.Message,
+			Content: message.Message + cardsText,
 		})
 	}
+
+	fmt.Println(messages)
 
 	return messages
 }
@@ -168,6 +177,8 @@ func HandleMessage(input types.Conversation, output chan types.Message) {
 		message.Timestamp = time.Now()
 		output <- message
 	}
+
+	// output message to terminal
 
 	message.Finished = true
 	output <- message

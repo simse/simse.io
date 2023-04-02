@@ -205,7 +205,7 @@ const AI = () => {
         }
 
         if (readyState === ReadyState.OPEN) {
-            return "Connected to GPT-4";
+            return "Connected to GPT-3.5";
         }
 
         return "Disconnected";
@@ -243,7 +243,8 @@ const AI = () => {
                     type="text" 
                     placeholder={conversation.messages.length === 0 ? "What are you looking for?" : "Type your message..."}
                     value={query}
-                    onChange={(e) => setQuery(e.target.value)} />
+                    onChange={(e) => setQuery(e.target.value)}
+                    onKeyDown={(e) => e.code === "Enter" ? submitMessage() : null}/>
 
                 <button 
                     className="bg-blue-600 w-1/6 disabled:bg-zinc-700 disabled:hover:cursor-not-allowed"

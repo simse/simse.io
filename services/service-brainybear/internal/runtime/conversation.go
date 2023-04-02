@@ -3,7 +3,6 @@ package runtime
 import (
 	"fmt"
 	"strings"
-	"time"
 
 	gonanoid "github.com/matoous/go-nanoid/v2"
 	"github.com/simse/simse.io/services/service-brainybear/internal/models/gpt4"
@@ -37,12 +36,12 @@ func createId() string {
 
 func HandleMessage(message string, conversation types.Conversation, output chan types.Message) {
 	// add message to conversation
-	conversation.AddMessage(types.Message{
+	/*conversation.AddMessage(types.Message{
 		ID:        createId(),
 		Entity:    "user",
 		Message:   message,
 		Timestamp: time.Now(),
-	})
+	})*/
 
 	// send message back to model if last message contains GET
 	var repeat bool = true

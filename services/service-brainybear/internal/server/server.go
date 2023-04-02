@@ -8,6 +8,7 @@ import (
 	"time"
 
 	"github.com/gorilla/websocket"
+	gonanoid "github.com/matoous/go-nanoid/v2"
 	"github.com/simse/simse.io/services/service-brainybear/internal/runtime"
 	"github.com/simse/simse.io/services/service-brainybear/internal/types"
 )
@@ -20,6 +21,15 @@ var upgrader = websocket.Upgrader{
 
 type Message struct {
 	Message string `json:"message"`
+}
+
+func createId() string {
+	id, err := gonanoid.New()
+	if err != nil {
+		panic(err)
+	}
+
+	return id
 }
 
 func ws(w http.ResponseWriter, r *http.Request) {
@@ -56,6 +66,13 @@ func ws(w http.ResponseWriter, r *http.Request) {
 			fmt.Println("empty message")
 			continue
 		}
+
+		conversation.AddMessage(types.Message{
+			ID:        createId(),
+			Entity:    "user",
+			Message:   decodedMessage.Message,
+			Timestamp: time.Now(),
+		})
 
 		var output chan types.Message = make(chan types.Message)
 
