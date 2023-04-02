@@ -4,7 +4,7 @@ module.exports = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['system-ui'],
+				sans: ['Wotfard', 'system-ui'],
 				monospace: ['IBM Plex Mono'],
 				serif: ['Cormorant', 'serif']
 			},

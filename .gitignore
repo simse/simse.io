@@ -75,3 +75,5 @@ terraform.tfvars
 *.backup
 terraform.tfstate.d/*
 .terraform.lock.hcl
+.idea
+.fleet

@@ -14,24 +14,24 @@ import { prettyDate } from "src/utils/date";
 ---
 <Layout title={article?.name || ""} description={""} disableMaxWidth={true} noSpacing={true}>
 	<!-- Heading Metadata -->
-	<div class="px-4 py-16 max-w-[1600px] mx-auto">
+	<div class="px-4 py-16 pl-[15vw]">
 		{false && <div class="mb-4">
 		{article.category.map((category) => (
 			<a href={`/category/${category.slug}`} class="bg-blue-700 px-3 py-1 mr-2 rounded-full inline-block">{category.name}</a>
 		))}
 		</div>}
 
-		<h1 class="text-2xl max-w-6xl mb-4">{article.name}</h1>
+		<h1 class="text-4xl mb-4">{article.name}</h1>
 
-		<p class="text-sm mb-16"><strong>{prettyDate(article.createdAt)}</strong></p>
+		<p class="text-xl mb-16">{prettyDate(article.createdAt)}</p>
 
-		<div class="max-w-4xl">
+		<div class="max-w-[1400px]">
 			<!-- Featured Image -->
-			<Image image={article.media}  height={800} width={800} gravity={"center"} />
+			<Image image={article.media}  height={800} width={1200} gravity={"center"} />
 		</div>
 	</div>
 
-	<div class="article max-w-[1600px] px-4 prose prose-lg dark:prose-invert mx-auto">
+	<div class="article max-w-7xl px-4 prose prose-xl prose-invert pl-[15vw] break-auto">
 		<slot />
 	</div>
 </Layout>

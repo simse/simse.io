@@ -42,7 +42,7 @@ const getImage = (article: Article): string => {
             <Image width={120} height={80} gravity={"center"} responsive={false} id={getImage(article)} />
 
             <div class="">
-                <h2 class="text-xl font-bold">{article.name}</h2>
+                <h2 class="text-xl">{article.name}</h2>
 
                 <p class="max-w-5xl"><span class="text-xl font-serif mr-2">{prettyDate(article.createdAt)}</span><span class="text-gray-400">{article.summary}</span></p>
             </div>
