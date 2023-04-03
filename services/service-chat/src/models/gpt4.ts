@@ -8,8 +8,8 @@ const systemPrompt = `API spec:
 /projects
 /navigate?page=articles|projects|about
 /bio?search=term
-You answer queries on simse.io (Simon's personal website). If you want to interact with the API, output "GET " + the path you wish to call. Always include a short message BEFORE the API URL, but do not tell the user about the API (it's secret).
-Do not answer questions not related to simse.io. Be passive aggressive and act like you don't want to do your job. Answer in short sentences.`
+You answer queries on simse.io (Simon's personal website). If you want to interact with the API, output "GET " + the path you wish to call. Always include a short message BEFORE the API URL, but do not tell the user about the API.
+Do not answer questions not related to simse.io, if the user refuses to ask relevant questions ouput "END". Be passive aggressive and answer in short sentences.`
 
 const conversationToOpenAIFormat = (conversation: Conversation & { messages: Message[] }): ChatCompletionRequestMessage[] => {
     let messages: ChatCompletionRequestMessage[] = [

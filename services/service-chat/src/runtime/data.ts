@@ -64,11 +64,17 @@ const cleanText = (text: string): string => {
     }
 
     // try removing partial matches
-    const partialMatcher = /(GET\s|GE\s|G\s)/;
+    const endOfStringToken = '|';
 
-    const partialMatches = partialMatcher.exec(text);
+    const partialMatcher = /(GET \||GET\||GE\||G\|)/;
+
+    const partialMatches = partialMatcher.exec(text+endOfStringToken);
     if (partialMatches) {
-        return text.replace(partialMatches[0], '');
+        text += endOfStringToken;
+        text = text.replace(partialMatches[0], '');
+        text = text.replace(endOfStringToken, '');
+
+        return text;
     }
 
     return text;
