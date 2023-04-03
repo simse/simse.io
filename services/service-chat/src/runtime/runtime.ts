@@ -3,6 +3,7 @@ import { Conversation, Message } from "@prisma/client";
 import { nanoid } from 'nanoid';
 import prisma from "../lib/db";
 import * as gpt4 from "../models/gpt4";
+import { cleanText, parseMessage } from "./data";
 
 interface ServerMessage {
     type: "CONVERSATION_CREATED" | "MESSAGE_SENT" | "CONVERSATION_ENDED" | "ERROR";
@@ -88,7 +89,8 @@ const handleMessage = async (connection: SocketStream, message: ClientMessage) =
             conversationId: conversation.id,
             text: message.message,
             entity: "USER",
-            timestamp: new Date()
+            timestamp: new Date(),
+            finished: true
         }
 
         // save to db
@@ -104,13 +106,17 @@ const handleMessage = async (connection: SocketStream, message: ClientMessage) =
             conversationId: conversation.id,
             text: "",
             entity: "MODEL",
-            timestamp: new Date()
+            timestamp: new Date(),
+            finished: false
         }
 
         for await (let message of await gpt4.handleMessage(conversation)) {
+            let parsedMessage = await parseMessage(message);
+            parsedMessage.text = cleanText(parsedMessage.text);
+
             connection.socket.send(JSON.stringify({
                 type: "MESSAGE_SENT",
-                message: message
+                message: parsedMessage
             } as ServerMessage));
 
             modelMessage = message;

@@ -2,9 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import useWebSocket, { ReadyState } from 'react-use-websocket';
 import type { ClientMessage, ServerMessage, Message, ContentCard, Conversation } from '@simse/service-chat/src/types';
 
-interface ConversationWithMessages extends Conversation {
-    messages: Message[];
-}
+type MessageWithContentCards = Message & { contentCards?: ContentCard[] };
 
 interface UserMessageProps {
     message: Message;
@@ -17,16 +15,16 @@ const UserMessage = ({ message }: UserMessageProps) => (
 )
 
 interface ModelMessageProps {
-    message: Message & { cards?: ContentCard[] }
+    message: MessageWithContentCards;
 }
 
 const ModelMessage = ({ message }: ModelMessageProps) => (
     <div className="mb-6 text-xl">
         {message.text}
 
-        {/*message.finished && message.cards?.map(card => <Card key={card.title} card={card} />)*/}
+        {message.finished && message.contentCards?.map(card => <Card key={card.title} card={card} />)}
 
-        {(true && message.cards) && <LoadingCard />}
+        {(!message.finished && message.contentCards && message.contentCards.length > 0) && <LoadingCard />}
     </div>
 )
 
@@ -35,9 +33,15 @@ interface CardProps {
 }
 
 const Card = ({ card }: CardProps) => (
-    <div className="mt-3 bg-neutral-900 text-base px-4 py-3">
-        <h2 className="font-bold mb-2 text-lg">{card.title}</h2>
-        <p>{card.body}</p>
+    <div className="mt-3 bg-neutral-900 text-base flex items-center mb-2">
+        {card.image && <div >
+            {/*<img style={{height: 100, width: 200}} src={`https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/${card.image}/w=200,h=100,format=auto,fit=cover`} alt={card.title} />*/}
+        </div>}
+
+        <div className="px-4 py-3">
+            <h2 className="text-lg font-bold">{card.title}</h2>
+            <p>{card.body}</p>
+        </div>
     </div>
 )
 
@@ -57,7 +61,7 @@ const AI = () => {
     const messagesContainer = useRef<HTMLInputElement>(null);
     const [query, setQuery] = useState<string>("");
     const [conversation, setConversation] = useState<Conversation>();
-    const [messages, setMessages] = useState<Message[]>([]);
+    const [messages, setMessages] = useState<Message[] | MessageWithContentCards[]>([]);
     const [status, setStatus] = useState<ConnectionStatus>(ConnectionStatus.CONNECTING);
 
     const { sendMessage, lastJsonMessage, readyState } = useWebSocket(import.meta.env.PUBLIC_SERVICE_CHAT_URL || '', {}, true);
@@ -75,12 +79,12 @@ const AI = () => {
                     break;
                     
                 case "MESSAGE_SENT":
-                    const existingMessage = messages.find(m => m.id === serverMessage.message?.id);
+                    const existingMessage = messages.find((m: Message | MessageWithContentCards) => m.id === serverMessage.message?.id);
 
                     if (existingMessage) {
-                        setMessages(messages.map(m => {
+                        setMessages(messages.map((m: Message | MessageWithContentCards) => {
                             if (m.id === serverMessage.message?.id) {
-                                return serverMessage.message;
+                                return serverMessage.message as MessageWithContentCards;
                             }
 
                             return m;
@@ -88,7 +92,7 @@ const AI = () => {
                     } else {
                         setMessages([
                             ...messages,
-                            serverMessage.message as Message
+                            serverMessage.message as MessageWithContentCards
                         ]);
                     }
                     break;
@@ -101,7 +105,7 @@ const AI = () => {
             top: messagesContainer.current.scrollHeight,
             behavior: 'smooth'
         })
-    }, [conversation]);
+    }, [messages]);
 
     useEffect(() => {
         if (readyState === ReadyState.CLOSED) {
@@ -123,7 +127,8 @@ const AI = () => {
                 id: (Math.random() * 100000000000000000).toString(),
                 text: query,
                 entity: "USER",
-                timestamp: new Date()
+                timestamp: new Date(),
+                finished: true
             }
         ]);
 
@@ -165,7 +170,7 @@ const AI = () => {
     return (
         <div>
             <div ref={messagesContainer} className="pr-2 max-h-[30vh] overflow-y-auto scrollbar-thumb-neutral-800 scrollbar-track-neutral-900 scrollbar-thin scrollbar-rounded">
-                {messages.map((message, i) => {
+                {messages.map((message: Message | MessageWithContentCards) => {
                     if (message.entity === "USER") {
                         return <UserMessage key={message.id} message={message} />
                     }
@@ -178,7 +183,7 @@ const AI = () => {
 
             <div className={`flex gap-1 w-full ${messages.length > 0 ? 'mt-12' : ''}`}>
                 <input
-                    className="bg-zinc-900 py-3 px-4 text-xl w-5/6 active:outline outline-2 outline-blue-600 border-0"
+                    className="bg-zinc-900 py-3 px-4 text-xl w-5/6 active:outline outline-2 inset outline-blue-600 border-0"
                     type="text"
                     placeholder={messages.length === 0 ? "What are you looking for?" : "Type your message..."}
                     value={query}
