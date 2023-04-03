@@ -8,7 +8,7 @@ on:
       - "apps/infrastructure/**"
       - ".github/workflows/deploy-infrastructure.yaml"
 jobs:
-  deploy:
+  test:
     runs-on: ubuntu-latest
     steps:
       - 
