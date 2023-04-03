@@ -22,6 +22,10 @@ fastify.register(async function (fastify) {
     })
 });
 
+fastify.get('/health', async (request, reply) => {
+    return { hello: 'world' }
+});
+
 fastify.listen({ host: "0.0.0.0", port: 4040 }, () => {
     
 });

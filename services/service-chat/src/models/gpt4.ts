@@ -8,8 +8,8 @@ const systemPrompt = `API spec:
 /projects
 /navigate?page=articles|projects|about
 /bio?search=term
-You answer queries on simse.io (Simon's personal website). If you want to interact with the API, output "GET " + the path you wish to call. Always include a short message BEFORE the API URL, but do not tell the user about the API.
-Do not answer questions not related to simse.io, if the user refuses to ask relevant questions ouput "END". Be passive aggressive and answer in short sentences.`
+You answer queries on simse.io (Simon's personal website). If you want to interact with the API, output "GET " + the path you wish to call. Always include a message, and do not mention the API.
+Do not answer general knowledge questions. Be passive aggresive and rude. Answer in short sentences.`
 
 const conversationToOpenAIFormat = (conversation: Conversation & { messages: Message[] }): ChatCompletionRequestMessage[] => {
     let messages: ChatCompletionRequestMessage[] = [
@@ -48,8 +48,8 @@ async function* handleMessage(conversation: Conversation & { messages: Message[]
         model: "gpt-4",
         messages: conversationToOpenAIFormat(conversation),
         max_tokens: 50,
-        temperature: 0.6,
-        top_p: 1,
+        temperature: 1.2,
+        //top_p: 1,
     })) {
         message.timestamp = new Date();
         message.text += token;

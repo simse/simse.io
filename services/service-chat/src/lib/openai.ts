@@ -2,7 +2,9 @@ import {
     OpenAIApi,
     Configuration,
     CreateChatCompletionRequest,
+    ChatCompletionRequestMessage
 } from 'openai';
+import { Conversation, Message } from '@prisma/client';
 
 const openai = new OpenAIApi(
     new Configuration({
@@ -51,6 +53,27 @@ async function* streamChatCompletion(request: CreateChatCompletionRequest): Asyn
 
 }
 
+const conversationToOpenAIFormat = (conversation: Conversation & { messages: Message[] }, systemPrompt: string): ChatCompletionRequestMessage[] => {
+    let messages: ChatCompletionRequestMessage[] = [
+        {
+            content: systemPrompt,
+            role: 'system'
+        }
+    ];
+
+    conversation.messages.forEach((message: Message) => {
+        const role = message.entity === "USER" ? 'user' : 'assistant';
+
+        messages.push({
+            content: message.text,
+            role: role
+        })
+    });
+
+    return messages;
+}
+
 export {
     streamChatCompletion,
+    conversationToOpenAIFormat
 }

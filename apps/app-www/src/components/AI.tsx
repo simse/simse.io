@@ -22,7 +22,7 @@ const ModelMessage = ({ message }: ModelMessageProps) => (
     <div className="mb-6 text-xl">
         {message.text}
 
-        {message.finished && message.contentCards?.map(card => <Card key={card.title} card={card} />)}
+        {(message.finished && message.contentCards && message.contentCards.length > 0) && message.contentCards?.map(card => <Card key={card.title} card={card} />)}
 
         {(!message.finished && message.contentCards && message.contentCards.length > 0) && <LoadingCard />}
     </div>
@@ -145,11 +145,11 @@ const AI = () => {
 
     const connectionMessage = (): string => {
         if (status === ConnectionStatus.CONNECTING) {
-            return "Connecting to GPT-4...";
+            return `Connecting...`;
         }
 
         if (status === ConnectionStatus.CONNECTED) {
-            return "Connected to GPT-4";
+            return `Connected to ${conversation ? conversation.model : ''}`;
         }
 
         return "Disconnected";

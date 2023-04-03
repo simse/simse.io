@@ -1,15 +1,5 @@
 ---
-import { getAllProjectSlugs, getProjectBySlug } from "src/lib/cms";
-
-export async function getStaticPaths() {
-  const slugs = await getAllProjectSlugs();
-
-  return slugs.map(slug => ({
-    params: {
-        slug
-    }
-  }))
-}
+import { getProjectBySlug } from "src/lib/cms";
 
 import Layout from "@layouts/Layout.astro";
 import ProjectLanguageTags from "@components/ProjectLanguageTags.astro";

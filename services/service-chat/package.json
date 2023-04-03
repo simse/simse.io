@@ -6,7 +6,8 @@
   "scripts": {
     "test": "vitest",
     "dev": "nodemon -e ts --exec \"ts-node src/main.ts | pino-pretty\"",
-    "prisma": "prisma"
+    "prisma": "prisma",
+    "start": "prisma migrate deploy && prisma generate && ts-node src/main.ts"
   },
   "keywords": [],
   "author": "",

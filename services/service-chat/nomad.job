@@ -1,0 +1,59 @@
+job "simse.io/service-chat-[[ env "ENV" ]]" {
+  region = "global"
+  datacenters = ["dc1"]
+  type        = "service"
+
+  meta {
+    version = "1"
+  }
+
+  group "service-chat" {
+    count = 1
+
+    network {
+      port "http" {
+        to = 4040
+        host_network = "private"
+      }
+    }
+
+    task "service-chat" {
+      driver = "docker"
+      
+      config {
+        image = "[[ env "DOCKER_IMAGE" ]]"
+        ports = ["http"]
+        force_pull = true
+      }
+
+      env {
+        DATABASE_URL = "[[ env "DATABASE_URL" ]]"
+        OPENAI_API_KEY = "[[ env "OPENAI_API_KEY" ]]"
+        ENV = "[[ env "ENV" ]]"
+      }
+
+      service {
+        port = "http"
+	    name = "simse-io-service-chat-[[ env "ENV" ]]"
+
+        tags = [
+          "traefik.enable=true",
+          "traefik.http.routers.simse-chat-[[ env "ENV" ]].rule=Host(`simse-io-service-chat-[[ env "ENV" ]].sorensen.cloud`)",
+          "traefik.http.routers.simse-chat-[[ env "ENV" ]].tls.certresolver=sample",
+        ]
+
+        check {
+          type     = "http"
+          path     = "/health"
+          interval = "10s"
+          timeout  = "2s"
+        }
+      }
+
+      resources {
+        cpu    = 500
+        memory = 512
+      }
+    }
+  }
+}

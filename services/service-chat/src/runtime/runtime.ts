@@ -3,6 +3,7 @@ import { Conversation, Message } from "@prisma/client";
 import { nanoid } from 'nanoid';
 import prisma from "../lib/db";
 import * as gpt4 from "../models/gpt4";
+import * as gpt3_5 from "../models/gpt3-5";
 import { cleanText, parseMessage } from "./data";
 
 interface ServerMessage {
@@ -30,7 +31,7 @@ const startConversation = async (model = "gpt4") => {
 
 const handleConnect = async (connection: SocketStream) => {
     // create new conversation
-    const conversation = await startConversation();
+    const conversation = await startConversation("GPT-4");
 
     // send conversation created message
     connection.socket.send(JSON.stringify({

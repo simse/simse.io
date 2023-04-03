@@ -1,0 +1,19 @@
+set dotenv-load
+
+build_tag := `git rev-parse --short HEAD`
+branch := env_var_or_default("BRANCH", "none")
+env := if branch == "master" {
+    "prod"
+} else if branch == "develop" {
+    "staging"
+} else {
+    "dev"
+}
+docker_image := "ghcr.io/simse/simse.io/service-chat:" + build_tag + "-" + env
+
+build:
+    cd ../.. && docker build -f services/service-chat/Dockerfile . -t {{docker_image}} --progress=plain
+    docker push {{docker_image}}
+
+deploy:
+    ENV={{env}} DOCKER_IMAGE={{docker_image}} levant deploy nomad.job

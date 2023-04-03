@@ -1,8 +1,9 @@
 ---
 import Base from '../layouts/Base.astro';
 
-import Image from '../components/Image.astro';
 import AI from '@components/AI';
+
+import { MessageCircle, FileText } from 'react-feather';
 ---
 <Base title="Welcome">
 	<div class="max-w-xl mx-auto min-h-[75vh] flex flex-col justify-center">
@@ -10,6 +11,11 @@ import AI from '@components/AI';
 			<img src="https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/e016d6ff-aad5-4173-2770-8411ac77fd00/format=auto,h=48,w=48,fit=cover,gravity=auto">
 
 			<h2 class="text-lg">simse.io</h2>
+
+			<nav class="ml-auto gap-2 flex">
+				<a class="rounded-full bg-blue-200 px-3 py-1 flex gap-1 items-center text-blue-800" href=""><MessageCircle height={20} /> Chat</a>
+				<a class="rounded-full bg-zinc-800 px-3 py-1 flex gap-1 items-center text-zinc-300" href="/sitemap"><FileText height={20} /> Sitemap</a>
+			</nav>
 		</div>
 		
 
