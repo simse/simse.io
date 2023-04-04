@@ -1,6 +1,6 @@
-import { Fragment } from 'react';
+import { Fragment } from 'preact';
 import escapeHTML from 'escape-html';
-import { ExternalLink } from 'react-feather';
+import { ExternalLink } from 'preact-feather';
 
 interface Node {
     text?: string;

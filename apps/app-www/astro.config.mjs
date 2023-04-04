@@ -2,7 +2,8 @@ import { defineConfig } from 'astro/config';
 import tailwind from "@astrojs/tailwind";
 import robotsTxt from 'astro-robots-txt';
 import node from '@astrojs/node';
-import react from "@astrojs/react";
+
+import preact from "@astrojs/preact";
 
 // https://astro.build/config
 export default defineConfig({
@@ -11,5 +12,5 @@ export default defineConfig({
     mode: 'middleware'
   }),
   site: 'https://simse.io',
-  integrations: [tailwind(), robotsTxt(), react()]
+  integrations: [tailwind(), robotsTxt(), preact()],
 });

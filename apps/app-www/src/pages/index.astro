@@ -1,9 +1,8 @@
 ---
 import Base from '../layouts/Base.astro';
+import Chat from '@parts/chat/Chat';
 
-import AI from '@components/AI';
-
-import { MessageCircle, FileText } from 'react-feather';
+import { MessageCircle, FileText } from 'preact-feather';
 ---
 <Base title="Welcome">
 	<div class="max-w-xl mx-auto min-h-[75vh] flex flex-col justify-center">
@@ -18,7 +17,6 @@ import { MessageCircle, FileText } from 'react-feather';
 			</nav>
 		</div>
 		
-
-		<AI client:load />
+        <Chat client:only />
 	</div>
 </Base>

@@ -28,7 +28,7 @@
   },
   "dependencies": {
     "@astrojs/node": "^5.1.0",
-    "@astrojs/react": "^2.1.0",
+    "@astrojs/preact": "^2.1.0",
     "@fastify/middie": "^8.1.0",
     "@fastify/static": "^6.9.0",
     "@simse/app-cms": "workspace:^1.0.0",
@@ -42,14 +42,12 @@
     "cssnano": "^5.1.14",
     "fastify": "^4.14.1",
     "feather-icons": "^4.29.0",
-    "font-color-contrast": "^11.1.0",
     "highlight.js": "^11.7.0",
     "openai": "3.2.1",
     "postcss": "^8.4.21",
-    "react": "^18.0.0",
-    "react-dom": "^18.0.0",
-    "react-feather": "^2.0.10",
-    "react-use-websocket": "^4.3.1",
+    "preact": "^10.6.5",
+    "preact-feather": "^4.2.1",
+    "sockette": "^2.0.6",
     "tailwind-scrollbar": "^3.0.0"
   }
 }

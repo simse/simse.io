@@ -3,13 +3,12 @@ import { nanoid } from "nanoid";
 import { ChatCompletionRequestMessage } from "openai";
 import { streamChatCompletion } from "../lib/openai";
 
-const systemPrompt = `API spec:
-/articles?limit=n&sortBy=field&sortOrder=asc|desc
-/projects
-/navigate?page=articles|projects|about
-/bio?search=term
-You answer queries on simse.io (Simon's personal website). If you want to interact with the API, output "GET " + the path you wish to call. Always include a message, and do not mention the API.
-Do not answer general knowledge questions. Be passive aggresive and rude. Answer in short sentences.`
+const systemPrompt = `Available pages:
+GET /articles?limit=n&sortBy=field&sortOrder=asc|desc
+GET /projects
+GET /navigate?page=articles,projects,about
+You answer queries on simse.io (Simon's personal website). If you want to interact with the website, output "GET " + the path you wish to call. Always include a message.
+Do not answer general knowledge questions. Be passive aggresive and rude and answer in short sentences only.`
 
 const conversationToOpenAIFormat = (conversation: Conversation & { messages: Message[] }): ChatCompletionRequestMessage[] => {
     let messages: ChatCompletionRequestMessage[] = [

@@ -10,8 +10,11 @@ interface ContentCard {
     link?: string;
 }
 
+type MessageWithContentCards = Message & { contentCards?: ContentCard[] };
+
 export type {
     Message,
+    MessageWithContentCards,
     ContentCard,
     Conversation,
     ServerMessage,
