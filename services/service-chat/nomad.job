@@ -27,14 +27,23 @@ job "simse.io/service-chat-[[ env "ENV" ]]" {
       }
 
       env {
-        DATABASE_URL = "[[ env "DATABASE_URL" ]]"
-        OPENAI_API_KEY = "[[ env "OPENAI_API_KEY" ]]"
         ENV = "[[ env "ENV" ]]"
+      }
+
+      template {
+        data = <<EOF
+        {{with secret "secrets/data/simse.io/service-chat/[[ env "ENV" ]]"}}
+          DATABASE_URL = "{{.Data.data.DATABASE_URL}}"
+          OPENAI_API_KEY = "{{.Data.data.OPENAI_API_KEY}}"
+        {{end}}
+        EOF
+        destination = "env"
+        env = true
       }
 
       service {
         port = "http"
-	    name = "simse-io-service-chat-[[ env "ENV" ]]"
+	      name = "simse-io-service-chat-[[ env "ENV" ]]"
 
         tags = [
           "traefik.enable=true",
@@ -53,6 +62,11 @@ job "simse.io/service-chat-[[ env "ENV" ]]" {
       resources {
         cpu    = 500
         memory = 512
+      }
+
+      vault {
+        policies = ["simse-io-[[ env "ENV" ]]"]
+        env = false
       }
     }
   }
