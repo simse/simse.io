@@ -22,7 +22,7 @@ const parseMessage = async (message: Message): Promise<Message & { contentCards:
             })
         } else {
             const path = matches[1];
-            const url = `http://localhost:3000/api${path}`;
+            const url = `${process.env.DATA_SERVICE_URL}${path}`;
             const response = await axios.get(url);
 
             if (response.status !== 200) {

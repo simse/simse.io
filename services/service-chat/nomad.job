@@ -35,6 +35,7 @@ job "simse.io/service-chat-[[ env "ENV" ]]" {
         {{with secret "secrets/data/simse.io/service-chat/[[ env "ENV" ]]"}}
           DATABASE_URL = "{{.Data.data.DATABASE_URL}}"
           OPENAI_API_KEY = "{{.Data.data.OPENAI_API_KEY}}"
+          DATA_SERVICE_URL = "{{.Data.data.DATA_SERVICE_URL}}"
         {{end}}
         EOF
         destination = "env"

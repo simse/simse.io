@@ -26,6 +26,17 @@ job "simse.io/app-www-[[ env "ENV" ]]" {
         force_pull = true
       }
 
+      template {
+        data = <<EOF
+        {{with secret "secrets/data/simse.io/app-www/[[ env "ENV" ]]"}}
+          PUBLIC_SERVICE_CHAT_URL = "{{.Data.data.PUBLIC_SERVICE_CHAT_URL}}"
+          CMS_URL = "{{.Data.data.CMS_URL}}"
+        {{end}}
+        EOF
+        destination = "env"
+        env = true
+      }
+
       service {
         port = "http"
 	      name = "simse-io-app-www-[[ env "ENV" ]]"
@@ -47,6 +58,11 @@ job "simse.io/app-www-[[ env "ENV" ]]" {
       resources {
         cpu    = 500
         memory = 4096
+      }
+
+      vault {
+        policies = ["simse-io-[[ env "ENV" ]]"]
+        env = false
       }
     }
   }

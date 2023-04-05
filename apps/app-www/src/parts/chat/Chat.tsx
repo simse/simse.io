@@ -11,9 +11,19 @@ const Chat = () => {
     const [messages, setMessages] = useState<(Message | MessageWithContentCards)[]>([]);
     const [status, setStatus] = useState<ConnectionStatus>(ConnectionStatus.CONNECTING);
     const [lastServerMessage, setLastServerMessage] = useState<ServerMessage>();
+    const [serviceChatUrl, setServiceChatUrl] = useState<string>();
 
     useEffect(() => {
-        setConnection(new Sockette(import.meta.env.PUBLIC_SERVICE_CHAT_URL || 'wss://chat.simse.io', {
+        if(!serviceChatUrl) {
+            fetch("/api/chatUrl")
+                .then((response) => response.json())
+                .then((data) => {
+                    setServiceChatUrl(data.url);
+                });
+            return;
+        }
+
+        setConnection(new Sockette(serviceChatUrl, {
             // timeout: 10e3,
             maxAttempts: 10,
             onopen: (e: Event) => {
@@ -38,7 +48,7 @@ const Chat = () => {
         }));
 
         return () => connection?.close();
-    }, []);
+    }, [serviceChatUrl]);
 
     useEffect(() => {
         if (!lastServerMessage) {
