@@ -20,9 +20,15 @@ const conversationToOpenAIFormat = (conversation: Conversation & { messages: Mes
 
     conversation.messages.forEach((message: Message) => {
         const role = message.entity === "USER" ? 'user' : 'assistant';
+        let content = message.text;
+
+        // if role is user, and content is longer than 50 words, replace
+        if (role === 'user' && content.split(' ').length > 50) {
+            content = "<long message>"
+        }
 
         messages.push({
-            content: message.text,
+            content: content,
             role: role
         })
     });
