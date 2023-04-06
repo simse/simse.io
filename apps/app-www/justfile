@@ -19,4 +19,4 @@ slim:
     slim build --target {{docker_image}} --expose 8080
 
 deploy:
-    ENV={{env}} DOCKER_IMAGE={{docker_image}} levant deploy nomad.job
+    ENV={{env}} DOCKER_IMAGE={{docker_image}} levant deploy -force nomad.job

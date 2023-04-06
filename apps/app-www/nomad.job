@@ -4,11 +4,19 @@ job "simse.io/app-www-[[ env "ENV" ]]" {
   type        = "service"
 
   meta {
-    version = "1"
+    version = "4"
+  }
+
+  update {
+    max_parallel     = 2
+    min_healthy_time = "30s"
+    healthy_deadline = "5m"
+
+    auto_revert = true
   }
 
   group "app-www" {
-    count = 1
+    count = 2
 
     network {
       port "http" {
@@ -16,6 +24,8 @@ job "simse.io/app-www-[[ env "ENV" ]]" {
         host_network = "private"
       }
     }
+
+    
 
     task "app-www" {
       driver = "docker"
@@ -57,7 +67,7 @@ job "simse.io/app-www-[[ env "ENV" ]]" {
 
       resources {
         cpu    = 500
-        memory = 4096
+        memory = 1024
       }
 
       vault {
