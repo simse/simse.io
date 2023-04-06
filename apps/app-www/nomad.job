@@ -25,8 +25,6 @@ job "simse.io/app-www-[[ env "ENV" ]]" {
       }
     }
 
-    
-
     task "app-www" {
       driver = "docker"
       
@@ -39,7 +37,7 @@ job "simse.io/app-www-[[ env "ENV" ]]" {
       template {
         data = <<EOF
         {{with secret "secrets/data/simse.io/app-www/[[ env "ENV" ]]"}}
-          PUBLIC_SERVICE_CHAT_URL = "{{.Data.data.PUBLIC_SERVICE_CHAT_URL}}"
+          SERVICE_CHAT_URL = "{{.Data.data.SERVICE_CHAT_URL}}"
           CMS_URL = "{{.Data.data.CMS_URL}}"
         {{end}}
         EOF

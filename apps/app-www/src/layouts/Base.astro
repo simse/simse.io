@@ -5,6 +5,7 @@ export interface Props {
 }
 
 const { title, description = ""} = Astro.props as Props
+import Banner, { BannerType } from "@components/Banner";
 
 ---
 
@@ -26,6 +27,11 @@ const { title, description = ""} = Astro.props as Props
 	</head>
 
 	<body class="bg-black text-white min-h-screen">
+		{import.meta.env.MODE === "production" && import.meta.env.PUBLIC_ENV !== "prod" &&
+		<Banner title="WARNING" type={BannerType.Warning}>
+			<p slot="message">You are currently viewing a development version of <a class="underline" href="https://simse.io">simse.io</a>. Some things may not work as expected.</p>
+		</Banner>}
+
 		<slot />
 	</body>
 </html>

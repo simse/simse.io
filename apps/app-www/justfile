@@ -12,7 +12,7 @@ env := if branch == "master" {
 docker_image := "ghcr.io/simse/simse.io/app-www:" + build_tag + "-" + env
 
 build:
-    cd ../.. && docker build -f apps/app-www/Dockerfile . -t {{docker_image}} --progress=plain
+    cd ../.. && docker build -f apps/app-www/Dockerfile . -t {{docker_image}} --progress=plain --build-arg env={{env}}
     docker push {{docker_image}}
 
 slim:
@@ -20,3 +20,6 @@ slim:
 
 deploy:
     ENV={{env}} DOCKER_IMAGE={{docker_image}} levant deploy -force nomad.job
+
+dev:
+    pnpm dev

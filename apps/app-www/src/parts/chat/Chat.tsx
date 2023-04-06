@@ -15,10 +15,10 @@ const Chat = () => {
 
     useEffect(() => {
         if(!serviceChatUrl) {
-            fetch("/api/chatUrl")
+            fetch("/api/env")
                 .then((response) => response.json())
                 .then((data) => {
-                    setServiceChatUrl(data.url);
+                    setServiceChatUrl(data.SERVICE_CHAT_URL);
                 });
             return;
         }

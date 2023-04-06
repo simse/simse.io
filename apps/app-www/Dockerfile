@@ -1,6 +1,10 @@
-FROM node:18.13.0-alpine AS build
+FROM node:19.8.1-alpine AS build
 
-RUN npm -g install pnpm
+ARG env
+
+ENV PUBLIC_ENV=$env
+
+RUN npm -g install pnpm@7.31.0
 
 WORKDIR /simse
 COPY . /simse/
@@ -14,9 +18,9 @@ RUN pnpm build
 WORKDIR /simse
 RUN rm -rf node_modules
 
-FROM node:18.13.0-alpine AS runtime
+FROM node:19.8.1-alpine AS runtime
 
-RUN npm -g install pnpm
+RUN npm -g install pnpm@7.31.0
 
 RUN apk add --no-cache curl
 RUN curl -sf https://gobinaries.com/tj/node-prune | sh
