@@ -4,11 +4,11 @@ job "simse.io/app-www-[[ env "ENV" ]]" {
   type        = "service"
 
   meta {
-    version = "4"
+    version = "6"
   }
 
   update {
-    max_parallel     = 2
+    max_parallel     = 1
     min_healthy_time = "30s"
     healthy_deadline = "5m"
 
@@ -45,7 +45,18 @@ job "simse.io/app-www-[[ env "ENV" ]]" {
         env = true
       }
 
-      service {
+      resources {
+        cpu    = 500
+        memory = 1024
+      }
+
+      vault {
+        policies = ["simse-io-[[ env "ENV" ]]"]
+        env = false
+      }
+    }
+
+    service {
         port = "http"
 	      name = "simse-io-app-www-[[ env "ENV" ]]"
 
@@ -62,16 +73,5 @@ job "simse.io/app-www-[[ env "ENV" ]]" {
           timeout  = "2s"
         }
       }
-
-      resources {
-        cpu    = 500
-        memory = 1024
-      }
-
-      vault {
-        policies = ["simse-io-[[ env "ENV" ]]"]
-        env = false
-      }
-    }
   }
 }

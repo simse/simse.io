@@ -15,7 +15,7 @@ const Status = ({ status }: StatusProps) => {
         }
 
         if (status === ConnectionStatus.CONNECTED) {
-            return `Connected to bludGPT`;
+            return `Connected to GPT-4`;
         }
 
         return "Disconnected";
