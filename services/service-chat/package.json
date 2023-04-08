@@ -7,7 +7,7 @@
     "test": "vitest",
     "dev": "nodemon -e ts --exec \"ts-node src/main.ts | pino-pretty\"",
     "prisma": "prisma",
-    "start": "prisma migrate deploy && node dist/main.js",
+    "start": "pnpx prisma migrate deploy && node dist/main.js",
     "build": "esbuild src/main.ts --bundle --minify --platform=node --outfile=dist/main.js"
   },
   "keywords": [],

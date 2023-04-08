@@ -4,7 +4,7 @@ job "simse.io/service-chat-[[ env "ENV" ]]" {
   type        = "service"
 
   meta {
-    version = "1"
+    version = "3"
   }
 
   group "service-chat" {

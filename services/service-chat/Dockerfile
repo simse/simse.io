@@ -12,13 +12,16 @@ WORKDIR /simse/services/service-chat
 RUN pnpm prisma generate
 RUN pnpm run build
 
-FROM node:18.13.0-alpine
+FROM alpine
+
+RUN apk add --update nodejs npm
 
 RUN npm -g install pnpm
 
 WORKDIR /simse
 
 WORKDIR /simse/services/service-chat
+
 
 COPY --from=BUILD /simse/services/service-chat/package.json ./package.json
 COPY --from=BUILD /simse/services/service-chat/dist ./dist
