@@ -64,6 +64,8 @@ job "simse.io/app-www-[[ env "ENV" ]]" {
           "traefik.enable=true",
           "traefik.http.routers.simse-www-[[ env "ENV" ]].rule=Host(`simse-io-app-www-[[ env "ENV" ]].sorensen.cloud`)",
           "traefik.http.routers.simse-www-[[ env "ENV" ]].tls.certresolver=sample",
+          "traefik.http.middlewares.test-retry.retry.attempts=4",
+          "traefik.http.middlewares.test-retry.retry.initialinterval=100ms"
         ]
 
         check {

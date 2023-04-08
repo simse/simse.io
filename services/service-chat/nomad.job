@@ -8,7 +8,7 @@ job "simse.io/service-chat-[[ env "ENV" ]]" {
   }
 
   group "service-chat" {
-    count = 1
+    count = 2
 
     network {
       port "http" {

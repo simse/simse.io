@@ -7,7 +7,8 @@
     "test": "vitest",
     "dev": "nodemon -e ts --exec \"ts-node src/main.ts | pino-pretty\"",
     "prisma": "prisma",
-    "start": "prisma migrate deploy && prisma generate && ts-node src/main.ts"
+    "start": "prisma migrate deploy && node dist/main.js",
+    "build": "esbuild src/main.ts --bundle --minify --platform=node --outfile=dist/main.js"
   },
   "keywords": [],
   "author": "",
@@ -27,6 +28,7 @@
     "@types/nodemon": "^1.19.2",
     "@types/ws": "^8.5.4",
     "dotenv": "^8.2.0",
+    "esbuild": "^0.17.15",
     "nodemon": "2.0.22",
     "pino-pretty": "^10.0.0",
     "ts-node": "^9.1.1",

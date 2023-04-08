@@ -59,6 +59,7 @@ const Chat = () => {
             case "CONVERSATION_CREATED":
                 setConversation(lastServerMessage.conversation);
                 setStatus(ConnectionStatus.CONNECTED);
+                setMessages([]);
                 break;
 
             case "MESSAGE_SENT":
