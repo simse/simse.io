@@ -1,21 +1,38 @@
-# simse.io - monorepo
-My personal website and all related services.
+# create-svelte
 
-## Apps
-| Name | Summary | Status |
-|---|---|---|
-| app-www | Main website at simse.io | [![deploy-app-www](https://github.com/simse/simse.io/actions/workflows/deploy-app-www.yaml/badge.svg)](https://github.com/simse/simse.io/actions/workflows/deploy-app-www.yaml) |
-| app-cms | Payload CMS hosting all content types such as: articles, projects, notes, videoes, etc. | [![deploy-app-cms](https://github.com/simse/simse.io/actions/workflows/deploy-app-cms.yaml/badge.svg)](https://github.com/simse/simse.io/actions/workflows/deploy-app-cms.yaml) |
+Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
 
-## Environments
-### Production
-simse.io - deployed exclusively by Github Actions from master branch
+## Creating a project
 
-### Staging
-simse.cloud - deployed by Github Actions from develop branch
+If you're seeing this, you've probably already done this step. Congrats!
 
-### Development
-simse.dev - deployed by me when I feel like it :)
+```bash
+# create a new project in the current directory
+npm create svelte@latest
 
-##### Is this whole monorepo thing not overkill?
-Totally!
+# create a new project in my-app
+npm create svelte@latest my-app
+```
+
+## Developing
+
+Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+
+```bash
+npm run dev
+
+# or start the server and open the app in a new browser tab
+npm run dev -- --open
+```
+
+## Building
+
+To create a production version of your app:
+
+```bash
+npm run build
+```
+
+You can preview the production build with `npm run preview`.
+
+> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.

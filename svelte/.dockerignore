@@ -1,6 +1,0 @@
-Dockerfile
-node_modules
-.svelte-kit
-build
-.gitignore
-README.md

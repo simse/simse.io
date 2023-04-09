@@ -77,3 +77,5 @@ terraform.tfstate.d/*
 .terraform.lock.hcl
 .idea
 .fleet
+build/*
+.svelte-kit/*
