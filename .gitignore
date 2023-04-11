@@ -60,13 +60,6 @@ typings/
 # Mac files
 .DS_Store
 
-# Yarn
-yarn-error.log
-.pnp/
-.pnp.js
-# Yarn Integrity file
-.yarn-integrity
-
 .vercel
 .terraform
 .terraform.tfstate.lock.info
@@ -77,5 +70,7 @@ terraform.tfstate.d/*
 .terraform.lock.hcl
 .idea
 .fleet
-build/*
-.svelte-kit/*
+build
+.svelte-kit
+
+*.db*

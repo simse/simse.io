@@ -2,3 +2,9 @@ node_modules/
 .git/
 justfile
 Dockerfile
+fly.toml
+.gitignore
+.gitattributes
+LICENSE
+build
+.svelte-kit
