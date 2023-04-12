@@ -13,8 +13,7 @@ FROM alpine
 RUN apk add bash fuse sqlite ca-certificates curl
 COPY --from=flyio/litefs:0.3 /usr/local/bin/litefs /usr/local/bin/litefs
 
-RUN apk add --no-cache nodejs npm
-RUN npm install -g pnpm@8.2.0
+RUN apk add --no-cache nodejs
 
 WORKDIR /app
 COPY --from=builder /app/build /app

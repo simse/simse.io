@@ -1,6 +1,5 @@
 import type { RequestHandler } from '@sveltejs/kit';
 import imageRequestSchema from "$lib/schemas/imageRequest";
-import thumbor from '$lib/services/thumbor';
 
 export const GET: RequestHandler = async ({ url }) => {
     const queryParams = new URL(url).searchParams;
@@ -13,10 +12,10 @@ export const GET: RequestHandler = async ({ url }) => {
         });
     }
 
-    let width = imageRequest.data.w;
-    let height = imageRequest.data.h || width === undefined ? undefined : width;
+    let width = imageRequest.data.w || 0;
+    let height = imageRequest.data.h || width === 0 ? 0 : width;
 
-    const thumborUrl = thumbor.setPath(imageRequest.data.url).resize(width || "orig", height || "orig").format("webp").buildUrl();
+    const thumborUrl = `https://image.sorensen.cloud/unsafe/${width}x${height}/filters:format(webp):quality(${imageRequest.data.q || 80})/${imageRequest.data.url}`;
 
     return fetch(thumborUrl);
 };
