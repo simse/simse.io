@@ -98,6 +98,17 @@ data "cloudflare_zone" "zone" {
     account_id = "ffa300f532eaaec071135605899f7bf8"
 }
 
+resource "cloudflare_zone_settings_override" "zoneSettings" {
+    zone_id = data.cloudflare_zone.zone.id
+
+    settings {
+        always_online = "off"
+        security_level = "essentially_off"
+        brotli = "on"
+        challenge_ttl = 31536000 # 1 year
+    }
+}
+
 resource "cloudflare_record" "apexv4" {
     zone_id = data.cloudflare_zone.zone.id
     name    = "@"
@@ -112,4 +123,32 @@ resource "cloudflare_record" "apexv6" {
     type    = "AAAA"
     value   = fly_ip.dedicatedIpv6.address
     proxied = true
+}
+
+# image endpoint cache rule
+resource "cloudflare_page_rule" "imageCache" {
+    zone_id = data.cloudflare_zone.zone.id
+    target = "${var.domain}/api/_image*"
+
+    actions {
+        cache_level = "cache_everything"
+        browser_cache_ttl = 31536000
+        edge_cache_ttl = 2678400
+    }
+}
+
+# status page
+resource "cloudflare_record" "status" {
+    zone_id = data.cloudflare_zone.zone.id
+    name    = "status"
+    type    = "CNAME"
+    value   = "page.updown.io"
+    proxied = false
+}
+
+resource "cloudflare_record" "statusVerification" {
+    zone_id = data.cloudflare_zone.zone.id
+    name = "_updown.status"
+    value = "\"updown-page=p/jn8zj\""
+    type = "TXT"
 }
