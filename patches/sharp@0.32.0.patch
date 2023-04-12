@@ -1,0 +1,13 @@
+diff --git a/lib/libvips.js b/lib/libvips.js
+index 003c93176b41a5b416ab635db84ba7c5f065c5c9..d005e1c995ec3ee1c2bf4afde412733b7ea0d727 100644
+--- a/lib/libvips.js
++++ b/lib/libvips.js
+@@ -23,7 +23,7 @@ const spawnSyncOptions = {
+   shell: true
+ };
+ 
+-const vendorPath = path.join(__dirname, '..', 'vendor', minimumLibvipsVersion, platform());
++const vendorPath = "<nah>";
+ 
+ const mkdirSync = function (dirPath) {
+   try {

@@ -1,0 +1,25 @@
+diff --git a/dist/api/requestHandler.js b/dist/api/requestHandler.js
+index 898ef6ed45940fcc48c2a3f8e2970aa124c24a5e..23ab6fa2b8f187b79e06bad1880ca8d475b50a65 100644
+--- a/dist/api/requestHandler.js
++++ b/dist/api/requestHandler.js
+@@ -126,6 +126,6 @@ export const requestHandler = (config = {}) => async (event) => {
+         }
+     }
+     catch (e) {
+-        throw error(500, 'unable to optimize image');
++        throw error(500, 'unable to optimize image: ' + e);
+     }
+ };
+diff --git a/dist/components/Image.svelte b/dist/components/Image.svelte
+index 2afc8453386852d159672544bcc69d6899ce0f14..05c804ba572f20201b047b7351152c88a1b53bf1 100644
+--- a/dist/components/Image.svelte
++++ b/dist/components/Image.svelte
+@@ -9,7 +9,7 @@ export let sync = undefined;
+ export let eager = undefined;
+ export let prioritize = false;
+ export let important = false;
+-export let preload = false;
++// export let preload = false;
+ export let quality = 73;
+ export let clip = true;
+ let klass = undefined;
