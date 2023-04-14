@@ -125,6 +125,22 @@ resource "cloudflare_record" "apexv6" {
     proxied = true
 }
 
+resource "cloudflare_record" "learnSubdomainv4" {
+    zone_id = data.cloudflare_zone.zone.id
+    name    = "learn"
+    type    = "A"
+    value   = fly_ip.dedicatedIpv4.address
+    proxied = true
+}
+
+resource "cloudflare_record" "learnSubdomainv6" {
+    zone_id = data.cloudflare_zone.zone.id
+    name    = "learn"
+    type    = "AAAA"
+    value   = fly_ip.dedicatedIpv6.address
+    proxied = true
+}
+
 # image endpoint cache rule
 resource "cloudflare_page_rule" "imageCache" {
     zone_id = data.cloudflare_zone.zone.id
