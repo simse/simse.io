@@ -72,5 +72,6 @@ terraform.tfstate.d/*
 .fleet
 build
 .svelte-kit
+server_bundle.js
 
 *.db*

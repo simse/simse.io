@@ -7,11 +7,18 @@ env := if branch == "main" {
 } else {
     "dev"
 }
-docker_image := "ghcr.io/simse/simse.io:" + build_tag + "-" + env
+random_tag := if branch == "main" {
+    ""
+} else {
+    "-" + uuid()
+}
+docker_image := "ghcr.io/simse/simse.io:" + build_tag + "-" + env + random_tag
 
 build:
     docker build . -t {{docker_image}}
     docker push {{docker_image}}
+
+deploy: build tf-apply
 
 # terraform stuff
 workspace := `terraform -chdir=infra workspace show`

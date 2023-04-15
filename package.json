@@ -5,6 +5,7 @@
 	"scripts": {
 		"dev": "vite dev",
 		"build": "vite build",
+		"build:server": "esbuild server/server.js --bundle --platform=node --target=node18 --format=esm --minify --external:../build/handler.js --outfile=server/server_bundle.js",
 		"preview": "vite preview",
 		"test": "playwright test",
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
@@ -18,7 +19,6 @@
 	"devDependencies": {
 		"@playwright/test": "^1.32.3",
 		"@prisma/client": "^4.12.0",
-		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/adapter-node": "^1.2.3",
 		"@sveltejs/kit": "^1.15.4",
 		"@tailwindcss/aspect-ratio": "^0.4.2",
@@ -28,6 +28,7 @@
 		"@typescript-eslint/eslint-plugin": "^5.58.0",
 		"@typescript-eslint/parser": "^5.58.0",
 		"autoprefixer": "^10.4.14",
+		"esbuild": "^0.17.16",
 		"eslint": "^8.38.0",
 		"eslint-config-prettier": "^8.8.0",
 		"eslint-plugin-svelte3": "^4.0.0",
@@ -35,6 +36,8 @@
 		"prettier": "^2.8.7",
 		"prettier-plugin-svelte": "^2.10.0",
 		"prisma": "^4.12.0",
+		"sqlite": "^4.1.2",
+		"sqlite3": "^5.1.6",
 		"svelte": "^3.58.0",
 		"svelte-check": "^3.2.0",
 		"sveltekit-image": "0.5.9",
