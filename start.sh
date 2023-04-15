@@ -4,4 +4,4 @@ if [ ! -f "$FILE" ]; then
   pnpx prisma migrate deploy
 fi
 
-node server/server.js
+node .

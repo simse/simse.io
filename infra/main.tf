@@ -141,6 +141,20 @@ resource "cloudflare_record" "learnSubdomainv6" {
     proxied = true
 }
 
+# redirect
+/*
+resource "cloudflare_page_rule" "redirect" {
+    zone_id = data.cloudflare_zone.zone.id
+    target = "https://learn.${var.domain}*"
+
+    actions {
+        forwarding_url {
+            status_code = 301
+            url = "https://${var.domain}/learn$1"
+        }
+    }
+}*/
+
 # image endpoint cache rule
 resource "cloudflare_page_rule" "imageCache" {
     zone_id = data.cloudflare_zone.zone.id
