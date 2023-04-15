@@ -13,11 +13,10 @@
 		"lint": "prettier --plugin-search-dir . --check . && eslint .",
 		"format": "prettier --plugin-search-dir . --write .",
 		"prisma": "prisma",
-		"start": "node ."
+		"start": "node ./build"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.32.3",
-		"@prisma/client": "^4.12.0",
 		"@sveltejs/adapter-node": "^1.2.3",
 		"@sveltejs/kit": "^1.15.4",
 		"@tailwindcss/aspect-ratio": "^0.4.2",
@@ -34,9 +33,7 @@
 		"postcss": "^8.4.21",
 		"prettier": "^2.8.7",
 		"prettier-plugin-svelte": "^2.10.0",
-		"prisma": "^4.12.0",
-		"sqlite": "^4.1.2",
-		"sqlite3": "^5.1.6",
+		"sql-template-strings": "^2.2.2",
 		"svelte": "^3.58.0",
 		"svelte-check": "^3.2.0",
 		"sveltekit-image": "0.5.9",
@@ -46,7 +43,11 @@
 		"vite": "^4.2.1",
 		"vitest": "^0.25.8",
 		"zod": "^3.21.4",
-		"zod-form-data": "^2.0.1"
+		"zod-form-data": "^2.0.1",
+		"prisma": "^4.12.0"
+	},
+	"dependencies": {
+		"@prisma/client": "^4.12.0"
 	},
 	"type": "module",
 	"pnpm": {
