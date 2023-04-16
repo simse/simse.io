@@ -1,20 +1,12 @@
 /** @type {import('tailwindcss').Config} */
-export default {
-  content: ['./src/**/*.{html,js,svelte,ts}'],
-    theme: {
-        extend: {
-            fontFamily: {
-                sans: ['Wotfard', 'system-ui'],
-                monospace: ['IBM Plex Mono'],
-                serif: ['Cormorant', 'serif']
-            },
-        },
-    },
+module.exports = {
+  content: ["./internal/server/templates/**/*.html"],
+  theme: {
+    extend: {},
+  },
   plugins: [
-      require('@tailwindcss/forms'),
-      require('@tailwindcss/typography'),
-      require('@tailwindcss/aspect-ratio'),
-      require('@tailwindcss/container-queries'),
+    require('@tailwindcss/forms'),
+    require('@tailwindcss/typography'),
   ],
 }
 

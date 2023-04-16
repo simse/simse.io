@@ -20,6 +20,12 @@ build:
 
 deploy: build tf-apply
 
+# dev stuff
+css:
+    echo '@tailwind base;@tailwind components;@tailwind utilities;' > input.css
+    tailwindcss -i input.css -o static/style.css --minify
+    rm input.css
+
 # terraform stuff
 workspace := `terraform -chdir=infra workspace show`
 
