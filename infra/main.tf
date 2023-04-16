@@ -34,6 +34,11 @@ resource "fly_app" "app" {
     name = "simse-${var.env}"
 }
 
+resource "fly_cert" "apexCert" {
+    app = fly_app.app.id
+    hostname = "${var.domain}"
+}
+
 resource "fly_ip" "dedicatedIpv4" {
     app = fly_app.app.id
     type = "v4"
@@ -139,6 +144,13 @@ resource "cloudflare_record" "learnSubdomainv6" {
     type    = "AAAA"
     value   = fly_ip.dedicatedIpv6.address
     proxied = false
+}
+
+resource "cloudflare_record" "apexCertVerification" {
+    zone_id = data.cloudflare_zone.zone.id
+    name = "${fly_cert.apexCert.dnsvalidationhostname}"
+    value = "${fly_cert.apexCert.dnsvalidationtarget}"
+    type = "CNAME"
 }
 
 # redirect
