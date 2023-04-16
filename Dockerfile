@@ -1,12 +1,22 @@
-FROM node:19.8.1-alpine as builder
-
-RUN npm install -g pnpm@8.2.0
+FROM golang:1.20.3-alpine as builder
 
 WORKDIR /app
 COPY . /app
 
-RUN pnpm install --frozen-lockfile
-RUN pnpm build
+RUN go build -o simse
+
+FROM ubuntu:20.04 as tailwind
+
+WORKDIR /app
+
+RUN apt-get update
+RUN apt-get install -y curl
+
+RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64
+RUN chmod +x tailwindcss-linux-x64
+COPY . /app
+RUN echo '@tailwind base;@tailwind components;@tailwind utilities;' > input.css
+RUN ./tailwindcss-linux-x64 build input.css -o static/style.css --minify
 
 FROM alpine as runner
 
@@ -15,19 +25,11 @@ WORKDIR /app
 RUN apk add bash fuse sqlite ca-certificates curl
 COPY --from=flyio/litefs:0.3 /usr/local/bin/litefs /usr/local/bin/litefs
 
-RUN apk add --no-cache nodejs npm
-RUN npm install -g pnpm
+COPY --from=builder /app/simse /app/simse
+RUN chmod +x /app/simse
 
-ADD prisma /app/prisma
-ADD package.json /app/package.json
-ADD pnpm-lock.yaml /app/pnpm-lock.yaml
-ADD patches /app/patches
-RUN pnpm install --frozen-lockfile -P
-
-COPY --from=builder /app/build /app
-COPY --from=builder /app/node_modules/prisma/libquery_engine-linux-musl-openssl-3.0.x.so.node ./libquery_engine-linux-musl-openssl-3.0.x.so.node
+COPY --from=tailwind /app/static/style.css /app/static/style.css
 
 ADD litefs.yml /etc/litefs.yml
-ADD start.sh /app/start.sh
 
-ENTRYPOINT litefs mount -- sh start.sh
+ENTRYPOINT litefs mount -- ./simse

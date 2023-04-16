@@ -9,3 +9,5 @@ LICENSE
 build
 .svelte-kit
 .env
+infra
+.github

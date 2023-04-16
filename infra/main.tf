@@ -114,7 +114,7 @@ resource "cloudflare_record" "apexv4" {
     name    = "@"
     type    = "A"
     value   = fly_ip.dedicatedIpv4.address
-    proxied = true
+    proxied = false
 }
 
 resource "cloudflare_record" "apexv6" {
@@ -122,7 +122,7 @@ resource "cloudflare_record" "apexv6" {
     name    = "@"
     type    = "AAAA"
     value   = fly_ip.dedicatedIpv6.address
-    proxied = true
+    proxied = false
 }
 
 resource "cloudflare_record" "learnSubdomainv4" {
@@ -130,7 +130,7 @@ resource "cloudflare_record" "learnSubdomainv4" {
     name    = "learn"
     type    = "A"
     value   = fly_ip.dedicatedIpv4.address
-    proxied = true
+    proxied = false
 }
 
 resource "cloudflare_record" "learnSubdomainv6" {
@@ -138,7 +138,7 @@ resource "cloudflare_record" "learnSubdomainv6" {
     name    = "learn"
     type    = "AAAA"
     value   = fly_ip.dedicatedIpv6.address
-    proxied = true
+    proxied = false
 }
 
 # redirect
