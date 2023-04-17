@@ -1,5 +1,1 @@
-{{extends "../layouts/root.jet"}}
-
-{{block documentBody()}}
 <h1>test</h1>
-{{end}}

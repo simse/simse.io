@@ -1,3 +1,4 @@
 {{ include "/partials/layout_start.jet" }}
+{{ include "/partials/navbar.jet" }}
 {{ embed() }}
 {{ include "/partials/layout_end.jet" }}

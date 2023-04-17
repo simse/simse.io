@@ -45,3 +45,6 @@ terraform.tfstate.d/*
 *.fiber*
 
 main
+
+bin
+tmp

@@ -22,7 +22,7 @@ deploy: build tf-apply
 
 # dev stuff
 dev:
-    go run main.go
+    ./bin/air & just css-watch && fg
 
 css:
     echo '@tailwind base;@tailwind components;@tailwind utilities;' > /tmp/input{{ random_tag }}.css

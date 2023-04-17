@@ -1,0 +1,20 @@
+{{ import "../components/image.jet" }}
+
+<nav class="flex justify-between py-2 bg-black pl-4 border-b border-white/20 items-center">
+    <div class="flex items-center">
+        <a href="/">
+            {{ yield image(url="https://assets.simse.io/android-chrome-256x256.png", width=32, height=32, quality=100) }}
+        </a>
+
+        <div class="border-l border-white/20 ml-4 pl-4 hidden sm:block">
+            <a href="/" class="hover:underline">simse.io</a>
+        </div>
+
+    </div>
+
+    <div class="flex items-center">
+        <ul class="p-0 m-0 flex">
+            <li><a class="p-2 py-4 sm:p-4 sm:mx-2 hover:underline" href="#">Home</a></li>
+        </ul>
+    </div>
+</nav>
