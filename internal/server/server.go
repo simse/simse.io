@@ -5,7 +5,7 @@ import (
 
 	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
-	"github.com/gofiber/template/html"
+	"github.com/gofiber/template/jet"
 	"github.com/jfyne/live"
 	"github.com/simse/simse.io/internal/templates"
 )
@@ -24,7 +24,7 @@ func handler(c ) {
 
 func StartServer() {
 	// load templates
-	engine := html.NewFileSystem(http.FS(templates.Files), ".html")
+	engine := jet.NewFileSystem(http.FS(templates.Files), ".jet")
 	engine.Debug(true)
 
 	app := fiber.New(fiber.Config{

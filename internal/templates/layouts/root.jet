@@ -1,4 +1,3 @@
-{{ define "root" }}
 <!doctype html>
 <html>
     <head>
@@ -23,8 +22,7 @@
 		</style>
     </head>
     <body class="bg-black text-white">
-        {{ template "content" . }}
+        {{block documentBody()}}{{end}}
         <script type="text/javascript" src="/static/live.js"></script>
     </body>
 </html>
-{{ end }}
