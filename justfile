@@ -21,10 +21,16 @@ build:
 deploy: build tf-apply
 
 # dev stuff
+dev:
+    go run main.go
+
 css:
-    echo '@tailwind base;@tailwind components;@tailwind utilities;' > input.css
-    tailwindcss -i input.css -o static/style.css --minify
-    rm input.css
+    echo '@tailwind base;@tailwind components;@tailwind utilities;' > /tmp/input{{ random_tag }}.css
+    tailwindcss -i /tmp/input{{ random_tag }}.css -o static/style.css --minify
+
+css-watch:
+    echo '@tailwind base;@tailwind components;@tailwind utilities;' > /tmp/input.css
+    tailwindcss -i /tmp/input.css -o static/style.css --watch
 
 # terraform stuff
 workspace := `terraform -chdir=infra workspace show`

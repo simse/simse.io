@@ -3,8 +3,10 @@ package server
 import (
 	"net/http"
 
+	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/html"
+	"github.com/jfyne/live"
 	"github.com/simse/simse.io/internal/templates"
 )
 
@@ -36,6 +38,8 @@ func StartServer() {
 	app.Static("/static", "./static", fiber.Static{
 		Compress: true,
 	})
+	app.Get("/static/live.js", adaptor.HTTPHandler(live.Javascript{}))
+	app.Get("/static/auto.js.map", adaptor.HTTPHandler(live.JavascriptMap{}))
 
 	app.Listen(":3000")
 }
