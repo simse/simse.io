@@ -22,8 +22,10 @@ FROM alpine as runner
 
 WORKDIR /app
 
-RUN apk add bash fuse sqlite ca-certificates curl
+RUN apk add bash fuse3 sqlite ca-certificates curl
 COPY --from=flyio/litefs:0.4 /usr/local/bin/litefs /usr/local/bin/litefs
+
+ADD static /app/static
 
 COPY --from=builder /app/simse /app/simse
 RUN chmod +x /app/simse

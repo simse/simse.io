@@ -19,9 +19,26 @@ func StartServer() {
 		Views: engine,
 	})
 
+	// routes
 	app.Get("/", func(c *fiber.Ctx) error {
 		return c.Render("pages/index", fiber.Map{
 			"pageTitle": "Simon Sorensen — Classically Trained Software Engineer",
+		}, "layouts/content")
+	})
+
+	app.Get("/sitemap", func(c *fiber.Ctx) error {
+		return c.Render("pages/sitemap", fiber.Map{
+			"pageTitle": "Sitemap — Simon Sorensen",
+		}, "layouts/container")
+	})
+
+	app.Get("/article/:slug", func(c *fiber.Ctx) error {
+		return c.Render("pages/article", fiber.Map{
+			"pageTitle": "Article — Simon Sorensen",
+			"article": map[string]interface{}{
+				"title":    "We are now in AI terminology hell",
+				"subtitle": "I suppose we always were, given that impressive AIs like GPT-4 is really \"just\" machine learning.",
+			},
 		}, "layouts/content")
 	})
 

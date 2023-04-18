@@ -1,0 +1,6 @@
+{{ include "/partials/layout_start.jet" }}
+{{ include "/partials/navbar.jet" }}
+<div class="px-2 pt-8 max-w-7xl mx-auto">
+    {{ embed() }}
+</div>
+{{ include "/partials/layout_end.jet" }}

@@ -11,3 +11,4 @@ build
 .env
 infra
 .github
+*.fiber.gz

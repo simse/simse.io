@@ -2,6 +2,6 @@
 <img
   src="/_image?url={{ url }}&width={{ width }}&height={{ height }}&quality={{ quality }}"
   sizes="(min-width: 1024px) 800px, (min-width: 768px) 80vw, 100vw"
-  style="min-height: {{ height }}px;min-width: {{ width }}px;"
+  style="height: {{ height }}px;width: {{ width }}px;"
 />
 {{ end }}
