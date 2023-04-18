@@ -1,9 +1,12 @@
 package main
 
 import (
-	"github.com/simse/simse.io/internal/server"
+	"fmt"
+
+	"github.com/simse/simse.io/internal/wordpress"
 )
 
 func main() {
-	server.StartServer()
+	// server.StartServer()
+	fmt.Println(wordpress.GetPostByID(21))
 }
