@@ -7,6 +7,7 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/template/jet"
 	"github.com/jfyne/live"
+	"github.com/rs/zerolog/log"
 	"github.com/simse/simse.io/internal/templates"
 	"github.com/simse/simse.io/internal/wordpress"
 )
@@ -18,6 +19,12 @@ func StartServer() {
 
 	app := fiber.New(fiber.Config{
 		Views: engine,
+	})
+
+	// enable logging
+	app.Use(func(c *fiber.Ctx) error {
+		log.Info().Str("method", c.Method()).Str("path", c.Path()).Str("ip", c.IP()).Msg("request")
+		return c.Next()
 	})
 
 	// routes
@@ -49,5 +56,6 @@ func StartServer() {
 	app.Get("/static/auto.js.map", adaptor.HTTPHandler(live.JavascriptMap{}))
 	app.Get("/_image", imageHandler)
 
+	log.Info().Str("address", "0.0.0.0").Int("port", 3000).Msg("server started")
 	app.Listen(":3000")
 }
