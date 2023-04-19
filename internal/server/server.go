@@ -8,6 +8,7 @@ import (
 	"github.com/gofiber/template/jet"
 	"github.com/jfyne/live"
 	"github.com/simse/simse.io/internal/templates"
+	"github.com/simse/simse.io/internal/wordpress"
 )
 
 func StartServer() {
@@ -33,12 +34,11 @@ func StartServer() {
 	})
 
 	app.Get("/article/:slug", func(c *fiber.Ctx) error {
+		post, _ := wordpress.GetPostByID(21)
+
 		return c.Render("pages/article", fiber.Map{
 			"pageTitle": "Article — Simon Sorensen",
-			"article": map[string]interface{}{
-				"title":    "We are now in AI terminology hell",
-				"subtitle": "I suppose we always were, given that impressive AIs like GPT-4 is really \"just\" machine learning.",
-			},
+			"article":   post,
 		}, "layouts/content")
 	})
 
