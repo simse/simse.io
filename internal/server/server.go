@@ -5,6 +5,8 @@ import (
 
 	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/compress"
+	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"github.com/gofiber/template/jet"
 	"github.com/jfyne/live"
 	"github.com/rs/zerolog/log"
@@ -18,14 +20,23 @@ func StartServer() {
 	engine.Debug(true)
 
 	app := fiber.New(fiber.Config{
-		Views: engine,
+		Views:                 engine,
+		DisableStartupMessage: true,
+		ServerHeader:          "Microsoft-IIS/7.5",
 	})
+
+	app.Use(requestid.New())
 
 	// enable logging
 	app.Use(func(c *fiber.Ctx) error {
-		log.Info().Str("method", c.Method()).Str("path", c.Path()).Str("ip", c.IP()).Msg("request")
+		requestid := c.Locals("requestid").(string)
+
+		log.Info().Str("method", c.Method()).Str("path", c.Path()).Str("ip", c.IP()).Str("request_id", requestid).Msg("request")
 		return c.Next()
 	})
+
+	// enable compression
+	app.Use(compress.New())
 
 	// routes
 	app.Get("/", func(c *fiber.Ctx) error {
@@ -44,7 +55,7 @@ func StartServer() {
 		post, _ := wordpress.GetPostByID(21)
 
 		return c.Render("pages/article", fiber.Map{
-			"pageTitle": "Article — Simon Sorensen",
+			"pageTitle": post.Title + " — Simon Sorensen",
 			"article":   post,
 		}, "layouts/content")
 	})
