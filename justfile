@@ -22,7 +22,7 @@ deploy: build tf-apply
 
 # dev stuff
 dev:
-    ./bin/air & just css-watch && fg
+    ./bin/air
 
 css:
     echo '@tailwind base;@tailwind components;@tailwind utilities;' > /tmp/input{{ random_tag }}.css

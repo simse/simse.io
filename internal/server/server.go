@@ -14,6 +14,10 @@ import (
 	"github.com/simse/simse.io/internal/wordpress"
 )
 
+type ServerInfo struct {
+	Region string
+}
+
 func StartServer() {
 	// load templates
 	engine := jet.NewFileSystem(http.FS(templates.Files), ".jet")
@@ -52,7 +56,7 @@ func StartServer() {
 	})
 
 	app.Get("/article/:slug", func(c *fiber.Ctx) error {
-		post, _ := wordpress.GetPostByID(21)
+		post, _ := wordpress.GetPostByID(27)
 
 		return c.Render("pages/article", fiber.Map{
 			"pageTitle": post.Title + " — Simon Sorensen",

@@ -14,7 +14,9 @@
 
     <div class="flex items-center">
         <ul class="p-0 m-0 flex">
-            <li><a class="p-2 py-4 sm:p-4 sm:mx-2 hover:underline" href="#">Home</a></li>
+            <li><a class="p-2 py-4 sm:p-4 sm:mx-2 hover:underline" href="/">Frontpage</a></li>
+            <li><a class="p-2 py-4 sm:p-4 sm:mx-2 hover:underline" href="/articles">Articles</a></li>
+            <li><a class="p-2 py-4 sm:p-4 sm:mx-2 hover:underline" href="/projects">Projects</a></li>
         </ul>
     </div>
 </nav>
