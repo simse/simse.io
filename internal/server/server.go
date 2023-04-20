@@ -2,6 +2,7 @@ package server
 
 import (
 	"net/http"
+	"time"
 
 	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
@@ -11,7 +12,6 @@ import (
 	"github.com/jfyne/live"
 	"github.com/rs/zerolog/log"
 	"github.com/simse/simse.io/internal/templates"
-	"github.com/simse/simse.io/internal/wordpress"
 )
 
 type ServerInfo struct {
@@ -22,6 +22,9 @@ func StartServer() {
 	// load templates
 	engine := jet.NewFileSystem(http.FS(templates.Files), ".jet")
 	engine.Debug(true)
+	engine.AddFunc("formatDate", func(date time.Time) string {
+		return date.Format("January 2, 2006")
+	})
 
 	app := fiber.New(fiber.Config{
 		Views:                 engine,
@@ -55,14 +58,8 @@ func StartServer() {
 		}, "layouts/container")
 	})
 
-	app.Get("/article/:slug", func(c *fiber.Ctx) error {
-		post, _ := wordpress.GetPostByID(27)
-
-		return c.Render("pages/article", fiber.Map{
-			"pageTitle": post.Title + " — Simon Sorensen",
-			"article":   post,
-		}, "layouts/content")
-	})
+	app.Get("/posts", PostsIndex)
+	app.Get("/posts/:slug", PostRoute)
 
 	app.Static("/static", "./static", fiber.Static{
 		Compress: true,

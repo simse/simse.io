@@ -14,9 +14,9 @@ func InsertPost(post Post) error {
 	}
 
 	_, err := Conn.Exec(`
-		INSERT INTO posts (id, title, html, created, updated, published, status)
-		VALUES (?, ?, ?, ?, ?, ?, ?)
-	`, post.ID, post.Title, post.HTML, post.Created, post.Updated, post.Published, post.Status)
+		INSERT INTO posts (id, slug, title, html, excerpt, created, updated, published, status, featured_image)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+	`, post.ID, post.Slug, post.Title, post.HTML, post.Excerpt, post.Created, post.Updated, post.Published, post.Status, post.FeaturedImage)
 
 	return err
 }
