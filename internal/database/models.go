@@ -15,3 +15,12 @@ type Post struct {
 	FeaturedImage string
 	Status        string
 }
+
+type PostCategory struct {
+	ID          string
+	Name        string
+	Slug        string
+	Description string
+	Created     time.Time
+	Updated     time.Time
+}

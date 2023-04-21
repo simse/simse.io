@@ -5,6 +5,7 @@ import (
 	"time"
 
 	"github.com/imroc/req/v3"
+	"github.com/simse/simse.io/internal/database"
 	"github.com/tdewolff/minify/v2"
 	"github.com/tdewolff/minify/v2/html"
 )
@@ -14,12 +15,14 @@ type PostRaw struct {
 	Title struct {
 		Rendered string `json:"rendered"`
 	} `json:"title"`
-	Date    string `json:"date"`
-	DateGMT string `json:"date_gmt"`
-	Slug    string `json:"slug"`
-	Status  string `json:"status"`
-	Type    string `json:"type"`
-	Content struct {
+	Date        string `json:"date"`
+	DateGMT     string `json:"date_gmt"`
+	Modified    string `json:"modified"`
+	ModifiedGMT string `json:"modified_gmt"`
+	Slug        string `json:"slug"`
+	Status      string `json:"status"`
+	Type        string `json:"type"`
+	Content     struct {
 		Rendered string `json:"rendered"`
 	} `json:"content"`
 	Excerpt struct {
@@ -29,30 +32,16 @@ type PostRaw struct {
 	Categories []int `json:"categories"`
 }
 
-type Post struct {
-	ID         int
-	Title      string
-	Date       time.Time
-	Slug       string
-	Status     string
-	HTML       string
-	Excerpt    string
-	Tags       []TagRaw
-	Categories []CategoryRaw
-}
-
-type TagRaw struct {
+type TaxemonyRaw struct {
 	ID          int    `json:"id"`
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	Slug        string `json:"slug"`
 }
 
-type CategoryRaw = TagRaw
-
 var WORDPRESS_URL = "http://simse-wp.internal.sorensen.cloud/wp-json/wp/v2/"
 
-func GetPosts() ([]Post, error) {
+func GetPosts() ([]database.Post, error) {
 	client := req.C().SetBaseURL(WORDPRESS_URL)
 
 	var rawPosts []PostRaw
@@ -61,7 +50,7 @@ func GetPosts() ([]Post, error) {
 		return nil, err
 	}
 
-	var posts []Post
+	var posts []database.Post
 	for _, post := range rawPosts {
 		p, err := rawToPost(post)
 		if err != nil {
@@ -74,23 +63,7 @@ func GetPosts() ([]Post, error) {
 	return posts, nil
 }
 
-func GetPostByID(id int) (Post, error) {
-	client := req.C().SetBaseURL(WORDPRESS_URL)
-
-	var rawPost PostRaw
-	err := client.Get().SetURL(fmt.Sprintf("posts/%d", id)).Do().Into(&rawPost)
-	if err != nil {
-		return Post{}, err
-	}
-
-	if rawPost.ID == 0 {
-		return Post{}, fmt.Errorf("Post not found")
-	}
-
-	return rawToPost(rawPost)
-}
-
-func getTaxemonyByID(taxonomy string, ids []int) []TagRaw {
+func getTaxemonyByID(taxonomy string, ids []int) []TaxemonyRaw {
 	client := req.C().SetBaseURL(WORDPRESS_URL)
 
 	// concat all ids into a comma seperated string
@@ -102,7 +75,7 @@ func getTaxemonyByID(taxonomy string, ids []int) []TagRaw {
 		}
 	}
 
-	var rawTags []TagRaw
+	var rawTags []TaxemonyRaw
 	err := client.Get().SetURL(taxonomy).SetQueryParam("include", tagIds).SetQueryParam("per_page", "100").Do().Into(&rawTags)
 	if err != nil {
 		return nil
@@ -111,23 +84,40 @@ func getTaxemonyByID(taxonomy string, ids []int) []TagRaw {
 	return rawTags
 }
 
-func rawToPost(post PostRaw) (Post, error) {
+func rawToPost(post PostRaw) (database.Post, error) {
 	minifiedContent, err := minifyHtml(post.Content.Rendered)
 	if err != nil {
-		return Post{}, err
+		return database.Post{}, err
 	}
 
-	return Post{
-		ID:         post.ID,
-		Title:      post.Title.Rendered,
-		Date:       parseDate(post.Date),
-		Slug:       post.Slug,
-		Status:     post.Status,
-		HTML:       minifiedContent,
-		Excerpt:    post.Excerpt.Rendered,
-		Tags:       getTaxemonyByID("tags", post.Tags),
-		Categories: getTaxemonyByID("categories", post.Categories),
+	// get tags
+	tags, _ := getTagsList(post.Tags)
+
+	return database.Post{
+		// ID:         post.ID,
+		Title:     post.Title.Rendered,
+		Created:   parseDate(post.ModifiedGMT),
+		Updated:   parseDate(post.ModifiedGMT),
+		Published: parseDate(post.DateGMT),
+		Slug:      post.Slug,
+		Status:    post.Status,
+		HTML:      minifiedContent,
+		Excerpt:   post.Excerpt.Rendered,
+		Tags:      tags,
+		//Categories: getTaxemonyByID("categories", post.Categories),
 	}, nil
+}
+
+func getTagsList(tagIds []int) ([]string, error) {
+	tags := getTaxemonyByID("tags", tagIds)
+
+	// join tags into a comma seperated string
+	tagNames := make([]string, len(tags))
+	for i, tag := range tags {
+		tagNames[i] = tag.Name
+	}
+
+	return tagNames, nil
 }
 
 func minifyHtml(input string) (string, error) {

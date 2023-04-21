@@ -21,8 +21,11 @@ build:
 deploy: build tf-apply
 
 # dev stuff
-dev:
-    ./bin/air
+dev-server:
+    ./bin/air server
+
+dev-worker:
+    ./bin/air worker
 
 css:
     echo '@tailwind base;@tailwind components;@tailwind utilities;' > /tmp/input{{ random_tag }}.css
