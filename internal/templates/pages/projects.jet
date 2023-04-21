@@ -1,0 +1,447 @@
+<div class="mx-auto max-w-7xl">
+			<main class="">
+				<h1 class="text-4xl mb-12">Projects</h1><div class="mb-8">
+			<h2 class="text-lg font-bold pb-2 mt-2 mb-4 w-full border-b border-white/20">Applications</h2>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+			<div class="mb-4 md:mb-0 ">
+						<a href="/projects/homestead">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">homestead</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#00acd7;color:#fff;">Go</span>
+</div>
+
+							<p class=" text-gray-400">homestead is a tool to create and connect to dev containers</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/homestead" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							
+						</div>
+					</div><div class="mb-4 md:mb-0 ">
+						<a href="/projects/reindeer">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">reindeer</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#00acd7;color:#fff;">Go</span>
+</div>
+
+							<p class=" text-gray-400">Status page server written in Go</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/reindeer" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							
+						</div>
+					</div><div class="mb-4 md:mb-0 ">
+						<a href="/projects/hermes">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">hermes</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#00acd7;color:#fff;">Go</span>
+</div>
+
+							<p class=" text-gray-400">Tool to deploy and manage S3+CloudFront websites</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/hermes" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							
+						</div>
+					</div><div class="mb-4 md:mb-0 ">
+						<a href="/projects/qc">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        <img class="max-h-full w-full object-cover" style="aspect-ratio:5/3;" src="https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/19f40905-f653-4e80-2ff3-695791de4700/format=auto,h=420,w=700,fit=cover,gravity=center">
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">qc</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#00acd7;color:#fff;">Go</span>
+</div>
+
+							<p class=" text-gray-400">qc is small tool for converting file formats</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/qc" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							
+						</div>
+					</div><div class="mb-4 md:mb-0 ">
+						<a href="/projects/sussex-direct-cli">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        <img class="max-h-full w-full object-cover" style="aspect-ratio:5/3;" src="https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/d2697a7b-eaa9-4d66-d3d3-2f20a13c8d00/format=auto,h=420,w=700,fit=cover,gravity=center">
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">Sussex Direct CLI</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#3c78a9;color:#fff;">Python</span>
+</div>
+
+							<p class=" text-gray-400">CLI to show grades and attendance at the University of Sussex</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/sussex-direct-cli" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							
+						</div>
+					</div><div class="mb-4 md:mb-0 ">
+						<a href="/projects/chronos">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">Chronos</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#3c78a9;color:#fff;">Python</span><span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#f0db4f;color:#000;">Javascript</span>
+</div>
+
+							<p class=" text-gray-400"></p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/chronos" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://chronos.demo.simse.io/" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link" color="60a5fa"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    Demo
+</a>
+						</div>
+					</div>
+			</div>
+		</div><div class="mb-8">
+			<h2 class="text-lg font-bold pb-2 mt-2 mb-4 w-full border-b border-white/20">Experiments</h2>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+			<div class="mb-4 md:mb-0 ">
+						<a href="/projects/ib-grade-calculator">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">IB Grade Calculator</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#f0db4f;color:#000;">Javascript</span>
+</div>
+
+							<p class=" text-gray-400">Website to calculate your final IB grade (2017)</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							
+							
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://ib-grade-calculator.demo.simse.io" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link" color="60a5fa"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    Demo
+</a>
+						</div>
+					</div><div class="mb-4 md:mb-0 ">
+						<a href="/projects/bar-maker">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        <img class="max-h-full w-full object-cover" style="aspect-ratio:5/3;" src="https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/61877d17-e07f-443c-4554-b231f2f29900/format=auto,h=420,w=700,fit=cover,gravity=center">
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">Bar Maker</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#f0db4f;color:#000;">Javascript</span>
+</div>
+
+							<p class=" text-gray-400">App to create visually pleasing ratio visuals</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/bar-maker" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://bar-maker.demo.simse.io" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link" color="60a5fa"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    Demo
+</a>
+						</div>
+					</div><div class="mb-4 md:mb-0 ">
+						<a href="/projects/auto-film-collections">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">Auto Film Collections</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#3c78a9;color:#fff;">Python</span>
+</div>
+
+							<p class=" text-gray-400">Twice-daily update film collections (e.g. Pixar, MCU, and so on)</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/film-collections" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							
+						</div>
+					</div>
+			</div>
+		</div><div class="mb-8">
+			<h2 class="text-lg font-bold pb-2 mt-2 mb-4 w-full border-b border-white/20">Libraries</h2>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+			<div class="mb-4 md:mb-0 ">
+						<a href="/projects/pymitv">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">pymitv</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#3c78a9;color:#fff;">Python</span>
+</div>
+
+							<p class=" text-gray-400">Library to interact with 3rd gen Xiaomi TVs</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/pymitv" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							
+						</div>
+					</div>
+			</div>
+		</div><div class="mb-8">
+			<h2 class="text-lg font-bold pb-2 mt-2 mb-4 w-full border-b border-white/20">Websites</h2>
+
+			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
+			<div class="mb-4 md:mb-0 ">
+						<a href="/projects/allabout.school">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        <img class="max-h-full w-full object-cover" style="aspect-ratio:5/3;" src="https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/d90baa43-8c31-4424-d7a9-fcdbb6dde800/format=auto,h=420,w=700,fit=cover,gravity=center">
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">allabout.school</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#f0db4f;color:#000;">Javascript</span>
+</div>
+
+							<p class=" text-gray-400">Website I created to learn Gatsby</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							
+							
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://allaboutschool.demo.simse.io/" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link" color="60a5fa"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    Demo
+</a>
+						</div>
+					</div><div class="mb-4 md:mb-0 ">
+						<a href="/projects/nempolitik">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        <img class="max-h-full w-full object-cover" style="aspect-ratio:5/3;" src="https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/9382f37f-b17e-4d17-603a-eda1c821ab00/format=auto,h=420,w=700,fit=cover,gravity=center">
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">Nempolitik</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#f0db4f;color:#000;">Javascript</span>
+</div>
+
+							<p class=" text-gray-400">One-stop shop for all information about Danish politics (warning: it's in Danish)</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/nempolitik" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://nempolitik.demo.simse.io/politikere" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link" color="60a5fa"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    Demo
+</a>
+						</div>
+					</div><div class="mb-4 md:mb-0 ">
+						<a href="/projects/idontplaycricket">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">idontplaycricket</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#777bb3;color:#fff;">PHP</span><span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#f0db4f;color:#000;">Javascript</span>
+</div>
+
+							<p class=" text-gray-400"></p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/idontplaycricket" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							
+						</div>
+					</div><div class="mb-4 md:mb-0 ">
+						<a href="/projects/hello-mars-podcast">
+							<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
+
+        <img class="max-h-full w-full object-cover" style="aspect-ratio:5/3;" src="https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/64c20106-d89f-4dc8-3fd8-517df9cdbc00/format=auto,h=420,w=700,fit=cover,gravity=center">
+    </div>
+</div>
+
+
+
+							<h2 class="my-2 font-bold text-xl">Hello Mars Podcast</h2>
+
+							<div class="flex gap-2 mb-2">
+    <span class="text-sm font-bold py-1 px-2 rounded-full" style="background:#f0db4f;color:#000;">Javascript</span>
+</div>
+
+							<p class=" text-gray-400">Website for a podcast I used to co-host</p>
+						</a>
+
+						<div class="mt-4 mb-4 gap-4 flex text-blue-400">
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/hello-mars" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+    Source Code
+</a>
+							
+							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://hellomars.demo.simse.io/" target="_blank">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link" color="60a5fa"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+    Demo
+</a>
+						</div>
+					</div>
+			</div>
+		</div>
+			</main>
+</div>
