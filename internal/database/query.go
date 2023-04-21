@@ -1,7 +1,7 @@
 package database
 
 func GetPosts() ([]Post, error) {
-	rows, err := Conn.Query("SELECT id, slug, title, COALESCE(html, ''), excerpt, created, updated, published, COALESCE(featured_image, ''), status FROM posts")
+	rows, err := Conn.Query("SELECT id, slug, title, COALESCE(html, ''), excerpt, created, updated, published, COALESCE(featured_image, ''), status FROM posts WHERE status = 'publish' ORDER BY published DESC")
 	if err != nil {
 		return nil, err
 	}

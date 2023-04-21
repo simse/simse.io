@@ -1,6 +1,7 @@
 package wordpress
 
 import (
+	"crypto/sha256"
 	"fmt"
 	"time"
 
@@ -11,7 +12,9 @@ import (
 )
 
 type PostRaw struct {
-	ID    int `json:"id"`
+	ID struct {
+		Rendered string `json:"rendered"`
+	} `json:"guid"`
 	Title struct {
 		Rendered string `json:"rendered"`
 	} `json:"title"`
@@ -39,15 +42,22 @@ type TaxemonyRaw struct {
 	Slug        string `json:"slug"`
 }
 
-var WORDPRESS_URL = "http://simse-wp.internal.sorensen.cloud/wp-json/wp/v2/"
+var WORDPRESS_URL = "https://simse-wp.sorensen.cloud/wp-json/wp/v2/"
 
 func GetPosts() ([]database.Post, error) {
 	client := req.C().SetBaseURL(WORDPRESS_URL)
 
+	client.SetCommonBasicAuth("simon", "jNCLfXUHnC5PuSkdniFtb8Jvv64ZcRosbu9Brq7LJG7g7hMrzt8yCfCfEV6eKyBBM")
+
 	var rawPosts []PostRaw
-	err := client.Get().SetURL("posts").Do().Into(&rawPosts)
-	if err != nil {
-		return nil, err
+
+	for _, status := range []string{"publish", "draft"} {
+		posts, err := getPostsForStatus(status)
+		if err != nil {
+			return nil, err
+		}
+
+		rawPosts = append(rawPosts, posts...)
 	}
 
 	var posts []database.Post
@@ -61,6 +71,20 @@ func GetPosts() ([]database.Post, error) {
 	}
 
 	return posts, nil
+}
+
+func getPostsForStatus(status string) ([]PostRaw, error) {
+	client := req.C().SetBaseURL(WORDPRESS_URL)
+
+	client.SetCommonBasicAuth("simon", "Cfef c6l0 1Rd3 btbG nj9e 4bxn")
+
+	var rawPosts []PostRaw
+	err := client.Get().SetURL("posts").SetQueryParam("per_page", "100").SetQueryParam("status", status).Do().Into(&rawPosts)
+	if err != nil {
+		return nil, err
+	}
+
+	return rawPosts, nil
 }
 
 func getTaxemonyByID(taxonomy string, ids []int) []TaxemonyRaw {
@@ -93,8 +117,12 @@ func rawToPost(post PostRaw) (database.Post, error) {
 	// get tags
 	tags, _ := getTagsList(post.Tags)
 
+	h := sha256.New()
+	h.Write([]byte(post.ID.Rendered))
+	id := fmt.Sprintf("%x", h.Sum(nil))
+
 	return database.Post{
-		// ID:         post.ID,
+		ID:        id,
 		Title:     post.Title.Rendered,
 		Created:   parseDate(post.ModifiedGMT),
 		Updated:   parseDate(post.ModifiedGMT),

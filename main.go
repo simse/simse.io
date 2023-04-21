@@ -27,7 +27,7 @@ func main() {
 
 	// read argument from command line
 	if os.Args[1] == "server" {
-		// tasks.AddTask(tasks.NewSyncWordpressTask())
+		tasks.AddTask(tasks.NewSyncWordpressTask())
 
 		server.StartServer()
 	} else if os.Args[1] == "worker" {
