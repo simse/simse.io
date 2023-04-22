@@ -29,10 +29,10 @@ dev:
         attach 
 
 dev-server:
-    ./bin/air server
+    ./bin/air -- -primary -server
 
 dev-worker:
-    ./bin/air worker
+    ./bin/air -- -worker
 
 css:
     echo '@tailwind base;@tailwind components;@tailwind utilities;' > /tmp/input{{ random_tag }}.css
