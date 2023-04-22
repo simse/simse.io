@@ -21,6 +21,13 @@ build:
 deploy: build tf-apply
 
 # dev stuff
+dev:
+    tmux new-session -d -s dev -n server 'just dev-server' \; \
+        split-window -v -p 50 -t dev 'just dev-worker' \; \
+        split-window -h -p 50 -t dev 'just css-watch' \; \
+        select-pane -t dev:0 \; \
+        attach 
+
 dev-server:
     ./bin/air server
 
