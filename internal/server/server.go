@@ -12,6 +12,7 @@ import (
 	"github.com/gofiber/template/jet"
 	"github.com/jfyne/live"
 	"github.com/rs/zerolog/log"
+	"github.com/simse/simse.io/internal/tasks"
 	"github.com/simse/simse.io/internal/templates"
 )
 
@@ -69,6 +70,12 @@ func StartServer() {
 	rootApp.Get("/static/live.js", adaptor.HTTPHandler(live.Javascript{}))
 	rootApp.Get("/static/auto.js.map", adaptor.HTTPHandler(live.JavascriptMap{}))
 	rootApp.Get("/_image", imageHandler)
+
+	rootApp.Get("/webhook/wordpress", func(c *fiber.Ctx) error {
+		tasks.AddTask(tasks.NewSyncWordpressTask())
+
+		return c.SendString("OK")
+	})
 
 	hosts[os.Getenv("SIMSE_IO_HOST")] = &Host{Fiber: rootApp}
 

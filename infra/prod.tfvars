@@ -3,7 +3,7 @@ domain = "simse.io"
 regions = [
     {
         name = "lhr"
-        cpus = 2
+        cpus = 1
         cputype = "shared"
         memorymb = 512
     },

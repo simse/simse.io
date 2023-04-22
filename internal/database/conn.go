@@ -2,6 +2,7 @@ package database
 
 import (
 	"database/sql"
+	"os"
 
 	"github.com/golang-migrate/migrate/v4"
 	"github.com/golang-migrate/migrate/v4/database/sqlite"
@@ -17,7 +18,7 @@ import (
 var Conn *sql.DB
 
 func openConn() {
-	db, err := sql.Open("sqlite", "simse.dev.db")
+	db, err := sql.Open("sqlite", os.Getenv("DATABASE_URL"))
 	if err != nil {
 		panic(err)
 	}
@@ -32,10 +33,10 @@ func openConn() {
 
 func Open() {
 	openConn()
-	runMigrations()
+	// runMigrations()
 }
 
-func runMigrations() {
+func RunMigrations() {
 	driver, err := sqlite.WithInstance(Conn, &sqlite.Config{})
 	if err != nil {
 		panic(err)

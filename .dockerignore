@@ -12,3 +12,4 @@ build
 infra
 .github
 *.fiber.gz
+*.db*

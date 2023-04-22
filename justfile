@@ -23,16 +23,12 @@ deploy: build tf-apply
 # dev stuff
 dev:
     tmux new-session -d -s dev -n server 'just dev-server' \; \
-        split-window -v -p 50 -t dev 'just dev-worker' \; \
-        split-window -h -p 50 -t dev 'just css-watch' \; \
+        split-window -h -p 20 -t dev 'just css-watch' \; \
         select-pane -t dev:0 \; \
         attach 
 
 dev-server:
-    ./bin/air -- -primary -server
-
-dev-worker:
-    ./bin/air -- -worker
+    ./bin/air -- -primary
 
 css:
     echo '@tailwind base;@tailwind components;@tailwind utilities;' > /tmp/input{{ random_tag }}.css

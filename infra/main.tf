@@ -84,6 +84,14 @@ resource "fly_machine" "node" {
             path = "/var/lib/litefs"
         }
     ]
+    env = {
+        DATABASE_URL = "/litefs/simse.db"
+        WORDPRESS_URL="https://simse-wp.sorensen.cloud/wp-json/wp/v2/"
+        SIMSE_IO_HOST="simse.dev"
+        # SIMON_SORENSEN_COM_HOST="simon-sorensen.local:3000"
+        REDIS_URL="100.79.200.93:6379"
+        REDIS_DATABASE=1
+    }
 }
 
 resource "fly_volume" "databaseVolume" {
@@ -103,6 +111,7 @@ data "cloudflare_zone" "zone" {
     account_id = "ffa300f532eaaec071135605899f7bf8"
 }
 
+/*
 resource "cloudflare_zone_settings_override" "zoneSettings" {
     zone_id = data.cloudflare_zone.zone.id
 
@@ -112,7 +121,7 @@ resource "cloudflare_zone_settings_override" "zoneSettings" {
         brotli = "on"
         challenge_ttl = 31536000 # 1 year
     }
-}
+}*/
 
 resource "cloudflare_record" "apexv4" {
     zone_id = data.cloudflare_zone.zone.id
@@ -151,32 +160,6 @@ resource "cloudflare_record" "apexCertVerification" {
     name = "${fly_cert.apexCert.dnsvalidationhostname}"
     value = "${fly_cert.apexCert.dnsvalidationtarget}"
     type = "CNAME"
-}
-
-# redirect
-/*
-resource "cloudflare_page_rule" "redirect" {
-    zone_id = data.cloudflare_zone.zone.id
-    target = "https://learn.${var.domain}*"
-
-    actions {
-        forwarding_url {
-            status_code = 301
-            url = "https://${var.domain}/learn$1"
-        }
-    }
-}*/
-
-# image endpoint cache rule
-resource "cloudflare_page_rule" "imageCache" {
-    zone_id = data.cloudflare_zone.zone.id
-    target = "${var.domain}/api/_image*"
-
-    actions {
-        cache_level = "cache_everything"
-        browser_cache_ttl = 31536000
-        edge_cache_ttl = 2678400
-    }
 }
 
 # status page

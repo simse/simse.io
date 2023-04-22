@@ -36,6 +36,7 @@ RUN mkdir -p /var/run/tailscale /var/cache/tailscale /var/lib/tailscale
 
 ADD static /app/static
 ADD start.sh /app/start.sh
+ADD migrations /app/migrations
 
 COPY --from=builder /app/simse /app/simse
 RUN chmod +x /app/simse

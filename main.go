@@ -15,8 +15,6 @@ import (
 func main() {
 	// parse flags
 	primaryOverride := flag.Bool("primary", false, "a bool")
-	serverMode := flag.Bool("server", false, "a bool")
-	workerMode := flag.Bool("worker", false, "a bool")
 	flag.Parse()
 	if *primaryOverride {
 		server.CurrentMeta.Primary = true
@@ -32,15 +30,14 @@ func main() {
 	log.Info().Str("region", server.CurrentMeta.Region).Str("app", server.CurrentMeta.App).Str("allocation_id", server.CurrentMeta.AllocationID).Str("environment", server.CurrentMeta.Environment).Bool("primary", server.CurrentMeta.Primary).Msg("app started")
 
 	database.Open()
+	if server.CurrentMeta.Primary {
+		database.RunMigrations()
+	}
 
 	// read argument from command line
-	if *serverMode {
-		// tasks.AddTask(tasks.NewSyncWordpressTask())
-
-		server.StartServer()
-	} else if *workerMode {
-		tasks.StartWorker()
-	} else {
-		log.Fatal().Msg("node mode selected")
+	if server.CurrentMeta.Primary {
+		go tasks.StartWorker()
 	}
+
+	server.StartServer()
 }
