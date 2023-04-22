@@ -3,6 +3,7 @@ package wordpress
 import (
 	"crypto/sha256"
 	"fmt"
+	"os"
 	"time"
 
 	"github.com/imroc/req/v3"
@@ -42,13 +43,9 @@ type TaxemonyRaw struct {
 	Slug        string `json:"slug"`
 }
 
-var WORDPRESS_URL = "https://simse-wp.sorensen.cloud/wp-json/wp/v2/"
+var WORDPRESS_URL = os.Getenv("WORDPRESS_URL")
 
 func GetPosts() ([]database.Post, error) {
-	client := req.C().SetBaseURL(WORDPRESS_URL)
-
-	client.SetCommonBasicAuth("simon", "jNCLfXUHnC5PuSkdniFtb8Jvv64ZcRosbu9Brq7LJG7g7hMrzt8yCfCfEV6eKyBBM")
-
 	var rawPosts []PostRaw
 
 	for _, status := range []string{"publish", "draft"} {

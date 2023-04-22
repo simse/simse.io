@@ -42,6 +42,9 @@ css-watch:
     echo '@tailwind base;@tailwind components;@tailwind utilities;' > /tmp/input.css
     tailwindcss -i /tmp/input.css -o static/style.css --watch
 
+test:
+    gotest ./...
+
 # terraform stuff
 workspace := `terraform -chdir=infra workspace show`
 
