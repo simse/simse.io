@@ -26,6 +26,9 @@ type (
 	}
 )
 
+var TimeoutTracker = time.NewTimer(1 * time.Minute)
+var TimeoutEnabled = true
+
 func StartServer() {
 	// load templates
 	engine := jet.NewFileSystem(http.FS(templates.Files), ".jet")
@@ -100,9 +103,27 @@ func StartServer() {
 		if host == nil {
 			return c.SendStatus(fiber.StatusNotFound)
 		} else {
+			// reset timeout if method is not HEAD
+			if c.Method() != "HEAD" {
+				TimeoutTracker.Reset(1 * time.Minute)
+			}
+
 			host.Fiber.Handler()(c.Context())
 			return nil
 		}
 	})
+
+	// start timeout listener
+	if TimeoutEnabled {
+		go func() {
+			<-TimeoutTracker.C
+			log.Info().Str("timeout", "1m").Msg("server timeout reached, shutting down")
+			os.Exit(0)
+		}()
+	} else {
+		log.Info().Msg("server timeout disabled")
+	}
+
+	// start server
 	app.Listen(":3000")
 }

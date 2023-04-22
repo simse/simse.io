@@ -12,5 +12,11 @@ regions = [
         cpus = 1
         cputype = "shared"
         memorymb = 256
+    },
+    {
+        name = "syd"
+        cpus = 1
+        cputype = "shared"
+        memorymb = 256
     }
 ]

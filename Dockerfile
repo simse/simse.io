@@ -1,5 +1,7 @@
 FROM golang:1.20.3-alpine as builder
 
+RUN apk update && apk add vips
+
 WORKDIR /app
 COPY . /app
 
@@ -25,7 +27,7 @@ RUN wget https://pkgs.tailscale.com/stable/${TSFILE} && \
   tar xzf ${TSFILE} --strip-components=1
 
 FROM alpine as runner
-RUN apk update && apk add ca-certificates iptables ip6tables bash fuse3 sqlite curl && rm -rf /var/cache/apk/*
+RUN apk update && apk add ca-certificates iptables ip6tables bash fuse3 sqlite curl vips && rm -rf /var/cache/apk/*
 
 WORKDIR /app
 

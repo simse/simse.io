@@ -20,6 +20,11 @@ func main() {
 		server.CurrentMeta.Primary = true
 	}
 
+	if server.CurrentMeta.Primary {
+		log.Info().Msg("disabling timeout")
+		server.TimeoutEnabled = false
+	}
+
 	// init logging
 	if server.CurrentMeta.Environment == "prod" {
 		zerolog.TimeFieldFormat = zerolog.TimeFormatUnix
