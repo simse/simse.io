@@ -75,7 +75,7 @@ func StartServer() {
 	rootApp.Get("/_image", imageHandler)
 
 	rootApp.Get("/webhook/wordpress", func(c *fiber.Ctx) error {
-		tasks.AddTask(tasks.NewSyncWordpressTask())
+		go tasks.SyncWordpress()
 
 		return c.SendString("OK")
 	})

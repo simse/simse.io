@@ -1,10 +1,8 @@
 package tasks
 
 import (
-	"context"
 	"strings"
 
-	"github.com/hibiken/asynq"
 	"github.com/rs/zerolog/log"
 	"golang.org/x/net/html"
 
@@ -12,9 +10,7 @@ import (
 	"github.com/simse/simse.io/internal/wordpress"
 )
 
-const TypeSyncWordpress = "sync:wordpress"
-
-func syncWordpressTask() error {
+func SyncWordpress() error {
 	log.Info().Msg("syncing Wordpress with database...")
 	// get posts from wordpress
 	posts, err := wordpress.GetPosts()
@@ -55,12 +51,4 @@ func extractTextContent(htmlString string) (string, error) {
 	f(doc)
 
 	return strings.TrimSpace(textContent.String()), nil
-}
-
-func HandleSyncWordpressTask(ctx context.Context, t *asynq.Task) error {
-	return syncWordpressTask()
-}
-
-func NewSyncWordpressTask() (*asynq.Task, error) {
-	return asynq.NewTask(TypeSyncWordpress, []byte{}), nil
 }

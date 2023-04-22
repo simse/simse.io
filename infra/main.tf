@@ -88,9 +88,6 @@ resource "fly_machine" "node" {
         DATABASE_URL = "/litefs/simse.db"
         WORDPRESS_URL="https://simse-wp.sorensen.cloud/wp-json/wp/v2/"
         SIMSE_IO_HOST="simse.dev"
-        # SIMON_SORENSEN_COM_HOST="simon-sorensen.local:3000"
-        REDIS_URL="100.79.200.93:6379"
-        REDIS_DATABASE=1
     }
 }
 
