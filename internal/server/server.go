@@ -42,6 +42,7 @@ func StartServer() {
 	rootApp := fiber.New(fiber.Config{
 		Views:        engine,
 		ServerHeader: "Microsoft-IIS/7.5",
+		ErrorHandler: errorHandler,
 	})
 
 	// routes
@@ -98,6 +99,8 @@ func StartServer() {
 
 	// enable compression
 	app.Use(compress.New())
+
+	// handle hostname routing
 	app.Use(func(c *fiber.Ctx) error {
 		host := hosts[c.Hostname()]
 		if host == nil {
