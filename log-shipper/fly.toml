@@ -1,0 +1,27 @@
+# fly.toml file generated for log-forwarder on 2023-04-23T01:30:21+01:00
+
+app = "log-forwarder"
+kill_signal = "SIGINT"
+kill_timeout = 5
+mounts = []
+primary_region = "lhr"
+processes = []
+
+[build]
+  image = "ghcr.io/superfly/fly-log-shipper:latest"
+
+[[services]]
+  internal_port = 8686
+  processes = ["app"]
+  protocol = "tcp"
+
+  [services.concurrency]
+    hard_limit = 25
+    soft_limit = 20
+    type = "connections"
+
+  [[services.ports]]
+    force_https = false
+    handlers = ["http"]
+    port = 80
+
