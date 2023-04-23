@@ -8,6 +8,7 @@ import (
 	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
+	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"github.com/gofiber/template/jet"
 	"github.com/jfyne/live"
@@ -41,7 +42,6 @@ func StartServer() {
 
 	rootApp := fiber.New(fiber.Config{
 		Views:        engine,
-		ServerHeader: "Microsoft-IIS/7.5",
 		ErrorHandler: errorHandler,
 	})
 
@@ -71,6 +71,10 @@ func StartServer() {
 		Compress:      true,
 		CacheDuration: 30 * 24 * time.Hour,
 	})
+	rootApp.Static("/", "./static", fiber.Static{
+		Compress:      true,
+		CacheDuration: 30 * 24 * time.Hour,
+	})
 	rootApp.Get("/static/live.js", adaptor.HTTPHandler(live.Javascript{}))
 	rootApp.Get("/static/auto.js.map", adaptor.HTTPHandler(live.JavascriptMap{}))
 	rootApp.Get("/_image", imageHandler)
@@ -86,7 +90,12 @@ func StartServer() {
 	log.Info().Str("address", "0.0.0.0").Int("port", 3000).Msg("server started")
 	app := fiber.New(fiber.Config{
 		DisableStartupMessage: true,
+		ServerHeader:          "Microsoft-IIS/7.5",
 	})
+	app.Use(favicon.New(favicon.Config{
+		File: "./static/favicon.ico",
+		URL:  "/favicon.ico",
+	}))
 	app.Use(requestid.New())
 
 	// enable logging

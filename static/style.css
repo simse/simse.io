@@ -1334,11 +1334,6 @@ select {
   margin-bottom: 0.5rem;
 }
 
-.my-4 {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-}
-
 .mb-1 {
   margin-bottom: 0.25rem;
 }
@@ -1416,20 +1411,8 @@ select {
   height: 100%;
 }
 
-.h-3\/5 {
-  height: 60%;
-}
-
 .max-h-full {
   max-height: 100%;
-}
-
-.min-h-full {
-  min-height: 100%;
-}
-
-.min-h-screen {
-  min-height: 100vh;
 }
 
 .min-h-\[60vh\] {
@@ -1458,10 +1441,6 @@ select {
 
 .grid-cols-1 {
   grid-template-columns: repeat(1, minmax(0, 1fr));
-}
-
-.flex-row {
-  flex-direction: row;
 }
 
 .flex-col {
