@@ -7,7 +7,11 @@ data:
 exit-on-error: false
 
 lease:
-  type: "static"
-  advertise-url: "http://lhr.${FLY_APP_NAME}.internal:20202"
-  candidate: ${FLY_REGION == "lhr"}
+  type: "consul"
+  candidate: ${FLY_REGION == PRIMARY_REGION}
+  promote: true
+  advertise-url: "http://${FLY_ALLOC_ID}.vm.${FLY_APP_NAME}.internal:20202"
 
+  consul:
+    url: "${FLY_CONSUL_URL}"
+    key: "${FLY_APP_NAME}/primary"

@@ -1,0 +1,32 @@
+primary_region = "lhr"
+
+[build]
+  dockerfile = "Dockerfile"
+
+[deploy]
+  strategy = "rolling"
+
+[env]
+  DATABASE_URL = "/litefs/simse.db"
+  SIMSE_IO_HOST = "simse.dev"
+  WORDPRESS_URL = "https://simse-wp.sorensen.cloud/wp-json/wp/v2/"
+
+[[mounts]]
+  source = "litefs"
+  destination = "/var/lib/litefs"
+
+[http_service]
+  internal_port = 3000
+  force_https = true
+  auto_start_machines = true
+  [http_service.concurrency]
+    type = "requests"
+    hard_limit = 6000
+    soft_limit = 5000
+
+[checks]
+  [checks.alive]
+    type = "tcp"
+    interval = "15s"
+    timeout = "2s"
+    grace_period = "5s"

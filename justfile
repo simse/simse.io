@@ -1,4 +1,5 @@
 set dotenv-load
+set positional-arguments
 
 build_tag := `git rev-parse --short HEAD`
 branch := env_var_or_default("BRANCH", "none")
@@ -18,7 +19,12 @@ build:
     docker build . -t {{docker_image}}
     docker push {{docker_image}}
 
-deploy: build tf-apply
+deploy:
+    fly deploy --app simse-dev --local-only
+
+load-test:
+    k6 run k6/test.js
+
 
 # dev stuff
 dev:

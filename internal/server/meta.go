@@ -6,11 +6,11 @@ import (
 )
 
 type Meta struct {
-	App          string `json:"app"`
-	AllocationID string `json:"allocation_id"`
-	Region       string `json:"region"`
-	Primary      bool   `json:"primary"`
-	Environment  string `json:"stage"`
+	App          string
+	AllocationID string
+	Region       string
+	Primary      bool
+	Environment  string
 }
 
 var CurrentMeta Meta
@@ -24,7 +24,7 @@ func init() {
 		// CurrentMeta.Primary = true
 	} else {
 		CurrentMeta.App = os.Getenv("FLY_APP_NAME")
-		CurrentMeta.AllocationID = os.Getenv("FLY_ALLOCATION_ID")
+		CurrentMeta.AllocationID = os.Getenv("FLY_ALLOC_ID")
 		CurrentMeta.Region = os.Getenv("FLY_REGION")
 		CurrentMeta.Environment = "prod"
 		CurrentMeta.Primary = isPrimary()
