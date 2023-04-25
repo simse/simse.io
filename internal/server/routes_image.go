@@ -39,7 +39,7 @@ func imageHandler(c *fiber.Ctx) error {
 	defer os.Remove(file.Name())
 
 	// download image
-	resp, err := http.Get(fmt.Sprintf("https://image.sorensen.cloud/unsafe/%dx%d/filters:format(webp):quality(%d)/%s", input.Width, input.Height, input.Quality, input.URL))
+	resp, err := http.Get(fmt.Sprintf("https://image.sorensen.cloud/unsafe/%dx%d/smart/filters:format(webp):quality(%d)/%s", input.Width, input.Height, input.Quality, input.URL))
 	if err != nil {
 		fmt.Println(err)
 		return c.SendStatus(fiber.StatusInternalServerError)

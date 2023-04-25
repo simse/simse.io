@@ -10,13 +10,13 @@
         {{ range i, post := posts }}
         <a href="/posts/{{ post.Slug }}" class="pb-4 block">
             <div class="flex gap-8 items-center">
-                {{ if post.FeaturedImage != "" }}
+                <div class="shrink-0 w-32 h-32 bg-zinc-900">
+                    {{ if post.FeaturedImage != "" }}
                     <div class="shrink-0 w-32 h-32">
                         {{ yield image(url=post.FeaturedImage, width=128, height=128, quality=83) }}
                     </div>
-                {{ else }}
-                    <div class="shrink-0 w-32 h-32 bg-zinc-800"></div>
-                {{ end }}
+                    {{ end }}
+                </div>
 
                 <div class="">
                     <h2 class="text-xl mb-1">{{ post.Title }}</h2>

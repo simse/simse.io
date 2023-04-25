@@ -9,20 +9,6 @@
 		<!--link rel="icon" href="/icon.svg" type="image/svg+xml"-->
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<!--link rel="manifest" href="/manifest.webmanifest"-->
-		<style>
-			@font-face {
-				font-family: "Wotfard";
-				src: url('/static/fonts/Wotfard-Regular.woff2') format('woff2');
-				font-weight: 400;
-				font-display: swap;
-			}
-
-			@font-face {
-				font-family: "Wotfard";
-				src: url('/static/fonts/Wotfard-Bold.woff2') format('woff2');
-				font-weight: 700;
-				font-display: swap;
-			}
-		</style>
+		<style>@font-face{font-family:Wotfard;src:url('/static/fonts/Wotfard-Regular.woff2') format('woff2');font-weight:400;font-display:swap}@font-face{font-family:Wotfard;src:url('/static/fonts/Wotfard-Bold.woff2') format('woff2');font-weight:700;font-display:swap}@font-face{font-family:Wotfard;src:url('/static/fonts/Wotfard-Italic.woff2') format('woff2');font-weight:400;font-display:swap;font-style:italic}@font-face{font-family:Wotfard;src:url('/static/fonts/Wotfard-BoldItalic.woff2') format('woff2');font-weight:700;font-display:swap;font-style:italic}</style>
     </head>
     <body class="bg-zinc-950 text-white">

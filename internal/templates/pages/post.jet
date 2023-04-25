@@ -1,6 +1,14 @@
+{{ import "../components/image.jet" }}
+
 <div class="mx-auto max-w-4xl py-16 px-2">
     <div class="mb-16">
-        <h1 class="text-6xl mb-8 font-bold">{{ post.Title }}</h1>
+        <h1 class="text-3xl mb-8 font-bold">{{ post.Title }}</h1>
+
+        {{ if post.FeaturedImage != "" }}
+            <div class="aspect-w-8 aspect-h-5 block bg-zinc-900">
+                {{ yield image(url=post.FeaturedImage, width=800, height=500, quality=83) }}
+            </div>
+        {{ end }}
 
         <p class="text-2xl "></p>
     </div>

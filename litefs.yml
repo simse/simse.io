@@ -2,7 +2,7 @@ fuse:
   dir: "/litefs"
 
 data:
-  dir: "/var/lib/litefs"
+  dir: "${STORAGE_PATH}/litefs"
 
 exit-on-error: false
 

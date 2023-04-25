@@ -6,7 +6,7 @@ module.exports = {
       fontFamily: {
         sans: ['Wotfard', 'system-ui'],
         monospace: ['IBM Plex Mono'],
-        serif: ['Cormorant', 'serif']
+        serif: ['Novela', 'serif']
       },
     },
   },
