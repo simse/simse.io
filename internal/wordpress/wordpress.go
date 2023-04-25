@@ -32,8 +32,9 @@ type PostRaw struct {
 	Excerpt struct {
 		Rendered string `json:"rendered"`
 	} `json:"excerpt"`
-	Tags       []int `json:"tags"`
-	Categories []int `json:"categories"`
+	Tags          []int `json:"tags"`
+	Categories    []int `json:"categories"`
+	FeaturedMedia int   `json:"featured_media"`
 }
 
 type TaxemonyRaw struct {
@@ -41,6 +42,11 @@ type TaxemonyRaw struct {
 	Name        string `json:"name"`
 	Description string `json:"description"`
 	Slug        string `json:"slug"`
+}
+
+type MediaRaw struct {
+	ID        int    `json:"id"`
+	SourceURL string `json:"source_url"`
 }
 
 var WORDPRESS_URL = os.Getenv("WORDPRESS_URL")
@@ -118,19 +124,37 @@ func rawToPost(post PostRaw) (database.Post, error) {
 	h.Write([]byte(post.ID.Rendered))
 	id := fmt.Sprintf("%x", h.Sum(nil))
 
+	// get featured image
+	media := getMedia(post.FeaturedMedia)
+
 	return database.Post{
-		ID:        id,
-		Title:     post.Title.Rendered,
-		Created:   parseDate(post.ModifiedGMT),
-		Updated:   parseDate(post.ModifiedGMT),
-		Published: parseDate(post.DateGMT),
-		Slug:      post.Slug,
-		Status:    post.Status,
-		HTML:      minifiedContent,
-		Excerpt:   post.Excerpt.Rendered,
-		Tags:      tags,
+		ID:            id,
+		Title:         post.Title.Rendered,
+		Created:       parseDate(post.ModifiedGMT),
+		Updated:       parseDate(post.ModifiedGMT),
+		Published:     parseDate(post.DateGMT),
+		Slug:          post.Slug,
+		Status:        post.Status,
+		HTML:          minifiedContent,
+		Excerpt:       post.Excerpt.Rendered,
+		Tags:          tags,
+		FeaturedImage: media.SourceURL,
 		//Categories: getTaxemonyByID("categories", post.Categories),
 	}, nil
+}
+
+func getMedia(id int) MediaRaw {
+	client := req.C().SetBaseURL(WORDPRESS_URL)
+
+	client.SetCommonBasicAuth("simon", "Cfef c6l0 1Rd3 btbG nj9e 4bxn")
+
+	var media MediaRaw
+	err := client.Get().SetURL(fmt.Sprintf("media/%d", id)).Do().Into(&media)
+	if err != nil {
+		return MediaRaw{}
+	}
+
+	return media
 }
 
 func getTagsList(tagIds []int) ([]string, error) {

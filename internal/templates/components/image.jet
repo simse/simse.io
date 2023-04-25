@@ -1,7 +1,6 @@
 {{ block image(url, width=0, height=0, quality=0) }}
 <img
-  src="/_image?url={{ url }}&width={{ width }}&height={{ height }}&quality={{ quality }}"
-  sizes="(min-width: 1024px) 800px, (min-width: 768px) 80vw, 100vw"
+  src="/_image?url={{ url }}&width={{ width*2 }}&height={{ height*2 }}&quality=100"
   style="height: {{ height }}px;width: {{ width }}px;"
 />
 {{ end }}

@@ -1,6 +1,6 @@
 {{ import "../components/image.jet" }}
 
-<nav class="flex justify-between py-2 bg-black pl-4 border-b border-white/20 items-center">
+<nav class="flex justify-between py-2 bg-zinc-900 pl-4 border-b border-white/20 items-center sticky top-0 z-50">
     <div class="flex items-center">
         <a href="/">
             {{ yield image(url="https://assets.simse.io/android-chrome-256x256.png", width=32, height=32, quality=100) }}

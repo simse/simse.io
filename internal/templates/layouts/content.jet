@@ -1,4 +1,9 @@
 {{ include "/partials/layout_start.jet" }}
 {{ include "/partials/navbar.jet" }}
+
+<main class="min-h-[90vh]">
 {{ embed() }}
+</main>
+
+{{ include "/partials/footer.jet" }}
 {{ include "/partials/layout_end.jet" }}

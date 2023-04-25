@@ -37,6 +37,9 @@ func StartServer() {
 	engine.AddFunc("formatDate", func(date time.Time) string {
 		return date.Format("January 2, 2006")
 	})
+	engine.AddFunc("currentRegion", func() string {
+		return CurrentMeta.HumanReadableRegion
+	})
 
 	hosts := map[string]*Host{}
 
