@@ -57,7 +57,7 @@ func init() {
 	CurrentMeta.AllocationID = os.Getenv("FLY_ALLOC_ID")
 	CurrentMeta.Region = os.Getenv("FLY_REGION")
 	CurrentMeta.Environment = "prod"
-	CurrentMeta.Primary = isPrimary()
+	CurrentMeta.Primary = IsPrimary()
 
 	if os.Getenv("FLY_REGION") == "kut" {
 		CurrentMeta.AllocationID = "dev"
@@ -73,7 +73,7 @@ func init() {
 	}
 }
 
-func isPrimary() bool {
+func IsPrimary() bool {
 	// return true if /litefs/.primary does not exist
 	if _, err := os.Stat("/litefs/.primary"); errors.Is(err, os.ErrNotExist) {
 		return true
