@@ -13,7 +13,7 @@ env := if branch == "main" {
 }
 
 deploy:
-    fly deploy --app simse-{{ env }} --local-only
+    flyctl deploy --app simse-{{ env }} --local-only
 
 load-test:
     k6 run k6/test.js
