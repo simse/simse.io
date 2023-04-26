@@ -29,6 +29,9 @@ dev:
 dev-server:
     ./bin/air -- -primary
 
+dev-litefs:
+    ./bin/litefs mount
+
 css:
     echo '@tailwind base;@tailwind components;@tailwind utilities;' > /tmp/input.css
     tailwindcss -i /tmp/input.css -o static/style.css --minify

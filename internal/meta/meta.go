@@ -1,4 +1,4 @@
-package server
+package meta
 
 import (
 	"errors"
@@ -53,18 +53,16 @@ var regionToCity = map[string]string{
 }
 
 func init() {
-	if os.Getenv("FLY_APP_NAME") == "" {
-		CurrentMeta.App = "simse-dev"
+	CurrentMeta.App = os.Getenv("FLY_APP_NAME")
+	CurrentMeta.AllocationID = os.Getenv("FLY_ALLOC_ID")
+	CurrentMeta.Region = os.Getenv("FLY_REGION")
+	CurrentMeta.Environment = "prod"
+	CurrentMeta.Primary = isPrimary()
+
+	if os.Getenv("FLY_REGION") == "kut" {
 		CurrentMeta.AllocationID = "dev"
-		CurrentMeta.Region = "kut"
 		CurrentMeta.Environment = "dev"
-		// CurrentMeta.Primary = true
-	} else {
-		CurrentMeta.App = os.Getenv("FLY_APP_NAME")
-		CurrentMeta.AllocationID = os.Getenv("FLY_ALLOC_ID")
-		CurrentMeta.Region = os.Getenv("FLY_REGION")
-		CurrentMeta.Environment = "prod"
-		CurrentMeta.Primary = isPrimary()
+		CurrentMeta.Primary = true
 	}
 
 	// set human readable region, fallback to region if not found

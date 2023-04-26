@@ -1,8 +1,6 @@
 package server
 
 import (
-	"fmt"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/simse/simse.io/internal/database"
 )
@@ -12,8 +10,6 @@ func PostsIndex(c *fiber.Ctx) error {
 	if err != nil {
 		return err
 	}
-
-	fmt.Println(posts)
 
 	return c.Render("pages/posts", fiber.Map{
 		"pageTitle": "Posts — Simon Sorensen",

@@ -1426,6 +1426,10 @@ select {
   display: none;
 }
 
+.h-16 {
+  height: 4rem;
+}
+
 .h-32 {
   height: 8rem;
 }
@@ -1453,6 +1457,10 @@ select {
 
 .min-h-\[90vh\] {
   min-height: 90vh;
+}
+
+.w-16 {
+  width: 4rem;
 }
 
 .w-32 {
@@ -1608,10 +1616,6 @@ select {
   padding-top: 2rem;
 }
 
-.font-serif {
-  font-family: Novela, serif;
-}
-
 .text-2xl {
   font-size: 1.5rem;
   line-height: 2rem;
@@ -1644,10 +1648,6 @@ select {
 
 .font-bold {
   font-weight: 700;
-}
-
-.italic {
-  font-style: italic;
 }
 
 .text-blue-400 {

@@ -1,8 +1,8 @@
 {{ import "../components/image.jet" }}
 
 <div class="min-h-[60vh] flex flex-col justify-center items-center">
-    <div class="mb-4">
-        {{ yield image(url="https://assets.simse.io/android-chrome-256x256.png", width=64, height=64, quality=100) }}
+    <div class="mb-4 h-16 w-16">
+        {{ yield image(url="https://assets.simse.io/android-chrome-256x256.png", width=64, height=64, quality=100, responsive=false) }}
     </div>
 
     <strong>{{ errorCode }}</strong>

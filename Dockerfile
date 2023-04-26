@@ -26,7 +26,7 @@ RUN apk update && apk add ca-certificates iptables ip6tables bash fuse3 sqlite c
 
 WORKDIR /app
 
-COPY --from=flyio/litefs:0.4 /usr/local/bin/litefs /usr/local/bin/litefs
+COPY --from=flyio/litefs:0.4 /usr/local/bin/litefs /app/bin/litefs
 
 ADD static /app/static
 ADD migrations /app/migrations
@@ -38,4 +38,4 @@ COPY --from=tailwind /app/static/style.css /app/static/style.css
 
 ADD litefs.yml /etc/litefs.yml
 
-ENTRYPOINT litefs mount -- ./simse
+ENTRYPOINT ./simse

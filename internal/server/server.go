@@ -3,16 +3,19 @@ package server
 import (
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
 	"github.com/gofiber/fiber/v2/middleware/favicon"
+	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
 	"github.com/gofiber/template/jet"
 	"github.com/jfyne/live"
 	"github.com/rs/zerolog/log"
+	"github.com/simse/simse.io/internal/meta"
 	"github.com/simse/simse.io/internal/tasks"
 	"github.com/simse/simse.io/internal/templates"
 )
@@ -38,7 +41,7 @@ func StartServer() {
 		return date.Format("January 2, 2006")
 	})
 	engine.AddFunc("currentRegion", func() string {
-		return CurrentMeta.HumanReadableRegion
+		return meta.CurrentMeta.HumanReadableRegion
 	})
 
 	hosts := map[string]*Host{}
@@ -47,6 +50,7 @@ func StartServer() {
 		Views:        engine,
 		ErrorHandler: errorHandler,
 	})
+	rootApp.Use(recover.New())
 
 	// routes
 	rootApp.Get("/", func(c *fiber.Ctx) error {
@@ -70,16 +74,6 @@ func StartServer() {
 	rootApp.Get("/posts", PostsIndex)
 	rootApp.Get("/posts/:slug", PostRoute)
 
-	rootApp.Static("/static", "./static", fiber.Static{
-		Compress:      true,
-		CacheDuration: 30 * 24 * time.Hour,
-	})
-	rootApp.Static("/", "./static", fiber.Static{
-		Compress:      true,
-		CacheDuration: 30 * 24 * time.Hour,
-	})
-	rootApp.Get("/static/live.js", adaptor.HTTPHandler(live.Javascript{}))
-	rootApp.Get("/static/auto.js.map", adaptor.HTTPHandler(live.JavascriptMap{}))
 	rootApp.Get("/_image", imageHandler)
 
 	rootApp.Get("/webhook/wordpress", func(c *fiber.Ctx) error {
@@ -93,7 +87,6 @@ func StartServer() {
 	log.Info().Str("address", "0.0.0.0").Int("port", 3000).Msg("server started")
 	app := fiber.New(fiber.Config{
 		DisableStartupMessage: true,
-		ServerHeader:          "Microsoft-IIS/7.5",
 	})
 	app.Use(favicon.New(favicon.Config{
 		File: "./static/favicon.ico",
@@ -101,8 +94,23 @@ func StartServer() {
 	}))
 	app.Use(requestid.New())
 
+	rootApp.Static("/static", "./static", fiber.Static{
+		Compress:      true,
+		CacheDuration: 30 * 24 * time.Hour,
+	})
+	rootApp.Static("/", "./static", fiber.Static{
+		Compress:      true,
+		CacheDuration: 30 * 24 * time.Hour,
+	})
+	rootApp.Get("/static/live.js", adaptor.HTTPHandler(live.Javascript{}))
+	rootApp.Get("/static/auto.js.map", adaptor.HTTPHandler(live.JavascriptMap{}))
+
 	// enable logging
 	app.Use(func(c *fiber.Ctx) error {
+		if strings.Contains(c.Path(), "static") {
+			return c.Next()
+		}
+
 		requestid := c.Locals("requestid").(string)
 
 		log.Info().Str("method", c.Method()).Str("path", c.Path()).Str("ip", c.IP()).Str("request_id", requestid).Msg("request")
