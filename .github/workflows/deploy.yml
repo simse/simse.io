@@ -1,0 +1,21 @@
+name: Deploy simse.io
+on:
+  push:
+    branches:
+      - master
+      - main
+      - develop
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: 
+          actions/checkout@v3
+      - uses: 
+          extractions/setup-just@v1
+      - 
+        run: just deploy
+        env:
+          BRANCH: ${{ github.ref_name }}
+          FLY_TOKEN: ${{ secrets.FLY_TOKEN }}

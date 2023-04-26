@@ -74,6 +74,11 @@ func init() {
 }
 
 func IsPrimary() bool {
+	// if /litefs does not exist, return false
+	if _, err := os.Stat("/litefs"); errors.Is(err, os.ErrNotExist) {
+		return false
+	}
+
 	// return true if /litefs/.primary does not exist
 	if _, err := os.Stat("/litefs/.primary"); errors.Is(err, os.ErrNotExist) {
 		return true

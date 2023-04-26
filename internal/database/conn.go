@@ -102,6 +102,11 @@ func pollForLitefs() {
 		if err != nil {
 			log.Info().Int("attempt", i+1).Msg("failed to open connection, retrying")
 			time.Sleep(1 * time.Second)
+
+			if i == 19 {
+				log.Fatal().Msg("could not open litefs database file")
+			}
+
 			continue
 		}
 

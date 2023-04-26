@@ -28,21 +28,16 @@ func main() {
 	}
 
 	// output info about the current allocation
-	log.Info().Str("region", meta.CurrentMeta.Region).Str("app", meta.CurrentMeta.App).Str("allocation_id", meta.CurrentMeta.AllocationID).Str("environment", meta.CurrentMeta.Environment).Bool("primary", meta.CurrentMeta.Primary).Msg("app started")
+	log.Info().Str("region", meta.CurrentMeta.Region).Str("app", meta.CurrentMeta.App).Str("allocation_id", meta.CurrentMeta.AllocationID).Str("environment", meta.CurrentMeta.Environment).Msg("app started")
 
 	// if primary, disable timeout because the database must be available
-	if meta.CurrentMeta.Primary {
+	/*if meta.CurrentMeta.Region == "lhr" {
 		log.Info().Msg("disabling timeout")
 		server.TimeoutEnabled = false
-	}
-
-	//database.MountLitefs()
-
-	// open database connection, and if primary run migrations
-	database.Open()
-	/*if server.CurrentMeta.Primary {
-		database.RunMigrations()
 	}*/
+
+	// open database connection
+	database.Open()
 
 	server.StartServer()
 }

@@ -107,7 +107,7 @@ func StartServer() {
 
 	// enable logging
 	app.Use(func(c *fiber.Ctx) error {
-		if strings.Contains(c.Path(), "static") {
+		if strings.Contains(c.Path(), "static") || strings.Contains(c.Path(), "_image") {
 			return c.Next()
 		}
 
