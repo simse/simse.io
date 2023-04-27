@@ -1,1 +1,54 @@
-<h1>test</h1>
+<div class="flex gap-8 max-w-[2000px] mx-auto p-8 flex-col-reverse md:flex-row md:py-16">
+		<div class="flex-none w-full sm:w-96">
+			<!-- About -->
+			<!--h1 class="text-4xl  mb-8">Simon Sorensen</h1-->
+
+			<h2 class="font-bold text-xl ">About me</h2>
+			<h3 class="text-2xl ">Computer Science student</h3>
+			<p class="text-gray-400">by day</p>
+
+			<h3 class="text-2xl  mt-4">Software Engineering Intern @ LEGO</h3>
+			<p class="mb-4 text-gray-400">also by day</p>
+
+			<h3 class="text-2xl  mt-4"><a href="https://www.youtube.com/@simon.sorensen" target="_blank" class="underline decoration-from-font">Youtube</a> Programming Educator</h3>
+			<p class="mb-4 text-gray-400">by night</p>
+
+			<a class="underline decoration-from-font  text-xl" href="https://simon-sorensen.com" target="_blank">Curriculum Vitae</a>
+
+			<!-- Articles -->
+			<div class="mt-8">
+				<h2 class="font-bold text-xl  mb-2">Articles</h2>
+
+				<div>
+    <a href="/article/being-a-little-bit-silly-with-gpt-4-and-elevenlabs" class="mb-3 block">
+                <h3>Being a little bit silly with GPT-4 and ElevenLabs</h3>
+
+                <p class=" text-sm">
+                    20/03/2023
+                </p>
+            </a><a href="/article/using-gpt-4-to-help-me-write-better-articles" class="mb-3 block">
+                <h3>Using GPT-4 to write better articles</h3>
+
+                <p class=" text-sm">
+                    13/02/2023
+                </p>
+            </a>
+    
+</div>
+			</div>
+
+			<a class="underline decoration-from-font mt-8 block  text-xl" href="/projects">Want to see my <em>work</em>?</a>
+		</div>
+
+		<div class="flex-auto">
+			<div class="relative h-fit " style="aspect-ratio:5/3;">
+    <div>
+        <img class="top-0 absolute w-full h-full -z-10" src="/images/placeholder.svg" alt="">
+
+        <img class="max-h-full w-full object-cover" style="aspect-ratio:5/3;" src="https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/d56330f2-41d4-484a-e488-8c2566378100/format=auto,h=1000,w=1600,fit=cover,gravity=center" alt="80s style graphic with my full name: Simon Sorensen">
+    </div>
+</div>
+
+
+		</div>
+	</div>

@@ -1,6 +1,6 @@
 {{ import "../components/image.jet" }}
 
-<div class="max-w-5xl mx-auto py-8">
+<div class="max-w-5xl mx-auto py-8 px-2">
     <h1 class="text-4xl mb-4">Posts</h1>
     <p class="mb-12 text-lg text-zinc-300">My ramblings and other cool stuff!</p>
 
@@ -8,9 +8,9 @@
         <h2 class="text-lg font-bold pb-2 mt-2 mb-4 w-full border-b border-white/20">2023</h2>
 
         {{ range i, post := posts }}
-        <a href="/posts/{{ post.Slug }}" class="pb-4 block">
+        <a href="/posts/{{ post.Slug }}" class="pb-4 block border-b border-white/20 md:border-none">
             <div class="flex gap-8 items-center">
-                <div class="shrink-0 w-32 h-32 bg-zinc-900">
+                <div class="shrink-0 w-32 h-32 bg-zinc-900 hidden md:block">
                     {{ if post.FeaturedImage != "" }}
                     <div class="shrink-0 w-32 h-32">
                         {{ yield image(url=post.FeaturedImage, width=128, height=128, quality=83) }}
