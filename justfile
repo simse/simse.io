@@ -11,9 +11,18 @@ env := if branch == "main" {
 } else {
     "dev"
 }
+fly_app_env := if branch == "main" {
+    "--env SIMSE_IO_HOST=simse.io"
+} else if branch == "master" {
+    "--env SIMSE_IO_HOST=simse.io"
+} else if branch == "develop" {
+    "--env SIMSE_IO_HOST=simse.cloud"
+} else {
+    "--env SIMSE_IO_HOST=simse.dev"
+}
 
 deploy:
-    flyctl deploy --app simse-{{ env }} --local-only
+    flyctl deploy --app simse-{{ env }} --local-only {{ fly_app_env }}
 
 load-test:
     k6 run k6/test.js

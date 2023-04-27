@@ -87,6 +87,7 @@ func StartServer() {
 	log.Info().Str("address", "0.0.0.0").Int("port", 3000).Msg("server started")
 	app := fiber.New(fiber.Config{
 		DisableStartupMessage: true,
+		ErrorHandler:          errorHandler,
 	})
 	app.Use(favicon.New(favicon.Config{
 		File: "./static/favicon.ico",
