@@ -20,13 +20,13 @@
 				<h2 class="font-bold text-xl  mb-2">Articles</h2>
 
 				<div>
-    <a href="/article/being-a-little-bit-silly-with-gpt-4-and-elevenlabs" class="mb-3 block">
+    <a href="/posts/being-a-little-bit-silly-with-gpt-4-and-elevenlabs" class="mb-3 block">
                 <h3>Being a little bit silly with GPT-4 and ElevenLabs</h3>
 
                 <p class=" text-sm">
                     20/03/2023
                 </p>
-            </a><a href="/article/using-gpt-4-to-help-me-write-better-articles" class="mb-3 block">
+            </a><a href="/posts/using-gpt-4-to-help-me-write-better-articles" class="mb-3 block">
                 <h3>Using GPT-4 to write better articles</h3>
 
                 <p class=" text-sm">

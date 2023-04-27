@@ -88,7 +88,7 @@ func StartServer() {
 	app := fiber.New(fiber.Config{
 		DisableStartupMessage: true,
 		ErrorHandler:          errorHandler,
-		ProxyHeader:           "X-Forwarded-For",
+		ProxyHeader:           "Fly-Client-IP",
 	})
 	app.Use(favicon.New(favicon.Config{
 		File: "./static/favicon.ico",
