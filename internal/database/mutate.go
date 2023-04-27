@@ -14,8 +14,8 @@ func InsertPost(post Post) error {
 	}
 
 	_, err := Conn.Exec(`
-		INSERT INTO posts (id, slug, title, html, excerpt, created, updated, published, status, featured_image)
-		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+		INSERT INTO posts (id, slug, title, html, excerpt, created, updated, published, status, featured_image, tags)
+		VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
 		ON CONFLICT(id) DO UPDATE SET
 			slug = excluded.slug,
 			title = excluded.title,
@@ -25,8 +25,9 @@ func InsertPost(post Post) error {
 			updated = excluded.updated,
 			published = excluded.published,
 			status = excluded.status,
-			featured_image = excluded.featured_image;
-	`, post.ID, post.Slug, post.Title, post.HTML, post.Excerpt, post.Created, post.Updated, post.Published, post.Status, post.FeaturedImage)
+			featured_image = excluded.featured_image,
+			tags = excluded.tags;
+	`, post.ID, post.Slug, post.Title, post.HTML, post.Excerpt, post.Created, post.Updated, post.Published, post.Status, post.FeaturedImage, post.Tags)
 
 	return err
 }

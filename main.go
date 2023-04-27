@@ -31,7 +31,7 @@ func main() {
 	log.Info().Str("region", meta.CurrentMeta.Region).Str("app", meta.CurrentMeta.App).Str("allocation_id", meta.CurrentMeta.AllocationID).Str("environment", meta.CurrentMeta.Environment).Msg("app started")
 
 	// if primary, disable timeout because the database must be available
-	if meta.CurrentMeta.Region == "lhr" {
+	if meta.CurrentMeta.Region == "lhr" || meta.CurrentMeta.Region == "kut" {
 		log.Info().Msg("disabling timeout")
 		server.TimeoutEnabled = false
 	}

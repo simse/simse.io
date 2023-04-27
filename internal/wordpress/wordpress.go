@@ -3,10 +3,10 @@ package wordpress
 import (
 	"crypto/sha256"
 	"fmt"
-	"os"
 	"time"
 
 	"github.com/imroc/req/v3"
+	"github.com/rs/zerolog/log"
 	"github.com/simse/simse.io/internal/database"
 	"github.com/tdewolff/minify/v2"
 	"github.com/tdewolff/minify/v2/html"
@@ -49,7 +49,7 @@ type MediaRaw struct {
 	SourceURL string `json:"source_url"`
 }
 
-var WORDPRESS_URL = os.Getenv("WORDPRESS_URL")
+var WORDPRESS_URL = "https://simse-wp.sorensen.cloud/wp-json/wp/v2/"
 
 func GetPosts() ([]database.Post, error) {
 	var rawPosts []PostRaw
@@ -71,6 +71,7 @@ func GetPosts() ([]database.Post, error) {
 		}
 
 		posts = append(posts, p)
+		log.Info().Str("id", p.ID).Msg("fetched wordpress post")
 	}
 
 	return posts, nil
@@ -158,6 +159,10 @@ func getMedia(id int) MediaRaw {
 }
 
 func getTagsList(tagIds []int) ([]string, error) {
+	if len(tagIds) == 0 {
+		return []string{}, nil
+	}
+
 	tags := getTaxemonyByID("tags", tagIds)
 
 	// join tags into a comma seperated string

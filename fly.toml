@@ -8,8 +8,6 @@ primary_region = "lhr"
 
 [env]
   DATABASE_URL = "/litefs/simse.db"
-  SIMSE_IO_HOST = "simse.dev"
-  WORDPRESS_URL = "https://simse-wp.sorensen.cloud/wp-json/wp/v2/"
   STORAGE_PATH = "/storage"
 
 [[mounts]]

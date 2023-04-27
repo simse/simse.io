@@ -1,6 +1,11 @@
 package database
 
-import "time"
+import (
+	"database/sql/driver"
+	"fmt"
+	"strings"
+	"time"
+)
 
 type Post struct {
 	ID            string
@@ -8,12 +13,34 @@ type Post struct {
 	Title         string
 	HTML          string
 	Excerpt       string
-	Tags          []string
+	Tags          TagSlice
 	Created       time.Time
 	Updated       time.Time
 	Published     time.Time
 	FeaturedImage string
 	Status        string
+}
+
+type TagSlice []string
+
+func (ts *TagSlice) Scan(value interface{}) error {
+	if value == nil {
+		*ts = []string{}
+		return nil
+	}
+
+	str, ok := value.(string)
+	if !ok {
+		return fmt.Errorf("invalid type for tags")
+	}
+
+	tags := strings.Split(str, ",")
+	*ts = tags
+	return nil
+}
+
+func (ts TagSlice) Value() (driver.Value, error) {
+	return strings.Join(ts, ","), nil
 }
 
 type PostCategory struct {
