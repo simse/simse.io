@@ -3,8 +3,11 @@ FROM golang:1.20.3-alpine as builder
 RUN apk update && apk add vips
 
 WORKDIR /app
-COPY . /app
+ADD go.mod /app
+ADD go.sum /app
+RUN go mod download
 
+COPY . /app
 RUN go build -o simse
 
 FROM ubuntu:20.04 as tailwind

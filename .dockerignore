@@ -3,3 +3,4 @@ infra
 .github
 *.fiber.gz
 *.db*
+.git

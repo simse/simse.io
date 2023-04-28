@@ -74,6 +74,8 @@ func init() {
 }
 
 func IsPrimary() bool {
+	return CurrentMeta.Region == "lhr"
+
 	// if /litefs does not exist, return false
 	if _, err := os.Stat("/litefs"); errors.Is(err, os.ErrNotExist) {
 		return false

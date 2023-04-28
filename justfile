@@ -21,6 +21,9 @@ fly_app_env := if branch == "main" {
     "--env SIMSE_IO_HOST=simse.dev"
 }
 
+build:
+    depot build --push --tag ghcr.io/simse/simse.io:latest --project lcf3hcmtrt .
+
 deploy:
     flyctl deploy --app simse-{{ env }} --local-only {{ fly_app_env }}
 
@@ -37,6 +40,9 @@ dev:
 
 dev-server:
     ./bin/air -- -primary
+
+dev-server-once:
+    go run main.go -primary
 
 dev-litefs:
     ./bin/litefs mount

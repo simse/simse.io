@@ -2,16 +2,22 @@ package database
 
 import (
 	"bufio"
+	"context"
 	"io"
 	"os"
 	"os/exec"
+	"os/signal"
 	"sync"
+	"syscall"
 
 	"github.com/rs/zerolog/log"
 )
 
 func MountLitefs() {
-	cmd := exec.Command("./bin/litefs", "mount")
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
+
+	cmd := exec.CommandContext(ctx, "./bin/litefs", "mount")
 
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
@@ -59,6 +65,17 @@ func MountLitefs() {
 			line = line[:len(line)-1]
 			log.Info().Str("component", "litefs").Msg(line)
 		}
+	}()
+
+	sigCh := make(chan os.Signal, 1)
+	signal.Notify(sigCh, os.Interrupt, syscall.SIGINT)
+	go func() {
+		sig := <-sigCh
+		log.Info().Msg("received interrupt, killing litefs")
+		if err := cmd.Process.Signal(sig); err != nil {
+			log.Error().Err(err).Msg("error sending signal to subprocess")
+		}
+		os.Exit(1)
 	}()
 
 	wg.Wait()
