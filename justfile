@@ -2,9 +2,8 @@ set dotenv-load
 set positional-arguments
 
 branch := env_var_or_default("BRANCH", "none")
+random_string := `openssl rand -hex 24`
 env := if branch == "main" {
-    "prod"
-} else if branch == "master" {
     "prod"
 } else if branch == "develop" {
     "staging"
@@ -13,19 +12,28 @@ env := if branch == "main" {
 }
 fly_app_env := if branch == "main" {
     "--env SIMSE_IO_HOST=simse.io"
-} else if branch == "master" {
-    "--env SIMSE_IO_HOST=simse.io"
 } else if branch == "develop" {
     "--env SIMSE_IO_HOST=simse.cloud"
 } else {
     "--env SIMSE_IO_HOST=simse.dev"
 }
+docker_image := "ghcr.io/simse/simse.io:" + env + "-" + random_string
+
+depot_build_command := "depot build --push --tag " + docker_image + " --project lcf3hcmtrt ."
+buildx_build_command := "docker buildx build --push --tag " + docker_image + " ."
+docker_build_command := if branch == "main" {
+    depot_build_command
+} else if branch == "develop" {
+    depot_build_command
+} else {
+    buildx_build_command
+}
 
 build:
-    depot build --push --tag ghcr.io/simse/simse.io:latest --project lcf3hcmtrt .
+    {{ docker_build_command }}
 
-deploy:
-    flyctl deploy --app simse-{{ env }} --local-only {{ fly_app_env }}
+deploy: build
+    flyctl deploy --app simse-{{ env }} --image {{ docker_image }} {{ fly_app_env }}
 
 load-test:
     k6 run k6/test.js
