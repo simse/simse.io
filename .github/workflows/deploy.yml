@@ -18,6 +18,13 @@ jobs:
       - 
         uses: superfly/flyctl-actions/setup-flyctl@master
       -
+        name: Login to GitHub Container Registry
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
         run: just deploy
         env:
           BRANCH: ${{ github.ref_name }}
