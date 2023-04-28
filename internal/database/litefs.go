@@ -13,6 +13,16 @@ import (
 	"github.com/rs/zerolog/log"
 )
 
+func readOutput(reader io.Reader, component string) {
+	scanner := bufio.NewScanner(reader)
+	for scanner.Scan() {
+		log.Info().Str("component", component).Msg(scanner.Text())
+	}
+	if err := scanner.Err(); err != nil {
+		log.Error().Err(err).Msgf("error reading %s", component)
+	}
+}
+
 func MountLitefs() {
 	ctx, cancel := context.WithCancel(context.Background())
 	defer cancel()
@@ -37,34 +47,12 @@ func MountLitefs() {
 
 	go func() {
 		defer wg.Done()
-		reader := bufio.NewReader(stdout)
-		for {
-			line, err := reader.ReadString('\n')
-			if err != nil {
-				if err != io.EOF {
-					log.Error().Err(err).Msg("error reading stdout")
-				}
-				break
-			}
-			line = line[:len(line)-1]
-			log.Info().Str("component", "litefs").Msg(line)
-		}
+		readOutput(stdout, "litefs stdout")
 	}()
 
 	go func() {
 		defer wg.Done()
-		reader := bufio.NewReader(stderr)
-		for {
-			line, err := reader.ReadString('\n')
-			if err != nil {
-				if err != io.EOF {
-					log.Error().Err(err).Msg("error reading stderr")
-				}
-				break
-			}
-			line = line[:len(line)-1]
-			log.Info().Str("component", "litefs").Msg(line)
-		}
+		readOutput(stderr, "litefs stderr")
 	}()
 
 	sigCh := make(chan os.Signal, 1)

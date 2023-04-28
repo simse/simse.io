@@ -10,10 +10,10 @@ export const options = {
 };
 
 export default function () {
-    http.get('https://simse.dev');
+    http.get('https://simse.io');
     sleep(1);
-    http.get('https://simse.dev/posts');
+    http.get('https://simse.io/posts');
     sleep(1);
-    http.get('https://simse.dev/posts/rebuilding-my-personal-website-is-my-vice');
+    http.get('https://simse.io/posts/using-gpt-4-to-write-better-articles');
     sleep(1);
 }
