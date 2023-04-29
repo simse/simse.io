@@ -20,7 +20,7 @@ primary_region = "lhr"
   auto_start_machines = true
   [http_service.concurrency]
     type = "requests"
-    hard_limit = 1500
+    hard_limit = 1200
     soft_limit = 1000
 
 [checks]
