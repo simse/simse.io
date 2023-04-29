@@ -81,6 +81,11 @@ func StartServer() {
 
 		return c.SendString("OK")
 	})
+	rootApp.Post("/webhook/wordpress", func(c *fiber.Ctx) error {
+		go tasks.SyncWordpress()
+
+		return c.SendString("OK")
+	})
 
 	hosts[os.Getenv("SIMSE_IO_HOST")] = &Host{Fiber: rootApp}
 

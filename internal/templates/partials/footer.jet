@@ -10,4 +10,12 @@
     <p class="mt-4">
         <span class="text-zinc-400">Served from</span> {{ currentRegion() }}
     </p>
+
+    <div class="flex gap-2 items-center mt-8">
+        <img src="/static/images/pride.svg" class="border-2 border-white h-6" />
+
+        <p class="text-lg">
+            Love is love.
+        </p>
+    </div>
 </footer>
