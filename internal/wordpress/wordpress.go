@@ -1,10 +1,17 @@
 package wordpress
 
 import (
+	"bytes"
 	"crypto/sha256"
 	"fmt"
+	"regexp"
+	"strings"
 	"time"
 
+	"github.com/alecthomas/chroma"
+	chroma_html "github.com/alecthomas/chroma/formatters/html"
+	"github.com/alecthomas/chroma/lexers"
+	"github.com/alecthomas/chroma/styles"
 	"github.com/imroc/req/v3"
 	"github.com/rs/zerolog/log"
 	"github.com/simse/simse.io/internal/database"
@@ -113,7 +120,10 @@ func getTaxemonyByID(taxonomy string, ids []int) []TaxemonyRaw {
 }
 
 func rawToPost(post PostRaw) (database.Post, error) {
-	minifiedContent, err := minifyHtml(post.Content.Rendered)
+	postHtml := post.Content.Rendered
+	postHtml = parseHtml(postHtml)
+
+	postHtml, err := minifyHtml(postHtml)
 	if err != nil {
 		return database.Post{}, err
 	}
@@ -136,7 +146,7 @@ func rawToPost(post PostRaw) (database.Post, error) {
 		Published:     parseDate(post.DateGMT),
 		Slug:          post.Slug,
 		Status:        post.Status,
-		HTML:          minifiedContent,
+		HTML:          postHtml,
 		Excerpt:       post.Excerpt.Rendered,
 		Tags:          tags,
 		FeaturedImage: media.SourceURL,
@@ -189,4 +199,63 @@ func minifyHtml(input string) (string, error) {
 func parseDate(date string) time.Time {
 	t, _ := time.Parse("2006-01-02T15:04:05", date)
 	return t
+}
+
+func parseHtml(input string) string {
+	// find all wp-block-code blocks and parse
+	re := regexp.MustCompile(`(?s)<pre class="wp-block-code.*?>(.*?)</pre>`)
+	input = re.ReplaceAllStringFunc(input, func(s string) string {
+		// remove pre tags
+		s = strings.Replace(s, "<pre class=\"wp-block-code\">", "", 1)
+		s = strings.Replace(s, "</pre>", "", 1)
+
+		// get value of lang attribute of code tag, e.g. <span lang="go" class="language-go">
+		langRegex := regexp.MustCompile(`lang="([^"]+)"`)
+		contentRegex := regexp.MustCompile(`<code[^>]*>([\s\S]*?)<\/code>`)
+
+		langAttrValue := langRegex.FindStringSubmatch(s)
+		content := contentRegex.FindStringSubmatch(s)
+
+		if len(langAttrValue) == 2 && len(content) == 2 {
+			sourceCode := content[1]
+			lang := langAttrValue[1]
+
+			lexer := lexers.Get(lang)
+
+			if lexer == nil {
+				lexer = lexers.Analyse(sourceCode)
+			}
+
+			if lexer == nil {
+				log.Error().Str("lang", lang).Msg("failed to find lexer")
+				lexer = lexers.Fallback
+			}
+			lexer = chroma.Coalesce(lexer)
+
+			style := styles.Get("github-dark")
+			if style == nil {
+				style = styles.Fallback
+			}
+			formatter := chroma_html.New(chroma_html.WithClasses(true))
+
+			iterator, err := lexer.Tokenise(nil, sourceCode)
+			if err != nil {
+				log.Error().Err(err).Msg("failed to tokenize code")
+				return s
+			}
+
+			buf := new(bytes.Buffer)
+			err = formatter.Format(buf, style, iterator)
+			if err != nil {
+				log.Error().Err(err).Msg("failed to highlight code")
+				return s
+			}
+
+			return buf.String()
+		}
+
+		return s
+	})
+
+	return input
 }

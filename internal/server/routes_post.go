@@ -1,8 +1,6 @@
 package server
 
 import (
-	"fmt"
-
 	"github.com/gofiber/fiber/v2"
 	"github.com/simse/simse.io/internal/database"
 )
@@ -24,8 +22,6 @@ func PostRoute(c *fiber.Ctx) error {
 	if err != nil {
 		return fiber.ErrNotFound
 	}
-
-	fmt.Println(post.Tags)
 
 	return c.Render("pages/post", fiber.Map{
 		"pageTitle": post.Title + " — Simon Sorensen",
