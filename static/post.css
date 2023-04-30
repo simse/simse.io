@@ -1,7 +1,7 @@
 .chroma {
     color: #c9d1d9;
     background-color: rgb(24 24 27 / var(--tw-bg-opacity));
-    font-family: 'IBM Plex Mono', monospace;
+    font-family: 'IBM Plex Mono', 'Courier New', Courier, monospace;
 }
 
 .chroma .err {

@@ -9,6 +9,7 @@ import (
 	"github.com/gofiber/adaptor/v2"
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/compress"
+	"github.com/gofiber/fiber/v2/middleware/etag"
 	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
@@ -101,13 +102,13 @@ func StartServer() {
 	}))
 	app.Use(requestid.New())
 
+	// enable ETag
+	rootApp.Use(etag.New())
 	rootApp.Static("/static", "./static", fiber.Static{
-		Compress:      true,
-		CacheDuration: 30 * 24 * time.Hour,
+		Compress: true,
 	})
 	rootApp.Static("/", "./static", fiber.Static{
-		Compress:      true,
-		CacheDuration: 30 * 24 * time.Hour,
+		Compress: true,
 	})
 	rootApp.Get("/static/live.js", adaptor.HTTPHandler(live.Javascript{}))
 	rootApp.Get("/static/auto.js.map", adaptor.HTTPHandler(live.JavascriptMap{}))

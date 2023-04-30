@@ -16,9 +16,10 @@ type Meta struct {
 
 var CurrentMeta Meta
 
-var regionToCity = map[string]string{
+var RegionToCity = map[string]string{
 	"ams": "Amsterdam, Netherlands",
 	"arn": "Stockholm, Sweden",
+	"atl": "Atlanta, Georgia",
 	"bog": "Bogotá, Colombia",
 	"bos": "Boston, Massachusetts",
 	"cdg": "Paris, France",
@@ -66,7 +67,7 @@ func init() {
 	}
 
 	// set human readable region, fallback to region if not found
-	if val, ok := regionToCity[CurrentMeta.Region]; ok {
+	if val, ok := RegionToCity[CurrentMeta.Region]; ok {
 		CurrentMeta.HumanReadableRegion = val
 	} else {
 		CurrentMeta.HumanReadableRegion = CurrentMeta.Region
