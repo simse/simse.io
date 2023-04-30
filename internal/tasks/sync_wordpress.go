@@ -1,6 +1,7 @@
 package tasks
 
 import (
+	"os"
 	"strings"
 
 	"github.com/imroc/req/v3"
@@ -70,5 +71,5 @@ func wakeAllRegions() {
 
 func wakeRegion(region string) {
 	client := req.C()
-	client.Get("https://simse.io/").SetHeader("fly-prefer-region", region).Do()
+	client.Get("https://"+os.Getenv("SIMSE_IO_HOST")).SetHeader("fly-prefer-region", region).Do()
 }
