@@ -56,7 +56,8 @@ func StartServer() {
 	// routes
 	rootApp.Get("/", func(c *fiber.Ctx) error {
 		return c.Render("pages/index", fiber.Map{
-			"pageTitle": "Simon Sorensen — Classically Trained Software Engineer",
+			"pageTitle":       "Simon Sorensen — Classically Trained Software Engineer",
+			"pageDescription": "Simon Sorensen is a classically trained software engineer based out of London. He loves everything Artificial Intelligence and Machine Learning.",
 		}, "layouts/content")
 	})
 
@@ -68,12 +69,15 @@ func StartServer() {
 
 	rootApp.Get("/projects", func(c *fiber.Ctx) error {
 		return c.Render("pages/projects", fiber.Map{
-			"pageTitle": "My Projects — Simon Sorensen",
+			"pageTitle":       "My Projects — Simon Sorensen",
+			"pageDescription": "All of my projects I have created over the years. Big and small, good and bad, it's here!",
 		}, "layouts/container")
 	})
 
 	rootApp.Get("/posts", PostsIndex)
 	rootApp.Get("/posts/:slug", PostRoute)
+
+	rootApp.Get("/sitemap.xml", sitemapHandler)
 
 	rootApp.Get("/_image", imageHandler)
 

@@ -1,8 +1,9 @@
-{{ block image(url, width=0, height=0, quality=0, responsive=true) }}
+{{ block image(url, width=0, height=0, quality=0, responsive=true, alt="") }}
 <img
   src="/_image?url={{ url }}&width={{ width*2 }}&height={{ height*2 }}&quality=100"
   {{ if !responsive }}
   style="max-width: {{ width }}px;"
   {{ end }}
+  alt="{{ alt }}"
 />
 {{ end }}

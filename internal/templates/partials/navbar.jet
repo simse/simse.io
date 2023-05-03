@@ -4,7 +4,7 @@
     <div class="flex items-center">
         <a href="/">
             <div class="w-8 h-8">
-                {{ yield image(url="https://assets.simse.io/android-chrome-256x256.png", width=32, height=32, quality=100, responsive=false) }}
+                {{ yield image(url="https://assets.simse.io/android-chrome-256x256.png", width=32, height=32, quality=100, responsive=false, alt="Memoji resembling Simon winking") }}
             </div>
         </a>
 
