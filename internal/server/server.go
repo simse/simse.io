@@ -31,7 +31,7 @@ type (
 	}
 )
 
-var TimeoutTracker = time.NewTimer(1 * time.Minute)
+var TimeoutTracker = time.NewTimer(5 * time.Minute)
 var TimeoutEnabled = true
 
 func StartServer() {
