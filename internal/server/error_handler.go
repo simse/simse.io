@@ -55,8 +55,14 @@ func errorHandler(ctx *fiber.Ctx, err error) error {
 	}, "layouts/error")
 	if err != nil {
 		log.Error().Err(err).Msg("failed to render error page")
+
+		errorMessage := fmt.Sprintf("The error code was %d, but rendering the error page failed, so now it's 500.", code)
+		if code == 500 {
+			errorMessage = "Rendering the error page failed, it's 500."
+		}
+
 		// In case the SendFile fails
-		return ctx.Status(fiber.StatusInternalServerError).SendString(fmt.Sprintf("The error code was %d, but rendering the error page failed, so now it's 500.", code))
+		return ctx.Status(fiber.StatusInternalServerError).SendString(errorMessage)
 	}
 
 	// Return from handler

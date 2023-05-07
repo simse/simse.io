@@ -12,6 +12,9 @@
         {{ if isset(pageDescription) }}
         <meta name="description" content="{{ pageDescription }}">
         {{ end }}
+        {{ if !shouldIndex() }}
+        <meta name="robots" content="noindex, nofollow" />
+        {{ end }}
 		<!--link rel="icon" href="/icon.svg" type="image/svg+xml"-->
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png">
 		<!--link rel="manifest" href="/manifest.webmanifest"-->

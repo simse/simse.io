@@ -34,6 +34,14 @@ type (
 var TimeoutTracker = time.NewTimer(5 * time.Minute)
 var TimeoutEnabled = true
 
+func shouldIndex() bool {
+	if meta.CurrentMeta.Environment == "prod" && meta.CurrentMeta.App == "simse-prod" {
+		return true
+	}
+
+	return false
+}
+
 func StartServer() {
 	// load templates
 	engine := jet.NewFileSystem(http.FS(templates.Files), ".jet")
@@ -44,6 +52,7 @@ func StartServer() {
 	engine.AddFunc("currentRegion", func() string {
 		return meta.CurrentMeta.HumanReadableRegion
 	})
+	engine.AddFunc("shouldIndex", shouldIndex)
 
 	hosts := map[string]*Host{}
 
