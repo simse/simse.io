@@ -16,6 +16,7 @@ import (
 	"github.com/gofiber/template/jet"
 	"github.com/jfyne/live"
 	"github.com/rs/zerolog/log"
+	"github.com/simse/simse.io/internal/database"
 	"github.com/simse/simse.io/internal/meta"
 	"github.com/simse/simse.io/internal/tasks"
 	"github.com/simse/simse.io/internal/templates"
@@ -64,9 +65,15 @@ func StartServer() {
 
 	// routes
 	rootApp.Get("/", func(c *fiber.Ctx) error {
+		posts, err := database.GetPosts()
+		if err != nil {
+			return err
+		}
+
 		return c.Render("pages/index", fiber.Map{
 			"pageTitle":       "Simon Sorensen — Classically Trained Software Engineer",
 			"pageDescription": "Simon Sorensen is a classically trained software engineer based out of London. He loves everything Artificial Intelligence and Machine Learning.",
+			"posts":           posts,
 		}, "layouts/content")
 	})
 
