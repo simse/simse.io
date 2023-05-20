@@ -1,44 +1,49 @@
-<div class="flex gap-8 max-w-[2000px] mx-auto p-8 flex-col-reverse md:flex-row md:py-16">
-	<div class="flex-none w-full sm:w-96">
-		<!-- About -->
-		<!--h1 class="text-4xl  mb-8">Simon Sorensen</h1-->
+<div class="max-w-7xl mx-auto pt-16 p-2">
+	<header class="mb-16">
+		<img class="mb-5 rounded-full w-32 h-32" src="https://yt3.googleusercontent.com/SYsMW43Jqxfx_kNwyHF_RMHhtbEH4brKxEg6xK0klXvLz_KDPc_SU-Uh-Jjzx_JYBv4JNLBR=s176-c-k-c0x00ffffff-no-rj" />
 
-		<h2 class="font-bold text-xl ">About me</h2>
-		<h3 class="text-2xl ">Computer Science student</h3>
-		<p class="text-gray-400">by day</p>
+		<h1 class="text-3xl mb-6">Simon Sorensen — Classically Trained Software Engineer</h1>
+		<h2 class="text-lg text-zinc-300">Luv' <strong class="text-[#007ACC]">Typescript</strong>. 'Ate the <strong class="text-[#F0DB4F]">JS ecosystem</strong>. Simple as.</h2>
+	</header>
 
-		<h3 class="text-2xl  mt-4">Software Engineering Intern @ LEGO</h3>
-		<p class="mb-4 text-gray-400">also by day</p>
+	<!-- journeys -->
+	<div class="">
+		<div class="my-8 border-b border-white/20 pb-8">
+			<h3 class="text-zinc-400 text-xl mb-4">For those interested in my <span class="text-white">writing</span>...</h3>
 
-		<h3 class="text-2xl  mt-4"><a href="https://www.youtube.com/@simon.sorensen" target="_blank" class="underline decoration-from-font">Youtube</a> Programming Educator</h3>
-		<p class="mb-4 text-gray-400">by night</p>
+			{{ range i, post := posts }}
+			<a href="/posts/being-a-little-bit-silly-with-gpt-4-and-elevenlabs" class="mb-3 block">
+				<h3>{{ post.Title }}</h3>
 
-		<a class="underline decoration-from-font  text-xl" href="https://simon-sorensen.com" target="_blank">Curriculum Vitae</a>
-
-		<!-- Articles -->
-		<div class="mt-8">
-				<h2 class="font-bold text-xl  mb-2">Recent posts</h2>
-
-				{{ range i, post := posts }}
-					<a href="/posts/being-a-little-bit-silly-with-gpt-4-and-elevenlabs" class="mb-3 block">
-						<h3>{{ post.Title }}</h3>
-
-						<p class="text-zinc-400 text-sm">
-							{{ formatDate(post.Published) }}
-						</p>
-					</a>
-				{{ end }}
-
-			<a class="underline decoration-from-font mt-8 block text-lg" href="/projects">Want to see my <em>work</em>?</a>
+				<p class="text-zinc-400 text-sm">
+					{{ formatDate(post.Published) }}
+				</p>
+			</a>
+			{{ end }}
 		</div>
-	</div>
 
-	<div class="flex-auto">
-		<div class="relative h-fit " style="aspect-ratio:5/3;">
-		<div>
-			<img class="top-0 absolute w-full h-full -z-10" src="/images/placeholder.svg" alt="">
+		<!--div class="my-8 border-b border-white/20 pb-8">
+			<h3 class="text-zinc-400 mb-2 text-xl">For those interested in my Youtube videos...</h3>
 
-			<img class="max-h-full w-full object-cover" style="aspect-ratio:5/3;" src="https://imagedelivery.net/momKfEj2XLFFfTO94YnvIg/d56330f2-41d4-484a-e488-8c2566378100/format=auto,h=1000,w=1600,fit=cover,gravity=center" alt="80s style graphic with my full name: Simon Sorensen">
+			blahl blah blah
+		</!--div>
+
+		<div class="my-8 border-b border-white/20 pb-8">
+			<h3 class="text-zinc-400 mb-2 text-xl">For those interested in my programming projects...</h3>
+
+			blahl blah blah
+		</div>
+
+		<div-- class="my-8 border-b border-white/20 pb-8">
+			<h3 class="text-zinc-400 mb-2 text-xl">For those interested in my AI experiments...</h3>
+
+			blahl blah blah
+		</div-->
+
+		<div class="my-8 pb-8">
+			<h3 class="text-zinc-400 mb-2 text-xl">For those interested in <span class="text-white">my favorite joke</span>...</h3>
+
+			<p class="text-2xl text-zinc-300">I have a good knock-knock joke, but you have to start it.</p>
 		</div>
 	</div>
 </div>
