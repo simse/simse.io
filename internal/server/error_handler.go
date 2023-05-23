@@ -35,6 +35,7 @@ func errorHandler(ctx *fiber.Ctx, err error) error {
 	}
 
 	log.Info().Int("error_code", code).Str("path", ctx.Path()).Msg("error handler triggered")
+	log.Error().Err(err).Msg("error handler triggered")
 
 	// find error title and description, fallback to default
 	title, ok := errorCodeToTitle[code]

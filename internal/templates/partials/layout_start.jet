@@ -1,7 +1,11 @@
 <!doctype html>
 <html lang="en">
     <head>
+        {{ if isset(pageTitle) }}
         <title>{{ pageTitle }}</title>
+        {{ else }}
+        <title>Simon Sorensen — Classically Trained Software Engineer</title>
+        {{ end }}
         <meta charset="utf-8">
         <link rel="stylesheet" href="/static/style.css" type="text/css">
         <link rel="stylesheet" href="/static/post.css" type="text/css">

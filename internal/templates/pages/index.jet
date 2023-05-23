@@ -1,49 +1,50 @@
-<div class="max-w-7xl mx-auto pt-16 p-2">
-	<header class="mb-16">
-		<img class="mb-5 rounded-full w-32 h-32" src="https://yt3.googleusercontent.com/SYsMW43Jqxfx_kNwyHF_RMHhtbEH4brKxEg6xK0klXvLz_KDPc_SU-Uh-Jjzx_JYBv4JNLBR=s176-c-k-c0x00ffffff-no-rj" />
+{{ import "../components/image.jet" }}
+{{ include "/partials/layout_start.jet" }}
 
-		<h1 class="text-3xl mb-6">Simon Sorensen — Classically Trained Software Engineer</h1>
-		<h2 class="text-lg text-zinc-300">Luv' <strong class="text-[#007ACC]">Typescript</strong>. 'Ate the <strong class="text-[#F0DB4F]">JS ecosystem</strong>. Simple as.</h2>
-	</header>
-
-	<!-- journeys -->
-	<div class="">
-		<div class="my-8 border-b border-white/20 pb-8">
-			<h3 class="text-zinc-400 text-xl mb-4">For those interested in my <span class="text-white">writing</span>...</h3>
-
-			{{ range i, post := posts }}
-			<a href="/posts/being-a-little-bit-silly-with-gpt-4-and-elevenlabs" class="mb-3 block">
-				<h3>{{ post.Title }}</h3>
-
-				<p class="text-zinc-400 text-sm">
-					{{ formatDate(post.Published) }}
-				</p>
-			</a>
-			{{ end }}
-		</div>
-
-		<!--div class="my-8 border-b border-white/20 pb-8">
-			<h3 class="text-zinc-400 mb-2 text-xl">For those interested in my Youtube videos...</h3>
-
-			blahl blah blah
-		</!--div>
-
-		<div class="my-8 border-b border-white/20 pb-8">
-			<h3 class="text-zinc-400 mb-2 text-xl">For those interested in my programming projects...</h3>
-
-			blahl blah blah
-		</div>
-
-		<div-- class="my-8 border-b border-white/20 pb-8">
-			<h3 class="text-zinc-400 mb-2 text-xl">For those interested in my AI experiments...</h3>
-
-			blahl blah blah
-		</div-->
-
-		<div class="my-8 pb-8">
-			<h3 class="text-zinc-400 mb-2 text-xl">For those interested in <span class="text-white">my favorite joke</span>...</h3>
-
-			<p class="text-2xl text-zinc-300">I have a good knock-knock joke, but you have to start it.</p>
-		</div>
+<div class="max-w-3xl mx-auto pt-64 p-2">
+	<div class="w-16 h-16 mb-8">
+		{{ yield image(url="https://assets.simse.io/android-chrome-256x256.png", width=64, height=64, quality=100, responsive=false, alt="Memoji resembling Simon winking") }}
 	</div>
+
+	<div class="max-h-96 overflow-y-auto" live-hook="newmessage" id="messages">
+	{{ range conversation.Messages }}
+		{{ if !.User }}
+			<p class="text-2xl mb-8" live-hook="newmessage">{{ .Content }}</p>
+		{{ else }}
+			<p class="text-lg text-zinc-400 mb-2" live-hook="newmessage">{{ .Content }}</p>
+		{{ end }}
+	{{ end }}
+	</div>
+
+	<form class="mt-16" live-submit="send-message" id="message_form">
+		<input class="form-input bg-zinc-800 text-white p-4 placeholder:text-zinc-400" type="text" name="message" placeholder="Type a message here..." />
+
+		<button class="bg-blue-600 ml-2 p-4" type="submit">send message</button>
+	</form>
 </div>
+
+<style>
+#messages::-webkit-scrollbar {
+  width: 8px;
+  background: #18181b;
+}
+ 
+#messages::-webkit-scrollbar-thumb {
+  background-color: #27272a;
+}
+</style>
+
+<script>
+window.Hooks = {
+	"newmessage": {
+		updated: () => {
+			// selected last message
+			let lastMessage = document.querySelector("#messages p:last-child")
+
+			lastMessage.scrollIntoView({ behavior: "smooth", block: "start" });
+		},
+	}
+}
+</script>
+
+{{ include "/partials/layout_end.jet" }}

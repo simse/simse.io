@@ -1,6 +1,7 @@
 package server
 
 import (
+	"context"
 	"net/http"
 	"os"
 	"strings"
@@ -13,10 +14,11 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/favicon"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/fiber/v2/middleware/requestid"
+	"github.com/gofiber/fiber/v2/middleware/session"
 	"github.com/gofiber/template/jet"
 	"github.com/jfyne/live"
 	"github.com/rs/zerolog/log"
-	"github.com/simse/simse.io/internal/database"
+	"github.com/simse/simse.io/internal/livefiber"
 	"github.com/simse/simse.io/internal/meta"
 	"github.com/simse/simse.io/internal/tasks"
 	"github.com/simse/simse.io/internal/templates"
@@ -64,7 +66,7 @@ func StartServer() {
 	rootApp.Use(recover.New())
 
 	// routes
-	rootApp.Get("/", func(c *fiber.Ctx) error {
+	/*rootApp.Get("/", func(c *fiber.Ctx) error {
 		posts, err := database.GetPosts()
 		if err != nil {
 			return err
@@ -75,7 +77,12 @@ func StartServer() {
 			"pageDescription": "Simon Sorensen is a classically trained software engineer based out of London. He loves everything Artificial Intelligence and Machine Learning.",
 			"posts":           posts,
 		}, "layouts/content")
+	})*/
+	frontpageHandler.HandleMount(func(ctx context.Context, s live.Socket) (interface{}, error) {
+		// This will initialise the counter if needed.
+		return newChat(s), nil
 	})
+	rootApp.Get("/", livefiber.NewHandler(session.New(), frontpageHandler).Handlers()...)
 
 	rootApp.Get("/sitemap", func(c *fiber.Ctx) error {
 		return c.Render("pages/sitemap", fiber.Map{
