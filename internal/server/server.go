@@ -90,6 +90,12 @@ func StartServer() {
 		}, "layouts/container")
 	})
 
+	rootApp.Get("/design-system", func(c *fiber.Ctx) error {
+		return c.Render("pages/design-system", fiber.Map{
+			"pageTitle": "Design System for simse.io — Simon Sorensen",
+		}, "layouts/container")
+	})
+
 	rootApp.Get("/projects", func(c *fiber.Ctx) error {
 		return c.Render("pages/projects", fiber.Map{
 			"pageTitle":       "My Projects — Simon Sorensen",
