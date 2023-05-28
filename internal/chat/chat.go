@@ -3,7 +3,7 @@ package chat
 import gonanoid "github.com/matoous/go-nanoid/v2"
 
 type Bot struct {
-	SendMessage func(string) (chan Message, error)
+	SendMessage func(string, []Message) (chan Message, error)
 	Name        string
 	Description string
 }
@@ -18,10 +18,20 @@ type Message struct {
 type Conversation struct {
 	Bot      Bot
 	Messages []Message `json:"messages"`
+	Done     bool      `json:"done"`
 }
 
 func (c *Conversation) HandleMessage(message string) (chan Message, error) {
-	return c.Bot.SendMessage(message)
+	// nanoid
+	//id, _ := gonanoid.New()
+
+	/*c.Messages = append(c.Messages, Message{
+		ID:      id,
+		Content: message,
+		User:    true,
+	})*/
+
+	return c.Bot.SendMessage(message, c.Messages)
 }
 
 func (c *Conversation) AddMessage(message Message) {

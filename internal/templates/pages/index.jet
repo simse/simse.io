@@ -1,26 +1,37 @@
 {{ import "../components/image.jet" }}
 {{ include "/partials/layout_start.jet" }}
+{{ include "/partials/non_prod_banner.jet" }}
 
-<div class="max-w-3xl mx-auto pt-64 p-2">
-	<div class="w-16 h-16 mb-8">
-		{{ yield image(url="https://assets.simse.io/android-chrome-256x256.png", width=64, height=64, quality=100, responsive=false, alt="Memoji resembling Simon winking") }}
+<div class="max-w-3xl mx-auto md:pt-[25vh] pt-16 px-4">
+	<div class="mb-8 flex items-center gap-4">
+		<div class="w-16 h-16">
+			{{ yield image(url="https://assets.simse.io/android-chrome-256x256.png", width=64, height=64, quality=100, responsive=false, alt="Memoji resembling Simon winking") }}
+		</div>
+
+		<p class="text-lg font-bold">Simon Sorensen</p>
 	</div>
 
-	<div class="max-h-96 overflow-y-auto" live-hook="newmessage" id="messages">
+	<div class="max-h-96 overflow-y-auto pr-4" live-hook="newmessage" id="messages">
 	{{ range conversation.Messages }}
 		{{ if !.User }}
-			<p class="text-2xl mb-8" live-hook="newmessage">{{ .Content }}</p>
+			<p class="text-xl sm:text-2xl mb-8" live-hook="newmessage">{{ .Content }}</p>
 		{{ else }}
-			<p class="text-lg text-zinc-400 mb-2" live-hook="newmessage">{{ .Content }}</p>
+			<p class="sm:text-lg text-zinc-400 mb-2" live-hook="newmessage">{{ .Content }}</p>
 		{{ end }}
 	{{ end }}
 	</div>
 
-	<form class="mt-16" live-submit="send-message" id="message_form">
-		<input class="form-input bg-zinc-800 text-white p-4 placeholder:text-zinc-400" type="text" name="message" placeholder="Type a message here..." />
+	<div class="mt-16">
+	{{ if !conversation.Done }}
+		<form class="grid-cols-12 grid gap-2" disabled live-submit="send-message" id="message_form">
+			<input class="form-input bg-zinc-800 text-white p-4 placeholder:text-zinc-400 col-span col-span-9" type="text" name="message" id="message_input" placeholder="Say something..." />
 
-		<button class="bg-blue-600 ml-2 p-4" type="submit">send message</button>
-	</form>
+			<button class="bg-blue-600 ml-2 p-4 col-span-3" type="submit">Send<span class="hidden sm:inline"> message</span></button>
+		</form>
+	{{ else }}
+		<p class="text-blue-100 text-lg px-4 py-3 bg-blue-800">Thanks for chatting for with me. This conversation is over for the time being. 🤑</p>
+	{{ end }}
+	</div>
 </div>
 
 <style>
@@ -34,7 +45,7 @@
 }
 </style>
 
-<script>
+<script lang="js">
 window.Hooks = {
 	"newmessage": {
 		updated: () => {
@@ -42,7 +53,17 @@ window.Hooks = {
 			let lastMessage = document.querySelector("#messages p:last-child")
 
 			lastMessage.scrollIntoView({ behavior: "smooth", block: "start" });
+
+			setTimeout(() => {
+				document.getElementById("message_input").value = "";
+			}, 1)
+			// console.log(document.getElementById("message_input"))
 		},
+		mounted: () => {
+			let lastMessage = document.querySelector("#messages p:last-child")
+
+			lastMessage.scrollIntoView({ behavior: "smooth", block: "start" });
+		}
 	}
 }
 </script>

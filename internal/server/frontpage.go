@@ -12,28 +12,47 @@ import (
 	"github.com/simse/simse.io/internal/livefiber"
 )
 
-type Chat struct {
-	Test string
-}
+// temp storage for chat sessions
+var chatSessions = map[string]*chat.Conversation{}
 
 var frontpageHandler = live.NewHandler(livefiber.WithViewsRenderer("pages/index"))
 
 func newChat(s live.Socket) *chat.Conversation {
 	c, ok := s.Assigns().(*chat.Conversation)
-	if !ok {
-		log.Debug().Str("bot", "aurelia").Msg("creating new chat")
-		return &chat.Conversation{
-			Bot: chat.Aurelia,
-			Messages: []chat.Message{
-				{
-					ID:      "first_message",
-					Content: "Hey, how ya doin'? I'm Simon Sorensen, the Golang and Typescript enthusiast from London. I also love space and sci fi movies.",
-					User:    false,
-				},
-			},
-		}
+	if ok {
+		return c
 	}
-	return c
+
+	// get session key
+	sessionKeyValue, ok := s.Session()["_lsid"]
+	sessionKey := ""
+	if ok {
+		sessionKey = sessionKeyValue.(string)
+	}
+
+	// check if session exists
+	c, ok = chatSessions[sessionKey]
+	if ok {
+		log.Debug().Str("session", sessionKey).Msg("found existing chat session")
+		return c
+	}
+
+	log.Debug().Str("session", sessionKey).Str("bot", "aurelia").Msg("creating new chat")
+	conversation := &chat.Conversation{
+		Bot:  chat.Aurelia,
+		Done: false,
+		Messages: []chat.Message{
+			{
+				ID:      "first_message",
+				Content: "Hi there, unfortunately I'm in a terrible mood today. Anyway, I'm Simon Sorensen, a software engineering intern living in London.",
+				User:    false,
+			},
+		},
+	}
+
+	chatSessions[sessionKey] = conversation
+
+	return conversation
 }
 
 func init() {
@@ -69,7 +88,7 @@ func init() {
 	frontpageHandler.HandleSelf("newmessage", func(ctx context.Context, s live.Socket, data interface{}) (interface{}, error) {
 		conversation := s.Assigns().(*chat.Conversation)
 
-		log.Debug().Str("bot", conversation.Bot.Name).Msg("handling newmessage event")
+		//log.Debug().Str("bot", conversation.Bot.Name).Msg("handling newmessage event")
 
 		// find and replace message based on id
 		message := data.(chat.Message)
@@ -87,7 +106,11 @@ func init() {
 			conversation.Messages = append(conversation.Messages, message)
 		}
 
-		log.Debug().Bool("replaced_message", replacedMessage).Str("bot", "aurelia").Msg("updated conversation")
+		if len(conversation.Messages) > 13 {
+			conversation.Done = true
+		}
+
+		//log.Debug().Bool("replaced_message", replacedMessage).Str("bot", "aurelia").Msg("updated conversation")
 
 		return conversation, nil
 	})

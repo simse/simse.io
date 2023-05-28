@@ -45,6 +45,8 @@ func shouldIndex() bool {
 	return false
 }
 
+var store = session.New()
+
 func StartServer() {
 	// load templates
 	engine := jet.NewFileSystem(http.FS(templates.Files), ".jet")
@@ -56,6 +58,7 @@ func StartServer() {
 		return meta.CurrentMeta.HumanReadableRegion
 	})
 	engine.AddFunc("shouldIndex", shouldIndex)
+	engine.AddFunc("isProd", shouldIndex)
 
 	hosts := map[string]*Host{}
 
@@ -82,7 +85,7 @@ func StartServer() {
 		// This will initialise the counter if needed.
 		return newChat(s), nil
 	})
-	rootApp.Get("/", livefiber.NewHandler(session.New(), frontpageHandler).Handlers()...)
+	rootApp.Get("/", livefiber.NewHandler(store, frontpageHandler).Handlers()...)
 
 	rootApp.Get("/sitemap", func(c *fiber.Ctx) error {
 		return c.Render("pages/sitemap", fiber.Map{

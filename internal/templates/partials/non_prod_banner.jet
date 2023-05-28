@@ -1,0 +1,4 @@
+{{ import "../components/banner.jet" }}
+{{ if !isProd() }}
+{{ yield banner(title="This is a test version!", body="It does not reflect the <s>latest</s> and greatest. Go to <a class=\"underline\" href=\"https://simse.io\">simse.io</a>.") }}
+{{ end }}

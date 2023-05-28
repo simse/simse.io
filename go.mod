@@ -13,6 +13,7 @@ require (
 	github.com/jfyne/live v0.15.5
 	github.com/matoous/go-nanoid/v2 v2.0.0
 	github.com/rs/zerolog v1.29.1
+	github.com/sashabaranov/go-openai v1.9.4
 	github.com/tdewolff/minify/v2 v2.12.5
 	golang.org/x/net v0.8.0
 	modernc.org/sqlite v1.21.2
