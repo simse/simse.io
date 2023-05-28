@@ -2,7 +2,7 @@
 {{ include "/partials/layout_start.jet" }}
 {{ include "/partials/non_prod_banner.jet" }}
 
-<div class="max-w-3xl mx-auto md:pt-[25vh] pt-16 px-4">
+<div class="max-w-3xl mx-auto flex flex-col justify-center md:h-[70vh] pt-16 px-4">
 	<div class="mb-8 flex items-center gap-4">
 		<div class="w-16 h-16">
 			{{ yield image(url="https://assets.simse.io/android-chrome-256x256.png", width=64, height=64, quality=100, responsive=false, alt="Memoji resembling Simon winking") }}
@@ -16,7 +16,7 @@
 		{{ if !.User }}
 			<p class="text-xl sm:text-2xl mb-8" live-hook="newmessage">{{ .Content }}</p>
 		{{ else }}
-			<p class="sm:text-lg text-zinc-400 mb-2" live-hook="newmessage">{{ .Content }}</p>
+			<p class="sm:text-lg text-zinc-200 mb-2" live-hook="newmessage">{{ .Content }} <span class="text-zinc-400">{{ .Timestamp | formatTime }}</span></p>
 		{{ end }}
 	{{ end }}
 	</div>

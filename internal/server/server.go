@@ -54,6 +54,20 @@ func StartServer() {
 	engine.AddFunc("formatDate", func(date time.Time) string {
 		return date.Format("January 2, 2006")
 	})
+	engine.AddFunc("formatTime", func(date time.Time) string {
+		// if older than 24 hours, show date
+		if time.Since(date) > 24*time.Hour {
+			return date.Format("January 2, 2006")
+		}
+
+		// if older than 1 hour, show hours
+		if time.Since(date) > time.Hour {
+			return date.Format("15:04")
+		}
+
+		// otherwise show minutes and seconds
+		return date.Format("15:04:05")
+	})
 	engine.AddFunc("currentRegion", func() string {
 		return meta.CurrentMeta.HumanReadableRegion
 	})

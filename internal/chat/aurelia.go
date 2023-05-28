@@ -86,10 +86,10 @@ func AureliaHandleMessage(message string, history []Message) (chan Message, erro
 
 			buffer += response.Choices[0].Delta.Content
 			messageChan <- Message{
-				ID:       id,
-				Content:  buffer,
-				User:     false,
-				Datetime: fmt.Sprintf("%d", time.Now().UnixNano()),
+				ID:        id,
+				Content:   buffer,
+				User:      false,
+				Timestamp: time.Now(),
 			}
 		}
 
@@ -101,9 +101,9 @@ func AureliaHandleMessage(message string, history []Message) (chan Message, erro
 
 func historyToOpenAIMessages(history []Message) []openai.ChatCompletionMessage {
 	// loop throw last 4 messages
-	if len(history) > AURELIA_MAX_HISTORY {
+	/*if len(history) > AURELIA_MAX_HISTORY {
 		history = history[len(history)-AURELIA_MAX_HISTORY:]
-	}
+	}*/
 
 	messages := make([]openai.ChatCompletionMessage, len(history)+1)
 

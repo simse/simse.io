@@ -1,6 +1,10 @@
 package chat
 
-import gonanoid "github.com/matoous/go-nanoid/v2"
+import (
+	"time"
+
+	gonanoid "github.com/matoous/go-nanoid/v2"
+)
 
 type Bot struct {
 	SendMessage func(string, []Message) (chan Message, error)
@@ -9,10 +13,10 @@ type Bot struct {
 }
 
 type Message struct {
-	ID       string `json:"id"`
-	Content  string `json:"content"`
-	User     bool
-	Datetime string
+	ID        string `json:"id"`
+	Content   string `json:"content"`
+	User      bool
+	Timestamp time.Time
 }
 
 type Conversation struct {

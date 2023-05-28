@@ -2,7 +2,6 @@ package server
 
 import (
 	"context"
-	"fmt"
 	"time"
 
 	"github.com/jfyne/live"
@@ -66,10 +65,10 @@ func init() {
 
 		id, _ := gonanoid.New()
 		s.Self(ctx, "newmessage", chat.Message{
-			ID:       id,
-			Content:  p.String("message"),
-			User:     true,
-			Datetime: fmt.Sprintf("%d", time.Now().UnixNano()),
+			ID:        id,
+			Content:   p.String("message"),
+			User:      true,
+			Timestamp: time.Now(),
 		})
 
 		messageChan, err := conversation.HandleMessage(p.String("message"))
