@@ -29,7 +29,7 @@
 		<form class="grid-cols-12 grid gap-2" disabled live-submit="send-message" id="message_form">
 			<input class="form-input bg-zinc-800 text-white p-4 placeholder:text-zinc-400 col-span col-span-9" type="text" name="message" id="message_input" placeholder="Say something..." />
 
-			<button class="bg-blue-600 ml-2 p-4 col-span-3" type="submit">Send<span class="hidden sm:inline"> message</span></button>
+			<button class="bg-blue-700 hover:bg-blue-800 ml-2 p-4 col-span-3" type="submit">Send<span class="hidden sm:inline"> message</span></button>
 		</form>
 	{{ else }}
 		<p class="text-blue-100 text-lg px-4 py-3 bg-blue-800">Thanks for chatting for with me. This conversation is over for the time being. 🤑</p>

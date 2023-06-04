@@ -45,6 +45,14 @@ func shouldIndex() bool {
 	return false
 }
 
+func isProd() bool {
+	if meta.CurrentMeta.Environment == "prod" && meta.CurrentMeta.App == "simse-prod" || meta.CurrentMeta.Region == "kut" {
+		return true
+	}
+
+	return false
+}
+
 var store = session.New()
 
 func StartServer() {
@@ -72,7 +80,7 @@ func StartServer() {
 		return meta.CurrentMeta.HumanReadableRegion
 	})
 	engine.AddFunc("shouldIndex", shouldIndex)
-	engine.AddFunc("isProd", shouldIndex)
+	engine.AddFunc("isProd", isProd)
 
 	hosts := map[string]*Host{}
 
@@ -111,6 +119,12 @@ func StartServer() {
 		return c.Render("pages/design-system", fiber.Map{
 			"pageTitle": "Design System for simse.io — Simon Sorensen",
 		}, "layouts/container")
+	})
+
+	rootApp.Get("/pymitv", func(c *fiber.Ctx) error {
+		return c.Render("pages/project", fiber.Map{
+			"pageTitle": "pymitv — Simon Sorensen",
+		}, "layouts/content")
 	})
 
 	rootApp.Get("/projects", func(c *fiber.Ctx) error {
