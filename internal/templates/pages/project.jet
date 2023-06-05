@@ -1,8 +1,8 @@
 {{ import "../components/image.jet" }}
 
 <div class="mx-auto max-w-[1400px] px-4 pb-16">
-    <header class="flex items-center flex-col py-32">
-        <h1 class="text-3xl lg:text-5xl mb-8">pymitv</h1>
+    <header class="flex flex-col py-32">
+        <h1 class="text-3xl lg:text-5xl mb-6">pymitv</h1>
 
         <p class="text-lg text-zinc-300">A Python 3 library for controlling 3rd gen Xiaomi TVs</p>
     </header>

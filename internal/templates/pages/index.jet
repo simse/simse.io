@@ -1,4 +1,5 @@
 {{ import "../components/image.jet" }}
+{{ pageDescription := "Simon Sorensen is a classically trained software engineer based out of London. He loves everything Artificial Intelligence and Machine Learning." }}
 {{ include "/partials/layout_start.jet" }}
 {{ include "/partials/non_prod_banner.jet" }}
 
