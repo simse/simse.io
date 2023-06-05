@@ -53,7 +53,9 @@ func isProd() bool {
 	return false
 }
 
-var store = session.New()
+var store = session.New(session.Config{
+	Expiration: 24 * 7 * time.Hour,
+})
 
 func StartServer() {
 	// load templates
@@ -91,18 +93,6 @@ func StartServer() {
 	rootApp.Use(recover.New())
 
 	// routes
-	/*rootApp.Get("/", func(c *fiber.Ctx) error {
-		posts, err := database.GetPosts()
-		if err != nil {
-			return err
-		}
-
-		return c.Render("pages/index", fiber.Map{
-			"pageTitle":       "Simon Sorensen — Classically Trained Software Engineer",
-			"pageDescription": "Simon Sorensen is a classically trained software engineer based out of London. He loves everything Artificial Intelligence and Machine Learning.",
-			"posts":           posts,
-		}, "layouts/content")
-	})*/
 	frontpageHandler.HandleMount(func(ctx context.Context, s live.Socket) (interface{}, error) {
 		// This will initialise the counter if needed.
 		return newChat(s), nil

@@ -43,7 +43,7 @@ func newChat(s live.Socket) *chat.Conversation {
 		Messages: []chat.Message{
 			{
 				ID:      "first_message",
-				Content: "Hi there, unfortunately I'm in a terrible mood today. Anyway, I'm Simon Sorensen, a software engineering intern living in London.",
+				Content: "Hi there, I'm Simon Sorensen, a software engineering intern living in London.",
 				User:    false,
 			},
 		},
