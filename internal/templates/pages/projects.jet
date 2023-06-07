@@ -125,7 +125,7 @@
 							
 						</div>
 					</div><div class="mb-4 md:mb-0 ">
-						<a href="/projects/sussex-direct-cli">
+						<a href="/sussex-cli">
 							<div class="relative h-fit " style="aspect-ratio:5/3;">
     <div>
         <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
@@ -154,7 +154,7 @@
 							
 						</div>
 					</div><div class="mb-4 md:mb-0 ">
-						<a href="/projects/chronos">
+						<a href="/chronos">
 							<div class="relative h-fit " style="aspect-ratio:5/3;">
     <div>
         <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">
@@ -288,7 +288,7 @@
 
 			<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-2">
 			<div class="mb-4 md:mb-0 ">
-						<a href="/projects/pymitv">
+						<a href="/pymitv">
 							<div class="relative h-fit " style="aspect-ratio:5/3;">
     <div>
         <img class="top-0 absolute w-full h-full -z-10" src="/static/images/placeholder.svg" alt="">

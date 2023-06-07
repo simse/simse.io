@@ -2,6 +2,7 @@ package server
 
 import (
 	"context"
+	"fmt"
 	"net/http"
 	"os"
 	"strings"
@@ -17,11 +18,14 @@ import (
 	"github.com/gofiber/fiber/v2/middleware/session"
 	"github.com/gofiber/template/jet"
 	"github.com/jfyne/live"
+	"github.com/kofalt/go-memoize"
 	"github.com/rs/zerolog/log"
 	"github.com/simse/simse.io/internal/livefiber"
 	"github.com/simse/simse.io/internal/meta"
+	"github.com/simse/simse.io/internal/metrics"
 	"github.com/simse/simse.io/internal/tasks"
 	"github.com/simse/simse.io/internal/templates"
+	"github.com/simse/simse.io/internal/utils"
 )
 
 type ServerInfo struct {
@@ -57,6 +61,8 @@ var store = session.New(session.Config{
 	Expiration: 24 * 7 * time.Hour,
 })
 
+var cache = memoize.NewMemoizer(24*time.Hour, 1*time.Hour)
+
 func StartServer() {
 	// load templates
 	engine := jet.NewFileSystem(http.FS(templates.Files), ".jet")
@@ -83,6 +89,30 @@ func StartServer() {
 	})
 	engine.AddFunc("shouldIndex", shouldIndex)
 	engine.AddFunc("isProd", isProd)
+	engine.AddFunc("parseDownloadsStat", func(stat string) string {
+		result, err, _ := cache.Memoize(stat, func() (interface{}, error) {
+			return metrics.ParseDownloadsStat(stat), nil
+		})
+
+		if err != nil {
+			log.Error().Err(err).Msg("failed to parse downloads stat")
+			return ""
+		}
+
+		return fmt.Sprintf("%s downloads", utils.NearestThousandFormat(float64(result.(int))))
+	})
+	engine.AddFunc("renderMarkdown", func(md string) string {
+		result, err, _ := cache.Memoize(md, func() (interface{}, error) {
+			return utils.MarkdownToHTML(md), nil
+		})
+
+		if err != nil {
+			log.Error().Err(err).Msg("failed to render markdown")
+			return ""
+		}
+
+		return result.(string)
+	})
 
 	hosts := map[string]*Host{}
 
@@ -109,12 +139,6 @@ func StartServer() {
 		return c.Render("pages/design-system", fiber.Map{
 			"pageTitle": "Design System for simse.io — Simon Sorensen",
 		}, "layouts/container")
-	})
-
-	rootApp.Get("/pymitv", func(c *fiber.Ctx) error {
-		return c.Render("pages/project", fiber.Map{
-			"pageTitle": "pymitv — Simon Sorensen",
-		}, "layouts/content")
 	})
 
 	rootApp.Get("/projects", func(c *fiber.Ctx) error {
@@ -166,6 +190,32 @@ func StartServer() {
 	})
 	rootApp.Get("/static/live.js", adaptor.HTTPHandler(live.Javascript{}))
 	rootApp.Get("/static/auto.js.map", adaptor.HTTPHandler(live.JavascriptMap{}))
+
+	rootApp.Get("/*", func(c *fiber.Ctx) error {
+		path := c.Path()
+		// remove first slash
+		if path[0] == '/' {
+			path = path[1:]
+		}
+
+		project, ok := projects[path]
+		if !ok {
+			return errorHandler(c, fiber.NewError(fiber.StatusNotFound, "Page not found"))
+		}
+
+		// open and read file
+		contents, err := os.ReadFile(fmt.Sprintf("./static/markdown/%s.md", project.ID))
+		if err != nil {
+			log.Error().Err(err).Msg("failed to read markdown file")
+		}
+
+		project.Markdown = string(contents)
+
+		return c.Render("pages/project", fiber.Map{
+			"pageTitle": project.Name + " — " + project.Subtitle,
+			"project":   project,
+		}, "layouts/content")
+	})
 
 	// enable logging
 	app.Use(func(c *fiber.Ctx) error {

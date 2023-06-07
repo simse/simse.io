@@ -1,104 +1,43 @@
 {{ import "../components/image.jet" }}
+{{ import "../components/tag.jet" }}
+
 
 <div class="mx-auto max-w-4xl px-4 pb-16 ">
     <header class="py-8 lg:py-12 ">
-        <div class="w-32 h-32 bg-zinc-800 rounded mb-8"></div>
+        <div class="w-32 h-32 bg-zinc-800 rounded mb-8">
+        </div>
 
-        <h1 class="text-3xl lg:text-4xl mb-6">pymitv</h1>
+        <h1 class="text-3xl lg:text-4xl mb-6">{{ project.Name }}</h1>
 
-        <p class="text-lg text-zinc-300 mb-4">A Python 3 library for controlling 3rd gen Xiaomi TVs</p>
+        <p class="text-lg text-zinc-300 mb-4">{{ project.Subtitle }}</p>
 
         <div class="flex gap-2 mb-4">
-            <div class="border border-blue-700 text-blue-300 px-3 py-1 rounded-full flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" class="" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-   <path d="M7 8l-4 4l4 4"></path>
-   <path d="M17 8l4 4l-4 4"></path>
-   <path d="M14 4l-4 16"></path>
-</svg>Python</div>
-            <span class="border border-purple-700 text-purple-300 px-3 py-1 rounded-full flex items-center gap-1"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-   <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-   <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2"></path>
-   <path d="M7 11l5 5l5 -5"></path>
-   <path d="M12 4l0 12"></path>
-</svg> 208.3k downloads</span>
-            <span class="border border-yellow-700 text-yellow-300 px-3 py-1 rounded-full flex items-center gap-1">Archived</span>
+            {{ yield tag(text=project.ProgrammingLanguages, icon="code") }}
+            {{ downloads := parseDownloadsStat(project.DownloadsStat) }}
+            {{ if downloads != "0 downloads" }}
+            {{ yield tag(text=downloads, colour="text-purple-300", border="border-purple-700") }}
+            {{ end }}
+            {{ yield tag(text=project.Status, colour="text-yellow-300", border="border-yellow-700") }}
         </div>
 
         <div class="gap-4 flex text-blue-400">
-							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://github.com/simse/hello-mars" target="_blank">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
-    Source Code
-</a>
-							
-							<a class="hover:underline flex gap-2 items-center text-blue-400" href="https://hellomars.demo.simse.io/" target="_blank">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link" color="60a5fa"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-    Demo
-</a>
-						</div>
+            {{ if project.SourceCode }}
+			<a class="hover:underline flex gap-2 items-center text-blue-400" href="{{ project.SourceCode }}" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-code" color="60a5fa"><polyline points="16 18 22 12 16 6"></polyline><polyline points="8 6 2 12 8 18"></polyline></svg>
+                Source Code
+            </a>
+            {{ end }}
+
+            {{ if project.Demo }}		
+			<a class="hover:underline flex gap-2 items-center text-blue-400" href="{{ project.Demo }}" target="_blank">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-external-link" color="60a5fa"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                Demo
+            </a>
+            {{ end }}
+		</div>
     </header>
 
-    <main class="prose prose-invert hidden">
-        <h2>Introduction</h2>
+    <main class="prose prose-invert">
+        {{ project.Markdown | renderMarkdown | raw }}
     </main>
-    <!--div class="flex gap-12 min-h-[3000px] relative">
-        <div class="w-64 sticky top-20 h-fit border-r border-zinc-800">
-            <nav class="text-base lg:text-sm">
-                <ul role="list" class="space-y-9">
-                    <li>
-                        <h2 class="font-display font-medium text-slate-900 dark:text-white">Introduction</h2>
-                        <ul role="list" class="mt-2 space-y-2 border-l-2 border-slate-800 lg:mt-4 lg:space-y-4">
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full font-semibold text-blue-400 before:bg-blue-400" href="/">Getting started</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/installation">Installation</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h2 class="font-display font-medium text-slate-900 dark:text-white">Core concepts</h2>
-                        <ul role="list" class="mt-2 space-y-2 border-l-2 border-slate-800 lg:mt-4 lg:space-y-4">
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/understanding-caching">Understanding caching</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/predicting-user-behavior">Predicting user behavior</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/basics-of-time-travel">Basics of time-travel</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/introduction-to-string-theory">Introduction to string theory</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/the-butterfly-effect">The butterfly effect</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h2 class="font-display font-medium text-slate-900 dark:text-white">Advanced guides</h2>
-                        <ul role="list" class="mt-2 space-y-2 border-l-2 border-slate-800 lg:mt-4 lg:space-y-4">
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/writing-plugins">Writing plugins</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/neuralink-integration">Neuralink integration</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/temporal-paradoxes">Temporal paradoxes</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/testing">Testing</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/compile-time-caching">Compile-time caching</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/predictive-data-generation">Predictive data generation</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h2 class="font-display font-medium text-slate-900 dark:text-white">API reference</h2>
-                        <ul role="list" class="mt-2 space-y-2 border-l-2 border-slate-800 lg:mt-4 lg:space-y-4">
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/cacheadvance-predict">CacheAdvance.predict()</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/cacheadvance-flush">CacheAdvance.flush()</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/cacheadvance-revert">CacheAdvance.revert()</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/cacheadvance-regret">CacheAdvance.regret()</a></li>
-                        </ul>
-                    </li>
-                    <li>
-                        <h2 class="font-display font-medium text-slate-900 dark:text-white">Contributing</h2>
-                        <ul role="list" class="mt-2 space-y-2 border-l-2 border-slate-800 lg:mt-4 lg:space-y-4">
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/how-to-contribute">How to contribute</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/architecture-guide">Architecture guide</a></li>
-                            <li class="relative"><a class="block w-full pl-3.5 before:pointer-events-none before:absolute before:-left-1 before:top-1/2 before:h-1.5 before:w-1.5 before:-translate-y-1/2 before:rounded-full text-slate-500 before:hidden before:bg-slate-300 hover:text-slate-600 hover:before:block dark:text-slate-400 dark:before:bg-slate-700 dark:hover:text-slate-300" href="/docs/design-principles">Design principles</a></li>
-                        </ul>
-                    </li>
-                </ul>
-                </nav>
-        </div>
-
-        <div class="grow">
-            <h2 class="text-3xl">Getting started</h2>
-        </div>
-
-        <div class="w-32 sticky top-20 h-fit">
-            on this page
-        </div>
-    </div-->
 </div>

@@ -51,3 +51,16 @@ type PostCategory struct {
 	Created     time.Time
 	Updated     time.Time
 }
+
+type Project struct {
+	ID                   string
+	Slug                 string
+	Name                 string
+	Subtitle             string
+	Markdown             string
+	SourceCode           string
+	Demo                 string
+	Status               string
+	ProgrammingLanguages string
+	DownloadsStat        string
+}
