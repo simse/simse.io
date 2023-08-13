@@ -1,29 +1,3 @@
-# Logs
-logs
-*.log
-
-# dotenv environment variable files
-.env*
-
-# Mac files
-.DS_Store
-
-.terraform
-.terraform.tfstate.lock.info
-.vscode
-terraform.tfvars
-*.backup
-terraform.tfstate.d/*
-.terraform.lock.hcl
-.idea
-.fleet
-
-*.db*
-
-*.fiber*
-
-main
-
-bin
-tmp
-static/style.css
+node_modules
+.astro
+dist

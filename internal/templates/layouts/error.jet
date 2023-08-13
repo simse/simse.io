@@ -1,5 +1,0 @@
-{{ include "/partials/layout_start.jet" }}
-{{ include "/partials/non_prod_banner.jet" }}
-{{ embed() }}
-</body>
-</html>

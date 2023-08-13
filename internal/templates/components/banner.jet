@@ -1,5 +1,0 @@
-{{ block banner(title, body = "") }}
-<div class="py-3 px-4 w-full bg-yellow-800 text-yellow-50">
-  <p><strong>{{ title }}</strong> {{ body | raw }}</p>
-</div>
-{{ end }}

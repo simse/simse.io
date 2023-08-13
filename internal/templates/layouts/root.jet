@@ -1,4 +1,0 @@
-{{ include "/partials/layout_start.jet" }}
-{{ include "/partials/non_prod_banner.jet" }}
-{{ embed() }}
-{{ include "/partials/layout_end.jet" }}
