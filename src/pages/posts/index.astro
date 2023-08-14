@@ -19,9 +19,15 @@ const allBlogPosts = await getCollection('blog');
     
     <div class="grid grid-cols-4 gap-4">
     {allBlogPosts.map(async (post) => {
-      const dominantColor = await getAverageColor(`${Astro.url.origin}/${post.data.cover.src}`, {
-        mode: 'precision',
-      });
+      let dominantColor = { hex: '#555' };
+      try {
+        let filename = post.data.cover.src.split('/').pop().split('?').shift().split('.');
+        filename = `${filename.shift()}.${filename.pop()}`;
+
+        dominantColor = await getAverageColor(`src/assets/${filename}`, {
+          mode: 'precision',
+        });
+      } catch(e) { console.error(`could not find dominant color for ${post.slug}: ${e}`) }
 
       return (
         <a href={`/posts/${post.slug}`}>
