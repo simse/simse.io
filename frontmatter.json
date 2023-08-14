@@ -12,21 +12,37 @@
           "type": "string"
         },
         {
-          "title": "Description",
-          "name": "description",
+          "title": "Excerpt",
+          "name": "excerpt",
           "type": "string"
         },
         {
           "title": "Publishing date",
-          "name": "date",
+          "name": "publishedOn",
           "type": "datetime",
           "default": "{{now}}",
           "isPublishDate": true
         },
         {
-          "title": "Content preview",
-          "name": "preview",
+          "title": "Cover Image Layout",
+          "name": "coverLayout",
+          "type": "choice",
+          "choices": ["fullscreen", "half", "third", "below-title"]
+        },
+        {
+          "title": "Cover Image",
+          "name": "cover",
           "type": "image"
+        },
+        {
+          "title": "Cover Alt",
+          "name": "coverAlt",
+          "type": "string"
+        },
+        {
+          "title": "Cover Caption",
+          "name": "coverCaption",
+          "type": "string"
         },
         {
           "title": "Is in draft",

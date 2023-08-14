@@ -5,6 +5,7 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				sans: ['National2', 'sans-serif'],
+				serif: ['Feijoa', 'serif'],
 			}
 		},
 	},

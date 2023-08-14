@@ -1,0 +1,12 @@
+---
+interface Props {
+    title: string;
+    href?: string;
+}
+
+const { title, href } = Astro.props;
+const style = "text-sm text-zinc-100 bg-zinc-800 border-zinc-700 hover:bg-blue-800 hover:border-blue-500 hover:text-blue-100 transition-colors border rounded-full px-3 py-1";
+---
+{href !== undefined && <a href={href} class={style}>{title}</a>}
+
+{href === undefined && <span class={style}>{title}</span>}

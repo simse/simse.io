@@ -10,5 +10,10 @@ export default defineConfig({
   integrations: [mdx(), svelte(), tailwind()],
   experimental: {
     assets: true
+  },
+  markdown: {
+    shikiConfig: {
+      theme: 'github-dark',
+    }
   }
 });

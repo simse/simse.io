@@ -1,26 +1,94 @@
 ---
-import { getCollection, CollectionEntry } from 'astro:content';
+import { getCollection, CollectionEntry } from "astro:content";
+import BaseLayout from "@/layouts/base.astro";
+import Navbar from "@/components/Navbar.astro";
+import TableOfContents from "@/components/blog/TableOfContents.astro";
+import Tag from "@/components/blog/Tag.astro";
+import Image from "astro/components/Image.astro";
 
 export async function getStaticPaths() {
-    const blogEntries = await getCollection('blog');
+  const blogEntries = await getCollection("blog");
 
-    return blogEntries.map(entry => ({
-        params: { slug: entry.slug }, props: { entry },
-    }));
+  return blogEntries.map((entry) => ({
+    params: { slug: entry.slug },
+    props: { entry },
+  }));
 }
 
 interface Props {
-    entry: CollectionEntry<'blog'>;
+  entry: CollectionEntry<"blog">;
 }
 
 const { entry } = Astro.props;
-const { Content } = await entry.render();
+const { Content, headings } = await entry.render();
 
-import BaseLayout from '../../layouts/base.astro';
+
+
+const imageHeight: {
+  [key: string]: string;
+} = {
+  third: "h-[33vh]",
+  half: "h-[50vh]",
+  fullscreen: "h-[100vh]",
+  "below-title": "h-[0px]",
+};
 ---
-<BaseLayout>
-    <div class="max-w-3xl prose prose-invert mx-auto text-lg">
-        <Content components={{ h1: 'h2', h2: 'h3', h3: 'h4', h4: 'h5', h5: 'h6', h6: 'strong' }} />
-    </div>
-</BaseLayout>
 
+<BaseLayout>
+  <Navbar />
+
+  {
+    entry.data.cover && (
+      <div class={`relative ${imageHeight[entry.data.coverLayout]}`}>
+        <Image
+          src={entry.data.cover}
+          alt={entry.data.title}
+          class="object-cover object-center w-full h-full"
+        />
+      </div>
+    )
+  }
+
+  <div class="max-w-[120ch] mx-auto pt-16 grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-8 relative h-fit">
+    <div></div>
+
+    <!-- Heading -->
+    <div class="mb-8">
+      <div class="flex items-center mb-4 gap-2">
+        {entry.data.tags?.map((tag) => <Tag title={tag} />)}
+      </div>
+
+      <h1 class={`text-4xl leading-normal mb-2 font-[Feijoa]`}>
+        {entry.data.title}
+      </h1>
+      <p class="text-zinc-400 text-xl">
+        Published on <span class="text-zinc-200"
+          >{
+            entry.data.publishedOn.toLocaleDateString("en-GB", {
+              year: "numeric",
+              month: "long",
+              day: "numeric",
+            })
+          }</span>
+      </p>
+    </div>
+
+    <!-- Content -->
+      <div class="sticky top-12 self-start hidden lg:block">
+          <TableOfContents headings={headings} />
+      </div>
+
+      <div class="text-lg prose prose-invert">
+          <Content
+            components={{
+              h1: "h2",
+              h2: "h3",
+              h3: "h4",
+              h4: "h5",
+              h5: "h6",
+              h6: "strong",
+            }}
+          />
+        </div>
+  </div>
+</BaseLayout>

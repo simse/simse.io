@@ -1,0 +1,90 @@
+---
+---
+<style lang="scss">
+nav {
+    width: 100%;
+    border-color: transparent;
+    transition-duration: 0.5s !important;
+    transition-property: all;
+    transition-timing-function: cubic-bezier(0.83, 0, 0.17, 1);
+    border-radius: 100px;
+
+    strong, a {
+        opacity: .3;
+        transition: opacity .2s ease-in-out;
+    }
+
+    @media screen and (min-width: 768px) {
+        &.scrolled {
+            width: 700px;
+            
+            // top: 16px;
+            border-color: rgb(63 63 70);
+            transform: translateY(-100%);
+
+            &.focus,
+            &:hover {
+                filter: drop-shadow(5px 5px 50px #000);
+            }
+
+            &.focus {
+                transform: translateY(20%);
+            }
+        }
+    }
+
+    &.focus,
+    &:hover {
+        strong, a {
+            opacity: 1;
+        }
+
+        
+    }
+}
+</style>
+
+<nav id="navbar" class="md:sticky top-0 z-10 mx-auto max-w-7xl bg-zinc-950/80 border p-4 px-8 backdrop-blur-sm flex focus">
+    <strong>Simon Sorensen</strong>
+
+    <ul class="ml-auto flex gap-4">
+        <li><a>Home</a></li>
+        <li><a>Projects</a></li>
+    </ul>
+</nav>
+
+<script lang="js">
+let previousScrollPosition = 0;
+let lastKnownScrollPosition = 0;
+let ticking = false;
+let navbar = document.getElementById("navbar");
+
+function doSomething(scrollPos) {
+    if (scrollPos > 0) {
+        navbar.classList.add("scrolled");
+    } else {
+        navbar.classList.remove("scrolled");
+    }
+
+    if (scrollPos > previousScrollPosition) {
+        navbar.classList.remove("focus");
+    } else {
+        navbar.classList.add("focus");
+    }
+
+    previousScrollPosition = scrollPos;
+}
+
+document.addEventListener("scroll", (event) => {
+  lastKnownScrollPosition = window.scrollY;
+
+  if (!ticking) {
+    window.requestAnimationFrame(() => {
+      doSomething(lastKnownScrollPosition);
+      ticking = false;
+    });
+
+    ticking = true;
+  }
+});
+</script>

@@ -1,0 +1,26 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+    headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+
+const depthToMargin: {
+    [key: number]: string;
+} = {
+    1: 'ml-0',
+    2: 'ml-4',
+    3: 'ml-8',
+    4: 'ml-12',
+}
+---
+<div class="text-zinc-600 hover:text-zinc-400 flex flex-col">
+    {headings.map(heading => (
+        <a 
+            href={`#${heading.slug}`}
+            class={`hover:text-zinc-200 hover:cursor-pointer py-1 transition-colors ${depthToMargin[heading.depth]}`}
+        >{heading.text}</a>
+    ))}
+</div>
