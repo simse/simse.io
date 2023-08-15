@@ -1,12 +1,23 @@
 ---
+/*
+import { Canvas } from 'glsl-canvas-js';
+*/
+
 interface Props {
     title: string;
     href?: string;
+    fancy?: boolean;
 }
 
-const { title, href } = Astro.props;
-const style = "text-sm text-zinc-100 bg-zinc-800 border-zinc-700 hover:bg-blue-800 hover:border-blue-500 hover:text-blue-100 transition-colors border rounded-full px-3 py-1";
+const { title, href, fancy = false } = Astro.props;
+const style = "hover:cursor-pointer text-sm text-zinc-100 bg-zinc-800 border-zinc-700 hover:bg-blue-700 hover:text-blue-100 hover:border-blue-900 transition-colors border rounded-full px-3 py-1";
+const fancyStyle = "hover:cursor-pointer text-sm text-zinc-100 bg-zinc-800 border-zinc-700 hover:bg-transparent hover:text-zinc-950 transition-colors border rounded-full px-3 py-1 relative"
 ---
 {href !== undefined && <a href={href} class={style}>{title}</a>}
 
-{href === undefined && <span class={style}>{title}</span>}
+{href === undefined && <div class={`${fancy ? fancyStyle : style} overflow-clip w-fit`}>
+    <span class="">{title}</span>
+
+    {fancy && <canvas class="glsl-canvas w-32 h-8 absolute top-0 left-0 -z-10" data-fragment-url="/fragments/woah.glsl" ></canvas>}
+</div>}
+

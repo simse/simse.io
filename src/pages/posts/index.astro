@@ -1,12 +1,12 @@
 ---
-import { getAverageColor } from 'fast-average-color-node';
 import { getCollection } from 'astro:content';
-import Image from 'astro/components/Image.astro';
 import Base from '@/layouts/base.astro';
 import Navbar from '@/components/Navbar.astro';
-import Tag from '@/components/blog/Tag.astro';
+import BlogPostCard from '@/components/blog/BlogPostCard.astro';
 
-const allBlogPosts = await getCollection('blog');
+let allBlogPosts = await getCollection('blog');
+
+
 ---
 <Base>
   <Navbar />
@@ -17,41 +17,9 @@ const allBlogPosts = await getCollection('blog');
       <p class="text-lg text-zinc-300">Writings about coding and other fun stuff :)</p>
     </header>
     
-    <div class="grid grid-cols-4 gap-4">
-    {allBlogPosts.map(async (post) => {
-      let dominantColor = { hex: '#555' };
-      try {
-        let filename = post.data.cover.src.split('/').pop().split('?').shift().split('.');
-        filename = `${filename.shift()}.${filename.pop()}`;
-
-        dominantColor = await getAverageColor(`src/assets/${filename}`, {
-          mode: 'precision',
-        });
-      } catch(e) { console.error(`could not find dominant color for ${post.slug}: ${e}`) }
-
-      return (
-        <a href={`/posts/${post.slug}`}>
-         
-
-          <div class="bg-zinc-900 border-2 border-zinc-800 rounded-md overflow-clip transition-colors hover:border-[var(--dominantColor)] relative" style={`--dominantColor: ${dominantColor.hex}`}>
-            {/* Tags overlay, yay! */}
-            <div class="absolute top-2 left-2 w-full pr-2">
-              {post.data.tags?.map((tag) => <Tag title={tag} />)}
-            </div>
-
-            <Image src={post.data.cover} height="500" width="800" alt="bruh" />
-
-            <div class="p-4">
-              
-
-              <h2 class="text-xl font-bold">{post.data.title}</h2>
-            </div>
-          </div>
-        </a>
-      )
-    })}
+    <div class="grid grid-cols-4 auto-rows-fr gap-4">
+    {allBlogPosts.map(async (post) => <BlogPostCard post={post} />)}
     </div>
     
   </main>
-
 </Base>

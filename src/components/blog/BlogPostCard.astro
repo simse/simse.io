@@ -1,0 +1,60 @@
+---
+import { getAverageColor } from "fast-average-color-node";
+import type { CollectionEntry } from "astro:content";
+import Image from 'astro/components/Image.astro';
+import Tag from '@/components/blog/Tag.astro';
+
+interface Props {
+  post: CollectionEntry<"blog">;
+}
+
+const { post } = Astro.props;
+
+// find dominant colour in cover image
+let dominantColor = { hex: "#555" };
+try {
+  let filenameParts = post.data.cover.src
+    .split("/")
+    .pop()
+    ?.split("?")
+    .shift()
+    ?.split(".");
+  let filename = `${filenameParts?.shift()}.${filenameParts?.pop()}`;
+
+  dominantColor = await getAverageColor(`src/assets/${filename}`, {
+    mode: "precision",
+  });
+} catch (e) {
+  console.error(`could not find dominant color for ${post.slug}: ${e}`);
+}
+---
+
+<a href={`/posts/${post.slug}`}>
+  <article
+    class="bg-zinc-900 border-2 border-zinc-800 rounded-md overflow-clip transition-colors hover:border-[var(--dominantColor)] relative h-full"
+    style={`--dominantColor: ${dominantColor.hex}`}
+  >
+    {/* Tags overlay, yay! */}
+    <div class="absolute top-2 left-2 w-full pr-2">
+      {post.data.tags?.map((tag) => <Tag title={tag} />)}
+    </div>
+
+    <Image src={post.data.cover} height="500" width="800" alt="bruh" />
+
+    <div class="p-4">
+      <p class="font-bold mb-1 text-zinc-300">
+        {
+          post.data.publishedOn.toLocaleDateString("en-GB", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })
+        }
+      </p>
+
+      <h2 class="text-xl font-bold mb-3">{post.data.title}</h2>
+
+      <p class="text-zinc-300 hyphens-auto">{post.data.excerpt}</p>
+    </div>
+    </article>
+</a>

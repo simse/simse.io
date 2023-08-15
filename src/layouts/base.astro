@@ -9,6 +9,7 @@
         src: url("/fonts/National2-Regular.woff2") format("woff2");
         font-weight: normal;
         font-style: normal;
+        font-display: swap;
       }
 
       @font-face {
@@ -16,6 +17,7 @@
         src: url("/fonts/National2-Bold.woff2") format("woff2");
         font-weight: bold;
         font-style: normal;
+        font-display: swap;
       }
 
       @font-face {
@@ -23,6 +25,7 @@
         src: url("/fonts/Feijoa-Display.woff2") format("woff2");
         font-weight: normal;
         font-style: normal;
+        font-display: swap;
       }
 
       html {
@@ -33,5 +36,7 @@
 
   <body class="bg-zinc-950 text-white">
     <slot />
+
+    <script type="text/javascript" src="https://unpkg.com/glsl-canvas-js/dist/umd/glsl-canvas.min.js"></script>
   </body>
 </html>
