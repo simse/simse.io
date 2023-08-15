@@ -13,11 +13,11 @@ let allBlogPosts = await getCollection('blog');
 
   <main class="max-w-7xl mx-auto px-4 pt-16">
     <header class="mb-8">
-      <h1 class="text-4xl font-serif mb-4">Blog</h1>
+      <h1 class="text-3xl md:text-4xl font-serif mb-4">Blog</h1>
       <p class="text-lg text-zinc-300">Writings about coding and other fun stuff :)</p>
     </header>
     
-    <div class="grid grid-cols-4 auto-rows-fr gap-4">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-fr gap-4">
     {allBlogPosts.map(async (post) => <BlogPostCard post={post} />)}
     </div>
     

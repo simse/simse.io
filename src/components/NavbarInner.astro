@@ -1,11 +1,35 @@
 ---
 import { Icon } from 'astro-icon';
+
+const items = [
+    {
+        name: 'Home',
+        url: '/',
+        icon: 'pixelarticons:home'
+    },
+    {
+        name: 'About',
+        url: '/about',
+        icon: 'pixelarticons:downasaur'
+    },
+    {
+        name: 'Posts',
+        url: '/posts',
+        icon: 'pixelarticons:article-multiple'
+    },
+    {
+        name: 'Projects',
+        url: '/projects',
+        icon: 'pixelarticons:dashbaord'
+    }
+]
 ---
-<div class="max-w-7xl mx-auto flex p-4 px-8">
+<div class="px-4 max-w-7xl mx-auto flex py-4">
     <strong>Simon Sorensen</strong>
 
-    <ul class="ml-auto flex gap-5">
-        <li><a class="flex gap-1 hover:text-blue-300 transition-colors" href="/"><Icon name="pixelarticons:home" width="20" /> Home</a></li>
-        <li><a class="flex gap-1 hover:text-blue-300 transition-colors" href="/posts"><Icon name="pixelarticons:article-multiple" width="20" /> Posts</a></li>
+    <ul class="ml-auto flex flex-wrap justify-end gap-3 md:gap-6">
+        {items.map(item => (
+            <li><a class="flex gap-1 hover:text-blue-300 transition-colors" href={item.url}><Icon name={item.icon} width="20" /> {item.name}</a></li>
+        ))}
     </ul>
 </div>

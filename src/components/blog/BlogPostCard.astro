@@ -39,7 +39,9 @@ try {
       {post.data.tags?.map((tag) => <Tag title={tag} />)}
     </div>
 
-    <Image src={post.data.cover} height="500" width="800" alt="bruh" />
+    <div class="bg-zinc-800 w-full aspect-w-8 aspect-h-5 overflow-clip">
+        <Image src={post.data.cover} height="500" width="800" alt={post.data.coverAlt} />
+    </div>
 
     <div class="p-4">
       <p class="font-bold mb-1 text-zinc-300">

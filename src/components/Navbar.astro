@@ -11,7 +11,8 @@ nav#navbar {
     border-radius: 100px;
     opacity: 0;
     width: 700px;
-    transform: translateY(-100%);
+    transform: translateY(-100%) translateX(-50%);
+    left: 50%;
 
     strong, a {
         opacity: .3;
@@ -32,7 +33,7 @@ nav#navbar {
         }
 
         &.focus {
-            transform: translateY(20%);
+            transform: translateY(20%) translateX(-50%);
         }
     }
 
@@ -45,11 +46,11 @@ nav#navbar {
 }
 </style>
 
-<nav id="navbar" class="md:sticky top-0 z-10 mx-auto bg-zinc-950/80 border backdrop-blur-sm focus hidden lg:block">
+<nav id="navbar" class="px-4 fixed top-0 z-10 mx-auto bg-zinc-950/80 border backdrop-blur-sm focus hidden lg:block">
     <NavbarInner />
 </nav>
 
-<nav class="absolute top-0 z-20 w-full bg-zinc-950/80">
+<nav class="top-0 z-20 w-full bg-zinc-950/80">
     <NavbarInner />
 </nav>
 

@@ -1,10 +1,20 @@
 ---
 import Base from "@/layouts/base.astro";
 import Navbar from "@/components/Navbar.astro";
+
+// sections
+import WritingSection from "@/components/homepage/writing/WritingSection.astro";
+import PortabilitySection from "@/components/homepage/portability/PortabilitySection";
 ---
 
 <Base>
 	<Navbar />
 
-	welcome
+	<main class="py-32">
+		bruh
+	</main>
+
+	<WritingSection />
+
+	<PortabilitySection client:visible />
 </Base>
