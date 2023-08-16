@@ -21,10 +21,10 @@ const limitWithResistance = (input: number, lowerLimit: number, upperLimit: numb
 }
 
 const Walkman = () => {
-    const [playClickSfx] = useSound('/sounds/walkman/button_click_sfx_2.mp3', { interrupt: true });
+    /*const [playClickSfx] = useSound('/sounds/walkman/button_click_sfx_2.mp3', { interrupt: true });
     const [playRewindSfx, { stop: stopRewindSfx }] = useSound('/sounds/walkman/walkman_rewind.mp3', { interrupt: true });
     const [playFastForwardSfx, { stop: stopFastForwardSfx }] = useSound('/sounds/walkman/walkman_ff.mp3', { interrupt: true });
-    const [playInsertSfx] = useSound('/sounds/walkman/walkman_tape_insert.mp3', { interrupt: true });
+    const [playInsertSfx] = useSound('/sounds/walkman/walkman_tape_insert.mp3', { interrupt: true });*/
 
     // Walkman state
     const [walkmanState, setWalkmanState] = useState<'playing' | 'stopped' | 'ff' | 'rewind' | 'ejecting' | 'ejected'>('stopped');
