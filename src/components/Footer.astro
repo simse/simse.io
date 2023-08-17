@@ -1,0 +1,16 @@
+---
+import { Icon } from 'astro-icon';
+
+const buildDate = new Date().toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric',
+});
+---
+<footer class="border-t border-zinc-800 p-8">
+    <div class="flex gap-2 items-center">
+        <Icon name="pixelarticons:mood-happy" width="26" /> Designed and built with love in <strong>London</strong>
+    </div>
+
+    <p class="text-zinc-400 mt-4">This site was statically generated on {buildDate}.</p>
+</footer>

@@ -1,5 +1,3 @@
-"use client"
-
 import { useState } from 'preact/compat';
 import Modal from 'react-modal';
 import Hero from "./Hero";

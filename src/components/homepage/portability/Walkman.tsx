@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'preact/compat';
-import useSound from './hooks/useSound';
 import usePrevious from './hooks/usePrevious';
 
 import './Walkman.css';
@@ -20,11 +19,41 @@ const limitWithResistance = (input: number, lowerLimit: number, upperLimit: numb
     }
 }
 
+const SOUNDS: {
+    [key: string]: string;
+} = {
+    buttonClick: '/sounds/walkman/button_click_sfx_2.mp3',
+    rewind: '/sounds/walkman/walkman_rewind.mp3',
+    fastForward: '/sounds/walkman/walkman_ff.mp3',
+    insert: '/sounds/walkman/walkman_tape_insert.mp3',
+}
+
 const Walkman = () => {
-    /*const [playClickSfx] = useSound('/sounds/walkman/button_click_sfx_2.mp3', { interrupt: true });
-    const [playRewindSfx, { stop: stopRewindSfx }] = useSound('/sounds/walkman/walkman_rewind.mp3', { interrupt: true });
-    const [playFastForwardSfx, { stop: stopFastForwardSfx }] = useSound('/sounds/walkman/walkman_ff.mp3', { interrupt: true });
-    const [playInsertSfx] = useSound('/sounds/walkman/walkman_tape_insert.mp3', { interrupt: true });*/
+    // sounds effects
+    let refs: {
+        [key: string]: React.MutableRefObject<HTMLAudioElement | null>;
+    } = {};
+
+    Object.keys(SOUNDS).forEach((sound) => {
+        refs[sound] = useRef<HTMLAudioElement>(null);
+    });
+
+    const playSfx = (sound: string) => {
+        if (!refs || !refs[sound]) return;
+
+        if (refs[sound].current) {
+            // refs[sound].current.currentTime = 0;
+            refs[sound].current?.play();
+        }
+    }
+
+    const stopSfx = (sound: string) => {
+        if (!refs || !refs[sound]) return;
+
+        if (refs[sound].current) {
+            refs[sound].current?.pause();
+        }
+    }
 
     // Walkman state
     const [walkmanState, setWalkmanState] = useState<'playing' | 'stopped' | 'ff' | 'rewind' | 'ejecting' | 'ejected'>('stopped');
@@ -131,21 +160,21 @@ const Walkman = () => {
     // sfx effect
     useEffect(() => {
         if (walkmanState === 'rewind') {
-            playRewindSfx();
+            playSfx('rewind');
         } else {
-            stopRewindSfx();
+            stopSfx('rewind');
         }
 
         if (walkmanState === 'ff') {
-            playFastForwardSfx();
+            playSfx('fastForward');
         } else {
-            stopFastForwardSfx();
+            stopSfx('fastForward');
         }
     }, [walkmanState]);
 
     useEffect(() => {
         if (walkmanState === 'ejecting') {
-            playInsertSfx();
+            playSfx('insert');
         }
     }, [selectedTape]);
 
@@ -197,6 +226,10 @@ const Walkman = () => {
     return (
         <div className="walkman-wrapper">
             <audio ref={songRef} src={`https://files.simse.io/walkman/song_${selectedTape}.mp3`} loop={false} onEnded={() => setWalkmanState('stopped')} preload='auto' />
+
+            {Object.keys(SOUNDS).map((sound) => (
+                <audio key={sound} ref={refs[sound]} src={SOUNDS[sound]} preload='auto' />
+            ))}
             
             <div 
                 className={`walkman ${isEjecting || isEjected ? 'cover-open' : 'tape-in'} ${isPlaying ? 'playing' : ''} ${isFastForwarding ? 'forward' : ''} ${isRewinding ? 'rewind' : ''}`}
@@ -368,7 +401,7 @@ const Walkman = () => {
 
                         <div className="play">
                             <div className={`cube play-button transition-03  ${isPlaying ? 'pressed' : ''}`} onMouseDown={() => {
-                                playClickSfx();
+                                playSfx('buttonClick');
                                 setWalkmanState('playing');
                                 onPlayButtonClick();
                             }}>
@@ -380,7 +413,7 @@ const Walkman = () => {
 
                         <div className="rewind">
                             <div className={`cube rewind-button transition-03 ${isRewinding ? 'pressed' : ''}`} onMouseDown={() => {
-                                playClickSfx();
+                                playSfx('buttonClick');
                                 setWalkmanState('rewind');
                             }}>
                                 <div className="sides-x"></div>
@@ -391,7 +424,7 @@ const Walkman = () => {
 
                         <div className="forward">
                             <div className={`cube forward-button transition-03 ${isFastForwarding ? 'pressed' : ''}`} onMouseDown={() => {
-                                playClickSfx();
+                                playSfx('buttonClick');
                                 setWalkmanState('ff');
                             }}>
                                 <div className="sides-x"></div>
@@ -419,7 +452,7 @@ const Walkman = () => {
                             </ul>
                         </div>
                         <div className={`stop-eject`} onMouseDown={() => {
-                            playClickSfx();
+                            playSfx('buttonClick');
                             
                             setEjectButtonPressed(true);
                             setTimeout(() => {

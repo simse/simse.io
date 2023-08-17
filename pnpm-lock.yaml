@@ -24,9 +24,6 @@ dependencies:
   '@astrojs/tailwind':
     specifier: ^4.0.0
     version: 4.0.0(astro@2.10.7)(tailwindcss@3.3.3)
-  '@types/howler':
-    specifier: ^2.2.7
-    version: 2.2.7
   '@types/react-modal':
     specifier: ^3.16.0
     version: 3.16.0
@@ -42,9 +39,6 @@ dependencies:
   glsl-canvas-js:
     specifier: ^0.2.9
     version: 0.2.9
-  howler:
-    specifier: ^2.2.3
-    version: 2.2.3
   micromodal:
     specifier: ^0.4.10
     version: 0.4.10
@@ -1104,10 +1098,6 @@ packages:
     resolution: {integrity: sha512-SvQi0L/lNpThgPoleH53cdjB3y9zpLlVjRbqB3rH8hx1jiRSBGAhyjV3H+URFjNVRqt2EdYNrbZE5IsGlNfpRg==}
     dependencies:
       '@types/unist': 2.0.7
-    dev: false
-
-  /@types/howler@2.2.7:
-    resolution: {integrity: sha512-PEZldwZqJJw1PWRTpupyC7ajVTZA8aHd8nB/Y0n6zRZi5u8ktYDntsHj13ltEiBRqWwF06pASxBEvCTxniG8eA==}
     dev: false
 
   /@types/json5@0.0.30:
@@ -2474,10 +2464,6 @@ packages:
       hast-util-parse-selector: 3.1.1
       property-information: 6.2.0
       space-separated-tokens: 2.0.2
-    dev: false
-
-  /howler@2.2.3:
-    resolution: {integrity: sha512-QM0FFkw0LRX1PR8pNzJVAY25JhIWvbKMBFM4gqk+QdV+kPXOhleWGCB6AiAF/goGjIHK2e/nIElplvjQwhr0jg==}
     dev: false
 
   /html-escaper@3.0.3:
