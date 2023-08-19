@@ -6,7 +6,10 @@ import BlogPostCard from '@/components/blog/BlogPostCard.astro';
 
 let allBlogPosts = await getCollection('blog');
 
-
+// sort by publishedOn Date object
+allBlogPosts = allBlogPosts.sort((a, b) => {
+  return b.data.publishedOn.getTime() - a.data.publishedOn.getTime();
+});
 ---
 <Base>
   <Navbar />

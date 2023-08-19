@@ -1,0 +1,56 @@
+---
+interface Props {
+    text: string;
+    element?: 'p' | 'span';
+    speed?: number;
+}
+
+const { text, speed = 1, element: Element = 'span' } = Astro.props;
+---
+<style lang="scss">
+@keyframes rainbow {
+    0% {
+        color: #e81416;
+    }
+
+    16% {
+        color: #ffa500;
+    }
+
+    33% {
+        color: #faeb36;
+    }
+
+    50% {
+        color: #79c314;
+    }
+
+    66% {
+        color: #487de7;
+    }
+
+    83% {
+        color: #4b369d;
+    }
+
+    92% {
+        color: #70369d;
+    }
+
+    100% {
+        color: #e81416;
+    }
+}
+
+.rainbow:hover span {
+    animation: rainbow calc(10s * var(--speed)) infinite;
+    animation-delay: var(--delay);
+}
+</style>
+
+
+<Element style={`--speed: ${speed}`} class="rainbow">
+    {[...text].map((letter, i) => {
+        return letter === ' ' ? ' ' : <span style={`--delay: -${i*100}ms`}>{letter}</span>
+    })}
+</Element>

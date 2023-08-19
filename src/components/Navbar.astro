@@ -20,13 +20,9 @@ nav#navbar {
     }
 
     &.scrolled {
-        
         opacity: 1;
-        
-        // top: 16px;
         border-color: rgb(63 63 70);
         
-
         &.focus,
         &:hover {
             filter: drop-shadow(5px 5px 50px #000);
@@ -57,6 +53,7 @@ nav#navbar {
 <script lang="js">
 let previousScrollPosition = 0;
 let lastKnownScrollPosition = 0;
+let focusedByMouse = false;
 let ticking = false;
 let navbar = document.getElementById("navbar");
 
@@ -73,6 +70,7 @@ function doSomething(scrollPos) {
         navbar.classList.remove("focus");
     } else {
         navbar.classList.add("focus");
+        focusedByMouse = false;
     }
 
     previousScrollPosition = scrollPos;
@@ -89,5 +87,15 @@ document.addEventListener("scroll", (event) => {
 
     ticking = true;
   }
+});
+
+document.addEventListener("mousemove", (event) => {
+    if (event.clientY < 100) {
+        navbar.classList.add("focus");
+        focusedByMouse = true;
+    } else if(focusedByMouse) {
+        navbar.classList.remove("focus");
+        focusedByMouse = false;
+    }
 });
 </script>

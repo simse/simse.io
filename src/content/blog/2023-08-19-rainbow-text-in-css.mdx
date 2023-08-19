@@ -1,0 +1,197 @@
+---
+title: Rainbow Text in CSS (and a bit of HTML templating)
+excerpt: ""
+publishedOn: 2023-08-19T08:09:33.394Z
+coverLayout: third
+cover: ../../assets/fly-d-nFg_W3xE8Ug-unsplash.jpg
+coverAlt: ""
+coverCaption: ""
+draft: true
+tags:
+  - CSS
+categories: []
+lastmod: 2023-08-19T22:15:42.967Z
+---
+import RainbowText from '@/components/utilities/RainbowText.astro'
+import RainbowTextFirstAttempt from '@/components/blogPosts/rainbow-text/RainbowTextFirstAttempt.astro'
+import RainbowTextWorking from '@/components/blogPosts/rainbow-text/RainbowTextWorking.astro'
+import RainbowTextBigDelay from '@/components/blogPosts/rainbow-text/RainbowTextBigDelay.astro'
+import RainbowTextFasterAnimation from '@/components/blogPosts/rainbow-text/RainbowTextFasterAnimation.astro'
+
+In this blog post I'll show you how to create a fun rolling rainbow text effect like <RainbowText text="this" element="span" /> with just CSS! Although I warmly recommend also using a bit of HTML templating to make it easier to write the text. 
+
+If you're just interested in the end result, you can skip to the end of the post to see the final code. I understand.
+
+# How
+## The HTML
+
+To attain the desired effect, apply a CSS animation that transitions through rainbow colors, with a delayed start for scroll effect.
+
+Split the input string to stagger the animation, making each letter an individual element. For example, `simon` becomes:
+```html
+<span>
+  <span>s</span>
+  <span>i</span>
+  <span>m</span>
+  <span>o</span>
+  <span>n</span>
+</span>
+```
+
+While you are allowed to write this by hand, it's not so fun. Here's how you convert a string to a group of spans with JSX:
+```js
+{[...text].map((letter, i) => {
+    return letter === ' ' ? ' ' : <span style={`--delay: ${i*50}ms`}>{letter}</span>
+})}
+```
+
+Spaces are left as is because they can't change colour anyway.
+
+On each span, a CSS variable is set that increases the start delay depending on the position of the letter in string. This is the magic that creates the scrolling effect.
+
+## The CSS
+First thing that's needed is a CSS animation that fades through the colours of the rainbow:
+```css
+@keyframes rainbow {
+  0% {
+      color: #e81416;
+  }
+
+  16% {
+      color: #ffa500;
+  }
+
+  33% {
+      color: #faeb36;
+  }
+
+  50% {
+      color: #79c314;
+  }
+
+  66% {
+      color: #487de7;
+  }
+
+  83% {
+      color: #4b369d;
+  }
+
+  92% {
+      color: #70369d;
+  }
+
+  100% {
+      color: #e81416;
+  }
+}
+```
+This animation starts and ends at red.
+
+Next we'll need to apply the animation to each span element, delaying the start time by the `--delay` variable.
+```css
+.rainbow:hover span {
+  animation: rainbow 5s infinite;
+  animation-delay: var(--delay);
+}
+```
+
+Putting it all together it looks like this:
+<RainbowTextFirstAttempt />
+
+So it looks awesome, yay! But there is a slight problem... Because of the delay we added before, the letters are just chilling in white before the animation starts.
+
+The fix is simple, just one character in fact. The neat thing about the animation delay is that you can delay it by negative amount.
+
+In the context of looping animations, a negative delay essentially means the animation starts not from its initial state, but partway through. This is because it's as if the animation has already been playing for the animation duration (5s) minus the delay (i * 50ms).
+
+Let's apply a negative delay instead:
+```html
+<span style={`--delay: -${i * 50}ms`}>{letter}</span>
+```
+
+<RainbowTextWorking />
+
+### Tuning Timings
+
+The values I've provided are what I've found to work well.
+
+It may be difficult to visually the exact effect the animation speed vs the delay has, so here are two examples to help you out.
+
+### Delay
+
+The following has a much higher delay of 500ms.
+<RainbowTextBigDelay />
+
+As you can see this leads to more rainbow at a time.
+
+### Animation Duration
+
+The following has a much faster animation of 1s.
+<RainbowTextFasterAnimation />
+
+Gee willikers, that's fast! And it makes a little nauseous, somehow.
+
+# Final code
+
+If you just want to copy and paste the code, here it is for different frameworks.
+
+## Astro component
+```astro
+---
+interface Props {
+    text: string;
+    element?: 'p' | 'span';
+    speed?: number;
+}
+
+const { text, speed = 1, element: Element = 'span' } = Astro.props;
+---
+<style lang="scss">
+@keyframes rainbow {
+    0% {
+        color: #e81416;
+    }
+
+    16% {
+        color: #ffa500;
+    }
+
+    33% {
+        color: #faeb36;
+    }
+
+    50% {
+        color: #79c314;
+    }
+
+    66% {
+        color: #487de7;
+    }
+
+    83% {
+        color: #4b369d;
+    }
+
+    92% {
+        color: #70369d;
+    }
+
+    100% {
+        color: #e81416;
+    }
+}
+
+.rainbow:hover span {
+    animation: rainbow calc(10s * var(--speed)) infinite;
+    animation-delay: var(--delay);
+}
+</style>
+
+
+<Element style={`--speed: ${speed}`} class="rainbow">
+    {[...text].map((letter, i) => {
+        return letter === ' ' ? ' ' : <span style={`--delay: -${i*100}ms`}>{letter}</span>
+    })}
+</Element>
+```

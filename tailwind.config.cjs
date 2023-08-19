@@ -6,6 +6,7 @@ module.exports = {
 			fontFamily: {
 				sans: ['National2', 'sans-serif'],
 				serif: ['Feijoa', 'serif'],
+				mono: ['CommitMono', 'Consolas', 'monospace']
 			}
 		},
 	},

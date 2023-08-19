@@ -2,6 +2,7 @@
 import { getCollection, CollectionEntry } from "astro:content";
 import BaseLayout from "@/layouts/base.astro";
 import Navbar from "@/components/Navbar.astro";
+import Footer from "@/components/Footer.astro";
 import TableOfContents from "@/components/blog/TableOfContents.astro";
 import Tag from "@/components/blog/Tag.astro";
 import Image from "astro/components/Image.astro";
@@ -22,8 +23,6 @@ interface Props {
 const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
 
-
-
 const imageHeight: {
   [key: string]: string;
 } = {
@@ -33,13 +32,12 @@ const imageHeight: {
   "below-title": "h-[0px]",
 };
 ---
-
 <BaseLayout>
   <Navbar />
 
   {
     entry.data.cover && (
-      <div class={`relative ${imageHeight[entry.data.coverLayout]}`}>
+      <div class={`relative ${imageHeight[entry.data.coverLayout]} bg-zinc-800`}>
         <Image
           src={entry.data.cover}
           alt={entry.data.title}
@@ -49,7 +47,9 @@ const imageHeight: {
     )
   }
 
-  <div class="max-w-[120ch] mx-auto pt-16 grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-8 relative h-fit">
+  <div
+    class="max-w-[120ch] mx-auto pt-16 grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-8 relative h-fit"
+  >
     <div></div>
 
     <!-- Heading -->
@@ -69,26 +69,29 @@ const imageHeight: {
               month: "long",
               day: "numeric",
             })
-          }</span>
+          }</span
+        >
       </p>
     </div>
 
     <!-- Content -->
-      <div class="sticky top-12 self-start hidden lg:block">
-          <TableOfContents headings={headings} />
-      </div>
+    <div class="sticky top-12 self-start hidden lg:block">
+      <TableOfContents headings={headings} />
+    </div>
 
-      <div class="text-lg prose prose-invert">
-          <Content
-            components={{
-              h1: "h2",
-              h2: "h3",
-              h3: "h4",
-              h4: "h5",
-              h5: "h6",
-              h6: "strong",
-            }}
-          />
-        </div>
+    <div class="text-lg mb-32 prose prose-invert">
+      <Content
+        components={{
+          h1: "h2",
+          h2: "h3",
+          h3: "h4",
+          h4: "h5",
+          h5: "h6",
+          h6: "strong",
+        }}
+      />
+    </div>
   </div>
+
+  <Footer />
 </BaseLayout>

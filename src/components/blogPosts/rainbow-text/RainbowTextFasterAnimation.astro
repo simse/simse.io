@@ -1,0 +1,57 @@
+---
+import CommonContainer from "./CommonContainer.astro";
+---
+<style lang="scss">
+  @keyframes rainbow {
+    0% {
+      color: #e81416;
+    }
+
+    16% {
+      color: #ffa500;
+    }
+
+    33% {
+      color: #faeb36;
+    }
+
+    50% {
+      color: #79c314;
+    }
+
+    66% {
+      color: #487de7;
+    }
+
+    83% {
+      color: #4b369d;
+    }
+
+    92% {
+      color: #70369d;
+    }
+
+    100% {
+      color: #e81416;
+    }
+  }
+
+  p:hover span {
+    animation: rainbow 1s infinite;
+    animation-delay: var(--delay);
+  }
+</style>
+
+<CommonContainer>
+  <p class="m-0 text-xl">
+    {
+      [..."Rainbows yay!"].map((letter, i) => {
+        return letter === " " ? (
+          " "
+        ) : (
+          <span style={`--delay: -${i * 50}ms`}>{letter}</span>
+        );
+      })
+    }
+  </p>  
+</CommonContainer>

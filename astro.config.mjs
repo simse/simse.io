@@ -1,4 +1,4 @@
-import { defineConfig } from 'astro/config';
+import { defineConfig, sharpImageService } from 'astro/config';
 import mdx from "@astrojs/mdx";
 import svelte from "@astrojs/svelte";
 import tailwind from "@astrojs/tailwind";
@@ -12,9 +12,13 @@ export default defineConfig({
   experimental: {
     assets: true
   },
+  image: {
+    service: sharpImageService(),
+  },
   markdown: {
     shikiConfig: {
       theme: 'github-dark'
     }
-  }
+  },
+  compressHTML: true,
 });
