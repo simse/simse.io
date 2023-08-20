@@ -4,6 +4,7 @@ const blogCollection = defineCollection({
   schema: ({ image }) => z.object({
     title: z.string(),
     excerpt: z.string(),
+    draft: z.boolean(),
     publishedOn: z.date(),
     tags: z.array(z.string()),
     cover: image().refine((img) => img.width >= 1080, {

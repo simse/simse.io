@@ -10,6 +10,11 @@ let allBlogPosts = await getCollection('blog');
 allBlogPosts = allBlogPosts.sort((a, b) => {
   return b.data.publishedOn.getTime() - a.data.publishedOn.getTime();
 });
+
+// if production, filter out draft
+if (import.meta.env.PROD) {
+  allBlogPosts = allBlogPosts.filter((post) => !post.data.draft);
+}
 ---
 <Base>
   <Navbar />

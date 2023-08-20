@@ -1,24 +1,28 @@
 ---
-title: Rainbow Text in CSS (and a bit of HTML templating)
-excerpt: ""
+title: Rainbow Text with pure CSS
+excerpt: I love me some rainbows, and I love that it's pure CSS even more
 publishedOn: 2023-08-19T08:09:33.394Z
 coverLayout: third
 cover: ../../assets/fly-d-nFg_W3xE8Ug-unsplash.jpg
 coverAlt: ""
 coverCaption: ""
-draft: true
+draft: false
 tags:
   - CSS
 categories: []
-lastmod: 2023-08-19T22:15:42.967Z
+lastmod: 2023-08-20T20:19:04.585Z
+slug: rainbow-text-css
 ---
 import RainbowText from '@/components/utilities/RainbowText.astro'
+import Disclaimer from '@/components/blogPosts/rainbow-text/Disclaimer.astro'
 import RainbowTextFirstAttempt from '@/components/blogPosts/rainbow-text/RainbowTextFirstAttempt.astro'
 import RainbowTextWorking from '@/components/blogPosts/rainbow-text/RainbowTextWorking.astro'
 import RainbowTextBigDelay from '@/components/blogPosts/rainbow-text/RainbowTextBigDelay.astro'
 import RainbowTextFasterAnimation from '@/components/blogPosts/rainbow-text/RainbowTextFasterAnimation.astro'
 
-In this blog post I'll show you how to create a fun rolling rainbow text effect like <RainbowText text="this" element="span" /> with just CSS! Although I warmly recommend also using a bit of HTML templating to make it easier to write the text. 
+<Disclaimer />
+
+In this blog post I'll show you how to create a fun rolling rainbow text effect like <RainbowText text="this" element="span" active="always" /> with just CSS! Although I warmly recommend also using a bit of HTML templating to make it easier to write the text. 
 
 If you're just interested in the end result, you can skip to the end of the post to see the final code. I understand.
 

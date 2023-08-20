@@ -3,9 +3,10 @@ interface Props {
     text: string;
     element?: 'p' | 'span';
     speed?: number;
+    active?: 'hover' | 'always';
 }
 
-const { text, speed = 1, element: Element = 'span' } = Astro.props;
+const { text, speed = 1, element: Element = 'span', active = 'hover' } = Astro.props;
 ---
 <style lang="scss">
 @keyframes rainbow {
@@ -42,14 +43,21 @@ const { text, speed = 1, element: Element = 'span' } = Astro.props;
     }
 }
 
-.rainbow:hover span {
-    animation: rainbow calc(10s * var(--speed)) infinite;
-    animation-delay: var(--delay);
+.rainbow-hover:hover,
+.rainbow-always {
+    span {
+        animation: rainbow calc(10s * var(--speed)) infinite;
+        animation-delay: var(--delay);
+
+        @media (prefers-reduced-motion: reduce) {
+            animation-play-state: paused;
+        }
+    }
 }
 </style>
 
 
-<Element style={`--speed: ${speed}`} class="rainbow">
+<Element style={`--speed: ${speed}`} class={`rainbow-${active}`}>
     {[...text].map((letter, i) => {
         return letter === ' ' ? ' ' : <span style={`--delay: -${i*100}ms`}>{letter}</span>
     })}

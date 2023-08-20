@@ -39,6 +39,10 @@ import CommonContainer from "./CommonContainer.astro";
   p:hover span {
     animation: rainbow 5s infinite;
     animation-delay: var(--delay);
+
+    @media (prefers-reduced-motion: reduce) {
+      animation-play-state: paused;
+    }
   }
 </style>
 

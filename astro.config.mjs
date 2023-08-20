@@ -9,6 +9,9 @@ import preact from "@astrojs/preact";
 export default defineConfig({
   output: 'static',
   integrations: [mdx(), svelte(), tailwind(), preact({ compat: true })],
+  /*build : {
+    inlineStylesheets: 'auto'
+  },*/
   experimental: {
     assets: true
   },

@@ -14,6 +14,10 @@ nav#navbar {
     transform: translateY(-100%) translateX(-50%);
     left: 50%;
 
+    @media (prefers-reduced-motion: reduce) {
+        transition-duration: 0s !important;
+    }
+
     strong, a {
         opacity: .3;
         transition: opacity .2s ease-in-out;
