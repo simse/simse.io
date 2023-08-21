@@ -1,0 +1,69 @@
+---
+interface Props {
+    text: string;
+}
+
+const { text } = Astro.props;
+
+// prevent delay duplication
+let chosenDelays: number[] = [];
+
+const getDelay = (): number => {
+    const delay = Math.floor(Math.random() * (5 - 2 + 1) + 2);
+
+    if (chosenDelays.includes(delay)) {
+        return getDelay();
+    }
+
+    chosenDelays.push(delay);
+
+    return delay;
+}
+---
+<style lang="scss">
+@keyframes censored {
+    0% {
+        content: '!';
+    }
+
+    19% {
+        content: '£';
+    }
+
+    32% {
+        content: '@';
+    }
+    
+    50% {
+        content: '#';
+    }
+
+    71% {
+        content: '$';
+    }
+
+    87% {
+        content: '%';
+    }
+    
+    100% {
+        content: '!';
+    }
+}
+
+span.letter:after {
+    content: '*';
+    animation: censored var(--duration) infinite;
+    animation-delay: var(--delay);
+
+    @media (prefers-reduced-motion: reduce) {
+        animation-play-state: paused;
+    }
+}
+</style>
+
+<span class="font-mono">
+    {[...text].map((letter, i) => {
+        return letter === ' ' ? ' ' : <span class="letter" style={`--duration: ${Math.floor(Math.random() * (10 - 5 + 1) + 5)}s; --delay: -${getDelay()}s`}></span>
+    })}
+</span>
