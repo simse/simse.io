@@ -1,7 +1,15 @@
+import { useEffect, useState } from "preact/compat";
 import Walkman from "./Walkman";
 
-
 const Hero = () => {
+    const [staticWalkman, setStaticWalkman] = useState(false);
+
+    useEffect(() => {
+        // @ts-ignore this works fine in browser
+        const isSafari = /constructor/i.test(window.HTMLElement) || (function (p) { return p.toString() === "[object SafariRemoteNotification]"; })(!window['safari'] || (typeof safari !== 'undefined' && safari.pushNotification));
+        
+        setStaticWalkman(isSafari);
+    }, []);
 
     return (
         <div className="relative">
@@ -23,7 +31,7 @@ const Hero = () => {
                 </div>
 
                 <div className="lg:pt-32">
-                    <Walkman />
+                    {staticWalkman ? <div className=""></div> : <Walkman />}
                 </div>
             </div>
         </div>

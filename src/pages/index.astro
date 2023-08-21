@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
 
 // sections
+import Hero from "@/components/homepage/hero/Hero.astro";
 import WritingSection from "@/components/homepage/writing/WritingSection.astro";
 import PortabilitySection from "@/components/homepage/portability/PortabilitySection";
 ---
@@ -11,9 +12,9 @@ import PortabilitySection from "@/components/homepage/portability/PortabilitySec
 <Base>
 	<Navbar />
 
-	<main class="py-32">
-		bruh
-	</main>
+	<Hero />
+
+	<p class="text-center my-8 text-zinc-300 text-lg animate-pulse motion-reduce:animate-none">Scroll to learn about amazing and important inventions...</p>
 
 	<WritingSection />
 

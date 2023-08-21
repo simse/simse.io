@@ -1,14 +1,17 @@
 ---
-import Base from "@/layouts/base.astro";
-import Navbar from "@/components/Navbar.astro";
-import Footer from "@/components/Footer.astro";
+import Image from "astro/components/Image.astro";
+import ContainerLayout from "@/layouts/container.astro";
+
+import ProfilePic from '@/assets/simse.jpg';
+
+// calculate age from 21st of May 2001
+const age = Math.floor((new Date().getTime() - new Date(2001, 5, 21).getTime()) / 3.15576e+10);
 ---
-<Base>
-    <Navbar />
+<ContainerLayout>
+    <div class="mb-16">
+        <Image width={512} height={512} src={ProfilePic} alt="Simon Sorensen in front of a beautiful Danish sunset" />
+        <p class="text-lg mt-4 text-zinc-300">Disclaimer: this picture was taken in 2019 on my 18th birthday, while I am now {age} years old.</p>
+    </div>
 
-    <main class="py-32 max-w-7xl mx-auto">
-        <h1 class="font-serif text-5xl ">Who the hell is this guy!!</h1>
-    </main>
-
-    <Footer />
-</Base>
+    <p class="text-2xl md:text-4xl font-serif">Software Engineering Intern at The LEGO Group</p>
+</ContainerLayout>
