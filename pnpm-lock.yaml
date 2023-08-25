@@ -45,6 +45,9 @@ dependencies:
   preact:
     specifier: ^10.17.0
     version: 10.17.0
+  react-micro-modal:
+    specifier: ^2.0.2
+    version: 2.0.2(react-dom@18.2.0)(react@18.2.0)
   react-modal:
     specifier: ^3.16.1
     version: 3.16.1(react-dom@18.2.0)(react@18.2.0)
@@ -3990,6 +3993,17 @@ packages:
 
   /react-lifecycles-compat@3.0.4:
     resolution: {integrity: sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==}
+    dev: false
+
+  /react-micro-modal@2.0.2(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-PucE/ap3NiTBdeZXsrYFr0JKXjVMV5cdwaB2g/pHzMg8KKcERAaEhBnRyCxGR6G5ZfnPoE0cnFrNf4+TY+gf2A==}
+    engines: {node: '>=10.22.0'}
+    peerDependencies:
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /react-modal@3.16.1(react-dom@18.2.0)(react@18.2.0):

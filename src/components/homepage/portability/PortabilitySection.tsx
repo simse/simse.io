@@ -1,5 +1,4 @@
 import { useState } from 'preact/compat';
-import Modal from 'react-modal';
 import Hero from "./Hero";
 
 const funFacts = [
@@ -47,53 +46,11 @@ const PortabilitySection = () => {
                             <h2 className="font-bold text-3xl mb-4">{funFact.title}</h2>
 
                             <p className="text-zinc-200 text-lg mb-4">{funFact.description}</p>
-                        
-                            <a 
+
+                            <a
                                 className="px-6 py-3 rounded-full border-orange-400 border inline-block text-orange-400 hover:cursor-pointer hover:bg-orange-400 hover:text-black transition-colors"
-                                onClick={() => setOpenModal(index)}
+                            /*onClick={() => setOpenModal(index)}*/
                             >Read more ⟶</a>
-                        
-                            {/* @ts-ignore */}
-                            <Modal
-                                isOpen={openModal === index}
-                                style={{
-                                    content: {
-                                        top: '50%',
-                                        left: '50%',
-                                        right: 'auto',
-                                        bottom: 'auto',
-                                        marginRight: '-50%',
-                                        transform: 'translate(-50%, -50%)',
-                                        backgroundColor: 'rgba(25, 25, 25, 1)',
-                                        maxWidth: '600px',
-                                        width: '50vw',
-                                        height: '70vh',
-                                        maxHeight: '800px',
-                                        border: 'none',
-                                        borderRadius: '16px'
-                                    },
-                                    overlay: {
-                                        backgroundColor: 'rgba(0, 0, 0, 0.75)'
-                                    }
-                                }}
-                                shouldCloseOnOverlayClick={true}
-                                shouldCloseOnEsc={true}
-                                onRequestClose={() => setOpenModal(null)}
-                            >
-                                {/* @ts-ignore */}
-                                <div className="p-4 flex flex-col h-full">
-                                    <h3 className="text-2xl font-bold mb-6">{funFact.title}</h3>
-
-                                    <div className={"prose prose-invert"} dangerouslySetInnerHTML={{__html: funFact.longDescription}}></div>
-
-                                    <button 
-                                        className='px-6 py-3 rounded-full border-orange-400 border  text-orange-400 hover:cursor-pointer hover:bg-orange-400 hover:text-black transition-colors mt-auto'
-                                        onClick={() => setOpenModal(null)}
-                                    >
-                                        Close
-                                    </button>
-                                </div>
-                            </Modal>
                         </div>
                     ))}
                 </div>

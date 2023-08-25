@@ -1,9 +1,43 @@
 ---
----
-<div class="min-h-[100vh] bg-[#1A1C19] p-8">
-    <div class="text-lg text-zinc-300 mb-2">
-        <p>3200 B.C.</p>
-    </div>
+import Slider from "./Slider.svelte";
 
-    <h1 class="uppercase text-9xl font-[NewYork] text-[#BA855E]">The Dawn of Communication</h1>
+import firstImage from '@/assets/homepage/writing/one.jpg';
+import secondImage from '@/assets/homepage/writing/two.jpg';
+import thirdImage from '@/assets/homepage/writing/three.jpg';
+
+const slides = [
+    {
+        image: firstImage,
+        imageAlt: '',
+        imageTitle: 'ANCIENT SUMER',
+        text: 'Writing\'s invention revolutionized commerce with record-keeping'
+    },
+    {
+        image: secondImage,
+        imageAlt: '',
+        imageTitle: 'BRUH',
+        text: 'test'
+    }
+]
+---
+<div class="min-h-[100vh] h-full  p-8 relative">
+    <!-- background -->
+    <div class="absolute top-0 left-0 w-full h-full -z-50 bg-[#1A1C19]">
+        <img src="/world_bg.svg" class="object-cover w-full h-full -z-10" />
+    </div>
+    
+    <!-- header -->
+    <header class="mb-32">
+        <div class="text-xl text-zinc-300 mb-2">
+            <p>3200 B.C.</p>
+        </div>
+    
+        <h1 class="uppercase text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-[NewYork] text-[#BA855E] mb-8">The Dawn of Communication</h1>
+
+        <p class="max-w-4xl text-xl lg:text-2xl xl:text-3xl opacity-75">
+            This period marks the birth of written communication, with the invention of writing in ancient Sumer. This breakthrough allowed humans to record information and share it across time and space.
+        </p>
+    </header>
+
+    <Slider slides={slides} client:load />
 </div>

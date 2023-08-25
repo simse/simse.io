@@ -27,7 +27,12 @@
           "title": "Cover Image Layout",
           "name": "coverLayout",
           "type": "choice",
-          "choices": ["fullscreen", "half", "third", "below-title"]
+          "choices": [
+            "fullscreen",
+            "half",
+            "third",
+            "below-title"
+          ]
         },
         {
           "title": "Cover Image",
@@ -68,7 +73,10 @@
     }
   ],
   "frontMatter.framework.id": "astro",
-  "frontMatter.content.publicFolder": "src/assets",
+  "frontMatter.content.publicFolder": {
+    "path": "src/assets",
+    "relative": true
+  },
   "frontMatter.preview.host": "http://localhost:3000",
   "frontMatter.content.pageFolders": [
     {
@@ -76,9 +84,5 @@
       "path": "[[workspace]]/src/content/blog"
     }
   ],
-  "frontMatter.taxonomy.tags": [
-    "test"
-  ],
-  "frontMatter.taxonomy.categories": [],
-  "frontMatter.experimental": true
+  "frontMatter.experimental": false
 }
