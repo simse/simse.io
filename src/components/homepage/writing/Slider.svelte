@@ -29,6 +29,7 @@
         imageAlt: string;
         imageTitle: string;
         text: string;
+        description?: string;
     }[] = [];
 
     let currentSlide = 0;
@@ -46,48 +47,38 @@
     }
 </script>
 
-<div class="mb-16 flex items-center">
-    <!-- previous -->
-    <!--div class="mx-8 text-2xl border border-[#BA855E] text-[#BA855E] flex items-center justify-center rounded-full">
-        <button class="p-8" on:click={previousSlide}>
-            ←
-        </button>
-    </div-->
-
+<div class="mb-16 flex flex-col lg:flex-row items-center gap-16">
     <!-- images -->
-    <div class="relative h-[35vw] w-[35vw] max-w-[800px] max-h-[800px]">
+    <div class="h-[90vw] w-[90vw] lg:h-[50vw] lg:w-[50vw] max-w-[800px] max-h-[800px] grid grid-cols-1">
         {#each slides as slide, index}
-        <div class={`absolute top-0 transition-all image ${currentSlide === index ? 'selected' : ''}`}>
+        <div class={`transition-opacity image ${currentSlide === index ? 'selected' : ''} col-start-1 row-start-1`}>
             <img src={slide.image.src} width={800} height={800} alt={slide.imageAlt} class="object-cover" />
 
-            <p class="absolute bottom-0 -mb-8 font-[NewYork] text-[#BA855E] text-6xl select-none uppercase">{slide.imageTitle}</p>
+            <p class="-mt-3 lg:-mt-5 font-[NewYork] text-[#BA855E] text-4xl select-none uppercase">{slide.imageTitle}</p>
         </div>
         {/each}
     </div>
 
-    <div class="flex-1 mx-auto px-16 text-4xl relative">
+    <div class="flex-1 mx-auto max-h-[800px] grid grid-cols-1">
         {#each slides as slide, index}
-        <div class="absolute top-0">
-            <p class={`text transition-opacity ${currentSlide === index ? 'selected' : ''}`}>{slide.text}</p>
+        <div class={`transition-opacity ${currentSlide === index ? 'opacity-1' : 'opacity-0'} col-start-1 row-start-1 flex flex-col justify-center`}>
+            <p class={`text-3xl lg:text-4xl mb-5`}>{slide.text}</p>
+
+            {#if slide.description}
+                <p class="text-zinc-300 text-xl max-w-5xl hidden md:block">{slide.description}</p>
+            {/if}
         </div>
         {/each}
     </div>
-
-    <!-- next -->
-    <!--div class="ml-auto px-8 text-2xl border border-[#BA855E] text-[#BA855E] flex items-center justify-center h-20 w-20 rounded-full">
-        <button on:click={nextSlide}>
-            →
-        </button>
-    </div-->
 </div>
 
-<!-- dots -->
+<!-- navigation -->
 <div class="flex gap-3 w-full justify-center">
-    <button class="mr-auto" on:click={previousSlide}>previous</button>
+    <button class="mr-auto border border-[#BA855E] text-[#BA855E] hover:bg-[#BA855E] hover:text-black transition-all px-4 py-2 rounded-full" on:click={previousSlide}>← Previous Fact</button>
 
-    {#each slides as slide, index}
+    {#each slides as _, index}
     <div class={`h-3 w-3 rounded-full border border-[#BA855E] ${currentSlide === index ? 'bg-[#BA855E]' : ''}`}></div>
     {/each}
 
-    <button class="ml-auto" on:click={nextSlide}>next</button>
+    <button class="ml-auto border border-[#BA855E] text-[#BA855E] hover:bg-[#BA855E] hover:text-black transition-all px-4 py-2 rounded-full" on:click={nextSlide}>Next Fact →</button>
 </div>
