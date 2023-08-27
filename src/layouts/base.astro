@@ -57,7 +57,7 @@ const { meta = {
 
       /* front page specific fonts */
       @font-face {
-        font-face: "NewYork";
+        font-family: "NewYork";
         src: url("/fonts/NewYork-Regular.woff2") format("woff2");
         font-display: swap;
       }
@@ -72,5 +72,6 @@ const { meta = {
     <slot />
 
     <script type="text/javascript" src="https://unpkg.com/glsl-canvas-js/dist/umd/glsl-canvas.min.js"></script>
+    {import.meta.env.PROD && (<script async src="https://analytics.0x1.earth/bruh" data-website-id="ab6f267a-724c-4e2f-be93-2d06611e5b9d"></script>)}
   </body>
 </html>
