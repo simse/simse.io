@@ -32,7 +32,10 @@ const imageHeight: {
   "below-title": "h-[0px]",
 };
 ---
-<BaseLayout>
+<BaseLayout meta={{
+  title: `${entry.data.title}—Simon Sorensen`,
+  description: entry.data.excerpt,
+}}>
   <Navbar />
 
   {
@@ -76,6 +79,8 @@ const imageHeight: {
 
     <!-- Content -->
     <div class="sticky top-12 self-start hidden lg:block">
+      <h2 class="mb-3 text-zinc-300 font-bold">Table of Contents</h2>
+
       <TableOfContents headings={headings} />
     </div>
 

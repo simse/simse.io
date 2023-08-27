@@ -2,7 +2,7 @@
 import Timeline from "../common/Timeline.astro";
 import Slider from "./Slider.svelte";
 
-import firstImage from '@/assets/homepage/writing/one.jpg';
+import firstImage from '@/assets/homepage/writing/one.png';
 import secondImage from '@/assets/homepage/writing/two.jpg';
 import thirdImage from '@/assets/homepage/writing/three.jpg';
 
@@ -49,5 +49,5 @@ const slides = [
         </p>
     </header>
 
-    <Slider slides={slides} client:load />
+    <Slider slides={slides} client:visible />
 </div>

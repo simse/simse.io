@@ -1,8 +1,27 @@
+---
+import type { PageMeta } from '@/types';
+interface Props {
+  meta?: PageMeta;
+}
+
+const { meta = {
+  title: 'Simon Sorensen—Software Engineering Intern',
+  description: 'Simon Sorensen is a Software Engineering Intern at LEGO.',
+  fonts: [
+    {
+      name: 'NewYork',
+      url: 'NewYork-Regular.woff2',
+      weight: 400
+    }
+  ]
+} } = Astro.props;
+---
 <html lang="en">
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <title>Simon Sorensen—Software Engineering Intern</title>
+    <title>{meta.title}</title>
+    <meta name="description" content={meta.description} />
     <style is:inline>
       @font-face {
         font-family: "National2";
@@ -38,7 +57,7 @@
 
       /* front page specific fonts */
       @font-face {
-        font-face: NewYork;
+        font-face: "NewYork";
         src: url("/fonts/NewYork-Regular.woff2") format("woff2");
         font-display: swap;
       }

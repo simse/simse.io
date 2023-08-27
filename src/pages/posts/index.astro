@@ -16,7 +16,10 @@ if (import.meta.env.PROD) {
   allBlogPosts = allBlogPosts.filter((post) => !post.data.draft);
 }
 ---
-<Base>
+<Base meta={{
+  title: 'Blog—Simon Sorensen',
+  description: ''
+}}>
   <Navbar />
 
   <main class="max-w-7xl mx-auto px-4 pt-16">
