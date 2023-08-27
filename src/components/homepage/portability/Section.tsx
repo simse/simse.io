@@ -32,25 +32,8 @@ const PortabilitySection = () => {
     const [openModal, setOpenModal] = useState<number | null>(null);
 
     return (
-        <div className="relative overflow-clip">
-            <svg
-		class="absolute left-4 top-7 mt-1 h-full w-6 border-t border-zinc-300"
-		aria-hidden="true"
-		><defs
-			><pattern
-				id=":R1t6:"
-				width="32"
-				height="8"
-				patternUnits="userSpaceOnUse"
-				><path
-					d="M 0 0 H 10 M 0 8 H 10"
-					class="stroke-white/30"
-					fill="none"></path></pattern
-			></defs
-		><rect width="100%" height="100%" fill="url(#:R1t6:)"></rect></svg
-	>
-
-            <div className="font-bold p-4 text-lg text-zinc-300 pl-16">
+        <div className="">
+            <div className="font-bold py-7 text-lg text-zinc-300">
                 <p>1970s — 1980s</p>
             </div>
 

@@ -7,7 +7,10 @@ import Footer from "@/components/Footer.astro";
 import Hero from "@/components/homepage/hero/Hero.astro";
 import WritingSection from "@/components/homepage/writing/WritingSection.astro";
 import PrintingSection from "@/components/homepage/printing/PrintingSection.astro";
-import PortabilitySection from "@/components/homepage/portability/PortabilitySection";
+import PortabilitySection from "@/components/homepage/portability/PortabilitySection.astro";
+import PersonalComputingSection from "@/components/homepage/personal-computing/PersonalComputingSection.astro";
+import MobileComputingSection from "@/components/homepage/mobile-computing/MobileComputingSection.astro";
+import MachineLearningSection from "@/components/homepage/machine-learning/MachineLearningSection.astro";
 ---
 
 <Base>
@@ -25,7 +28,13 @@ import PortabilitySection from "@/components/homepage/portability/PortabilitySec
 
 	<PrintingSection />
 
-	<PortabilitySection client:visible />
+	<PortabilitySection />
+
+	<PersonalComputingSection />
+
+	<MobileComputingSection />
+
+	<MachineLearningSection />
 
 	<Footer />
 </Base>
