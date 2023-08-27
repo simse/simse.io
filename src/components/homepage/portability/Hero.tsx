@@ -14,7 +14,7 @@ const Hero = () => {
     return (
         <div className="relative">
             <div className="w-full h-96 flex-col justify-start items-start inline-flex absolute top-0 -z-10">
-                <div className="w-full h-12 lg:h-20 bg-pink-500" />
+                <div className="w-full h-12 lg:h-20 bg-pink-600" />
                 <div className="w-full h-12 lg:h-20 bg-fuchsia-700" />
                 <div className="w-full h-12 lg:h-20 bg-purple-800" />
                 <div className="w-full h-12 lg:h-20 bg-violet-900" />

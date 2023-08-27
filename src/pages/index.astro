@@ -6,17 +6,24 @@ import Footer from "@/components/Footer.astro";
 // sections
 import Hero from "@/components/homepage/hero/Hero.astro";
 import WritingSection from "@/components/homepage/writing/WritingSection.astro";
+import PrintingSection from "@/components/homepage/printing/PrintingSection.astro";
 import PortabilitySection from "@/components/homepage/portability/PortabilitySection";
 ---
 
 <Base>
-	<Navbar />
+	<Navbar floating={false} />
 
 	<Hero />
 
-	<p class="text-center my-8 text-zinc-300 text-lg animate-pulse motion-reduce:animate-none">Scroll to learn about amazing and important inventions...</p>
+	<p
+		class="text-center my-8 text-zinc-300 text-lg animate-pulse motion-reduce:animate-none"
+	>
+		Scroll to learn about amazing and important inventions...
+	</p>
 
 	<WritingSection />
+
+	<PrintingSection />
 
 	<PortabilitySection client:visible />
 

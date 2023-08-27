@@ -1,4 +1,5 @@
 ---
+import Timeline from "../common/Timeline.astro";
 import Slider from "./Slider.svelte";
 
 import firstImage from '@/assets/homepage/writing/one.jpg';
@@ -10,8 +11,8 @@ const slides = [
         image: firstImage,
         imageAlt: '',
         imageTitle: 'ANCIENT SUMER',
-        text: 'Writing\'s invention revolutionized commerce with record-keeping',
-        description: 'The invention of writing in ancient Sumer, particularly cuneiform script around 3200 B.C., revolutionized commerce by enabling detailed record-keeping of transactions, debts, and inventories. This innovation facilitated the evolution of trade from a simple barter system to a more complex and efficient one, laying the groundwork for modern economic systems.'
+        text: 'The Dawn of Cuneiform',
+        description: 'The Sumerians invented cuneiform writing around 3200 BC, a system using wedge-shaped marks on clay tablets. Initially pictographic, it evolved into a complex system representing objects and abstract concepts, marking a pivotal moment in human history by enabling idea transmission across generations.'
     },
     {
         image: secondImage,
@@ -27,7 +28,9 @@ const slides = [
     }
 ]
 ---
-<div class="min-h-[100vh] h-full p-8 md:pl-16 xl:pl-32 relative">
+<div class="min-h-[100vh] h-full p-7 md:pl-16 relative overflow-clip">
+   <Timeline timelineTop="top-10" />
+
     <!-- background -->
     <div class="absolute top-0 left-0 w-full h-full -z-50 bg-[#1A1C19]">
         <img src="/world_bg.svg" class="object-cover w-full h-full -z-10 opacity-50" />
@@ -41,7 +44,7 @@ const slides = [
     
         <h1 class="uppercase text-4xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-[NewYork] text-[#BA855E] mb-8">The Dawn of Communication</h1>
 
-        <p class="max-w-4xl text-xl lg:text-2xl xl:text-3xl opacity-75">
+        <p class="max-w-5xl text-xl lg:text-2xl xl:text-3xl opacity-75">
             This period marks the birth of written communication, with the invention of writing in ancient Sumer. This breakthrough allowed humans to record information and share it across time and space.
         </p>
     </header>

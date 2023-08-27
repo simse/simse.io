@@ -1,5 +1,11 @@
 ---
 import NavbarInner from "./NavbarInner.astro";
+
+interface Props {
+    floating?: boolean;
+}
+
+const { floating = true } = Astro.props;
 ---
 <style lang="scss">
 nav#navbar {
@@ -46,7 +52,7 @@ nav#navbar {
 }
 </style>
 
-<nav id="navbar" class="px-4 fixed top-0 z-10 mx-auto bg-zinc-950/80 border backdrop-blur-sm focus hidden lg:block">
+<nav id="navbar" class={`px-4 fixed top-0 z-10 mx-auto bg-zinc-950/80 border backdrop-blur-sm focus hidden lg:block ${!floating ? 'invisible' : ''}`}>
     <NavbarInner />
 </nav>
 
@@ -97,9 +103,9 @@ document.addEventListener("mousemove", (event) => {
     if (event.clientY < 100) {
         navbar.classList.add("focus");
         focusedByMouse = true;
-    } else if(focusedByMouse) {
+    } /*else if(focusedByMouse) {
         navbar.classList.remove("focus");
         focusedByMouse = false;
-    }
+    }*/
 });
 </script>
