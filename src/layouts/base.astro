@@ -25,6 +25,14 @@ const { meta = {
     <style>
       @font-face {
         font-family: "National2";
+        src: url("/fonts/National2-Light.woff2") format("woff2");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "National2";
         src: url("/fonts/National2-Regular.woff2") format("woff2");
         font-weight: normal;
         font-style: normal;
@@ -115,7 +123,7 @@ const { meta = {
   <body class="bg-zinc-950 text-white">
     <slot />
 
-    <script type="text/javascript" src="https://unpkg.com/glsl-canvas-js/dist/umd/glsl-canvas.min.js"></script>
+    <!--script type="text/javascript" src="https://unpkg.com/glsl-canvas-js/dist/umd/glsl-canvas.min.js"></script-->
     <script is:inline async src="https://analytics.0x1.earth/bruh" data-website-id="ab6f267a-724c-4e2f-be93-2d06611e5b9d" data-do-not-track="true" data-domains="simse.io"></script>
   </body>
 </html>
