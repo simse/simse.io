@@ -9,10 +9,10 @@
 </style>
 
 <script lang="ts">
-    import type { ImageMetadata } from "astro";
+    import type { GetImageResult } from "astro";
 
     export let slides: {
-        image: ImageMetadata;
+        image: GetImageResult;
         imageAlt: string;
         imageTitle: string;
         text: string;
@@ -39,6 +39,7 @@
     <div class="h-[90vw] w-[90vw] lg:h-[50vw] lg:w-[50vw] max-w-[800px] max-h-[800px] grid grid-cols-1">
         {#each slides as slide, index}
         <div class={`transition-opacity image ${currentSlide === index ? 'opacity-1' : 'opacity-0'} col-start-1 row-start-1`}>
+            
             <img src={slide.image.src} width={800} height={800} alt={slide.imageAlt} class="object-cover" />
 
             <p class="-mt-3 lg:-mt-5 font-[NewYork] text-[#BA855E] text-4xl select-none uppercase">{slide.imageTitle}</p>
