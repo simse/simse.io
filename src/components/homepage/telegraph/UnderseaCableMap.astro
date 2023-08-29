@@ -1,0 +1,95 @@
+<script>
+    import "maplibre-gl/dist/maplibre-gl.css";
+    import MapLibreGL from "maplibre-gl";
+
+    const map = new MapLibreGL.Map({
+        container: "map",
+        style: "https://api.maptiler.com/maps/ocean/style.json?key=Ng17OwLFAIWvk21DBUZH",
+        center: [-34.102, 48.866],
+        zoom: 4,
+        // scrollZoom: false,
+        cooperativeGestures: true,
+    });
+
+    const markerElement = document.createElement("div");
+    markerElement.classList.add("h-2", "w-2", "bg-purple-500", "rounded-full");
+
+    const marker = new MapLibreGL.Marker({
+        element: markerElement,
+    })
+        .setLngLat([-10.389757923774972, 51.893388679761244])
+        .addTo(map);
+
+    const secondMarker = new MapLibreGL.Marker({
+        element: markerElement.cloneNode(true) as HTMLDivElement,
+    })
+        .setLngLat([-53.364444, 47.870278])
+        .addTo(map);
+
+    map.addControl(new MapLibreGL.NavigationControl());
+
+    map.on("load", () => {
+        map.addSource("route", {
+            type: "geojson",
+            data: {
+                type: "Feature",
+                properties: {},
+                geometry: {
+                    coordinates: [
+                        [-10.390085686547792, 51.892633967953486],
+                        [-10.429371512723066, 51.874908081050194],
+                        [-10.440302279623808, 51.88927454882682],
+                        [-52.93895587159068, 48.222705081520644],
+                        [-53.14101893086273, 48.20535965297299],
+                        [-53.43225765861874, 47.8960324907477],
+                        [-53.39071054369437, 47.88188884322159],
+                        [-53.36887913672126, 47.86945181995847],
+                        [-53.365859550436156, 47.869949537721624],
+                    ],
+                    type: "LineString",
+                },
+            },
+        });
+        map.addLayer({
+            id: "route",
+            type: "line",
+            source: "route",
+            layout: {
+                "line-join": "round",
+                "line-cap": "round",
+            },
+            paint: {
+                "line-color": "#be185d",
+                "line-dasharray": [1, 2],
+                "line-width": 2,
+            },
+        });
+    });
+</script>
+
+<div>
+    <h2 class="text-xl mb-4 font-bold">
+        Explore the undersea cables laid between 1866 and 1922
+    </h2>
+
+    <div class="grid grid-cols-10 gap-4">
+        <div
+            class="col-span-10 xl:col-span-8 w-full"
+            id="map"
+            style="height: 75vh;"
+        />
+
+        <div class="col-span-2 hidden xl:block">
+            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2 p-5">
+                <h3 class="font-bold text-xl">1866 Atlantic Cable</h3>
+            </div>
+
+            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
+            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
+            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
+            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
+            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
+            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
+        </div>
+    </div>
+</div>

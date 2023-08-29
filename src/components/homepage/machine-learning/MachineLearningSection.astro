@@ -1,7 +1,8 @@
 ---
 import Timeline from "../common/Timeline.astro";
+import DeroExperience from "./DeroExperience.svelte";
 ---
-<div class="relative min-h-screen px-4 md:pl-16 bg-[#000521]">
+<div class="relative min-h-screen px-4 md:pl-16 bg-[#000521] border-t border-zinc-800">
     <Timeline />
 
     <header class="font-bold  py-6 text-lg">
@@ -10,14 +11,5 @@ import Timeline from "../common/Timeline.astro";
 
     Artificial Intelligence
 
-    <div class="flex items-center flex-col py-4">
-        <video class="w-64 mb-8 h-48 hover:cursor-pointer hover:scale-110 active:scale-100 active:duration-200 transition-transform duration-500" loop autoplay muted preload="auto">
-            <source src="/ai_orb.mp4" type="video/mp4" />
-            <source src="/ai_orb.webm" type="video/webm" />
-        </video>
-
-        <h1 class="max-w-5xl text-center font-light text-4xl">Greetings, user. Welcome to your first interaction with me, Dero. How may I assist you today?</h1>
-
-        <input class="bg-white/10 p-4 mt-16 text-xl min-w-[500px] outline-none rounded-lg border-transparent focus:border-blue-900 border" type="text" placeholder="Ask about anything..." />
-    </div>
+    <DeroExperience client:visible />
 </div>
