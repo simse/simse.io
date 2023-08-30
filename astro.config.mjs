@@ -13,9 +13,6 @@ export default defineConfig({
   build : {
     inlineStylesheets: 'auto'
   },
-  experimental: {
-    assets: true
-  },
   image: {
     service: sharpImageService()
   },
