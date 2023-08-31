@@ -2,7 +2,9 @@
 import { getCollection } from 'astro:content';
 import Base from '@/layouts/base.astro';
 import Navbar from '@/components/Navbar.astro';
+import Footer from '@/components/Footer.astro';
 import BlogPostCard from '@/components/blog/BlogPostCard.astro';
+import Tag from '@/components/blog/Tag.astro';
 
 let allBlogPosts = await getCollection('blog');
 
@@ -15,17 +17,35 @@ allBlogPosts = allBlogPosts.sort((a, b) => {
 if (import.meta.env.PROD) {
   allBlogPosts = allBlogPosts.filter((post) => !post.data.draft);
 }
+
+// create array of tags
+let tags: string[] = [];
+allBlogPosts.forEach((post) => {
+  post.data.tags.forEach((tag) => {
+    if (!tags.includes(tag)) {
+      tags.push(tag);
+    }
+  });
+});
 ---
 <Base meta={{
   title: 'Blog—Simon Sorensen',
-  description: ''
+  description: '',
+  transitions: true
 }}>
   <Navbar />
 
-  <main class="max-w-7xl mx-auto px-4 pt-16">
-    <header class="mb-8">
-      <h1 class="text-8xl md:text-5xl font-serif mb-4">Blog</h1>
+  <main class="max-w-7xl mx-auto px-4 pb-32">
+    <header class="py-32 flex flex-col items-center">
+      <h1 class="text-4xl md:text-6xl lg:text-7xl  font-serif mb-4">Posts</h1>
       <p class="text-lg text-zinc-300">Writings about coding and other fun stuff :)</p>
+
+      <!-- tags -->
+      <div class="flex flex-wrap justify-center max-w-2xl gap-3 mt-8">
+        {tags.map((tag) => (
+          <Tag title={tag} fontSize='text-lg' />
+        ))}
+      </div>
     </header>
     
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-fr gap-4">
@@ -33,4 +53,6 @@ if (import.meta.env.PROD) {
     </div>
     
   </main>
+
+  <Footer />
 </Base>

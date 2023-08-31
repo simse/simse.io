@@ -2,6 +2,7 @@ interface PageMeta {
     title: string;
     description: string;
     fonts?: Font[];
+    transitions?: boolean;
 }
 
 interface Font {

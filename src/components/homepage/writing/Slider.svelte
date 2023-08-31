@@ -50,7 +50,7 @@
     <div class="flex-1 mx-auto max-h-[800px] grid grid-cols-1">
         {#each slides as slide, index}
         <div class={`transition-opacity ${currentSlide === index ? 'opacity-1' : 'opacity-0'} col-start-1 row-start-1 flex flex-col justify-center`}>
-            <p class={`text-3xl lg:text-4xl mb-5`}>{slide.text}</p>
+            <p class={`text-2xl md:text-3xl lg:text-4xl mb-5`}>{slide.text}</p>
 
             {#if slide.description}
                 <p class="text-zinc-300 text-xl max-w-5xl hidden md:block">{slide.description}</p>
@@ -62,7 +62,7 @@
 
 <!-- navigation -->
 <div class="flex gap-3 w-full justify-center">
-    <button class="mr-auto border border-[#BA855E] text-[#BA855E] hover:bg-[#BA855E] hover:text-black transition-all px-4 py-2 rounded-full" on:click={previousSlide}>← Previous Fact</button>
+    <button class="mr-auto border border-[#BA855E] text-[#BA855E] hover:bg-[#BA855E] hover:text-black transition-all px-4 py-2 rounded-full" on:click={previousSlide}>←<span class="hidden md:inline-block">Previous Fact</span></button>
 
     {#each slides as _, index}
     <div 
@@ -74,5 +74,5 @@
     />
     {/each}
 
-    <button class="ml-auto border border-[#BA855E] text-[#BA855E] hover:bg-[#BA855E] hover:text-black transition-all px-4 py-2 rounded-full" on:click={nextSlide}>Next Fact →</button>
+    <button class="ml-auto border border-[#BA855E] text-[#BA855E] hover:bg-[#BA855E] hover:text-black transition-all px-4 py-2 rounded-full" on:click={nextSlide}><span class="hidden md:inline-block">Next Fact </span>→</button>
 </div>

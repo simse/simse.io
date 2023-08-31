@@ -40,7 +40,7 @@ const PortabilitySection = () => {
             <div className="">
                 <Hero />
 
-                <div className="max-w-[2000px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 pb-8 px-8">
+                <div className="max-w-[2000px] mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 pb-8 px-4 md:px-8">
                     {funFacts.map((funFact, index) => (
                         <div key={`walkman-funfact-${index}`}>
                             <h2 className="font-bold text-3xl mb-4">{funFact.title}</h2>

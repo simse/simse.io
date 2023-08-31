@@ -22,7 +22,7 @@ const Hero = () => {
             </div>
 
             <div className="grid grid-cols-1 lg:grid-cols-2 max-w-[2000px] mx-auto px-4 md:px-8">
-                <div className="pt-48 lg:pt-[300px] font-bold">
+                <div className="pt-48 lg:pt-[300px] mb-16 md:mb-0 font-bold">
                     <p className="text-3xl lg:text-6xl ">The Age of</p>
 
                     <h1 className="text-5xl md:text-7xl lg:text-[8rem] mb-4">Portability</h1>
@@ -30,7 +30,7 @@ const Hero = () => {
                     <p className="text-xl md:text-2xl text-zinc-400">The Cassette Tape</p>
                 </div>
 
-                <div className="lg:pt-32">
+                <div className="lg:pt-32 hidden md:block">
                     {staticWalkman ? <div className=""></div> : <Walkman />}
                 </div>
             </div>

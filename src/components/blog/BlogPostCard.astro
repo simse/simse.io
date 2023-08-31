@@ -1,7 +1,7 @@
 ---
 import { getAverageColor } from "fast-average-color-node";
 import type { CollectionEntry } from "astro:content";
-import Image from 'astro/components/Image.astro';
+import { Image } from 'astro:assets';
 import Tag from '@/components/blog/Tag.astro';
 
 interface Props {
@@ -21,9 +21,13 @@ try {
     ?.split(".");
   let filename = `${filenameParts?.shift()}.${filenameParts?.pop()}`;
 
-  dominantColor = await getAverageColor(`src/assets/${filename}`, {
-    mode: "precision",
-  });
+  if (import.meta.env.PROD) {
+    dominantColor = await getAverageColor(`src/assets/${filename}`, {
+      mode: "precision",
+      algorithm: 'sqrt',
+      ignoredColor: [0, 0, 0, 1],
+    });
+  }
 } catch (e) {
   console.error(`could not find dominant color for ${post.slug}: ${e}`);
 }
