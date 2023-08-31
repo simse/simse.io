@@ -70,6 +70,55 @@
           "type": "datetime"
         }
       ]
+    },
+    {
+      "name": "project",
+      "pageBundle": false,
+      "previewPath": null,
+      "fields": [
+        {
+          "title": "Title",
+          "name": "title",
+          "type": "string"
+        },
+        {
+          "title": "Description",
+          "name": "description",
+          "type": "string"
+        },
+        {
+          "title": "Category",
+          "name": "category",
+          "type": "choice",
+          "choices": [
+            "Website",
+            "Library",
+            "Application",
+            "Experiment",
+            "Other"
+          ]
+        },
+        {
+          "title": "Tech Stack",
+          "name": "techStack",
+          "type": "list"
+        },
+        {
+          "title": "type",
+          "name": "type",
+          "type": "string"
+        },
+        {
+          "title": "lastmod",
+          "name": "lastmod",
+          "type": "datetime"
+        },
+        {
+          "title": "sourceCode",
+          "name": "sourceCode",
+          "type": "string"
+        }
+      ]
     }
   ],
   "frontMatter.framework.id": "astro",
@@ -77,11 +126,18 @@
     "path": "src/assets",
     "relative": true
   },
-  "frontMatter.preview.host": "http://localhost:3000",
+  "frontMatter.preview.host": "http://localhost:4321",
   "frontMatter.content.pageFolders": [
     {
-      "title": "blog",
+      "title": "Blog",
       "path": "[[workspace]]/src/content/blog"
+    },
+    {
+      "title": "Projects",
+      "path": "[[workspace]]/src/content/projects",
+      "contentTypes": [
+        "project"
+      ]
     }
   ],
   "frontMatter.experimental": false

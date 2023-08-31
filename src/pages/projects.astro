@@ -1,6 +1,24 @@
 ---
-import { Icon } from 'astro-icon';
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+import Icon from "astro-icon";
 import ContainerLayout from "@/layouts/container.astro";
+import Tag from "@/components/blog/Tag.astro";
+
+const projects = await getCollection("projects");
+
+// group by category
+const categories = projects.reduce((acc: {
+    [key: string]: CollectionEntry<'projects'>[];
+}, project) => {
+    if (!acc[project.data.category]) {
+        acc[project.data.category] = [];
+    }
+
+    acc[project.data.category].push(project);
+
+    return acc;
+}, {});
 ---
 <ContainerLayout>
     <header class="text-center mb-16">
@@ -8,5 +26,23 @@ import ContainerLayout from "@/layouts/container.astro";
         <p class="text-lg text-zinc-300">Stuff I've created over the years</p>
     </header>
 
-    <h2 class="font-bold text-xl">Websites</h2>    
+    {Object.keys(categories).map(cat => (
+        <h2 class="font-bold text-xl">{cat}</h2>
+
+        <div class="grid grid-cols-10 mb-12 mt-2">
+            {categories[cat].map(project => (
+                <h3 class="border-b border-zinc-700 py-4 col-span-2">{project.data.title}</h3>
+
+                <div class="border-b border-zinc-700 py-4 col-span-4 flex gap-2">
+                    {project.data.techStack.map(tech => (
+                        <Tag title={tech} />
+                    ))}
+                </div>
+                <div class="border-b border-zinc-700 py-4 col-span-3"></div>
+                <div class="border-b border-zinc-700 py-4 flex justify-end ">
+                    <a href={project.data.sourceCode} class="flex gap-2 text-zinc-300 hover:text-blue-300"><Icon name="pixelarticons:code" width="16" /> Source Code</a>
+                </div>
+            ))}
+        </div>
+    ))}
 </ContainerLayout>
