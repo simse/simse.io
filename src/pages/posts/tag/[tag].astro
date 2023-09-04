@@ -1,0 +1,40 @@
+---
+
+import { getCollection } from "astro:content";
+import PostsPage from "@/templates/PostsPage.astro";
+import { slugifyText } from "@/common";
+
+export async function getStaticPaths() {
+    const posts = await getCollection("blog");
+
+    // get list of tags
+    const tags = posts.reduce((acc: string[], post) => {
+        post.data.tags.forEach((tag) => {
+            if (!acc.includes(tag)) {
+                acc.push(tag);
+            }
+        });
+        return acc;
+    }, []);
+
+    return tags.map((tag) => {
+        return {
+            params: {
+                tag: slugifyText(tag),
+            },
+            props: {
+                tag,
+                originalTag: tag,
+            }
+        };
+    });
+}
+
+interface Props {
+    tag: string;
+    originalTag: string;
+}
+
+const { tag, originalTag } = Astro.props;
+---
+<PostsPage tag={originalTag} />

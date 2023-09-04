@@ -3,9 +3,10 @@ interface Props {
     title: string;
     href?: string;
     fontSize?: 'text-sm' | 'text-lg' | 'text-xl';
+    selected?: boolean;
 }
 
-const { title, href, fontSize = 'text-sm' } = Astro.props;
+const { title, href, fontSize = 'text-sm', selected = false } = Astro.props;
 
 // map to colour
 const colourMap: {
@@ -30,6 +31,28 @@ const colourMap: {
     rose: "hover:bg-rose-700 hover:border-rose-900 hover:text-rose-200"
 }
 
+const selectedolourMap: {
+    [key: string]: string;
+} = {
+    red: "bg-red-700 border-red-900 text-red-200",
+    orange: "bg-orange-700 border-orange-900 text-orange-200",
+    amber: "bg-amber-700 border-amber-900 text-amber-200",
+    yellow: "bg-yellow-700 border-yellow-900 text-yellow-200",
+    lime: "bg-lime-700 border-lime-900 text-lime-200",
+    green: "bg-green-700 border-green-900 text-green-200",
+    emerald: "bg-emerald-700 border-emerald-900 text-emerald-200",
+    teal: "bg-teal-700 border-teal-900 text-teal-100",
+    cyan: "bg-cyan-700 border-cyan-900 text-cyan-100",
+    sky: "bg-sky-700 border-sky-900 text-sky-100",
+    blue: "bg-blue-700 border-blue-900 text-blue-200",
+    indigo: "bg-indigo-700 border-indigo-900 text-indigo-200",
+    violet: "bg-violet-700 border-violet-900 text-violet-200",
+    purple: "bg-purple-700 border-purple-900 text-purple-200",
+    fuchsia: "bg-fuchsia-700 border-fuchsia-900 text-fuchsia-200",
+    pink: "bg-pink-700 border-pink-900 text-pink-200",
+    rose: "bg-rose-700 border-rose-900 text-rose-200"
+}
+
 const getTailwindColor = (inputString: string): string => {
     const colors = Object.keys(colourMap);
 
@@ -40,6 +63,10 @@ const getTailwindColor = (inputString: string): string => {
     }
     
     const index = sum % colors.length;
+    if (selected) {
+        return selectedolourMap[colors[index]];
+    }
+
     return colourMap[colors[index]];
 }
 
