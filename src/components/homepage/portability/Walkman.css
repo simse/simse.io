@@ -712,6 +712,36 @@
 
 /* Walkman Cover
 ------------------------ */
+@keyframes flutter {
+    0% {
+        transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(75px) translatex(1px) translatey(0px);
+    }
+
+    2% {
+        transform: rotateY(-16deg) rotateX(0deg) rotateZ(0deg) translateZ(80px) translatex(20px) translatey(0px);
+    }
+
+    6% {
+        transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(75px) translatex(1px) translatey(0px);
+    }
+
+    8% {
+        transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(75px) translatex(1px) translatey(0px);
+    }
+
+    10% {
+        transform: rotateY(-16deg) rotateX(0deg) rotateZ(0deg) translateZ(80px) translatex(20px) translatey(0px);
+    }
+
+    14% {
+        transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(75px) translatex(1px) translatey(0px);
+    }
+
+    100% {
+        transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(75px) translatex(1px) translatey(0px);
+    }
+}
+
 .walkman-cover {
     top: 80px;
     width: 271px;
@@ -721,7 +751,13 @@
     transform: rotateY(-41deg) rotateX(0deg) rotateZ(0deg) translateZ(51px) translatex(59px) translatey(0px);
     backface-visibility: visible;
     cursor: pointer;
+    animation: flutter 10s infinite;
+    animation-delay: 4s;
     /* opacity: 0; */
+}
+
+.walkman.touched .walkman-cover {
+    animation: none;
 }
 
 .walkman-cover *,

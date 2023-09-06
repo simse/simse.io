@@ -31,7 +31,7 @@ const colourMap: {
     rose: "hover:bg-rose-700 hover:border-rose-900 hover:text-rose-200"
 }
 
-const selectedolourMap: {
+const selectedColourMap: {
     [key: string]: string;
 } = {
     red: "bg-red-700 border-red-900 text-red-200",
@@ -64,13 +64,13 @@ const getTailwindColor = (inputString: string): string => {
     
     const index = sum % colors.length;
     if (selected) {
-        return selectedolourMap[colors[index]];
+        return selectedColourMap[colors[index]];
     }
 
     return colourMap[colors[index]];
 }
 
-const style = `hover:cursor-pointer text-zinc-100 bg-zinc-800 border-zinc-700 transition-colors border rounded-full px-3 py-1 ${fontSize} ${getTailwindColor(title)}`;
+const style = `hover:cursor-pointer transition-colors border rounded-full px-3 py-1 ${fontSize} ${getTailwindColor(title)} ${!selected ? 'text-zinc-100 bg-zinc-800 border-zinc-700' : ''}`;
 ---
 {href && <a href={href} class={style}>{title}</a>}
 {!href && <span class={style}>{title}</span>}

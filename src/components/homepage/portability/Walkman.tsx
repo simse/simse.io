@@ -61,6 +61,7 @@ const Walkman = () => {
     const [timeStart, setTimeStart] = useState<Date>(new Date());
     const songRef = useRef<HTMLAudioElement>(null);
     const [selectedTape, setSelectedTape] = useState<number>(1);
+    const [touched, setTouched] = useState<boolean>(false);
 
     // state helpers
     const isPlaying = walkmanState === 'playing';
@@ -222,9 +223,12 @@ const Walkman = () => {
         document.addEventListener("mouseup", onMouseUp);
       };
 
+      const onTouch = () => {
+        setTouched(true);
+      }
 
     return (
-        <div className="walkman-wrapper">
+        <div className="walkman-wrapper" onClick={onTouch} onTouchStart={onTouch} onDragStart={onTouch}>
             <audio ref={songRef} src={`https://files.simse.io/walkman/song_${selectedTape}.mp3`} loop={false} onEnded={() => setWalkmanState('stopped')} preload='auto' />
 
             {Object.keys(SOUNDS).map((sound) => (
@@ -232,7 +236,7 @@ const Walkman = () => {
             ))}
             
             <div 
-                className={`walkman ${isEjecting || isEjected ? 'cover-open' : 'tape-in'} ${isPlaying ? 'playing' : ''} ${isFastForwarding ? 'forward' : ''} ${isRewinding ? 'rewind' : ''}`}
+                className={`walkman ${isEjecting || isEjected ? 'cover-open' : 'tape-in'} ${isPlaying ? 'playing' : ''} ${isFastForwarding ? 'forward' : ''} ${isRewinding ? 'rewind' : ''} ${touched ? 'touched' : ''}`}
                 style={{ '--rotation-y': `${rotationY}deg`, '--rotation-x': `${rotationX}deg`, '--rotation-z': `${rotationZ}deg`} as React.CSSProperties}
                 onMouseDown={onMouseDown}
             >
