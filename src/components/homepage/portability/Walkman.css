@@ -726,14 +726,10 @@
     }
 
     8% {
-        transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(75px) translatex(1px) translatey(0px);
-    }
-
-    10% {
         transform: rotateY(-16deg) rotateX(0deg) rotateZ(0deg) translateZ(80px) translatex(20px) translatey(0px);
     }
 
-    14% {
+    12% {
         transform: rotateY(0deg) rotateX(0deg) rotateZ(0deg) translateZ(75px) translatex(1px) translatey(0px);
     }
 
@@ -752,7 +748,7 @@
     backface-visibility: visible;
     cursor: pointer;
     animation: flutter 10s infinite;
-    animation-delay: 4s;
+    animation-delay: 2s;
     /* opacity: 0; */
 }
 

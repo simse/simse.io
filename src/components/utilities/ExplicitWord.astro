@@ -5,17 +5,8 @@ interface Props {
 
 const { text } = Astro.props;
 
-// prevent delay duplication
-let chosenDelays: number[] = [];
-
-const getDelay = (): number => {
-    const delay = Math.random() * (5 - 2 + 1) + 2;
-
-    if (chosenDelays.includes(delay)) {
-        return getDelay();
-    }
-
-    chosenDelays.push(delay);
+const getDelay = (char: string, position: number): number => {
+    const delay = char.charCodeAt(0) * position / 20;
 
     return delay;
 }
@@ -64,6 +55,6 @@ span.letter:after {
 
 <span class="font-mono">
     {[...text].map((letter, i) => {
-        return letter === ' ' ? ' ' : <span class="letter" style={`--duration: ${Math.floor(Math.random() * (10 - 5 + 1) + 5)}s; --delay: -${getDelay()}s`}></span>
+        return letter === ' ' ? ' ' : <span class="letter" style={`--duration: ${getDelay(letter, i)}s; --delay: -${getDelay(letter, i)}s`}></span>
     })}
 </span>

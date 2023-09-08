@@ -1,14 +1,19 @@
 ---
 import Timeline from "../common/Timeline.astro";
+import { Image } from "astro:assets";
+import macintoshImage from "@/assets/homepage/pc/macintosh.png";
 ---
-<div class="relative min-h-screen pl-4 md:pl-16 ">
-    <Timeline />
+<div class="relative min-h-screen pl-4 md:pl-16 bg-amber-100 text-amber-950 pb-32">
+    <Timeline markerColor="border-amber-700" timelineColor="stroke-amber-300" />
 
     <header class="py-6 text-lg">
-        <strong>1980s</strong>
+        <strong class="mb-2 block">1980s — Computers move into the home</strong>
 
-        
+        <p>Whhomp whomp womph. And so on.</p>
     </header>
 
-    PCs, MS-DOS, etc.
+    <h1 class="font-serif font-light text-center text-8xl mt-16 mb-6">Test drive<br />a Macintosh.</h1>
+    <p class="text-xl text-center text-amber-800">Seriously, you can! Oh the wonders of modern browsers.</p>
+
+    <Image class="max-w-6xl mx-auto" src={macintoshImage} width={1600} quality={100} format="avif" alt="" />
 </div>

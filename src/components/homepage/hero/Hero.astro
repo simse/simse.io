@@ -1,9 +1,18 @@
 ---
 import ExplicitWord from "@/components/utilities/ExplicitWord.astro";
+import { Image } from "astro:assets";
+import ProfilePic from '@/assets/simse.jpg';
 ---
 
-<main class="py-16 px-4 md:py-64 max-w-7xl mx-auto">
-    <h1 class="text-3xl md:text-4xl mb-8">👋 Welcome to my website where I can do whatever the <strong><ExplicitWord text="hell" /></strong> I want!</h1>
+<main class="py-16 px-4 md:py-64 max-w-7xl mx-auto flex gap-8 items-center">
+    <div class="rounded-full mb-8 w-[500px] overflow-clip">
+        <Image src={ProfilePic} width={1000} height={1000} alt="Picture of Simon" class="object-cover  w-[500px]" />
+    </div>
+    
 
-    <p class="text-lg text-zinc-300">So I have. Hehe.</p>
+    <div>
+        <h1 class="text-3xl md:text-4xl mb-8">👋 Welcome to my website where I can do whatever the <strong><ExplicitWord text="hell" /></strong> I want!</h1>
+
+        <p class="text-lg text-zinc-300">So I have. Hehe.</p>
+    </div>
 </main>
