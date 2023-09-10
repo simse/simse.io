@@ -29,7 +29,8 @@
     "@playwright/test": "^1.37.1",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",
-    "sass": "^1.65.1"
+    "sass": "^1.65.1",
+    "tailwind-scrollbar": "^3.0.5"
   },
   "pnpm": {
     "overrides": {

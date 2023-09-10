@@ -6,7 +6,7 @@ interface Props {
 const { text } = Astro.props;
 
 const getDelay = (char: string, position: number): number => {
-    const delay = char.charCodeAt(0) * position / 20;
+    const delay = char.charCodeAt(0) * (position+1) / 20;
 
     return delay;
 }

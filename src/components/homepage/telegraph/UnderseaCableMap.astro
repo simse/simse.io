@@ -1,95 +1,262 @@
+---
+import Icon from "astro-icon";
+
+let underseaTelegraphCables = [
+    {
+        title: "Transatlantic Telegraph Cable",
+        landingPoints: [
+            "Valentia Island, Ireland",
+            "Heart's Content, Newfoundland, Canada",
+        ],
+        yearLaid: 1866,
+        speed: "8 words per minute",
+    },
+    {
+        title: "French Atlantic Cable",
+        landingPoints: ["Brest, France", "Saint Pierre and Miquelon, France"],
+        yearLaid: 1869,
+        speed: "Not available",
+    },
+    {
+        title: "Direct United States Cable",
+        landingPoints: [
+            "Rye Beach, New Hampshire, USA",
+            "Canso, Nova Scotia, Canada",
+        ],
+        yearLaid: 1874,
+        speed: "Not available",
+    },
+    {
+        title: "Commercial Cable Company's First Cable",
+        landingPoints: ["Waterville, Ireland", "Canso, Nova Scotia, Canada"],
+        yearLaid: 1884,
+        speed: "Not available",
+    },
+    {
+        title: "Western Union's Second Atlantic Cable",
+        landingPoints: [
+            "Ballinskelligs, Ireland",
+            "Coney Island, New York, USA",
+        ],
+        yearLaid: 1894,
+        speed: "Not available",
+    },
+    {
+        title: "Anglo-American Telegraph Company's Cable",
+        landingPoints: [
+            "Clifden, Ireland",
+            "Heart's Content, Newfoundland, Canada",
+        ],
+        yearLaid: 1901,
+        speed: "Not available",
+    },
+    {
+        title: "Direct Spanish Cable",
+        landingPoints: ["Porthcurno, England", "Carnero, Spain"],
+        yearLaid: 1906,
+        speed: "Not available",
+    },
+    {
+        title: "Western Union's Fifth Atlantic Cable",
+        landingPoints: ["Horta, Azores", "Miami, Florida, USA"],
+        yearLaid: 1921,
+        speed: "Not available",
+    },
+];
+---
+
 <script>
+    let underseaTelegraphCables = [
+        {
+            title: "Transatlantic Telegraph Cable",
+            landingPoints: [
+                "Valentia Island, Ireland",
+                "Heart's Content, Newfoundland, Canada",
+            ],
+            yearLaid: 1866,
+            speed: "8 words per minute",
+        },
+        {
+            title: "French Atlantic Cable",
+            landingPoints: [
+                "Brest, France",
+                "Saint Pierre and Miquelon, France",
+            ],
+            yearLaid: 1869,
+            speed: "Not available",
+        },
+        {
+            title: "Direct United States Cable",
+            landingPoints: [
+                "Rye Beach, New Hampshire, USA",
+                "Canso, Nova Scotia, Canada",
+            ],
+            yearLaid: 1874,
+            speed: "Not available",
+        },
+        {
+            title: "Commercial Cable Company's First Cable",
+            landingPoints: [
+                "Waterville, Ireland",
+                "Canso, Nova Scotia, Canada",
+            ],
+            yearLaid: 1884,
+            speed: "Not available",
+        },
+        {
+            title: "Western Union's Second Atlantic Cable",
+            landingPoints: [
+                "Ballinskelligs, Ireland",
+                "Coney Island, New York, USA",
+            ],
+            yearLaid: 1894,
+            speed: "Not available",
+        },
+        {
+            title: "Anglo-American Telegraph Company's Cable",
+            landingPoints: [
+                "Clifden, Ireland",
+                "Heart's Content, Newfoundland, Canada",
+            ],
+            yearLaid: 1901,
+            speed: "Not available",
+        },
+        {
+            title: "Direct Spanish Cable",
+            landingPoints: ["Porthcurno, England", "Carnero, Spain"],
+            yearLaid: 1906,
+            speed: "Not available",
+        },
+        {
+            title: "Western Union's Fifth Atlantic Cable",
+            landingPoints: ["Horta, Azores", "Miami, Florida, USA"],
+            yearLaid: 1921,
+            speed: "Not available",
+        },
+    ];
+
     import "maplibre-gl/dist/maplibre-gl.css";
-    import MapLibreGL from "maplibre-gl";
 
-    const map = new MapLibreGL.Map({
-        container: "map",
-        style: "https://api.maptiler.com/maps/ocean/style.json?key=Ng17OwLFAIWvk21DBUZH",
-        center: [-34.102, 48.866],
-        zoom: 4,
-        // scrollZoom: false,
-        cooperativeGestures: true,
-    });
+    const loadMapButton = document.getElementById("loadmap");
 
-    const markerElement = document.createElement("div");
-    markerElement.classList.add("h-2", "w-2", "bg-purple-500", "rounded-full");
+    if (!loadMapButton) {
+        throw new Error("Could not find load map button");
+    }
 
-    const marker = new MapLibreGL.Marker({
-        element: markerElement,
-    })
-        .setLngLat([-10.389757923774972, 51.893388679761244])
-        .addTo(map);
+    loadMapButton.onclick = async () => {
+        const MapLibreGL = await import("maplibre-gl");
 
-    const secondMarker = new MapLibreGL.Marker({
-        element: markerElement.cloneNode(true) as HTMLDivElement,
-    })
-        .setLngLat([-53.364444, 47.870278])
-        .addTo(map);
+        const map = new MapLibreGL.Map({
+            container: "map",
+            style: "https://api.maptiler.com/maps/ocean/style.json?key=Ng17OwLFAIWvk21DBUZH",
+            center: [-34.102, 48.866],
+            zoom: 4,
+            // scrollZoom: false,
+            cooperativeGestures: true,
+        });
 
-    map.addControl(new MapLibreGL.NavigationControl());
+        const markerElement = document.createElement("div");
+        markerElement.classList.add(
+            "h-2",
+            "w-2",
+            "bg-purple-500",
+            "rounded-full",
+        );
 
-    map.on("load", () => {
-        map.addSource("route", {
-            type: "geojson",
-            data: {
-                type: "Feature",
-                properties: {},
-                geometry: {
-                    coordinates: [
-                        [-10.390085686547792, 51.892633967953486],
-                        [-10.429371512723066, 51.874908081050194],
-                        [-10.440302279623808, 51.88927454882682],
-                        [-52.93895587159068, 48.222705081520644],
-                        [-53.14101893086273, 48.20535965297299],
-                        [-53.43225765861874, 47.8960324907477],
-                        [-53.39071054369437, 47.88188884322159],
-                        [-53.36887913672126, 47.86945181995847],
-                        [-53.365859550436156, 47.869949537721624],
-                    ],
-                    type: "LineString",
+        const marker = new MapLibreGL.Marker({
+            element: markerElement,
+        })
+            .setLngLat([-10.389757923774972, 51.893388679761244])
+            .addTo(map);
+
+        const secondMarker = new MapLibreGL.Marker({
+            element: markerElement.cloneNode(true) as HTMLDivElement,
+        })
+            .setLngLat([-53.364444, 47.870278])
+            .addTo(map);
+
+        map.addControl(new MapLibreGL.NavigationControl());
+
+        map.on("load", () => {
+            map.addSource("route", {
+                type: "geojson",
+                data: {
+                    type: "Feature",
+                    properties: {},
+                    geometry: {
+                        coordinates: [
+                            [-10.390085686547792, 51.892633967953486],
+                            [-10.429371512723066, 51.874908081050194],
+                            [-10.440302279623808, 51.88927454882682],
+                            [-52.93895587159068, 48.222705081520644],
+                            [-53.14101893086273, 48.20535965297299],
+                            [-53.43225765861874, 47.8960324907477],
+                            [-53.39071054369437, 47.88188884322159],
+                            [-53.36887913672126, 47.86945181995847],
+                            [-53.365859550436156, 47.869949537721624],
+                        ],
+                        type: "LineString",
+                    },
                 },
-            },
+            });
+            map.addLayer({
+                id: "route",
+                type: "line",
+                source: "route",
+                layout: {
+                    "line-join": "round",
+                    "line-cap": "round",
+                },
+                paint: {
+                    "line-color": "#be185d",
+                    "line-dasharray": [1, 2],
+                    "line-width": 2,
+                },
+            });
         });
-        map.addLayer({
-            id: "route",
-            type: "line",
-            source: "route",
-            layout: {
-                "line-join": "round",
-                "line-cap": "round",
-            },
-            paint: {
-                "line-color": "#be185d",
-                "line-dasharray": [1, 2],
-                "line-width": 2,
-            },
-        });
-    });
+    };
 </script>
 
 <div>
     <h2 class="text-xl mb-4 font-bold">
         Explore <em>some</em> of the undersea cables laid between 1866 and 1922
+
+        
     </h2>
 
     <div class="grid grid-cols-10 gap-4">
         <div
-            class="col-span-10 xl:col-span-8 w-full"
+            class="col-span-10 xl:col-span-8 w-full bg-zinc-900"
             id="map"
             style="height: 75vh;"
-        />
+        >
+            <div class="flex flex-col items-center justify-center h-full">
+                <p class="text-center mb-8 text-2xl text-zinc-300">I want to show you map. How much bandwidth can I use?</p>
 
-        <div class="col-span-2 hidden xl:block">
-            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2 p-5">
-                <h3 class="font-bold text-xl">1866 Atlantic Cable</h3>
+                <div class="font-bold">
+                    <button class="h-32 w-32 bg-zinc-800 hover:bg-zinc-700 mr-4"><Icon class="mx-auto mb-1" name="pixelarticons:zap" width="32" /> Lite (300kb)</button>
+
+                    <button class="h-32 w-32 bg-zinc-800 hover:bg-zinc-700" id="loadmap"><Icon class="mx-auto mb-1" name="pixelarticons:downasaur" width="32" /> Full (2mb)</button>
+                </div>
             </div>
+        </div>
 
-            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
-            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
-            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
-            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
-            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
-            <div class="bg-zinc-800 h-32 w-full rounded-lg mb-2" />
+        <div class="col-span-2 hidden xl:block max-h-[75vh] overflow-y-scroll scrollbar-thumb-zinc-700 scrollbar-track-zinc-800 scrollbar-thin pr-2">
+            {
+                underseaTelegraphCables.map((cable) => (
+                    <div class="bg-zinc-800 w-full mb-2 p-6 hover:cursor-pointer hover:bg-zinc-700">
+                        <div class="w-12 h-1.5 rounded-full bg-blue-800 mb-3" />
+
+                        <h3 class="font-li font-serif text-xl">
+                            {cable.yearLaid} - {cable.title}
+                        </h3>
+
+                        <p>
+                            {cable.landingPoints[0]} — {cable.landingPoints[1]}
+                        </p>
+                    </div>
+                ))
+            }
         </div>
     </div>
 </div>

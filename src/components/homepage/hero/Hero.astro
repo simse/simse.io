@@ -1,18 +1,61 @@
 ---
-import ExplicitWord from "@/components/utilities/ExplicitWord.astro";
 import { Image } from "astro:assets";
+import Icon from "astro-icon";
+import { getCollection } from "astro:content";
+
+import { formatPostDate } from "@/common";
+import ExplicitWord from "@/components/utilities/ExplicitWord.astro";
 import ProfilePic from '@/assets/simse.jpg';
+
+let posts = await getCollection("blog");
+posts = posts.sort((a, b) => {
+  return b.data.publishedOn.getTime() - a.data.publishedOn.getTime();
+});
 ---
 
-<main class="py-16 px-4 md:py-64 max-w-7xl mx-auto flex gap-8 items-center">
-    <div class="rounded-full mb-8 w-[500px] overflow-clip">
-        <Image src={ProfilePic} width={1000} height={1000} alt="Picture of Simon" class="object-cover  w-[500px]" />
+<main class="py-16 px-1 max-w-7xl mx-auto">
+    <div class="flex items-center px-3 mb-8">
+        <div class="mb-8 h-[500px] overflow-clip mr-16 grow-0 shrink-0 basis-[500px]">
+            <Image src={ProfilePic} width={1000} height={1000} alt="Picture of Simon" class="object-cover h-[500px] w-[500px]" />
+        </div>
+        
+        <div class="">
+            <h1 class="text-3xl md:text-4xl mb-8">👋 Welcome to my website where I can do whatever the <strong><ExplicitWord text="hell" /></strong> I want!</h1>
+    
+            <p class="text-lg text-zinc-300">So I have. Hehe.</p>      
+        </div>
     </div>
     
+    <div class="grid grid-cols-2">
+        <div class="pr-8 border-r border-zinc-700">
+            <h2 class="text-lg ml-3 text-zinc-300 font-bold"><a class="flex gap-2" href="/posts"><Icon name="pixelarticons:article-multiple" width="20" /><span class="text-white font-serif font-normal mt-1.5">Blog Posts</span></a></h2>
 
-    <div>
-        <h1 class="text-3xl md:text-4xl mb-8">👋 Welcome to my website where I can do whatever the <strong><ExplicitWord text="hell" /></strong> I want!</h1>
+            {posts.slice(0, 3).map(post => (
+                <a href={`/posts/${post.slug}`}>
+                    <div class="first:mt-2 hover:bg-zinc-800 p-3  rounded-lg">
+                        <p class="font-bold text-blue-200">{formatPostDate(post.data.publishedOn)}</p>
+                        <h3 class="text-xl font-bold">{post.data.title}</h3>
+                        <p class="text-zinc-300">{post.data.excerpt}</p>
+                    </div>
+                </a>
+            ))}
+        </div>
 
-        <p class="text-lg text-zinc-300">So I have. Hehe.</p>
+        <div class="pl-8">
+            <h2 class="font-bold text-lg text-zinc-300"><a class="flex gap-2" href="https://simon-sorensen.com" target="_blank"><Icon name="pixelarticons:coffee-alt" width="24" /><span class="text-white font-serif font-normal mt-1.5">Work Experience</span></a></h2>
+
+            <ul class="list-disc list-inside">
+                <li class="my-3">March 2022 - Current <strong>Software Engineering Intern @ The LEGO Group</strong></li>
+                <li class="my-3">March 2021 - October 2021 <strong>Student Worker @ The LEGO Group</strong></li>
+                <li>bruh</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="mt-32">
+        <p class="text-xl text-center text-blue-200">A journey through technology awaits you below...</p>
+
+        <Icon name="pixelarticons:arrow-down" width="32" class="mx-auto mt-6 animate-bounce motion-reduce:animate-none text-blue-200"  />
     </div>
 </main>
+
