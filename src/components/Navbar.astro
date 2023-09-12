@@ -60,14 +60,16 @@ nav#navbar {
     <NavbarInner />
 </nav>
 
-<script lang="js">
+<script>
 let previousScrollPosition = 0;
 let lastKnownScrollPosition = 0;
 let focusedByMouse = false;
 let ticking = false;
 let navbar = document.getElementById("navbar");
 
-function doSomething(scrollPos) {
+function doSomething(scrollPos: number) {
+    if (!navbar) return;
+
     if (scrollPos > 200) {
         navbar.classList.add("scrolled");
     } else {
@@ -100,6 +102,8 @@ document.addEventListener("scroll", (event) => {
 });
 
 document.addEventListener("mousemove", (event) => {
+    if (!navbar) return;
+
     if (event.clientY < 100) {
         navbar.classList.add("focus");
         focusedByMouse = true;

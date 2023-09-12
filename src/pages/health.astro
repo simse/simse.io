@@ -1,0 +1,13 @@
+---
+import ContainerLayout from '@/layouts/container.astro';
+import HealthPage from '@/components/health/HealthPage.svelte';
+---
+<ContainerLayout>
+    <header class="text-center mt-16 mb-32">
+        <h1 class="font-serif text-5xl mb-6">My Health Dashboard</h1>
+        <p class="text-zinc-300 text-lg">I love telling everyone just how heavy I am! :)</p>
+    </header>
+    
+
+    <HealthPage client:load />
+</ContainerLayout>
