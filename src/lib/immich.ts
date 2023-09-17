@@ -21,6 +21,7 @@ export const getImages = async (albumId: string): Promise<Image[]> => {
 }
 
 export interface Image {
+    id: string;
     checksum: string;
     thumbhash: string;
     thumbhashDataUri: string;

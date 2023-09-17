@@ -1,9 +1,26 @@
 ---
+import type { PageMeta } from '@/types';
+interface Props {
+  meta?: PageMeta;
+}
 import Base from "./base.astro";
 import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
+
+const { meta = {
+  title: 'Simon Sorensen—Software Engineering Intern',
+  description: 'Simon Sorensen is a Software Engineering Intern at LEGO.',
+  /*fonts: [
+    {
+      name: 'NewYork',
+      url: 'NewYork-Regular.woff2',
+      weight: 400
+    }
+  ],*/
+  transitions: false
+} } = Astro.props;
 ---
-<Base>
+<Base meta={meta}>
     <Navbar />
 
     <main class="py-16 px-6 max-w-7xl mx-auto">

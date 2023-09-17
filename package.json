@@ -3,15 +3,14 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "astro dev",
-    "start": "astro dev",
+    "dev": "wrangler pages dev -- astro dev",
+    "start": "wrangler pages dev -- astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "wrangler pages dev -- astro preview",
     "astro": "astro",
     "test:e2e": "SELENIUM_REMOTE_URL=http://192.168.0.22:4444 playwright test"
   },
   "dependencies": {
-    "@astrojs/cloudflare": "^7.1.0",
     "@astrojs/mdx": "^1.0.0",
     "@astrojs/preact": "^3.0.0",
     "@astrojs/sitemap": "^3.0.0",
@@ -33,7 +32,8 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",
     "sass": "^1.65.1",
-    "tailwind-scrollbar": "^3.0.5"
+    "tailwind-scrollbar": "^3.0.5",
+    "wrangler": "^3.8.0"
   },
   "pnpm": {
     "overrides": {
