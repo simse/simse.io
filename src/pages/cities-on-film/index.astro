@@ -1,0 +1,63 @@
+---
+import Icon from "astro-icon";
+import PageHeader from "@/components/PageHeader.astro";
+import ContainerLayout from "@/layouts/container.astro";
+import { getImages } from "@/lib/immich";
+import type { Image } from "@/lib/immich";
+
+const albums: {
+    [city: string]: {
+        [album: string]: {
+            id: string;
+            publicUrl: string;
+        }
+    }
+} = {
+    'London, United Kingdom': {
+        'Brixton': {
+            id: 'b610e7ac-5a4f-40de-9971-e97c2b03fde6',
+            publicUrl: 'https://img.0x1.earth/share/GI9UHrDv5U94MKjIXlzy6CbVP7cIoH9_OFaGBsHh_Xmcr1w9U0s6sXv3aKvX9ESxD64'
+        },
+        /*'Richmond': {
+            id: 'b610e7ac-5a4f-40de-9971-e97c2b03fde6',
+            publicUrl: 'https://img.0x1.earth/share/GI9UHrDv5U94MKjIXlzy6CbVP7cIoH9_OFaGBsHh_Xmcr1w9U0s6sXv3aKvX9ESxD64'
+        }*/
+    }
+}
+
+// load images in albums
+let albumImages: {
+    [albumId: string]: Image[]
+} = {};
+let albumIds = Object.keys(albums).map(albumCategory => Object.keys(albums[albumCategory]).map(album => albums[albumCategory][album].id)).flat();
+
+await Promise.all(albumIds.map(async albumId => {
+    albumImages[albumId] = await getImages(albumId);
+}));
+---
+<ContainerLayout>
+    <PageHeader title="Cities on Film" subtitle="I bought a film camera and I live in a city, so here we are." />
+
+
+    {Object.keys(albums).map(albumCategory => (<section>
+        <h2 class="font-bold">{albumCategory}</h2>
+
+        {Object.keys(albums[albumCategory]).map(album => (
+            <a href={albums[albumCategory][album].publicUrl} target="_blank">
+                <article class="my-2 py-8">
+                    <div class="flex justify-between items-center mb-3">
+                        <h3 class="font-serif font-light text-5xl ">{album}</h3>
+
+                        <button class="flex gap-2 text-zinc-200 hover:text-blue-200">Open <Icon name="pixelarticons:open" size="24" /></button>
+                    </div>
+
+                    <div class="flex gap-2 max-w-full overflow-x-scroll scrollbar-thin scrollbar-track-zinc-800 scrollbar-thumb-zinc-500">
+                    {albumImages[albums[albumCategory][album].id].map(image => (
+                        <img class="w-64 h-64" src={image.thumbhashDataUri} alt='' />
+                    ))}
+                    </div>
+                </article>
+            </a>
+        ))}
+    </section>))}
+</ContainerLayout>

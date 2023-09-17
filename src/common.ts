@@ -7,3 +7,5 @@ export const formatPostDate = (date: Date): string => date.toLocaleDateString("e
     month: "long",
     day: "numeric",
 });
+
+export const base64ToBinary = (base64: string) => new Uint8Array(atob(base64).split('').map(x => x.charCodeAt(0)));

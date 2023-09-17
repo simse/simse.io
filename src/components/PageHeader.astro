@@ -1,0 +1,12 @@
+---
+interface Props {
+    title: string;
+    subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+<header class="text-center mt-16 mb-32">
+    <p class="font-serif text-5xl mb-6">{title}</p>
+    {subtitle ? <span class="text-zinc-300 text-lg">{subtitle}</span> : null}
+</header>

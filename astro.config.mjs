@@ -4,11 +4,13 @@ import svelte from "@astrojs/svelte";
 import tailwind from "@astrojs/tailwind";
 import preact from "@astrojs/preact";
 import sitemap from "@astrojs/sitemap";
+import cloudflare from '@astrojs/cloudflare';
 
 // https://astro.build/config
 export default defineConfig({
   site: 'https://simse.io',
-  output: 'static',
+  output: 'hybrid',
+  adapter: cloudflare(),
   integrations: [mdx(), svelte(), tailwind(), preact({
     compat: true
   }), sitemap()],

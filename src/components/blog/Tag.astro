@@ -70,7 +70,7 @@ const getTailwindColor = (inputString: string): string => {
     return colourMap[colors[index]];
 }
 
-const style = `hover:cursor-pointer transition-colors border rounded-full px-3 py-1 ${fontSize} ${getTailwindColor(title)} ${!selected ? 'text-zinc-100 bg-zinc-800 border-zinc-700' : ''}`;
+const style = `transition-colors border rounded-full px-3 py-1 ${fontSize} ${getTailwindColor(title)} ${!selected ? 'text-zinc-100 bg-zinc-800 border-zinc-700' : ''}`;
 ---
 {href && <a href={href} class={style}>{title}</a>}
 {!href && <span class={style}>{title}</span>}

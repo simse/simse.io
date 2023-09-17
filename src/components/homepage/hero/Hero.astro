@@ -11,6 +11,9 @@ let posts = await getCollection("blog");
 posts = posts.sort((a, b) => {
   return b.data.publishedOn.getTime() - a.data.publishedOn.getTime();
 });
+
+// filter out drafts
+posts = posts.filter(post => !post.data.draft);
 ---
 
 <main class="py-16 px-1 max-w-7xl mx-auto">
@@ -54,10 +57,10 @@ posts = posts.sort((a, b) => {
         </div>
     </div>
 
-    <div class="mt-32">
+    {import.meta.env.DEV && <div class="mt-32">
         <p class="text-xl text-center text-blue-200">A journey through technology awaits you below...</p>
 
         <Icon name="pixelarticons:arrow-down" width="32" class="mx-auto mt-6 animate-bounce motion-reduce:animate-none text-blue-200"  />
-    </div>
+    </div>}
 </main>
 

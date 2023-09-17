@@ -41,21 +41,23 @@ import MachineLearningSection from "@/components/homepage/machine-learning/Machi
 
 	</div-->
 
-	<WritingSection />
+	{import.meta.env.DEV && (
+		<WritingSection />
 
-	<TelegraphSection />
+		<TelegraphSection />
 
-	<EarlyInternetSection />
+		<EarlyInternetSection />
 
-	<PortabilitySection />
+		<PortabilitySection />
 
-	<PersonalComputingSection />
+		<PersonalComputingSection />
 
-	<InternetSection />
+		<InternetSection />
 
-	<MobileComputingSection />
+		<MobileComputingSection />
 
-	<MachineLearningSection />
+		<MachineLearningSection />
+	)}
 
 	<Footer />
 </Base>
