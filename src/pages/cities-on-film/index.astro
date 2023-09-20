@@ -1,6 +1,5 @@
 ---
 import Icon from "astro-icon";
-import { Image as AstroImage } from "astro:assets";
 import PageHeader from "@/components/PageHeader.astro";
 import ContainerLayout from "@/layouts/container.astro";
 import { getImages } from "@/lib/immich";
@@ -19,9 +18,13 @@ const albums: {
             id: 'b610e7ac-5a4f-40de-9971-e97c2b03fde6',
             publicUrl: 'https://img.0x1.earth/share/GI9UHrDv5U94MKjIXlzy6CbVP7cIoH9_OFaGBsHh_Xmcr1w9U0s6sXv3aKvX9ESxD64'
         },
-        /*'Richmond': {
-            id: 'b610e7ac-5a4f-40de-9971-e97c2b03fde6',
-            publicUrl: 'https://img.0x1.earth/share/GI9UHrDv5U94MKjIXlzy6CbVP7cIoH9_OFaGBsHh_Xmcr1w9U0s6sXv3aKvX9ESxD64'
+        'Kingston upon Thames': {
+            id: 'd5ad148d-5676-43c3-b8ae-cc8dfd856e54',
+            publicUrl: 'https://img.0x1.earth/share/ORCjg-SQxTjzI3W-pmyYOz35OQR6I-53R0wrQfwW-P-g_pqfNZDde7eDPiYB8iIWtEo'
+        },
+        /*'Wimbledon': {
+            id: 'd5ad148d-5676-43c3-b8ae-cc8dfd856e54',
+            publicUrl: 'https://img.0x1.earth/share/ORCjg-SQxTjzI3W-pmyYOz35OQR6I-53R0wrQfwW-P-g_pqfNZDde7eDPiYB8iIWtEo'
         }*/
     }
 }
@@ -44,27 +47,29 @@ await Promise.all(albumIds.map(async albumId => {
 
 
     {Object.keys(albums).map(albumCategory => (<section>
-        <h2 class="font-bold">{albumCategory}</h2>
+        <h2 class="font-bold w-full border-b border-zinc-700 pb-3">{albumCategory}</h2>
 
         {Object.keys(albums[albumCategory]).map(album => (
             <a href={albums[albumCategory][album].publicUrl} target="_blank">
-                <article class="my-2 py-8">
-                    <div class="flex justify-between items-center mb-3">
-                        <h3 class="font-serif font-light text-5xl ">{album}</h3>
+                <article class="my-0 py-8">
+                    <div class="flex items-center mb-3">
+                        <h3 class="font-serif text-3xl mr-3">{album}</h3>
 
-                        <button class="flex gap-2 text-zinc-200 hover:text-blue-200">Open <Icon name="pixelarticons:open" size="24" /></button>
+                        <button class="flex gap-2 text-zinc-200 hover:text-blue-200 ml-auto">Open <Icon name="pixelarticons:open" size="24" /></button>
                     </div>
 
-                    <div class="flex gap-2 pb-2 max-w-full overflow-x-scroll scrollbar-thin scrollbar-track-zinc-800 scrollbar-thumb-zinc-500">
+                    <div class="flex gap-2 pb-4 max-w-full overflow-x-scroll scrollbar-none hover:pb-2 hover:scrollbar-thin scrollbar-track-zinc-800 scrollbar-thumb-zinc-500">
                     {albumImages[albums[albumCategory][album].id].slice(0, 10).map(image => (
-                        <div class="w-48 h-48 relative">
+                        <div class="w-48 h-48 shrink-0 relative">
                             <img class="object-cover h-full w-full" src={image.thumbhashDataUri} alt='' />
 
-                            <img class="w-full h-full z-10 absolute top-0 left-0" src={`/cities-on-film/image-proxy?assetId=${image.id}`} alt='' />
+                            <img class="object-cover w-full h-full z-10 absolute top-0 left-0" src={`/cities-on-film/image-proxy?assetId=${image.id}`} alt='' />
                         </div>
-                        
-                        
                     ))}
+
+                        {albumImages[albums[albumCategory][album].id].length > 10 ? <div class="w-48 h-48 shrink-0 bg-zinc-800 flex justify-center items-center">
+                            <p class="text-zinc-200 text-2xl">+{albumImages[albums[albumCategory][album].id].length - 10}</p>
+                        </div> : null}
                     </div>
                 </article>
             </a>
