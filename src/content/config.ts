@@ -27,7 +27,17 @@ const projectsCollection = defineCollection({
   })
 })
 
+const citiesOnFilmCollection = defineCollection({
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    geographicCategory: z.string()
+  })
+})
+
+
 export const collections = {
   'blog': blogCollection,
   'projects': projectsCollection,
+  'cities-on-film': citiesOnFilmCollection
 };

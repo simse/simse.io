@@ -2,42 +2,7 @@
 import Icon from "astro-icon";
 import PageHeader from "@/components/PageHeader.astro";
 import ContainerLayout from "@/layouts/container.astro";
-import { getImages } from "@/lib/immich";
-import type { Image } from "@/lib/immich";
 
-const albums: {
-    [city: string]: {
-        [album: string]: {
-            id: string;
-            publicUrl: string;
-        }
-    }
-} = {
-    'London, United Kingdom': {
-        'Brixton': {
-            id: 'b610e7ac-5a4f-40de-9971-e97c2b03fde6',
-            publicUrl: 'https://img.0x1.earth/share/GI9UHrDv5U94MKjIXlzy6CbVP7cIoH9_OFaGBsHh_Xmcr1w9U0s6sXv3aKvX9ESxD64'
-        },
-        'Kingston upon Thames': {
-            id: 'd5ad148d-5676-43c3-b8ae-cc8dfd856e54',
-            publicUrl: 'https://img.0x1.earth/share/ORCjg-SQxTjzI3W-pmyYOz35OQR6I-53R0wrQfwW-P-g_pqfNZDde7eDPiYB8iIWtEo'
-        },
-        /*'Wimbledon': {
-            id: 'd5ad148d-5676-43c3-b8ae-cc8dfd856e54',
-            publicUrl: 'https://img.0x1.earth/share/ORCjg-SQxTjzI3W-pmyYOz35OQR6I-53R0wrQfwW-P-g_pqfNZDde7eDPiYB8iIWtEo'
-        }*/
-    }
-}
-
-// load images in albums
-let albumImages: {
-    [albumId: string]: Image[]
-} = {};
-let albumIds = Object.keys(albums).map(albumCategory => Object.keys(albums[albumCategory]).map(album => albums[albumCategory][album].id)).flat();
-
-await Promise.all(albumIds.map(async albumId => {
-    albumImages[albumId] = await getImages(albumId);
-}));
 ---
 <ContainerLayout meta={{
     title: 'Cities on Film by Simon Sorensen',
@@ -46,7 +11,7 @@ await Promise.all(albumIds.map(async albumId => {
     <PageHeader title="Cities on Film" subtitle="I bought a film camera and I live in a city, so here we are." />
 
 
-    {Object.keys(albums).map(albumCategory => (<section>
+    {/*Object.keys(albums).map(albumCategory => (<section>
         <h2 class="font-bold w-full border-b border-zinc-700 pb-3">{albumCategory}</h2>
 
         {Object.keys(albums[albumCategory]).map(album => (
@@ -74,5 +39,6 @@ await Promise.all(albumIds.map(async albumId => {
                 </article>
             </a>
         ))}
-    </section>))}
+        </section>))*/}
+        <a href="/cities-on-film/kingston">Kingston</a>
 </ContainerLayout>

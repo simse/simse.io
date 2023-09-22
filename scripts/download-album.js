@@ -38,7 +38,7 @@ const albumImageIds = album['assets'].map((asset) => asset.id);
 
 // figure out which images have not been downloaded
 for (let imageId of albumImageIds) {
-    const imageFile = path.resolve(destinationFolder, `${imageId}.avif`);
+    const imageFile = path.resolve(destinationFolder, `${imageId}.webp`);
 
     if (fs.existsSync(imageFile)) {
         console.log(`${imageFile} already downloaded!`);
@@ -59,7 +59,7 @@ for (let imageId of albumImageIds) {
     });
     const downloadBody = await downloadResult.arrayBuffer()
 
-    spinner.setSpinnerTitle('converting to avif...')
+    spinner.setSpinnerTitle('converting to webp...')
 
     // convert to AVIF
     const sharpImage = await sharp(downloadBody)
@@ -67,9 +67,9 @@ for (let imageId of albumImageIds) {
         .resize({
             width: 4000
         })
-        .avif({
+        .webp({
             effort: 6,
-            quality: 70
+            quality: 95
         })
         .toBuffer()
 
@@ -80,9 +80,16 @@ for (let imageId of albumImageIds) {
 
     spinner.setSpinnerTitle(`downloaded ${imageFile}`);
     spinner.stop();
-    console.log('\n');
+    console.log('');
 }
 
+for (let imageId of albumImageIds) {
+    const imageFile = path.join('../../assets/cities-on-film', dest, `${imageId}.webp`);
 
+    // find alt
+    const alt = album['assets'].find(asset => imageId === asset.id).exifInfo.description;
+
+    console.log(`![${alt}](${imageFile})`);
+}
 
 export {};

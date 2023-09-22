@@ -1,19 +1,42 @@
 ---
+import { getCollection } from "astro:content";
+import type { CollectionEntry } from "astro:content";
+
+export async function getStaticPaths() {
+  const citiesOnFilm = await getCollection("cities-on-film");
+
+  return citiesOnFilm.map((entry) => ({
+    params: { city: entry.slug },
+    props: { entry },
+  }));
+}
+
 import BaseLayout from "@/layouts/base.astro";
 import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
 
-import { Image } from "astro:assets";
-import testImage from "@/assets/cities-on-film/richmond/000014760035.webp";
+
+interface Props {
+    entry: CollectionEntry<'cities-on-film'>
+}
+const { entry } = Astro.props;
+const { Content, headings } = await entry.render();
 ---
+<style lang="scss" is:inline>
+    img {
+        margin-bottom: 6rem;
+        background: #222;
+    }
+</style>
+
 <BaseLayout>
     <Navbar floating={false} />
 
     <header class="max-w-7xl mx-auto pt-64 pb-24">
-        <h2 class="font-serif font-light text-6xl leading-[1.4] mb-8">Richmond<br />on 35mm Film</h2>
+        <h2 class="font-serif font-light text-6xl leading-[1.4] mb-8">{entry.data.title}</h2>
 
         <p class="text-2xl max-w-4xl text-zinc-300 mb-24">
-            Richmond upon Thames is a beautiful city in the south west of London. It's about 5 miles from where I live, but it's well worth the trip. It's also where Ted Lasso takes place and was filmed.
+            {entry.data.description}
         </p>
 
         <div class="grid grid-cols-4 gap-2">
@@ -43,10 +66,8 @@ import testImage from "@/assets/cities-on-film/richmond/000014760035.webp";
         </div>
     </header>
 
-   <main class="mb-16 max-w-[2000px] mx-auto flex flex-col gap-24">
-    <Image src={testImage} width={4000} alt="Richmond on 35mm film" />
-
-    <Image src={testImage} width={4000} alt="Richmond on 35mm film" />
+   <main class="mb-16 max-w-[2000px] mx-auto">
+        <Content />
    </main>
 
    <Footer />
