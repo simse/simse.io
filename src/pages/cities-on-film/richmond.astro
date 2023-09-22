@@ -1,0 +1,53 @@
+---
+import BaseLayout from "@/layouts/base.astro";
+import Navbar from "@/components/Navbar.astro";
+import Footer from "@/components/Footer.astro";
+
+import { Image } from "astro:assets";
+import testImage from "@/assets/cities-on-film/richmond/000014760035.webp";
+---
+<BaseLayout>
+    <Navbar floating={false} />
+
+    <header class="max-w-7xl mx-auto pt-64 pb-24">
+        <h2 class="font-serif font-light text-6xl leading-[1.4] mb-8">Richmond<br />on 35mm Film</h2>
+
+        <p class="text-2xl max-w-4xl text-zinc-300 mb-24">
+            Richmond upon Thames is a beautiful city in the south west of London. It's about 5 miles from where I live, but it's well worth the trip. It's also where Ted Lasso takes place and was filmed.
+        </p>
+
+        <div class="grid grid-cols-4 gap-2">
+            <div>
+                <strong>Camera</strong>
+
+                <p>Olympus OM-10</p>
+            </div>
+
+            <div>
+                <strong>Lens</strong>
+
+                <p>Zuiko 5-30mm</p>
+            </div>
+
+            <div>
+                <strong>35mm film</strong>
+
+                <p>Kodak UltraMax 400</p>
+            </div>
+
+            <div>
+                <strong>Last Updated</strong>
+
+                <p>21/09/2023</p>
+            </div>
+        </div>
+    </header>
+
+   <main class="mb-16 max-w-[2000px] mx-auto flex flex-col gap-24">
+    <Image src={testImage} width={4000} alt="Richmond on 35mm film" />
+
+    <Image src={testImage} width={4000} alt="Richmond on 35mm film" />
+   </main>
+
+   <Footer />
+</BaseLayout>
