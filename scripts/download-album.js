@@ -1,20 +1,56 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import sharp from 'sharp';
-import fetch from 'node-fetch';
-
-import { Spinner } from 'cli-spinner';
 import { exit } from 'node:process';
 
-// script input
-const albumId = 'd5ad148d-5676-43c3-b8ae-cc8dfd856e54';
-const dest = 'london/kingston';
+import sharp from 'sharp';
+import fetch from 'node-fetch';
+import { Spinner } from 'cli-spinner';
+import prompts from 'prompts';
 
+
+// script input
+/*const albumId = 'd5ad148d-5676-43c3-b8ae-cc8dfd856e54';
+const dest = 'london/kingston';*/
 if (!process.env.IMMICH_API_KEY) {
     console.log('You must set IMMICH_API_KEY for this script to work');
     exit(1);
 }
+
+// load all albums
+const allAlbumsRequest = await fetch('https://img.0x1.earth/api/album', {
+    method: 'GET',
+    headers: {
+        'x-api-key': process.env.IMMICH_API_KEY || ''
+    }
+});
+let allAlbums = await allAlbumsRequest.json();
+
+// sort by last modified
+allAlbums.sort((a, b) => {
+    const aDate = new Date(a.lastModifiedAssetTimestamp);
+    const bDate = new Date(b.lastModifiedAssetTimestamp);
+
+    return bDate - aDate;
+});
+
+// get script input
+const { albumId, dest } = await prompts([
+    {
+        type: 'multiselect',
+        name: 'albumId',
+        message: 'Which album?',
+        choices: allAlbums.map(album => ({
+            title: album.albumName,
+            value: album.id
+        }))
+    },
+    {
+        type: 'text',
+        name: 'dest',
+        message: 'Where to put it?'
+    }
+])
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);

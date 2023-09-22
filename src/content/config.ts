@@ -28,10 +28,19 @@ const projectsCollection = defineCollection({
 })
 
 const citiesOnFilmCollection = defineCollection({
-  schema: z.object({
+  schema: ({ image }) => z.object({
     title: z.string(),
-    description: z.string(),
-    geographicCategory: z.string()
+    titleSuffix: z.string().optional(),
+    story: z.string(),
+    seo: z.object({
+      description: z.string()
+    }).optional(),
+    cover: image(),
+    category: z.string(),
+    camera: z.string().default('Olympus OM-10'),
+    lens: z.array(z.string()).default(['Zuiko 50mm f1.8']),
+    film: z.array(z.string()),
+    lastUpdated: z.date()
   })
 })
 

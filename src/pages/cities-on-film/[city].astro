@@ -14,7 +14,8 @@ export async function getStaticPaths() {
 import BaseLayout from "@/layouts/base.astro";
 import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
-
+import { formatPostDate } from "@/common";
+import Tag from "@/components/blog/Tag.astro";
 
 interface Props {
     entry: CollectionEntry<'cities-on-film'>
@@ -24,49 +25,57 @@ const { Content, headings } = await entry.render();
 ---
 <style lang="scss" is:inline>
     img {
-        margin-bottom: 6rem;
+        margin: 0 auto 2rem auto;
         background: #222;
+
+        @media (min-width: 1200px) {
+            margin-bottom: 6rem;
+        }
     }
 </style>
 
-<BaseLayout>
+<BaseLayout meta={{
+    title: entry.data.title,
+    description: entry.data.seo?.description || ''
+}}>
     <Navbar floating={false} />
 
-    <header class="max-w-7xl mx-auto pt-64 pb-24">
-        <h2 class="font-serif font-light text-6xl leading-[1.4] mb-8">{entry.data.title}</h2>
+    <header class="max-w-7xl mx-auto pt-24 lg:pt-48 pb-24 px-4">
+        <h2 class="font-serif font-light text-4xl md:text-6xl mb-2">{entry.data.title}</h2>
+        <p class="mb-12 text-2xl">{entry.data.titleSuffix}</p>
 
-        <p class="text-2xl max-w-4xl text-zinc-300 mb-24">
-            {entry.data.description}
+        <p class="text-lg md:text-xl lg:text-2xl max-w-4xl text-zinc-300 mb-24">
+            {entry.data.story}
         </p>
 
-        <div class="grid grid-cols-4 gap-2">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8">
             <div>
                 <strong>Camera</strong>
 
-                <p>Olympus OM-10</p>
+                <p>{entry.data.camera}</p>
             </div>
 
             <div>
                 <strong>Lens</strong>
 
-                <p>Zuiko 5-30mm</p>
+                {entry.data.lens.map(lens => <p>{lens}</p>)}
             </div>
 
             <div>
-                <strong>35mm film</strong>
+                <strong>35mm Film</strong>
 
-                <p>Kodak UltraMax 400</p>
+                {entry.data.film.map(film => <p>{film}</p>)}
             </div>
 
             <div>
                 <strong>Last Updated</strong>
 
-                <p>21/09/2023</p>
+                <p>{formatPostDate(entry.data.lastUpdated)}</p>
             </div>
         </div>
     </header>
 
-   <main class="mb-16 max-w-[2000px] mx-auto">
+   <main class="mb-16 max-w-[2000px] mx-auto text-xl text-zinc-300">
         <Content />
    </main>
 

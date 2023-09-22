@@ -3,11 +3,10 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "wrangler pages dev -- astro dev",
-    "dev:naked": "astro dev",
-    "start": "wrangler pages dev -- astro dev",
+    "dev": "astro dev",
+    "start": "astro dev",
     "build": "astro build",
-    "preview": "wrangler pages dev -- astro preview",
+    "preview": "astro preview",
     "astro": "astro",
     "test:e2e": "SELENIUM_REMOTE_URL=http://192.168.0.22:4444 playwright test",
     "download-album": "IMMICH_API_KEY=Xb5DQmObuJqv5uoei6qvxaDPw49AHhHuF3MRJYBt0 node ./scripts/download-album.js"
@@ -36,10 +35,9 @@
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/typography": "^0.5.9",
     "@types/cli-spinner": "^0.2.1",
-    "bun-types": "^1.0.2",
+    "@types/prompts": "^2.4.4",
+    "prompts": "^2.4.2",
     "sass": "^1.65.1",
-    "tailwind-scrollbar": "^3.0.5",
-    "ts-node": "^10.9.1",
-    "wrangler": "^3.8.0"
+    "tailwind-scrollbar": "^3.0.5"
   }
 }
