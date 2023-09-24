@@ -2,7 +2,8 @@
   "packages": [
     "nodejs@18.16.1",
     "nodePackages.pnpm@8.6.11",
-    "bun@0.7.3"
+    "bun@0.7.3",
+    "act@0.2.50"
   ],
   "shell": {
     "init_hook": [

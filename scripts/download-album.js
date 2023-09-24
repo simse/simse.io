@@ -3,15 +3,15 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { exit } from 'node:process';
 
+import 'dotenv/config';
 import sharp from 'sharp';
 import fetch from 'node-fetch';
 import { Spinner } from 'cli-spinner';
 import prompts from 'prompts';
 
+const OUTPUT_FORMAT = 'avif';
 
 // script input
-/*const albumId = 'd5ad148d-5676-43c3-b8ae-cc8dfd856e54';
-const dest = 'london/kingston';*/
 if (!process.env.IMMICH_API_KEY) {
     console.log('You must set IMMICH_API_KEY for this script to work');
     exit(1);
@@ -72,9 +72,20 @@ const albumRequest = await fetch('https://img.0x1.earth/api/album/' + albumId, {
 const album = await albumRequest.json();
 const albumImageIds = album['assets'].map((asset) => asset.id);
 
+// delete downloaded images that are not in the album
+const downloadedImages = fs.readdirSync(destinationFolder);
+for (let downloadedImage of downloadedImages) {
+    const downloadedImageId = downloadedImage.split('.')[0];
+
+    if (!albumImageIds.includes(downloadedImageId)) {
+        console.log(`deleting ${downloadedImage}`);
+        fs.unlinkSync(path.resolve(destinationFolder, downloadedImage));
+    }
+}
+
 // figure out which images have not been downloaded
 for (let imageId of albumImageIds) {
-    const imageFile = path.resolve(destinationFolder, `${imageId}.webp`);
+    const imageFile = path.resolve(destinationFolder, `${imageId}.${OUTPUT_FORMAT}`);
 
     if (fs.existsSync(imageFile)) {
         console.log(`${imageFile} already downloaded!`);
@@ -95,7 +106,7 @@ for (let imageId of albumImageIds) {
     });
     const downloadBody = await downloadResult.arrayBuffer()
 
-    spinner.setSpinnerTitle('converting to webp...')
+    spinner.setSpinnerTitle(`converting to ${OUTPUT_FORMAT}...`)
 
     // convert to AVIF
     const sharpImage = await sharp(downloadBody)
@@ -103,9 +114,9 @@ for (let imageId of albumImageIds) {
         .resize({
             width: 4000
         })
-        .webp({
-            effort: 6,
-            quality: 95
+        .avif({
+            effort: 4,
+            quality: 80
         })
         .toBuffer()
 
@@ -119,8 +130,10 @@ for (let imageId of albumImageIds) {
     console.log('');
 }
 
+console.log('\nfor MDX file:')
+
 for (let imageId of albumImageIds) {
-    const imageFile = path.join('../../assets/cities-on-film', dest, `${imageId}.webp`);
+    const imageFile = path.join('../../assets/cities-on-film', dest, `${imageId}.${OUTPUT_FORMAT}`);
 
     // find alt
     const alt = album['assets'].find(asset => imageId === asset.id).exifInfo.description;

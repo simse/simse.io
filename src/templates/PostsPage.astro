@@ -55,7 +55,7 @@ if (filteredTag) {
       <!-- tags -->
       <div class="flex flex-wrap justify-center max-w-2xl gap-3 mt-8">
         {tags.map((tag) => (
-          <Tag title={tag} fontSize='text-lg' href={`/posts${tag === filteredTag ? '' : '/tag/' + slugifyText(tag)}`} selected={tag === filteredTag} />
+          <Tag title={tag} fontSize='text-lg' href={`/posts${tag === filteredTag ? '' : '/tag/' + slugifyText(tag)}/`} selected={tag === filteredTag} />
         ))}
       </div>
     </header>

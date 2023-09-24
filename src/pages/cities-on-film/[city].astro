@@ -35,7 +35,7 @@ const { Content, headings } = await entry.render();
 </style>
 
 <BaseLayout meta={{
-    title: entry.data.title,
+    title: entry.data.title + " " + entry.data.titleSuffix,
     description: entry.data.seo?.description || ''
 }}>
     <Navbar floating={false} />
