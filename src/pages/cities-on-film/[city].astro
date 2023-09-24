@@ -15,18 +15,22 @@ import BaseLayout from "@/layouts/base.astro";
 import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
 import { formatPostDate } from "@/common";
-import Tag from "@/components/blog/Tag.astro";
+
+// custom components
+import Paragraph from "@/components/citiesOnFilm/Paragraph.astro";
 
 interface Props {
     entry: CollectionEntry<'cities-on-film'>
 }
 const { entry } = Astro.props;
-const { Content, headings } = await entry.render();
+const { Content } = await entry.render();
 ---
 <style lang="scss" is:inline>
     img {
         margin: 0 auto 2rem auto;
         background: #222;
+        max-height: 80vh;
+        width: auto;
 
         @media (min-width: 1200px) {
             margin-bottom: 6rem;
@@ -56,13 +60,13 @@ const { Content, headings } = await entry.render();
             </div>
 
             <div>
-                <strong>Lens</strong>
+                <strong>Lens{entry.data.lens.length > 1 ? 'es' : ''}</strong>
 
                 {entry.data.lens.map(lens => <p>{lens}</p>)}
             </div>
 
             <div>
-                <strong>35mm Film</strong>
+                <strong>35mm Film{entry.data.film.length > 1 ? 's' : ''}</strong>
 
                 {entry.data.film.map(film => <p>{film}</p>)}
             </div>
@@ -75,8 +79,10 @@ const { Content, headings } = await entry.render();
         </div>
     </header>
 
-   <main class="mb-16 max-w-[2000px] mx-auto text-xl text-zinc-300">
-        <Content />
+   <main class="mb-16 text-xl text-zinc-300">
+        <Content components={{
+            p: Paragraph,
+        }} />
    </main>
 
    <Footer />
