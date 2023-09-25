@@ -3,12 +3,12 @@ import { getCollection } from "astro:content";
 import type { CollectionEntry } from "astro:content";
 
 export async function getStaticPaths() {
-  const citiesOnFilm = await getCollection("cities-on-film");
+    const citiesOnFilm = await getCollection("cities-on-film");
 
-  return citiesOnFilm.map((entry) => ({
-    params: { city: entry.slug },
-    props: { entry },
-  }));
+    return citiesOnFilm.map((entry) => ({
+        params: { city: entry.slug },
+        props: { entry },
+    }));
 }
 
 import BaseLayout from "@/layouts/base.astro";
@@ -20,17 +20,23 @@ import { formatPostDate } from "@/common";
 import Paragraph from "@/components/citiesOnFilm/Paragraph.astro";
 
 interface Props {
-    entry: CollectionEntry<'cities-on-film'>
+    entry: CollectionEntry<"cities-on-film">;
 }
 const { entry } = Astro.props;
 const { Content } = await entry.render();
 ---
+
 <style lang="scss" is:inline>
+    html {
+        scroll-padding-top: 0px !important;
+      }
+
     img {
         margin: 0 auto 2rem auto;
         background: #222;
-        max-height: 90vh;
         width: auto;
+        min-width: min(1742px, 95vw);
+        max-height: 90vh;
 
         @media (min-width: 1200px) {
             margin-bottom: 6rem;
@@ -38,21 +44,157 @@ const { Content } = await entry.render();
     }
 </style>
 
-<BaseLayout meta={{
-    title: entry.data.title + " " + entry.data.titleSuffix,
-    description: entry.data.seo?.description || ''
-}}>
+<script>
+    const imageContainer = document.getElementById("images");
+
+    // figure out which image to selected based on visibility on initial load
+    const images = imageContainer?.querySelectorAll("img");
+    const selected = Array.from(images || []).find((image) => {
+        const rect = image.getBoundingClientRect();
+        return rect.top >= 0 && rect.bottom <= window.innerHeight;
+    });
+
+    if (selected) {
+        selected.attributes.setNamedItem(
+            document.createAttribute("data-selected")
+        );
+    }
+    
+
+    // keyboard navigation
+    document.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowRight") {
+            const selected = imageContainer?.querySelector("[data-selected]");
+            const next = selected?.nextElementSibling;
+
+            if (next) {
+                selected?.attributes.removeNamedItem("data-selected");
+                next.attributes.setNamedItem(
+                    document.createAttribute("data-selected")
+                );
+
+                // scroll to next image
+                next.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                    inline: "center",
+                });
+            } else {
+                // if there is no next image, select the first image
+                const first = imageContainer?.querySelector("img");
+
+                if (first) {
+                    selected?.attributes.removeNamedItem("data-selected");
+                    first.attributes.setNamedItem(
+                        document.createAttribute("data-selected")
+                    );
+
+                    // scroll to first image
+                    first.scrollIntoView({
+                        behavior: "smooth",
+                        block: "center",
+                        inline: "center",
+                    });
+                }
+            }
+        } else if (e.key === "ArrowLeft") {
+            const selected = imageContainer?.querySelector("[data-selected]");
+            const prev = selected?.previousElementSibling;
+
+            if (prev) {
+                selected?.attributes.removeNamedItem("data-selected");
+                prev.attributes.setNamedItem(
+                    document.createAttribute("data-selected")
+                );
+
+                // scroll to previous image
+                prev.scrollIntoView({
+                    behavior: "smooth",
+                    block: "center",
+                    inline: "center",
+                });
+            }
+        }
+    });
+
+    // scroll navigation
+    document.addEventListener("scroll", () => {
+        const selected = imageContainer?.querySelector("[data-selected]");
+        const images = imageContainer?.querySelectorAll("img");
+
+        if (selected && images) {
+            const selectedRect = selected.getBoundingClientRect();
+
+            // if the selected image is no longer visible, find the next image
+            // that is visible and select it
+            if (
+                selectedRect.top < 0 ||
+                selectedRect.bottom > window.innerHeight
+            ) {
+                const next = Array.from(images).find((image) => {
+                    const rect = image.getBoundingClientRect();
+                    return rect.top >= 0 && rect.bottom <= window.innerHeight;
+                });
+
+                if (next) {
+                    selected.attributes.removeNamedItem("data-selected");
+                    next.attributes.setNamedItem(
+                        document.createAttribute("data-selected")
+                    );
+                }
+            }
+        }
+    });
+
+    // update selected on resize
+    window.addEventListener("resize", () => {
+        const selected = imageContainer?.querySelector("[data-selected]");
+        const images = imageContainer?.querySelectorAll("img");
+
+        if (selected && images) {
+            const selectedRect = selected.getBoundingClientRect();
+
+            // if the selected image is no longer visible, find the next image
+            // that is visible and select it
+            if (
+                selectedRect.top < 0 ||
+                selectedRect.bottom > window.innerHeight
+            ) {
+                const next = Array.from(images).find((image) => {
+                    const rect = image.getBoundingClientRect();
+                    return rect.bottom > 0 && rect.top <= window.innerHeight;
+                }) || Array.from(images).pop();
+
+                if (next) {
+                    selected.attributes.removeNamedItem("data-selected");
+                    next.attributes.setNamedItem(
+                        document.createAttribute("data-selected")
+                    );
+                }
+            }
+        }
+    });
+</script>
+
+<BaseLayout
+    meta={{
+        title: entry.data.title + " " + entry.data.titleSuffix,
+        description: entry.data.seo?.description || "",
+    }}
+>
     <Navbar floating={false} />
 
     <header class="max-w-7xl mx-auto pt-24 lg:pt-48 pb-24 px-4">
-        <h2 class="font-serif font-light text-4xl md:text-6xl mb-2">{entry.data.title}</h2>
+        <h2 class="font-serif font-light text-4xl md:text-6xl mb-2">
+            {entry.data.title}
+        </h2>
         <p class="mb-12 text-2xl">{entry.data.titleSuffix}</p>
 
         <p class="text-lg md:text-xl lg:text-2xl max-w-4xl text-zinc-300 mb-24">
             {entry.data.story}
         </p>
 
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-y-8 mb-16">
             <div>
                 <strong>Camera</strong>
 
@@ -60,15 +202,16 @@ const { Content } = await entry.render();
             </div>
 
             <div>
-                <strong>Lens{entry.data.lens.length > 1 ? 'es' : ''}</strong>
+                <strong>Lens{entry.data.lens.length > 1 ? "es" : ""}</strong>
 
-                {entry.data.lens.map(lens => <p>{lens}</p>)}
+                {entry.data.lens.map((lens) => <p>{lens}</p>)}
             </div>
 
             <div>
-                <strong>35mm Film{entry.data.film.length > 1 ? 's' : ''}</strong>
+                <strong>35mm Film{entry.data.film.length > 1 ? "s" : ""}</strong
+                >
 
-                {entry.data.film.map(film => <p>{film}</p>)}
+                {entry.data.film.map((film) => <p>{film}</p>)}
             </div>
 
             <div>
@@ -77,13 +220,33 @@ const { Content } = await entry.render();
                 <p>{formatPostDate(entry.data.lastUpdated)}</p>
             </div>
         </div>
+
+        <strong class="mb-4 block text-zinc-300">Keyboard Navigation</strong>
+
+        <div class="flex items-center gap-6 text-zinc-300">
+            <div class="w-12 h-12 rounded border border-zinc-600 bg-zinc-900 flex items-center justify-center">
+                <span class="-mt-1">←</span>
+            </div>
+
+            <span>Previous Image</span>
+
+            <div class="border border-zinc-600 h-4"></div>
+
+            <span>Next Image</span>
+
+            <div class="w-12 h-12 rounded border border-zinc-600 bg-zinc-900 flex items-center justify-center">
+                <span class="-mt-1">→</span>
+            </div>
+        </div>
     </header>
 
-   <main class="mb-16 text-xl text-zinc-300">
-        <Content components={{
-            p: Paragraph,
-        }} />
-   </main>
+    <main class="mb-16" id="images">
+        <Content
+            components={{
+                p: Paragraph,
+            }}
+        />
+    </main>
 
-   <Footer />
+    <Footer />
 </BaseLayout>
