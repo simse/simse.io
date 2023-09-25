@@ -9,9 +9,10 @@ import { slugifyText } from '@/common';
 
 interface Props {
     tag?: string;
+    displayTagOverlay?: boolean;
 }
 
-const { tag: filteredTag } = Astro.props;
+const { tag: filteredTag, displayTagOverlay = true } = Astro.props;
 
 let allBlogPosts = await getCollection('blog');
 
@@ -61,7 +62,7 @@ if (filteredTag) {
     </header>
     
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 auto-rows-fr gap-4">
-    {allBlogPosts.map(async (post) => <BlogPostCard post={post} />)}
+    {allBlogPosts.map(async (post) => <BlogPostCard post={post} displayTags={displayTagOverlay} />)}
     </div>
     
   </main>

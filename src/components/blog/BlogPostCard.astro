@@ -6,9 +6,10 @@ import Tag from '@/components/blog/Tag.astro';
 
 interface Props {
   post: CollectionEntry<"blog">;
+  displayTags?: boolean;
 }
 
-const { post } = Astro.props;
+const { post, displayTags = true } = Astro.props;
 
 // find dominant colour in cover image
 let dominantColor = { hex: "#555" };
@@ -39,12 +40,12 @@ try {
     style={`--dominantColor: ${dominantColor.hex}`}
   >
     {/* Tags overlay, yay! */}
-    <div class="absolute top-2 left-2 w-full pr-2">
-      {post.data.tags?.map((tag) => <Tag title={tag} />)}
-    </div>
+    {displayTags ? <div class="absolute top-4 left-4 w-full pr-2 z-10 pointer-events-none flex gap-2 flex-wrap">
+      {post.data.tags?.slice(0, 3).map((tag) => <Tag title={tag} />)}
+    </div> : null}
 
     <div class="bg-zinc-800 w-full aspect-w-8 aspect-h-5 overflow-clip">
-        <Image src={post.data.cover} height="500" width="800" alt={post.data.coverAlt} />
+        <Image class="h-auto" src={post.data.cover} height="500" width="800" alt={post.data.coverAlt} />
     </div>
 
     <div class="p-4">

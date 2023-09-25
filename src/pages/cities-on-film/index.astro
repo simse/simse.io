@@ -17,7 +17,7 @@ const cities = await getCollection('cities-on-film');
         {cities.map(city => (
             <a href={`/cities-on-film/${city.slug}/`}>
                 <article>
-                    <Image class="mb-8" src={city.data.cover} width={800} alt={''} />
+                    <Image class="mb-8 bg-zinc-800" src={city.data.cover} width={800} alt={''} />
 
                     <h2 class="font-light font-serif text-3xl mb-2">{city.data.title}</h2>
 
