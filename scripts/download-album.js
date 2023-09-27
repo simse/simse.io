@@ -8,6 +8,7 @@ import sharp from 'sharp';
 import fetch from 'node-fetch';
 import { Spinner } from 'cli-spinner';
 import prompts from 'prompts';
+import { stringify } from 'yaml';
 
 const OUTPUT_FORMAT = 'avif';
 
@@ -130,15 +131,23 @@ for (let imageId of albumImageIds) {
     console.log('');
 }
 
-console.log('\nfor MDX file:')
+console.log('\nfor yaml file:')
 
+
+let imagesForYaml = [];
 for (let imageId of albumImageIds) {
     const imageFile = path.join('../../assets/cities-on-film', dest, `${imageId}.${OUTPUT_FORMAT}`);
 
     // find alt
-    const alt = album['assets'].find(asset => imageId === asset.id).exifInfo.description;
+    const caption = album['assets'].find(asset => imageId === asset.id).exifInfo.description;
 
-    console.log(`![${alt}](${imageFile})`);
+    imagesForYaml.push({
+        image: imageFile,
+        caption,
+        alt: ''
+    });
 }
+
+console.log(stringify(imagesForYaml));
 
 export {};

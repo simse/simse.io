@@ -28,12 +28,19 @@ const projectsCollection = defineCollection({
 })
 
 const citiesOnFilmCollection = defineCollection({
+  type: 'data',
   schema: ({ image }) => z.object({
+    images: z.array(z.object({
+      image: image(),
+      alt: z.string().optional(),
+      caption: z.string().optional(),
+    })),
     title: z.string(),
     titleSuffix: z.string().optional(),
     story: z.string(),
     seo: z.object({
-      description: z.string()
+      description: z.string(),
+      slug: z.string(),
     }).optional(),
     cover: image(),
     category: z.string(),
