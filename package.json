@@ -17,7 +17,7 @@
     "@astrojs/sitemap": "^3.0.0",
     "@astrojs/svelte": "^4.0.0",
     "@astrojs/tailwind": "^5.0.0",
-    "astro": "3.1.2",
+    "astro": "3.2.3",
     "astro-icon": "^0.8.1",
     "cli-spinner": "^0.2.10",
     "dotenv": "^16.3.1",

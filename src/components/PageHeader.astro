@@ -6,7 +6,7 @@ interface Props {
 
 const { title, subtitle } = Astro.props;
 ---
-<header class="text-center mt-16 mb-32">
-    <p class="font-serif text-5xl mb-6">{title}</p>
+<header class="py-16 md:py-32 flex flex-col text-center">
+    <h1 class="text-4xl md:text-6xl lg:text-7xl font-serif mb-4">{title}</h1>
     {subtitle ? <span class="text-zinc-300 text-lg">{subtitle}</span> : null}
 </header>

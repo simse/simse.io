@@ -3,6 +3,8 @@ interface PageMeta {
     description: string;
     fonts?: Font[];
     transitions?: boolean;
+    noIndex?: boolean;
+    noFollow?: boolean;
 }
 
 interface Font {

@@ -7,6 +7,7 @@ import Footer from "@/components/Footer.astro";
 import TableOfContents from "@/components/blog/TableOfContents.astro";
 import Tag from "@/components/blog/Tag.astro";
 import { Image } from 'astro:assets';
+import BlogPostCard from "@/components/blog/BlogPostCard.astro";
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection("blog");
@@ -32,7 +33,70 @@ const imageHeight: {
   fullscreen: "h-[100vh]",
   "below-title": "h-[0px]",
 };
+
+// get 4 newest blog posts
+const blogEntries = await getCollection("blog");
+
+const newestBlogEntries = blogEntries
+  .filter(post => post.slug !== entry.slug)
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.publishedOn.getTime() - a.data.publishedOn.getTime())
+  .slice(0, 4);
 ---
+{/*<script>
+  // on scroll find the heading closest to the top of the screen, select the a that links to that heading and apply the data-selected attribute
+  // important, do not ise an intersection observer
+  const headings = document.querySelectorAll("h2, h3, h4, h5, h6");
+  const toc = document.querySelector("#toc");
+
+  // First, create an array from your NodeList
+const headingsArray = Array.from(headings);
+
+// Then, remove data-selected attribute from all the links
+function clearSelected() {
+  if (!toc) return;
+
+  const tocLinks = toc.querySelectorAll('a');
+  tocLinks.forEach(link => link.removeAttribute('data-selected'));
+}
+
+// Find the closest heading to the top of the screen
+function findClosestHeading() {
+  let closest = null;
+
+  for (let i = 0; i < headingsArray.length; i++) {
+    const heading = headingsArray[i];
+    // Get the bounding client rect
+    const rect = heading.getBoundingClientRect();
+
+    // If the top of the heading is less than half the window height, but more than 0, it's the closest to the top
+    if (rect.top > 0 && rect.top < window.innerHeight / 2) {
+      closest = heading;
+      break;
+    }
+  }
+
+  return closest;
+}
+
+// On scroll, find the closest heading and select the corresponding link
+window.addEventListener('scroll', () => {
+  const closestHeading = findClosestHeading();
+
+  if (closestHeading) {
+    if (!toc) return;
+    
+    clearSelected();
+    const id = closestHeading.getAttribute('id');
+    const link = toc.querySelector(`a[href="#${id}"]`);
+    if (link) {
+      link.setAttribute('data-selected', 'true');
+    }
+  }
+});
+
+</script>*/}
+
 <BaseLayout meta={{
   title: `${entry.data.title}—Simon Sorensen`,
   description: entry.data.excerpt,
@@ -47,6 +111,9 @@ const imageHeight: {
         <Image
           src={entry.data.cover}
           alt={entry.data.title}
+          width={2000}
+          quality="high"
+          loading="eager"
           class="object-cover object-center w-full h-full"
         />
       </div>
@@ -54,17 +121,15 @@ const imageHeight: {
   }
 
   <div
-    class="max-w-[120ch] mx-auto pt-16 grid grid-cols-1 lg:grid-cols-[250px_1fr] gap-8 relative h-fit"
+    class="max-w-7xl mx-auto px-4 2xl:pl-[250px] pt-16 grid grid-cols-[1fr_250px] gap-8 relative h-fit"
   >
-    <div></div>
-
     <!-- Heading -->
-    <div class="mb-8 px-4">
+    <div class="mb-8 col-span-2">
       <div class="flex items-center mb-8 gap-2">
         {entry.data.tags?.map((tag) => <Tag title={tag} />)}
       </div>
 
-      <h1 class={`text-3xl md:text-4xl lg:text-5xl leading-normal md:leading-normal lg:leading-normal mb-2 font-serif`}>
+      <h1 class={`text-3xl md:text-4xl lg:text-5xl leading-normal md:leading-normal lg:leading-normal mb-2 font-serif font-light`}>
         {entry.data.title}
       </h1>
       <p class="text-zinc-400 text-xl">
@@ -80,14 +145,7 @@ const imageHeight: {
       </p>
     </div>
 
-    <!-- Content -->
-    <div class="sticky top-12 self-start hidden lg:block">
-      <h2 class="mb-3 text-zinc-300 font-bold">Table of Contents</h2>
-
-      <TableOfContents headings={headings} />
-    </div>
-
-    <div class="text-lg mb-32 prose prose-invert px-4">
+    <div class="text-lg prose prose-invert col-span-2 lg:col-span-1">
       <Content
         components={{
           h1: "h2",
@@ -98,6 +156,24 @@ const imageHeight: {
           h6: "strong",
         }}
       />
+    </div>
+
+    <!-- Content -->
+    <div class="sticky top-12 self-start hidden lg:block" id="toc">
+      <h2 class="mb-3 text-zinc-300 font-bold">Table of Contents</h2>
+
+      <TableOfContents headings={headings} />
+    </div>
+
+  </div>
+
+  <div class="max-w-7xl px-4 my-12 md:mt-16 lg:mt-32 mx-auto">
+    <h2 class="font-bold text-lg mb-4">Couple other blog posts</h2>
+
+    <div class="flex gap-4 overflow-x-auto">
+      {newestBlogEntries.map(entry => (
+        <BlogPostCard post={entry} className="w-[250px]" />
+      ))}
     </div>
   </div>
 

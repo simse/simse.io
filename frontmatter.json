@@ -140,5 +140,6 @@
       ]
     }
   ],
-  "frontMatter.experimental": false
+  "frontMatter.experimental": false,
+  "frontMatter.framework.startCommand": "pnpm dev"
 }

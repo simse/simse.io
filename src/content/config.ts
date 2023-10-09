@@ -27,7 +27,7 @@ const projectsCollection = defineCollection({
   })
 })
 
-const citiesOnFilmCollection = defineCollection({
+const photographyCollection = defineCollection({
   type: 'data',
   schema: ({ image }) => z.object({
     images: z.array(z.object({
@@ -55,5 +55,5 @@ const citiesOnFilmCollection = defineCollection({
 export const collections = {
   'blog': blogCollection,
   'projects': projectsCollection,
-  'cities-on-film': citiesOnFilmCollection
+  'photography': photographyCollection
 };
