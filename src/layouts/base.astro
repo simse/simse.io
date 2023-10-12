@@ -21,13 +21,21 @@ const { meta = {
     {meta.noIndex && !meta.noFollow && <meta name="robots" content="noindex" />}
     {meta.noFollow && meta.noIndex && <meta name="robots" content="nofollow" />}
     {meta.noFollow && meta.noIndex && <meta name="robots" content="noindex,nofollow" />}
-    <style is:inline>
+    <style>
       @font-face{font-family:National2;src:url("/fonts/National2-Light.woff2") format("woff2");font-weight:300;font-style:normal;font-display:swap}@font-face{font-family:National2;src:url("/fonts/National2-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:National2;src:url("/fonts/National2-Italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}@font-face{font-family:National2;src:url("/fonts/National2-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}@font-face{font-family:National2;src:url("/fonts/National2-BoldItalic.woff2") format("woff2");font-weight:700;font-style:italic;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-Italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-Ultrabold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-UltraboldItalic.woff2") format("woff2");font-weight:700;font-style:italic;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-Ultralight.woff2") format("woff2");font-weight:300;font-style:normal;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-UltralightItalic.woff2") format("woff2");font-weight:300;font-style:italic;font-display:swap}@font-face{font-family:CommitMono;src:url("/fonts/CommitMono-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:NewYork;src:url("/fonts/NewYork-Regular.woff2") format("woff2");font-display:swap}html{scroll-padding-top:50px}
     </style>
     <link rel="icon" href="/favicon.ico" sizes="32x32">
-    <!--link rel="icon" href="/icon.svg" type="image/svg+xml"-->
     <link rel="apple-touch-icon" href="/apple-touch-icon.png">
     <link rel="manifest" href="/manifest.webmanifest">
+    <script type="application/ld+json">
+      {
+        "@context" : "https://schema.org",
+        "@type" : "WebSite",
+        "name" : "Simon Sorensen",
+        "alternateName" : "simse.io",
+        "url" : "https://simse.io"
+      }
+    </script>
   </head>
 
   <body class="bg-zinc-950 text-white">

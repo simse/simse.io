@@ -1,0 +1,51 @@
+---
+title: Simon's Web Design Bible
+slug: web-design-bible
+excerpt: A continously updated list of rules to follow when designing web experiences
+publishedOn: 2023-10-10T07:30:33.934Z
+coverLayout: below-title
+cover: ../../assets/simon_wide_shot.png
+coverAlt: ""
+coverCaption: ""
+draft: true
+tags:
+    - UI
+    - UX
+categories: []
+lastmod: 2023-10-10T21:42:20.191Z
+---
+introduction goes here
+
+# 1. Don't hijack scrolling behaviour
+This rule boils down to: **don't implement smooth scrolling**.
+
+Different browsers, across different OSes, using different input methods scroll differently. On mobile or if using a touchpad, the user is grabbing the page and expects the movement of their finger to be mapped to the movement of the page.
+
+When using a scrollwheel, the scrolling is usually "stepped". However, most browsers smooth the steps so it doesn't feel like the page is jumping.
+
+In any case, smooth scroll is disruptive, and pretty much never a good choice.
+
+
+# 2. Don't style the window scrollbar
+The main scrollbar used to indicate the scroll position of the page should be left untouched.
+
+# 3. Don't change the page title after load
+It's possible to change the page title after the user clicks away from the tab to something like: "Come back we miss you!". You can even flash a message. **Don't do this.** It's poor taste.
+
+A notable exception: Twitter.
+
+# 4. Don't play sound until user interaction
+No pop-ups should make any sound. No buttons should click.
+
+The only acceptable times to play sound, is when it's obvious. Like pressing a play button. Or if context allows, like you're on Youtube or a podcast site, it makes sense.
+
+# 5. 
+
+- Don't set an upper limit for password length
+- Don't use overly specific password rules
+- Do allow copy/paste always
+- Do allow showing plain text password
+- Do use lax form validation
+- Do label form inputs properly
+- Don't show pop-ups when user is leaving site
+- Do consider layout shift

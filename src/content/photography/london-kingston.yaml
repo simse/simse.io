@@ -8,9 +8,13 @@ seo:
 film:
     - Kodak UltraMax 400
     - Kodak Gold 200
+    - Kodak Porta 400
 lastUpdated: 2023-09-26
 cover: ../../assets/cities-on-film/london/kingston/12656136-2d38-4bbb-b5f2-06d17299e1df.avif
 images:
+- image: ../../assets/cities-on-film/london/kingston/9a7a112c-fda8-4426-9e95-dfead9ed34c1.avif
+  caption: ""
+  alt: ""
 - image: ../../assets/cities-on-film/london/kingston/a0d58300-4810-4b1a-8fd6-15420d37640b.avif
   caption: ""
   alt: ""

@@ -100,7 +100,8 @@ window.addEventListener('scroll', () => {
 <BaseLayout meta={{
   title: `${entry.data.title}—Simon Sorensen`,
   description: entry.data.excerpt,
-  transitions: true
+  transitions: true,
+  noIndex: entry.data.draft,
 }}>
 
   <Navbar />
