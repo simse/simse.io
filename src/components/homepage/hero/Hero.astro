@@ -5,7 +5,7 @@ import { getCollection } from "astro:content";
 
 import { formatPostDate } from "@/common";
 import ExplicitWord from "@/components/utilities/ExplicitWord.astro";
-import ProfilePic from '@/assets/homepage/literally_me.jpg';
+import ProfilePic from '@/assets/simse.jpg';
 
 let posts = await getCollection("blog");
 posts = posts.sort((a, b) => {
@@ -44,7 +44,7 @@ posts = posts.filter(post => !post.data.draft);
             ))}
         </div>
 
-        <div class="pt-8 pl-3 md:pl-8">
+        <div class="pt-8 pl-3 md:pl-8 md:pt-0">
             <h2 class="font-bold text-lg text-zinc-300"><a class="flex gap-2" href="https://simon-sorensen.com" target="_blank"><Icon name="pixelarticons:coffee-alt" width="24" /><span class="text-white font-serif font-normal mt-1.5">Work Experience</span></a></h2>
 
             <ul class="list-disc list-inside">

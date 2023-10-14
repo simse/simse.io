@@ -1,6 +1,6 @@
 ---
 import { getCollection } from "astro:content";
-import { Image } from "astro:assets";
+import { Image, Picture } from "astro:assets";
 
 import PageHeader from "@/components/PageHeader.astro";
 import ContainerLayout from "@/layouts/container.astro";
@@ -36,7 +36,7 @@ albums.forEach(album => {
             {albumCategory[category].map(city => (
                 <a href={`/photography/${city.data.seo?.slug}/`}>
                     <article>
-                        <Image class="mb-8 bg-zinc-800" src={city.data.cover} width={800} alt={''} loading="eager" />
+                        <Picture class="mb-8 bg-zinc-800" src={city.data.cover} formats={['avif', 'webp']} fallbackFormat="jpg" densities={[1, 2]} width={600} alt="" loading="eager" />
 
                         <h3 class="font-light font-serif text-3xl mb-2">{city.data.title}</h3>
 

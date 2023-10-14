@@ -9,38 +9,72 @@ import PageHeader from "@/components/PageHeader.astro";
 const projects = await getCollection("projects");
 
 // group by category
-const categories = projects.reduce((acc: {
-    [key: string]: CollectionEntry<'projects'>[];
-}, project) => {
-    if (!acc[project.data.category]) {
-        acc[project.data.category] = [];
-    }
+const categories = projects.reduce(
+    (
+        acc: {
+            [key: string]: CollectionEntry<"projects">[];
+        },
+        project,
+    ) => {
+        if (!acc[project.data.category]) {
+            acc[project.data.category] = [];
+        }
 
-    acc[project.data.category].push(project);
+        acc[project.data.category].push(project);
 
-    return acc;
-}, {});
+        return acc;
+    },
+    {},
+);
 ---
-<ContainerLayout>
+<ContainerLayout meta={{
+    title: 'Projects by Simon Sorensen',
+    description: 'A collection of stuff I\'ve created, with very few exceptions. Some of it is good, and some of it is not so good.'
+}}>
     <PageHeader title="Projects" subtitle="Stuff I've created over the years" />
 
-    {Object.keys(categories).map(cat => (
-        <h2 class="font-bold text-xl">{cat}</h2>
+    {
+        Object.keys(categories).map((cat) => (
+            <>
+                <h2 class="font-bold text-xl pb-2 border-b border-zinc-700">{cat}</h2>
+                <div class="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mb-12 mt-2 w-full">
+                    {categories[cat].map((project) => (
+                        <div class="h-full">
+                            <a>
+                                <div
+                                    class="relative h-fit bg-zinc-800"
+                                    style="aspect-ratio:5/3;"
+                                >
+                                    <div>
+                                        
+                                    </div>
+                                </div>
 
-        <div class="grid grid-cols-4 grid-rows-1 items-center mb-12 mt-2 w-full border-b border-zinc-700">
-            {categories[cat].map(project => (
-                <h3 class=" py-4 ">{project.data.title}</h3>
+                                <h3 class="my-2 font-bold text-xl">{project.data.title}</h3>
 
-                <div class="py-4  flex gap-2 flex-wrap">
-                    {project.data.techStack.map(tech => (
-                        <Tag title={tech} />
+                                <div class="flex gap-2 mb-2">
+                                    {project.data.techStack.map(tech => <Tag title={tech} />)}
+                                </div>
+
+                                <p class="text-gray-400">
+                                    {project.data.description}
+                                </p>
+                            </a>
+
+                            <div class="text-blue-400 mt-4">
+                                <a
+                                    class="hover:underline flex gap-2 items-center"
+                                    href={project.data.sourceCode}
+                                    target="_blank"
+                                >
+                                    <Icon name="pixelarticons:code" size="24" />
+                                    Source Code
+                                </a>
+                            </div>
+                        </div>
                     ))}
                 </div>
-                <div class=" py-4 "></div>
-                <div class="py-4">
-                    <a href={project.data.sourceCode} target="_blank" class="flex gap-2 text-zinc-300 hover:text-blue-300"><Icon class="-mt-0.5" name="pixelarticons:code" width="16" /> Source Code</a>
-                </div>
-            ))}
-        </div>
-    ))}
+            </>
+        ))
+    }
 </ContainerLayout>
