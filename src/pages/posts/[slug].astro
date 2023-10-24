@@ -10,7 +10,12 @@ import { Image } from 'astro:assets';
 import BlogPostCard from "@/components/blog/BlogPostCard.astro";
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection("blog");
+  let blogEntries = await getCollection("blog");
+
+  // filter out drafts
+  if (import.meta.env.PROD) {
+    blogEntries = blogEntries.filter((entry) => !entry.data.draft);
+  }
 
   return blogEntries.map((entry) => ({
     params: { slug: entry.slug },

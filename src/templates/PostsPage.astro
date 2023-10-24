@@ -42,7 +42,7 @@ if (filteredTag) {
 }
 ---
 <Base meta={{
-  title: 'Blog—Simon Sorensen',
+  title: filteredTag ? `Posts tagged with ${filteredTag} on Simon's Blog` : 'Simon\'s Blog',
   description: 'On my blog I mostly write about coding and other fun stuff.',
 }}>
   <Navbar />

@@ -1,39 +1,138 @@
 ---
-import type { PageMeta } from '@/types';
+import type { PageMeta } from "@/types";
 interface Props {
   meta?: PageMeta;
 }
 
-const { meta = {
-  title: 'Simon Sorensen—Software Engineering Intern in London',
-  description: 'Simon Sorensen is a Danish Software Engineering Intern and Computer Science student.',
-  transitions: false,
-  noIndex: false,
-  noFollow: false,
-} } = Astro.props;
+const {
+  meta = {
+    title: "Simon Sorensen—Software Engineering Intern in London",
+    description:
+      "Simon Sorensen is a Danish Software Engineering Intern and Computer Science student.",
+    transitions: false,
+    noIndex: false,
+    noFollow: false,
+  },
+} = Astro.props;
 ---
+
 <html lang="en">
   <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
     <title>{meta.title}</title>
     <meta name="description" content={meta.description} />
     {meta.noIndex && !meta.noFollow && <meta name="robots" content="noindex" />}
     {meta.noFollow && meta.noIndex && <meta name="robots" content="nofollow" />}
-    {meta.noFollow && meta.noIndex && <meta name="robots" content="noindex,nofollow" />}
+    {
+      meta.noFollow && meta.noIndex && (
+        <meta name="robots" content="noindex,nofollow" />
+      )
+    }
     <style>
-      @font-face{font-family:National2;src:url("/fonts/National2-Light.woff2") format("woff2");font-weight:300;font-style:normal;font-display:swap}@font-face{font-family:National2;src:url("/fonts/National2-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:National2;src:url("/fonts/National2-Italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}@font-face{font-family:National2;src:url("/fonts/National2-Bold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}@font-face{font-family:National2;src:url("/fonts/National2-BoldItalic.woff2") format("woff2");font-weight:700;font-style:italic;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-Italic.woff2") format("woff2");font-weight:400;font-style:italic;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-Ultrabold.woff2") format("woff2");font-weight:700;font-style:normal;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-UltraboldItalic.woff2") format("woff2");font-weight:700;font-style:italic;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-Ultralight.woff2") format("woff2");font-weight:300;font-style:normal;font-display:swap}@font-face{font-family:PPEditorialNew;src:url("/fonts/PPEditorialNew-UltralightItalic.woff2") format("woff2");font-weight:300;font-style:italic;font-display:swap}@font-face{font-family:CommitMono;src:url("/fonts/CommitMono-Regular.woff2") format("woff2");font-weight:400;font-style:normal;font-display:swap}@font-face{font-family:NewYork;src:url("/fonts/NewYork-Regular.woff2") format("woff2");font-display:swap}html{scroll-padding-top:50px}
+      @font-face {
+        font-family: National2;
+        src: url("/fonts/National2-Light.woff2") format("woff2");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: National2;
+        src: url("/fonts/National2-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: National2;
+        src: url("/fonts/National2-Italic.woff2") format("woff2");
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: National2;
+        src: url("/fonts/National2-Bold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: National2;
+        src: url("/fonts/National2-BoldItalic.woff2") format("woff2");
+        font-weight: 700;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: PPEditorialNew;
+        src: url("/fonts/PPEditorialNew-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: PPEditorialNew;
+        src: url("/fonts/PPEditorialNew-Italic.woff2") format("woff2");
+        font-weight: 400;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: PPEditorialNew;
+        src: url("/fonts/PPEditorialNew-Ultrabold.woff2") format("woff2");
+        font-weight: 700;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: PPEditorialNew;
+        src: url("/fonts/PPEditorialNew-UltraboldItalic.woff2") format("woff2");
+        font-weight: 700;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: PPEditorialNew;
+        src: url("/fonts/PPEditorialNew-Ultralight.woff2") format("woff2");
+        font-weight: 300;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: PPEditorialNew;
+        src: url("/fonts/PPEditorialNew-UltralightItalic.woff2") format("woff2");
+        font-weight: 300;
+        font-style: italic;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: CommitMono;
+        src: url("/fonts/CommitMono-Regular.woff2") format("woff2");
+        font-weight: 400;
+        font-style: normal;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: NewYork;
+        src: url("/fonts/NewYork-Regular.woff2") format("woff2");
+        font-display: swap;
+      }
+      html {
+        scroll-padding-top: 50px;
+      }
     </style>
-    <link rel="icon" href="/favicon.ico" sizes="32x32">
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="icon" href="/favicon.ico" sizes="32x32" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
     <script type="application/ld+json">
       {
-        "@context" : "https://schema.org",
-        "@type" : "WebSite",
-        "name" : "Simon Sorensen",
-        "alternateName" : "simse.io",
-        "url" : "https://simse.io"
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Simon Sorensen",
+        "alternateName": "simse.io",
+        "url": "https://simse.io"
       }
     </script>
   </head>
@@ -41,6 +140,12 @@ const { meta = {
   <body class="bg-zinc-950 text-white">
     <slot />
 
-    <script is:inline async src="https://analytics.0x1.earth/bruh" data-website-id="ab6f267a-724c-4e2f-be93-2d06611e5b9d" data-do-not-track="true" data-domains="simse.io"></script>
+    <script
+      is:inline
+      async
+      src="https://analytics.0x1.earth/bruh"
+      data-website-id="ab6f267a-724c-4e2f-be93-2d06611e5b9d"
+      data-do-not-track="true"
+      data-domains="simse.io"></script>
   </body>
 </html>
