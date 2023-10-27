@@ -6,7 +6,7 @@ import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
 import TableOfContents from "@/components/blog/TableOfContents.astro";
 import Tag from "@/components/blog/Tag.astro";
-import { Image } from 'astro:assets';
+import { Picture } from 'astro:assets';
 import BlogPostCard from "@/components/blog/BlogPostCard.astro";
 
 export async function getStaticPaths() {
@@ -30,6 +30,7 @@ interface Props {
 const { entry } = Astro.props;
 const { Content, headings } = await entry.render();
 
+/*
 const imageHeight: {
   [key: string]: string;
 } = {
@@ -38,6 +39,7 @@ const imageHeight: {
   fullscreen: "h-[100vh]",
   "below-title": "h-[0px]",
 };
+*/
 
 // get 4 newest blog posts
 const blogEntries = await getCollection("blog");
@@ -111,7 +113,7 @@ window.addEventListener('scroll', () => {
 
   <Navbar />
 
-  {
+  {/*
     entry.data.cover && (
       <div class={`relative ${imageHeight[entry.data.coverLayout]} bg-zinc-800`}>
         <Image
@@ -124,21 +126,21 @@ window.addEventListener('scroll', () => {
         />
       </div>
     )
-  }
+  */}
 
   <div
-    class="max-w-7xl mx-auto px-4 2xl:pl-[250px] pt-16 grid grid-cols-[1fr_250px] gap-8 relative h-fit"
+    class="max-w-3xl mx-auto px-4 pt-16"
   >
     <!-- Heading -->
-    <div class="mb-8 col-span-2">
-      <div class="flex items-center mb-8 gap-2">
+    <div class="mb-16">
+      <div class="flex items-center mb-3 gap-2">
         {entry.data.tags?.map((tag) => <Tag title={tag} />)}
       </div>
 
-      <h1 class={`text-3xl md:text-4xl lg:text-5xl leading-normal md:leading-normal lg:leading-normal mb-2 font-serif font-light`}>
+      <h1 class={`text-4xl mb-4 font-bold`}>
         {entry.data.title}
       </h1>
-      <p class="text-zinc-400 text-xl">
+      <p class="text-zinc-400 text-lg">
         Published on <span class="text-zinc-200"
           >{
             entry.data.publishedOn.toLocaleDateString("en-GB", {
@@ -149,9 +151,24 @@ window.addEventListener('scroll', () => {
           }</span
         >
       </p>
+
+      <Picture
+        src={entry.data.cover}
+        alt={entry.data.title}
+        width={1200}
+        height={800}
+        quality="high"
+        loading="eager"
+        class="mt-8 mb-24 border-2 border-zinc-700" />
     </div>
 
-    <div class="text-lg prose prose-invert col-span-2 lg:col-span-1">
+    <div class="text-lg prose prose-invert max-w-3xl mx-auto">
+      <!-- <div class="mb-24">
+        <h2 class="mb-3 text-zinc-300 font-bold">Table of Contents</h2>
+
+        <TableOfContents headings={headings} />
+      </div> -->
+
       <Content
         components={{
           h1: "h2",
@@ -163,14 +180,6 @@ window.addEventListener('scroll', () => {
         }}
       />
     </div>
-
-    <!-- Content -->
-    <div class="sticky top-12 self-start hidden lg:block" id="toc">
-      <h2 class="mb-3 text-zinc-300 font-bold">Table of Contents</h2>
-
-      <TableOfContents headings={headings} />
-    </div>
-
   </div>
 
   <div class="max-w-7xl px-4 my-12 md:mt-16 lg:mt-32 mx-auto">

@@ -7,27 +7,14 @@ const buildDate = new Date().toLocaleDateString('en-GB', {
     month: 'long',
     year: 'numeric',
 });
-
-const links = [
- {
-    icon: 'pixelarticons:code',
-    href: 'https://github.com/simse/simse.io',
-    label: 'Source Code'
- }
-]
 ---
-<footer class="border-t border-zinc-800 p-4 md:p-8">
+<footer class="bg-zinc-900 p-4 flex justify-between items-center text-sm">
     <div class="flex items-center">
         <Icon class="mr-2" name="pixelarticons:mood-happy" width="26" />
         
         <p>Designed and built with love in <strong class=""><RainbowText text="London" speed={2} /></strong></p>
     </div>
 
-    <div class="mt-12 flex gap-6">
-        {links.map(link => (
-            <a href={link.href} target={link.href.startsWith('/') ? '_self' : '_blank'} class="flex gap-1 text-zinc-300 hover:text-blue-300"><Icon name={link.icon} width="16" /> {link.label}</a>
-        ))}
-    </div>
-
-    <p class="text-zinc-400 mt-4">This site was statically generated on {buildDate} with <a href="https://astro.build" target="_blank">Astro 3.0</a></p>
+    <p class="text-zinc-200">This site was statically generated on {buildDate} with <a href="https://astro.build" target="_blank"><strong>Astro 3.3</strong></a></p>
 </footer>
+

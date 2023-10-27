@@ -20,7 +20,7 @@ const depthToMargin: {
     {headings.map(heading => (
         <a 
             href={`#${heading.slug}`}
-            class={`hover:text-zinc-200 hover:cursor-pointer py-1 transition-colors ${depthToMargin[heading.depth]}`}
+            class={`hover:text-zinc-200 hover:cursor-pointer py-1 transition-colors no-underline ${depthToMargin[heading.depth]}`}
         >{heading.text}</a>
     ))}
 </div>

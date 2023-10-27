@@ -16,6 +16,7 @@ import Navbar from "@/components/Navbar.astro";
 import Footer from "@/components/Footer.astro";
 import Picture from "@/components/Picture.astro";
 import { formatPostDate } from "@/common";
+import EasterEgg from "@/components/EasterEgg.astro";
 
 interface Props {
     entry: CollectionEntry<"photography">;
@@ -248,6 +249,8 @@ const { entry } = Astro.props;
             </div>
         ))}
     </main>
+
+    {entry.id === 'london-kingston' ? <EasterEgg easterEgg={3} /> : null}
 
     <Footer />
 </BaseLayout>

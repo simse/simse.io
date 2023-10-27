@@ -12,11 +12,15 @@ tags:
     - UI
     - UX
 categories: []
-lastmod: 2023-10-10T21:42:20.191Z
+lastmod: 2023-10-24T22:42:06.011Z
 ---
-introduction goes here
+Welcome to my Bible of Web Design. It's a continously updated list of rules to follow when designing web experiences. It's _highly_ opinionated and non-exhaustive.
 
-# 1. Don't hijack scrolling behaviour
+Follow these rules and you will probably deliver better web experiences. But don't forget: all rules have exceptions.
+
+# Visual
+
+## 1. Don't hijack scrolling behaviour
 This rule boils down to: **don't implement smooth scrolling**.
 
 Different browsers, across different OSes, using different input methods scroll differently. On mobile or if using a touchpad, the user is grabbing the page and expects the movement of their finger to be mapped to the movement of the page.
@@ -26,23 +30,34 @@ When using a scrollwheel, the scrolling is usually "stepped". However, most brow
 In any case, smooth scroll is disruptive, and pretty much never a good choice.
 
 
-# 2. Don't style the window scrollbar
+## 2. Don't style the window scrollbar
 The main scrollbar used to indicate the scroll position of the page should be left untouched.
 
-# 3. Don't change the page title after load
+## 3. Don't change the page title after load
 It's possible to change the page title after the user clicks away from the tab to something like: "Come back we miss you!". You can even flash a message. **Don't do this.** It's poor taste.
 
 A notable exception: Twitter.
 
-# 4. Don't play sound until user interaction
+## 4. Don't play sound until user interaction
 No pop-ups should make any sound. No buttons should click.
 
 The only acceptable times to play sound, is when it's obvious. Like pressing a play button. Or if context allows, like you're on Youtube or a podcast site, it makes sense.
 
-# 5. 
+# Security
 
-- Don't set an upper limit for password length
-- Don't use overly specific password rules
+## 5. Don't set an upper limit for password length
+
+There's no real technical reason to set a low limit when hashing passwords, as cryptographically secure functions tend to return fixed length hashes.
+
+Around 128 characters is a good limit.
+
+## 6. Don't use overly specific password rules
+
+It's not very secure, but users tend to reuse passwords. That's just how it is until Passkeys are more widely adopted.
+
+When stricter password rules prevent a user from reusing an existing password, they will typiccally...
+
+
 - Do allow copy/paste always
 - Do allow showing plain text password
 - Do use lax form validation
