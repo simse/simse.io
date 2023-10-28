@@ -51,9 +51,20 @@ const photographyCollection = defineCollection({
   })
 })
 
+const easterEggCollection = defineCollection({
+  type: 'data',
+  schema: ({ image }) => z.object({
+    id: z.string(),
+    title: z.string(),
+    description: z.string(),
+    image: image(),
+  })
+})
+
 
 export const collections = {
   'blog': blogCollection,
   'projects': projectsCollection,
-  'photography': photographyCollection
+  'photography': photographyCollection,
+  'easterEggs': easterEggCollection,
 };

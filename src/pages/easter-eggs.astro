@@ -1,0 +1,55 @@
+---
+import { getCollection } from "astro:content";
+import { Image } from "astro:assets";
+
+import ContainerLayout from "@/layouts/container.astro";
+import PageHeader from "@/components/PageHeader.astro";
+
+const easterEggs = await getCollection("easterEggs");
+---
+<style lang="scss">
+    .easter-egg {
+        img {
+            filter: grayscale(100%);
+            opacity: .4;
+            transition: all .2s ease-in-out;
+        }
+
+        p,
+        h2 {
+            opacity: .5;
+            transition: all .2s ease-in-out;
+        }
+        
+        &.found {
+            img {
+                filter: grayscale(0%);
+                opacity: 1;
+            }
+
+            p,
+            h2 {
+                opacity: 1;
+            }
+        }
+    }
+</style>
+
+<ContainerLayout meta={{
+    title: "Easter Eggs on simse.io",
+    description: "Can you find all the easter eggs on my website?",
+    noIndex: true
+}}>
+    <PageHeader title="Easter Eggs" subtitle="Can you find all the easter eggs on my website?" />
+
+    <div class="grid grid-cols-4">
+        {easterEggs.map(egg => (
+            <div class="flex items-center flex-col p-3 easter-egg" onclick="this.classList.add('found')">
+                <Image class="mb-6" src={egg.data.image} width={200} height={200} alt="" />
+
+                <h2 class="font-serif text-2xl mb-2">{egg.data.title}</h2>
+                <p class="text-lg text-zinc-300">{egg.data.description}</p>
+            </div>
+        ))}
+    </div>
+</ContainerLayout>

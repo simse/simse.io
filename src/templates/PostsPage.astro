@@ -64,9 +64,11 @@ if (filteredTag) {
     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-fr gap-4">
     {allBlogPosts.map(async (post) => <BlogPostCard post={post} displayTags={displayTagOverlay} />)}
     </div>
+
+    <p class="mt-8 text-zinc-400 text-lg mb-16">Showing {allBlogPosts.length} of {allBlogPosts.length} posts</p>
+
+    <EasterEgg easterEgg={1} />
   </main>
 
   <Footer />
-
-  <EasterEgg easterEgg={1} />
 </Base>
