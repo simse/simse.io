@@ -1,5 +1,5 @@
 ---
-title: "Simon's Web Design Bible: 103 Commandments"
+title: "Simon's Web Design Bible: 24 Commandments"
 slug: web-design-bible
 excerpt: A continously updated list of rules to follow when designing web experiences
 publishedOn: 2023-10-10T07:30:33.934Z
@@ -14,7 +14,11 @@ tags:
 categories: []
 lastmod: 2023-10-28T11:06:29.419Z
 ---
+import ExplicitWord from "@/components/utilities/ExplicitWord.astro";
+
 Welcome to my Bible of Web Design. It's a continously updated list of rules to follow when designing web experiences. It's _highly_ opinionated and non-exhaustive.
+
+But you may be thinking: who the <ExplicitWord text="fuck" /> do you think you are?? Am I really qualified to give you commandments to follow? Maybe, I don't care.
 
 Follow these rules and you will probably deliver better web experiences. But don't forget: all rules have exceptions. It is up to you to use your best judgement.
 
@@ -23,44 +27,58 @@ Follow these rules and you will probably deliver better web experiences. But don
 ## 1. Don't hijack scrolling behaviour
 This rule boils down to: **don't implement smooth scrolling**.
 
-Different browsers, across different OSes, using different input methods scroll differently. On mobile or if using a touchpad, the user is grabbing the page and expects the movement of their finger to be mapped to the movement of the page.
+Different browsers, across different OSes, using different input methods scroll differently. On mobile, or if using a touchpad, the user is grabbing the page and expects the page to move precisely with their finger.
 
-When using a scrollwheel, the scrolling is usually "stepped". However, most browsers smooth the steps so it doesn't feel like the page is jumping.
+When using a scrollwheel, the scrolling is usually "stepped". However, most browsers smooth the steps so it doesn't feel like the page scrolling is not so jarring.
 
-In any case, smooth scroll is disruptive, and pretty much never a good choice.
+In any case, smooth scroll is disruptive, and pretty much never a good choice, because at best it makes the page feel sluggish, and at worst it can interfere with user settings.
 
 ---
 
 ## 2. Don't style the window scrollbar
 The main scrollbar used to indicate the scroll position of the page should be left untouched.
 
+Some users rely on the scrollbar for scrolling, and not just a visual indicator.
+
 ---
 
 ## 3. Don't change the page title after load
 It's possible to change the page title after the user clicks away from the tab to something like: "Come back we miss you!". You can even flash a message. **Don't do this.** It's poor taste.
 
-A notable exception: Twitter.
+A notable exception: Twitter (now called X) which uses the title as a notification indicator.
 
 ---
 
 ## 4. Don't play sound until user interaction
 No pop-ups should make any sound. No buttons should click.
 
-The only acceptable times to play sound, is when it's obvious. Like pressing a play button. Or if context allows, like you're on Youtube or a podcast site, it makes sense.
+The only acceptable time to play sound, is when it's obvious. Like pressing a play button. Or if context allows. Like on Youtube, where navigating to a video will play the video with sound. No surprises there.
 
-# Security
+The reason you shouldn't be playing sound without permission, is because you don't know where your website is loaded. It could feasibly be, although rare, loaded up on the sound guy's laptop at a huge stadium!
+
+---
+
+# Forms
 
 ## 5. Don't set an upper limit for password length
 
 There's no real technical reason to set a low limit when hashing passwords, as cryptographically secure functions tend to return fixed length hashes.
 
-Around 128 characters is a good limit.
+Around 128 characters is a good limit, which is effectively no limit. It's difficult to argue anything above that is neccessary for anyone, normal users and password manager users alike.
+
+---
 
 ## 6. Don't use overly specific password rules
 
-It's not very secure, but users tend to reuse passwords. That's just how it is until Passkeys are more widely adopted.
+It's not very secure, but the reality is that users tend to reuse passwords. That's just how it is until Passkeys are more widely adopted.
 
-When stricter password rules prevent a user from reusing an existing password, they will typiccally...
+When stricter password rules prevent a user from reusing an existing password, they will typiccally just modify it to pass the requirements, and then promptly forgetting it.
+
+---
+
+## 7. Do allow copy/paste always
+
+---
 
 
 - Do allow copy/paste always

@@ -1,0 +1,42 @@
+---
+import { Image } from "astro:assets";
+import Icon from "astro-icon";
+
+import Background from "@/assets/homepage/bg_smaller.jpg";
+import Logo from "@/assets/homepage/logo.png";
+---
+<div class="absolute -top-10 left-0 w-full h-full -z-50 min-h-screen">
+    <div class="h-1/4 xl:h-1/3 w-full bg-gradient-to-b from-fuchsia-900/70 to-black"></div>
+
+    <svg class="absolute h-full w-full z-0" xmlns="http://www.w3.org/2000/svg" version="1.1">
+        <defs>
+            <filter id="heat" filterUnits="objectBoundingBox" x="0" y="0" width="100%" height="100%">
+                <feTurbulence id="heatturb" type="fractalNoise" numOctaves="1" seed="10" baseFrequency="0.005"></feTurbulence>
+                <feDisplacementMap xChannelSelector="G" yChannelSelector="R" scale="30" in="SourceGraphic"></feDisplacementMap>
+              </filter>
+              <animate xlink:href="#heatturb"
+                  id="anim-heatturb"
+                attributeName="baseFrequency"
+                values="0.003; 0.008; 0.003"
+                dur="60s"
+                restart="always"
+                repeatCount="indefinite" />
+        </defs>
+        
+        <image id="img" x="0" y="0" width="100%" height="100%" xlink:href={Background.src} filter="url(#heat)" />
+    </svg>
+</div>
+
+
+<div class="w-full flex items-center flex-col min-h-screen">
+    <Image src={Logo} width={1200} format="avif" alt="" />
+
+    <!-- <h2 class="text-center w-full text-2xl font-bold text-purple-200 -mt-24 mb-12">Software Engineering Intern @ LEGO</h2> -->
+
+
+    {import.meta.env.DEV && <div class="mb-32 mt-auto">
+        <p class="text-xl text-center text-fuchsia-200">A journey through technology awaits you below...</p>
+
+        <Icon name="pixelarticons:arrow-down" width="32" class="mx-auto mt-6 animate-bounce motion-reduce:animate-none text-fuchsia-200"  />
+    </div>}
+</div>

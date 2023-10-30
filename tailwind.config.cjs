@@ -5,7 +5,7 @@ module.exports = {
 		extend: {
 			fontFamily: {
 				sans: ['National2', 'sans-serif'],
-				serif: ['PPEditorialNew', 'serif'],
+				serif: ['ETBook', 'PPEditorialNew', 'serif'],
 				mono: ['CommitMono', 'Consolas', 'monospace']
 			}
 		},

@@ -137,10 +137,10 @@ window.addEventListener('scroll', () => {
         {entry.data.tags?.map((tag) => <Tag title={tag} />)}
       </div>
 
-      <h1 class={`text-4xl mb-4 font-bold`}>
+      <h1 class={`text-4xl mb-4 font-serif`}>
         {entry.data.title}
       </h1>
-      <p class="text-zinc-400 text-lg">
+      <p class="text-zinc-400 text-xl font-serif">
         Published on <span class="text-zinc-200"
           >{
             entry.data.publishedOn.toLocaleDateString("en-GB", {
@@ -164,7 +164,7 @@ window.addEventListener('scroll', () => {
       <p class="text-zinc-300">{entry.data.coverCaption}</p>
     </div>
 
-    <div class="text-lg prose prose-invert max-w-3xl mx-auto">
+    <div class="text-2xl prose prose-invert max-w-3xl mx-auto font-serif">
       <!-- <div class="mb-24">
         <h2 class="mb-3 text-zinc-300 font-bold">Table of Contents</h2>
 
