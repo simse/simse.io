@@ -1,0 +1,13 @@
+---
+interface Props {
+    title: string;
+    /* subtitle renders HTML elements */
+    subtitle?: string;
+}
+
+const { title, subtitle } = Astro.props;
+---
+<header class="mb-12">
+    <h1 class="text-3xl mb-2">{title}</h1>
+    {subtitle && <span class="text-zinc-400" set:html={subtitle} />}
+</header>

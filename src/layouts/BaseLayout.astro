@@ -1,0 +1,43 @@
+---
+import "../app.css";
+
+interface Props {
+    title: string;
+	canonical?: string;
+}
+
+const { title, canonical } = Astro.props;
+---
+
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/ico" href="/favicon.ico" />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<title>{title}</title>
+		{canonical && <link rel="canonical" href={`https://simse.io${canonical}`} />}
+		<style>
+			@font-face {
+				font-family: 'Figtree';
+				src: url('/fonts/Figtree.woff2') format('woff2-variations');
+				src: url('/fonts/Figtree.woff2') format('woff2') tech('variations');
+				font-weight: 100 1000;
+				font-stretch: 25% 151%;
+				font-display: swap;
+			}
+			@font-face {
+				font-family: 'FigtreeItalic';
+				src: url('/fonts/Figtree-Italic.woff2') format('woff2-variations');
+				src: url('/fonts/Figtree-Italic.woff2') format('woff2') tech('variations');
+				font-weight: 100 1000;
+				font-stretch: 25% 151%;
+				font-style: italic;
+				font-display: swap;
+			}
+		</style>
+	</head>
+	<body class="bg-zinc-950 text-zinc-100">
+		<slot />
+	</body>
+</html>

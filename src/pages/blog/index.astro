@@ -1,0 +1,22 @@
+---
+import { getCollection } from 'astro:content';
+
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Navbar from "@components/Navbar.astro";
+import PageHeader from "@components/common/PageHeader.astro";
+import YearList from "@components/blog/YearList.astro";
+
+const posts = await getCollection('blog');
+---
+<BaseLayout title="Blog">
+    <Navbar activeItem="Blog" />
+
+    <main class="px-2 py-8 max-w-6xl mx-auto">
+        <PageHeader 
+            title="Blog"
+            subtitle="My corner of The Internet where I write sometimes,<br />but honestly not that often."
+        />
+
+        <YearList year={2024} posts={posts} />
+    </main>
+</BaseLayout>

@@ -1,0 +1,25 @@
+---
+import { Image } from 'astro:assets';
+import ProfilePicture from "@assets/me_18.jpg";
+---
+<header class="py-12 flex items-center flex-col px-4">
+    <h1 class="text-center text-xl md:text-2xl lg:text-3xl text-zinc-300 max-w-xl mb-8">
+        <span class="text-zinc-50 font-medium">Hi! I'm Simon</span> — a Software Engineer based in London
+    </h1>
+
+    <figure class="w-96 h-96">
+        <Image
+            src={ProfilePicture} 
+            alt="Simon is standing in front of a beautiful pink sunset in Denmark" 
+            width={750} 
+            height={750} 
+            quality="high"
+            format="avif"
+            class="mb-1"
+        />
+
+        <figcaption class="text-zinc-400">
+            Me a few years ago in Denmark
+        </figcaption>
+    </figure>
+</header>
