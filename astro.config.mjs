@@ -5,8 +5,9 @@ import mdx from "@astrojs/mdx";
 import react from "@astrojs/react";
 import markdoc from "@astrojs/markdoc";
 import keystatic from '@keystatic/astro';
-
 import icon from "astro-icon";
+
+import preact from "@astrojs/preact";
 
 // https://astro.build/config
 export default defineConfig({
@@ -14,7 +15,20 @@ export default defineConfig({
   adapter: cloudflare({
     imageService: 'cloudflare'
   }),
-  integrations: [tailwind(), mdx(), react(), markdoc(), keystatic(), icon()],
+  integrations: [
+    tailwind(), 
+    mdx(), 
+    markdoc(), 
+    keystatic(), 
+    icon(), 
+    preact({
+      compat: true,
+      include: '**/preact/*'
+    }),
+    react({
+      include: '**/react/*'
+    })
+  ],
   image: {
     service: passthroughImageService()
   },

@@ -5,7 +5,20 @@ export default {
 		extend: {
 			fontFamily: {
 				sans: ['Figtree', 'sans-serif'],
-			}
+			},
+			keyframes: {
+				'fade-in': {
+					'0%': {
+						opacity: '0',
+					},
+					'100%': {
+						opacity: '1',
+					},
+				},
+			},
+			animation: {
+				'fadeIn': 'fade-in 0.5s ease-in-out',
+			},
 		},
 	},
 	plugins: [

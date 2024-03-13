@@ -1,69 +1,15 @@
 ---
-import logo from '@assets/logo.png';
-
-const items = [
-    {
-        title: 'Home',
-        link: '/'
-    },
-    {
-        title: 'Blog',
-        link: '/blog'
-    },
-    {
-        title: 'Projects',
-        link: '/projects'
-    }
-]
+import NavbarComponent from "@components/preact/Navbar";
+import { Icon } from 'astro-icon/components';
 
 interface Props {
     activeItem?: 'Home' | 'Blog' | 'Projects';
 }
 
 const { activeItem } = Astro.props;
-
-const isItemActive = (title: string) => {
-    if (title === activeItem || activeItem === undefined) {
-        return 'text-white font-semibold';
-    }
-
-    return 'text-zinc-300';
-}
 ---
-<script lang="ts">
-window.onload = () => {
-    document.getElementById('logo').addEventListener('mouseenter', () => {
-        document.getElementById('logo_video').play();
-    });
-}
-</script>
-
-<nav 
-    class=" py-3 flex justify-between items-center bg-zinc-950/80
-        backdrop-blur-lg sticky top-0 mx-auto max-w-6xl"
->
-    <a class="flex items-center" href="/" id="logo">
-        <div class="mr-2 h-8 w-8">
-            <video 
-                muted
-                playsinline
-                id="logo_video"
-                poster={logo.src}
-            >
-                <source src="/logo.webm" type="video/webm" />
-            </video>
-        </div>
-
-        <span class="font-bold">Simon Sorensen</span>
-    </a>
-
-    <ul class="ml-auto flex ">
-        {items.map(item => (
-            <li class:list={[
-                isItemActive(item.title)
-            ]}>
-                <a class="p-2" href={item.link} data-astro-prefetch>{item.title}</a>
-            </li>
-        ))}
-    </ul>
-</nav>
+<NavbarComponent client:load activeItem={activeItem}>
+    <Icon name="tabler:menu" size={20} slot="openMenuIcon" />
+    <Icon name="tabler:x" size={18} slot="closeMenuIcon" />
+    <Icon name="tabler:arrow-up-right" size={16} slot="linkIcon" />
+</NavbarComponent>

@@ -1,25 +1,14 @@
 ---
-import { Image } from 'astro:assets';
-import ProfilePicture from "@assets/me_18.jpg";
+import ParticleHeader from '@components/preact/ParticleHeader';
 ---
-<header class="py-12 flex items-center flex-col px-4">
-    <h1 class="text-center text-xl md:text-2xl lg:text-3xl text-zinc-300 max-w-xl mb-8">
-        <span class="text-zinc-50 font-medium">Hi! I'm Simon</span> — a Software Engineer based in London
+<header class="py-48 relative px-4 min-h-[600px]">
+    <div class="w-screen absolute top-0">
+        <ParticleHeader client:only="preact" />
+    </div>
+
+    <h1 class="
+        text-xl md:text-2xl lg:text-3xl text-zinc-300 left-1/2 -translate-x-1/2 z-20 absolute text-center
+    ">
+        <span class="text-zinc-50 font-medium">Hi! I'm Simon</span> — a Software Engineer<br />based in London
     </h1>
-
-    <figure class="w-96 h-96">
-        <Image
-            src={ProfilePicture} 
-            alt="Simon is standing in front of a beautiful pink sunset in Denmark" 
-            width={750} 
-            height={750} 
-            quality="high"
-            format="avif"
-            class="mb-1"
-        />
-
-        <figcaption class="text-zinc-400">
-            Me a few years ago in Denmark
-        </figcaption>
-    </figure>
 </header>

@@ -3,7 +3,7 @@ import type { CollectionEntry } from "astro:content";
 import { Icon } from 'astro-icon/components';
 
 interface Props {
-    year: number;
+    year: string;
     posts: CollectionEntry<'blog'>[];
 }
 
@@ -13,7 +13,7 @@ const formatDate = (date: Date) => {
     return date.toLocaleDateString('en-US', { month: 'long', day: 'numeric' });
 };
 ---
-<section class="my-2 pb-2 border-t border-zinc-500 grid grid-cols-1 md:grid-cols-12">
+<section class="my-2 pb-2 border-t border-zinc-500 grid grid-cols-1 md:grid-cols-12 mb-12">
     <span class="text-xl text-zinc-300 col-span-3 mt-3">{year}</span>
 
     <ul class="col-span-9">

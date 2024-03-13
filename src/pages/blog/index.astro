@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Navbar from "@components/Navbar.astro";
@@ -7,16 +8,31 @@ import PageHeader from "@components/common/PageHeader.astro";
 import YearList from "@components/blog/YearList.astro";
 
 const posts = await getCollection('blog');
+
+// group posts by year
+let postsByYear: {
+    [key: string]: CollectionEntry<'blog'>[];
+} = {};
+
+posts.forEach((post) => {
+    const year = new Date(post.data.published).getFullYear().toString();
+    if (!postsByYear[year]) {
+        postsByYear[year] = [];
+    }
+    postsByYear[year].push(post);
+});
 ---
 <BaseLayout title="Blog">
     <Navbar activeItem="Blog" />
 
-    <main class="px-2 py-8 max-w-6xl mx-auto">
+    <main class="px-2 md:px-4 py-8 max-w-6xl mx-auto">
         <PageHeader 
             title="Blog"
             subtitle="My corner of The Internet where I write sometimes,<br />but honestly not that often."
         />
 
-        <YearList year={2024} posts={posts} />
+        {Object.keys(postsByYear).sort().reverse().map((year) => (
+            <YearList year={year} posts={postsByYear[year]} />
+        ))}
     </main>
 </BaseLayout>
