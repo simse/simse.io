@@ -8,6 +8,15 @@ import relievedMemoji from "@assets/memojies/relieved.png";
 import winkMemoji from "@assets/memojies/wink.png";
 import surprisedMemoji from "@assets/memojies/surprised.png";
 
+/*
+import happyMemoji from "@assets/shapes/red.png";
+import cheekyMemoji from "@assets/shapes/yellow.png";
+import ponderingMemoji from "@assets/shapes/purple.png";
+import relievedMemoji from "@assets/shapes/blue.png";
+import winkMemoji from "@assets/shapes/orange.png";
+import surprisedMemoji from "@assets/shapes/green.png";
+*/
+
 interface Particle {
   x: number;
   y: number;
@@ -48,7 +57,7 @@ const ParticleHeader = () => {
     const particleCount = Math.floor(
       (dimensions.width * dimensions.height) / 10000
     );
-    return particleCount / 2;
+    return particleCount / 4;
   };
 
   const getRandomCoordinate = (dimensions: {
@@ -69,9 +78,7 @@ const ParticleHeader = () => {
 
     if (
       randomX > forbiddenWidthZoneStart &&
-      randomX < forbiddenWidthZoneEnd &&
-      randomY > forbiddenHeightZoneStart &&
-      randomY < forbiddenHeightZoneEnd
+      randomX < forbiddenWidthZoneEnd
     ) {
       return getRandomCoordinate(dimensions);
     }
@@ -85,50 +92,50 @@ const ParticleHeader = () => {
     const forbiddenWidthZoneStart = dimensions.width * 0.3;
     const forbiddenWidthZoneEnd = dimensions.width * 0.7;
 
-    const forbiddenHeightZoneStart = dimensions.height * 0.4;
-    const forbiddenHeightZoneEnd = dimensions.height * 0.6;
+    /*const forbiddenHeightZoneStart = dimensions.height * 0.4;
+    const forbiddenHeightZoneEnd = dimensions.height * 0.6;*/
 
     const distanceToForbiddenZoneX = Math.min(
       Math.abs(x - forbiddenWidthZoneStart),
       Math.abs(x - forbiddenWidthZoneEnd)
     );
 
-    const distanceToForbiddenZoneY = Math.min(
+    /*const distanceToForbiddenZoneY = Math.min(
       Math.abs(y - forbiddenHeightZoneStart),
       Math.abs(y - forbiddenHeightZoneEnd)
-    );
+    );*/
 
     const distanceToForbiddenZone = Math.min(
       distanceToForbiddenZoneX,
-      distanceToForbiddenZoneY
+      // distanceToForbiddenZoneY
     );
 
-    return 1 + distanceToForbiddenZone / (dimensions.width / 20);
+    return 1 + distanceToForbiddenZone / (dimensions.width / 2);
   };
 
   const getOpacity = (x: number, y: number) => {
     const forbiddenWidthZoneStart = dimensions.width * 0.3;
     const forbiddenWidthZoneEnd = dimensions.width * 0.7;
 
-    const forbiddenHeightZoneStart = dimensions.height * 0.4;
-    const forbiddenHeightZoneEnd = dimensions.height * 0.6;
+    /*const forbiddenHeightZoneStart = dimensions.height * 0.4;
+    const forbiddenHeightZoneEnd = dimensions.height * 0.6;*/
 
     const distanceToForbiddenZoneX = Math.min(
       Math.abs(x - forbiddenWidthZoneStart),
       Math.abs(x - forbiddenWidthZoneEnd)
     );
 
-    const distanceToForbiddenZoneY = Math.min(
+   /* const distanceToForbiddenZoneY = Math.min(
       Math.abs(y - forbiddenHeightZoneStart),
       Math.abs(y - forbiddenHeightZoneEnd)
-    );
+    );*/
 
     const distanceToForbiddenZone = Math.min(
       distanceToForbiddenZoneX,
-      distanceToForbiddenZoneY
+      // distanceToForbiddenZoneY
     );
 
-    return Math.max(0.2, 1.2 - distanceToForbiddenZone / (dimensions.width / 10));
+    return 1 -  distanceToForbiddenZone / (dimensions.width / 2);
   };
 
   const randomImage = () => {
@@ -173,14 +180,15 @@ const ParticleHeader = () => {
   }, [debouncedDimensions]);
 
   return (
-    <div class="w-full h-[600px] relative" ref={targetRef}>
+    <div class="w-full h-[600px] relative overflow-clip" ref={targetRef}>
       {particles.map((particle, index) => (
         <img
+          key={dimensions.width * index}
           src={particle.image}
           alt=""
           aria-hidden="true"
           role="presentation"
-          class="absolute z-0 hover:cursor-pointer"
+          class="absolute z-0 animate-fadeIn pointer-events-none"
           style={{
             right: particle.x,
             top: particle.y,
@@ -188,7 +196,11 @@ const ParticleHeader = () => {
             width: "50px",
             transform: `scale(${particle.scale})`,
             opacity: particle.opacity,
-            filter: `blur(${1 - particle.opacity}px)`
+            '--opacity': particle.opacity,
+            filter: `blur(${1 - particle.opacity}px)`,
+            animationDelay: `${index * 0.25}s`,
+            animationDuration: '2s',
+            animationFillMode: 'both',
           }}
         />
       ))}

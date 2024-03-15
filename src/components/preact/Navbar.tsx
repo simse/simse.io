@@ -5,7 +5,7 @@ interface NavbarProps {
   openMenuIcon?: any;
   closeMenuIcon?: any;
   linkIcon?: any;
-  activeItem?: "Home" | "Blog" | "Projects" | "About" | "Contact";
+  activeItem?: "Home" | "Blog" | "Projects" | "Photography" | "Contact";
 }
 
 const items = [
@@ -19,14 +19,19 @@ const items = [
     link: "/blog",
     showInBar: true,
   },
-  {
+  /*{
     title: "About",
     link: "/about",
     showInBar: true,
-  },
+  },*/
   {
     title: "Projects",
     link: "/projects",
+    showInBar: true,
+  },
+  {
+    title: "Photography",
+    link: "/photography",
     showInBar: false,
   },
   {
@@ -72,7 +77,7 @@ const Navbar = ({
     <>
       <nav
         className={`
-          px-1 md:px-4 py-3 flex justify-between items-center rounded-b-lg z-20 sticky mx-auto
+          px-1 md:px-4 py-3 flex justify-between items-center rounded-b-lg z-40 sticky mx-auto
           backdrop-blur-sm top-0 w-full max-w-6xl border-x border-b border-transparent transition-colors
           ${isMenuOpen ? "bg-transparent" : "bg-zinc-950/80"}
           ${isPageScrolled && !isMenuOpen ? "border-zinc-700" : ""}
@@ -98,7 +103,7 @@ const Navbar = ({
 
         <ul className={"ml-auto flex items-center"}>
           {items.map((item) => (
-            item.showInBar && <li>
+            item.showInBar && <li class="hidden sm:block">
               <a
                 className={`
                   p-2 ${
@@ -129,7 +134,7 @@ const Navbar = ({
       <nav
         className={`
           fixed top-0 bg-zinc-800/90 max-w-6xl w-full rounded-b-lg pt-16 pb-4 px-4 
-          left-1/2 -translate-x-1/2 z-10 min-h-[32em] backdrop-blur-sm transition-all transform-gpu
+          left-1/2 -translate-x-1/2 z-30 min-h-[32em] backdrop-blur-sm transition-all transform-gpu
           grid grid-cols-2 gap-8
           ${
             isMenuOpen
@@ -166,7 +171,7 @@ const Navbar = ({
 
       <div
         className={`
-          fixed w-screen h-screen z-0 bg-black/80 top-0 left-0 
+          fixed w-screen h-screen z-10 bg-black/80 top-0 left-0 
           transition-opacity ${
             isMenuOpen
               ? "opacity-100 pointer-events-auto"
