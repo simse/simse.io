@@ -1,25 +1,51 @@
 ---
 import { Icon } from "astro-icon/components";
-import { getCollection } from 'astro:content';
+import { getCollection } from "astro:content";
+import { formatDateWithYear } from "@utils/date";
 
-import BlogPostsCard from "./BlogPostCard.astro";
+import TestImage from "@assets/blog/elizabeth.jpg";
 
 const posts = await getCollection("blog");
-
 ---
-<section class="max-w-6xl mx-auto my-8 px-4">
-    <h2 class="text-lg font-semibold mb-2">Blog</h2>
 
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-2">
-        {posts.slice(0, 3).map(post =>
-            <BlogPostsCard
-                post={post}
-            />
-        )}
-    </div>
+<section class="mb-8 max-w-6xl mx-auto px-4">
+  <a href="/blog">
+    <h2 class="font-bold text-xl mb-2">Blog</h2>
+  </a>
+  <div class="w-full overflow-auto rounded mb-2">
+    <table class="w-full border border-zinc-700">
+      <thead class="[&_tr]:border-b [&_tr]:border-zinc-700 bg-zinc-800"
+        ><tr class="border-b border-zinc-700 font-bold text-left"
+          ><th class="py-2 px-3">Date</th><th class="py-2 px-3">Title</th><th
+            class="py-2 px-3">Link</th
+          ></tr
+        ></thead
+      >
+      <tbody>
+        {
+          posts.slice(0, 10).map((post) => (
+            <tr class="border-b border-zinc-700">
+                <td class="p-3 align-middle font-bold w-48">
+                  {formatDateWithYear(post.data.published)}
+                </td>
+                <td class="p-3 align-middle ">{post.data.title}</td>
+                <td class="p-3 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]">
+                  <a
+                    class="bg-blue-700 px-1 py-0.5 sm:px-3 sm:py-1 border border-blue-600 rounded-full"
+                    href={`/${post.slug}`}
+                  >
+                    Read →
+                  </a>
+                </td>
+            </tr>
+          ))
+        }
+      </tbody>
+    </table>
+  </div>
 
-    <a class="flex items-center gap-1 text-zinc-300" href="/blog">
-        See all posts
-        <Icon name="tabler:arrow-right" />
-    </a>
+  <a class="text-zinc-400 flex items-center gap-1" href="/blog">
+    See all posts
+    <Icon name="tabler:arrow-right" size={20} />
+  </a>
 </section>

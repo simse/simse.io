@@ -79,7 +79,7 @@ const Navbar = ({
         className={`
           px-1 md:px-4 py-3 flex justify-between items-center rounded-b-lg z-40 sticky mx-auto
           backdrop-blur-sm top-0 w-full max-w-6xl border-x border-b border-transparent transition-colors
-          ${isMenuOpen ? "bg-transparent" : "bg-zinc-950/80"}
+          ${isMenuOpen ? "bg-transparent" : "bg-zinc-950/90"}
           ${isPageScrolled && !isMenuOpen ? "border-zinc-700" : ""}
         `}
       >
@@ -108,8 +108,8 @@ const Navbar = ({
                 className={`
                   p-2 ${
                     item.title === activeItem ? "font-bold" : "text-zinc-300"
-                  }
-                  transition-opacity ${isMenuOpen ? "opacity-0" : "opacity-100"}
+                  } hover:text-zinc-50
+                  transition-all ${isMenuOpen ? "opacity-0" : "opacity-100"}
                 `}
                 href={item.link}
                 data-astro-prefetch

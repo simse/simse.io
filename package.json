@@ -7,7 +7,8 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "deploy": "wrangler pages deploy dist"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.7",
@@ -33,6 +34,7 @@
     "use-debounce-preact": "^1.0.2"
   },
   "devDependencies": {
-    "@tailwindcss/typography": "^0.5.10"
+    "@tailwindcss/typography": "^0.5.10",
+    "wrangler": "^3.34.2"
   }
 }

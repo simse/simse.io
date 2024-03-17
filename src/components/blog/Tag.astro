@@ -1,0 +1,76 @@
+---
+interface Props {
+    title: string;
+    href?: string;
+    fontSize?: string;
+    selected?: boolean;
+}
+
+const { title, href, fontSize = 'text-xs', selected = false } = Astro.props;
+
+// map to colour
+const colourMap: {
+    [key: string]: string;
+} = {
+    red: "hover:bg-red-700 hover:text-red-200",
+    orange: "hover:bg-orange-700 hover:border-orange-900 hover:text-orange-200",
+    amber: "hover:bg-amber-700 hover:border-amber-900 hover:text-amber-200",
+    yellow: "hover:bg-yellow-700 hover:border-yellow-900 hover:text-yellow-200",
+    lime: "hover:bg-lime-700 hover:border-lime-900 hover:text-lime-200",
+    green: "hover:bg-green-700 hover:border-green-900 hover:text-green-200",
+    emerald: "hover:bg-emerald-700 hover:border-emerald-900 hover:text-emerald-200",
+    teal: "hover:bg-teal-700 hover:border-teal-900 hover:text-teal-100",
+    cyan: "hover:bg-cyan-700 hover:border-cyan-900 hover:text-cyan-100",
+    sky: "hover:bg-sky-700 hover:border-sky-900 hover:text-sky-100",
+    blue: "hover:bg-blue-700 hover:border-blue-900 hover:text-blue-200",
+    indigo: "hover:bg-indigo-700 hover:border-indigo-900 hover:text-indigo-200",
+    violet: "hover:bg-violet-700 hover:border-violet-900 hover:text-violet-200",
+    purple: "hover:bg-purple-700 hover:border-purple-900 hover:text-purple-200",
+    fuchsia: "hover:bg-fuchsia-700 hover:border-fuchsia-900 hover:text-fuchsia-200",
+    pink: "hover:bg-pink-700 hover:border-pink-900 hover:text-pink-200",
+    rose: "hover:bg-rose-700 hover:border-rose-900 hover:text-rose-200"
+}
+
+const selectedColourMap: {
+    [key: string]: string;
+} = {
+    red: "bg-red-700 text-red-200",
+    orange: "bg-orange-700 text-orange-200",
+    amber: "bg-amber-700 text-amber-200",
+    yellow: "bg-yellow-700 text-yellow-200",
+    lime: "bg-lime-700 text-lime-200",
+    green: "bg-green-700 text-green-200",
+    emerald: "bg-emerald-700 text-emerald-200",
+    teal: "bg-teal-700 text-teal-100",
+    cyan: "bg-cyan-700 text-cyan-100",
+    sky: "bg-sky-700 text-sky-100",
+    blue: "bg-blue-700 text-blue-200",
+    indigo: "bg-indigo-700 text-indigo-200",
+    violet: "bg-violet-700 text-violet-200",
+    purple: "bg-purple-700 text-purple-200",
+    fuchsia: "bg-fuchsia-700 text-fuchsia-200",
+    pink: "bg-pink-700 text-pink-200",
+    rose: "bg-rose-700 text-rose-200"
+}
+
+const getTailwindColor = (inputString: string): string => {
+    const colors = Object.keys(colourMap);
+
+    let sum = 0;
+    
+    for(let i = 0; i < inputString.length; i++) {
+        sum += Math.floor(inputString.charCodeAt(i) * 3.77);
+    }
+    
+    const index = sum % colors.length;
+    if (selected) {
+        return selectedColourMap[colors[index]];
+    }
+
+    return colourMap[colors[index]];
+}
+
+const style = `uppercase font-semibold transition-colors rounded-full px-3 py-1 ${fontSize} ${getTailwindColor(title)} ${!selected ? 'text-zinc-100 bg-zinc-800 border-zinc-700' : ''}`;
+---
+{href && <a href={href} class={style}>{title}</a>}
+{!href && <span class={style}>{title}</span>}
