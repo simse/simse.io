@@ -5,6 +5,7 @@ interface NavbarProps {
   openMenuIcon?: any;
   closeMenuIcon?: any;
   linkIcon?: any;
+  speakerIcon?: any;
   activeItem?: "Home" | "Blog" | "Projects" | "Photography" | "Contact";
 }
 
@@ -45,11 +46,14 @@ const Navbar = ({
   openMenuIcon,
   closeMenuIcon,
   linkIcon,
+  speakerIcon,
   activeItem,
 }: NavbarProps) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isPageScrolled, setIsPageScrolled] = useState(false);
+  const [isMusicPlaying, setIsMusicPlaying] = useState(false);
   const logoRef = useRef<HTMLVideoElement>(null);
+  const musicRef = useRef<HTMLAudioElement>(null);
 
   const handleScroll = () => {
     if (window.scrollY > 0) {
@@ -72,6 +76,15 @@ const Navbar = ({
       logoRef.current.play();
     }
   };
+
+  useEffect(() => {
+    document.addEventListener("mood_music", () => {
+      if (musicRef.current) {
+        musicRef.current.play();
+        setIsMusicPlaying(true);
+      }
+    });
+  });
 
   return (
     <>
@@ -126,9 +139,13 @@ const Navbar = ({
             >
               {isMenuOpen ? closeMenuIcon : openMenuIcon}
               {isMenuOpen ? "Close" : "Menu"}
+              {isMusicPlaying && <div class="bg-blue-600 p-1 rounded-full ml-1">
+                {speakerIcon}
+              </div>}
             </button>
           </li>
         </ul>
+
       </nav>
 
       <nav
@@ -166,6 +183,19 @@ const Navbar = ({
               </a>
             </li>
           ))}
+
+          <li class="mt-auto">
+            <audio 
+              controls 
+              volume={0.2} 
+              ref={musicRef}
+              onPause={() => setIsMusicPlaying(false)}
+              onPlay={() => setIsMusicPlaying(true)}
+              onEnded={() => setIsMusicPlaying(false)}
+            >
+              <source src="/mood_music/seine_river.ogg" type="audio/ogg" />
+            </audio>
+          </li>
         </ul>
       </nav>
 

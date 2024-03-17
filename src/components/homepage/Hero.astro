@@ -1,9 +1,20 @@
 ---
-// import ParticleHeader from '@components/preact/ParticleHeader';
 import { Picture } from "astro:assets";
+import { Icon } from "astro-icon/components";
 
 import me from "@assets/me_18.jpg";
 ---
+<script lang="ts">
+    const event = new Event("mood_music");
+
+    window.onload = () => {
+        const moodMusicTrigger = document.getElementById("mood_music_trigger");
+
+        moodMusicTrigger.addEventListener("click", () => {
+            document.dispatchEvent(event);
+        });
+    };
+</script>
 
 <header class="py-8 px-4 max-w-6xl mx-auto">
     <div class="flex items-center gap-6">
@@ -25,5 +36,11 @@ import me from "@assets/me_18.jpg";
         </h1>
     </div>
 
-  
+    <button 
+        class="mt-6 bg-blue-600 hover:bg-blue-700 transition-colors rounded-full px-3 py-1 flex gap-1 items-center" 
+        id="mood_music_trigger"
+    >
+        Mood Music™
+        <Icon name="tabler:player-play-filled" />
+    </button>
 </header>
