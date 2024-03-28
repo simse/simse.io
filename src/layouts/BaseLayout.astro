@@ -8,6 +8,12 @@ interface Props {
 }
 
 const { title, canonical } = Astro.props;
+
+const createTitle = (title: string) => {
+	if (title.includes("—")) return title;
+
+	return title ? `${title}—Simon Sorensen` : "Simon Sorensen—Software Engineer in London";
+};
 ---
 
 <html lang="en" transition:animate="none">
@@ -17,8 +23,8 @@ const { title, canonical } = Astro.props;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="robots" content="noindex,nofollow" />
-		<title>{title}</title>
-		{canonical && <link rel="canonical" href={`https://simse.io${canonical}`} />}
+		<title>{createTitle(title)}</title>
+		{canonical && <link rel="canonical" href={`https://sorensen.engineer${canonical}`} />}
 		<style>
 			@font-face {
 				font-family: 'Figtree';

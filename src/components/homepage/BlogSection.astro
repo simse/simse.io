@@ -3,9 +3,17 @@ import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
 import { formatDateWithYear } from "@utils/date";
 
-import TestImage from "@assets/blog/elizabeth.jpg";
+let posts = await getCollection("blog");
 
-const posts = await getCollection("blog");
+// filter out drafts
+posts = posts.filter((post) => {
+  return !post.data.draft;
+});
+
+// sort by date
+posts = posts.sort((a, b) => {
+  return +b.data.published - +a.data.published;
+});
 ---
 
 <section class="mb-8 max-w-6xl mx-auto px-4">
@@ -16,7 +24,7 @@ const posts = await getCollection("blog");
     <table class="w-full border border-zinc-700">
       <thead class="[&_tr]:border-b [&_tr]:border-zinc-700 bg-zinc-800"
         ><tr class="border-b border-zinc-700 font-bold text-left"
-          ><th class="py-2 px-3">Date</th><th class="py-2 px-3">Title</th><th
+          ><th class="py-2 px-3 hidden md:table-cell">Date</th><th class="py-2 px-3">Title</th><th
             class="py-2 px-3">Link</th
           ></tr
         ></thead
@@ -24,17 +32,20 @@ const posts = await getCollection("blog");
       <tbody>
         {
           posts.slice(0, 10).map((post) => (
-            <tr class="border-b border-zinc-700">
-                <td class="p-3 align-middle font-bold w-48">
+            <tr class="border-b border-zinc-700 bg-zinc-900">
+                <td class="p-3 align-middle font-bold w-48 hidden md:table-cell">
                   {formatDateWithYear(post.data.published)}
                 </td>
-                <td class="p-3 align-middle ">{post.data.title}</td>
-                <td class="p-3 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]">
+                <td class="p-3 align-middle">
+                  <span class="md:hidden text-zinc-300 text-sm">{formatDateWithYear(post.data.published)}<br /></span>
+                  {post.data.title}
+                </td>
+                <td class="p-3 align-middle">
                   <a
-                    class="bg-blue-700 px-1 py-0.5 sm:px-3 sm:py-1 border border-blue-600 rounded-full"
+                    class="bg-blue-600 hover:bg-blue-700 transition-colors px-3 py-1 pr-2 rounded-full flex items-center w-fit"
                     href={`/${post.slug}`}
                   >
-                    Read →
+                    Read <Icon name="tabler:arrow-narrow-right" class="inline mb-0.5" size={20} />
                   </a>
                 </td>
             </tr>

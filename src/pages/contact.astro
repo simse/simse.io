@@ -1,0 +1,52 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Navbar from "@components/Navbar.astro";
+import PageHeader from "@components/common/PageHeader.astro";
+import Footer from "@components/common/Footer.astro";
+import Link from "@components/common/Link.astro";
+
+const sections = [
+{
+    title: "General Enquiries",
+    content: "For general enquiries, please email",
+    email: "simon@sorensen.engineer",
+  },
+  {
+    title: "Press",
+    content: "For press and other media enquiries, please email",
+    email: "press@sorensen.engineer",
+  },
+  {
+    title: "Recruitment",
+    content: "For recruitment/headhunting enquiries, please email",
+    email: "spam@sorensen.engineer",
+  },
+  {
+    title: "Joke of the Day",
+    content: "To request the joke of the day, please reach out on",
+    email: "jotd@sorensen.engineer",
+  }
+]
+---
+
+<BaseLayout title="Contact">
+  <Navbar activeItem="Contact" />
+
+  <main class="px-2 md:px-6 py-8 max-w-6xl mx-auto">
+    <PageHeader title="Contact" />
+
+    {sections.map(section => (
+        <section class="mb-6">
+            <h2 class="font-bold text-lg mb-1">{section.title}</h2>
+            <p>
+                {section.content}{" "}
+                <Link href={`mailto:${section.email}`} />.
+            </p>
+        </section>
+    ))}
+
+    <p class="text-lg mt-12">To be clear, I am just joking. But all those email addresses work, so send whatever you like, whereever you like!</p>
+  </main>
+
+  <Footer />
+</BaseLayout>

@@ -25,16 +25,16 @@ const items = [
     link: "/about",
     showInBar: true,
   },*/
-  {
+  /*{
     title: "Projects",
     link: "/projects",
     showInBar: true,
-  },
-  {
+  },*/
+  /*{
     title: "Photography",
     link: "/photography",
     showInBar: false,
-  },
+  },*/
   {
     title: "Contact",
     link: "/contact",
@@ -84,6 +84,10 @@ const Navbar = ({
         setIsMusicPlaying(true);
       }
     });
+
+    if (musicRef.current) {
+      setIsMusicPlaying(!musicRef.current.paused);
+    }
   });
 
   return (
@@ -111,7 +115,7 @@ const Navbar = ({
             <source src="/logo.webm" type="video/webm" />
           </video>
 
-          <span className="font-bold">Simon <span class="hidden sm:inline-block">Sorensen</span></span>
+          <span className="font-bold">Simon Sorensen</span>
         </a>
 
         <ul className={"ml-auto flex items-center"}>

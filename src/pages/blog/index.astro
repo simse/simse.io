@@ -7,7 +7,10 @@ import Navbar from "@components/Navbar.astro";
 import PageHeader from "@components/common/PageHeader.astro";
 import YearList from "@components/blog/YearList.astro";
 
-const posts = await getCollection('blog');
+let posts = await getCollection('blog');
+
+// filter out drafts
+posts = posts.filter((post) => !post.data.draft);
 
 // group posts by year
 let postsByYear: {

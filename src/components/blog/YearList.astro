@@ -23,16 +23,18 @@ const formatDate = (date: Date) => {
                     class="py-4 md:px-2 grid grid-cols-10 items-center border-b border-zinc-700 hover:bg-zinc-900"
                     href={`/${post.slug}`}
                 >
-                    <span class="col-span-6">
+                    <span class="col-span-8 md:col-span-6">
+                        <span class="text-zinc-400 text-sm md:hidden">{formatDate(post.data.published)} <br/></span>
+
                         {post.data.title}
                     </span>
-                    <span class="col-span-3 text-zinc-400">
+                    <span class="hidden md:block md:col-span-2 text-zinc-400">
                         {formatDate(post.data.published)}
                     </span>
                     <button
-                        class="bg-blue-700 px-1 py-0.5 sm:px-3 sm:py-1 border border-blue-600 rounded-full"
+                        class="col-span-2 justify-self-end bg-blue-700 px-3 py-1 border border-blue-600 rounded-full flex items-center w-fit"
                     >
-                        Read →
+                        Read <Icon name="tabler:arrow-narrow-right" class="" size={20} />
                     </button>
                 </a>    
             </li>

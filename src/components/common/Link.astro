@@ -1,0 +1,19 @@
+---
+interface Props {
+    text?: string;
+    href?: string;
+    // children?: any;
+}
+
+const { text, href } = Astro.props;
+
+const hrefToText = (href?: string) => {
+    if (!href) return '';
+
+    return href.replace(/https?:\/\//, '').replace('mailto:', '');
+}
+---
+<a 
+    href={href}
+    class="text-blue-400 border-b border-blue-400 hover:text-blue-500 hover:border-blue-500 transition-colors"
+>{text || hrefToText(href)}</a>
