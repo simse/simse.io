@@ -8,7 +8,7 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "wrangler pages deploy dist"
+    "deploy": "wrangler pages deploy dist --project-name simse-io"
   },
   "dependencies": {
     "@astrojs/check": "^0.5.7",
