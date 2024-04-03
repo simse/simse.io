@@ -25,7 +25,7 @@ const createTitle = (title: string) => {
 		<meta name="robots" content="noindex,nofollow" />
 		<title>{createTitle(title)}</title>
 		{canonical && <link rel="canonical" href={`https://sorensen.engineer${canonical}`} />}
-		<style>
+		<style is:inline>
 			@font-face {
 				font-family: 'Figtree';
 				src: url('/fonts/Figtree.woff2') format('woff2-variations');
@@ -43,10 +43,22 @@ const createTitle = (title: string) => {
 				font-style: italic;
 				font-display: swap;
 			}
+			@font-face {
+				font-family: 'Chicago';
+				src: url('/fonts/Chicago.woff2') format('woff2');
+				font-weight: 400;
+				font-display: swap;
+			}
+			@font-face {
+				font-family: 'ArialPixel';
+				src: url('/fonts/Arial.woff2') format('woff2');
+				font-weight: 400;
+				font-display: swap;
+			}
 		</style>
 		<ViewTransitions />
 	</head>
-	<body class="bg-zinc-950 text-zinc-100">
+	<body class="bg-[#FAF2E8] antialiased">
 		<slot />
 	</body>
 </html>

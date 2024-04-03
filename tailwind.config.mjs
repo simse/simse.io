@@ -3,23 +3,14 @@ export default {
 	content: ['./src/**/*.{astro,html,js,jsx,md,mdx,svelte,ts,tsx,vue}'],
 	theme: {
 		extend: {
+			boxShadow: {
+				'window': '4px 4px 0px 0 rgba(0,0,0,0.25)'
+			},
 			fontFamily: {
-				sans: ['Figtree', 'sans-serif'],
-			},
-			keyframes: {
-				'fade-in': {
-					'0%': {
-						opacity: '0',
-					},
-					'100%': {
-						opacity: 'var(--opacity)',
-					},
-				},
-			},
-			animation: {
-				'fadeIn': 'fade-in 0.5s ease-in-out',
-			},
-		},
+				sans: ['Chicago', 'sans-serif'],
+				'sans-alt': ['ArialPixel', 'sans-serif'],
+			}
+		}
 	},
 	plugins: [
 		require('@tailwindcss/typography'),
