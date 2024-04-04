@@ -1,9 +1,16 @@
+import type { WindowProps } from "../types";
 import WindowFrame from "../WindowFrame";
 import SimonPicture from "@assets/me_but_dithered.png";
 
-const BiographyWindow = () => {
+interface BiographyWindowProps extends WindowProps {}
+
+const BiographyWindow = (props: BiographyWindowProps) => {
   return (
-    <WindowFrame title="Biography" initialSize={{ width: 400, height: 560 }}>
+    <WindowFrame 
+      title="Biography" 
+      initialSize={{ width: 350, height: 500 }}
+      {...props}
+    >
       <div class="float-left mr-3">
         <img
           src={SimonPicture.src}
@@ -17,13 +24,13 @@ const BiographyWindow = () => {
 
       
       <p class="mb-4">
-        <h1 class="text-3xl">Simon Sorensen</h1>
-        <span class="font-sans-alt text-sm leading-3">
+        <h1 class="text-2xl">Simon Sorensen</h1>
+        <span class="font-sans-alt text-xs leading-3">
           22-year old Software Engineer™ in London, UK.
         </span>
       </p>
 
-      <div class="font-sans-alt prose text-sm">
+      <div class="font-sans-alt prose text-xs">
       <p>
         I've always been fascinated with technology, and as a child I broke many
         things through tinkering.

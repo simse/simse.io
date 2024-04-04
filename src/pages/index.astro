@@ -1,8 +1,12 @@
 ---
+import { getCollection } from "astro:content";
+
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Computer from "@components/computer";
+
+const blogPosts = await getCollection("blog");
 ---
 
 <BaseLayout title="simonOS">
-  <Computer client:load />
+  <Computer blogPosts={blogPosts} client:load />
 </BaseLayout>

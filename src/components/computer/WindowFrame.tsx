@@ -1,14 +1,13 @@
 import type { ComponentChildren } from "preact";
 import { useEffect, useState } from "preact/hooks";
 
+import type { WindowProps } from "./types";
 import WindowHeaderBackground from "@assets/window_header_background.svg";
 
-interface WindowFrameProps {
-  title: string;
+interface WindowFrameProps extends WindowProps {
   children: ComponentChildren;
   initialPosition?: { x: number; y: number };
   initialSize?: { width: number; height: number };
-  onClose?: () => void;
 }
 
 const WindowFrame = ({
@@ -16,7 +15,9 @@ const WindowFrame = ({
   title,
   initialPosition = { x: 50, y: 50 },
   initialSize = { height: 600, width: 250 },
-  onClose
+  onClose,
+  onTouch,
+  active,
 }: WindowFrameProps) => {
   const [isDragging, setIsDragging] = useState(false);
   const [windowPosition, setWindowPosition] = useState(initialPosition);
@@ -71,23 +72,24 @@ const WindowFrame = ({
         left: windowPosition.x,
         width: windowSize.width,
         height: windowSize.height,
+        zIndex: active ? 1 : 0,
       }}
+      onMouseDown={onTouch}
     >
       <header
-        class="text-center flex justify-between select-none mb-2 items-center"
+        class="text-center flex justify-between select-none items-center sticky"
         style={{
           backgroundImage: `url(${WindowHeaderBackground.src})`,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
-          backgroundRepeat: "no-repeat",
+          backgroundSize: "auto 100%",
+          backgroundRepeat: "repeat-x",
           cursor: isDragging ? "grabbing" : "grab",
         }}
         onMouseDown={handleMouseDown}
       >
-        <div class="px-0.5 py-2 bg-[#FAF2E8]" />
+        <div class="px-1 py-2 bg-[#FAF2E8]" />
 
         <button 
-          class="ml-4 bg-[#FAF2E8] border border-black items-center flex justify-center text-transparent hover:text-black"
+          class="ml-4 bg-[#FAF2E8] border border-black items-center flex justify-center text-transparent hover:text-black active:bg-black active:text-white"
           style={{
             width: 13,
             height: 13,
@@ -100,14 +102,16 @@ const WindowFrame = ({
           x
         </button>
 
-        <span class="px-2 bg-[#FAF2E8] text-xl mx-auto">{title}</span>
+        <span class="px-2 bg-[#FAF2E8] text-lg mx-auto">{title}</span>
 
         <div style={{ width: 13 + 16 }} />
 
-        <div class="px-0.5 py-2 bg-[#FAF2E8]" />
+        <div class="px-1 py-2 bg-[#FAF2E8]" />
       </header>
 
-      <div class="px-2">{children}</div>
+      <div class="px-2 pt-2 overflow-y-auto" style={{
+        maxHeight: 'calc(100% - 36px)'
+      }}>{children}</div>
     </div>
   );
 };

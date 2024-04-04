@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import BlogPostPage from '@templates/BlogPostPage.astro';
+import Computer from '@components/computer';
+import BaseLayout from '@layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
@@ -10,9 +11,17 @@ export async function getStaticPaths() {
   }));
 }
 
+const posts = await getCollection('blog');
+
 export const prerender = true;
 
 const { entry } = Astro.props;
-
+const { Content } = await entry.render();
 ---
-<BlogPostPage post={entry} />
+<BaseLayout title="simonOS">
+  <Computer blogPosts={posts} client:load transition:persist="computer">
+    <div slot="blogPost">
+      <Content />
+    </div>
+  </Computer>
+</BaseLayout>
