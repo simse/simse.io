@@ -15,7 +15,7 @@ const BiographyWindow = (props: BiographyWindowProps) => {
         <img
           src={SimonPicture.src}
           alt="Simon"
-          class="w-28 h-28"
+          class="w-28 h-28 mb-2"
           style={{
             imageRendering: "pixelated",
           }}
@@ -30,7 +30,7 @@ const BiographyWindow = (props: BiographyWindowProps) => {
         </span>
       </p>
 
-      <div class="font-sans-alt prose text-xs">
+      <div class="font-sans-alt prose text-xs leading-5">
       <p>
         I've always been fascinated with technology, and as a child I broke many
         things through tinkering.

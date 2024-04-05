@@ -5,7 +5,12 @@ const TopBar = () => {
 
   useEffect(() => {
     setInterval(() => {
-      setTime(new Date());
+      const date = new Date();
+      
+      // override year to 1988
+      date.setFullYear(1988);
+
+      setTime(date);
     }, 1000);
   }, []);
 
