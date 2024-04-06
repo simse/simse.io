@@ -9,6 +9,7 @@ export default {
 			fontFamily: {
 				sans: ['Chicago', 'sans-serif'],
 				'sans-alt': ['ArialPixel', 'sans-serif'],
+				mono: ['ArialPixel', 'monospace']
 			}
 		}
 	},

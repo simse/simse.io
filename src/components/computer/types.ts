@@ -1,6 +1,6 @@
 interface WindowProps {
     title?: string;
-    active: boolean;
+    zIndex: number;
     onClose: () => void;
     onTouch: () => void;
 };

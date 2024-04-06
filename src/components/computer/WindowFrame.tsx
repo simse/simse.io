@@ -1,26 +1,35 @@
 import type { ComponentChildren } from "preact";
-import { useEffect, useState } from "preact/hooks";
+import { useEffect, useRef, useState } from "preact/hooks";
 
 import type { WindowProps } from "./types";
 import WindowHeaderBackground from "@assets/window_header_background.svg";
+import type { CSSProperties } from "preact/compat";
 
 interface WindowFrameProps extends WindowProps {
   children: ComponentChildren;
   initialPosition?: { x: number; y: number };
+  initialPositionLabel?: "center";
   initialSize?: { width: number; height: number };
 }
 
 const WindowFrame = ({
   children,
   title,
-  initialPosition = { x: 50, y: 50 },
+  initialPosition = { x: 0, y: 0 },
+  initialPositionLabel,
   initialSize = { height: 600, width: 250 },
   onClose,
   onTouch,
-  active,
+  zIndex,
 }: WindowFrameProps) => {
+  const [windowPositionSource, setWindowPositionSource] = useState<
+    "layout" | "user"
+  >(initialPositionLabel ? "layout" : "user");
   const [isDragging, setIsDragging] = useState(false);
-  const [windowPosition, setWindowPosition] = useState(initialPosition);
+  const [windowPosition, setWindowPosition] = useState<{
+    x: number;
+    y: number;
+  }>(initialPosition);
   const [onGrabCursorPosition, setOnGrabCursorPosition] = useState({
     x: 0,
     y: 0,
@@ -30,6 +39,21 @@ const WindowFrame = ({
     y: 0,
   });
   const [windowSize, setWindowSize] = useState(initialSize);
+  const windowRef = useRef<HTMLDivElement | null>(null);
+
+  // on initial render, calculate window position if the source is layout
+  useEffect(() => {
+    if (windowPositionSource === "layout") {
+      const layoutPosition = windowRef.current?.getBoundingClientRect();
+      if (layoutPosition) {
+        setWindowPosition({
+          x: layoutPosition.left,
+          y: layoutPosition.top - 25,
+        });
+        setWindowPositionSource("user");
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (!isDragging) return;
@@ -39,7 +63,7 @@ const WindowFrame = ({
 
   const handleMouseDown = (event: MouseEvent) => {
     setOnGrabCursorPosition({ x: event.clientX, y: event.clientY });
-    setOnGrabWindowPosition({ x: windowPosition.x, y: windowPosition.y });
+    setOnGrabWindowPosition({ x: windowPosition!.x, y: windowPosition!.y });
     setIsDragging(true);
   };
 
@@ -64,17 +88,33 @@ const WindowFrame = ({
     window.removeEventListener("mouseup", handleMouseUp);
   };
 
+  const calculateWindowPosition = (): CSSProperties => {
+    if (windowPositionSource === "layout") {
+      if (initialPositionLabel === "center") {
+        return {
+          left: `calc(50% - ${windowSize.width / 2}px)`,
+          top: windowPosition.y,
+        };
+      }
+    }
+
+    return {
+      top: windowPosition.y,
+      left: windowPosition.x,
+    };
+  };
+
   return (
     <div
       class="border border-black absolute shadow-window bg-[#FAF2E8]"
       style={{
-        top: windowPosition.y,
-        left: windowPosition.x,
+        ...calculateWindowPosition(),
         width: windowSize.width,
         height: windowSize.height,
-        zIndex: active ? 30 : 20,
+        zIndex: zIndex,
       }}
       onMouseDown={onTouch}
+      ref={windowRef}
     >
       <header
         class="text-center flex justify-between select-none items-center sticky"
@@ -88,7 +128,7 @@ const WindowFrame = ({
       >
         <div class="px-1 py-2 bg-[#FAF2E8]" />
 
-        <button 
+        <button
           class="ml-4 bg-[#FAF2E8] border border-black items-center flex justify-center text-transparent hover:text-black active:bg-black active:text-white"
           style={{
             width: 13,
@@ -109,9 +149,14 @@ const WindowFrame = ({
         <div class="px-1 py-2 bg-[#FAF2E8]" />
       </header>
 
-      <div class="px-2 pt-2 overflow-y-auto" style={{
-        maxHeight: 'calc(100% - 36px)'
-      }}>{children}</div>
+      <div
+        class="px-2 pt-2 overflow-y-auto"
+        style={{
+          maxHeight: "calc(100% - 36px)",
+        }}
+      >
+        {children}
+      </div>
     </div>
   );
 };

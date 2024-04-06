@@ -18,6 +18,27 @@ It's a short and relatively straightforward story. But it's one I cherish. Not o
 
 It's rare to reach real humans that aren't just responding using a script. At least that's what it feels like to me. Maybe Github is the same nowadays? I don't know, I haven't needed help since then.
 
-```php
-$test = "bruh";
+```js
+export default defineConfig({
+  output: "hybrid",
+  adapter: cloudflare({
+    imageService: 'cloudflare'
+  }),
+  integrations: [
+    tailwind(), 
+    mdx(), 
+    markdoc(), 
+    icon(), 
+    preact(),
+  ],
+  image: {
+    service: passthroughImageService()
+  },
+  prefetch: true,
+  markdown: {
+    shikiConfig: {
+      theme: 'github-light'
+    }
+  }
+});
 ```

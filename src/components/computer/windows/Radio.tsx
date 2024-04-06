@@ -297,7 +297,7 @@ const RadioWindow = (props: RadioWindowProps) => {
     <WindowFrame
       title="Radio"
       initialSize={{ width: 300, height: 350 }}
-      initialPosition={{ x: 400, y: 200 }}
+      initialPosition={{ x: 350, y: 450 }}
       {...props}
     >
       {true ? (
@@ -337,22 +337,6 @@ const RadioWindow = (props: RadioWindowProps) => {
             </button>
           </div>
 
-          {radioInfo?.nextShow && !radioInfo.current && (
-            <>
-              <p>Upcoming Programming</p>
-
-              <div class="flex flex-col mb-2">
-                <span class="opacity-70">
-                  {formatShowDate(radioInfo.nextShow[0].start_timestamp)}
-                </span>
-
-                <span class="text-2xl leading-5">
-                  {radioInfo.nextShow[0].name}
-                </span>
-              </div>
-            </>
-          )}
-
           {radioInfo?.current && (
             <>
               <p>Schedule</p>
@@ -369,19 +353,22 @@ const RadioWindow = (props: RadioWindowProps) => {
                   }}
                 />
               </div>
+            </>
+          )}
 
-              {radioInfo.next && (
-                <div class="flex flex-col mb-2 opacity-50">
-                  <span class="">{formatDate(radioInfo.next.starts)}</span>
+          {radioInfo?.nextShow && (
+            <>
+              <p>Upcoming Programming</p>
 
-                  <span
-                    class="text-2xl leading-5"
-                    dangerouslySetInnerHTML={{
-                      __html: formatTitle(radioInfo.next),
-                    }}
-                  />
-                </div>
-              )}
+              <div class="flex flex-col mb-2">
+                <span class="opacity-70">
+                  {formatShowDate(radioInfo.nextShow[0].start_timestamp)}
+                </span>
+
+                <span class="text-2xl leading-5">
+                  {radioInfo.nextShow[0].name}
+                </span>
+              </div>
             </>
           )}
         </>

@@ -9,6 +9,7 @@ const BiographyWindow = (props: BiographyWindowProps) => {
     <WindowFrame 
       title="Biography" 
       initialSize={{ width: 350, height: 500 }}
+      initialPosition={{ x: 50, y: 50 }}
       {...props}
     >
       <div class="float-left mr-3">

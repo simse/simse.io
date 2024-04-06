@@ -1,10 +1,7 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
 import cloudflare from "@astrojs/cloudflare";
 import tailwind from "@astrojs/tailwind";
-import mdx from "@astrojs/mdx";
-import markdoc from "@astrojs/markdoc";
 import icon from "astro-icon";
-
 import preact from "@astrojs/preact";
 
 // https://astro.build/config
@@ -15,13 +12,16 @@ export default defineConfig({
   }),
   integrations: [
     tailwind(), 
-    mdx(), 
-    markdoc(), 
     icon(), 
     preact(),
   ],
   image: {
     service: passthroughImageService()
   },
-  prefetch: true
+  prefetch: true,
+  markdown: {
+    shikiConfig: {
+      theme: 'github-light'
+    }
+  }
 });

@@ -14,7 +14,6 @@ interface Window {
   title: string;
   component: FunctionalComponent<WindowProps>;
   id: number;
-  active: boolean;
   extra?: any;
 }
 
@@ -27,7 +26,6 @@ const BiographyWindowDefinition: Window = {
   title: "Biography",
   component: BiographyWindow,
   id: 0,
-  active: true,
 }
 
 const Computer = ({
@@ -40,7 +38,6 @@ const Computer = ({
       title: "Blog",
       component: BlogList,
       id: 1,
-      active: false,
       extra: {
         posts: blogPosts,
       },
@@ -49,18 +46,17 @@ const Computer = ({
       title: "Radio",
       component: RadioWindow,
       id: 2,
-      active: false,
     },
     /*{
       title: "Blog Post",
       component: BlogPost,
       id: 3,
-      active: false,
       extra: {
         postSlug: 'github-username'
       },
     }*/
   ]);
+  const [windowStack, setWindowStack] = useState<number[]>([0, 1, 2, 3]);
 
   const closeWindow = (id: number) => {
     setWindows((prevWindows) =>
@@ -69,21 +65,15 @@ const Computer = ({
   }
 
   const touchWindow = (id: number) => {
-    setWindows((prevWindows) =>
-      prevWindows.map((prevWindow) => {
-        if (prevWindow.id === id) {
-          return {
-            ...prevWindow,
-            active: true,
-          };
-        }
+    setWindowStack((prevStack) => {
+      const newStack = prevStack.filter((stackId) => stackId !== id);
+      newStack.push(id);
+      return newStack;
+    });
+  }
 
-        return {
-          ...prevWindow,
-          active: false,
-        };
-      })
-    );
+  const calculateZIndex = (id: number) => {
+    return ((windowStack.indexOf(id) + 1) * 10) + 100;
   }
 
   return (
@@ -100,7 +90,7 @@ const Computer = ({
             <WindowComponent
               key={window.id}
               title={window.title}
-              active={window.active}
+              zIndex={calculateZIndex(window.id)}
               onClose={() => closeWindow(window.id)}
               onTouch={() => touchWindow(window.id)}
               {...window.extra}

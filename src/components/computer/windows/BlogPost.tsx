@@ -9,13 +9,13 @@ interface BlogPostProps extends WindowProps {
   postSlug?: string;
 }
 
-type BlogPostFrontmatter = CollectionEntry<'blog'>['data'];
+type BlogPostFrontmatter = CollectionEntry<"blog">["data"];
 
 const BlogPost = (props: BlogPostProps) => {
   const postSlug = props.postSlug || "";
   const [postHTML, setPostHTML] = useState("");
   const [postFrontMatter, setPostFrontMatter] = useState<BlogPostFrontmatter>();
-  
+
   useEffect(() => {
     fetch(`/api/blog/${postSlug}`)
       .then((response) => response.json())
@@ -32,10 +32,11 @@ const BlogPost = (props: BlogPostProps) => {
   }, [postSlug]);
 
   return (
-    <WindowFrame 
+    <WindowFrame
       title="Blog"
       initialSize={{ width: 500, height: 650 }}
-      initialPosition={{ x: 550, y: 20 }}
+      initialPosition={{ x: 50, y: 50 }}
+      initialPositionLabel="center"
       {...props}
     >
       <header class="mb-3">
@@ -45,9 +46,12 @@ const BlogPost = (props: BlogPostProps) => {
         )}
       </header>
 
-      <div class="prose text-xs font-sans-alt leading-5 prose-pre:rounded-none" dangerouslySetInnerHTML={{
-        __html: postHTML
-      }} />
+      <div
+        class="prose text-xs font-sans-alt leading-5 prose-pre:rounded-none prose-pre:border prose-pre:border-black"
+        dangerouslySetInnerHTML={{
+          __html: postHTML,
+        }}
+      />
     </WindowFrame>
   );
 };
