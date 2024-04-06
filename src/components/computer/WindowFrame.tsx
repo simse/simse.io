@@ -72,7 +72,7 @@ const WindowFrame = ({
         left: windowPosition.x,
         width: windowSize.width,
         height: windowSize.height,
-        zIndex: active ? 1 : 0,
+        zIndex: active ? 30 : 20,
       }}
       onMouseDown={onTouch}
     >

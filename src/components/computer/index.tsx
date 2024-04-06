@@ -8,6 +8,7 @@ import type { WindowProps } from "./types";
 import type { CollectionEntry } from "astro:content";
 import RadioWindow from "./windows/Radio";
 import BlogPost from "./windows/BlogPost";
+import Desktop from "./Desktop";
 
 interface Window {
   title: string;
@@ -22,17 +23,19 @@ interface ComputerProps {
   blogPost?: ComponentChild;
 }
 
+const BiographyWindowDefinition: Window = {
+  title: "Biography",
+  component: BiographyWindow,
+  id: 0,
+  active: true,
+}
+
 const Computer = ({
   blogPosts,
   blogPost
 }: ComputerProps) => {
   const [windows, setWindows] = useState<Window[]>([
-    {
-      title: "Biography",
-      component: BiographyWindow,
-      id: 0,
-      active: true,
-    },
+    BiographyWindowDefinition,
     {
       title: "Blog",
       component: BlogList,
@@ -89,7 +92,7 @@ const Computer = ({
     >
       <TopBar />
 
-      <div class="relative w-full">
+      <div class="relative w-full h-full">
         {windows.map((window) => {
           const WindowComponent = window.component;
 
@@ -104,6 +107,22 @@ const Computer = ({
             />
           );
         })}
+
+        <Desktop
+          onIconDoubleClick={(name) => {
+            if (name === "Biography") {
+              // if biography is no longer in the list, add it back
+              if (!windows.find((window) => window.id === 0)) {
+                setWindows((prevWindows) => [
+                  ...prevWindows,
+                  BiographyWindowDefinition,
+                ]);
+              } else {
+                touchWindow(0);
+              }
+            }
+          }}
+        />
       </div>
     </div>
   );

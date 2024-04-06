@@ -16,7 +16,8 @@ interface PlayItem {
     album_title: string;
     year: string;
     artwork_url: string;
-  }
+    track_type_id: number;
+  };
 }
 
 interface Show {
@@ -30,7 +31,7 @@ interface Show {
 }
 
 interface LibreTimeResponse {
-  env: 'production';
+  env: "production";
   schedulerTime: string;
   timezone: string;
   timezoneOffset: number;
@@ -43,11 +44,75 @@ interface LibreTimeResponse {
 interface RadioWindowProps extends WindowProps {}
 
 const RadioWindow = (props: RadioWindowProps) => {
-  const audioRef = useRef<HTMLAudioElement>(null);
+  const audioElementRef = useRef<HTMLAudioElement | null>(null);
+  const audioContextRef = useRef<AudioContext | null>(null);
   const analyserRef = useRef<AnalyserNode | null>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [isReady, setIsReady] = useState(false);
   const [radioInfo, setRadioInfo] = useState<LibreTimeResponse | null>(null);
+
+  const streamUrl = "https://radio.sorensen.engineer:8443/main-low";
+
+  useEffect(() => {
+    if (!audioContextRef.current) {
+      audioContextRef.current = new AudioContext();
+    }
+
+    if (!audioElementRef.current) {
+      const audioElement = new Audio();
+      audioElement.crossOrigin = "anonymous";
+      audioElement.src = streamUrl;
+      audioElementRef.current = audioElement;
+    }
+
+    const audioContext = audioContextRef.current;
+    const audioElement = audioElementRef.current;
+
+    const source = audioContext.createMediaElementSource(audioElement);
+    source.connect(audioContext.destination);
+
+    audioElement.addEventListener("pause", () => {
+      audioElement.play();
+      audioElement.volume = 0;
+      setIsPlaying(false);
+    });
+
+    return () => {
+      audioElement.pause();
+    };
+  }, []);
+
+  const play = () => {
+    const playAudio = async () => {
+      const audioElement = audioElementRef.current;
+      if (!audioElement) return;
+
+      const audioContext = audioContextRef.current;
+      if (!audioContext) return;
+
+      if (audioContext.state === "suspended") {
+        await audioContext.resume();
+      }
+      audioElement.volume = 1;
+      await audioElement
+        .play()
+        .catch((error) => console.error("Error playing audio:", error));
+
+      createAudioContext();
+    };
+
+    playAudio();
+    setIsPlaying(true);
+  };
+
+  const pause = () => {
+    const audioElement = audioElementRef.current;
+    if (!audioElement) return;
+
+    audioElement.volume = 0;
+    setIsPlaying(false);
+  };
 
   const ratio = 2;
   const WIDHT = 282;
@@ -69,7 +134,7 @@ const RadioWindow = (props: RadioWindowProps) => {
   }, []);
 
   async function fetchRadioInfo() {
-    const res = await fetch("https://radio.sorensen.engineer/api/live-info");
+    const res = await fetch("/api/radio-info");
     const data = await res.json();
 
     setRadioInfo(data);
@@ -85,13 +150,13 @@ const RadioWindow = (props: RadioWindowProps) => {
     }, 6000);
 
     return () => clearInterval(interval);
-  })
+  });
 
   const createAudioContext = () => {
     // check if SSR
     if (typeof window === "undefined") return;
 
-    const audio = audioRef.current;
+    const audio = audioElementRef.current;
     if (!audio) return;
 
     // if analyser already exists, return
@@ -100,7 +165,9 @@ const RadioWindow = (props: RadioWindowProps) => {
     // @ts-expect-error
     const stream = audio.captureStream();
 
-    const audioCtx = new AudioContext();
+    const audioCtx = audioContextRef.current;
+    if (!audioCtx) return;
+
     const analyser = audioCtx.createAnalyser();
     const source = audioCtx.createMediaStreamSource(stream);
     source.connect(analyser);
@@ -135,7 +202,8 @@ const RadioWindow = (props: RadioWindowProps) => {
     canvasCtx.fillRect(0, 0, WIDHT, HEIGHT);
 
     const barWidth = 2;
-    const barSpacing = (WIDHT - (bufferLength - 8) * barWidth) / (bufferLength - 1) + 1.5;
+    const barSpacing =
+      (WIDHT - (bufferLength - 8) * barWidth) / (bufferLength - 1) + 1.5;
     let barHeight;
     let x = 0;
 
@@ -157,7 +225,7 @@ const RadioWindow = (props: RadioWindowProps) => {
     if (!show) return "Off air";
 
     return show.name;
-  }
+  };
 
   const formatShowRange = (show: Show | undefined): string => {
     if (!show) return "";
@@ -172,7 +240,7 @@ const RadioWindow = (props: RadioWindowProps) => {
       hour: "numeric",
       minute: "numeric",
     })}`;
-  }
+  };
 
   const formatShowDate = (date?: string): string => {
     if (!date) return "No show scheduled";
@@ -188,7 +256,7 @@ const RadioWindow = (props: RadioWindowProps) => {
     }
 
     d.setFullYear(1988);
-    
+
     return d.toLocaleString("en-UK", {
       month: "short",
       day: "numeric",
@@ -196,7 +264,7 @@ const RadioWindow = (props: RadioWindowProps) => {
       hour: "numeric",
       minute: "numeric",
     });
-  }
+  };
 
   const formatDate = (date?: string): string => {
     if (!date) return "No show scheduled";
@@ -209,7 +277,7 @@ const RadioWindow = (props: RadioWindowProps) => {
       hour: "numeric",
       minute: "numeric",
     });
-  }
+  };
 
   const formatTitle = (item: PlayItem | undefined): string => {
     if (!item) return "No show scheduled";
@@ -218,14 +286,18 @@ const RadioWindow = (props: RadioWindowProps) => {
       return item.metadata.track_title + " [ADVERT]";
     }
 
+    if (item.metadata.track_type_id === 4) {
+      return "Talking";
+    }
+
     return item.name;
-  }
+  };
 
   return (
     <WindowFrame
       title="Radio"
       initialSize={{ width: 300, height: 350 }}
-      initialPosition={{ x: 400, y: 700 }}
+      initialPosition={{ x: 400, y: 200 }}
       {...props}
     >
       {true ? (
@@ -244,72 +316,74 @@ const RadioWindow = (props: RadioWindowProps) => {
           <div class="mt-2 pb-3 mb-1 border-b border-black flex items-center justify-between">
             <div>
               <span>Currently playing</span>
-              <p class="text-xl leading-4">{formatShowName(radioInfo?.currentShow[0])}</p>
+              <p class="text-xl leading-4" dangerouslySetInnerHTML={{
+                __html: formatShowName(radioInfo?.currentShow[0])
+              }} />
               <p>{formatShowRange(radioInfo?.currentShow[0])}</p>
             </div>
 
             <button
-              class="border border-black rounded-sm h-11 w-11"
+              class="border border-black rounded-sm h-11 w-11 disabled:cursor-not-allowed disabled:opacity-50"
               onClick={() => {
-                const audio = audioRef.current;
-                if (!audio) return;
-
-                createAudioContext();
-
-                // if not playing yet, create audio context
-                if (audio.paused) {
-                  
-                  audio.play();
-                  return;
+                if (isPlaying) {
+                  pause();
                 } else {
-                  audio.pause();
+                  play();
                 }
               }}
+              // disabled={!radioInfo || !isReady}
             >
               {isPlaying ? "⏸" : "▶"}
             </button>
           </div>
 
-          {radioInfo?.nextShow && !radioInfo.current && <>
-            <p>Upcoming Programming</p>
+          {radioInfo?.nextShow && !radioInfo.current && (
+            <>
+              <p>Upcoming Programming</p>
 
-            <div class="flex flex-col mb-2">
-              <span class="opacity-70">{formatShowDate(radioInfo.nextShow[0].start_timestamp)}</span>
+              <div class="flex flex-col mb-2">
+                <span class="opacity-70">
+                  {formatShowDate(radioInfo.nextShow[0].start_timestamp)}
+                </span>
 
-              <span class="text-2xl leading-5">{radioInfo.nextShow[0].name}</span>
-            </div>
-          </>}
+                <span class="text-2xl leading-5">
+                  {radioInfo.nextShow[0].name}
+                </span>
+              </div>
+            </>
+          )}
 
-          {radioInfo?.current && 
+          {radioInfo?.current && (
             <>
               <p>Schedule</p>
 
               <div class="flex flex-col mb-2">
-                <span class="opacity-70">{formatDate(radioInfo.current.starts)}</span>
+                <span class="opacity-70">
+                  {formatDate(radioInfo.current.starts)}
+                </span>
 
-                <span class="text-2xl leading-5" dangerouslySetInnerHTML={{
-                  __html: formatTitle(radioInfo.current)
-                }} />
+                <span
+                  class="text-2xl leading-5"
+                  dangerouslySetInnerHTML={{
+                    __html: formatTitle(radioInfo.current),
+                  }}
+                />
               </div>
 
-              {radioInfo.next && <div class="flex flex-col mb-2 opacity-50">
-                <span class="">{formatDate(radioInfo.next.starts)}</span>
+              {radioInfo.next && (
+                <div class="flex flex-col mb-2 opacity-50">
+                  <span class="">{formatDate(radioInfo.next.starts)}</span>
 
-                <span class="text-2xl leading-5" dangerouslySetInnerHTML={{
-                  __html: formatTitle(radioInfo.next)
-                }} />
-              </div>}
-          </>}
-
-
-          <audio
-            ref={audioRef}
-            crossOrigin={"anonymous"}
-            onPlay={() => setIsPlaying(true)}
-            onPause={() => setIsPlaying(false)}
-          >
-            <source src="https://radio.sorensen.engineer:8443/main-low" type="audio/ogg" />
-          </audio>
+                  <span
+                    class="text-2xl leading-5"
+                    dangerouslySetInnerHTML={{
+                      __html: formatTitle(radioInfo.next),
+                    }}
+                  />
+                </div>
+              )}
+            </>
+          )}
         </>
       ) : (
         <p>Nothing playing right now</p>
