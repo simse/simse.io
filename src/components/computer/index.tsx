@@ -1,85 +1,81 @@
 import { useState } from "preact/hooks";
+import type { CollectionEntry } from "astro:content";
 
 import TopBar from "./TopBar";
 import BiographyWindow from "./windows/Biography";
 import BlogList from "./windows/BlogList";
-import type { ComponentChild, FunctionalComponent } from "preact";
-import type { WindowProps } from "./types";
-import type { CollectionEntry } from "astro:content";
 import RadioWindow from "./windows/Radio";
-import BlogPost from "./windows/BlogPost";
 import Desktop from "./Desktop";
+import type { WindowType } from "./types";
 
-interface Window {
-  title: string;
-  component: FunctionalComponent<WindowProps>;
-  id: number;
-  extra?: any;
-}
+import BiographyIcon from "@assets/desktop_icons/msagent-3.png";
+import BlogIcon from "@assets/desktop_icons/address_book_pad.png";
+import RadioIcon from "@assets/desktop_icons/cd_audio_cd_a-4.png";
 
 interface ComputerProps {
   blogPosts: CollectionEntry<"blog">[];
-  blogPost?: ComponentChild;
 }
 
-const BiographyWindowDefinition: Window = {
-  title: "Biography",
-  component: BiographyWindow,
-  id: 0,
-}
+const Computer = ({ blogPosts }: ComputerProps) => {
+  const BiographyWindowDefinition: WindowType = {
+    title: "Biography",
+    component: BiographyWindow,
+    id: 'biography',
+    type: "biography",
+  };
+  
+  const BlogWindowDefinition: WindowType = {
+    title: "Blog",
+    component: BlogList,
+    id: 'blog',
+    type: "blogList",
+    posts: blogPosts,
+  };
+  
+  const RadioWindowDefinition: WindowType = {
+    title: "Radio",
+    component: RadioWindow,
+    id: 'radio',
+    type: "radio",
+  };
 
-const Computer = ({
-  blogPosts,
-  blogPost
-}: ComputerProps) => {
-  const [windows, setWindows] = useState<Window[]>([
+  const [windows, setWindows] = useState<WindowType[]>([
     BiographyWindowDefinition,
-    {
-      title: "Blog",
-      component: BlogList,
-      id: 1,
-      extra: {
-        posts: blogPosts,
-      },
-    },
-    {
-      title: "Radio",
-      component: RadioWindow,
-      id: 2,
-    },
-    /*{
-      title: "Blog Post",
-      component: BlogPost,
-      id: 3,
-      extra: {
-        postSlug: 'github-username'
-      },
-    }*/
+    BlogWindowDefinition,
+    RadioWindowDefinition,
   ]);
-  const [windowStack, setWindowStack] = useState<number[]>([0, 1, 2, 3]);
+  const [windowStack, setWindowStack] = useState<string[]>(['blog', 'radio', 'biography']);
 
-  const closeWindow = (id: number) => {
+  const closeWindow = (id: string) => {
     setWindows((prevWindows) =>
       prevWindows.filter((prevWindow) => prevWindow.id !== id)
     );
-  }
+  };
 
-  const touchWindow = (id: number) => {
+  const touchWindow = (id: string) => {
     setWindowStack((prevStack) => {
       const newStack = prevStack.filter((stackId) => stackId !== id);
       newStack.push(id);
       return newStack;
     });
-  }
+  };
 
-  const calculateZIndex = (id: number) => {
-    return ((windowStack.indexOf(id) + 1) * 10) + 100;
+  const calculateZIndex = (id: string) => {
+    return (windowStack.indexOf(id) + 1) * 10 + 100;
+  };
+
+  const openWindow = (window: WindowType) => {
+    if (windows.find((prevWindow) => prevWindow.id === window.id)) {
+      touchWindow(window.id);
+      return;
+    }
+
+    setWindows((prevWindows) => [...prevWindows, window]);
+    touchWindow(window.id);
   }
 
   return (
-    <div
-      class="max-h-screen overflow-hidden h-screen"
-    >
+    <div class="max-h-screen overflow-hidden h-screen">
       <TopBar />
 
       <div class="relative w-full h-full">
@@ -89,29 +85,33 @@ const Computer = ({
           return (
             <WindowComponent
               key={window.id}
-              title={window.title}
               zIndex={calculateZIndex(window.id)}
               onClose={() => closeWindow(window.id)}
               onTouch={() => touchWindow(window.id)}
-              {...window.extra}
+              openWindow={openWindow}
+              {...window}
             />
           );
         })}
 
         <Desktop
-          onIconDoubleClick={(name) => {
-            if (name === "Biography") {
-              // if biography is no longer in the list, add it back
-              if (!windows.find((window) => window.id === 0)) {
-                setWindows((prevWindows) => [
-                  ...prevWindows,
-                  BiographyWindowDefinition,
-                ]);
-              } else {
-                touchWindow(0);
-              }
-            }
-          }}
+          icons={[
+            {
+              name: "Biography",
+              icon: BiographyIcon,
+              onDoubleClick: () => openWindow(BiographyWindowDefinition),
+            },
+            {
+              name: "Blog",
+              icon: BlogIcon,
+              onDoubleClick: () => openWindow(BlogWindowDefinition),
+            },
+            {
+              name: "Radio",
+              icon: RadioIcon,
+              onDoubleClick: () => openWindow(RadioWindowDefinition),
+            },
+          ]}
         />
       </div>
     </div>

@@ -1,30 +1,16 @@
 import { useState } from "preact/hooks";
-
-import BiographyIcon from "@assets/desktop_icons/msagent-3.png";
-import BlogIcon from "@assets/desktop_icons/address_book_pad.png";
-import RadioIcon from "@assets/desktop_icons/cd_audio_cd_a-4.png";
-
-const ICONS = [
-  {
-    name: "Biography",
-    icon: BiographyIcon,
-  },
-  {
-    name: "Blog",
-    icon: BlogIcon,
-  },
-  {
-    name: "Radio",
-    icon: RadioIcon,
-  },
-];
+import type { ImageMetadata } from "astro";
 
 interface DesktopProps {
-  onIconDoubleClick: (name: string) => void;
+  icons: {
+    name: string;
+    icon: ImageMetadata;
+    onDoubleClick: () => void;
+  }[];
 }
 
 const Desktop = ({
-  onIconDoubleClick,
+  icons
 }: DesktopProps) => {
   const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
 
@@ -37,12 +23,10 @@ const Desktop = ({
         onClick={() => setSelectedIcon(null)}
       />
 
-      {ICONS.map((icon) => (
+      {icons.map((icon) => (
         <button 
           class="flex flex-col items-center gap-2 z-10 min-w-24"
-          onDblClick={() => {
-            onIconDoubleClick(icon.name);
-          }}
+          onDblClick={() => icon.onDoubleClick()}
           onClick={() => setSelectedIcon(icon.name)}
         >
           <img

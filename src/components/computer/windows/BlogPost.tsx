@@ -15,6 +15,7 @@ const BlogPost = (props: BlogPostProps) => {
   const postSlug = props.postSlug || "";
   const [postHTML, setPostHTML] = useState("");
   const [postFrontMatter, setPostFrontMatter] = useState<BlogPostFrontmatter>();
+  const [isLoaded, setIsLoaded] = useState(false);
 
   useEffect(() => {
     fetch(`/api/blog/${postSlug}`)
@@ -28,6 +29,7 @@ const BlogPost = (props: BlogPostProps) => {
           tags: post.frontmatter.tags,
           draft: post.frontmatter.draft,
         });
+        setIsLoaded(true);
       });
   }, [postSlug]);
 
@@ -39,19 +41,26 @@ const BlogPost = (props: BlogPostProps) => {
       initialPositionLabel="center"
       {...props}
     >
-      <header class="mb-3">
-        <h1 class="text-2xl">{postFrontMatter?.title}</h1>
-        {postFrontMatter?.published && (
-          <span>{formatDateWithYear(postFrontMatter.published)}</span>
-        )}
-      </header>
+      {!isLoaded ? (
+        <div>Loading...</div>
+      ) : (
+        <>
+          <header class="mb-3">
+            <h1 class="text-2xl">{postFrontMatter?.title}</h1>
+            {postFrontMatter?.published && (
+              <span>{formatDateWithYear(postFrontMatter.published)}</span>
+            )}
+          </header>
 
-      <div
-        class="prose text-xs font-sans-alt leading-5 prose-pre:rounded-none prose-pre:border prose-pre:border-black"
-        dangerouslySetInnerHTML={{
-          __html: postHTML,
-        }}
-      />
+          <div
+            class="pr-2 prose text-xs font-sans-alt leading-5 prose-pre:rounded-none
+            prose-pre:border prose-pre:border-black prose-hr:border-black"
+            dangerouslySetInnerHTML={{
+              __html: postHTML,
+            }}
+          />
+        </>
+      )}
     </WindowFrame>
   );
 };

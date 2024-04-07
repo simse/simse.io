@@ -13,7 +13,7 @@ dependencies:
     version: 10.0.2(astro@4.5.16)
   '@astrojs/preact':
     specifier: 3.1.2
-    version: 3.1.2(@babel/core@7.24.0)(preact@10.20.1)(vite@5.1.5)
+    version: 3.1.2(@babel/core@7.24.4)(preact@10.20.1)(vite@5.1.5)
   '@astrojs/tailwind':
     specifier: 5.1.0
     version: 5.1.0(astro@4.5.16)(tailwindcss@3.4.3)
@@ -40,6 +40,9 @@ devDependencies:
   '@tailwindcss/typography':
     specifier: 0.5.12
     version: 0.5.12(tailwindcss@3.4.3)
+  tailwind-scrollbar:
+    specifier: ^3.1.0
+    version: 3.1.0(tailwindcss@3.4.3)
   wrangler:
     specifier: ^3.34.2
     version: 3.34.2
@@ -178,17 +181,17 @@ packages:
       - supports-color
     dev: false
 
-  /@astrojs/preact@3.1.2(@babel/core@7.24.0)(preact@10.20.1)(vite@5.1.5):
+  /@astrojs/preact@3.1.2(@babel/core@7.24.4)(preact@10.20.1)(vite@5.1.5):
     resolution: {integrity: sha512-DIxlwbCkywakf+O3JtJ1h96cFOAY8fFXmkyl9aDuY36EYN3brhX+kmGFX87ZQGlzSD6SBXOscADILREhF33eFw==}
     engines: {node: '>=18.14.1'}
     peerDependencies:
       preact: ^10.6.5
     dependencies:
-      '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.24.0)
-      '@babel/plugin-transform-react-jsx-development': 7.22.5(@babel/core@7.24.0)
-      '@preact/preset-vite': 2.8.1(@babel/core@7.24.0)(preact@10.20.1)(vite@5.1.5)
+      '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.24.4)
+      '@babel/plugin-transform-react-jsx-development': 7.22.5(@babel/core@7.24.4)
+      '@preact/preset-vite': 2.8.1(@babel/core@7.24.4)(preact@10.20.1)(vite@5.1.5)
       '@preact/signals': 1.2.2(preact@10.20.1)
-      babel-plugin-transform-hook-names: 1.0.2(@babel/core@7.24.0)
+      babel-plugin-transform-hook-names: 1.0.2(@babel/core@7.24.4)
       preact: 10.20.1
       preact-render-to-string: 6.3.1(preact@10.20.1)
       preact-ssr-prepass: 1.2.1(preact@10.20.1)
@@ -490,16 +493,6 @@ packages:
       '@babel/types': 7.24.0
     dev: false
 
-  /@babel/plugin-syntax-jsx@7.23.3(@babel/core@7.24.0):
-    resolution: {integrity: sha512-EB2MELswq55OHUoRZLGg/zC7QWUKfNLpE57m/S2yr1uEneIgsTgrSzXP3NXEsMkVn76OlaVVnzN+ugObuYGwhg==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.24.0
-      '@babel/helper-plugin-utils': 7.24.0
-    dev: false
-
   /@babel/plugin-syntax-jsx@7.23.3(@babel/core@7.24.4):
     resolution: {integrity: sha512-EB2MELswq55OHUoRZLGg/zC7QWUKfNLpE57m/S2yr1uEneIgsTgrSzXP3NXEsMkVn76OlaVVnzN+ugObuYGwhg==}
     engines: {node: '>=6.9.0'}
@@ -510,28 +503,14 @@ packages:
       '@babel/helper-plugin-utils': 7.24.0
     dev: false
 
-  /@babel/plugin-transform-react-jsx-development@7.22.5(@babel/core@7.24.0):
+  /@babel/plugin-transform-react-jsx-development@7.22.5(@babel/core@7.24.4):
     resolution: {integrity: sha512-bDhuzwWMuInwCYeDeMzyi7TaBgRQei6DqxhbyniL7/VG4RSS7HtSL2QbY4eESy1KJqlWt8g3xeEBGPuo+XqC8A==}
     engines: {node: '>=6.9.0'}
     peerDependencies:
       '@babel/core': ^7.0.0-0
     dependencies:
-      '@babel/core': 7.24.0
-      '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.24.0)
-    dev: false
-
-  /@babel/plugin-transform-react-jsx@7.23.4(@babel/core@7.24.0):
-    resolution: {integrity: sha512-5xOpoPguCZCRbo/JeHlloSkTA8Bld1J/E1/kLfD1nsuiW1m8tduTA1ERCgIZokDflX/IBzKcqR3l7VlRgiIfHA==}
-    engines: {node: '>=6.9.0'}
-    peerDependencies:
-      '@babel/core': ^7.0.0-0
-    dependencies:
-      '@babel/core': 7.24.0
-      '@babel/helper-annotate-as-pure': 7.22.5
-      '@babel/helper-module-imports': 7.22.15
-      '@babel/helper-plugin-utils': 7.24.0
-      '@babel/plugin-syntax-jsx': 7.23.3(@babel/core@7.24.0)
-      '@babel/types': 7.24.0
+      '@babel/core': 7.24.4
+      '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.24.4)
     dev: false
 
   /@babel/plugin-transform-react-jsx@7.23.4(@babel/core@7.24.4):
@@ -1233,18 +1212,18 @@ packages:
     requiresBuild: true
     optional: true
 
-  /@preact/preset-vite@2.8.1(@babel/core@7.24.0)(preact@10.20.1)(vite@5.1.5):
+  /@preact/preset-vite@2.8.1(@babel/core@7.24.4)(preact@10.20.1)(vite@5.1.5):
     resolution: {integrity: sha512-a9KV4opdj17X2gOFuGup0aE+sXYABX/tJi/QDptOrleX4FlnoZgDWvz45tHOdVfrZX+3uvVsIYPHxRsTerkDNA==}
     peerDependencies:
       '@babel/core': 7.x
       vite: 2.x || 3.x || 4.x || 5.x
     dependencies:
-      '@babel/core': 7.24.0
-      '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.24.0)
-      '@babel/plugin-transform-react-jsx-development': 7.22.5(@babel/core@7.24.0)
+      '@babel/core': 7.24.4
+      '@babel/plugin-transform-react-jsx': 7.23.4(@babel/core@7.24.4)
+      '@babel/plugin-transform-react-jsx-development': 7.22.5(@babel/core@7.24.4)
       '@prefresh/vite': 2.4.5(preact@10.20.1)(vite@5.1.5)
       '@rollup/pluginutils': 4.2.1
-      babel-plugin-transform-hook-names: 1.0.2(@babel/core@7.24.0)
+      babel-plugin-transform-hook-names: 1.0.2(@babel/core@7.24.4)
       debug: 4.3.4
       kolorist: 1.8.0
       magic-string: 0.30.5
@@ -1816,12 +1795,12 @@ packages:
     dev: false
     optional: true
 
-  /babel-plugin-transform-hook-names@1.0.2(@babel/core@7.24.0):
+  /babel-plugin-transform-hook-names@1.0.2(@babel/core@7.24.4):
     resolution: {integrity: sha512-5gafyjyyBTTdX/tQQ0hRgu4AhNHG/hqWi0ZZmg2xvs2FgRkJXzDNKBZCyoYqgFkovfDrgM8OoKg8karoUvWeCw==}
     peerDependencies:
       '@babel/core': ^7.12.10
     dependencies:
-      '@babel/core': 7.24.0
+      '@babel/core': 7.24.4
     dev: false
 
   /bail@2.0.2:
@@ -4671,6 +4650,15 @@ packages:
       csso: 5.0.5
       picocolors: 1.0.0
     dev: false
+
+  /tailwind-scrollbar@3.1.0(tailwindcss@3.4.3):
+    resolution: {integrity: sha512-pmrtDIZeHyu2idTejfV59SbaJyvp1VRjYxAjZBH0jnyrPRo6HL1kD5Glz8VPagasqr6oAx6M05+Tuw429Z8jxg==}
+    engines: {node: '>=12.13.0'}
+    peerDependencies:
+      tailwindcss: 3.x
+    dependencies:
+      tailwindcss: 3.4.3
+    dev: true
 
   /tailwindcss@3.4.3:
     resolution: {integrity: sha512-U7sxQk/n397Bmx4JHbJx/iSOOv5G+II3f1kpLpY2QeUv5DcPdcTsYLlusZfq1NthHS1c1cZoyFmmkex1rzke0A==}

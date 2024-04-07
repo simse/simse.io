@@ -28,23 +28,6 @@ const createTitle = (title: string) => {
 		{canonical && <link rel="canonical" href={`https://sorensen.engineer${canonical}`} />}
 		<style is:global>
 			@font-face {
-				font-family: 'Figtree';
-				src: url('/fonts/Figtree.woff2') format('woff2-variations');
-				src: url('/fonts/Figtree.woff2') format('woff2') tech('variations');
-				font-weight: 100 1000;
-				font-stretch: 25% 151%;
-				font-display: swap;
-			}
-			@font-face {
-				font-family: 'FigtreeItalic';
-				src: url('/fonts/Figtree-Italic.woff2') format('woff2-variations');
-				src: url('/fonts/Figtree-Italic.woff2') format('woff2') tech('variations');
-				font-weight: 100 1000;
-				font-stretch: 25% 151%;
-				font-style: italic;
-				font-display: swap;
-			}
-			@font-face {
 				font-family: 'Chicago';
 				src: url('/fonts/Chicago.woff2') format('woff2');
 				font-weight: 400;

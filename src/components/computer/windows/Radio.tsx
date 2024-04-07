@@ -2,44 +2,8 @@ import { useState, useRef, useEffect } from "preact/hooks";
 
 import WindowFrame from "../WindowFrame";
 import type { WindowProps } from "../types";
-
-interface PlayItem {
-  starts: string;
-  ends: string;
-  type: string;
-  name: string;
-  metadata: {
-    id: number;
-    mime: string;
-    artist_name: string;
-    track_title: string;
-    album_title: string;
-    year: string;
-    artwork_url: string;
-    track_type_id: number;
-  };
-}
-
-interface Show {
-  start_timestamp: string;
-  end_timestamp: string;
-  starts: string;
-  ends: string;
-  name: string;
-  description: string;
-  id: number;
-}
-
-interface LibreTimeResponse {
-  env: "production";
-  schedulerTime: string;
-  timezone: string;
-  timezoneOffset: number;
-  currentShow: Show[];
-  nextShow: Show[];
-  current: PlayItem;
-  next: PlayItem;
-}
+import MuteIcon from "@components/icons/MuteIcon";
+import VolumeThree from "@components/icons/VolumeThree";
 
 interface RadioWindowProps extends WindowProps {}
 
@@ -50,9 +14,10 @@ const RadioWindow = (props: RadioWindowProps) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
-  const [radioInfo, setRadioInfo] = useState<LibreTimeResponse | null>(null);
+  const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
+  const [currentlyPlayingRange, setCurrentlyPlayingRange] = useState<string | null>(null);
 
-  const streamUrl = "https://radio.sorensen.engineer:8443/main-low";
+  const streamUrl = "https://radio.sorensen.engineer/listen/simon_fm/main.aac";
 
   useEffect(() => {
     if (!audioContextRef.current) {
@@ -134,10 +99,22 @@ const RadioWindow = (props: RadioWindowProps) => {
   }, []);
 
   async function fetchRadioInfo() {
-    const res = await fetch("/api/radio-info");
+    const res = await fetch("https://radio.sorensen.engineer/api/nowplaying/simon_fm");
     const data = await res.json();
 
-    setRadioInfo(data);
+    setCurrentlyPlaying(data.now_playing.song.text);
+    
+    const playedAt = new Date(data.now_playing.played_at * 1000);
+    const endsAt = new Date(data.now_playing.played_at * 1000 + data.now_playing.duration * 1000);
+
+    setCurrentlyPlayingRange(`${playedAt.toLocaleTimeString("en-UK", {
+      hour: "numeric",
+      minute: "numeric",
+    })} - ${endsAt.toLocaleTimeString("en-UK", {
+      hour: "numeric",
+      minute: "numeric",
+    })}`);
+    setIsReady(true);
   }
 
   useEffect(() => {
@@ -147,7 +124,7 @@ const RadioWindow = (props: RadioWindowProps) => {
   useEffect(() => {
     const interval = setInterval(() => {
       fetchRadioInfo();
-    }, 6000);
+    }, 3000);
 
     return () => clearInterval(interval);
   });
@@ -221,82 +198,10 @@ const RadioWindow = (props: RadioWindowProps) => {
     requestAnimationFrame(visualize);
   };
 
-  const formatShowName = (show: Show | undefined): string => {
-    if (!show) return "Off air";
-
-    return show.name;
-  };
-
-  const formatShowRange = (show: Show | undefined): string => {
-    if (!show) return "";
-
-    const start = new Date(show.starts);
-    const end = new Date(show.ends);
-
-    return `${start.toLocaleTimeString("en-UK", {
-      hour: "numeric",
-      minute: "numeric",
-    })} - ${end.toLocaleTimeString("en-UK", {
-      hour: "numeric",
-      minute: "numeric",
-    })}`;
-  };
-
-  const formatShowDate = (date?: string): string => {
-    if (!date) return "No show scheduled";
-
-    const d = new Date(date);
-
-    // if show is today, return time only
-    if (d.toDateString() === new Date().toDateString()) {
-      return d.toLocaleTimeString("en-UK", {
-        hour: "numeric",
-        minute: "numeric",
-      });
-    }
-
-    d.setFullYear(1988);
-
-    return d.toLocaleString("en-UK", {
-      month: "short",
-      day: "numeric",
-      year: "numeric",
-      hour: "numeric",
-      minute: "numeric",
-    });
-  };
-
-  const formatDate = (date?: string): string => {
-    if (!date) return "No show scheduled";
-
-    // parse date and adjust for timezone which is UTC
-    const d = new Date(date);
-    d.setHours(d.getHours() + 1);
-
-    return d.toLocaleTimeString("en-UK", {
-      hour: "numeric",
-      minute: "numeric",
-    });
-  };
-
-  const formatTitle = (item: PlayItem | undefined): string => {
-    if (!item) return "No show scheduled";
-
-    if (item.metadata.artist_name === "ADVERT") {
-      return item.metadata.track_title + " [ADVERT]";
-    }
-
-    if (item.metadata.track_type_id === 4) {
-      return "Talking";
-    }
-
-    return item.name;
-  };
-
   return (
     <WindowFrame
       title="Radio"
-      initialSize={{ width: 300, height: 350 }}
+      initialSize={{ width: 300, height: 250 }}
       initialPosition={{ x: 350, y: 450 }}
       {...props}
     >
@@ -315,15 +220,14 @@ const RadioWindow = (props: RadioWindowProps) => {
 
           <div class="mt-2 pb-3 mb-1 border-b border-black flex items-center justify-between">
             <div>
-              <span>Currently playing</span>
-              <p class="text-xl leading-4" dangerouslySetInnerHTML={{
-                __html: formatShowName(radioInfo?.currentShow[0])
-              }} />
-              <p>{formatShowRange(radioInfo?.currentShow[0])}</p>
+              <span>Current Station</span>
+              <p class="text-xl leading-4">
+                Simon FM 98.3
+              </p>
             </div>
 
             <button
-              class="border border-black rounded-sm h-11 w-11 disabled:cursor-not-allowed disabled:opacity-50"
+              class="border border-black rounded-sm h-11 w-11 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center"
               onClick={() => {
                 if (isPlaying) {
                   pause();
@@ -331,43 +235,30 @@ const RadioWindow = (props: RadioWindowProps) => {
                   play();
                 }
               }}
-              // disabled={!radioInfo || !isReady}
+              disabled={!isReady}
             >
-              {isPlaying ? "⏸" : "▶"}
+              {isPlaying ? <VolumeThree /> : (
+                <MuteIcon />
+              )}
             </button>
           </div>
 
-          {radioInfo?.current && (
-            <>
-              <p>Schedule</p>
-
-              <div class="flex flex-col mb-2">
-                <span class="opacity-70">
-                  {formatDate(radioInfo.current.starts)}
-                </span>
-
-                <span
-                  class="text-2xl leading-5"
-                  dangerouslySetInnerHTML={{
-                    __html: formatTitle(radioInfo.current),
-                  }}
-                />
-              </div>
-            </>
+          {!isReady && (
+            <p>Connecting to station...</p>
           )}
 
-          {radioInfo?.nextShow && (
+          {(isReady && currentlyPlaying && currentlyPlayingRange) && (
             <>
-              <p>Upcoming Programming</p>
+              <p>Currently Playing</p>
 
-              <div class="flex flex-col mb-2">
+              <div class="flex flex-col mb-4">
                 <span class="opacity-70">
-                  {formatShowDate(radioInfo.nextShow[0].start_timestamp)}
+                  {currentlyPlayingRange}
                 </span>
 
-                <span class="text-2xl leading-5">
-                  {radioInfo.nextShow[0].name}
-                </span>
+                <span class="text-2xl leading-5" dangerouslySetInnerHTML={{
+                  __html: currentlyPlaying
+                }} />
               </div>
             </>
           )}
