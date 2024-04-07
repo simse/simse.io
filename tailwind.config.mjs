@@ -10,7 +10,10 @@ export default {
 				sans: ['Chicago', 'sans-serif'],
 				'sans-alt': ['ArialPixel', 'sans-serif'],
 				mono: ['ArialPixel', 'monospace']
-			}
+			},
+			animation: {
+				'bounce-marquee': 'bounceMarquee 10s linear infinite'
+			},
 		}
 	},
 	plugins: [

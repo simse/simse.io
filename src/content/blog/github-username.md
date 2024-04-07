@@ -17,28 +17,3 @@ And I _was_ interested. So I crafted a message, pleading for the username. And i
 It's a short and relatively straightforward story. But it's one I cherish. Not only because I succeeded, but because of Github Support.
 
 It's rare to reach real humans that aren't just responding using a script. At least that's what it feels like to me. Maybe Github is the same nowadays? I don't know, I haven't needed help since then.
-
-```js
-export default defineConfig({
-  output: "hybrid",
-  adapter: cloudflare({
-    imageService: 'cloudflare'
-  }),
-  integrations: [
-    tailwind(), 
-    mdx(), 
-    markdoc(), 
-    icon(), 
-    preact(),
-  ],
-  image: {
-    service: passthroughImageService()
-  },
-  prefetch: true,
-  markdown: {
-    shikiConfig: {
-      theme: 'github-light'
-    }
-  }
-});
-```

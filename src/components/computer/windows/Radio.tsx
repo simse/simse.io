@@ -15,7 +15,9 @@ const RadioWindow = (props: RadioWindowProps) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isReady, setIsReady] = useState(false);
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
-  const [currentlyPlayingRange, setCurrentlyPlayingRange] = useState<string | null>(null);
+  const [currentlyPlayingRange, setCurrentlyPlayingRange] = useState<
+    string | null
+  >(null);
 
   const streamUrl = "https://radio.sorensen.engineer/listen/simon_fm/main.aac";
 
@@ -99,21 +101,27 @@ const RadioWindow = (props: RadioWindowProps) => {
   }, []);
 
   async function fetchRadioInfo() {
-    const res = await fetch("https://radio.sorensen.engineer/api/nowplaying/simon_fm");
+    const res = await fetch(
+      "https://radio.sorensen.engineer/api/nowplaying/simon_fm"
+    );
     const data = await res.json();
 
     setCurrentlyPlaying(data.now_playing.song.text);
-    
-    const playedAt = new Date(data.now_playing.played_at * 1000);
-    const endsAt = new Date(data.now_playing.played_at * 1000 + data.now_playing.duration * 1000);
 
-    setCurrentlyPlayingRange(`${playedAt.toLocaleTimeString("en-UK", {
-      hour: "numeric",
-      minute: "numeric",
-    })} - ${endsAt.toLocaleTimeString("en-UK", {
-      hour: "numeric",
-      minute: "numeric",
-    })}`);
+    const playedAt = new Date(data.now_playing.played_at * 1000);
+    const endsAt = new Date(
+      data.now_playing.played_at * 1000 + data.now_playing.duration * 1000
+    );
+
+    setCurrentlyPlayingRange(
+      `${playedAt.toLocaleTimeString("en-UK", {
+        hour: "numeric",
+        minute: "numeric",
+      })} - ${endsAt.toLocaleTimeString("en-UK", {
+        hour: "numeric",
+        minute: "numeric",
+      })}`
+    );
     setIsReady(true);
   }
 
@@ -201,7 +209,7 @@ const RadioWindow = (props: RadioWindowProps) => {
   return (
     <WindowFrame
       title="Radio"
-      initialSize={{ width: 300, height: 250 }}
+      initialSize={{ width: 300 }}
       initialPosition={{ x: 350, y: 450 }}
       {...props}
     >
@@ -221,9 +229,7 @@ const RadioWindow = (props: RadioWindowProps) => {
           <div class="mt-2 pb-3 mb-1 border-b border-black flex items-center justify-between">
             <div>
               <span>Current Station</span>
-              <p class="text-xl leading-4">
-                Simon FM 98.3
-              </p>
+              <p class="text-xl leading-4">Simon FM 98.3</p>
             </div>
 
             <button
@@ -237,28 +243,31 @@ const RadioWindow = (props: RadioWindowProps) => {
               }}
               disabled={!isReady}
             >
-              {isPlaying ? <VolumeThree /> : (
-                <MuteIcon />
-              )}
+              {isPlaying ? <VolumeThree /> : <MuteIcon />}
             </button>
           </div>
 
-          {!isReady && (
-            <p>Connecting to station...</p>
-          )}
+          {!isReady && <p>Connecting to station...</p>}
 
-          {(isReady && currentlyPlaying && currentlyPlayingRange) && (
+          {isReady && currentlyPlaying && currentlyPlayingRange && (
             <>
               <p>Currently Playing</p>
 
               <div class="flex flex-col mb-4">
-                <span class="opacity-70">
-                  {currentlyPlayingRange}
-                </span>
+                <span class="opacity-70">{currentlyPlayingRange}</span>
 
-                <span class="text-2xl leading-5" dangerouslySetInnerHTML={{
-                  __html: currentlyPlaying
-                }} />
+                <div class="w-[282px] overflow-hidden">
+                  <span
+                    class={`text-2xl leading-5 whitespace-nowrap inline-flex ${
+                      currentlyPlaying.length > 20
+                        ? "animate-bounce-marquee"
+                        : ""
+                    }`}
+                    dangerouslySetInnerHTML={{
+                      __html: currentlyPlaying,
+                    }}
+                  />
+                </div>
               </div>
             </>
           )}

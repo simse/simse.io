@@ -9,7 +9,7 @@ interface WindowFrameProps extends WindowProps {
   children: ComponentChildren;
   initialPosition?: { x: number; y: number };
   initialPositionLabel?: "center";
-  initialSize?: { width: number; height: number };
+  initialSize?: { width: number; height?: number };
 }
 
 const WindowFrame = ({
@@ -106,11 +106,11 @@ const WindowFrame = ({
 
   return (
     <div
-      class="border border-black absolute shadow-window bg-[#FAF2E8]"
+      class="border border-black sm:absolute shadow-window bg-[#FAF2E8]"
       style={{
         ...calculateWindowPosition(),
         width: windowSize.width,
-        height: windowSize.height,
+        height: windowSize.height || 'fit-content',
         zIndex: zIndex,
       }}
       onMouseDown={onTouch}
@@ -129,7 +129,7 @@ const WindowFrame = ({
         <div class="px-1 py-2 bg-[#FAF2E8]" />
 
         <button
-          class="ml-4 bg-[#FAF2E8] border border-black items-center flex justify-center text-transparent hover:text-black active:bg-black active:text-white"
+          class="ml-4 bg-[#FAF2E8] border border-black items-center justify-center text-transparent hover:text-black active:bg-black active:text-white hidden sm:flex"
           style={{
             width: 13,
             height: 13,
@@ -150,7 +150,7 @@ const WindowFrame = ({
       </header>
 
       <div
-        class="px-2 pt-2 overflow-y-auto"
+        class="px-2 pt-2 overflow-y-auto h-full"
         style={{
           maxHeight: "calc(100% - 36px)",
         }}

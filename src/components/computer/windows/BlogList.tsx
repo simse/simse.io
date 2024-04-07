@@ -23,32 +23,36 @@ const BlogList = (props: BlogListProps) => {
       initialPosition={{ x: 550, y: 20 }}
       {...props}
     >
-      <ul>
-        {posts.map((post) => (
-          <li class="flex mb-2 pb-2 border-b border-black items-center">
-            <div class="bg-red-100 w-14 h-14 mr-4" />
+      <div class="flex flex-col h-full">
+        <ul>
+          {posts.map((post) => (
+            <li class="flex mb-2 pb-2 border-b border-black items-center">
+              <div class="bg-red-100 w-14 h-14 mr-4" />
 
-            <button 
-              class={`text-left p-1 border border-dotted border-transparent ${selectedPost === post.slug ? "bg-black text-white border-white" : ""}`}
-              onClick={() => {
-                if (selectedPost === post.slug) {
-                  openWindow({
-                    title: "Blog Post",
-                    component: BlogPost,
-                    postSlug: post.slug,
-                    type: "blogPost",
-                    id: `blog-${post.slug}`
-                  });
-                }
-                setSelectedPost(post.slug);
-              }}
-            >
-              <span class="text-xl">{post.data.title}</span>
-              <p class="font-sans-alt text-xs">{formatDateWithYear(post.data.published)}</p>
-            </button>
-          </li>
-        ))}
-      </ul>
+              <button 
+                class={`text-left p-1 border border-dotted border-transparent ${selectedPost === post.slug ? "bg-black text-white border-white" : ""}`}
+                onClick={() => {
+                  if (selectedPost === post.slug) {
+                    openWindow({
+                      title: "Blog Post",
+                      component: BlogPost,
+                      postSlug: post.slug,
+                      type: "blogPost",
+                      id: `blog-${post.slug}`
+                    });
+                  }
+                  setSelectedPost(post.slug);
+                }}
+              >
+                <span class="text-xl leading-none">{post.data.title}</span>
+                <p class="font-sans-alt text-[0.65rem]">{formatDateWithYear(post.data.published)}</p>
+              </button>
+            </li>
+          ))}
+        </ul>
+
+        <div class="flex-1 w-full" onClick={() => setSelectedPost(null)} />
+      </div>
     </WindowFrame>
   );
 };

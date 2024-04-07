@@ -78,7 +78,7 @@ const Computer = ({ blogPosts }: ComputerProps) => {
     <div class="max-h-screen overflow-hidden h-screen">
       <TopBar />
 
-      <div class="relative w-full h-full">
+      <div class="relative w-full h-full flex flex-col gap-4 p-2 sm:block sm:p-0">
         {windows.map((window) => {
           const WindowComponent = window.component;
 

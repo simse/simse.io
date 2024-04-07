@@ -39,6 +39,14 @@ const createTitle = (title: string) => {
 				font-weight: 400;
 				font-display: swap;
 			}
+			@keyframes bounceMarquee {
+				0% { transform: translateX(0); }
+				10% { transform: translateX(0); }
+				45% { transform: translateX(calc(-100% + 282px)); }
+				55% { transform: translateX(calc(-100% + 282px)); }
+				90% { transform: translateX(0); }
+				100% { transform: translateX(0); }
+			}
 		</style>
 		<ViewTransitions />
 	</head>
