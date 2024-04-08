@@ -11,6 +11,7 @@ import type { WindowType } from "./types";
 import BiographyIcon from "@assets/desktop_icons/msagent-3.png";
 import BlogIcon from "@assets/desktop_icons/address_book_pad.png";
 import RadioIcon from "@assets/desktop_icons/cd_audio_cd_a-4.png";
+import useSize from "@utils/useSize";
 
 interface ComputerProps {
   blogPosts: CollectionEntry<"blog">[];
@@ -39,12 +40,14 @@ const Computer = ({ blogPosts }: ComputerProps) => {
     type: "radio",
   };
 
+  const size = useSize();
+
   const [windows, setWindows] = useState<WindowType[]>([
     BiographyWindowDefinition,
     BlogWindowDefinition,
     RadioWindowDefinition,
   ]);
-  const [windowStack, setWindowStack] = useState<string[]>(['blog', 'radio', 'biography']);
+  const [windowStack, setWindowStack] = useState<string[]>(['biography', 'blog', 'radio']);
 
   const closeWindow = (id: string) => {
     setWindows((prevWindows) =>
@@ -75,7 +78,7 @@ const Computer = ({ blogPosts }: ComputerProps) => {
   }
 
   return (
-    <div class="max-h-screen overflow-hidden h-screen">
+    <div class="sm:max-h-screen sm:overflow-hidden pb-4 sm:pb-0 sm:h-screen">
       <TopBar />
 
       <div class="relative w-full h-full flex flex-col gap-4 p-2 sm:block sm:p-0">
@@ -85,9 +88,14 @@ const Computer = ({ blogPosts }: ComputerProps) => {
           return (
             <WindowComponent
               key={window.id}
-              zIndex={calculateZIndex(window.id)}
+              order={windowStack.indexOf(window.id)}
               onClose={() => closeWindow(window.id)}
-              onTouch={() => touchWindow(window.id)}
+              onTouch={() => {
+                // if on desktop
+                if (size[0] > 640) {
+                  touchWindow(window.id);
+                }
+              }}
               openWindow={openWindow}
               {...window}
             />

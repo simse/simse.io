@@ -20,7 +20,7 @@ const WindowFrame = ({
   initialSize = { height: 600, width: 250 },
   onClose,
   onTouch,
-  zIndex,
+  order,
 }: WindowFrameProps) => {
   const [windowPositionSource, setWindowPositionSource] = useState<
     "layout" | "user"
@@ -109,9 +109,11 @@ const WindowFrame = ({
       class="border border-black sm:absolute shadow-window bg-[#FAF2E8]"
       style={{
         ...calculateWindowPosition(),
-        width: windowSize.width,
-        height: windowSize.height || 'fit-content',
-        zIndex: zIndex,
+        width: `min(${windowSize.width}px, 100%)`,
+        height: 'fit-content',
+        minHeight: windowSize.height,
+        zIndex: order * 10 + 100,
+        order: order,
       }}
       onMouseDown={onTouch}
       ref={windowRef}
@@ -129,7 +131,7 @@ const WindowFrame = ({
         <div class="px-1 py-2 bg-[#FAF2E8]" />
 
         <button
-          class="ml-4 bg-[#FAF2E8] border border-black items-center justify-center text-transparent hover:text-black active:bg-black active:text-white hidden sm:flex"
+          class="ml-4 bg-[#FAF2E8] border border-black items-center justify-center text-transparent hover:text-black active:bg-black active:text-white opacity-0 sm:opacity-100"
           style={{
             width: 13,
             height: 13,

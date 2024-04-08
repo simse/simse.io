@@ -33,7 +33,8 @@ type WindowType =
 
 interface WindowProps {
   title?: string;
-  zIndex: number;
+  // zIndex: number;
+  order: number;
   onClose: () => void;
   onTouch: () => void;
   openWindow: (window: WindowType) => void;
