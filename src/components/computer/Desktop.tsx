@@ -16,7 +16,7 @@ const Desktop = ({
 
   return (
     <div 
-      class="h-full w-full flex flex-col items-end pt-4 gap-5 absolute top-0 right-0"
+      class="h-full w-full sm:flex flex-col items-end pt-4 gap-5 absolute top-0 right-0 hidden"
     >
       <div
         class="h-full w-full z-0 absolute top-0 left-0"

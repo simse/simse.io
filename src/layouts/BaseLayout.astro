@@ -1,7 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
 import "../app.css";
-import ChicagoFont from "@assets/fonts/Chicago.woff2";
 
 interface Props {
     title: string;
@@ -13,7 +12,7 @@ const { title, canonical } = Astro.props;
 const createTitle = (title: string) => {
 	if (title.includes("—")) return title;
 
-	return title ? `${title}—Simon Sorensen` : "Simon Sorensen—Software Engineer in London";
+	return title ? title : "Simon Sorensen—Software Engineer in London";
 };
 ---
 

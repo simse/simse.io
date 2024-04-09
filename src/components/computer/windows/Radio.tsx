@@ -37,7 +37,14 @@ const RadioWindow = (props: RadioWindowProps) => {
     const audioElement = audioElementRef.current;
 
     const source = audioContext.createMediaElementSource(audioElement);
-    source.connect(audioContext.destination);
+    const analyser = audioContext.createAnalyser();
+    analyser.fftSize = 256;
+    // analyser.smoothingTimeConstant = 0.9;
+    analyserRef.current = analyser;
+    source.connect(analyser);
+    analyser.connect(audioContext.destination);
+
+    visualize();
 
     audioElement.addEventListener("pause", () => {
       audioElement.play();
@@ -65,8 +72,6 @@ const RadioWindow = (props: RadioWindowProps) => {
       await audioElement
         .play()
         .catch((error) => console.error("Error playing audio:", error));
-
-      createAudioContext();
     };
 
     playAudio();
@@ -137,7 +142,7 @@ const RadioWindow = (props: RadioWindowProps) => {
     return () => clearInterval(interval);
   });
 
-  const createAudioContext = () => {
+  /*const createAudioContext = () => {
     // check if SSR
     if (typeof window === "undefined") return;
 
@@ -147,23 +152,13 @@ const RadioWindow = (props: RadioWindowProps) => {
     // if analyser already exists, return
     if (analyserRef.current) return;
 
-    // @ts-expect-error
-    const stream = audio.captureStream();
-
     const audioCtx = audioContextRef.current;
     if (!audioCtx) return;
 
-    const analyser = audioCtx.createAnalyser();
-    const source = audioCtx.createMediaStreamSource(stream);
-    source.connect(analyser);
-    analyser.fftSize = 256;
-
-    analyser.smoothingTimeConstant = 0.9;
-
-    analyserRef.current = analyser;
+    
 
     visualize();
-  };
+  };*/
 
   const visualize = () => {
     if (!analyserRef.current) return;
@@ -175,6 +170,8 @@ const RadioWindow = (props: RadioWindowProps) => {
     // console.log(dataArray);
 
     analyser.getByteFrequencyData(dataArray);
+
+    //console.log(dataArray);
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -209,7 +206,7 @@ const RadioWindow = (props: RadioWindowProps) => {
   return (
     <WindowFrame
       title="Radio"
-      initialSize={{ width: 300 }}
+      initialSize={{ width: 300, height: 250 }}
       initialPosition={{ x: 350, y: 450 }}
       {...props}
     >
@@ -259,7 +256,7 @@ const RadioWindow = (props: RadioWindowProps) => {
                 <div class="w-[282px] overflow-hidden">
                   <span
                     class={`text-2xl leading-5 whitespace-nowrap inline-flex ${
-                      currentlyPlaying.length > 20
+                      currentlyPlaying.length > 25
                         ? "animate-bounce-marquee"
                         : ""
                     }`}

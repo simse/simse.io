@@ -4,6 +4,7 @@ import type { FunctionalComponent } from "preact";
 interface Window {
   title: string;
   component: FunctionalComponent<WindowProps>;
+  associatedPath?: string;
   id: string;
 }
 
@@ -33,7 +34,6 @@ type WindowType =
 
 interface WindowProps {
   title?: string;
-  // zIndex: number;
   order: number;
   onClose: () => void;
   onTouch: () => void;

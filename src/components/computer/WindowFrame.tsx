@@ -1,9 +1,11 @@
 import type { ComponentChildren } from "preact";
 import { useEffect, useRef, useState } from "preact/hooks";
+import type { CSSProperties } from "preact/compat";
 
+import "./WindowFrame.scss";
 import type { WindowProps } from "./types";
 import WindowHeaderBackground from "@assets/window_header_background.svg";
-import type { CSSProperties } from "preact/compat";
+
 
 interface WindowFrameProps extends WindowProps {
   children: ComponentChildren;
@@ -106,12 +108,11 @@ const WindowFrame = ({
 
   return (
     <div
-      class="border border-black sm:absolute shadow-window bg-[#FAF2E8]"
+      class="windowFrame border border-black sm:absolute shadow-window bg-[#FAF2E8]"
       style={{
         ...calculateWindowPosition(),
-        width: `min(${windowSize.width}px, 100%)`,
-        height: 'fit-content',
-        minHeight: windowSize.height,
+        '--width': `min(${windowSize.width}px, 100%)`,
+        '--height': `${windowSize.height}px` || 'fit-content',
         zIndex: order * 10 + 100,
         order: order,
       }}
@@ -131,7 +132,7 @@ const WindowFrame = ({
         <div class="px-1 py-2 bg-[#FAF2E8]" />
 
         <button
-          class="ml-4 bg-[#FAF2E8] border border-black items-center justify-center text-transparent hover:text-black active:bg-black active:text-white opacity-0 sm:opacity-100"
+          class="ml-4 bg-[#FAF2E8] border border-black items-center justify-center flex text-transparent hover:text-black active:bg-black active:text-white opacity-0 sm:opacity-100"
           style={{
             width: 13,
             height: 13,

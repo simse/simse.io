@@ -31,6 +31,7 @@ const Computer = ({ blogPosts }: ComputerProps) => {
     id: 'blog',
     type: "blogList",
     posts: blogPosts,
+    associatedPath: "/blog",
   };
   
   const RadioWindowDefinition: WindowType = {
@@ -49,6 +50,8 @@ const Computer = ({ blogPosts }: ComputerProps) => {
   ]);
   const [windowStack, setWindowStack] = useState<string[]>(['biography', 'blog', 'radio']);
 
+  const getWindow = (id: string) => windows.find((window) => window.id === id);
+
   const closeWindow = (id: string) => {
     setWindows((prevWindows) =>
       prevWindows.filter((prevWindow) => prevWindow.id !== id)
@@ -61,10 +64,15 @@ const Computer = ({ blogPosts }: ComputerProps) => {
       newStack.push(id);
       return newStack;
     });
-  };
 
-  const calculateZIndex = (id: string) => {
-    return (windowStack.indexOf(id) + 1) * 10 + 100;
+    const window = getWindow(id);
+    if (window?.associatedPath) {
+      history.pushState({}, "", getWindow(id)?.associatedPath);
+    }
+
+    if (window?.title) {
+      document.title = `simonOS—${window.title}`;
+    }
   };
 
   const openWindow = (window: WindowType) => {
@@ -81,7 +89,7 @@ const Computer = ({ blogPosts }: ComputerProps) => {
     <div class="sm:max-h-screen sm:overflow-hidden pb-4 sm:pb-0 sm:h-screen">
       <TopBar />
 
-      <div class="relative w-full h-full flex flex-col gap-4 p-2 sm:block sm:p-0">
+      <div class="relative w-full h-full flex flex-col-reverse gap-4 p-2 sm:block sm:p-0">
         {windows.map((window) => {
           const WindowComponent = window.component;
 

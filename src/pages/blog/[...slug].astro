@@ -13,15 +13,10 @@ export async function getStaticPaths() {
 
 const posts = await getCollection('blog');
 
-export const prerender = true;
 
-const { entry } = Astro.props;
-const { Content } = await entry.render();
+
+
 ---
 <BaseLayout title="simonOS">
-  <Computer blogPosts={posts} client:load transition:persist="computer">
-    <div slot="blogPost">
-      <Content />
-    </div>
-  </Computer>
+  <Computer blogPosts={posts} client:load transition:persist="computer" />
 </BaseLayout>
