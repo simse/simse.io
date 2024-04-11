@@ -6,6 +6,11 @@ interface Window {
   component: FunctionalComponent<WindowProps>;
   associatedPath?: string;
   id: string;
+  meta?: {
+    title: string;
+    description: string;
+    path: string;
+  }
 }
 
 interface RadioWindowType extends Window {
@@ -24,6 +29,10 @@ interface BlogListWindowType extends Window {
 interface BlogPostWindowType extends Window {
   type: "blogPost";
   postSlug: string;
+  prefetchedPost?: {
+    html: string;
+    frontmatter: CollectionEntry<"blog">["data"];
+  };
 }
 
 type WindowType =
@@ -40,4 +49,13 @@ interface WindowProps {
   openWindow: (window: WindowType) => void;
 }
 
-export type { WindowProps, WindowType };
+interface InitialStateAction {
+  type: "openBlogPost";
+  postSlug: string;
+  prefetchedPost: {
+    html: string;
+    frontmatter: CollectionEntry<"blog">["data"];
+  };
+}
+
+export type { WindowProps, WindowType, InitialStateAction };

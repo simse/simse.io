@@ -79,7 +79,8 @@ const WindowFrame = ({
     };
 
     if (newPosition.x < 0) newPosition.x = 0;
-    if (newPosition.y < 0) newPosition.y = 0;
+    // -1 is to account for the topbar border
+    if (newPosition.y < -1) newPosition.y = -1;
 
     setWindowPosition(newPosition);
   };

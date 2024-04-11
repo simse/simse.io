@@ -18,11 +18,3 @@ export const GET: APIRoute = async ({ params }) => {
     })
   );
 };
-
-export async function getStaticPaths() {
-  const posts = await getCollection("blog");
-
-  return posts.map(post => (
-    { params: { slug: post.slug } }
-  ))
-}

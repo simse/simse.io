@@ -1,5 +1,4 @@
 ---
-import { ViewTransitions } from 'astro:transitions';
 import "../app.css";
 
 interface Props {
@@ -15,8 +14,7 @@ const createTitle = (title: string) => {
 	return title ? title : "Simon Sorensen—Software Engineer in London";
 };
 ---
-
-<html lang="en" transition:animate="none">
+<html lang="en">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/ico" href="/favicon.ico" />
@@ -25,7 +23,7 @@ const createTitle = (title: string) => {
 		<meta name="robots" content="noindex,nofollow" />
 		<title>{createTitle(title)}</title>
 		{canonical && <link rel="canonical" href={`https://sorensen.engineer${canonical}`} />}
-		<style is:global>
+		<style is:inline>
 			@font-face {
 				font-family: 'Chicago';
 				src: url('/fonts/Chicago.woff2') format('woff2');
@@ -47,7 +45,6 @@ const createTitle = (title: string) => {
 				100% { transform: translateX(0); }
 			}
 		</style>
-		<ViewTransitions />
 	</head>
 	<body class="bg-[#FAF2E8] antialiased">
 		<slot />

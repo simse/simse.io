@@ -1,18 +1,16 @@
 import { defineConfig, passthroughImageService } from 'astro/config';
 import cloudflare from "@astrojs/cloudflare";
 import tailwind from "@astrojs/tailwind";
-import icon from "astro-icon";
 import preact from "@astrojs/preact";
 
 // https://astro.build/config
 export default defineConfig({
-  output: "hybrid",
+  output: "server",
   adapter: cloudflare({
     imageService: 'cloudflare'
   }),
   integrations: [
     tailwind(), 
-    icon(), 
     preact(),
   ],
   image: {

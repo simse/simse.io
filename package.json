@@ -8,18 +8,16 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "deploy": "wrangler pages deploy dist --project-name simse-io"
+    "deploy": "wrangler pages deploy dist --project-name sorensen-engineer-dev --branch main"
   },
   "dependencies": {
     "@astrojs/check": "0.5.10",
     "@astrojs/cloudflare": "10.0.2",
     "@astrojs/preact": "3.1.2",
     "@astrojs/tailwind": "5.1.0",
-    "@iconify-json/tabler": "^1.1.107",
     "astro": "4.5.16",
-    "astro-icon": "^1.1.0",
     "preact": "10.20.1",
-    "preact-swr": "^0.3.14",
+    "sockette": "^2.0.6",
     "tailwindcss": "3.4.3",
     "typescript": "^5.4.2"
   },

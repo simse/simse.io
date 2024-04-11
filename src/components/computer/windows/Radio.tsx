@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "preact/hooks";
+import Sockette from "sockette";
 
 import WindowFrame from "../WindowFrame";
 import type { WindowProps } from "../types";
@@ -19,42 +20,123 @@ const RadioWindow = (props: RadioWindowProps) => {
     string | null
   >(null);
 
+  useEffect(() => {
+    const socket = new Sockette("wss://radio.sorensen.engineer/api/live/nowplaying/websocket", {
+      onopen: (e) => {
+        socket.send(
+          JSON.stringify({
+            subs: {
+              "station:simon_fm": {},
+            },
+          })
+        );
+      },
+      onmessage: (e) => {
+        const jsonData = JSON.parse(e.data);
+
+        if ("connect" in jsonData) {
+          setIsReady(true);
+
+          const initialData = jsonData.connect.data ?? [];
+          if (initialData.length > 0) {
+            handleData(initialData[0].pub);
+          }
+        } else if ('channel' in jsonData) {
+          handleData(jsonData.pub);
+        }
+      }
+    });
+
+
+    const handleData = (input: {
+      data: {
+        np: {
+          cache: string;
+          is_online: boolean;
+          listeners: {
+            current: number;
+            unique: number;
+            total: number;
+          };
+          now_playing: {
+            sh_id: number;
+            duration: number;
+            elapsed: number;
+            is_request: boolean;
+            played_at: number;
+            playlist: string;
+            remaining: number;
+            song: {
+              title: string;
+              text: string;
+            }
+          }
+        }
+      }
+    }) => {
+      const data = input.data.np;
+
+      if (data.is_online) {
+        setCurrentlyPlaying(data.now_playing.song.text);
+
+        const playedAt = new Date(data.now_playing.played_at * 1000);
+        const endsAt = new Date(
+          data.now_playing.played_at * 1000 + data.now_playing.duration * 1000
+        );
+
+        setCurrentlyPlayingRange(
+          `${playedAt.toLocaleTimeString("en-UK", {
+            hour: "numeric",
+            minute: "numeric",
+          })} - ${endsAt.toLocaleTimeString("en-UK", {
+            hour: "numeric",
+            minute: "numeric",
+          })}`
+        );
+      } else {
+        setCurrentlyPlaying("Nothing playing right now");
+        setCurrentlyPlayingRange("");
+      }
+    };
+
+    return () => {
+      socket.close();
+    }
+  }, []);
+
   const streamUrl = "https://radio.sorensen.engineer/listen/simon_fm/main.aac";
 
-  useEffect(() => {
-    if (!audioContextRef.current) {
-      audioContextRef.current = new AudioContext();
-    }
+  const createAudioContext = () => {
+    audioContextRef.current = new AudioContext();
 
-    if (!audioElementRef.current) {
-      const audioElement = new Audio();
-      audioElement.crossOrigin = "anonymous";
-      audioElement.src = streamUrl;
-      audioElementRef.current = audioElement;
-    }
+    const audioElement = new Audio();
+    audioElement.crossOrigin = "anonymous";
+    audioElement.src = streamUrl;
+    audioElementRef.current = audioElement;
+
+    audioElement.addEventListener("play", () => {
+      setIsPlaying(true);
+    });
+
+    audioElement.addEventListener("pause", () => {
+      setIsPlaying(false);
+    });
 
     const audioContext = audioContextRef.current;
-    const audioElement = audioElementRef.current;
 
     const source = audioContext.createMediaElementSource(audioElement);
     const analyser = audioContext.createAnalyser();
     analyser.fftSize = 256;
-    // analyser.smoothingTimeConstant = 0.9;
     analyserRef.current = analyser;
+
     source.connect(analyser);
     analyser.connect(audioContext.destination);
 
     visualize();
+  };
 
-    audioElement.addEventListener("pause", () => {
-      audioElement.play();
-      audioElement.volume = 0;
-      setIsPlaying(false);
-    });
-
-    return () => {
-      audioElement.pause();
-    };
+  useEffect(() => {
+    createAudioContext();
   }, []);
 
   const play = () => {
@@ -68,22 +150,20 @@ const RadioWindow = (props: RadioWindowProps) => {
       if (audioContext.state === "suspended") {
         await audioContext.resume();
       }
-      audioElement.volume = 1;
       await audioElement
         .play()
         .catch((error) => console.error("Error playing audio:", error));
     };
 
+    createAudioContext();
     playAudio();
-    setIsPlaying(true);
   };
 
   const pause = () => {
     const audioElement = audioElementRef.current;
     if (!audioElement) return;
 
-    audioElement.volume = 0;
-    setIsPlaying(false);
+    audioElement.pause();
   };
 
   const ratio = 2;
@@ -105,61 +185,6 @@ const RadioWindow = (props: RadioWindowProps) => {
     canvasCtx.fillRect(0, 0, WIDHT, HEIGHT);
   }, []);
 
-  async function fetchRadioInfo() {
-    const res = await fetch(
-      "https://radio.sorensen.engineer/api/nowplaying/simon_fm"
-    );
-    const data = await res.json();
-
-    setCurrentlyPlaying(data.now_playing.song.text);
-
-    const playedAt = new Date(data.now_playing.played_at * 1000);
-    const endsAt = new Date(
-      data.now_playing.played_at * 1000 + data.now_playing.duration * 1000
-    );
-
-    setCurrentlyPlayingRange(
-      `${playedAt.toLocaleTimeString("en-UK", {
-        hour: "numeric",
-        minute: "numeric",
-      })} - ${endsAt.toLocaleTimeString("en-UK", {
-        hour: "numeric",
-        minute: "numeric",
-      })}`
-    );
-    setIsReady(true);
-  }
-
-  useEffect(() => {
-    fetchRadioInfo();
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      fetchRadioInfo();
-    }, 3000);
-
-    return () => clearInterval(interval);
-  });
-
-  /*const createAudioContext = () => {
-    // check if SSR
-    if (typeof window === "undefined") return;
-
-    const audio = audioElementRef.current;
-    if (!audio) return;
-
-    // if analyser already exists, return
-    if (analyserRef.current) return;
-
-    const audioCtx = audioContextRef.current;
-    if (!audioCtx) return;
-
-    
-
-    visualize();
-  };*/
-
   const visualize = () => {
     if (!analyserRef.current) return;
 
@@ -167,11 +192,7 @@ const RadioWindow = (props: RadioWindowProps) => {
     const bufferLength = analyser.frequencyBinCount;
     const dataArray = new Uint8Array(bufferLength);
 
-    // console.log(dataArray);
-
     analyser.getByteFrequencyData(dataArray);
-
-    //console.log(dataArray);
 
     const canvas = canvasRef.current;
     if (!canvas) return;
@@ -226,7 +247,7 @@ const RadioWindow = (props: RadioWindowProps) => {
           <div class="mt-2 pb-3 mb-1 border-b border-black flex items-center justify-between">
             <div>
               <span>Current Station</span>
-              <p class="text-xl leading-4">Simon FM 98.3</p>
+              <p class="text-xl leading-4">Radio 1988 FOREVER</p>
             </div>
 
             <button
@@ -260,6 +281,9 @@ const RadioWindow = (props: RadioWindowProps) => {
                         ? "animate-bounce-marquee"
                         : ""
                     }`}
+                    style={{
+                      animationDuration: `${currentlyPlaying.length * 0.4}s`,
+                    }}
                     dangerouslySetInnerHTML={{
                       __html: currentlyPlaying,
                     }}

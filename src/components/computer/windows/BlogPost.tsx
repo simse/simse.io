@@ -7,17 +7,23 @@ import { formatDateWithYear } from "@utils/date";
 
 interface BlogPostProps extends WindowProps {
   postSlug?: string;
+  prefetchedPost?: {
+    html: string;
+    frontmatter: BlogPostFrontmatter;
+  };
 }
 
 type BlogPostFrontmatter = CollectionEntry<"blog">["data"];
 
 const BlogPost = (props: BlogPostProps) => {
   const postSlug = props.postSlug || "";
-  const [postHTML, setPostHTML] = useState("");
-  const [postFrontMatter, setPostFrontMatter] = useState<BlogPostFrontmatter>();
-  const [isLoaded, setIsLoaded] = useState(false);
+  const [postHTML, setPostHTML] = useState(props.prefetchedPost?.html || "");
+  const [postFrontMatter, setPostFrontMatter] = useState<BlogPostFrontmatter | null>(props.prefetchedPost?.frontmatter || null);
+  const [isLoaded, setIsLoaded] = useState(props.prefetchedPost ? true : false);
 
   useEffect(() => {
+    if (props.prefetchedPost) return;
+
     fetch(`/api/blog/${postSlug}`)
       .then((response) => response.json())
       .then((post) => {
@@ -48,13 +54,13 @@ const BlogPost = (props: BlogPostProps) => {
           <header class="mb-3">
             <h1 class="text-2xl">{postFrontMatter?.title}</h1>
             {postFrontMatter?.published && (
-              <span>{formatDateWithYear(postFrontMatter.published)}</span>
+              <span>{formatDateWithYear(new Date(postFrontMatter.published))}</span>
             )}
           </header>
 
           <div
             class="pr-2 prose text-xs font-sans-alt leading-5 prose-pre:rounded-none
-            prose-pre:border prose-pre:border-black prose-hr:border-black"
+            prose-pre:border prose-pre:border-black prose-hr:border-black pb-4"
             dangerouslySetInnerHTML={{
               __html: postHTML,
             }}

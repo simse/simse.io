@@ -1,8 +1,9 @@
 ---
 import { getCollection } from 'astro:content';
-import Computer from '@components/computer';
-import BaseLayout from '@layouts/BaseLayout.astro';
+import ComputerWrapper from '@components/ComputerWrapper.astro';
+import { getEntryBySlug } from 'astro:content';
 
+/*
 export async function getStaticPaths() {
   const blogEntries = await getCollection('blog');
   
@@ -10,13 +11,27 @@ export async function getStaticPaths() {
     params: { slug: entry.slug }, props: { entry },
   }));
 }
+*/
 
-const posts = await getCollection('blog');
+// export const prerender = true;
 
+const { slug } = Astro.params;
 
+if (!slug) {
+  return {
+    status: 404,
+    error: new Error('Not found'),
+  };
+}
 
-
+// load markdown file
+const post = await import(`../../content/blog/${slug}.md`);
 ---
-<BaseLayout title="simonOS">
-  <Computer blogPosts={posts} client:load transition:persist="computer" />
-</BaseLayout>
+<ComputerWrapper initialStateAction={{
+  type: 'openBlogPost',
+  postSlug: slug,
+  prefetchedPost: {
+    frontmatter: post.frontmatter,
+    html: post.compiledContent().replaceAll('’', "'").replaceAll('…', '...'),
+  },
+}} />

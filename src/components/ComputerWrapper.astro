@@ -1,5 +1,6 @@
 ---
 import { getCollection } from "astro:content";
+import type {InitialStateAction} from "@components/computer/types";
 
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Computer from "@components/computer";
@@ -21,7 +22,13 @@ blogPosts = blogPosts.map((post) => {
 blogPosts.sort((a, b) => {
   return +new Date(b.data.published) - +new Date(a.data.published);
 });
+
+interface Props {
+  initialStateAction?: InitialStateAction;
+}
+
+const props = Astro.props;
 ---
 <BaseLayout title="simonOS">
-  <Computer blogPosts={blogPosts} client:load />
+  <Computer blogPosts={blogPosts} initialStateAction={props.initialStateAction} client:load />
 </BaseLayout>

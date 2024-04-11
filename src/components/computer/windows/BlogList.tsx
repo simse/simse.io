@@ -26,22 +26,24 @@ const BlogList = (props: BlogListProps) => {
       <div class="flex flex-col h-full">
         <ul>
           {posts.map((post) => (
-            <li class="flex mb-2 pb-2 border-b border-black items-center">
+            <li class="flex mb-2 pb-2 border-b border-black last:border-transparent items-center">
               <div class="bg-red-100 w-14 h-14 mr-4" />
 
               <button 
                 class={`text-left p-1 border border-dotted border-transparent ${selectedPost === post.slug ? "bg-black text-white border-white" : ""}`}
                 onClick={() => {
-                  if (selectedPost === post.slug) {
-                    openWindow({
-                      title: "Blog Post",
-                      component: BlogPost,
-                      postSlug: post.slug,
-                      type: "blogPost",
-                      id: `blog-${post.slug}`
-                    });
-                  }
-                  setSelectedPost(post.slug);
+                  openWindow({
+                    title: "Blog Post",
+                    component: BlogPost,
+                    postSlug: post.slug,
+                    type: "blogPost",
+                    id: `blog-${post.slug}`,
+                    meta: {
+                      title: post.data.title,
+                      description: "A blog post",
+                      path: `/blog/${post.slug}`,
+                    }
+                  });
                 }}
               >
                 <span class="text-xl leading-none">{post.data.title}</span>

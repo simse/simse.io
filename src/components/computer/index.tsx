@@ -1,12 +1,13 @@
-import { useState } from "preact/hooks";
+import { useLayoutEffect, useState } from "preact/hooks";
 import type { CollectionEntry } from "astro:content";
 
 import TopBar from "./TopBar";
 import BiographyWindow from "./windows/Biography";
 import BlogList from "./windows/BlogList";
+import BlogPost from "./windows/BlogPost";
 import RadioWindow from "./windows/Radio";
 import Desktop from "./Desktop";
-import type { WindowType } from "./types";
+import type { InitialStateAction, WindowType } from "./types";
 
 import BiographyIcon from "@assets/desktop_icons/msagent-3.png";
 import BlogIcon from "@assets/desktop_icons/address_book_pad.png";
@@ -15,40 +16,88 @@ import useSize from "@utils/useSize";
 
 interface ComputerProps {
   blogPosts: CollectionEntry<"blog">[];
+  initialStateAction?: InitialStateAction;
 }
 
-const Computer = ({ blogPosts }: ComputerProps) => {
+const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
   const BiographyWindowDefinition: WindowType = {
     title: "Biography",
     component: BiographyWindow,
-    id: 'biography',
+    id: "biography",
     type: "biography",
+    meta: {
+      title: "Biography",
+      description: "Simon's biography",
+      path: "/",
+    }
   };
-  
+
   const BlogWindowDefinition: WindowType = {
     title: "Blog",
     component: BlogList,
-    id: 'blog',
+    id: "blog",
     type: "blogList",
     posts: blogPosts,
-    associatedPath: "/blog",
+    meta: {
+      title: "Blog",
+      description: "Simon's blog",
+      path: "/blog",
+    }
   };
-  
+
   const RadioWindowDefinition: WindowType = {
     title: "Radio",
     component: RadioWindow,
-    id: 'radio',
+    id: "radio",
     type: "radio",
+    meta: {
+      title: "Radio",
+      description: "Simon's radio",
+      path: "/",
+    }
   };
 
-  const size = useSize();
+  const [windowWidth, setWindowWidth] = useState(0);
 
-  const [windows, setWindows] = useState<WindowType[]>([
-    BiographyWindowDefinition,
-    BlogWindowDefinition,
-    RadioWindowDefinition,
-  ]);
-  const [windowStack, setWindowStack] = useState<string[]>(['biography', 'blog', 'radio']);
+  useLayoutEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+    handleResize();
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  const initialStateWindow = (): WindowType | undefined => {
+    if (initialStateAction?.type === "openBlogPost") {
+      return {
+        title: "Blog Post",
+        component: BlogPost,
+        postSlug: initialStateAction.postSlug,
+        type: "blogPost",
+        id: `blog-${initialStateAction.postSlug}`,
+        associatedPath: `/blog/${initialStateAction.postSlug}`,
+        prefetchedPost: initialStateAction.prefetchedPost,
+      };
+    }
+  };
+
+  const [windows, setWindows] = useState<WindowType[]>(
+    [
+      BiographyWindowDefinition,
+      BlogWindowDefinition,
+      RadioWindowDefinition,
+      initialStateWindow(),
+    ].filter(Boolean) as WindowType[]
+  );
+  const [windowStack, setWindowStack] = useState<string[]>([
+    "radio",
+    "blog",
+    "biography",
+    initialStateWindow()?.id,
+  ].filter(Boolean) as string[]);
 
   const getWindow = (id: string) => windows.find((window) => window.id === id);
 
@@ -56,6 +105,14 @@ const Computer = ({ blogPosts }: ComputerProps) => {
     setWindows((prevWindows) =>
       prevWindows.filter((prevWindow) => prevWindow.id !== id)
     );
+    setWindowStack((prevStack) => prevStack.filter((stackId) => stackId !== id));
+
+    const newTopWindow = getWindow(windowStack[windowStack.length - 2]);
+    if (newTopWindow) {
+      updateMeta(newTopWindow);
+    } else {
+      history.pushState({}, "", "/");
+    }
   };
 
   const touchWindow = (id: string) => {
@@ -66,14 +123,24 @@ const Computer = ({ blogPosts }: ComputerProps) => {
     });
 
     const window = getWindow(id);
-    if (window?.associatedPath) {
-      history.pushState({}, "", getWindow(id)?.associatedPath);
-    }
-
-    if (window?.title) {
-      document.title = `simonOS—${window.title}`;
+    if (window) {
+      updateMeta(window);
     }
   };
+
+  const updateMeta = (window: WindowType) => {
+    if (window.meta) {
+      history.pushState({}, "", window.meta.path);
+      document.title = window.meta.title + "—simonOS";
+      
+      const description = document.querySelector('meta[name="description"]');
+      if (description) {
+        description.setAttribute("content", window.meta.description);
+      }
+    } else {
+      history.pushState({}, "", "/");
+    }
+  }
 
   const openWindow = (window: WindowType) => {
     if (windows.find((prevWindow) => prevWindow.id === window.id)) {
@@ -82,8 +149,13 @@ const Computer = ({ blogPosts }: ComputerProps) => {
     }
 
     setWindows((prevWindows) => [...prevWindows, window]);
-    touchWindow(window.id);
-  }
+    setWindowStack((prevStack) => {
+      const newStack = prevStack.filter((stackId) => stackId !== window.id);
+      newStack.push(window.id);
+      return newStack;
+    });
+    updateMeta(window);
+  };
 
   return (
     <div class="sm:max-h-screen sm:overflow-hidden pb-4 sm:pb-0 sm:h-screen">
@@ -100,7 +172,7 @@ const Computer = ({ blogPosts }: ComputerProps) => {
               onClose={() => closeWindow(window.id)}
               onTouch={() => {
                 // if on desktop
-                if (size[0] > 640) {
+                if (windowWidth > 640) {
                   touchWindow(window.id);
                 }
               }}

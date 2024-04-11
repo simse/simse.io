@@ -14,9 +14,9 @@ const BiographyWindow = (props: BiographyWindowProps) => {
     >
       <div class="float-left mr-3">
         <img
-          src={SimonPicture.src}
+          src={`/cdn-cgi/image/width=200,quality=75,format=avif${SimonPicture.src}`}
           alt="Simon"
-          class="w-28 h-28 mb-2"
+          class="w-28 h-28 mb-1 bg-black/10"
           style={{
             imageRendering: "pixelated",
           }}
