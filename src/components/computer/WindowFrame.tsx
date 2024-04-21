@@ -16,6 +16,7 @@ interface WindowFrameProps extends WindowProps {
 
 const WindowFrame = ({
   children,
+  id,
   title,
   initialPosition = { x: 0, y: 0 },
   initialPositionLabel,
@@ -119,6 +120,7 @@ const WindowFrame = ({
       }}
       onMouseDown={onTouch}
       ref={windowRef}
+      id={id}
     >
       <header
         class="text-center flex justify-between select-none items-center sticky"

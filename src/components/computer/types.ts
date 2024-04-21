@@ -43,11 +43,13 @@ type WindowType =
 
 interface WindowProps {
   title?: string;
+  id: string;
   order: number;
   onClose: () => void;
   onTouch: () => void;
   openWindow: (window: WindowType) => void;
 }
+
 
 interface InitialStateAction {
   type: "openBlogPost";

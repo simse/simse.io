@@ -88,12 +88,12 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
     [
       BiographyWindowDefinition,
       BlogWindowDefinition,
-      RadioWindowDefinition,
+      // RadioWindowDefinition,
       initialStateWindow(),
     ].filter(Boolean) as WindowType[]
   );
   const [windowStack, setWindowStack] = useState<string[]>([
-    "radio",
+    // "radio",
     "blog",
     "biography",
     initialStateWindow()?.id,
@@ -116,11 +116,21 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
   };
 
   const touchWindow = (id: string) => {
-    setWindowStack((prevStack) => {
-      const newStack = prevStack.filter((stackId) => stackId !== id);
-      newStack.push(id);
-      return newStack;
-    });
+    if (windowWidth <= 640) {
+      const windowElement = document.getElementById(id);
+      if (windowElement) {
+        windowElement.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    } else {
+      setWindowStack((prevStack) => {
+        const newStack = prevStack.filter((stackId) => stackId !== id);
+        newStack.push(id);
+        return newStack;
+      });
+    }
 
     const window = getWindow(id);
     if (window) {
@@ -142,19 +152,24 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
     }
   }
 
-  const openWindow = (window: WindowType) => {
-    if (windows.find((prevWindow) => prevWindow.id === window.id)) {
-      touchWindow(window.id);
+  const openWindow = (newWindow: WindowType) => {
+    // if on mobile, navigate to path instead
+    if (windowWidth <= 640) {
+      window.location.href = newWindow.meta?.path || "/";
+    }
+
+    if (windows.find((prevWindow) => prevWindow.id === newWindow.id)) {
+      touchWindow(newWindow.id);
       return;
     }
 
-    setWindows((prevWindows) => [...prevWindows, window]);
+    setWindows((prevWindows) => [...prevWindows, newWindow]);
     setWindowStack((prevStack) => {
-      const newStack = prevStack.filter((stackId) => stackId !== window.id);
-      newStack.push(window.id);
+      const newStack = prevStack.filter((stackId) => stackId !== newWindow.id);
+      newStack.push(newWindow.id);
       return newStack;
     });
-    updateMeta(window);
+    updateMeta(newWindow);
   };
 
   return (
@@ -194,11 +209,11 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
               icon: BlogIcon,
               onDoubleClick: () => openWindow(BlogWindowDefinition),
             },
-            {
+            /*{
               name: "Radio",
               icon: RadioIcon,
               onDoubleClick: () => openWindow(RadioWindowDefinition),
-            },
+            },*/
           ]}
         />
       </div>
