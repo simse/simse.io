@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-italic {
+    font-family: ElstobItalic;
+    font-style: italic;
+  }
+}
+
+.blog {
+  text-align: justify;
+  @apply text-lg;
+
+  p {
+    @apply my-4;
+  }
+
+  hr {
+    @apply my-8;
+    @apply border-black/20;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 1.5rem;
+  }
+
+  h4,
+  h5,
+  h6 {
+    font-feature-settings: 'smcp' on;
+  }
+
+  h1 {
+    @apply text-3xl;
+  }
+
+  h2 {
+    @apply text-2xl;
+  }
+
+  h3 {
+    @apply text-xl;
+  }
+
+  h4 {
+    @apply text-lg;
+  }
+
+  h5 {
+    @apply text-base;
+    @apply font-bold;
+  }
+
+  h6 {
+    @apply text-base;
+    @apply font-bold;
+  }
+}

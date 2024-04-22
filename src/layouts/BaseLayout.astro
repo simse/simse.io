@@ -1,6 +1,6 @@
 ---
 import { ViewTransitions } from 'astro:transitions';
-import "../app.css";
+import "../app.scss";
 
 interface Props {
     title: string;
@@ -16,7 +16,7 @@ const createTitle = (title: string) => {
 };
 ---
 
-<html lang="en" transition:animate="none">
+<html lang="en" transition:animate="fade">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/ico" href="/favicon.ico" />
@@ -25,28 +25,21 @@ const createTitle = (title: string) => {
 		<meta name="robots" content="noindex,nofollow" />
 		<title>{createTitle(title)}</title>
 		{canonical && <link rel="canonical" href={`https://sorensen.engineer${canonical}`} />}
-		<style>
+		<style is:global>
 			@font-face {
-				font-family: 'Figtree';
-				src: url('/fonts/Figtree.woff2') format('woff2-variations');
-				src: url('/fonts/Figtree.woff2') format('woff2') tech('variations');
-				font-weight: 100 1000;
-				font-stretch: 25% 151%;
+				font-family: 'Elstob';
+				src: url('/fonts/Elstob.woff2');
 				font-display: swap;
 			}
 			@font-face {
-				font-family: 'FigtreeItalic';
-				src: url('/fonts/Figtree-Italic.woff2') format('woff2-variations');
-				src: url('/fonts/Figtree-Italic.woff2') format('woff2') tech('variations');
-				font-weight: 100 1000;
-				font-stretch: 25% 151%;
-				font-style: italic;
+				font-family: 'ElstobItalic';
+				src: url('/fonts/Elstob-Italic.woff2');
 				font-display: swap;
 			}
 		</style>
 		<ViewTransitions />
 	</head>
-	<body class="bg-zinc-950 text-zinc-100">
+	<body class="text-slate-950 bg-amber-50 font-serif">
 		<slot />
 	</body>
 </html>

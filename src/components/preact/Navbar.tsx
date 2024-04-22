@@ -94,10 +94,8 @@ const Navbar = ({
     <>
       <nav
         className={`
-          px-1 md:px-4 py-3 flex justify-between items-center rounded-b-lg z-40 sticky mx-auto
-          backdrop-blur-sm top-0 w-full max-w-6xl border-x border-b border-transparent transition-colors
-          ${isMenuOpen ? "bg-transparent" : "bg-zinc-950/90"}
-          ${isPageScrolled && !isMenuOpen ? "border-zinc-700" : ""}
+          py-4 px-2 flex justify-between items-center rounded-b-lg z-40 mx-auto
+          backdrop-blur-sm w-full max-w-2xl border-x border-b border-transparent transition-colors
         `}
       >
         <a
@@ -105,17 +103,7 @@ const Navbar = ({
           href="/"
           onMouseEnter={handleLogoHover}
         >
-          <video
-            muted
-            playsinline
-            poster={logo.src}
-            className="mr-2 h-8 w-8"
-            ref={logoRef}
-          >
-            <source src="/logo.webm" type="video/webm" />
-          </video>
-
-          <span className="font-bold">Simon Sorensen</span>
+          <span className="text-lg font-semibold">Simon Sorensen</span>
         </a>
 
         <ul className={"ml-auto flex items-center"}>
@@ -124,8 +112,8 @@ const Navbar = ({
               <a
                 className={`
                   p-2 ${
-                    item.title === activeItem ? "font-bold" : "text-zinc-300"
-                  } hover:text-zinc-50
+                    item.title === activeItem ? "font-bold" : "text-black/50"
+                  } hover:text-black
                   transition-all ${isMenuOpen ? "opacity-0" : "opacity-100"}
                 `}
                 href={item.link}
@@ -136,7 +124,7 @@ const Navbar = ({
             </li>
           ))}
 
-          <li className="ml-4">
+          {/* <li className="ml-4">
             <button
               className="px-2 text-sm rounded-full font-bold flex items-center gap-1 uppercase"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
@@ -147,7 +135,7 @@ const Navbar = ({
                 {speakerIcon}
               </div>}
             </button>
-          </li>
+          </li> */}
         </ul>
 
       </nav>

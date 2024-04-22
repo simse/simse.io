@@ -1,31 +1,41 @@
 ---
-import type { CollectionEntry } from "astro:content";
+import { PortableText } from "astro-portabletext";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Navbar from "@components/Navbar.astro";
 import PublishDate from "@components/blog/PublishDate.astro";
+import Hr from "@components/blog/blocks/Hr.astro";
+import type { Post } from "src/cms";
 
 interface Props {
-  post: CollectionEntry<"blog">;
+  post: Post;
 }
 
 const { post } = Astro.props;
-const { Content } = await post.render();
 ---
-
-<BaseLayout title={post.data.title} canonical={`/${post.slug}`}>
+<BaseLayout title={post.title} canonical={`/${post.slug}`}>
   <Navbar activeItem="Blog" />
 
-  <main class="max-w-2xl mx-auto pt-8 px-2 pb-12">
+  <main class="max-w-xl mx-auto pt-8 px-2 pb-12">
     <header class="mb-8">
-      <h1 class="text-2xl font-bold mb-2">{post.data.title}</h1>
+      <h1 class="text-3xl mb-2">{post.title}</h1>
       <PublishDate
-        published={post.data.published}
-        updated={post.data.updated}
+        published={post.published}
       />
     </header>
 
-    <article class="text-zinc-200 prose prose-invert">
-      <Content />
+    <article class="blog">
+      <PortableText
+        value={post.content}
+        components={{
+          type: {
+            break: Hr,
+          }
+        }}
+        onMissingComponent={(type) => {
+          console.warn(`Component not found: ${type}`);
+          return null;
+        }}
+      />
     </article>
   </main>
 </BaseLayout>

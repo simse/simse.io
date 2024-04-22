@@ -1,62 +1,53 @@
 ---
 import { Icon } from "astro-icon/components";
 import { getCollection } from "astro:content";
+import { sanityClient } from "sanity:client";
 import { formatDateWithYear } from "@utils/date";
 
-let posts = await getCollection("blog");
+interface Post {
+  image: {
+    asset: {
+      url: string;
+    };
+  };
+  title: string;
+  slug: {
+    current: string;
+  };
+  published: string;
+  content: any;
+}
 
-// filter out drafts
-posts = posts.filter((post) => {
-  return !post.data.draft;
-});
-
-// sort by date
-posts = posts.sort((a, b) => {
-  return +b.data.published - +a.data.published;
-});
+const posts = await sanityClient.fetch<Post[]>(`*[_type == "post" && defined(slug)] | order(publishedAt desc)`);
 ---
 
-<section class="mb-8 max-w-6xl mx-auto px-4">
+<section class="my-8">
   <a href="/blog">
-    <h2 class="font-bold text-xl mb-2">Blog</h2>
+    <h2 class="text-xl mb-2">Blog Posts</h2>
   </a>
-  <div class="w-full overflow-auto rounded mb-2">
-    <table class="w-full border border-zinc-700">
-      <thead class="[&_tr]:border-b [&_tr]:border-zinc-700 bg-zinc-800"
-        ><tr class="border-b border-zinc-700 font-bold text-left"
-          ><th class="py-2 px-3 hidden md:table-cell">Date</th><th class="py-2 px-3">Title</th><th
-            class="py-2 px-3">Link</th
-          ></tr
-        ></thead
-      >
-      <tbody>
-        {
-          posts.slice(0, 10).map((post) => (
-            <tr class="border-b border-zinc-700 bg-zinc-900">
-                <td class="p-3 align-middle font-bold w-48 hidden md:table-cell">
-                  {formatDateWithYear(post.data.published)}
-                </td>
-                <td class="p-3 align-middle">
-                  <span class="md:hidden text-zinc-300 text-sm">{formatDateWithYear(post.data.published)}<br /></span>
-                  {post.data.title}
-                </td>
-                <td class="p-3 align-middle">
-                  <a
-                    class="bg-blue-600 hover:bg-blue-700 transition-colors px-3 py-1 pr-2 rounded-full flex items-center w-fit"
-                    href={`/${post.slug}`}
-                  >
-                    Read <Icon name="tabler:arrow-narrow-right" class="inline mb-0.5" size={20} />
-                  </a>
-                </td>
-            </tr>
-          ))
-        }
-      </tbody>
-    </table>
-  </div>
+  
+  <ul class="">
+    {posts.map((post) => (
+        <li>
+            <a
+                class="py-2 grid grid-cols-10 items-center border-b border-black/20 hover:bg-black/5 transition-colors"
+                href={`/${post.slug.current}`}
+            >
+              <span class="col-span-8 md:col-span-6">
+                  <span class="text-zinc-400 text-sm md:hidden">{formatDateWithYear(new Date(post.published))} <br/></span>
 
-  <a class="text-zinc-400 flex items-center gap-1" href="/blog">
-    See all posts
-    <Icon name="tabler:arrow-right" size={20} />
-  </a>
+                  {post.title}
+              </span>
+              <span class="hidden md:block md:col-span-2 text-black/60">
+                  {formatDateWithYear(new Date(post.published))}
+              </span>
+              <button
+                  class="col-span-2 justify-self-end py-1 flex items-center w-fit"
+              >
+                  Read <Icon name="tabler:arrow-narrow-right" class="" size={20} />
+              </button>
+          </a>    
+      </li>
+    ))}
+</ul>
 </section>

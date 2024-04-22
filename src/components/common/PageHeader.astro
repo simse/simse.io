@@ -8,6 +8,6 @@ interface Props {
 const { title, subtitle } = Astro.props;
 ---
 <header class="mb-12">
-    <h1 class="text-3xl mb-2">{title}</h1>
-    {subtitle && <span class="text-zinc-400" set:html={subtitle} />}
+    <h1 class="text-2xl mb-2">{title}</h1>
+    {subtitle && <span class="text-black/70" set:html={subtitle} />}
 </header>

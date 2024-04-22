@@ -1,18 +1,15 @@
 ---
-import { getCollection } from 'astro:content';
 import BlogPostPage from '@templates/BlogPostPage.astro';
+import { getPosts } from 'src/cms';
 
 export async function getStaticPaths() {
-  const blogEntries = await getCollection('blog');
+  const blogPosts = await getPosts();
   
-  return blogEntries.map(entry => ({
+  return blogPosts.map(entry => ({
     params: { slug: entry.slug }, props: { entry },
   }));
 }
 
-export const prerender = true;
-
 const { entry } = Astro.props;
-
 ---
 <BlogPostPage post={entry} />

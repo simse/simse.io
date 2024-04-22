@@ -8,7 +8,7 @@ interface Props {
 
 const { activeItem } = Astro.props;
 ---
-<NavbarComponent client:load activeItem={activeItem} transition:persist>
+<NavbarComponent client:load activeItem={activeItem}>
     <Icon name="tabler:menu" size={20} slot="openMenuIcon" />
     <Icon name="tabler:x" size={18} slot="closeMenuIcon" />
     <Icon name="tabler:arrow-up-right" size={16} slot="linkIcon" />
