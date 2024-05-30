@@ -24,22 +24,17 @@ const createTitle = (title: string) => {
 		<meta name="generator" content={Astro.generator} />
 		<meta name="robots" content="noindex,nofollow" />
 		<title>{createTitle(title)}</title>
-		{canonical && <link rel="canonical" href={`https://sorensen.engineer${canonical}`} />}
+		{canonical && <link rel="canonical" href={`https://simse.io${canonical}`} />}
 		<style is:global>
 			@font-face {
-				font-family: 'Elstob';
-				src: url('/fonts/Elstob.woff2');
-				font-display: swap;
-			}
-			@font-face {
-				font-family: 'ElstobItalic';
-				src: url('/fonts/Elstob-Italic.woff2');
+				font-family: 'Soehne';
+				src: url('/fonts/Soehne-Regular.woff2');
 				font-display: swap;
 			}
 		</style>
 		<ViewTransitions />
 	</head>
-	<body class="text-slate-950 bg-amber-50 font-serif">
+	<body class="bg-zinc-50 text-zinc-950 dark:text-zinc-100 dark:bg-zinc-950">
 		<slot />
 	</body>
 </html>

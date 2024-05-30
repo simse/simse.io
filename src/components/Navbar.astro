@@ -1,16 +1,48 @@
 ---
-import NavbarComponent from "@components/preact/Navbar";
-import { Icon } from 'astro-icon/components';
-
 interface Props {
-    activeItem?: 'Home' | 'Blog' | 'Projects' | 'Contact';
+  activeItem?: "Home" | "Blog" | "Projects" | "Contact";
 }
+
+const items = [
+  {
+    title: "Home",
+    link: "/",
+  },
+  {
+    title: "Blog",
+    link: "/blog",
+  },
+  {
+    title: "Projects",
+    link: "/projects",
+  },
+];
 
 const { activeItem } = Astro.props;
 ---
-<NavbarComponent client:load activeItem={activeItem}>
-    <Icon name="tabler:menu" size={20} slot="openMenuIcon" />
-    <Icon name="tabler:x" size={18} slot="closeMenuIcon" />
-    <Icon name="tabler:arrow-up-right" size={16} slot="linkIcon" />
-    <Icon name="tabler:volume" size={16} slot="speakerIcon" />
-</NavbarComponent>
+
+<nav
+  class="py-4 px-2 flex justify-between items-center mx-auto max-w-2xl"
+>
+  <a class="text-lg" href="/">simse.io</a>
+
+  <ul class={"ml-auto flex items-center"}>
+    {
+      items.map((item) => (
+        <li>
+          <a
+            class={`
+                  p-2 ${
+                    item.title === activeItem ? "font-bold" : "text-black/50 dark:text-white/60"
+                  } hover:text-black dark:hover:text-white transition-colors
+                `}
+            href={item.link}
+            data-astro-prefetch
+          >
+            {item.title}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>

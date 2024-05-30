@@ -1,36 +1,37 @@
 ---
 import { Icon } from "astro-icon/components";
-import { getCollection } from "astro:content";
 
-const projects = await getCollection("projects");
+import { getProjects } from "src/cms";
+
+
+const projects = await getProjects();
 ---
-<section class="my-8">
-  <a href="/blog">
-    <h2 class="text-xl mb-2">Projects</h2>
-  </a>
-  
-  <ul class="">
-    {projects.map((project) => (
-        <li>
-            <a
-                class="py-2 grid grid-cols-10 items-center border-b border-black/20 hover:bg-black/5 transition-colors"
-                href={`/${project.slug}`}
-            >
-                <span class="col-span-2">
-                    <span class="text-zinc-400 text-sm md:hidden"></span>
 
-                    {project.data.title}
-                </span>
-                <span class="col-span-6 text-black/60">
-                    {project.data.description}
-                </span>
-                <button
-                    class="col-span-2 justify-self-end py-1 flex items-center w-fit"
-                >
-                    More <Icon name="tabler:arrow-narrow-right" class="" size={20} />
-                </button>
-            </a>    
+<section class="my-8">
+  <a href="/projects">
+    <h2 class="text-lg font-semibold mb-2">Projects</h2>
+  </a>
+
+  <ul>
+    {
+      projects.map((project) => (
+        <li>
+          <a
+            class="py-2 grid grid-cols-10 items-center border-b border-black/20 dark:border-white/20 hover:bg-black/5 transition-colors"
+            href={`/${project.slug}`}
+          >
+            <span class="col-span-2">
+              <span class="text-zinc-400 text-sm md:hidden" />
+
+              {project.title}
+            </span>
+            <span class="col-span-6 text-black/70 dark:text-white/70">{project.description}</span>
+            <button class="col-span-2 justify-self-end py-0.5 px-2 flex items-center w-fit bg-purple-400 dark:bg-purple-800">
+              More <Icon name="tabler:arrow-narrow-right" class="" size={20} />
+            </button>
+          </a>
         </li>
-    ))}
-</ul>
+      ))
+    }
+  </ul>
 </section>

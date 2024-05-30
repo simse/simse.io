@@ -6,7 +6,7 @@ export default {
 	theme: {
 		extend: {
 			fontFamily: {
-				serif: ['Elstob', 'serif'],
+				sans: ['Soehne', 'sans-serif'],
 			},
 			keyframes: {
 				'fade-in': {
@@ -25,10 +25,5 @@ export default {
 	},
 	plugins: [
 		require('@tailwindcss/typography'),
-		plugin(function({ addBase }) {
-			addBase({
-			   'html': { fontSize: "18px" },
-			 })
-		   }),
 	],
 }

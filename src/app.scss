@@ -2,24 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer utilities {
-  .text-italic {
-    font-family: ElstobItalic;
-    font-style: italic;
-  }
-}
-
-.blog {
-  text-align: justify;
-  @apply text-lg;
-
+.text {
   p {
-    @apply my-4;
+    @apply my-6;
+    @apply text-lg;
+
+    &:first-child {
+      @apply mt-0;
+    }
   }
 
   hr {
     @apply my-8;
-    @apply border-black/20;
   }
 
   h1,

@@ -1,39 +1,25 @@
 import { defineConfig, passthroughImageService } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
 import tailwind from "@astrojs/tailwind";
-import react from "@astrojs/react";
-import markdoc from "@astrojs/markdoc";
 import icon from "astro-icon";
-import preact from "@astrojs/preact";
-
 import sanity from "@sanity/astro";
+
+import react from "@astrojs/react";
 
 // https://astro.build/config
 export default defineConfig({
   output: "hybrid",
   adapter: cloudflare({
-    imageService: "cloudflare",
+    imageService: "cloudflare"
   }),
-  integrations: [
-    tailwind(),
-    markdoc(),
-    icon(),
-    preact({
-      compat: true,
-      include: "**/preact/*",
-    }),
-    react({
-      include: "**/react/*",
-    }),
-    sanity({
-      projectId: "rjqusm5i",
-      dataset: "production",
-      useCdn: true,
-      studioBasePath: '/cms',
-    }),
-  ],
+  integrations: [tailwind(), icon(), sanity({
+    projectId: "rjqusm5i",
+    dataset: "production",
+    useCdn: true,
+    studioBasePath: '/cms'
+  }), react()],
   image: {
-    service: passthroughImageService(),
+    service: passthroughImageService()
   },
-  prefetch: true,
+  prefetch: true
 });

@@ -1,9 +1,9 @@
 ---
-import { PortableText } from "astro-portabletext";
 import BaseLayout from "@layouts/BaseLayout.astro";
 import Navbar from "@components/Navbar.astro";
 import PublishDate from "@components/blog/PublishDate.astro";
-import Hr from "@components/blog/blocks/Hr.astro";
+import Text from "@components/text/Text.astro";
+import { getImageBuilder } from "src/cms";
 import type { Post } from "src/cms";
 
 interface Props {
@@ -11,31 +11,27 @@ interface Props {
 }
 
 const { post } = Astro.props;
+
+const image = await getImageBuilder(post.image);
 ---
 <BaseLayout title={post.title} canonical={`/${post.slug}`}>
-  <Navbar activeItem="Blog" />
+  <Navbar />
 
-  <main class="max-w-xl mx-auto pt-8 px-2 pb-12">
-    <header class="mb-8">
-      <h1 class="text-3xl mb-2">{post.title}</h1>
-      <PublishDate
-        published={post.published}
-      />
-    </header>
+  <header class="my-16 text-center max-w-2xl mx-auto ">
+    <PublishDate
+      published={post.published}
+    />
+    <h1 class="text-xl md:text-2xl lg:text-3xl my-2">{post.title}</h1>
+  </header>
 
-    <article class="blog">
-      <PortableText
-        value={post.content}
-        components={{
-          type: {
-            break: Hr,
-          }
-        }}
-        onMissingComponent={(type) => {
-          console.warn(`Component not found: ${type}`);
-          return null;
-        }}
-      />
-    </article>
+  {post.image && <figure class="my-16 max-w-4xl mx-auto">
+    <img class="w-full mb-2 rounded aspect-[3/2] bg-zinc-900" src={image.width(1200).height(800).url()} />
+
+    <figcaption class="text-sm text-zinc-700 dark:text-zinc-400">This is an image</figcaption>
+  </figure>}
+
+  <main class="max-w-2xl mx-auto px-2 pb-12">
+    <Text content={post.content} />
   </main>
+
 </BaseLayout>

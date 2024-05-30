@@ -1,0 +1,71 @@
+---
+import { Image } from "astro:assets";
+import legoLogo from "../../assets/lego.png";
+
+const workExperience = [
+  {
+    title: "Junior Software Engineer",
+    officialTitle: "Associate IT Engineer",
+    startDate: new Date("2024-06-10"),
+    endDate: null,
+    location: "London, UK",
+    locationFlag: "",
+    employer: "The LEGO Group"
+  },
+  {
+    title: "Software Engineering Intern",
+    officialTitle: "Intern",
+    startDate: new Date("2022-03-07"),
+    endDate: new Date("2024-03-01"),
+    location: "London, UK",
+    locationFlag: "",
+    employer: "The LEGO Group"
+  },
+  {
+    title: "Student Worker",
+    officialTitle: "Student Worker",
+    startDate: new Date("2021-03-01"),
+    endDate: new Date("2021-10-01"),
+    location: "Billund, DK",
+    locationFlag: "",
+    employer: "The LEGO Group"
+  },
+]
+
+const formatDate = (date: Date | null): string => {
+  if (date === null) {
+    return "Current";
+  }
+
+  return date.toLocaleDateString("en-US", {
+    year: 'numeric',
+    month: 'long',
+  });
+}
+---
+
+<section class="my-8 mb-16">
+  <a href="/cv">
+    <h2 class="text-lg font-semibold mb-2">Experience</h2>
+  </a>
+
+  <ul>
+    {workExperience.map(experience => (
+      <li class={`p-3 rounded mb-2 hover:bg-zinc-900 transition-colors`}>
+        <div class="flex justify-between items-center">
+          <div>
+            <h3 class="text-lg">{experience.title}</h3>
+            <span class="text-zinc-400 font-medium flex items-center gap-2">
+              <Image src={legoLogo} alt={`${experience.employer} official logo`} class="w-4 h-4" /> {experience.employer}
+            </span>
+          </div>
+
+          <div class="text-right">
+            <span>{formatDate(experience.startDate)} — {formatDate(experience.endDate)}</span>
+            <p class="text-zinc-700 dark:text-zinc-400">{experience.locationFlag} {experience.location}</p>
+          </div>
+        </div>
+      </li>
+    ))}
+  </ul>
+</section>

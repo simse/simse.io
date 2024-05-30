@@ -4,14 +4,18 @@ import Navbar from "@components/Navbar.astro";
 import BlogSection from "@components/homepage/BlogSection.astro";
 import ProjectSection from "@components/homepage/ProjectSection.astro";
 import Hero from "@components/homepage/Hero.astro";
+import WorkExperienceSection from "../components/homepage/WorkExperienceSection.astro";
+import AboutSection from "../components/homepage/AboutSection.astro";
 ---
 
 <BaseLayout title="Simon Sorensen—Software Engineer in London">
   <Navbar activeItem="Home" />
 
-  <main class="max-w-2xl mx-auto px-2 pt-8">
+  <main class="max-w-2xl mx-auto pt-8">
     <Hero />
 
+    <AboutSection />
+    <WorkExperienceSection />
     <BlogSection />
     <ProjectSection />
   </main>

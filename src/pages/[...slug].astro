@@ -1,15 +1,35 @@
 ---
-import BlogPostPage from '@templates/BlogPostPage.astro';
-import { getPosts } from 'src/cms';
+import BlogPostPage from "@templates/BlogPostPage.astro";
+import ProjectPage from "@templates/ProjectPage.astro";
+import { getPosts, getProjects, type Project, type Post } from "src/cms";
 
 export async function getStaticPaths() {
   const blogPosts = await getPosts();
-  
-  return blogPosts.map(entry => ({
-    params: { slug: entry.slug }, props: { entry },
-  }));
+  const projects = await getProjects();
+
+  const pages: {
+    params: { slug: string };
+    props: { entry: Post; type: "blog" } | { entry: Project; type: "project" };
+  }[] = [];
+
+  blogPosts.forEach((post) => {
+    pages.push({
+      params: { slug: post.slug },
+      props: { entry: post, type: "blog" },
+    });
+  });
+
+  projects.forEach((project) => {
+    pages.push({
+      params: { slug: project.slug },
+      props: { entry: project, type: "project" },
+    });
+  });
+
+  return pages;
 }
 
-const { entry } = Astro.props;
+const { entry, type } = Astro.props;
 ---
-<BlogPostPage post={entry} />
+{type === 'blog' && <BlogPostPage post={entry} />}
+{type === 'project' && <ProjectPage project={entry} />}

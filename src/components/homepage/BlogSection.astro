@@ -1,53 +1,40 @@
 ---
 import { Icon } from "astro-icon/components";
-import { getCollection } from "astro:content";
-import { sanityClient } from "sanity:client";
+import { getPosts } from "src/cms";
 import { formatDateWithYear } from "@utils/date";
 
-interface Post {
-  image: {
-    asset: {
-      url: string;
-    };
-  };
-  title: string;
-  slug: {
-    current: string;
-  };
-  published: string;
-  content: any;
-}
-
-const posts = await sanityClient.fetch<Post[]>(`*[_type == "post" && defined(slug)] | order(publishedAt desc)`);
+const posts = await getPosts();
 ---
 
-<section class="my-8">
+<section class="my-8 mb-16">
   <a href="/blog">
-    <h2 class="text-xl mb-2">Blog Posts</h2>
+    <h2 class="text-lg font-semibold mb-2">Blog Posts</h2>
   </a>
-  
-  <ul class="">
-    {posts.map((post) => (
-        <li>
-            <a
-                class="py-2 grid grid-cols-10 items-center border-b border-black/20 hover:bg-black/5 transition-colors"
-                href={`/${post.slug.current}`}
-            >
-              <span class="col-span-8 md:col-span-6">
-                  <span class="text-zinc-400 text-sm md:hidden">{formatDateWithYear(new Date(post.published))} <br/></span>
 
-                  {post.title}
+  <ul>
+    {
+      posts.map((post) => (
+        <li>
+          <a
+            class="py-2 grid grid-cols-10 items-center border-b border-black/20 dark:border-white/20 hover:bg-black/5 transition-colors"
+            href={`/${post.slug}`}
+          >
+            <span class="col-span-8 md:col-span-5">
+              <span class="text-zinc-400 text-sm md:hidden">
+                {formatDateWithYear(new Date(post.published))} <br />
               </span>
-              <span class="hidden md:block md:col-span-2 text-black/60">
-                  {formatDateWithYear(new Date(post.published))}
-              </span>
-              <button
-                  class="col-span-2 justify-self-end py-1 flex items-center w-fit"
-              >
-                  Read <Icon name="tabler:arrow-narrow-right" class="" size={20} />
-              </button>
-          </a>    
-      </li>
-    ))}
-</ul>
+
+              {post.title}
+            </span>
+            <span class="hidden md:block md:col-span-3 text-black/70 dark:text-white/70">
+              {formatDateWithYear(new Date(post.published))}
+            </span>
+            <button class="col-span-2 justify-self-end py-0.5 px-2 flex items-center w-fit bg-purple-400 dark:bg-purple-800 rounded">
+              Read <Icon name="tabler:arrow-narrow-right" size={20} />
+            </button>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
 </section>

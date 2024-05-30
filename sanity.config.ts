@@ -15,14 +15,14 @@ const breakBlock = defineType({
           { title: "Line break", value: "lineBreak" },
         ]
       },
-      initialValue: "lineBreak"
+      initialValue: "lineBreak",
     }
   ]
 })
 
 const postType = defineType({
   name: "post",
-  title: "Post",
+  title: "Posts",
   type: 'document',
   groups: [
     {
@@ -62,6 +62,28 @@ const postType = defineType({
       title: "Image",
       type: "image",
       group: "post",
+      options: {
+        hotspot: true,
+      },
+      fields: [
+        {
+          name: "alt",
+          title: "Alt",
+          type: "string",
+          options: {
+            isHighlighted: true,
+          },
+          validation: (Rule) => Rule.required(),
+        },
+        {
+          name: "caption",
+          title: "Caption",
+          type: "string",
+          options: {
+            isHighlighted: true,
+          },
+        }
+      ]
     }),
     defineField({
       name: "tags",
@@ -95,6 +117,80 @@ const postType = defineType({
   ]
 });
 
+const projectType = defineType({
+  type: "document",
+  name: "project",
+  title: "Projects",
+  fields: [
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "images",
+      title: "Images",
+      type: "array",
+      of: [{ type: "image" }],
+    }),
+    defineField({
+      name: "languages",
+      title: "Languages",
+      type: "array",
+      of: [{ type: "string" }],
+    }),
+    defineField({
+      name: "technologies",
+      title: "Technologies",
+      type: "array",
+      of: [{ type: "string" }],
+    }),
+    defineField({
+      name: "sourceCode",
+      title: "Source code",
+      type: "url",
+    }),
+    defineField({
+      name: "demo",
+      title: "Demo",
+      type: "url",
+    }),
+    defineField({
+      name: "published",
+      title: "Published",
+      type: "datetime",
+      validation: (Rule) => Rule.required(),
+      initialValue: () => new Date().toISOString(),
+    }),
+    defineField({
+      name: "description",
+      title: "Description",
+      type: "text",
+    }),
+    defineField({
+      name: "details",
+      title: "Details",
+      type: "array",
+      of: [
+        { type: "block" },
+        { type: "image" },
+        { type: "break" }
+      ],
+    }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: "title",
+        maxLength: 200,
+      },
+    }),
+  ]
+});
+
 export default defineConfig({
   name: "simse-io",
   title: "simse.io",
@@ -104,8 +200,8 @@ export default defineConfig({
   schema: {
     types: [
       postType,
+      projectType,
       breakBlock
     ],
-
   },
 });

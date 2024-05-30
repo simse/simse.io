@@ -1,0 +1,25 @@
+---
+import { PortableText } from "astro-portabletext";
+import Hr from "./blocks/Hr.astro";
+
+interface TextProps {
+  content: any;
+}
+
+const { content }: TextProps = Astro.props;
+---
+
+<article class="text">
+  <PortableText
+    value={content}
+    components={{
+      type: {
+        break: Hr,
+      },
+    }}
+    onMissingComponent={(type) => {
+      console.warn(`Component not found: ${type}`);
+      return null;
+    }}
+  />
+</article>

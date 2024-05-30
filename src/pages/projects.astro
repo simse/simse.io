@@ -1,0 +1,15 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import PageHeader from "../components/common/PageHeader.astro";
+import Navbar from "../components/Navbar.astro";
+---
+<BaseLayout title="Projects">
+    <Navbar activeItem="Projects" />
+
+    <main class="px-2 py-8 max-w-2xl mx-auto">
+        <PageHeader
+                title="Projects"
+                subtitle="A collection of things I've created over the years I've been programming (2013-now)."
+        />
+    </main>
+</BaseLayout>
