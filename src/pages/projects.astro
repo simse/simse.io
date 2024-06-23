@@ -1,7 +1,32 @@
 ---
-import BaseLayout from "../layouts/BaseLayout.astro";
-import PageHeader from "../components/common/PageHeader.astro";
-import Navbar from "../components/Navbar.astro";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@components/common/PageHeader.astro";
+import Navbar from "@components/Navbar.astro";
+import { getProjects } from "@cms";
+import ProjectCard from "../components/projects/ProjectCard.astro";
+import Footer from "../components/common/Footer.astro";
+
+const projects = await getProjects();
+
+const groupedProjects = projects.reduce((acc, project) => {
+    const { type } = project;
+    if (!acc[type]) {
+        acc[type] = [];
+    }
+    acc[type].push(project);
+    return acc;
+}, {});
+
+const formatGroupTitle = (input: string): string => {
+    const typeToTitleMap = {
+        library: 'Libraries',
+        application: 'Applications',
+        website: 'Websites',
+        experiment: 'Experiments'
+    };
+
+    return typeToTitleMap[input] || '';
+}
 ---
 <BaseLayout title="Projects">
     <Navbar activeItem="Projects" />
@@ -11,5 +36,21 @@ import Navbar from "../components/Navbar.astro";
                 title="Projects"
                 subtitle="A collection of things I've created over the years I've been programming (2013-now)."
         />
+
+        {Object.keys(groupedProjects).map(group => (
+          <section class="my-12">
+              <h2 class="text-lg mb-2">{formatGroupTitle(group)}</h2>
+
+              <ul class="grid grid-cols-3 gap-4">
+              {groupedProjects[group].map(project => (
+                <li>
+                    <ProjectCard project={project} />
+                </li>
+              ))}
+              </ul>
+          </section>
+        ))}
     </main>
+
+    <Footer />
 </BaseLayout>

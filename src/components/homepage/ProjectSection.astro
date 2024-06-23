@@ -2,36 +2,22 @@
 import { Icon } from "astro-icon/components";
 
 import { getProjects } from "src/cms";
+import ProjectCard from "../projects/ProjectCard.astro";
 
 
 const projects = await getProjects();
 ---
 
-<section class="my-8">
+<section class="my-16 px-3">
   <a href="/projects">
-    <h2 class="text-lg font-semibold mb-2">Projects</h2>
+    <h2 class="text-lg mb-2">Projects</h2>
   </a>
 
-  <ul>
-    {
-      projects.map((project) => (
-        <li>
-          <a
-            class="py-2 grid grid-cols-10 items-center border-b border-black/20 dark:border-white/20 hover:bg-black/5 transition-colors"
-            href={`/${project.slug}`}
-          >
-            <span class="col-span-2">
-              <span class="text-zinc-400 text-sm md:hidden" />
-
-              {project.title}
-            </span>
-            <span class="col-span-6 text-black/70 dark:text-white/70">{project.description}</span>
-            <button class="col-span-2 justify-self-end py-0.5 px-2 flex items-center w-fit bg-purple-400 dark:bg-purple-800">
-              More <Icon name="tabler:arrow-narrow-right" class="" size={20} />
-            </button>
-          </a>
-        </li>
-      ))
-    }
+  <ul class="grid grid-cols-3 gap-4">
+    {projects.map(project => (
+      <li>
+        <ProjectCard project={project} />
+      </li>
+    ))}
   </ul>
 </section>

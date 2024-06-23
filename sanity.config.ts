@@ -70,18 +70,12 @@ const postType = defineType({
           name: "alt",
           title: "Alt",
           type: "string",
-          options: {
-            isHighlighted: true,
-          },
           validation: (Rule) => Rule.required(),
         },
         {
           name: "caption",
           title: "Caption",
           type: "string",
-          options: {
-            isHighlighted: true,
-          },
         }
       ]
     }),
@@ -129,10 +123,42 @@ const projectType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      title: "Type",
+      // description: "Pick the format of your post",
+      name: "type",
+      type: "string",
+      options: {
+        list: [
+          { title: "Library", value: "library" },
+          { title: "Application", value: "application" },
+          { title: "Website", value: "website" },
+          { title: "Experiment", value: "experiment" },
+        ],
+      },
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "images",
       title: "Images",
       type: "array",
-      of: [{ type: "image" }],
+      of: [
+        {
+          type: "image",
+          fields: [
+            {
+              name: "alt",
+              title: "Alt",
+              type: "string",
+              validation: (Rule) => Rule.required(),
+            },
+            {
+              name: "caption",
+              title: "Caption",
+              type: "string",
+            }
+          ]
+        }
+      ],
     }),
     defineField({
       name: "languages",
@@ -191,6 +217,74 @@ const projectType = defineType({
   ]
 });
 
+const experienceType = defineType({
+  type: "document",
+  name: "experience",
+  title: "Work Experiences",
+  fields: [
+    defineField({
+      name: "title",
+      title: "Title",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "officialTitle",
+      title: "Official Title",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "location",
+      title: "Location",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "employer",
+      title: "Employer",
+      type: "string",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "employerLogo",
+      title: "Employer Logo",
+      type: "image",
+    }),
+    defineField({
+      name: "startDate",
+      title: "Start Date",
+      type: "datetime",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "endDate",
+      title: "End Date",
+      type: "datetime",
+    }),
+    defineField({
+      name: "details",
+      title: "Details",
+      type: "array",
+      of: [
+        { type: "block" },
+        { type: "image" },
+        { type: "break" }
+      ],
+    }),
+    defineField({
+      name: "slug",
+      title: "Slug",
+      type: "slug",
+      validation: (Rule) => Rule.required(),
+      options: {
+        source: "title",
+        maxLength: 200,
+      },
+    }),
+  ]
+});
+
 export default defineConfig({
   name: "simse-io",
   title: "simse.io",
@@ -201,6 +295,7 @@ export default defineConfig({
     types: [
       postType,
       projectType,
+      experienceType,
       breakBlock
     ],
   },

@@ -5,6 +5,7 @@ import Navbar from "@components/Navbar.astro";
 import PageHeader from "@components/common/PageHeader.astro";
 import YearList from "@components/blog/YearList.astro";
 import { getPosts, type Post } from 'src/cms';
+import Footer from "../../components/common/Footer.astro";
 
 let posts = await getPosts();
 
@@ -35,4 +36,6 @@ posts.forEach((post) => {
             <YearList year={year} posts={postsByYear[year]} />
         ))}
     </main>
+
+    <Footer />
 </BaseLayout>

@@ -1,0 +1,21 @@
+---
+import type { Project } from "@cms";
+interface Props {
+	project: Project;
+}
+
+const { project } = Astro.props;
+---
+<a
+  class="relative aspect-[2/3] w-full flex items-end transform-gpu transition-transform duration-300 hover:scale-105 bg-zinc-900 rounded"
+  href={`/${project.slug}`}
+>
+    <div class="z-20 absolute p-4 ">
+              <span class="text-lg">
+                {project.title}
+              </span>
+        <span class="block text-black/70 dark:text-white/70">
+                Bruh
+        </span>
+    </div>
+</a>

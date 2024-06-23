@@ -9,22 +9,17 @@ const sections = [
 {
     title: "General Enquiries",
     content: "For general enquiries, please email",
-    email: "simon@sorensen.engineer",
+    email: "simon@simse.io",
   },
   {
     title: "Press",
     content: "For press and other media enquiries, please email",
-    email: "press@sorensen.engineer",
-  },
-  {
-    title: "Recruitment",
-    content: "For recruitment/headhunting enquiries, please email",
-    email: "spam@sorensen.engineer",
+    email: "press@simse.io",
   },
   {
     title: "Joke of the Day",
     content: "To request the joke of the day, please reach out on",
-    email: "jotd@sorensen.engineer",
+    email: "jotd@simse.io",
   }
 ]
 ---
@@ -32,7 +27,7 @@ const sections = [
 <BaseLayout title="Contact">
   <Navbar activeItem="Contact" />
 
-  <main class="px-2 md:px-6 py-8 max-w-6xl mx-auto">
+  <main class="px-2 mt-16 max-w-2xl mx-auto">
     <PageHeader title="Contact" />
 
     {sections.map(section => (
@@ -45,7 +40,7 @@ const sections = [
         </section>
     ))}
 
-    <p class="text-lg mt-12">To be clear, I am just joking. But all those email addresses work, so send whatever you like, whereever you like!</p>
+    <p class="text-lg mt-12">To be clear, I'm just messing around. But all those email addresses work, so send whatever you like, whereever you like!</p>
   </main>
 
   <Footer />

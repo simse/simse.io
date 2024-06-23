@@ -1,12 +1,14 @@
 ---
-import { Picture } from "astro:assets";
-import { Icon } from "astro-icon/components";
-
-import me from "@assets/me_18.jpg";
+import { Image } from "astro:assets";
+import HeroImage from "@assets/takeoff.jpg";
 ---
+<header class="my-4 px-3">
+    <div class="max-w-2xl mx-auto my-12">
+        <h1 class="text-2xl mb-2">Hi—I'm Simon, a Software Engineer based in London.</h1>
+        <p>This is my little slice of the internet, please make yourself at home.</p>
+    </div>
 
-
-<header class="py-4">
-    <h1 class="text-2xl mb-2">Hi—I'm Simon, a Software Engineer based in London.</h1>
-    <p>This is my little slice of the internet, please make yourself at home.</p>
+    <div class="max-w-4xl bg-zinc-900 rounded aspect-[3/2] mx-auto my-16">
+        <Image src={HeroImage} alt="" width={1800} height={1200} class="rounded object-cover" />
+    </div>
 </header>

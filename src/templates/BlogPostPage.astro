@@ -5,6 +5,7 @@ import PublishDate from "@components/blog/PublishDate.astro";
 import Text from "@components/text/Text.astro";
 import { getImageBuilder } from "src/cms";
 import type { Post } from "src/cms";
+import Footer from "../components/common/Footer.astro";
 
 interface Props {
   post: Post;
@@ -17,21 +18,26 @@ const image = await getImageBuilder(post.image);
 <BaseLayout title={post.title} canonical={`/${post.slug}`}>
   <Navbar />
 
-  <header class="my-16 text-center max-w-2xl mx-auto ">
+  <header class="mt-8 mb-4 md:my-16 md:text-center max-w-2xl mx-auto px-2">
     <PublishDate
       published={post.published}
     />
     <h1 class="text-xl md:text-2xl lg:text-3xl my-2">{post.title}</h1>
   </header>
 
-  {post.image && <figure class="my-16 max-w-4xl mx-auto">
-    <img class="w-full mb-2 rounded aspect-[3/2] bg-zinc-900" src={image.width(1200).height(800).url()} />
+  {post.image && <figure class="my-8 md:my-16 max-w-4xl mx-auto px-2">
+    <img
+      class="w-full mb-2 rounded aspect-[3/2] bg-zinc-900 "
+      src={image.width(1200).height(800).url()}
+      alt={post.image.alt}
+    />
 
-    <figcaption class="text-sm text-zinc-700 dark:text-zinc-400">This is an image</figcaption>
+    <figcaption class="text-sm text-zinc-700 dark:text-zinc-400">{post.image.caption}</figcaption>
   </figure>}
 
   <main class="max-w-2xl mx-auto px-2 pb-12">
     <Text content={post.content} />
   </main>
 
+  <Footer />
 </BaseLayout>

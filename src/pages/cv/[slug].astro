@@ -1,0 +1,33 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import PageHeader from "@components/common/PageHeader.astro";
+import Navbar from "@components/Navbar.astro";
+import { getWorkExperiences } from "@cms";
+import type { WorkExperience } from "@cms";
+
+export async function getStaticPaths() {
+	const workExperiences = await getWorkExperiences();
+
+	return workExperiences.map(entry => ({
+		params: { slug: entry.slug }, props: { entry },
+	}));
+}
+
+interface Props {
+	entry: WorkExperience
+}
+
+const { entry: experience } = Astro.props;
+---
+<BaseLayout title="CV">
+    <Navbar />
+
+    <main class="px-2 py-8 max-w-2xl mx-auto">
+        <PageHeader
+				        title={experience.title}
+				        subtitle={`At ${experience.employer} in ${experience.location}.`}
+        />
+
+		    More to come here...
+    </main>
+</BaseLayout>
