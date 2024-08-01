@@ -21,13 +21,13 @@ const image = getImageBuilder(post.image);
 const suggestedPosts = await getPosts();
 ---
 <BaseLayout title={post.title} canonical={`/${post.slug}`}>
-  <Navbar />
+  <Navbar activeItem="Blog" />
 
-  <header class="mt-8 mb-4 md:my-16 md:text-center max-w-2xl mx-auto px-2">
+  <header class="my-8 md:my-16 md:text-center max-w-2xl mx-auto px-2">
     <PublishDate
       published={post.published}
     />
-    <h1 class="text-xl md:text-2xl lg:text-3xl my-2">{post.title}</h1>
+    <h1 class="text-2xl md:text-3xl my-2">{post.title}</h1>
   </header>
 
   {post.image && <figure class="my-8 md:my-16 max-w-4xl mx-auto px-2">
