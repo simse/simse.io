@@ -15,15 +15,13 @@ const { project }: Props = Astro.props;
 
 let downloads: number | null = null;
 
-/*
 const downloadStats = await fetch(`${Astro.url.protocol}//${Astro.url.host}/api/download-stats/${project.slug}.json`);
 if (downloadStats.ok) {
     downloads = (await downloadStats.json()).downloads;
 }
-*/
 ---
 <BaseLayout title={project.title} canonical={`/${project.slug}`}>
-    <Navbar />
+    <Navbar activeItem="Projects" />
 
     <main class="max-w-4xl mx-auto pt-8 px-2 pb-12">
         <header class="mb-8 max-w-2xl mx-auto">
@@ -41,14 +39,14 @@ if (downloadStats.ok) {
                     <td class="py-3 px-3 font-bold w-32">Language{project.languages.length > 1 && "s"}</td>
                     <td class="py-3 px-3">{project.languages.join(", ")}</td>
                 </tr>
-                <tr class="border-b border-black/20 dark:border-white/20">
+                <tr class="border-b last:border-transparent border-black/20 dark:border-white/20">
                     <td class="py-3 px-3 font-bold">Source Code</td>
                     <td class="py-3 px-3">
                         <a
                           href={project.sourceCode}
                           class="text-purple-400 hover:text-purple-500 hover:border-purple-500 border-purple-400 border-b transition-colors"
                         >
-                            github.com
+                            {project.sourceCode.replace('https://', '')}
                         </a>
                     </td>
                 </tr>
