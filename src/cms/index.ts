@@ -1,8 +1,8 @@
 import { sanityClient } from "sanity:client";
-import imageUrlBuilder from '@sanity/image-url';
+import imageUrlBuilder from "@sanity/image-url";
 import type { SanityAsset } from "@sanity/image-url/lib/types/types";
 
-const builder = imageUrlBuilder(sanityClient)
+const builder = imageUrlBuilder(sanityClient);
 
 interface Image {
   alt: string;
@@ -11,7 +11,7 @@ interface Image {
 }
 
 interface SanityPost {
-  _type: 'post';
+  _type: "post";
   image?: Image;
   title: string;
   slug: {
@@ -23,7 +23,7 @@ interface SanityPost {
 }
 
 interface SanityProject {
-  _type: 'project';
+  _type: "project";
   title: string;
   description: string;
   slug: {
@@ -96,7 +96,7 @@ interface Project {
 
 const getPosts = async (): Promise<Post[]> => {
   const rawPosts = await sanityClient.fetch<SanityPost[]>(
-    `*[_type == "post" && defined(slug)] | order(publishedAt desc)`
+    `*[_type == "post" && defined(slug)] | order(publishedAt desc)`,
   );
 
   return rawPosts.map((post) => ({
@@ -104,39 +104,49 @@ const getPosts = async (): Promise<Post[]> => {
     slug: post.slug.current,
     published: new Date(post.published),
   }));
-}
+};
 
-const transformWorkExperience = (workExperience: SanityWorkExperience): WorkExperience => {
+const transformWorkExperience = (
+  workExperience: SanityWorkExperience,
+): WorkExperience => {
   const convertedWorkExperience: WorkExperience = {
     ...workExperience,
     employerLogo: undefined,
     slug: workExperience.slug.current,
     startDate: new Date(workExperience.startDate),
-    endDate: workExperience.endDate ? new Date(workExperience.endDate) : undefined,
-  }
+    endDate: workExperience.endDate
+      ? new Date(workExperience.endDate)
+      : undefined,
+  };
 
   if (workExperience.employerLogo) {
-    convertedWorkExperience.employerLogo = builder.image(workExperience.employerLogo).width(64).height(64).url();
+    convertedWorkExperience.employerLogo = builder
+      .image(workExperience.employerLogo)
+      .width(64)
+      .height(64)
+      .url();
   }
 
   return convertedWorkExperience;
-}
+};
 
 const getWorkExperiences = async (): Promise<WorkExperience[]> => {
   const rawWorkExperiences = await sanityClient.fetch<SanityWorkExperience[]>(
-    `*[_type == "experience" && defined(slug)] | order(startDate desc)`
+    `*[_type == "experience" && defined(slug)] | order(startDate desc)`,
   );
 
-  return rawWorkExperiences.map((workExperience) => transformWorkExperience(workExperience));
-}
+  return rawWorkExperiences.map((workExperience) =>
+    transformWorkExperience(workExperience),
+  );
+};
 
 const getImageBuilder = (image: any) => {
   return builder.image(image);
-}
+};
 
 const getProjects = async (): Promise<Project[]> => {
   const rawProjects = await sanityClient.fetch<SanityProject[]>(
-    `*[_type == "project" && defined(slug)] | order(publishedAt desc)`
+    `*[_type == "project" && defined(slug)] | order(publishedAt desc)`,
   );
 
   return rawProjects.map((project) => ({
@@ -145,12 +155,12 @@ const getProjects = async (): Promise<Project[]> => {
     published: new Date(project.published),
     images: project.images || [],
   }));
-}
+};
 
 const getPostBySlug = async (slug: string): Promise<Post | undefined> => {
   const rawPosts = await sanityClient.fetch<SanityPost[]>(
     `*[_type == "post" && slug.current == $slug]`,
-    { slug }
+    { slug },
   );
 
   if (rawPosts.length < 1) {
@@ -164,12 +174,14 @@ const getPostBySlug = async (slug: string): Promise<Post | undefined> => {
     slug: rawPost.slug.current,
     published: new Date(rawPost.published),
   };
-}
+};
 
-export const getPageBySlug = async (slug: string): Promise<Post | Project | undefined> => {
+export const getPageBySlug = async (
+  slug: string,
+): Promise<Post | Project | undefined> => {
   const rawPages = await sanityClient.fetch<Array<SanityProject | SanityPost>>(
     `*[slug.current == $slug]`,
-    { slug }
+    { slug },
   );
 
   if (rawPages.length < 1) {
@@ -178,21 +190,21 @@ export const getPageBySlug = async (slug: string): Promise<Post | Project | unde
 
   const page = rawPages[0];
 
-  if (page._type === 'post') {
+  if (page._type === "post") {
     return {
       ...page,
       slug: page.slug.current,
       published: new Date(page.published),
     };
-  } else if (page._type === 'project') {
+  } else if (page._type === "project") {
     return {
       ...page,
       slug: page.slug.current,
       published: new Date(page.published),
       images: page.images || [],
-    }
+    };
   }
-}
+};
 /*
 const getProject = async (slug: string): Promise<Project> => {
   const rawProject = await sanityClient.fetch<SanityProject>(
@@ -208,13 +220,15 @@ const getProject = async (slug: string): Promise<Project> => {
   };
 }
 */
-const getWorkExperienceBySlug = async (slug: string): Promise<WorkExperience> => {
+const getWorkExperienceBySlug = async (
+  slug: string,
+): Promise<WorkExperience> => {
   const rawWorkExperiences = await sanityClient.fetch<SanityWorkExperience[]>(
-    `*[_type == "experience" && slug.current == "${slug}"]`
+    `*[_type == "experience" && slug.current == "${slug}"]`,
   );
 
   if (rawWorkExperiences.length < 1) {
-    throw Error("work experience with slug: " + slug + " not found")
+    throw Error("work experience with slug: " + slug + " not found");
   }
 
   return transformWorkExperience(rawWorkExperiences[0]);
@@ -227,12 +241,7 @@ export {
   getPostBySlug,
   getImageBuilder,
   getWorkExperiences,
-  getWorkExperienceBySlug
+  getWorkExperienceBySlug,
 };
 
-export type {
-  Post,
-  Project,
-  WorkExperience,
-  Image
-};
+export type { Post, Project, WorkExperience, Image };

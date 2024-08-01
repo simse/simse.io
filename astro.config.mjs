@@ -11,18 +11,24 @@ import svelte from "@astrojs/svelte";
 export default defineConfig({
   output: "server",
   adapter: cloudflare({
-    imageService: "cloudflare"
+    imageService: "cloudflare",
   }),
-  integrations: [tailwind({
-    applyBaseStyles: false,
-  }), icon(), sanity({
-    projectId: "rjqusm5i",
-    dataset: "production",
-    useCdn: true,
-    studioBasePath: '/cms'
-  }), react(), svelte()],
+  integrations: [
+    tailwind({
+      applyBaseStyles: false,
+    }),
+    icon(),
+    sanity({
+      projectId: "rjqusm5i",
+      dataset: "production",
+      useCdn: true,
+      studioBasePath: "/cms",
+    }),
+    react(),
+    svelte(),
+  ],
   image: {
-    service: passthroughImageService()
+    service: passthroughImageService(),
   },
-  prefetch: true
+  prefetch: true,
 });

@@ -3,24 +3,12 @@
   "compilerOptions": {
     "baseUrl": "./src",
     "paths": {
-      "@assets/*": [
-        "assets/*"
-      ],
-      "@components/*": [
-        "components/*"
-      ],
-      "@cms": [
-        "cms/index"
-      ],
-      "@layouts/*": [
-        "layouts/*"
-      ],
-      "@templates/*": [
-        "templates/*"
-      ],
-      "@utils/*": [
-        "utils/*"
-      ],
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@cms": ["cms/index"],
+      "@layouts/*": ["layouts/*"],
+      "@templates/*": ["templates/*"],
+      "@utils/*": ["utils/*"],
       "$lib/*": ["./src/*"]
     },
     "jsx": "react-jsx",
