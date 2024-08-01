@@ -1,6 +1,6 @@
 import { defineConfig, defineField, defineType } from "sanity";
 import { structureTool } from "sanity/structure";
-import { visionTool } from '@sanity/vision';
+import { visionTool } from "@sanity/vision";
 
 const breakBlock = defineType({
   name: "break",
@@ -12,29 +12,27 @@ const breakBlock = defineType({
       type: "string",
       title: "Break style",
       options: {
-        list: [
-          { title: "Line break", value: "lineBreak" },
-        ]
+        list: [{ title: "Line break", value: "lineBreak" }],
       },
       initialValue: "lineBreak",
-    }
-  ]
-})
+    },
+  ],
+});
 
 const postType = defineType({
   name: "post",
   title: "Posts",
-  type: 'document',
+  type: "document",
   groups: [
     {
       title: "Post",
       name: "post",
-      default: true
+      default: true,
     },
     {
       title: "SEO",
-      name: "seo"
-    }
+      name: "seo",
+    },
   ],
   fields: [
     defineField({
@@ -77,8 +75,8 @@ const postType = defineType({
           name: "caption",
           title: "Caption",
           type: "string",
-        }
-      ]
+        },
+      ],
     }),
     defineField({
       name: "tags",
@@ -91,11 +89,7 @@ const postType = defineType({
       name: "content",
       title: "Content",
       type: "array",
-      of: [
-        { type: "block" },
-        { type: "image" },
-        { type: "break" }
-      ],
+      of: [{ type: "block" }, { type: "image" }, { type: "break" }],
       group: "post",
     }),
     defineField({
@@ -109,7 +103,7 @@ const postType = defineType({
         maxLength: 200,
       },
     }),
-  ]
+  ],
 });
 
 const projectType = defineType({
@@ -156,9 +150,9 @@ const projectType = defineType({
               name: "caption",
               title: "Caption",
               type: "string",
-            }
-          ]
-        }
+            },
+          ],
+        },
       ],
     }),
     defineField({
@@ -199,11 +193,7 @@ const projectType = defineType({
       name: "details",
       title: "Details",
       type: "array",
-      of: [
-        { type: "block" },
-        { type: "image" },
-        { type: "break" }
-      ],
+      of: [{ type: "block" }, { type: "image" }, { type: "break" }],
     }),
     defineField({
       name: "slug",
@@ -215,7 +205,7 @@ const projectType = defineType({
         maxLength: 200,
       },
     }),
-  ]
+  ],
 });
 
 const experienceType = defineType({
@@ -267,11 +257,7 @@ const experienceType = defineType({
       name: "details",
       title: "Details",
       type: "array",
-      of: [
-        { type: "block" },
-        { type: "image" },
-        { type: "break" }
-      ],
+      of: [{ type: "block" }, { type: "image" }, { type: "break" }],
     }),
     defineField({
       name: "slug",
@@ -283,7 +269,7 @@ const experienceType = defineType({
         maxLength: 200,
       },
     }),
-  ]
+  ],
 });
 
 export default defineConfig({
@@ -293,11 +279,6 @@ export default defineConfig({
   dataset: "production",
   plugins: [structureTool(), visionTool()],
   schema: {
-    types: [
-      postType,
-      projectType,
-      experienceType,
-      breakBlock
-    ],
+    types: [postType, projectType, experienceType, breakBlock],
   },
 });
