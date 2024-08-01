@@ -1,16 +1,13 @@
 ---
-import { Icon } from "astro-icon/components";
-
-import { getProjects } from "src/cms";
+import { getProjects } from "@cms";
 import ProjectCard from "../projects/ProjectCard.astro";
-
 
 const projects = await getProjects();
 ---
 
 <section class="my-16 px-3">
   <a href="/projects">
-    <h2 class="text-lg mb-2">Projects</h2>
+    <h2 class="text-lg mb-2 font-bold">Projects</h2>
   </a>
 
   <ul class="grid grid-cols-3 gap-4">

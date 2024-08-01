@@ -4,11 +4,10 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import Navbar from "@components/Navbar.astro";
 import PageHeader from "@components/common/PageHeader.astro";
 import YearList from "@components/blog/YearList.astro";
-import { getPosts, type Post } from 'src/cms';
-import Footer from "../../components/common/Footer.astro";
+import { getPosts, type Post } from '@cms';
+import Footer from "@components/common/Footer.astro";
 
 let posts = await getPosts();
-
 
 // group posts by year
 let postsByYear: {

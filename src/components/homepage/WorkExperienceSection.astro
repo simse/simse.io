@@ -1,5 +1,5 @@
 ---
-import { getWorkExperiences } from "@cms";
+import { getWorkExperiences } from "../../cms";
 
 const workExperience = await getWorkExperiences();
 
@@ -17,7 +17,7 @@ const formatDate = (date: Date | null): string => {
 
 <section class="my-16">
   <a href="/cv">
-    <h2 class="text-lg mb-2 ml-3">Experience</h2>
+    <h2 class="text-lg mb-2 ml-3 font-bold">Experience</h2>
   </a>
 
   <ul>

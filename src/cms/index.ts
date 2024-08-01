@@ -11,6 +11,7 @@ interface Image {
 }
 
 interface SanityPost {
+  _type: 'post';
   image?: Image;
   title: string;
   slug: {
@@ -22,6 +23,7 @@ interface SanityPost {
 }
 
 interface SanityProject {
+  _type: 'project';
   title: string;
   description: string;
   slug: {
@@ -64,6 +66,7 @@ interface WorkExperience {
 }
 
 interface Post {
+  _type: string;
   image?: {
     alt: string;
     caption?: string;
@@ -77,6 +80,7 @@ interface Post {
 }
 
 interface Project {
+  _type: string;
   title: string;
   description: string;
   slug: string;
@@ -102,26 +106,28 @@ const getPosts = async (): Promise<Post[]> => {
   }));
 }
 
+const transformWorkExperience = (workExperience: SanityWorkExperience): WorkExperience => {
+  const convertedWorkExperience: WorkExperience = {
+    ...workExperience,
+    employerLogo: undefined,
+    slug: workExperience.slug.current,
+    startDate: new Date(workExperience.startDate),
+    endDate: workExperience.endDate ? new Date(workExperience.endDate) : undefined,
+  }
+
+  if (workExperience.employerLogo) {
+    convertedWorkExperience.employerLogo = builder.image(workExperience.employerLogo).width(64).height(64).url();
+  }
+
+  return convertedWorkExperience;
+}
+
 const getWorkExperiences = async (): Promise<WorkExperience[]> => {
   const rawWorkExperiences = await sanityClient.fetch<SanityWorkExperience[]>(
     `*[_type == "experience" && defined(slug)] | order(startDate desc)`
   );
 
-  return rawWorkExperiences.map((workExperience) => {
-    const convertedWorkExperience: WorkExperience = {
-      ...workExperience,
-      employerLogo: undefined,
-      slug: workExperience.slug.current,
-      startDate: new Date(workExperience.startDate),
-      endDate: workExperience.endDate ? new Date(workExperience.endDate) : undefined,
-    }
-
-    if (workExperience.employerLogo) {
-      convertedWorkExperience.employerLogo = builder.image(workExperience.employerLogo).width(64).height(64).url();
-    }
-
-    return convertedWorkExperience;
-  });
+  return rawWorkExperiences.map((workExperience) => transformWorkExperience(workExperience));
 }
 
 const getImageBuilder = (image: any) => {
@@ -140,21 +146,54 @@ const getProjects = async (): Promise<Project[]> => {
     images: project.images || [],
   }));
 }
-/*
-const getPost = async (slug: string): Promise<Post> => {
-  const rawPost = await sanityClient.fetch<SanityPost>(
-    `*[_type == "post" && slug.current == $slug] | order(publishedAt desc) [0]`,
+
+const getPostBySlug = async (slug: string): Promise<Post | undefined> => {
+  const rawPosts = await sanityClient.fetch<SanityPost[]>(
+    `*[_type == "post" && slug.current == $slug]`,
     { slug }
   );
+
+  if (rawPosts.length < 1) {
+    return undefined;
+  }
+
+  const rawPost = rawPosts[0];
 
   return {
     ...rawPost,
     slug: rawPost.slug.current,
     published: new Date(rawPost.published),
-    image: rawPost.image && rawPost.image,
   };
 }
 
+export const getPageBySlug = async (slug: string): Promise<Post | Project | undefined> => {
+  const rawPages = await sanityClient.fetch<Array<SanityProject | SanityPost>>(
+    `*[slug.current == $slug]`,
+    { slug }
+  );
+
+  if (rawPages.length < 1) {
+    return undefined;
+  }
+
+  const page = rawPages[0];
+
+  if (page._type === 'post') {
+    return {
+      ...page,
+      slug: page.slug.current,
+      published: new Date(page.published),
+    };
+  } else if (page._type === 'project') {
+    return {
+      ...page,
+      slug: page.slug.current,
+      published: new Date(page.published),
+      images: page.images || [],
+    }
+  }
+}
+/*
 const getProject = async (slug: string): Promise<Project> => {
   const rawProject = await sanityClient.fetch<SanityProject>(
     `*[_type == "project" && slug.current == $slug] | order(publishedAt desc) [0]`,
@@ -169,13 +208,26 @@ const getProject = async (slug: string): Promise<Project> => {
   };
 }
 */
+const getWorkExperienceBySlug = async (slug: string): Promise<WorkExperience> => {
+  const rawWorkExperiences = await sanityClient.fetch<SanityWorkExperience[]>(
+    `*[_type == "experience" && slug.current == "${slug}"]`
+  );
+
+  if (rawWorkExperiences.length < 1) {
+    throw Error("work experience with slug: " + slug + " not found")
+  }
+
+  return transformWorkExperience(rawWorkExperiences[0]);
+};
+
 export {
   getPosts,
-  // getPost,
   getProjects,
   // getProject,
+  getPostBySlug,
   getImageBuilder,
-  getWorkExperiences
+  getWorkExperiences,
+  getWorkExperienceBySlug
 };
 
 export type {

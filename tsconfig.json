@@ -1,26 +1,27 @@
 {
   "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
-    "baseUrl": "/Users/simon/Projects/simse.io",
+    "baseUrl": "./src",
     "paths": {
       "@assets/*": [
-        "src/assets/*"
+        "assets/*"
       ],
       "@components/*": [
-        "src/components/*"
+        "components/*"
       ],
       "@cms": [
-        "src/cms"
+        "cms/index"
       ],
       "@layouts/*": [
-        "src/layouts/*"
+        "layouts/*"
       ],
       "@templates/*": [
-        "src/templates/*"
+        "templates/*"
       ],
       "@utils/*": [
-        "src/utils/*"
-      ]
+        "utils/*"
+      ],
+      "$lib/*": ["./src/*"]
     },
     "jsx": "react-jsx",
     "jsxImportSource": "react"

@@ -1,5 +1,6 @@
 import { defineConfig, defineField, defineType } from "sanity";
 import { structureTool } from "sanity/structure";
+import { visionTool } from '@sanity/vision';
 
 const breakBlock = defineType({
   name: "break",
@@ -290,7 +291,7 @@ export default defineConfig({
   title: "simse.io",
   projectId: "rjqusm5i",
   dataset: "production",
-  plugins: [structureTool()],
+  plugins: [structureTool(), visionTool()],
   schema: {
     types: [
       postType,

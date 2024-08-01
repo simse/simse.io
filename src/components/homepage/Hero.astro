@@ -1,14 +1,11 @@
 ---
-import { Image } from "astro:assets";
-import HeroImage from "@assets/takeoff.jpg";
+import NavigatorDropdown from "./NavigatorDropdown.svelte";
 ---
-<header class="my-4 px-3">
-    <div class="max-w-2xl mx-auto my-12">
-        <h1 class="text-2xl mb-2">Hi—I'm Simon, a Software Engineer based in London.</h1>
-        <p>This is my little slice of the internet, please make yourself at home.</p>
+<header class="my-4 max-w-2xl mx-auto px-2">
+    <div class="my-12 ">
+        <h1 class="text-2xl mb-2">Hej—Welcome to my website!</h1>
+        <p class="opacity-70 text-lg">This is my little slice of the internet, please make yourself at home.</p>
     </div>
 
-    <div class="max-w-4xl bg-zinc-900 rounded aspect-[3/2] mx-auto my-16">
-        <Image src={HeroImage} alt="" width={1800} height={1200} class="rounded object-cover" />
-    </div>
+    <NavigatorDropdown client:load />
 </header>

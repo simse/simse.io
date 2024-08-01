@@ -3,9 +3,11 @@ import BaseLayout from "@layouts/BaseLayout.astro";
 import Navbar from "@components/Navbar.astro";
 import PublishDate from "@components/blog/PublishDate.astro";
 import Text from "@components/text/Text.astro";
-import { getImageBuilder } from "src/cms";
-import type { Post } from "src/cms";
-import Footer from "../components/common/Footer.astro";
+import { getImageBuilder } from "@cms";
+import type { Post } from "@cms";
+import Footer from "@components/common/Footer.astro";
+import BlogCard from "@components/blog/BlogCard.astro";
+import { getPosts } from "@cms";
 
 interface Props {
   post: Post;
@@ -13,7 +15,10 @@ interface Props {
 
 const { post } = Astro.props;
 
-const image = await getImageBuilder(post.image);
+const image = getImageBuilder(post.image);
+
+// suggested posts
+const suggestedPosts = await getPosts();
 ---
 <BaseLayout title={post.title} canonical={`/${post.slug}`}>
   <Navbar />
@@ -38,6 +43,18 @@ const image = await getImageBuilder(post.image);
   <main class="max-w-2xl mx-auto px-2 pb-12">
     <Text content={post.content} />
   </main>
+
+  <section class="my-16 px-3 max-w-5xl mx-auto">
+    <h2 class="text-lg mb-2">Suggested Posts</h2>
+
+    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+      {suggestedPosts.slice(0, 6).map((post) => (
+        <li>
+          <BlogCard post={post} dateWithYear={true} />
+        </li>
+      ))}
+    </ul>
+  </section>
 
   <Footer />
 </BaseLayout>

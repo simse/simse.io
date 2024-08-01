@@ -1,5 +1,5 @@
 ---
-import { getPosts } from "src/cms";
+import { getPosts } from "@cms";
 import BlogCard from "@components/blog/BlogCard.astro";
 
 const posts = await getPosts();
@@ -7,7 +7,7 @@ const posts = await getPosts();
 
 <section class="my-16 px-3">
   <a href="/blog">
-    <h2 class="text-lg mb-2">Blog</h2>
+    <h2 class="text-lg mb-2 font-bold">Blog</h2>
   </a>
 
   <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
