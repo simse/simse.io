@@ -1,3 +1,4 @@
+import { PEPY_API_KEY } from "astro:env/server"
 import type { APIRoute } from "astro";
 import TTLCache from '@isaacs/ttlcache';
 
@@ -81,7 +82,7 @@ const getPypiDownloads = async (identifier: string): Promise<number> => {
       `https://api.pepy.tech/api/v2/projects/${identifier}`,
       {
         headers: {
-          'x-api-key': import.meta.env.PEPY_API_KEY
+          'x-api-key': PEPY_API_KEY
         }
       }
   );

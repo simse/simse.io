@@ -133,4 +133,10 @@
     @apply text-base;
     @apply font-bold;
   }
+
+  .astro-code {
+    @apply rounded;
+    @apply p-4;
+    background: rgb(24 24 27 / var(--tw-bg-opacity)) !important;
+  }
 }
