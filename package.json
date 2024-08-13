@@ -33,6 +33,7 @@
     "astro-portabletext": "^0.9.8",
     "bits-ui": "^0.21.11",
     "clsx": "^2.1.1",
+    "groqd": "^0.15.12",
     "lucide-svelte": "^0.399.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

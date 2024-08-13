@@ -1,0 +1,29 @@
+---
+import { getAllCinemas } from "@cms";
+import BaseLayout from "@layouts/BaseLayout.astro";
+import Navbar from "@components/Navbar.astro";
+import PageHeader from "@components/common/PageHeader.astro";
+
+const cinemas = await getAllCinemas();
+---
+<BaseLayout title="Cinema Reviews">
+  <Navbar />
+
+  <main class="max-w-7xl mx-auto px-4 my-4">
+    <PageHeader title="Cinema Reviews" subtitle="Welcome to my UK cinema review project." />
+
+    <section>
+    {cinemas.map(cinema => (
+      <a
+        class="even:bg-zinc-900 hover:bg-zinc-800 transition-colors rounded p-3 grid grid-cols-10 items-center"
+        href={`/cinema-reviews/${cinema.slug}`}
+      >
+        <div class="col-span-3 flex items-center">
+          <img src={cinema.brand.logo.sizes.small} alt={`${cinema.brand.name} logo`} class="w-8 h-8 mr-4" />
+          <span >{cinema.name}</span>
+        </div>
+      </a>
+    ))}
+    </section>
+  </main>
+</BaseLayout>

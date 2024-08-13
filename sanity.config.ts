@@ -1,6 +1,12 @@
 import { defineConfig, defineField, defineType } from "sanity";
 import { structureTool } from "sanity/structure";
 import { visionTool } from "@sanity/vision";
+import {
+  cinemaBrandType,
+  cinemaScreenReviewType,
+  cinemaScreenType,
+  cinemaType,
+} from "./cms/cinemaReviewsTypes.ts";
 
 const breakBlock = defineType({
   name: "break",
@@ -279,6 +285,15 @@ export default defineConfig({
   dataset: "production",
   plugins: [structureTool(), visionTool()],
   schema: {
-    types: [postType, projectType, experienceType, breakBlock],
+    types: [
+      postType,
+      projectType,
+      experienceType,
+      breakBlock,
+      cinemaType,
+      cinemaBrandType,
+      cinemaScreenType,
+      cinemaScreenReviewType,
+    ],
   },
 });

@@ -1,6 +1,7 @@
 import { sanityClient } from "sanity:client";
 import imageUrlBuilder from "@sanity/image-url";
 import type { SanityAsset } from "@sanity/image-url/lib/types/types";
+import { getAllCinemas, getCinemaScreensBySlug } from "./cinema.ts";
 
 const builder = imageUrlBuilder(sanityClient);
 
@@ -140,7 +141,7 @@ const getWorkExperiences = async (): Promise<WorkExperience[]> => {
   );
 };
 
-const getImageBuilder = (image: any) => {
+const getImageBuilder = (image: SanityAsset) => {
   return builder.image(image);
 };
 
@@ -237,11 +238,12 @@ const getWorkExperienceBySlug = async (
 export {
   getPosts,
   getProjects,
-  // getProject,
   getPostBySlug,
   getImageBuilder,
   getWorkExperiences,
   getWorkExperienceBySlug,
+  getAllCinemas,
+  getCinemaScreensBySlug,
 };
 
 export type { Post, Project, WorkExperience, Image };
