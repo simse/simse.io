@@ -1,5 +1,8 @@
 ---
-import { Code } from 'astro:components';
+import { createHighlighterCore, loadWasm } from 'shiki/core';
+import githubDark from 'shiki/themes/github-dark.mjs';
+import js from 'shiki/langs/javascript.mjs';
+import ts from 'shiki/langs/typescript.mjs';
 
 interface Props {
   index: number;
@@ -14,5 +17,19 @@ interface Props {
 }
 
 const props = Astro.props;
+
+// @ts-expect-error
+await loadWasm(import('shiki/onig.wasm'))
+
+const highlighter = await createHighlighterCore({
+  themes: [githubDark],
+  langs: [js, ts],
+});
+
+// @ts-expect-error
+const highlightedCode = highlighter.codeToHtml(props.node.sourceCode, {
+  theme: 'github-dark',
+  lang: props.node.language
+})
 ---
-<Code code={props.node.sourceCode} lang={props.node.language} theme="github-dark" />
+<Fragment set:html={highlightedCode} />
