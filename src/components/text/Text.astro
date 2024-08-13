@@ -2,6 +2,7 @@
 import { PortableText } from "astro-portabletext";
 import Hr from "./blocks/Hr.astro";
 import Image from "./blocks/Image.astro";
+import CodeBlock from "./blocks/CodeBlock.astro";
 
 interface TextProps {
   content: any;
@@ -16,7 +17,8 @@ const { content }: TextProps = Astro.props;
     components={{
       type: {
         break: Hr,
-          image: Image,
+        image: Image,
+        codeBlock: CodeBlock,
       },
     }}
     onMissingComponent={(type) => {

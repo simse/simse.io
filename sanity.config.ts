@@ -19,6 +19,31 @@ const breakBlock = defineType({
   ],
 });
 
+const codeBlock = defineType({
+  name: "codeBlock",
+  type: "object",
+  title: "Code Block",
+  fields: [
+    {
+      name: "language",
+      type: "string",
+      title: "Language",
+      options: {
+        list: [
+          { title: "Typescript", value: "ts" },
+          { title: "Javascript", value: "js" },
+        ],
+      },
+      initialValue: "ts",
+    },
+    {
+      name: "sourceCode",
+      type: "text",
+      title: "Source Code"
+    }
+  ],
+});
+
 const postType = defineType({
   name: "post",
   title: "Posts",
@@ -89,7 +114,7 @@ const postType = defineType({
       name: "content",
       title: "Content",
       type: "array",
-      of: [{ type: "block" }, { type: "image" }, { type: "break" }],
+      of: [{ type: "block" }, { type: "image" }, { type: "break" }, { type: "codeBlock" }],
       group: "post",
     }),
     defineField({
@@ -193,7 +218,7 @@ const projectType = defineType({
       name: "details",
       title: "Details",
       type: "array",
-      of: [{ type: "block" }, { type: "image" }, { type: "break" }],
+      of: [{ type: "block" }, { type: "image" }, { type: "break" }, { type: "codeBlock" }],
     }),
     defineField({
       name: "slug",
@@ -279,6 +304,6 @@ export default defineConfig({
   dataset: "production",
   plugins: [structureTool(), visionTool()],
   schema: {
-    types: [postType, projectType, experienceType, breakBlock],
+    types: [postType, projectType, experienceType, breakBlock, codeBlock],
   },
 });
