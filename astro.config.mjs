@@ -1,4 +1,4 @@
-import { defineConfig, passthroughImageService, envField  } from "astro/config";
+import { defineConfig, passthroughImageService } from "astro/config";
 import cloudflare from "@astrojs/cloudflare";
 import tailwind from "@astrojs/tailwind";
 import icon from "astro-icon";
@@ -11,7 +11,7 @@ import svelte from "@astrojs/svelte";
 export default defineConfig({
   output: "server",
   adapter: cloudflare({
-    imageService: "passthrough",
+    imageService: "cloudflare",
   }),
   integrations: [
     tailwind({
@@ -31,11 +31,4 @@ export default defineConfig({
     service: passthroughImageService(),
   },
   prefetch: true,
-  experimental: {
-    env: {
-      schema: {
-        PEPY_API_KEY: envField.string({ context: "server", access: "secret" }),
-      }
-    }
-  }
 });
