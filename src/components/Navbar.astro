@@ -1,39 +1,39 @@
 ---
 interface Props {
-  activeItem?: "Home" | "Blog" | "Projects" | "Contact";
+  activeItem?: 'Home' | 'Blog' | 'Projects' | 'Contact'
 }
 
 const items = [
   {
-    title: "Home",
-    link: "/",
+    title: 'Home',
+    link: '/',
   },
   {
-    title: "Blog",
-    link: "/blog",
+    title: 'Blog',
+    link: '/blog',
   },
   {
-    title: "Projects",
-    link: "/projects",
+    title: 'Projects',
+    link: '/projects',
   },
-];
+]
 
-const { activeItem } = Astro.props;
+const { activeItem } = Astro.props
 ---
 
-<nav
-  class="py-4 px-2 flex justify-between items-center mx-auto max-w-2xl"
->
+<nav class="py-4 px-2 flex justify-between items-center mx-auto max-w-2xl">
   <a class="text-lg" href="/">Simon Sorensen</a>
 
-  <ul class={"ml-auto flex items-center"}>
+  <ul class={'ml-auto flex items-center'}>
     {
       items.map((item) => (
         <li>
           <a
             class={`
                   p-2 ${
-                    item.title === activeItem ? "font-bold" : "text-black/50 dark:text-white/60"
+                    item.title === activeItem
+                      ? 'font-bold'
+                      : 'text-black/50 dark:text-white/60'
                   } hover:text-black dark:hover:text-white transition-colors
                 `}
             href={item.link}

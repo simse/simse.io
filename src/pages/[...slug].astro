@@ -1,18 +1,19 @@
 ---
-import BlogPostPage from "@templates/BlogPostPage.astro";
-import ProjectPage from "@templates/ProjectPage.astro";
-import { getPageBySlug } from "@cms";
+import BlogPostPage from '@templates/BlogPostPage.astro'
+import ProjectPage from '@templates/ProjectPage.astro'
+import { getPageBySlug } from '@cms'
 
-const { slug } = Astro.params;
+const { slug } = Astro.params
 if (!slug) {
-	return Astro.rewrite('/404');
+  return Astro.rewrite('/404')
 }
 
-const page = await getPageBySlug(slug);
+const page = await getPageBySlug(slug)
 
 if (!page || !page._type) {
-	return Astro.rewrite('/404')
+  return Astro.rewrite('/404')
 }
 ---
+
 {page && page._type === 'post' && <BlogPostPage post={page} />}
 {page && page._type === 'project' && <ProjectPage project={page} />}

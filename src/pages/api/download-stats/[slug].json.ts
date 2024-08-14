@@ -1,96 +1,96 @@
-import { PEPY_API_KEY } from "astro:env/server"
-import type { APIRoute } from "astro";
-import TTLCache from '@isaacs/ttlcache';
+import { PEPY_API_KEY } from 'astro:env/server'
+import type { APIRoute } from 'astro'
+import TTLCache from '@isaacs/ttlcache'
 
-export const prerender = false;
+export const prerender = false
 
-const cache = new TTLCache({ max: 10000, ttl: 60 * 60 * 1000 });
+const cache = new TTLCache({ max: 10000, ttl: 60 * 60 * 1000 })
 
 export const GET: APIRoute = async ({ params, request }) => {
-  const slug = params.slug;
+  const slug = params.slug
 
   if (!slug) {
     return new Response(
       JSON.stringify({
-        error: "Missing project slug",
+        error: 'Missing project slug',
       }),
       {
         status: 400,
       },
-    );
+    )
   }
 
-  const downloads = await getDownloadsCached(slug);
+  const downloads = await getDownloadsCached(slug)
 
   if (!downloads) {
     return new Response(
-        JSON.stringify({
-          error: `Could not fetch statistics for project with slug: ${slug}`,
-        }),
-        {
-          status: 404,
-        },
-    );
+      JSON.stringify({
+        error: `Could not fetch statistics for project with slug: ${slug}`,
+      }),
+      {
+        status: 404,
+      },
+    )
   }
 
   return new Response(
-      JSON.stringify({
-        downloads: downloads,
-      }),
-  );
-};
+    JSON.stringify({
+      downloads: downloads,
+    }),
+  )
+}
 
 const getDownloadsCached = async (identifier: string) => {
   if (cache.has(identifier)) {
-    return cache.get<number>(identifier);
+    return cache.get<number>(identifier)
   }
 
-  const downloads = await getDownloads(identifier);
+  const downloads = await getDownloads(identifier)
   if (downloads && downloads !== 0) {
-    cache.set(identifier, downloads);
+    cache.set(identifier, downloads)
   }
 
-  return downloads;
+  return downloads
 }
 
 const getDownloads = async (identifier: string) => {
-  if (identifier === "chronos") {
-    return getDockerhubDownloads("simsemand/chronos");
+  if (identifier === 'chronos') {
+    return getDockerhubDownloads('simsemand/chronos')
   }
   if (identifier === 'pymitv') {
-    return getPypiDownloads('pymitv');
+    return getPypiDownloads('pymitv')
   }
 
-  return undefined;
+  return undefined
 }
 
 const getDockerhubDownloads = async (identifier: string): Promise<number> => {
   const response = await fetch(
     `https://hub.docker.com/v2/repositories/${identifier}`,
-  );
+  )
 
   if (!response.ok) {
-    return 0;
+    return 0
   }
 
-  const parsedResponse = await response.json();
-  return parsedResponse.pull_count as number;
-};
+  const parsedResponse = await response.json()
+  return parsedResponse.pull_count as number
+}
 
 const getPypiDownloads = async (identifier: string): Promise<number> => {
   const response = await fetch(
-      `https://api.pepy.tech/api/v2/projects/${identifier}`,
-      {
-        headers: {
-          'x-api-key': PEPY_API_KEY
-        }
-      }
-  );
+    `https://api.pepy.tech/api/v2/projects/${identifier}`,
+    {
+      headers: {
+        'x-api-key': PEPY_API_KEY,
+      },
+    },
+  )
 
   if (!response.ok) {
-    return 0;
+    return 0
   }
 
-  const parsedResponse = await response.json();
-  return parsedResponse.total_downloads as number;
+  const parsedResponse = await response.json()
+  return parsedResponse.total_downloads as number
 }

@@ -1,17 +1,22 @@
 ---
 interface Props {
-    published: Date;
-    updated?: Date;
+  published: Date
+  updated?: Date
 }
 
-const { published, updated } = Astro.props;
+const { published, updated } = Astro.props
 
 const formatDate = (date: Date) => {
-    return new Intl.DateTimeFormat('en-US', {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    }).format(date);
+  return new Intl.DateTimeFormat('en-US', {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  }).format(date)
 }
 ---
-<span class="text-black/70 dark:text-white/70">Published on <span class="text-black dark:text-white">{formatDate(published)}</span></span>
+
+<span class="text-black/70 dark:text-white/70"
+  >Published on <span class="text-black dark:text-white"
+    >{formatDate(published)}</span
+  ></span
+>

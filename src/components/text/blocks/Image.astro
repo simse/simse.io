@@ -1,22 +1,27 @@
 ---
-import { getImageBuilder } from "@cms";
+import { getImageBuilder } from '@cms'
 
 interface Props {
-    index: number;
-    isInline: boolean;
-    class?: string;
-    node: {
-        _type: 'image';
-        _key: string;
-        asset: {
-            _ref: string;
-            _type: string;
-        }
+  index: number
+  isInline: boolean
+  class?: string
+  node: {
+    _type: 'image'
+    _key: string
+    asset: {
+      _ref: string
+      _type: string
     }
+  }
 }
 
-const props = Astro.props;
+const props = Astro.props
 
-const imageBuilder = getImageBuilder(props.node.asset);
+const imageBuilder = getImageBuilder(props.node.asset)
 ---
-<img src={imageBuilder.width(1000).height(800).crop("focalpoint").url()} class="my-4 rounded" alt="" />
+
+<img
+  src={imageBuilder.width(1000).height(800).crop('focalpoint').url()}
+  class="my-4 rounded"
+  alt=""
+/>

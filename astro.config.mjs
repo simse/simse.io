@@ -1,17 +1,17 @@
-import { defineConfig, passthroughImageService, envField  } from "astro/config";
-import cloudflare from "@astrojs/cloudflare";
-import tailwind from "@astrojs/tailwind";
-import icon from "astro-icon";
-import sanity from "@sanity/astro";
-import react from "@astrojs/react";
+import { defineConfig, passthroughImageService, envField } from 'astro/config'
+import cloudflare from '@astrojs/cloudflare'
+import tailwind from '@astrojs/tailwind'
+import icon from 'astro-icon'
+import sanity from '@sanity/astro'
+import react from '@astrojs/react'
 
-import svelte from "@astrojs/svelte";
+import svelte from '@astrojs/svelte'
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
+  output: 'server',
   adapter: cloudflare({
-    imageService: "passthrough",
+    imageService: 'passthrough',
   }),
   integrations: [
     tailwind({
@@ -19,10 +19,10 @@ export default defineConfig({
     }),
     icon(),
     sanity({
-      projectId: "rjqusm5i",
-      dataset: "production",
+      projectId: 'rjqusm5i',
+      dataset: 'production',
       useCdn: true,
-      studioBasePath: "/cms",
+      studioBasePath: '/cms',
     }),
     react(),
     svelte(),
@@ -34,8 +34,8 @@ export default defineConfig({
   experimental: {
     env: {
       schema: {
-        PEPY_API_KEY: envField.string({ context: "server", access: "secret" }),
-      }
-    }
-  }
-});
+        PEPY_API_KEY: envField.string({ context: 'server', access: 'secret' }),
+      },
+    },
+  },
+})

@@ -1,4 +1,4 @@
-name: "Deploy simse.io"
+name: 'Deploy simse.io'
 on:
   push:
     branches: [main]

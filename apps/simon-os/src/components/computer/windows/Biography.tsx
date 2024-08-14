@@ -1,6 +1,6 @@
-import type { WindowProps } from "../types";
-import WindowFrame from "../WindowFrame";
-import SimonPicture from "@assets/me_but_dithered.png";
+import type { WindowProps } from '../types'
+import WindowFrame from '../WindowFrame'
+import SimonPicture from '@assets/me_but_dithered.png'
 
 interface BiographyWindowProps extends WindowProps {}
 
@@ -18,7 +18,7 @@ const BiographyWindow = (props: BiographyWindowProps) => {
           alt="Simon"
           class="w-28 h-28 mb-1 bg-black/10"
           style={{
-            imageRendering: "pixelated",
+            imageRendering: 'pixelated',
           }}
         />
       </div>
@@ -39,7 +39,7 @@ const BiographyWindow = (props: BiographyWindowProps) => {
         <p>
           Around the age of 10, I learned the HTML, CSS and JS basics from
           Youtube. When I was 12, my dad got me a subscription to Treehouse,
-          where I learned about PHP, Wordpress and jQuery.{" "}
+          where I learned about PHP, Wordpress and jQuery.{' '}
         </p>
 
         <p>
@@ -53,7 +53,7 @@ const BiographyWindow = (props: BiographyWindowProps) => {
         </p>
       </div>
     </WindowFrame>
-  );
-};
+  )
+}
 
-export default BiographyWindow;
+export default BiographyWindow

@@ -1,17 +1,17 @@
 ---
-import { getWorkExperiences } from "../../cms";
+import { getWorkExperiences } from '../../cms'
 
-const workExperience = await getWorkExperiences();
+const workExperience = await getWorkExperiences()
 
 const formatDate = (date: Date | null): string => {
   if (!date) {
-    return "Current";
+    return 'Current'
   }
 
-  return date.toLocaleDateString("en-US", {
+  return date.toLocaleDateString('en-US', {
     year: 'numeric',
     month: 'long',
-  });
+  })
 }
 ---
 
@@ -21,24 +21,41 @@ const formatDate = (date: Date | null): string => {
   </a>
 
   <ul>
-    {workExperience.map(experience => (
-      <li class="mb-2">
-        <a href={`/cv/${experience.slug}`} class="p-3 rounded block hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
-          <div class="flex justify-between items-center">
-            <div>
-              <h3 class="text-lg" title={experience.officialTitle}>{experience.title}</h3>
-              <span class="text-zinc-400 font-medium flex items-center gap-2">
-                <img src={experience.employerLogo} alt={`${experience.employer} official logo`} class="w-4 h-4" /> {experience.employer}
-              </span>
-            </div>
+    {
+      workExperience.map((experience) => (
+        <li class="mb-2">
+          <a
+            href={`/cv/${experience.slug}`}
+            class="p-3 rounded block hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+          >
+            <div class="flex justify-between items-center">
+              <div>
+                <h3 class="text-lg" title={experience.officialTitle}>
+                  {experience.title}
+                </h3>
+                <span class="text-zinc-400 font-medium flex items-center gap-2">
+                  <img
+                    src={experience.employerLogo}
+                    alt={`${experience.employer} official logo`}
+                    class="w-4 h-4"
+                  />{' '}
+                  {experience.employer}
+                </span>
+              </div>
 
-            <div class="text-right">
-              <span>{formatDate(experience.startDate)} — {formatDate(experience.endDate)}</span>
-              <p class="text-zinc-700 dark:text-zinc-400">{experience.location}</p>
+              <div class="text-right">
+                <span>
+                  {formatDate(experience.startDate)} —{' '}
+                  {formatDate(experience.endDate)}
+                </span>
+                <p class="text-zinc-700 dark:text-zinc-400">
+                  {experience.location}
+                </p>
+              </div>
             </div>
-          </div>
-        </a>
-      </li>
-    ))}
+          </a>
+        </li>
+      ))
+    }
   </ul>
 </section>

@@ -2,9 +2,10 @@
 title: Reflecting on my LEGO internship
 published: 2024-03-10
 draft: true
-tags: 
-    - Career
+tags:
+  - Career
 ---
+
 On Friday the 1st of March, my internship of almost two years at The LEGO Group in London came to an end. Most ordinary internships don't last two years, and my circumstances certainly weren't ordinary.
 
 Before I reflect on the past two years, I have to give you a bit of background.
@@ -29,7 +30,7 @@ In Septemper 2021 the time had come to move to London and say goodbye to my job 
 
 Certainly a shame, but no big deal. I had saved money and I had gained a bit experience to add to my CV. I left the job on good terms, and I was looking forward to starting university.
 
-A few months later, around November, I get a call from one of my old co-workers. He tells me he's been talking to a few people at the LEGO office in London. It just so happens that most of those working on [lego.com](https://lego.com), does so from the London office! 
+A few months later, around November, I get a call from one of my old co-workers. He tells me he's been talking to a few people at the LEGO office in London. It just so happens that most of those working on [lego.com](https://lego.com), does so from the London office!
 
 I was put in touch with two engineers, and we had an initial interview with the goal of bringing me on as an intern. After that, a few months went by and I didn't hear much. I followed up once, but there was no progress, so I thought it the ship had sailed.
 
@@ -52,4 +53,3 @@ The lego.com website is built with Next.js, so it uses React and we prefer Types
 The biggest I want to point out, is how everyone respected me despite my very junior title. That's actually a big part of the engineering culture at the company. Titles are about responsibilities, but it doesn't determine who is right or wrong.
 
 My ideas and opinions were valued just as much as everyone elses. That's a fact I quickly forgot about, but it was always the case, and I appreciate that.
-

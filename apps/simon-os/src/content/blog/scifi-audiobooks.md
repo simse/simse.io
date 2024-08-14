@@ -1,9 +1,10 @@
 ---
 title: My favorite sci-fi audiobooks
 published: 2024-01-09
-tags: 
-    - Yapping
+tags:
+  - Yapping
 ---
+
 Below is a list of my favourite sci-fi audiobooks. I **love** space sci-fi, so even though Frankenstein and The Handmaid's Tale is also sci-fi and great books, they are unlikely to make it onto this list.
 
 Every book on the list is great in its own right, but the narrator of the book is also important.

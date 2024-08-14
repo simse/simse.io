@@ -1,44 +1,49 @@
 ---
-import BaseLayout from "@layouts/BaseLayout.astro";
-import Navbar from "@components/Navbar.astro";
-import PublishDate from "@components/blog/PublishDate.astro";
-import Text from "@components/text/Text.astro";
-import { getImageBuilder } from "@cms";
-import type { Post } from "@cms";
-import Footer from "@components/common/Footer.astro";
-import BlogCard from "@components/blog/BlogCard.astro";
-import { getPosts } from "@cms";
+import BaseLayout from '@layouts/BaseLayout.astro'
+import Navbar from '@components/Navbar.astro'
+import PublishDate from '@components/blog/PublishDate.astro'
+import Text from '@components/text/Text.astro'
+import { getImageBuilder } from '@cms'
+import type { Post } from '@cms'
+import Footer from '@components/common/Footer.astro'
+import BlogCard from '@components/blog/BlogCard.astro'
+import { getPosts } from '@cms'
 
 interface Props {
-  post: Post;
+  post: Post
 }
 
-const { post } = Astro.props;
+const { post } = Astro.props
 
-const image = getImageBuilder(post.image);
+const image = getImageBuilder(post.image)
 
 // suggested posts
-const suggestedPosts = await getPosts();
+const suggestedPosts = await getPosts()
 ---
+
 <BaseLayout title={post.title} canonical={`/${post.slug}`}>
   <Navbar activeItem="Blog" />
 
   <header class="my-8 md:my-16 md:text-center max-w-2xl mx-auto px-2">
-    <PublishDate
-      published={post.published}
-    />
+    <PublishDate published={post.published} />
     <h1 class="text-2xl md:text-3xl my-2">{post.title}</h1>
   </header>
 
-  {post.image && <figure class="my-8 md:my-16 max-w-4xl mx-auto px-2">
-    <img
-      class="w-full mb-2 rounded aspect-[3/2] bg-zinc-900 "
-      src={image.width(1200).height(800).url()}
-      alt={post.image.alt}
-    />
+  {
+    post.image && (
+      <figure class="my-8 md:my-16 max-w-4xl mx-auto px-2">
+        <img
+          class="w-full mb-2 rounded aspect-[3/2] bg-zinc-900 "
+          src={image.width(1200).height(800).url()}
+          alt={post.image.alt}
+        />
 
-    <figcaption class="text-sm text-zinc-700 dark:text-zinc-400">{post.image.caption}</figcaption>
-  </figure>}
+        <figcaption class="text-sm text-zinc-700 dark:text-zinc-400">
+          {post.image.caption}
+        </figcaption>
+      </figure>
+    )
+  }
 
   <main class="max-w-2xl mx-auto px-2 pb-12">
     <Text content={post.content} />
@@ -48,11 +53,13 @@ const suggestedPosts = await getPosts();
     <h2 class="text-lg mb-2">Suggested Posts</h2>
 
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      {suggestedPosts.slice(0, 6).map((post) => (
-        <li>
-          <BlogCard post={post} dateWithYear={true} />
-        </li>
-      ))}
+      {
+        suggestedPosts.slice(0, 6).map((post) => (
+          <li>
+            <BlogCard post={post} dateWithYear={true} />
+          </li>
+        ))
+      }
     </ul>
   </section>
 

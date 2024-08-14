@@ -1,52 +1,62 @@
 ---
-import { Icon } from 'astro-icon/components';
-import type { Image } from "../../cms";
-import { getImageBuilder } from "../../cms";
+import { Icon } from 'astro-icon/components'
+import type { Image } from '../../cms'
+import { getImageBuilder } from '../../cms'
 interface Props {
-	images: Image[];
+  images: Image[]
 }
 
-const { images } = Astro.props;
+const { images } = Astro.props
 ---
+
 <script>
-    import Glide, { Controls } from '@glidejs/glide/dist/glide.modular.esm'
+  import Glide, { Controls } from '@glidejs/glide/dist/glide.modular.esm'
 
-    document.addEventListener('astro:page-load', () => {
-        const carouselElements = document.getElementsByClassName("glide");
+  document.addEventListener('astro:page-load', () => {
+    const carouselElements = document.getElementsByClassName('glide')
 
-        if (carouselElements.length !== 0) {
-            new Glide('.glide').mount({Controls});
-        }
-    });
+    if (carouselElements.length !== 0) {
+      new Glide('.glide').mount({ Controls })
+    }
+  })
 </script>
 
 <div class="glide my-16">
-    <div class="glide__track" data-glide-el="track">
-        <ul class="glide__slides">
-            {images.map(image => (
-              <li class="glide__slide aspect-[3/2] w-full">
-                  <figure>
-                      <img
-                        class="object-cover bg-zinc-900 rounded"
-                        src={getImageBuilder(image).width(1200).height(800).url()}
-                        alt={image.alt}
-                      />
+  <div class="glide__track" data-glide-el="track">
+    <ul class="glide__slides">
+      {
+        images.map((image) => (
+          <li class="glide__slide aspect-[3/2] w-full">
+            <figure>
+              <img
+                class="object-cover bg-zinc-900 rounded"
+                src={getImageBuilder(image).width(1200).height(800).url()}
+                alt={image.alt}
+              />
 
-                      <figcaption class="mt-2 text-zinc-700 dark:text-zinc-400">
-                          {image.caption}
-                      </figcaption>
-                  </figure>
-              </li>
-            ))}
-        </ul>
-    </div>
+              <figcaption class="mt-2 text-zinc-700 dark:text-zinc-400">
+                {image.caption}
+              </figcaption>
+            </figure>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 
-    <div class="glide__arrows -mt-6 flex items-center justify-end z-20 absolute right-0 dark:bg-zinc-950 dark:text-white bg-zinc-50 text-zinc-950 w-fit" data-glide-el="controls">
+  {
+    images.length > 1 && (
+      <div
+        class="glide__arrows -mt-6 flex items-center justify-end z-20 absolute right-0 dark:bg-zinc-950 dark:text-white bg-zinc-50 text-zinc-950 w-fit"
+        data-glide-el="controls"
+      >
         <button class="glide__arrow glide__arrow--left p-2" data-glide-dir="<">
-            <Icon name="tabler:chevron-left" size={22} />
+          <Icon name="tabler:chevron-left" size={22} />
         </button>
         <button class="glide__arrow glide__arrow--right p-2" data-glide-dir=">">
-            <Icon name="tabler:chevron-right" size={22} />
+          <Icon name="tabler:chevron-right" size={22} />
         </button>
-    </div>
+      </div>
+    )
+  }
 </div>

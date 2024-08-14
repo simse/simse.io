@@ -1,34 +1,39 @@
 ---
-import { getCollection } from "astro:content";
-import type {InitialStateAction} from "@components/computer/types";
+import { getCollection } from 'astro:content'
+import type { InitialStateAction } from '@components/computer/types'
 
-import BaseLayout from "@layouts/BaseLayout.astro";
-import Computer from "@components/computer";
+import BaseLayout from '@layouts/BaseLayout.astro'
+import Computer from '@components/computer'
 
-let blogPosts = await getCollection("blog");
+let blogPosts = await getCollection('blog')
 
 // filter out drafts
-blogPosts = blogPosts.filter((post) => !post.data.draft);
+blogPosts = blogPosts.filter((post) => !post.data.draft)
 
 // remove body content from blog posts
 blogPosts = blogPosts.map((post) => {
   return {
     ...post,
-    body: "",
-  };
-});
+    body: '',
+  }
+})
 
 // sort blog posts by date
 blogPosts.sort((a, b) => {
-  return +new Date(b.data.published) - +new Date(a.data.published);
-});
+  return +new Date(b.data.published) - +new Date(a.data.published)
+})
 
 interface Props {
-  initialStateAction?: InitialStateAction;
+  initialStateAction?: InitialStateAction
 }
 
-const props = Astro.props;
+const props = Astro.props
 ---
+
 <BaseLayout title="simonOS">
-  <Computer blogPosts={blogPosts} initialStateAction={props.initialStateAction} client:load />
+  <Computer
+    blogPosts={blogPosts}
+    initialStateAction={props.initialStateAction}
+    client:load
+  />
 </BaseLayout>

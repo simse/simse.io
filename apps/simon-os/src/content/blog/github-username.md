@@ -1,9 +1,10 @@
 ---
 title: How I got my Github username
 published: 2023-12-19
-tags: 
-    - Yapping
+tags:
+  - Yapping
 ---
+
 My username on Github and everywhere else I can get is `simse`. It's a nickname from my childhood I'm very fond of. The only problem is that it wasn't available on Github.
 
 I was devastated... I think. This was 9 years ago. What was a 13 year old lad to do?

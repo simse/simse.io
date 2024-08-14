@@ -1,25 +1,22 @@
-import { defineConfig, passthroughImageService } from 'astro/config';
-import cloudflare from "@astrojs/cloudflare";
-import tailwind from "@astrojs/tailwind";
-import preact from "@astrojs/preact";
+import { defineConfig, passthroughImageService } from 'astro/config'
+import cloudflare from '@astrojs/cloudflare'
+import tailwind from '@astrojs/tailwind'
+import preact from '@astrojs/preact'
 
 // https://astro.build/config
 export default defineConfig({
-  output: "server",
+  output: 'server',
   adapter: cloudflare({
-    imageService: 'cloudflare'
+    imageService: 'cloudflare',
   }),
-  integrations: [
-    tailwind(), 
-    preact(),
-  ],
+  integrations: [tailwind(), preact()],
   image: {
-    service: passthroughImageService()
+    service: passthroughImageService(),
   },
   prefetch: true,
   markdown: {
     shikiConfig: {
-      theme: 'github-light'
-    }
-  }
-});
+      theme: 'github-light',
+    },
+  },
+})

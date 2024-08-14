@@ -1,22 +1,22 @@
 ---
-import { createHighlighterCore, loadWasm } from 'shiki/core';
-import githubDark from 'shiki/themes/github-dark.mjs';
-import js from 'shiki/langs/javascript.mjs';
-import ts from 'shiki/langs/typescript.mjs';
+import { createHighlighterCore, loadWasm } from 'shiki/core'
+import githubDark from 'shiki/themes/github-dark.mjs'
+import js from 'shiki/langs/javascript.mjs'
+import ts from 'shiki/langs/typescript.mjs'
 
 interface Props {
-  index: number;
-  isInline: boolean;
-  class?: string;
+  index: number
+  isInline: boolean
+  class?: string
   node: {
-    _type: 'codeBlock';
-    _key: string;
-    language: 'js' | 'ts';
-    sourceCode: string;
+    _type: 'codeBlock'
+    _key: string
+    language: 'js' | 'ts'
+    sourceCode: string
   }
 }
 
-const props = Astro.props;
+const props = Astro.props
 
 // @ts-expect-error
 await loadWasm(import('shiki/onig.wasm'))
@@ -24,12 +24,13 @@ await loadWasm(import('shiki/onig.wasm'))
 const highlighter = await createHighlighterCore({
   themes: [githubDark],
   langs: [js, ts],
-});
+})
 
 // @ts-expect-error
 const highlightedCode = highlighter.codeToHtml(props.node.sourceCode, {
   theme: 'github-dark',
-  lang: props.node.language
+  lang: props.node.language,
 })
 ---
+
 <Fragment set:html={highlightedCode} />
