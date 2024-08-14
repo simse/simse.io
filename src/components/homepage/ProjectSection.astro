@@ -1,8 +1,11 @@
 ---
-import { getProjects } from '@cms'
+import { getProjects, type Project } from '@cms'
 import ProjectCard from '../projects/ProjectCard.astro'
 
-const projects = await getProjects()
+let projects = await getProjects();
+projects = projects.sort((a: Project, b: Project) => {
+  return a.published < b.published ? 1 : -1;
+})
 ---
 
 <section class="my-16 px-3">
