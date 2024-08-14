@@ -1,36 +1,36 @@
-import { useState, useEffect } from "preact/hooks";
+import { useState, useEffect } from 'preact/hooks'
 
 const TopBar = () => {
-  const [time, setTime] = useState(new Date());
+  const [time, setTime] = useState(new Date())
 
   useEffect(() => {
     setInterval(() => {
-      const date = new Date();
-      
-      // override year to 1988
-      date.setFullYear(1988);
+      const date = new Date()
 
-      setTime(date);
-    }, 1000);
-  }, []);
+      // override year to 1988
+      date.setFullYear(1988)
+
+      setTime(date)
+    }, 1000)
+  }, [])
 
   const timeString = (currentDate: Date): string => {
-    return currentDate.toLocaleTimeString("en-UK", {
-      hour: "numeric",
-      minute: "numeric",
-    });
-  };
+    return currentDate.toLocaleTimeString('en-UK', {
+      hour: 'numeric',
+      minute: 'numeric',
+    })
+  }
 
   const dateString = (currentDate: Date): string => {
     return currentDate
-      .toLocaleDateString("en-UK", {
-        weekday: "short",
-        month: "short",
-        day: "numeric",
-        year: "numeric",
+      .toLocaleDateString('en-UK', {
+        weekday: 'short',
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
       })
-      .replaceAll(",", "");
-  };
+      .replaceAll(',', '')
+  }
 
   return (
     <header class="border-b border-black flex px-3">
@@ -42,7 +42,7 @@ const TopBar = () => {
 
       <span class="pl-3">{dateString(time)}</span>
     </header>
-  );
-};
+  )
+}
 
-export default TopBar;
+export default TopBar

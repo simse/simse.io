@@ -1,40 +1,43 @@
 ---
+import BaseLayout from '@layouts/BaseLayout.astro'
+import Navbar from '@components/Navbar.astro'
+import PageHeader from '@components/common/PageHeader.astro'
+import YearList from '@components/blog/YearList.astro'
+import { getPosts, type Post } from '@cms'
+import Footer from '@components/common/Footer.astro'
 
-import BaseLayout from "@layouts/BaseLayout.astro";
-import Navbar from "@components/Navbar.astro";
-import PageHeader from "@components/common/PageHeader.astro";
-import YearList from "@components/blog/YearList.astro";
-import { getPosts, type Post } from '@cms';
-import Footer from "@components/common/Footer.astro";
-
-let posts = await getPosts();
+let posts = await getPosts()
 
 // group posts by year
 let postsByYear: {
-    [key: string]: Post[];
-} = {};
+  [key: string]: Post[]
+} = {}
 
 posts.forEach((post) => {
-    const year = post.published.getFullYear().toString();
-    if (!postsByYear[year]) {
-        postsByYear[year] = [];
-    }
-    postsByYear[year].push(post);
-});
+  const year = post.published.getFullYear().toString()
+  if (!postsByYear[year]) {
+    postsByYear[year] = []
+  }
+  postsByYear[year].push(post)
+})
 ---
+
 <BaseLayout title="Blog">
-    <Navbar activeItem="Blog" />
+  <Navbar activeItem="Blog" />
 
-    <main class="px-2 py-8 max-w-2xl mx-auto">
-        <PageHeader 
-            title="Blog"
-            subtitle="My corner of The Internet where I write sometimes,<br />but honestly not that often."
-        />
+  <main class="px-2 py-8 max-w-2xl mx-auto">
+    <PageHeader
+      title="Blog"
+      subtitle="My corner of The Internet where I write sometimes,<br />but honestly not that often."
+    />
 
-        {Object.keys(postsByYear).sort().reverse().map((year) => (
-            <YearList year={year} posts={postsByYear[year]} />
-        ))}
-    </main>
+    {
+      Object.keys(postsByYear)
+        .sort()
+        .reverse()
+        .map((year) => <YearList year={year} posts={postsByYear[year]} />)
+    }
+  </main>
 
-    <Footer />
+  <Footer />
 </BaseLayout>

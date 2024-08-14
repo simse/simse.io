@@ -1,50 +1,54 @@
 ---
-import LoadingIndicator from "astro-loading-indicator/component";
-import { ViewTransitions } from 'astro:transitions';
-import "../app.scss";
+import LoadingIndicator from 'astro-loading-indicator/component'
+import { ViewTransitions } from 'astro:transitions'
+import '../app.scss'
 
 interface Props {
-    title: string;
-	canonical?: string;
+  title: string
+  canonical?: string
 }
 
-const { title, canonical } = Astro.props;
+const { title, canonical } = Astro.props
 
 const createTitle = (title: string) => {
-	if (title.includes("—")) return title;
+  if (title.includes('—')) return title
 
-	return title ? `${title}—Simon Sorensen` : "Simon Sorensen—Software Engineer in London";
-};
+  return title
+    ? `${title}—Simon Sorensen`
+    : 'Simon Sorensen—Software Engineer in London'
+}
 ---
 
 <html lang="en" transition:animate="fade">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/ico" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<meta name="robots" content="noindex,nofollow" />
-		<title>{createTitle(title)}</title>
-		{canonical && <link rel="canonical" href={`https://simse.io${canonical}`} />}
-		<style is:global>
-        @font-face {
-            font-family: 'Soehne';
-            src: url('/fonts/Soehne-Regular.woff2');
-            font-display: swap;
-        }
-        @font-face {
-            font-family: 'Soehne';
-            src: url('/fonts/Soehne-Bold.woff2');
-						font-weight: 700;
-            font-display: swap;
-        }
-		</style>
-		<ViewTransitions />
-		<LoadingIndicator
-			color="#2563eb"
-		/>
-	</head>
-	<body class="bg-zinc-50 text-zinc-950 dark:text-zinc-100 dark:bg-zinc-950">
-		<slot />
-	</body>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/ico" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>{createTitle(title)}</title>
+    {
+      canonical && (
+        <link rel="canonical" href={`https://simse.io${canonical}`} />
+      )
+    }
+    <style is:global>
+      @font-face {
+        font-family: 'Soehne';
+        src: url('/fonts/Soehne-Regular.woff2');
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'Soehne';
+        src: url('/fonts/Soehne-Bold.woff2');
+        font-weight: 700;
+        font-display: swap;
+      }
+    </style>
+    <ViewTransitions />
+    <LoadingIndicator color="#2563eb" />
+  </head>
+  <body class="bg-zinc-50 text-zinc-950 dark:text-zinc-100 dark:bg-zinc-950">
+    <slot />
+  </body>
 </html>

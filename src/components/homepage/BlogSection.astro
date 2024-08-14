@@ -1,8 +1,8 @@
 ---
-import { getPosts } from "@cms";
-import BlogCard from "@components/blog/BlogCard.astro";
+import { getPosts } from '@cms'
+import BlogCard from '@components/blog/BlogCard.astro'
 
-const posts = await getPosts();
+const posts = await getPosts()
 ---
 
 <section class="my-16 px-3">
@@ -11,10 +11,12 @@ const posts = await getPosts();
   </a>
 
   <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-    {posts.slice(0, 4).map((post) => (
-      <li>
-        <BlogCard post={post} dateWithYear={true} />
-      </li>
-    ))}
+    {
+      posts.slice(0, 4).map((post) => (
+        <li>
+          <BlogCard post={post} dateWithYear={true} />
+        </li>
+      ))
+    }
   </ul>
 </section>

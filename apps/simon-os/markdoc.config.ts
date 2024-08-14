@@ -1,5 +1,5 @@
-import { defineMarkdocConfig, nodes } from '@astrojs/markdoc/config';
-import shiki from '@astrojs/markdoc/shiki';
+import { defineMarkdocConfig, nodes } from '@astrojs/markdoc/config'
+import shiki from '@astrojs/markdoc/shiki'
 
 export default defineMarkdocConfig({
   /*tags: {
@@ -15,13 +15,11 @@ export default defineMarkdocConfig({
       },
     },
   },*/
-  extends: [
-    shiki({}),
-  ],
+  extends: [shiki({})],
   nodes: {
     document: {
-        ...nodes.document,
-        render: undefined,
-    }
-  }
-});
+      ...nodes.document,
+      render: undefined,
+    },
+  },
+})

@@ -1,18 +1,16 @@
 ---
-import type { Post } from "src/cms";
-import BlogCard from "./BlogCard.astro";
+import type { Post } from 'src/cms'
+import BlogCard from './BlogCard.astro'
 
 interface Props {
-  year: string;
-  posts: Post[];
+  year: string
+  posts: Post[]
 }
 
-const { year, posts } = Astro.props;
+const { year, posts } = Astro.props
 ---
 
-<section
-  class="my-2 pb-2 mb-8"
->
+<section class="my-2 pb-2 mb-8">
   <h2 class="text-xl text-black/70 dark:text-white/70 mb-4">{year}</h2>
 
   <ul class="grid grid-cols-1 sm:grid-cols-2">

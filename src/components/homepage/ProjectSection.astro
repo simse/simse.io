@@ -1,8 +1,8 @@
 ---
-import { getProjects } from "@cms";
-import ProjectCard from "../projects/ProjectCard.astro";
+import { getProjects } from '@cms'
+import ProjectCard from '../projects/ProjectCard.astro'
 
-const projects = await getProjects();
+const projects = await getProjects()
 ---
 
 <section class="my-16 px-3">
@@ -11,10 +11,12 @@ const projects = await getProjects();
   </a>
 
   <ul class="grid grid-cols-3 gap-4">
-    {projects.map(project => (
-      <li>
-        <ProjectCard project={project} />
-      </li>
-    ))}
+    {
+      projects.map((project) => (
+        <li>
+          <ProjectCard project={project} />
+        </li>
+      ))
+    }
   </ul>
 </section>

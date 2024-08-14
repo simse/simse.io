@@ -10,7 +10,7 @@
     "astro": "astro",
     "deploy": "wrangler pages deploy dist --project-name simse-io",
     "lint": "eslint src",
-    "format": "prettier . --write",
+    "format": "prettier --write **/*.astro .",
     "types:check": "tsc --noEmit",
     "test": "vitest"
   },

@@ -1,43 +1,46 @@
-import { useState, useEffect } from "preact/hooks";
-import type { CollectionEntry } from "astro:content";
+import { useState, useEffect } from 'preact/hooks'
+import type { CollectionEntry } from 'astro:content'
 
-import WindowFrame from "../WindowFrame";
-import type { WindowProps } from "../types";
-import { formatDateWithYear } from "@utils/date";
+import WindowFrame from '../WindowFrame'
+import type { WindowProps } from '../types'
+import { formatDateWithYear } from '@utils/date'
 
 interface BlogPostProps extends WindowProps {
-  postSlug?: string;
+  postSlug?: string
   prefetchedPost?: {
-    html: string;
-    frontmatter: BlogPostFrontmatter;
-  };
+    html: string
+    frontmatter: BlogPostFrontmatter
+  }
 }
 
-type BlogPostFrontmatter = CollectionEntry<"blog">["data"];
+type BlogPostFrontmatter = CollectionEntry<'blog'>['data']
 
 const BlogPost = (props: BlogPostProps) => {
-  const postSlug = props.postSlug || "";
-  const [postHTML, setPostHTML] = useState(props.prefetchedPost?.html || "");
-  const [postFrontMatter, setPostFrontMatter] = useState<BlogPostFrontmatter | null>(props.prefetchedPost?.frontmatter || null);
-  const [isLoaded, setIsLoaded] = useState(props.prefetchedPost ? true : false);
+  const postSlug = props.postSlug || ''
+  const [postHTML, setPostHTML] = useState(props.prefetchedPost?.html || '')
+  const [postFrontMatter, setPostFrontMatter] =
+    useState<BlogPostFrontmatter | null>(
+      props.prefetchedPost?.frontmatter || null,
+    )
+  const [isLoaded, setIsLoaded] = useState(props.prefetchedPost ? true : false)
 
   useEffect(() => {
-    if (props.prefetchedPost) return;
+    if (props.prefetchedPost) return
 
     fetch(`/api/blog/${postSlug}`)
       .then((response) => response.json())
       .then((post) => {
-        setPostHTML(post.html);
+        setPostHTML(post.html)
         setPostFrontMatter({
           title: post.frontmatter.title,
           published: new Date(post.frontmatter.published),
           updated: new Date(post.frontmatter.updated),
           tags: post.frontmatter.tags,
           draft: post.frontmatter.draft,
-        });
-        setIsLoaded(true);
-      });
-  }, [postSlug]);
+        })
+        setIsLoaded(true)
+      })
+  }, [postSlug])
 
   return (
     <WindowFrame
@@ -54,7 +57,9 @@ const BlogPost = (props: BlogPostProps) => {
           <header class="mb-3">
             <h1 class="text-2xl">{postFrontMatter?.title}</h1>
             {postFrontMatter?.published && (
-              <span>{formatDateWithYear(new Date(postFrontMatter.published))}</span>
+              <span>
+                {formatDateWithYear(new Date(postFrontMatter.published))}
+              </span>
             )}
           </header>
 
@@ -68,7 +73,7 @@ const BlogPost = (props: BlogPostProps) => {
         </>
       )}
     </WindowFrame>
-  );
-};
+  )
+}
 
-export default BlogPost;
+export default BlogPost

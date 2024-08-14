@@ -1,54 +1,59 @@
 ---
-import { getProjects } from "../../cms";
+import { getProjects } from '../../cms'
 
-const projects = await getProjects();
+const projects = await getProjects()
 
 const links: {
-  title: string;
+  title: string
   items: {
-      label: string;
-      href: string;
-  }[];
+    label: string
+    href: string
+  }[]
 }[] = [
-    {
-        title: "Index",
-        items: [
-            {
-                label: "About",
-                href: "/about"
-            },
-            {
-                label: "Blog",
-                href: "/blog"
-            },
-            {
-                label: "Projects",
-                href: "/projects"
-            },
-            {
-                label: "Contact",
-                href: "/contact"
-            }
-        ]
-    },
-    {
-        title: "Projects",
-        items: projects.map(project => ({
-            label: project.title,
-            href: `/${project.slug}`
-        }))
-    }
+  {
+    title: 'Index',
+    items: [
+      {
+        label: 'About',
+        href: '/about',
+      },
+      {
+        label: 'Blog',
+        href: '/blog',
+      },
+      {
+        label: 'Projects',
+        href: '/projects',
+      },
+      {
+        label: 'Contact',
+        href: '/contact',
+      },
+    ],
+  },
+  {
+    title: 'Projects',
+    items: projects.map((project) => ({
+      label: project.title,
+      href: `/${project.slug}`,
+    })),
+  },
 ]
 ---
-<footer class="p-4 md:p-8 mt-32 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 max-w-5xl gap-y-8 mx-auto">
-    {links.map(group => (
+
+<footer
+  class="p-4 md:p-8 mt-32 mb-16 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 max-w-5xl gap-y-8 mx-auto"
+>
+  {
+    links.map((group) => (
       <ul class="flex flex-col gap-2">
-          <li class="text-zinc-700 dark:text-zinc-400">{group.title}</li>
-          {group.items.map(item => (
-            <li>
-                <a href={item.href}>{item.label}</a>
-            </li>
-          ))}
+        <li class="text-zinc-700 dark:text-zinc-400">{group.title}</li>
+        {group.items.map((item) => (
+          <li>
+            <a href={item.href}>{item.label}</a>
+          </li>
+        ))}
       </ul>
-    ))}
+    ))
+  }
 </footer>
