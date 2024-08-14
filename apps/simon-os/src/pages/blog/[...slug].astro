@@ -1,0 +1,37 @@
+---
+import { getCollection } from 'astro:content';
+import ComputerWrapper from '@components/ComputerWrapper.astro';
+import { getEntryBySlug } from 'astro:content';
+
+/*
+export async function getStaticPaths() {
+  const blogEntries = await getCollection('blog');
+  
+  return blogEntries.map(entry => ({
+    params: { slug: entry.slug }, props: { entry },
+  }));
+}
+*/
+
+// export const prerender = true;
+
+const { slug } = Astro.params;
+
+if (!slug) {
+  return {
+    status: 404,
+    error: new Error('Not found'),
+  };
+}
+
+// load markdown file
+const post = await import(`../../content/blog/${slug}.md`);
+---
+<ComputerWrapper initialStateAction={{
+  type: 'openBlogPost',
+  postSlug: slug,
+  prefetchedPost: {
+    frontmatter: post.frontmatter,
+    html: post.compiledContent().replaceAll('’', "'").replaceAll('…', '...'),
+  },
+}} />
