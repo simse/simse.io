@@ -1,4 +1,5 @@
 ---
+import LoadingIndicator from "astro-loading-indicator/component";
 import { ViewTransitions } from 'astro:transitions';
 import "../app.scss";
 
@@ -39,6 +40,9 @@ const createTitle = (title: string) => {
         }
 		</style>
 		<ViewTransitions />
+		<LoadingIndicator
+			color="#2563eb"
+		/>
 	</head>
 	<body class="bg-zinc-50 text-zinc-950 dark:text-zinc-100 dark:bg-zinc-950">
 		<slot />

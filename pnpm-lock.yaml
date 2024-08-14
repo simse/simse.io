@@ -53,6 +53,9 @@ importers:
       astro-icon:
         specifier: ^1.1.0
         version: 1.1.0
+      astro-loading-indicator:
+        specifier: ^0.5.0
+        version: 0.5.0(astro@4.13.0(sass@1.75.0)(typescript@5.5.3))
       astro-portabletext:
         specifier: ^0.9.8
         version: 0.9.8
@@ -2937,6 +2940,11 @@ packages:
 
   astro-icon@1.1.0:
     resolution: {integrity: sha512-Nksc09p7UuHeMcPNS9w1pKqRw3+wEmmh0A3FJW+FNXvqaeWI4RLvD1MCWErpY3Z5Cvad317rvLdik/Hg8GEk8Q==}
+
+  astro-loading-indicator@0.5.0:
+    resolution: {integrity: sha512-NU06AzJEzvlzXLac8ODFgHjzTDyaF/GV+nQQ7Rq21rCeSifhmLQu219lJukIUS0ySs4ySO4PAwcaHGClOSEufA==}
+    peerDependencies:
+      astro: ^4.0.0
 
   astro-portabletext@0.9.8:
     resolution: {integrity: sha512-zLsD3V+OHzMMico8t0y4x7U0/Bk1OeTbI0xlOU2EPrDMuTMtm4PLZIwtINkkrH3sUabu7iQDJ8f1hiLbh21knA==}
@@ -9788,6 +9796,10 @@ snapshots:
       '@iconify/utils': 2.1.22
     transitivePeerDependencies:
       - supports-color
+
+  astro-loading-indicator@0.5.0(astro@4.13.0(sass@1.75.0)(typescript@5.5.3)):
+    dependencies:
+      astro: 4.13.0(sass@1.75.0)(typescript@5.5.3)
 
   astro-portabletext@0.9.8:
     dependencies:

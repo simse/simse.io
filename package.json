@@ -30,6 +30,7 @@
     "@types/react-dom": "^18.3.0",
     "astro": "^4.13.0",
     "astro-icon": "^1.1.0",
+    "astro-loading-indicator": "^0.5.0",
     "astro-portabletext": "^0.9.8",
     "bits-ui": "^0.21.11",
     "clsx": "^2.1.1",
