@@ -21,7 +21,7 @@ const RadioWindow = (props: RadioWindowProps) => {
   >(null);
 
   useEffect(() => {
-    const socket = new Sockette("ws://188.34.196.254:81/api/live/nowplaying/websocket", {
+    const socket = new Sockette("wss://radio-backend.simse.io/api/live/nowplaying/websocket", {
       onopen: (e) => {
         socket.send(
           JSON.stringify({
@@ -104,7 +104,7 @@ const RadioWindow = (props: RadioWindowProps) => {
     }
   }, []);
 
-  const streamUrl = "http://188.34.196.254:10000/radio.mp3";
+  const streamUrl = "https://radio-backend.simse.io/listen/simons_radio/radio.mp3";
 
   const createAudioContext = () => {
     audioContextRef.current = new AudioContext();
