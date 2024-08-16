@@ -6,13 +6,15 @@
     "dev": "astro dev",
     "start": "astro dev",
     "build": "astro build",
-    "preview": "astro preview",
+    "preview": "wrangler pages dev dist --compatibility-date=2024-08-16",
     "astro": "astro",
     "deploy": "wrangler pages deploy dist --project-name simse-io",
     "lint": "eslint src",
     "format": "prettier --write **/*.astro .",
     "types:check": "tsc --noEmit",
-    "test": "vitest"
+    "test": "vitest",
+    "test:e2e:ui": "pnpx playwright test --ui",
+    "test:e2e": "pnpx playwright test"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.1",
@@ -47,8 +49,10 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.3.0",
+    "@playwright/test": "^1.46.0",
     "@sanity/vision": "^3.48.0",
     "@tailwindcss/typography": "^0.5.10",
+    "@types/node": "^22.4.0",
     "@typescript-eslint/parser": "^8.0.0",
     "eslint": "~9.3.0",
     "eslint-config-prettier": "^9.1.0",
@@ -59,6 +63,6 @@
     "sass": "^1.75.0",
     "typescript-eslint": "^7.11.0",
     "vitest": "^2.0.5",
-    "wrangler": "^3.34.2"
+    "wrangler": "3.72.0"
   }
 }
