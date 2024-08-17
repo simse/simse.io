@@ -78,6 +78,41 @@ jobs:
       - name: Run unit tests
         run: pnpm test
 
+  e2e-test:
+    timeout-minutes: 60
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9
+          run_install: false
+
+      - name: Setup node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18.20.x
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Install Playwright Browsers
+        run: pnpm exec playwright install --with-deps
+
+      - name: Run Playwright tests
+        run: pnpm exec playwright test --reporter json
+        env:
+          PLAYWRIGHT_JSON_OUTPUT_NAME: results.json
+
+      - uses: daun/playwright-report-summary@v3
+        if: always()
+        with:
+          report-file: results.json
+
   build-check:
     runs-on: ubuntu-latest
     steps:
