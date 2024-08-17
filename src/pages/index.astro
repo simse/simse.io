@@ -19,29 +19,26 @@ import EasterEgg from "@/components/EasterEgg.astro";
 ---
 
 <Base>
-	<Navbar floating={false} />
+	{/*<Navbar floating={false} />
 
-	<Hero />
+	<Hero />*/}
 
-	{import.meta.env.DEV && (
-		<WritingSection />
+	
+	<WritingSection />
 
-		<TelegraphSection />
+	<TelegraphSection />
 
-		<EarlyInternetSection />
+	<EarlyInternetSection />
 
-		<PortabilitySection />
+	<PortabilitySection />
 
-		<PersonalComputingSection />
+	<PersonalComputingSection />
 
-		<InternetSection />
+	<InternetSection />
 
-		<MobileComputingSection />
+	<MobileComputingSection />
 
-		<MachineLearningSection />
-
-		<EasterEgg easterEgg={2} />
-	)}
+	<MachineLearningSection />
 
 	<Footer />
 </Base>
