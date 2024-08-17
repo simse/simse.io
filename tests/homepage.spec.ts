@@ -27,6 +27,10 @@ test('contains blog posts section', async ({ page }) => {
   const blogPosts = blogSection.locator('ul > li');
   expect(await blogPosts.count()).toBeGreaterThan(0);
   expect(await blogPosts.count()).toBeLessThanOrEqual(4);
+
+  // all blog posts must have links
+  const blogPostLinks = blogSection.locator('ul > li > a');
+  expect(await blogPosts.count()).toEqual(await blogPostLinks.count());
 });
 
 test('contains projects section', async ({ page }) => {
@@ -38,4 +42,8 @@ test('contains projects section', async ({ page }) => {
 
   const projects = projectsSection.locator('ul > li');
   expect(await projects.count()).toBeGreaterThan(0);
+
+  // all projects must have links
+  const projectsLinks = projectsSection.locator('ul > li > a');
+  expect(await projects.count()).toEqual(await projectsLinks.count());
 });

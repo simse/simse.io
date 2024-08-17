@@ -13,8 +13,8 @@
     "format": "prettier --write **/*.astro .",
     "types:check": "tsc --noEmit",
     "test": "vitest",
-    "test:e2e:ui": "pnpx playwright test --ui",
-    "test:e2e": "pnpx playwright test"
+    "test:e2e:ui": "pnpm exec playwright test --ui",
+    "test:e2e": "pnpm exec playwright  test"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.1",
