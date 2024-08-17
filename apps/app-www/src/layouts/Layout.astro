@@ -1,0 +1,81 @@
+---
+import type { Breadcrumbs } from '../types';
+import BackgroundMusic from 'src/parts/BackgroundMusic.astro';
+
+export interface Props {
+	title: string;
+	description?: string;
+	breadcrumbs?: Breadcrumbs;
+	noSpacing?: boolean;
+}
+
+const { title, description = "", breadcrumbs = [], noSpacing = false } = Astro.props as Props
+
+import Navbar from '../components/Navbar.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="description" content={description}>
+		<meta name="viewport" content="width=device-width" />
+		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+		<link rel="manifest" href="/site.webmanifest">
+		<meta name="msapplication-TileColor" content="#2d89ef">
+		<meta name="theme-color" content="#ffffff">
+		<meta name="generator" content={Astro.generator} />
+		<title>{`${title} / simse.io`}</title>
+	</head>
+	<body class="dark:bg-black dark:text-gray-200">
+		<Navbar breadcrumbs={breadcrumbs} />
+
+		<div class="max-w-7xl mx-auto">
+			<main class={`${noSpacing ? '': 'pt-16'}`}>
+				<slot />
+			</main>
+	
+			<Footer />
+		</div>
+	</body>
+</html>
+<style>
+	@font-face {
+		font-family: "IBM Plex Mono";
+		src: url('/fonts/IBMPlexMono-Regular-Latin1.woff2') format('woff2');
+		font-weight: 400;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "IBM Plex Sans";
+		src: url('/fonts/IBMPlexSans-Regular.woff2') format('woff2');
+		font-weight: 400;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "IBM Plex Sans";
+		src: url('/fonts/IBMPlexSans-Italic.woff2') format('woff2');
+		font-weight: 400;
+		font-style: italic;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "IBM Plex Sans";
+		src: url('/fonts/IBMPlexSans-Light.woff2') format('woff2');
+		font-weight: 300;
+		font-display: swap;
+	}
+
+	@font-face {
+		font-family: "IBM Plex Sans";
+		src: url('/fonts/IBMPlexSans-Bold.woff2') format('woff2');
+		font-weight: 700;
+		font-display: swap;
+	}
+</style>

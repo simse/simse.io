@@ -51,12 +51,11 @@ typings/
 # Output of 'npm pack'
 *.tgz
 
-# dotenv environment variables file
-.env
+# dotenv environment variable files
+.env*
 
 # gatsby files
 .cache/
-public
 
 # Mac files
 .DS_Store
@@ -67,3 +66,12 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+.vercel
+.terraform
+.terraform.tfstate.lock.info
+.vscode
+terraform.tfvars
+*.backup
+terraform.tfstate.d/*
+.terraform.lock.hcl

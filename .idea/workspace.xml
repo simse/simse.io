@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="62a36c24-a9eb-453f-bc42-c406a6305243" name="Changes" comment="feat: Sort projects by publish date">
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/.npmrc" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/docker-compose.yml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/nodemon.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/src/collections/Examples.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/src/collections/Users.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/src/payload.config.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/src/server.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/tsconfig.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-cms/yarn.lock" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-www/public/fonts/IBMPlexSans-Bold.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-www/public/fonts/IBMPlexSans-Italic.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-www/public/fonts/IBMPlexSans-Light.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-www/public/fonts/IBMPlexSans-Regular.woff2" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-www/src/components/Chat.svelte" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-www/src/icons/volume-2.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-www/src/icons/volume-x.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-www/src/images/animated_logo.webp" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-www/src/parts/BackgroundMusic.astro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/apps/app-www/src/parts/HeroImage.astro" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/.npmignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/README.md" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/bin/service-ai-simon.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/bot.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/cdk.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/jest.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/lib/service-ai-simon-stack.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/package.json" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/pnpm-lock.yaml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/test/service-ai-simon.test.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/services/service-ai-simon/tsconfig.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.fleet/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/services/service-ai-simon/functions/createSession.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/astro.config.mjs" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/astro.config.mjs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/pnpm-lock.yaml" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/pnpm-lock.yaml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/public/fonts/Recoleta-Bold.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/public/fonts/Recoleta-Light.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/public/fonts/Recoleta-Regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/public/fonts/Unica-Bold.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/public/fonts/Unica-Light.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/public/fonts/Unica-Regular.woff2" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/components/ArticleList.astro" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/src/components/ArticleList.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/components/CodeSnippet.astro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/components/Footer.astro" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/src/components/Footer.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/components/GreetByTime.svelte" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/components/Navbar.astro" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/src/components/Navbar.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/images/bg.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/images/logo.png" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/src/images/logo.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/layouts/Layout.astro" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/src/layouts/Layout.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/pages/articles/efficient-server-to-js.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/src/pages/articles/efficient-server-to-js.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/pages/articles/smaller-docker-images.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/src/pages/articles/smaller-docker-images.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/pages/articles/the-ethics-of-media-piracy.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/src/pages/articles/the-ethics-of-media-piracy.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/pages/index.astro" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/src/pages/index.astro" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/pages/projects/idontplaycricket.mdx" beforeDir="false" afterPath="$PROJECT_DIR$/apps/app-www/src/pages/projects/idontplaycricket.mdx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/pages/weight-loss-journey/huh.astro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/pages/weight-loss-journey/index.astro" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/apps/app-www/src/parts/Hero.astro" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="TypeScript File" />
+        <option value="Astro Component" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="feat/better-cms" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 2
+}</component>
+  <component name="ProjectId" id="2iNlE7XK0c9dgkDnqbmuUpSzjv1" />
+  <component name="ProjectLevelVcsManager">
+    <OptionsSetting value="false" id="Update" />
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Playwright.has title.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;versions/2020-early&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/home/simon/simse.io/.github/workflows&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_interpreter_path&quot;: &quot;/home/simon/.volta/bin/node&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;pnpm&quot;,
+    &quot;npm.build.executor&quot;: &quot;Run&quot;,
+    &quot;npm.deploy.executor&quot;: &quot;Run&quot;,
+    &quot;npm.dev.executor&quot;: &quot;Run&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;settings.nodejs&quot;,
+    &quot;ts.external.directory.path&quot;: &quot;/home/simon/.cache/JetBrains/RemoteDev/dist/ae3e85d9255ab_WebStorm-2024.1.5/plugins/javascript-plugin/jsLanguageServicesImpl/external&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  }
+}</component>
+  <component name="RdControllerToolWindowsLayoutState" isNewUi="true">
+    <layout>
+      <window_info id="Bookmarks" show_stripe_button="false" side_tool="true" />
+      <window_info id="Merge Requests" show_stripe_button="false" />
+      <window_info id="Commit_Guest" show_stripe_button="false" />
+      <window_info id="npm" show_stripe_button="false" side_tool="true" />
+      <window_info id="Pull Requests" show_stripe_button="false" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13938954" />
+      <window_info id="Commit" order="1" weight="0.13938954" />
+      <window_info id="Welcome to GitHub Copilot" order="2" show_stripe_button="false" />
+      <window_info id="Structure" order="3" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="TypeScript" show_stripe_button="false" />
+      <window_info anchor="bottom" id="TODO" show_stripe_button="false" />
+      <window_info anchor="bottom" id="File Transfer" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Version Control" order="0" />
+      <window_info anchor="bottom" id="Problems" order="1" />
+      <window_info anchor="bottom" id="Problems View" order="2" />
+      <window_info anchor="bottom" id="Services" order="3" />
+      <window_info anchor="bottom" id="Find" order="4" weight="0.3301006" />
+      <window_info anchor="right" id="Endpoints" show_stripe_button="false" />
+      <window_info anchor="right" id="Coverage" show_stripe_button="false" side_tool="true" />
+      <window_info anchor="right" id="shadcn/ui" />
+      <window_info active="true" anchor="right" id="Terminal" order="0" sideWeight="0.50037825" visible="true" weight="0.2704942" />
+      <window_info anchor="right" content_ui="combo" id="Notifications" order="1" weight="0.25" />
+      <window_info anchor="right" id="AIAssistant" order="2" weight="0.25" />
+      <window_info anchor="right" id="Database" order="3" weight="0.25" />
+      <window_info anchor="right" id="github.copilotToolWindow" order="4" show_stripe_button="false" />
+      <window_info anchor="right" id="GitHub Copilot Chat" order="5" sideWeight="0.50037825" weight="0.19956395" />
+      <window_info anchor="right" id="Gradle" order="6" weight="0.25" />
+      <window_info anchor="right" id="Maven" order="7" weight="0.25" />
+      <window_info anchor="right" id="Run" order="8" sideWeight="0.49962178" side_tool="true" weight="0.2704942" />
+    </layout>
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/.github/workflows" />
+      <recent name="$PROJECT_DIR$/src/components/text/blocks" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$" />
+      <recent name="$PROJECT_DIR$/src/cms" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Playwright.has title">
+    <configuration name="has title" type="JavaScriptTestRunnerPlaywright" temporary="true" nameIsGenerated="true">
+      <node-interpreter value="project" />
+      <playwright-package value="$PROJECT_DIR$/node_modules/@playwright/test" />
+      <working-dir value="$PROJECT_DIR$" />
+      <envs />
+      <scope-kind value="TEST" />
+      <test-file value="$PROJECT_DIR$/tests/example.spec.ts" />
+      <test-names>
+        <test-name value="has title" />
+      </test-names>
+      <method v="2" />
+    </configuration>
+    <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="build" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="deploy" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="deploy" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <configuration name="dev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="dev" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Playwright.has title" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.deploy" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-WS-241.18034.50" />
+      </set>
+    </attachedChunks>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="62a36c24-a9eb-453f-bc42-c406a6305243" name="Changes" comment="" />
+      <created>1719338801265</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1719338801265</updated>
+      <workItem from="1719338802551" duration="317000" />
+      <workItem from="1719349794360" duration="9853000" />
+      <workItem from="1721558486096" duration="234000" />
+      <workItem from="1722372300168" duration="1716000" />
+      <workItem from="1722530797836" duration="2109000" />
+      <workItem from="1722538410515" duration="183000" />
+      <workItem from="1722538599940" duration="320000" />
+      <workItem from="1722538923390" duration="5931000" />
+      <workItem from="1722761038289" duration="4577000" />
+      <workItem from="1722783599103" duration="3188000" />
+      <workItem from="1722793669024" duration="2730000" />
+      <workItem from="1723577373034" duration="4006000" />
+      <workItem from="1723656759569" duration="3682000" />
+      <workItem from="1723668001382" duration="2651000" />
+      <workItem from="1723840635160" duration="3608000" />
+      <workItem from="1723893344130" duration="6197000" />
+    </task>
+    <task id="LOCAL-00001" summary="feat: Implement proper 404 routing">
+      <option name="closed" value="true" />
+      <created>1722530216301</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1722530216301</updated>
+    </task>
+    <task id="LOCAL-00002" summary="feat: Add cinema reviews">
+      <option name="closed" value="true" />
+      <created>1723577399060</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1723577399060</updated>
+    </task>
+    <task id="LOCAL-00003" summary="feat: Add code block content block">
+      <option name="closed" value="true" />
+      <created>1723579646895</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1723579646895</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fix: Fix Shiki wasm import for Cloudflare Workers">
+      <option name="closed" value="true" />
+      <created>1723581036496</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1723581036496</updated>
+    </task>
+    <task id="LOCAL-00005" summary="feat: Add page loading indicator when load takes longer than 200ms">
+      <option name="closed" value="true" />
+      <created>1723657098545</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1723657098545</updated>
+    </task>
+    <task id="LOCAL-00006" summary="feat: Add simonOS website">
+      <option name="closed" value="true" />
+      <created>1723661941445</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1723661941445</updated>
+    </task>
+    <task id="LOCAL-00007" summary="fix: Format astro files with prettier">
+      <option name="closed" value="true" />
+      <created>1723669070791</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1723669070791</updated>
+    </task>
+    <task id="LOCAL-00008" summary="feat: Sort projects by publish date">
+      <option name="closed" value="true" />
+      <created>1723669997676</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1723669997676</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="3" />
+  </component>
+  <component name="UnknownFeatures">
+    <option featureType="dependencySupport" implementationName="javascript:npm:react" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:tailwindcss" />
+    <option featureType="com.intellij.fileTypeFactory" implementationName=".env" />
+    <option featureType="dependencySupport" implementationName="javascript:npm:astro" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="feat: Implement proper 404 routing" />
+    <MESSAGE value="feat: Add cinema reviews" />
+    <MESSAGE value="feat: Add code block content block" />
+    <MESSAGE value="fix: Fix Shiki wasm import for Cloudflare Workers" />
+    <MESSAGE value="feat: Add page loading indicator when load takes longer than 200ms" />
+    <MESSAGE value="feat: Add simonOS website" />
+    <MESSAGE value="fix: Format astro files with prettier" />
+    <MESSAGE value="feat: Sort projects by publish date" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: Sort projects by publish date" />
+  </component>
+</project>

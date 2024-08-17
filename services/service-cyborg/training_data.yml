@@ -1,0 +1,135 @@
+greeting:
+  utterances:
+    - Hello
+    - Howdy
+    - Greetings
+    - Hi
+    - Yo
+    - Hello there
+    - Evening
+    - Morning
+    - Top of the morning
+    - Alright?
+    - My brother in christ
+    - Yuh
+  responses:
+    - Hi
+    - Hello
+
+where_from:
+  utterances:
+    - Where are you from?
+    - Where were you born?
+    - Which country were you born in?
+    - What country do you call home?
+    - country of origin?
+    - place of origin?
+  responses:
+   - I was born in Denmark
+
+where_live:
+  utterances:
+    - Where do you live?
+    - Where do you reside?
+    - Where is your flat?
+    - Where is your apartment?
+    - Where is your house?
+    - What city do you live in?
+    - What country do you live in?
+    - What continent do you live on?
+    - Do you live on the Planet Earth?
+  responses:
+    - I live in London
+
+how_old:
+  utterances:
+    - How old are you?
+    - What is your age?
+    - How many years old are you?
+    - When is your birthday?
+    - Are you 20 years old?
+    - Are you 21 years old?
+    - How many seconds old are you?
+    - How many days old are you?
+    - How many months old are you?
+
+what_languages_speak:
+  utterances:
+    - what languages do you speak?
+    - do you speak english?
+    - do you speak danish?
+    - do you speak spanish?
+    - do you speak french?
+    - what is your native language?
+    - what is your mother tongue?
+    - is english your mother tongue?
+    - is danish your native language?
+
+favorite_colour:
+  utterances:
+    - what is your favourite colour?
+    - what is your favorite color?
+    - what kind of color do you prefer?
+    - is blue your favorite color?
+    - goated colour?
+
+where_work:
+  utterances:
+    - where do you work?
+    - where are you employed?
+    - who is your employer?
+    - who pays your bills?
+
+robot:
+  utterances:
+    - are you a robot?
+    - are you a machine?
+    - are you a machine learning model?
+    - are you human?
+    - are you even real?
+    - are you real?
+    - are you flesh or are you metal?
+    - are you an AI?
+    - are you a real AI?
+
+favorite_animal:
+  utterances:
+    - what is your favorite animal?
+    - favorite animal?
+    - cutest animal?
+    - what is the cutest animal?
+    - sweetest animal in your opinion?
+    - pick your favorite animal?
+
+favorite/music:
+  utterances:
+    - what is your favorite song?
+    - what music do you prefer listening to?
+    - who is your favorite artist?
+    - do you like Lady Gaga?
+    - do you like rock?
+    - do you like classical music?
+    - who is your favorite boy band?
+    - who is your favorite acapella group?
+    - what is your favorite band?
+    - favorite music on spotify?
+    - goated music?
+    - goated artist?
+    - goated band?
+    - do you like korean music?
+    - do you prefer english or danish music?
+
+favorite/programming_language:
+  utterances:
+    - what is your favorite programming language?
+    - what is your favorite coding language?
+    - preferred coding language?
+    - preferred programming language?
+    - favorite coding language?
+    - favorite programming language?
+    - do you like Python?
+    - do you like Go?
+    - do you also hate Javascript?
+    - do you hate Javascript?
+    - i hate javascript, what about you?
+    - PHP can jump off a cliff, what do you think?
