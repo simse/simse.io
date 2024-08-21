@@ -3,24 +3,15 @@ import BaseLayout from '@layouts/BaseLayout.astro'
 import Navbar from '@components/Navbar.astro'
 import Text from '@components/text/Text.astro'
 import type { Project } from '@cms'
-import { kFormatter } from '../utils/number'
 import ImageCarousel from '@components/common/ImageCarousel.astro'
 import Footer from '@components/common/Footer.astro'
+import Downloads from '@components/projects/Downloads.svelte';
 
 interface Props {
   project: Project
 }
 
 const { project }: Props = Astro.props
-
-let downloads: number | null = null
-
-const downloadStats = await fetch(
-  `${Astro.url.protocol}//${Astro.url.host}/api/download-stats/${project.slug}.json`,
-)
-if (downloadStats.ok) {
-  downloads = (await downloadStats.json()).downloads
-}
 ---
 
 <BaseLayout title={project.title} canonical={`/${project.slug}`}>
@@ -76,14 +67,10 @@ if (downloadStats.ok) {
             </tr>
           )
         }
-        {
-          downloads !== null && (
-            <tr>
-              <td class="py-3 px-3 font-bold">Downloads</td>
-              <td class="py-3 px-3">{kFormatter(downloads)}</td>
-            </tr>
-          )
-        }
+        <tr>
+          <td class="py-3 px-3 font-bold">Downloads</td>
+          <td class="py-3 px-3"><Downloads projectSlug={project.slug} client:load /></td>
+        </tr>
       </table>
     </section>
 
