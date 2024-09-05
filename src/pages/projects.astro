@@ -43,7 +43,7 @@ const formatGroupTitle = (input: string): string => {
         <section class="my-12">
           <h2 class="text-lg mb-2">{formatGroupTitle(group)}</h2>
 
-          <ul class="grid grid-cols-3 gap-4">
+          <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             {groupedProjects[group].map((project) => (
               <li>
                 <ProjectCard project={project} />
