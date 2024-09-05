@@ -148,6 +148,18 @@ const projectType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'icon',
+      title: 'Icon',
+      type: 'image',
+      fields: [
+        {
+          name: 'alt',
+          title: 'Alt',
+          type: 'string',
+        }
+      ],
+    }),
+    defineField({
       title: 'Type',
       // description: "Pick the format of your post",
       name: 'type',

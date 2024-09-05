@@ -26,6 +26,7 @@ interface SanityProject {
   _type: 'project'
   title: string
   description: string
+  icon?: Image
   slug: {
     current: string
   }
@@ -82,6 +83,7 @@ interface Post {
 interface Project {
   _type: string
   title: string
+  icon?: Image
   description: string
   slug: string
   published: Date
