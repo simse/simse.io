@@ -1,0 +1,14 @@
+---
+import BaseLayout from '@layouts/BaseLayout.astro';
+import Chart from '@components/charts/Chart.astro';
+import LineChart from '@components/charts/LineChart.astro';
+---
+<BaseLayout title="Charts">
+    <main class="max-w-2xl mx-auto my-16">
+        <h1 class="text-2xl font-bold">Charts</h1>
+        
+        <Chart title="Acquisitions by year" />
+
+        <LineChart title="Package manager usage" />
+    </main>
+</BaseLayout>

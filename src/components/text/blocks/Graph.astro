@@ -1,0 +1,26 @@
+---
+import LineChart from '@components/charts/LineChart.astro'
+
+interface Props {
+  index: number
+  isInline: boolean
+  class?: string
+  node: {
+    _type: 'graphBlock'
+    _key: string
+    title: string;
+    type: string;
+    datasets: {
+      _type: 'file';
+      asset: {
+        _ref: string;
+        _type: 'reference';
+      }
+    };
+  }
+}
+
+const props = Astro.props;
+---
+
+{props.node.type === 'line' ? <LineChart title={props.node.title} /> : null}
