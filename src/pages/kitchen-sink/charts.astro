@@ -1,0 +1,10 @@
+---
+import BaseLayout from "@layouts/BaseLayout.astro";
+import LineChart from "@components/charts/LineChart.astro";
+---
+
+<BaseLayout title="Kitchen Sink / Charts">
+    <main class="max-w-4xl mx-auto my-12">
+        <LineChart title="JS Package manager usage over time" datasetReference="file-d9e207f60055571a529d2737bb09bda0a85069be-json" />
+    </main>
+</BaseLayout>

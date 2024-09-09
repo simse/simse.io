@@ -44,6 +44,34 @@ const codeBlock = defineType({
   ],
 })
 
+const graphBlock = defineType({
+  name: 'graphBlock',
+  type: 'object',
+  title: 'Graph',
+  fields: [
+    {
+      name: 'title',
+      type: 'string',
+    },
+    {
+      name: 'type',
+      type: 'string',
+      options: {
+        list: [
+          {
+            title: 'Line Graph',
+            value: 'line',
+          }
+        ]
+      }
+    },
+    {
+      name: 'datasets',
+      type: 'file',
+    }
+  ],
+})
+
 const postType = defineType({
   name: 'post',
   title: 'Posts',
@@ -119,6 +147,7 @@ const postType = defineType({
         { type: 'image' },
         { type: 'break' },
         { type: 'codeBlock' },
+        { type: 'graphBlock' },
       ],
       group: 'post',
     }),
@@ -326,6 +355,6 @@ export default defineConfig({
   dataset: 'production',
   plugins: [structureTool(), visionTool()],
   schema: {
-    types: [postType, projectType, experienceType, breakBlock, codeBlock],
+    types: [postType, projectType, experienceType, breakBlock, codeBlock, graphBlock],
   },
 })

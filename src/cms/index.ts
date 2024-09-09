@@ -4,6 +4,12 @@ import type { SanityAsset } from '@sanity/image-url/lib/types/types'
 
 const builder = imageUrlBuilder(sanityClient)
 
+export const getSanityFileUrl = (sanityFile: string): string => {
+  const fileName = sanityFile.replace('file-', '').replace('-json', '.json')
+
+  return `https://cdn.sanity.io/files/rjqusm5i/production/${fileName}`
+}
+
 interface Image {
   alt: string
   caption?: string

@@ -1,0 +1,179 @@
+---
+import Loader from '@components/common/Loader.astro';
+
+interface Props {
+    title: string;
+    datasetReference: string;
+}
+
+const { title, datasetReference } = Astro.props;
+---
+<script>
+    function parseToShortestNumber(value: number): number {
+        if (value === 0) return 0;
+
+        // Handle very small numbers to retain significant digits
+        if (Math.abs(value) < 0.0001) {
+            return parseFloat(value.toPrecision(1));
+        }
+
+        // For other numbers, round to one decimal place
+        return parseFloat(value.toFixed(1));
+    }
+
+    import { Chart, LineController, LineElement, PointElement, LinearScale, CategoryScale, TimeScale, Legend, Tooltip, Filler } from "chart.js";
+    import 'chartjs-adapter-luxon';
+
+    Chart.register(LineController, LineElement, PointElement, LinearScale, CategoryScale, TimeScale, Legend, Tooltip, Filler);
+    Chart.defaults.font.family = "Soehne, sans-serif";
+    Chart.defaults.font.size = 14;
+    Chart.defaults.animation = false;
+    Chart.defaults.backgroundColor = '#09090b';
+    Chart.defaults.borderColor = '#27272a';
+    Chart.defaults.color = '#d4d4d8';
+
+    const crossHairPlugin = {
+        id: 'corsair',
+        defaults: {
+            width: 1,
+            color: '#71717a',
+        },
+        afterInit: (chart: any, args: any, opts: any) => {
+            chart.corsair = {
+                x: 0,
+                y: 0,
+            }
+        },
+        afterEvent: (chart: any, args: any) => {
+            const {inChartArea} = args
+            const {type,x,y} = args.event
+
+            chart.corsair = {x, y, draw: inChartArea}
+            chart.draw()
+        },
+        beforeDatasetsDraw: (chart: any, args: any, opts: any) => {
+            const {ctx} = chart
+            const {top, bottom, left, right} = chart.chartArea
+            const {x, y, draw} = chart.corsair
+            if (!draw) return
+
+            ctx.save()
+            
+            ctx.beginPath()
+            ctx.lineWidth = 1
+            ctx.strokeStyle = opts.color
+            ctx.moveTo(x, bottom)
+            ctx.lineTo(x, top)
+            ctx.stroke()
+            
+            ctx.restore()
+        }
+    }
+
+    const initialiseChart = (chartElement: HTMLCanvasElement, data: any) => {
+        let chart = new Chart(
+            chartElement,
+            {
+                type: 'line',
+                data: data,
+                plugins: [crossHairPlugin],
+                options: {
+                    interaction: {
+                        mode: 'index',
+                        intersect: false
+                    },
+                    aspectRatio: 5/3,
+                    responsive: true,
+                    plugins: {
+                        filler: {
+                            propagate: true,
+                        },
+                        legend: {
+                            position: 'bottom',
+                            display: true,
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: (item) =>
+                                    `${item.dataset.label}: ${parseToShortestNumber(Number(item.formattedValue))}%`,
+                                title: (item) => {
+                                    const date = new Date(item[0].label);
+
+                                    return date.toLocaleDateString('en-UK', {
+                                        month: 'long',
+                                        year: 'numeric'
+                                    })
+                                }
+                            },
+                            position: 'nearest',
+                            padding: 12,
+                            backgroundColor: '#18181b',
+                        },
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            grid: {
+                                color: 'rgba(0,0,0,0)',
+                                drawTicks: true,
+                                tickColor: '#27272a'
+                            }
+                        }
+                    },
+                    elements: {
+                        point: {
+                            pointStyle: false
+                        }
+                    }
+                },
+            }
+        );
+
+        document.fonts.onloadingdone = () => {
+            chart.update();
+        };
+    }
+
+    
+    const findUnitialisedCharts = () => {
+        const charts = document.querySelectorAll('figure[chart-type=line]:not([chart-initialised])');
+
+        charts.forEach(async (chart) => {
+            const datasetReferenceAttr = chart.attributes.getNamedItem('dataset-reference');
+            const datasetReference = datasetReferenceAttr ? datasetReferenceAttr.value : null;
+            
+            if (datasetReference) {
+                // download dataset
+                const datasetRequest = await fetch(`/api/chart-data/${datasetReference}.json`);
+
+                if (datasetRequest.ok) {
+                    const dataset = await datasetRequest.json();
+
+                    // Here you can call initialiseChart with the dataset
+                    const canvas = chart.querySelector('canvas');
+                    if (canvas instanceof HTMLCanvasElement) {
+                        chart.querySelector('.loader')?.remove();
+                        initialiseChart(canvas, dataset);
+                        chart.setAttribute('chart-initialised', 'true');
+                    }
+                }
+            }
+        })
+    }
+
+    document.addEventListener('astro:page-load', () => {
+        findUnitialisedCharts();
+    });
+</script>
+
+<figure class="p-4 rounded my-8 w-full" title={title} dataset-reference={datasetReference} chart-type="line">
+    <figcaption class="text-white text-lg font-bold mb-4">{title}</figcaption>
+
+    <div class="w-full aspect-[5/3] h-auto relative">
+        <canvas></canvas>
+
+        <div class="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 loader">
+            <Loader />
+        </div>
+    </div>
+</figure>
