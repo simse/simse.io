@@ -1,5 +1,4 @@
 ---
-import { getSanityFileUrl } from '@cms';
 import Loader from '@components/common/Loader.astro';
 
 interface Props {
@@ -8,8 +7,6 @@ interface Props {
 }
 
 const { title, datasetReference } = Astro.props;
-
-const datasetUrl = getSanityFileUrl(datasetReference)
 ---
 <script>
     function parseToShortestNumber(value: number): number {
@@ -139,25 +136,25 @@ const datasetUrl = getSanityFileUrl(datasetReference)
 
     
     const findUnitialisedCharts = () => {
-        const charts = document.querySelectorAll('figure[chart-initialised=false][chart-type=line]');
+        const charts = document.querySelectorAll('figure[chart-type=line]:not([chart-initialised])');
 
         charts.forEach(async (chart) => {
-            const datasetUrlAttr = chart.attributes.getNamedItem('dataset-url');
-            const datasetUrl = datasetUrlAttr ? datasetUrlAttr.value : null;
+            const datasetReferenceAttr = chart.attributes.getNamedItem('dataset-reference');
+            const datasetReference = datasetReferenceAttr ? datasetReferenceAttr.value : null;
             
-            if (datasetUrl) {
+            if (datasetReference) {
                 // download dataset
-                const datasetRequest = await fetch(datasetUrl);
+                const datasetRequest = await fetch(`/api/chart-data/${datasetReference}.json`);
 
                 if (datasetRequest.ok) {
                     const dataset = await datasetRequest.json();
-                    console.log(dataset);
 
                     // Here you can call initialiseChart with the dataset
                     const canvas = chart.querySelector('canvas');
                     if (canvas instanceof HTMLCanvasElement) {
                         chart.querySelector('.loader')?.remove();
                         initialiseChart(canvas, dataset);
+                        chart.setAttribute('chart-initialised', 'true');
                     }
                 }
             }
@@ -167,13 +164,9 @@ const datasetUrl = getSanityFileUrl(datasetReference)
     document.addEventListener('astro:page-load', () => {
         findUnitialisedCharts();
     });
-
-    window.onload = () => {
-        findUnitialisedCharts();
-    }
 </script>
 
-<figure class="p-4 rounded my-8 w-full" dataset-url={datasetUrl} chart-id={datasetReference} chart-type="line" chart-initialised="false">
+<figure class="p-4 rounded my-8 w-full" title={title} dataset-reference={datasetReference} chart-type="line">
     <figcaption class="text-white text-lg font-bold mb-4">{title}</figcaption>
 
     <div class="w-full aspect-[5/3] h-auto relative">
