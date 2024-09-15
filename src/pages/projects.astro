@@ -32,7 +32,7 @@ const formatGroupTitle = (input: string): string => {
 <BaseLayout title="Projects">
   <Navbar activeItem="Projects" />
 
-  <main class="px-2 py-8 max-w-2xl mx-auto">
+  <main class="px-2 py-8 max-w-5xl mx-auto">
     <PageHeader
       title="Projects"
       subtitle="A collection of things I've created over the years I've been programming (2013-now)."
@@ -43,7 +43,7 @@ const formatGroupTitle = (input: string): string => {
         <section class="my-12">
           <h2 class="text-lg mb-2">{formatGroupTitle(group)}</h2>
 
-          <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+          <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
             {groupedProjects[group].map((project) => (
               <li>
                 <ProjectCard project={project} />
@@ -53,6 +53,14 @@ const formatGroupTitle = (input: string): string => {
         </section>
       ))
     }
+
+    <section class="my-12">
+      <h2 class="text-lg mb-2">All Projects</h2>
+
+      <table>
+
+      </table>
+    </section>
   </main>
 
   <Footer />

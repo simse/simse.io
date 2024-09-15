@@ -86,10 +86,7 @@ const { project }: Props = Astro.props
             </tr>
           )
         }
-        <tr>
-          <td class="py-3 px-3 font-bold">Downloads</td>
-          <td class="py-3 px-3"><Downloads projectSlug={project.slug} client:load /></td>
-        </tr>
+        <Downloads projectSlug={project.slug} client:load />
       </table>
     </section>
 

@@ -21,8 +21,7 @@ export default defineConfig({
       projectId: 'rjqusm5i',
       dataset: 'production',
       useCdn: true,
-      // studioBasePath: '/cms',
-
+      studioBasePath: '/cms',
     }),
     react(),
     svelte(),

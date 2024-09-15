@@ -29,13 +29,12 @@
 </script>
 
 {#if loading}
-  <div>loading...</div>
+
 {:else if error}
-  <div>{error}</div>
+
 {:else}
-  <div>{downloads}</div>
+  <tr>
+    <td class="py-3 px-3 font-bold">Downloads</td>
+    <td class="py-3 px-3"></td>
+  </tr>
 {/if}
-
-<style>
-
-</style>
