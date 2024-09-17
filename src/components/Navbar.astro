@@ -1,4 +1,7 @@
 ---
+import { Icon } from 'astro-icon/components';
+import Navbar from './Navbar.svelte';
+
 interface Props {
   activeItem?: 'Home' | 'Blog' | 'Projects' | 'Contact'
 }
@@ -21,28 +24,6 @@ const items = [
 const { activeItem } = Astro.props
 ---
 
-<nav class="py-4 px-2 flex justify-between items-center mx-auto max-w-2xl">
-  <a class="text-lg" href="/">Simon Sorensen</a>
-
-  <ul class={'ml-auto flex items-center'}>
-    {
-      items.map((item) => (
-        <li>
-          <a
-            class={`
-                  p-2 ${
-                    item.title === activeItem
-                      ? 'font-bold'
-                      : 'text-black/50 dark:text-white/60'
-                  } hover:text-black dark:hover:text-white transition-colors
-                `}
-            href={item.link}
-            data-astro-prefetch
-          >
-            {item.title}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
-</nav>
+<Navbar client:load>
+  <Icon name="tabler:search" size="22" slot="search-icon" />
+</Navbar>
