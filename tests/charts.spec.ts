@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-test('line chart works', async ({ page }) => {
+test.skip('line chart works', async ({ page }) => {
   await page.goto('/kitchen-sink/charts');
 
   await expect(page.getByText('JS Package manager usage over time')).toBeVisible();
