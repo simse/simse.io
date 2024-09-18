@@ -1,5 +1,5 @@
 ---
-import { createHighlighterCore } from 'shiki/core'
+import { createHighlighterCore, loadWasm } from 'shiki/core'
 import githubDark from 'shiki/themes/github-dark.mjs'
 import js from 'shiki/langs/javascript.mjs'
 import ts from 'shiki/langs/typescript.mjs'
@@ -17,6 +17,9 @@ interface Props {
 }
 
 const props = Astro.props
+
+// @ts-expect-error
+await loadWasm(import('shiki/onig.wasm?url'))
 
 const highlighter = await createHighlighterCore({
   themes: [githubDark],
