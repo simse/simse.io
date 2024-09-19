@@ -32,6 +32,7 @@ interface SanityProject {
   _type: 'project'
   title: string
   description: string
+  featured?: boolean
   icon?: Image
   slug: {
     current: string
@@ -90,6 +91,7 @@ interface Project {
   _type: string
   title: string
   icon?: Image
+  featured: boolean
   description: string
   slug: string
   published: Date
@@ -159,6 +161,7 @@ const getProjects = async (): Promise<Project[]> => {
 
   return rawProjects.map((project) => ({
     ...project,
+    featured: project.featured || false,
     slug: project.slug.current,
     published: new Date(project.published),
     images: project.images || [],
@@ -209,6 +212,7 @@ export const getPageBySlug = async (
   } else if (page._type === 'project') {
     return {
       ...page,
+      featured: page.featured || false,
       slug: page.slug.current,
       published: new Date(page.published),
       images: page.images || [],

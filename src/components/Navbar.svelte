@@ -25,7 +25,7 @@
 <nav
   class="top-0 sticky z-30 mb-8 {overlayOpen ? '' : 'bg-zinc-950/70 backdrop-blur'}"
 >
-  <div class="max-w-7xl mx-auto py-4 px-4 grid grid-cols-3 items-center">
+  <div class="max-w-7xl mx-auto py-4 px-4 grid grid-cols-2 md:grid-cols-3 items-center">
     <a class="text-lg transition-opacity {overlayOpen ? 'opacity-60' : ''}" href="/">Simon Sorensen</a>
 
     <ul class="flex items-center mx-auto">
@@ -46,7 +46,7 @@
         {/each}
     </ul>
 
-    <button class="ml-auto">
+    <button class="ml-auto hidden">
       <slot name="search-icon" />
     </button>
   </div>

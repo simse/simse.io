@@ -177,6 +177,12 @@ const projectType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: 'featured',
+      title: "Featured",
+      type: 'boolean',
+      description: "Whether this project should be prominently featured"
+    }),
+    defineField({
       name: 'icon',
       title: 'Icon',
       type: 'image',

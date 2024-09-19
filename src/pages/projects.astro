@@ -3,89 +3,55 @@ import { Icon } from 'astro-icon/components';
 import BaseLayout from '@layouts/BaseLayout.astro'
 import PageHeader from '@components/common/PageHeader.astro'
 import Navbar from '@components/Navbar.astro'
-import { getProjects } from '../cms'
-import ProjectCard from '../components/projects/ProjectCard.astro'
-import Footer from '../components/common/Footer.astro'
+import { getProjects } from '@cms'
+import ProjectCard from '@components/projects/ProjectCard.astro'
+import Footer from '@components/common/Footer.astro'
+import { capitalizeFirstLetter } from '@utils/string';
 
 const projects = await getProjects()
-
-const groupedProjects = projects.reduce((acc, project) => {
-  const { type } = project
-  if (!acc[type]) {
-    acc[type] = []
-  }
-  acc[type].push(project)
-  return acc
-}, {})
-
-const formatGroupTitle = (input: string): string => {
-  const typeToTitleMap = {
-    library: 'Libraries',
-    application: 'Applications',
-    website: 'Websites',
-    experiment: 'Experiments',
-  }
-
-  return typeToTitleMap[input] || ''
-}
+const featuredProjects = projects.filter(project => project.featured)
 ---
 
 <BaseLayout title="Projects">
   <Navbar activeItem="Projects" />
 
-  <main class="px-2 py-8 max-w-5xl mx-auto">
+  <main class="px-4 py-8 max-w-5xl mx-auto">
     <PageHeader
       title="Projects"
       subtitle="A collection of things I've created over the years I've been programming (2013-now)."
     />
 
-    {
-      Object.keys(groupedProjects).map((group) => (
-        <section class="my-12">
-          <h2 class="text-lg mb-2">{formatGroupTitle(group)}</h2>
+    {featuredProjects.length > 0 ? <section class="my-12">
+      <h2 class="text-lg mb-2">Featured Projects</h2>
 
-          <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
-            {groupedProjects[group].map((project) => (
-              <li>
-                <ProjectCard project={project} />
-              </li>
-            ))}
-          </ul>
-        </section>
-      ))
-    }
+      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4">
+        {featuredProjects.map((project) => (
+          <li>
+            <ProjectCard project={project} />
+          </li>
+        ))}
+      </ul>
+    </section> : null}
 
     <section class="my-12">
-      <h2 class="text-lg mb-2">All Projects (43)</h2>
+      <h2 class="text-lg mb-2">All Projects <span class="text-zinc-400">({projects.length})</span></h2>
 
       <table class="col-span-3 w-full ">
-        <tr class="border-b border-black/20 dark:border-white/20 last:border-transparent">
-          <td class="py-3 px-3 pl-0 font-bold w-32">
-            allabout.schools
-          </td>
-          <td class="py-3 px-3">Website</td>
-          <td class="text-zinc-400">Gatsby.js experiment</td>
-          <td>
-            <button class="flex items-center gap-1 bg-blue-700 px-3 py-0.5 rounded">
-              Read more
-              <Icon name="tabler:arrow-right" size={18} class="mt-0.5" />
-            </button>
-          </td>
-        </tr>
-
-        <tr class="border-b border-black/20 dark:border-white/20 last:border-transparent">
-          <td class="py-3 px-3 pl-0 font-bold w-32">
-            idontplay.cricket
-          </td>
-          <td class="py-3 px-3">Website</td>
-          <td class="text-zinc-400">File sharing website I built when I was 14</td>
-          <td>
-            <button class="flex items-center gap-1 bg-blue-700 px-3 py-0.5 rounded">
-              Read more
-              <Icon name="tabler:arrow-right" size={18} class="mt-0.5" />
-            </button>
-          </td>
-        </tr>
+        {projects.map(project => (
+          <tr class="border-b border-black/20 dark:border-white/20 last:border-transparent">
+            <td class="py-3 px-3 pl-0 font-bold w-32 md:w-48">
+              {project.title}
+            </td>
+            <td class="py-3 px-3 hidden md:block">{capitalizeFirstLetter(project.type)}</td>
+            <td class="text-zinc-400">{project.description}</td>
+            <td>
+              <a class="flex items-center gap-1 bg-blue-700 px-3 py-2 sm:py-0.5 rounded w-fit ml-auto my-1" href={`/${project.slug}`}>
+                <span class="hidden sm:block">Read more</span>
+                <Icon name="tabler:arrow-right" size={18} class="mt-0.5" />
+              </a>
+            </td>
+          </tr>
+        ))}
       </table>
     </section>
   </main>
