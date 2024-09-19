@@ -30,11 +30,9 @@ export default defineConfig({
     service: passthroughImageService(),
   },
   prefetch: true,
-  experimental: {
-    env: {
-      schema: {
-        PEPY_API_KEY: envField.string({ context: 'server', access: 'secret' }),
-      },
+  env: {
+    schema: {
+      PEPY_API_KEY: envField.string({ context: 'server', access: 'secret' }),
     },
   },
 })
