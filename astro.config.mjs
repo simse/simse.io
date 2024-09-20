@@ -20,8 +20,8 @@ export default defineConfig({
     sanity({
       projectId: 'rjqusm5i',
       dataset: 'production',
-      useCdn: true,
-      studioBasePath: '/cms',
+      useCdn: false,
+      // studioBasePath: '/cms',
     }),
     react(),
     svelte(),

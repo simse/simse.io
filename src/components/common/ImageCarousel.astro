@@ -1,9 +1,14 @@
 ---
 import { Icon } from 'astro-icon/components'
-import type { Image } from '../../cms'
-import { getImageBuilder } from '../../cms'
+import { getImageBuilder } from '@cms'
 interface Props {
-  images: Image[]
+  images: {
+    alt?: string;
+    caption?: string;
+    asset: {
+      _ref: string;
+    }
+  }[]
 }
 
 const { images } = Astro.props

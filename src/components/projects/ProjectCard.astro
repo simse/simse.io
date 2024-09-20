@@ -1,8 +1,8 @@
 ---
+import { type CollectionEntry } from 'astro:content';
 import { getImageBuilder } from '@cms';
-import type { Project } from '@cms'
 interface Props {
-  project: Project
+  project: CollectionEntry<'projects'>;
 }
 
 const { project } = Astro.props
@@ -10,21 +10,21 @@ const { project } = Astro.props
 
 <a
   class="relative aspect-[3/2] md:aspect-[3/4] w-full block transform-gpu transition-transform duration-300 hover:scale-105 bg-zinc-900 rounded"
-  href={`/${project.slug}`}
+  href={`/${project.data.slug}`}
 >
   <div class="p-4 flex flex-col h-full">
-    <span class="text-sm text-black/70 dark:text-white/70 font-bold mb-auto block">{project.type.toUpperCase()}</span>
+    <span class="text-sm text-black/70 dark:text-white/70 font-bold mb-auto block">{project.data.type.toUpperCase()}</span>
 
-    {project.icon && (
+    {project.data.icon && (
       <img
         class="w-16 h-16 mb-2"
-        src={getImageBuilder(project.icon).width(128).height(128).url()}
-        alt={project.icon.alt}
+        src={getImageBuilder(project.data.icon).width(128).height(128).url()}
+        alt={project.data.icon.alt}
       />
     )}
     <span class="text-lg font-bold">
-      {project.title}
+      {project.data.title}
     </span>
-    <span class="block text-black/70 dark:text-white/70">{project.description}</span>
+    <span class="block text-black/70 dark:text-white/70">{project.data.description}</span>
   </div>
 </a>

@@ -1,8 +1,8 @@
 ---
-import { getPosts } from '@cms'
+import { getCollection } from 'astro:content';
 import BlogCard from '@components/blog/BlogCard.astro'
 
-const posts = await getPosts()
+const posts = await getCollection('posts');
 ---
 
 <section class="my-16 px-3" title="Blog">
