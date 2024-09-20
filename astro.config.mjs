@@ -2,7 +2,6 @@ import { defineConfig, passthroughImageService, envField } from 'astro/config'
 import tailwind from '@astrojs/tailwind'
 import icon from 'astro-icon'
 import sanity from '@sanity/astro'
-import react from '@astrojs/react'
 import svelte from '@astrojs/svelte'
 import node from '@astrojs/node';
 
@@ -21,9 +20,7 @@ export default defineConfig({
       projectId: 'rjqusm5i',
       dataset: 'production',
       useCdn: false,
-      // studioBasePath: '/cms',
     }),
-    react(),
     svelte(),
   ],
   image: {
