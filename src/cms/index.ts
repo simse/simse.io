@@ -1,5 +1,5 @@
 import { sanityClient } from 'sanity:client'
-import { q, sanityImage, nullToUndefined, type InferType } from "groqd"
+import { q, nullToUndefined, type InferType } from "groqd"
 import imageUrlBuilder from '@sanity/image-url'
 import type { SanityAsset } from '@sanity/image-url/lib/types/types'
 
