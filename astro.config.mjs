@@ -2,7 +2,6 @@ import { defineConfig, passthroughImageService, envField } from 'astro/config'
 import tailwind from '@astrojs/tailwind'
 import icon from 'astro-icon'
 import sanity from '@sanity/astro'
-import react from '@astrojs/react'
 import svelte from '@astrojs/svelte'
 import node from '@astrojs/node';
 
@@ -20,21 +19,17 @@ export default defineConfig({
     sanity({
       projectId: 'rjqusm5i',
       dataset: 'production',
-      useCdn: true,
-      studioBasePath: '/cms',
+      useCdn: false,
     }),
-    react(),
     svelte(),
   ],
   image: {
     service: passthroughImageService(),
   },
   prefetch: true,
-  experimental: {
-    env: {
-      schema: {
-        PEPY_API_KEY: envField.string({ context: 'server', access: 'secret' }),
-      },
+  env: {
+    schema: {
+      PEPY_API_KEY: envField.string({ context: 'server', access: 'secret' }),
     },
   },
 })

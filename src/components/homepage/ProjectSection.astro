@@ -1,10 +1,10 @@
 ---
-import { getProjects, type Project } from '@cms'
+import { getCollection, type CollectionEntry } from 'astro:content';
 import ProjectCard from '../projects/ProjectCard.astro'
 
-let projects = await getProjects();
-projects = projects.sort((a: Project, b: Project) => {
-  return a.published < b.published ? 1 : -1;
+let projects = await getCollection('projects');
+projects = projects.sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => {
+  return a.data.published < b.data.published ? 1 : -1;
 })
 ---
 

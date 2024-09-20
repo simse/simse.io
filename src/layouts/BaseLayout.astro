@@ -49,6 +49,8 @@ const createTitle = (title: string) => {
     <LoadingIndicator color="#2563eb" />
   </head>
   <body class="text-zinc-100 bg-zinc-950">
+    <img src={`https://analytics.0x1.earth/count?p=${Astro.url.pathname}&t=${title}`}>
+
     <slot />
   </body>
 </html>

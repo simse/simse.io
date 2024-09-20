@@ -7,9 +7,10 @@ import { getProjects } from '@cms'
 import ProjectCard from '@components/projects/ProjectCard.astro'
 import Footer from '@components/common/Footer.astro'
 import { capitalizeFirstLetter } from '@utils/string';
+import { getCollection } from 'astro:content';
 
-const projects = await getProjects()
-const featuredProjects = projects.filter(project => project.featured)
+const projects = await getCollection('projects');
+const featuredProjects = projects.filter(project => project.data.featured)
 ---
 
 <BaseLayout title="Projects">
@@ -40,12 +41,12 @@ const featuredProjects = projects.filter(project => project.featured)
         {projects.map(project => (
           <tr class="border-b border-black/20 dark:border-white/20 last:border-transparent">
             <td class="py-3 px-3 pl-0 font-bold w-32 md:w-48">
-              {project.title}
+              {project.data.title}
             </td>
-            <td class="py-3 px-3 hidden md:block">{capitalizeFirstLetter(project.type)}</td>
-            <td class="text-zinc-400">{project.description}</td>
+            <td class="py-3 px-3 hidden md:block">{capitalizeFirstLetter(project.data.type)}</td>
+            <td class="text-zinc-400">{project.data.description}</td>
             <td>
-              <a class="flex items-center gap-1 bg-blue-700 px-3 py-2 sm:py-0.5 rounded w-fit ml-auto my-1" href={`/${project.slug}`}>
+              <a class="flex items-center gap-1 bg-blue-700 px-3 py-2 sm:py-0.5 rounded w-fit ml-auto my-1" href={`/${project.data.slug}`}>
                 <span class="hidden sm:block">Read more</span>
                 <Icon name="tabler:arrow-right" size={18} class="mt-0.5" />
               </a>

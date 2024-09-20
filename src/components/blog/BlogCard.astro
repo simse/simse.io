@@ -1,14 +1,16 @@
 ---
-import type { Post } from '../../cms'
-import { formatDate, formatDateWithYear } from '../../utils/date'
-import { getImageBuilder } from '../../cms'
+import type { CollectionEntry } from 'astro:content';
+import { formatDate, formatDateWithYear } from '@utils/date'
+import { getImageBuilder } from '@cms'
 
 interface Props {
-  post: Post
+  post: CollectionEntry<'posts'>;
   dateWithYear?: boolean
 }
 
-const { post, dateWithYear = false } = Astro.props
+const { post: {
+  data: post
+}, dateWithYear = false } = Astro.props
 ---
 
 <a

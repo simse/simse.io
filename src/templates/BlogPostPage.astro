@@ -4,13 +4,12 @@ import Navbar from '@components/Navbar.astro'
 import PublishDate from '@components/blog/PublishDate.astro'
 import Text from '@components/text/Text.astro'
 import { getImageBuilder } from '@cms'
-import type { Post } from '@cms'
 import Footer from '@components/common/Footer.astro'
 import BlogCard from '@components/blog/BlogCard.astro'
-import { getPosts } from '@cms'
+import { getCollection, type CollectionEntry } from 'astro:content';
 
 interface Props {
-  post: Post
+  post: CollectionEntry<'posts'>['data']
 }
 
 const { post } = Astro.props
@@ -18,7 +17,7 @@ const { post } = Astro.props
 const image = getImageBuilder(post.image)
 
 // suggested posts
-const suggestedPosts = await getPosts()
+const suggestedPosts = await getCollection('posts');
 ---
 
 <BaseLayout title={post.title} canonical={`/${post.slug}`}>

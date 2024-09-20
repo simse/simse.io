@@ -1,10 +1,10 @@
 ---
-import type { Post } from 'src/cms'
+import { type CollectionEntry } from 'astro:content';
 import BlogCard from './BlogCard.astro'
 
 interface Props {
   year: string
-  posts: Post[]
+  posts: CollectionEntry<'posts'>[]
 }
 
 const { year, posts } = Astro.props
