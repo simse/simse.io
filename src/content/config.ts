@@ -21,6 +21,7 @@ const posts = defineCollection({
   schema: z.object({
     _type: z.enum(['post']),
     title: z.string(),
+    excerpt: z.string().optional(),
     slug: z.string(),
     published: z.date(),
     image: imageType.optional(),

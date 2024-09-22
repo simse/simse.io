@@ -99,6 +99,7 @@ const { query: postsQuery, schema: postsSchema } = q('*')
     _type: q.string(),
     title: q.string(),
     slug: q.slug('slug'),
+    excerpt: nullToUndefined(q.string().optional()),
     image: nullToUndefined(
       q
         .object({
