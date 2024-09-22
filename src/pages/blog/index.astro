@@ -1,12 +1,13 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
-import BaseLayout from '@layouts/BaseLayout.astro'
+import { type CollectionEntry, getCollection } from 'astro:content'
 import Navbar from '@components/Navbar.astro'
-import PageHeader from '@components/common/PageHeader.astro'
 import YearList from '@components/blog/YearList.astro'
 import Footer from '@components/common/Footer.astro'
+import PageHeader from '@components/common/PageHeader.astro'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { Icon } from 'astro-icon/components'
 
-let posts = await getCollection('posts');
+let posts = await getCollection('posts')
 
 // group posts by year
 let postsByYear: {
@@ -37,6 +38,11 @@ posts.forEach((post) => {
         .reverse()
         .map((year) => <YearList year={year} posts={postsByYear[year]} />)
     }
+
+    <a class="flex items-center gap-2 my-12 bg-amber-600 w-fit text-black py-2 px-4 rounded" href="/rss.xml" target="_blank">
+      <Icon name="tabler:rss" size={18} />
+      RSS feed
+    </a>
   </main>
 
   <Footer />

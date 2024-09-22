@@ -3,33 +3,33 @@ import { getCollection } from 'astro:content'
 import BlogPostPage from '@templates/BlogPostPage.astro'
 import ProjectPage from '@templates/ProjectPage.astro'
 
-export const prerender = true;
+export const prerender = true
 export async function getStaticPaths() {
-  const projects = await getCollection('projects');
-  const posts = await getCollection('posts');
+  const projects = await getCollection('projects')
+  const posts = await getCollection('posts')
 
   return [
-  ...projects.map(project => ({
+    ...projects.map((project) => ({
       params: {
         slug: project.data.slug,
       },
       props: {
-        page: project.data
-      }
+        page: project.data,
+      },
     })),
 
-    ...posts.map(post => ({
+    ...posts.map((post) => ({
       params: {
         slug: post.data.slug,
       },
       props: {
-        page: post.data
-      }
-    }))
+        page: post.data,
+      },
+    })),
   ]
 }
 
-const { page } = Astro.props;
+const { page } = Astro.props
 ---
 
 {page && page._type === 'post' && <BlogPostPage post={page} />}

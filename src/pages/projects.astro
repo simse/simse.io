@@ -1,16 +1,16 @@
 ---
-import { Icon } from 'astro-icon/components';
-import BaseLayout from '@layouts/BaseLayout.astro'
-import PageHeader from '@components/common/PageHeader.astro'
-import Navbar from '@components/Navbar.astro'
+import { getCollection } from 'astro:content'
 import { getProjects } from '@cms'
-import ProjectCard from '@components/projects/ProjectCard.astro'
+import Navbar from '@components/Navbar.astro'
 import Footer from '@components/common/Footer.astro'
-import { capitalizeFirstLetter } from '@utils/string';
-import { getCollection } from 'astro:content';
+import PageHeader from '@components/common/PageHeader.astro'
+import ProjectCard from '@components/projects/ProjectCard.astro'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import { capitalizeFirstLetter } from '@utils/string'
+import { Icon } from 'astro-icon/components'
 
-const projects = await getCollection('projects');
-const featuredProjects = projects.filter(project => project.data.featured)
+const projects = await getCollection('projects')
+const featuredProjects = projects.filter((project) => project.data.featured)
 ---
 
 <BaseLayout title="Projects">

@@ -8,21 +8,19 @@ interface Props {
   node: {
     _type: 'graphBlock'
     _key: string
-    title: string;
-    type: string;
+    title: string
+    type: string
     datasets: {
-      _type: 'file';
+      _type: 'file'
       asset: {
-        _ref: string;
-        _type: 'reference';
+        _ref: string
+        _type: 'reference'
       }
-    };
+    }
   }
 }
 
-const props = Astro.props;
-
-console.log(props)
+const props = Astro.props
 ---
 
 {props.node.type === 'line' ? <LineChart title={props.node.title} datasetReference={props.node.datasets.asset._ref} /> : null}

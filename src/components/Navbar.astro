@@ -1,6 +1,6 @@
 ---
-import { Icon } from 'astro-icon/components';
-import Navbar from './Navbar.svelte';
+import { Icon } from 'astro-icon/components'
+import NavbarSvelte from './Navbar.svelte'
 
 interface Props {
   activeItem?: 'Home' | 'Blog' | 'Projects' | 'Contact'
@@ -24,6 +24,6 @@ const items = [
 const { activeItem } = Astro.props
 ---
 
-<Navbar client:load>
-  <Icon name="tabler:search" size="22" slot="search-icon" />
-</Navbar>
+<NavbarSvelte client:load>
+  <Icon name="tabler:search" size={22} slot="search-icon" />
+</NavbarSvelte>

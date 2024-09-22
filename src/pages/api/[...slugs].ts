@@ -1,15 +1,15 @@
-import Elysia, { t } from 'elysia'
 import swagger from '@elysiajs/swagger'
+import Elysia, { t } from 'elysia'
 
 const app = new Elysia({
-  prefix: '/api'
+  prefix: '/api',
 })
   .use(swagger())
   .get('/', () => 'hi')
   .post('/', ({ body }) => body, {
     body: t.Object({
-      name: t.String()
-    })
+      name: t.String(),
+    }),
   })
 
 const handle = ({ request }: { request: Request }) => app.handle(request)

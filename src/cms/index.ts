@@ -1,7 +1,7 @@
 import { sanityClient } from 'sanity:client'
-import { q, nullToUndefined, type InferType } from "groqd"
 import imageUrlBuilder from '@sanity/image-url'
 import type { SanityAsset } from '@sanity/image-url/lib/types/types'
+import { type InferType, nullToUndefined, q } from 'groqd'
 
 const builder = imageUrlBuilder(sanityClient)
 
@@ -60,55 +60,61 @@ interface Project {
   type: string
 }
 
-const contentBlocks = q.union([
-  q.contentBlock(),
-  q.object({
-    _type: q.literal('break'),
-    style: q.string(),
-  }),
-  q.object({
-    _type: q.literal('codeBlock'),
-    sourceCode: q.string(),
-    language: q.string()
-  }),
-  q.object({
-    _type: q.literal('image'),
-    asset: q.object({
-      _ref: q.string()
-    })
-  }),
-  q.object({
-    _type: q.literal('graphBlock'),
-    type: q.literal('line'),
-    datasets: q.object({
-      asset: q.object({
-        _ref: q.string()
-      }),
-      _type: q.literal('file')
+const contentBlocks = q
+  .union([
+    q.contentBlock(),
+    q.object({
+      _type: q.literal('break'),
+      style: q.string(),
     }),
-    title: q.string()
-  })
-]).array()
+    q.object({
+      _type: q.literal('codeBlock'),
+      sourceCode: q.string(),
+      language: q.string(),
+    }),
+    q.object({
+      _type: q.literal('image'),
+      asset: q.object({
+        _ref: q.string(),
+      }),
+    }),
+    q.object({
+      _type: q.literal('graphBlock'),
+      type: q.literal('line'),
+      datasets: q.object({
+        asset: q.object({
+          _ref: q.string(),
+        }),
+        _type: q.literal('file'),
+      }),
+      title: q.string(),
+    }),
+  ])
+  .array()
 
-const { query: postsQuery, schema: postsSchema } = q("*")
+const { query: postsQuery, schema: postsSchema } = q('*')
   .filter("_type == 'post' && defined(slug)")
   .order('publishedAt desc')
   .grab({
     _type: q.string(),
     title: q.string(),
     slug: q.slug('slug'),
-    image: nullToUndefined(q.object({
-      asset: q.object({
-        _ref: q.string()
-      })
-    }).optional()),
+    excerpt: nullToUndefined(q.string().optional()),
+    image: nullToUndefined(
+      q
+        .object({
+          asset: q.object({
+            _ref: q.string(),
+          }),
+        })
+        .optional(),
+    ),
     published: q.date(),
     content: contentBlocks,
     tags: nullToUndefined(q.string().array().optional()),
-  });
+  })
 
-
-const { query: projectsQuery, schema: projectsSchema } = q("*")
+const { query: projectsQuery, schema: projectsSchema } = q('*')
   .filter("_type == 'project' && defined(slug)")
   .order('publishedAt desc')
   .grab({
@@ -117,11 +123,15 @@ const { query: projectsQuery, schema: projectsSchema } = q("*")
     description: q.string(),
     featured: nullToUndefined(q.boolean().default(false)),
     slug: q.slug('slug'),
-    icon: nullToUndefined(q.object({
-      asset: q.object({
-        _ref: q.string()
-      })
-    }).optional()),
+    icon: nullToUndefined(
+      q
+        .object({
+          asset: q.object({
+            _ref: q.string(),
+          }),
+        })
+        .optional(),
+    ),
     published: q.date(),
     details: nullToUndefined(contentBlocks.optional()),
     languages: nullToUndefined(q.string().array().optional()),
@@ -129,19 +139,24 @@ const { query: projectsQuery, schema: projectsSchema } = q("*")
     sourceCode: nullToUndefined(q.string().optional()),
     demo: nullToUndefined(q.string().optional()),
     type: q.string(),
-    images: nullToUndefined(q.object({
-      alt: q.string().optional(),
-      caption: q.string().optional(),
-      asset: q.object({
-        _ref: q.string(),
-      })
-    }).array().optional())
-  });
+    images: nullToUndefined(
+      q
+        .object({
+          alt: q.string().optional(),
+          caption: q.string().optional(),
+          asset: q.object({
+            _ref: q.string(),
+          }),
+        })
+        .array()
+        .optional(),
+    ),
+  })
 
 const getPosts = async () => {
-  const sanityResponse = await sanityClient.fetch(postsQuery);
+  const sanityResponse = await sanityClient.fetch(postsQuery)
 
-  return postsSchema.parse(sanityResponse);
+  return postsSchema.parse(sanityResponse)
 }
 
 const transformWorkExperience = (
@@ -183,7 +198,7 @@ const getImageBuilder = (image: any) => {
 }
 
 const getProjects = async () => {
-  return projectsSchema.parse(await sanityClient.fetch(projectsQuery));
+  return projectsSchema.parse(await sanityClient.fetch(projectsQuery))
 }
 
 const getWorkExperienceBySlug = async (
@@ -208,6 +223,6 @@ export {
   getWorkExperienceBySlug,
 }
 
-type Post = InferType<typeof postsSchema>[0];
+type Post = InferType<typeof postsSchema>[0]
 
 export type { Post, Project, WorkExperience, Image }

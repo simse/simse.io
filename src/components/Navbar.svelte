@@ -1,25 +1,25 @@
 <script lang="ts">
-  /*interface Props {
+/*interface Props {
     activeItem?: 'Home' | 'Blog' | 'Projects' | 'Contact'
   }*/
 
-  const items = [
-    {
-      title: 'Home',
-      link: '/',
-    },
-    {
-      title: 'Blog',
-      link: '/blog',
-    },
-    {
-      title: 'Projects',
-      link: '/projects',
-    },
-  ]
+const items = [
+  {
+    title: 'Home',
+    link: '/',
+  },
+  {
+    title: 'Blog',
+    link: '/blog',
+  },
+  {
+    title: 'Projects',
+    link: '/projects',
+  },
+]
 
-  // const { activeItem } = Astro.props
-  let overlayOpen = false;
+// const { activeItem } = Astro.props
+let overlayOpen = false
 </script>
 
 <nav
