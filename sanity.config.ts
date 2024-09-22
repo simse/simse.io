@@ -73,6 +73,22 @@ const graphBlock = defineType({
   ],
 })
 
+const terminalRecordingBlock = defineType({
+  name: 'terminalRecordingBlock',
+  type: 'object',
+  title: 'Terminal Recording',
+  fields: [
+    {
+      name: 'title',
+      type: 'string',
+    },
+    {
+      name: 'cast_file',
+      type: 'file',
+    }
+  ],
+})
+
 const postType = defineType({
   name: 'post',
   title: 'Posts',
@@ -149,6 +165,7 @@ const postType = defineType({
         { type: 'break' },
         { type: 'codeBlock' },
         { type: 'graphBlock' },
+        { type: 'terminalRecordingBlock' }
       ],
       group: 'post',
     }),
@@ -360,9 +377,8 @@ export default defineConfig({
   title: 'simse.io',
   projectId: 'rjqusm5i',
   dataset: 'production',
-  
   plugins: [structureTool(), visionTool(), media()],
   schema: {
-    types: [postType, projectType, experienceType, breakBlock, codeBlock, graphBlock],
+    types: [postType, projectType, experienceType, breakBlock, codeBlock, graphBlock, terminalRecordingBlock],
   },
 })

@@ -4,14 +4,14 @@ import CodeBlock from './blocks/CodeBlock.astro'
 import Graph from './blocks/Graph.astro'
 import Hr from './blocks/Hr.astro'
 import Image from './blocks/Image.astro'
+import TerminalRecording from './blocks/TerminalRecording.astro'
 
-interface TextProps {
+interface Props {
   content: any
 }
 
 const { content } = Astro.props
 ---
-
 <article class="text grid grid-cols-6">
   <PortableText
     value={content}
@@ -21,6 +21,7 @@ const { content } = Astro.props
         image: Image,
         codeBlock: CodeBlock,
         graphBlock: Graph,
+        terminalRecordingBlock: TerminalRecording,
       },
     }}
     onMissingComponent={(type) => {

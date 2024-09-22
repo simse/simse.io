@@ -5,10 +5,14 @@ import { type InferType, nullToUndefined, q } from 'groqd'
 
 const builder = imageUrlBuilder(sanityClient)
 
-export const getSanityFileUrl = (sanityFile: string): string => {
-  const fileName = sanityFile.replace('file-', '').replace('-json', '.json')
+export const getSanityFileUrl = (
+  sanityFile: string,
+  projectId = 'rjqusm5i',
+): string => {
+  const dataset = import.meta.env.PROD ? 'production' : 'test'
+  let fileName = sanityFile.replace('file-', '').replace(/-(?=[^-]*$)/, '.')
 
-  return `https://cdn.sanity.io/files/rjqusm5i/production/${fileName}`
+  return `https://cdn.sanity.io/files/${projectId}/${dataset}/${fileName}`
 }
 
 interface Image {
@@ -43,23 +47,6 @@ interface WorkExperience {
   endDate?: Date
 }
 
-interface Project {
-  _type: string
-  title: string
-  icon?: Image
-  featured: boolean
-  description: string
-  slug: string
-  published: Date
-  details: any
-  languages: string[]
-  technologies: string[]
-  images: Image[]
-  sourceCode?: string
-  demo?: string
-  type: string
-}
-
 const contentBlocks = q
   .union([
     q.contentBlock(),
@@ -88,6 +75,16 @@ const contentBlocks = q
         _type: q.literal('file'),
       }),
       title: q.string(),
+    }),
+    q.object({
+      _type: q.literal('terminalRecordingBlock'),
+      title: q.string(),
+      cast_file: q.object({
+        asset: q.object({
+          _ref: q.string(),
+        }),
+        _type: q.literal('file'),
+      }),
     }),
   ])
   .array()
@@ -226,5 +223,6 @@ export {
 }
 
 type Post = InferType<typeof postsSchema>[0]
+type Project = InferType<typeof projectsSchema>[0]
 
 export type { Post, Project, WorkExperience, Image }
