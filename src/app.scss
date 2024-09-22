@@ -80,9 +80,27 @@
 }
 
 .text {
+  p,
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  ul {
+    @apply col-start-1;
+    @apply col-end-7;
+
+    @media (min-width: 768px) {
+      @apply col-start-2;
+      @apply col-end-6;
+    }
+  }
+
   p {
-    @apply my-6;
+    @apply my-4;
     @apply text-lg;
+    
 
     &:first-child {
       @apply mt-0;
@@ -99,7 +117,8 @@
   h4,
   h5,
   h6 {
-    margin-top: 1.5rem;
+    margin-top: 3rem;
+    font-weight: 700;
   }
 
   h4,
@@ -134,9 +153,28 @@
     @apply font-bold;
   }
 
+  :not(.astro-code) code {
+    @apply font-bold;
+    @apply bg-zinc-800;
+    @apply rounded;
+    @apply px-1;
+  }
+
+  ul {
+    @apply list-disc;
+    @apply list-outside;
+  }
+
+  li {
+    @apply my-1;
+  }
+
   .astro-code {
     @apply rounded;
     @apply p-4;
+    @apply my-6;
+    @apply col-start-1;
+    @apply col-end-7;
     background: rgb(24 24 27 / var(--tw-bg-opacity)) !important;
   }
 }
