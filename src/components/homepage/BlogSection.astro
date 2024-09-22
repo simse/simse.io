@@ -1,9 +1,12 @@
 ---
-import { getCollection } from 'astro:content'
+import { type CollectionEntry, getCollection } from 'astro:content'
 
 import BlogCard from '@components/blog/BlogCard.astro'
 
 const posts = await getCollection('posts')
+posts.sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => {
+  return +new Date(b.data.published) - +new Date(a.data.published)
+})
 ---
 
 <section class="my-16 px-3" title="Blog">

@@ -8,12 +8,16 @@ interface Props {
 }
 
 const { year, posts } = Astro.props
+
+posts.sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => {
+  return +new Date(b.data.published) - +new Date(a.data.published)
+})
 ---
 
 <section class="my-2 pb-2 mb-8">
   <h2 class="text-xl text-black/70 dark:text-white/70 mb-4">{year}</h2>
 
-  <ul class="grid grid-cols-1 sm:grid-cols-2">
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     {
       posts.map((post) => (
         <li>

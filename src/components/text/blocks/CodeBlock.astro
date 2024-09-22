@@ -16,4 +16,8 @@ interface Props {
 const props = Astro.props
 ---
 
-<Code code={props.node.sourceCode} lang={props.node.language} theme="github-dark" />
+<Code 
+  code={props.node.sourceCode}
+  lang={props.node.language}
+  theme="github-dark"
+/>

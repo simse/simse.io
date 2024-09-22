@@ -106,6 +106,8 @@ const { query: postsQuery, schema: postsSchema } = q('*')
           asset: q.object({
             _ref: q.string(),
           }),
+          caption: q.string().optional(),
+          alt: q.string(),
         })
         .optional(),
     ),
