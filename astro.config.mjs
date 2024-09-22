@@ -19,7 +19,7 @@ export default defineConfig({
     icon(),
     sanity({
       projectId: 'rjqusm5i',
-      dataset: 'production',
+      dataset: 'test',
       useCdn: false,
     }),
     svelte(),

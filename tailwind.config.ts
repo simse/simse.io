@@ -7,6 +7,7 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Soehne', 'sans-serif'],
+        mono: ['SoehneMono', 'monospace']
       },
       keyframes: {
         'fade-in': {

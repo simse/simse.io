@@ -1,5 +1,5 @@
 ---
-import { ViewTransitions } from 'astro:transitions'
+import { ClientRouter } from 'astro:transitions'
 import LoadingIndicator from 'astro-loading-indicator/component'
 import '../app.scss'
 
@@ -44,8 +44,19 @@ const createTitle = (title: string) => {
         font-weight: 700;
         font-display: swap;
       }
+      @font-face {
+        font-family: 'SoehneMono';
+        src: url('/fonts/Soehne-Mono-Regular.woff2');
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'SoehneMono';
+        src: url('/fonts/Soehne-Mono-Bold.woff2');
+        font-weight: 700;
+        font-display: swap;
+      }
     </style>
-    <ViewTransitions />
+    <ClientRouter />
     <LoadingIndicator color="#2563eb" />
   </head>
   <body class="text-zinc-100 bg-zinc-950">
