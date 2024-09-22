@@ -1,12 +1,12 @@
 ---
-import Loader from '@components/common/Loader.astro';
+import Loader from '@components/common/Loader.astro'
 
 interface Props {
-    title: string;
-    datasetReference: string;
+  title: string
+  datasetReference: string
 }
 
-const { title, datasetReference } = Astro.props;
+const { title, datasetReference } = Astro.props
 ---
 <script>
     function parseToShortestNumber(value: number): number {

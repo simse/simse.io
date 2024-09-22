@@ -1,5 +1,5 @@
-import type { APIRoute } from 'astro'
 import { getSanityFileUrl } from '@cms'
+import type { APIRoute } from 'astro'
 
 export const GET: APIRoute = async ({ params }) => {
   const reference = params.reference
@@ -15,8 +15,8 @@ export const GET: APIRoute = async ({ params }) => {
     )
   }
 
-  const datasetUrl = getSanityFileUrl(reference);
-  const dataset = await fetch(datasetUrl);
+  const datasetUrl = getSanityFileUrl(reference)
+  const dataset = await fetch(datasetUrl)
 
   if (!dataset.ok) {
     return new Response(

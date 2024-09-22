@@ -1,11 +1,13 @@
 ---
-import { getCollection, type CollectionEntry } from 'astro:content';
+import { type CollectionEntry, getCollection } from 'astro:content'
 import ProjectCard from '../projects/ProjectCard.astro'
 
-let projects = await getCollection('projects');
-projects = projects.sort((a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => {
-  return a.data.published < b.data.published ? 1 : -1;
-})
+let projects = await getCollection('projects')
+projects = projects.sort(
+  (a: CollectionEntry<'projects'>, b: CollectionEntry<'projects'>) => {
+    return a.data.published < b.data.published ? 1 : -1
+  },
+)
 ---
 
 <section class="my-16 px-3" title="Projects">

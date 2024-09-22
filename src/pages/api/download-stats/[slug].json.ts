@@ -1,6 +1,6 @@
 import { PEPY_API_KEY } from 'astro:env/server'
-import type { APIRoute } from 'astro'
 import TTLCache from '@isaacs/ttlcache'
+import type { APIRoute } from 'astro'
 
 export const prerender = false
 

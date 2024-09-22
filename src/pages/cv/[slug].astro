@@ -1,9 +1,9 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro'
-import PageHeader from '@components/common/PageHeader.astro'
-import Navbar from '@components/Navbar.astro'
 import { getWorkExperienceBySlug } from '@cms'
+import Navbar from '@components/Navbar.astro'
+import PageHeader from '@components/common/PageHeader.astro'
 import Text from '@components/text/Text.astro'
+import BaseLayout from '@layouts/BaseLayout.astro'
 
 const { slug } = Astro.params
 if (!slug) {
