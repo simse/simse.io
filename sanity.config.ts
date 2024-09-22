@@ -376,7 +376,7 @@ export default defineConfig({
   name: 'simse-io',
   title: 'simse.io',
   projectId: 'rjqusm5i',
-  dataset: 'production',
+  dataset: 'test',
   plugins: [structureTool(), visionTool(), media()],
   schema: {
     types: [postType, projectType, experienceType, breakBlock, codeBlock, graphBlock, terminalRecordingBlock],
