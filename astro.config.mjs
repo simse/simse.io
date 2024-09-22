@@ -19,7 +19,7 @@ export default defineConfig({
     icon(),
     sanity({
       projectId: 'rjqusm5i',
-      dataset: 'test',
+      dataset: import.meta.env.PROD ? 'production' : 'test',
       useCdn: false,
     }),
     svelte(),

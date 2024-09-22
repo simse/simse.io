@@ -8,8 +8,8 @@ const builder = imageUrlBuilder(sanityClient)
 export const getSanityFileUrl = (
   sanityFile: string,
   projectId = 'rjqusm5i',
-  dataset = 'test',
 ): string => {
+  const dataset = import.meta.env.PROD ? 'production' : 'test'
   let fileName = sanityFile.replace('file-', '').replace(/-(?=[^-]*$)/, '.')
 
   return `https://cdn.sanity.io/files/${projectId}/${dataset}/${fileName}`
