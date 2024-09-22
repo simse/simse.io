@@ -76,6 +76,17 @@ const contentBlocks = q.union([
     asset: q.object({
       _ref: q.string()
     })
+  }),
+  q.object({
+    _type: q.literal('graphBlock'),
+    type: q.literal('line'),
+    datasets: q.object({
+      asset: q.object({
+        _ref: q.string()
+      }),
+      _type: q.literal('file')
+    }),
+    title: q.string()
   })
 ]).array()
 

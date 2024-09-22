@@ -1,6 +1,7 @@
 import { defineConfig, defineField, defineType } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
+import { media } from 'sanity-plugin-media'
 
 const breakBlock = defineType({
   name: 'break',
@@ -359,7 +360,8 @@ export default defineConfig({
   title: 'simse.io',
   projectId: 'rjqusm5i',
   dataset: 'production',
-  plugins: [structureTool(), visionTool()],
+  
+  plugins: [structureTool(), visionTool(), media()],
   schema: {
     types: [postType, projectType, experienceType, breakBlock, codeBlock, graphBlock],
   },
