@@ -107,6 +107,7 @@ jobs:
         run: pnpm exec playwright test --reporter json
         env:
           PLAYWRIGHT_JSON_OUTPUT_NAME: results.json
+          NODE_ENV: development
 
       - uses: daun/playwright-report-summary@v3
         if: always()
