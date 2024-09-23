@@ -53,6 +53,9 @@ jobs:
 
       - name: Run tsc
         run: pnpm types:check
+        env:
+          SANITY_PROJECT_ID: rjqusm5i
+          SANITY_PROJECT_DATASET: test
 
   unit-test:
     runs-on: ubuntu-latest
@@ -77,6 +80,9 @@ jobs:
 
       - name: Run unit tests
         run: pnpm test
+        env:
+          SANITY_PROJECT_ID: rjqusm5i
+          SANITY_PROJECT_DATASET: test
 
   e2e-test:
     timeout-minutes: 60
@@ -109,6 +115,7 @@ jobs:
           PLAYWRIGHT_JSON_OUTPUT_NAME: results.json
           SANITY_PROJECT_ID: rjqusm5i
           SANITY_PROJECT_DATASET: test
+          PEPY_API_KEY: ''
 
       - uses: daun/playwright-report-summary@v3
         if: always()
@@ -138,3 +145,6 @@ jobs:
 
       - name: Ensure site is building
         run: pnpm build
+        env:
+          SANITY_PROJECT_ID: rjqusm5i
+          SANITY_PROJECT_DATASET: test
