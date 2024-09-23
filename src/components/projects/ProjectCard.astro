@@ -13,7 +13,7 @@ const { project } = Astro.props
   href={`/${project.data.slug}`}
 >
   <div class="p-4 flex flex-col h-full">
-    <span class="text-sm text-black/70 dark:text-white/70 font-bold mb-auto block">{project.data.type.toUpperCase()}</span>
+    <span class="text-sm text-white/70 font-bold mb-auto block">{project.data.type.toUpperCase()}</span>
 
     {project.data.icon && (
       <img
@@ -25,6 +25,6 @@ const { project } = Astro.props
     <span class="text-lg font-bold">
       {project.data.title}
     </span>
-    <span class="block text-black/70 dark:text-white/70">{project.data.description}</span>
+    <span class="block text-white/70">{project.data.description}</span>
   </div>
 </a>

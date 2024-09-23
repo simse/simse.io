@@ -12,7 +12,7 @@ const { title, subtitle } = Astro.props
   <h1 class="text-3xl font-bold mb-2">{title}</h1>
   {
     subtitle && (
-      <span class="text-black/70 dark:text-white/70" set:html={subtitle} />
+      <span class="text-white/70" set:html={subtitle} />
     )
   }
 </header>

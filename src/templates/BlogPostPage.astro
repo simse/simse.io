@@ -21,7 +21,11 @@ const suggestedPosts = (await getCollection('posts')).filter(
 )
 ---
 
-<BaseLayout title={post.title} canonical={`/${post.slug}`}>
+<BaseLayout 
+  title={post.title} 
+  canonical={`/${post.slug}`}
+  description={post.excerpt}
+>
   <Navbar activeItem="Blog" />
 
   <header class="my-8 md:my-16 md:text-center max-w-2xl mx-auto px-2">
@@ -38,7 +42,7 @@ const suggestedPosts = (await getCollection('posts')).filter(
           alt={post.image.alt}
         />
 
-        <figcaption class="text-zinc-700 dark:text-zinc-400">
+        <figcaption class="text-zinc-400">
           {post.image.caption}
         </figcaption>
       </figure>

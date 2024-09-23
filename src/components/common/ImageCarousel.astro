@@ -39,7 +39,7 @@ const { images } = Astro.props
                 alt={image.alt}
               />
 
-              <figcaption class="mt-2 text-zinc-700 dark:text-zinc-400">
+              <figcaption class="mt-2 text-zinc-400">
                 {image.caption}
               </figcaption>
             </figure>
@@ -52,7 +52,7 @@ const { images } = Astro.props
   {
     images.length > 1 && (
       <div
-        class="glide__arrows -mt-6 flex items-center justify-end z-20 absolute right-0 dark:bg-zinc-950 dark:text-white bg-zinc-50 text-zinc-950 w-fit"
+        class="glide__arrows -mt-6 flex items-center justify-end z-20 absolute right-0 bg-zinc-950 text-white w-fit"
         data-glide-el="controls"
       >
         <button class="glide__arrow glide__arrow--left p-2" data-glide-dir="<">
