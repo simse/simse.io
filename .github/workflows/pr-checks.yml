@@ -50,6 +50,8 @@ jobs:
 
       - name: Generate Astro types
         run: pnpm astro sync
+        env:
+          PEPY_API_KEY: 'bruh'
 
       - name: Run tsc
         run: pnpm types:check
@@ -115,7 +117,7 @@ jobs:
           PLAYWRIGHT_JSON_OUTPUT_NAME: results.json
           SANITY_PROJECT_ID: rjqusm5i
           SANITY_PROJECT_DATASET: test
-          PEPY_API_KEY: ''
+          PEPY_API_KEY: 'bruh'
 
       - uses: daun/playwright-report-summary@v3
         if: always()
@@ -148,3 +150,4 @@ jobs:
         env:
           SANITY_PROJECT_ID: rjqusm5i
           SANITY_PROJECT_DATASET: test
+          PEPY_API_KEY: 'bruh'
