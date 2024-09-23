@@ -33,4 +33,5 @@ jobs:
           SANITY_AUTH_TOKEN: ${{ secrets.SANITY_AUTH_TOKEN }}
           SANITY_PROJECT_ID: ${{ secrets.SANITY_PROJECT_ID }}
           SANITY_DATASET: ${{ secrets.SANITY_DATASET }}
+          NODE_ENV: production
         run: npx sanity deploy --no-browser --token $SANITY_AUTH_TOKEN --project $SANITY_PROJECT_ID --dataset $SANITY_DATASET

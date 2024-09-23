@@ -1,7 +1,7 @@
 ---
-import { getProjects } from '../../cms'
+import { getCollection } from "astro:content"
 
-const projects = await getProjects()
+const projects = await getCollection('projects');
 
 const links: {
   title: string
@@ -34,8 +34,8 @@ const links: {
   {
     title: 'Projects',
     items: projects.map((project) => ({
-      label: project.title,
-      href: `/${project.slug}`,
+      label: project.data.title,
+      href: `/${project.data.slug}`,
     })),
   },
 ]

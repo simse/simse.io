@@ -10,7 +10,7 @@ projects = projects.sort(
 )
 ---
 
-<section class="my-16 px-3" title="Projects">
+{projects.length > 0 ? <section class="my-16 px-3" title="Projects">
   <a href="/projects">
     <h2 class="text-lg mb-2 font-bold">Projects</h2>
   </a>
@@ -24,4 +24,4 @@ projects = projects.sort(
       ))
     }
   </ul>
-</section>
+</section> : null}
