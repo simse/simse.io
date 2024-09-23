@@ -25,7 +25,10 @@ const { content } = Astro.props
       },
     }}
     onMissingComponent={(type) => {
-      console.warn(`Component not found: ${type}`)
+      if (import.meta.env.DEV) {
+        console.warn(`Component not found: ${type}`)
+      }
+      
       return null
     }}
   />

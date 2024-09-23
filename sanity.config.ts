@@ -214,7 +214,6 @@ const projectType = defineType({
     }),
     defineField({
       title: 'Type',
-      // description: "Pick the format of your post",
       name: 'type',
       type: 'string',
       options: {
@@ -283,6 +282,7 @@ const projectType = defineType({
       name: 'description',
       title: 'Description',
       type: 'text',
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: 'details',
@@ -375,8 +375,8 @@ const experienceType = defineType({
 export default defineConfig({
   name: 'simse-io',
   title: 'simse.io',
-  projectId: 'rjqusm5i',
-  dataset: 'production',
+  projectId: process.env.SANITY_PROJECT_ID || '',
+  dataset: process.env.SANITY_PROJECT_DATASET || '',
   plugins: [structureTool(), visionTool(), media()],
   schema: {
     types: [postType, projectType, experienceType, breakBlock, codeBlock, graphBlock, terminalRecordingBlock],
