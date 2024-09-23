@@ -5,10 +5,11 @@ import '../app.scss'
 
 interface Props {
   title: string
+  description?: string
   canonical?: string
 }
 
-const { title, canonical } = Astro.props
+const { title, canonical, description } = Astro.props
 
 const createTitle = (title: string) => {
   if (title.includes('—')) return title
@@ -25,7 +26,7 @@ const createTitle = (title: string) => {
     <link rel="icon" type="image/ico" href="/favicon.ico" />
     <meta name="viewport" content="width=device-width" />
     <meta name="generator" content={Astro.generator} />
-    <meta name="robots" content="noindex,nofollow" />
+    {description ? <meta name="description" content={description} /> : null}
     <title>{createTitle(title)}</title>
     {
       canonical && (

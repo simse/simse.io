@@ -375,8 +375,8 @@ const experienceType = defineType({
 export default defineConfig({
   name: 'simse-io',
   title: 'simse.io',
-  projectId: 'rjqusm5i',
-  dataset: process.env.NODE_ENV === 'production' ? 'production' : 'test',
+  projectId: process.env.SANITY_PROJECT_ID || '',
+  dataset: process.env.SANITY_PROJECT_DATASET || '',
   plugins: [structureTool(), visionTool(), media()],
   schema: {
     types: [postType, projectType, experienceType, breakBlock, codeBlock, graphBlock, terminalRecordingBlock],

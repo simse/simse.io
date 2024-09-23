@@ -1,3 +1,4 @@
+import { SANITY_PROJECT_DATASET, SANITY_PROJECT_ID } from 'astro:env/server'
 import { sanityClient } from 'sanity:client'
 import imageUrlBuilder from '@sanity/image-url'
 import type { SanityAsset } from '@sanity/image-url/lib/types/types'
@@ -5,14 +6,10 @@ import { type InferType, nullToUndefined, q } from 'groqd'
 
 const builder = imageUrlBuilder(sanityClient)
 
-export const getSanityFileUrl = (
-  sanityFile: string,
-  projectId = 'rjqusm5i',
-): string => {
-  const dataset = import.meta.env.PROD ? 'production' : 'test'
+export const getSanityFileUrl = (sanityFile: string): string => {
   let fileName = sanityFile.replace('file-', '').replace(/-(?=[^-]*$)/, '.')
 
-  return `https://cdn.sanity.io/files/${projectId}/${dataset}/${fileName}`
+  return `https://cdn.sanity.io/files/${SANITY_PROJECT_ID}/${SANITY_PROJECT_DATASET}/${fileName}`
 }
 
 interface Image {
