@@ -2,10 +2,10 @@
 import { type CollectionEntry, getCollection } from 'astro:content'
 import Navbar from '@components/Navbar.astro'
 import YearList from '@components/blog/YearList.astro'
+import Button from '@components/common/Button.astro'
 import Footer from '@components/common/Footer.astro'
 import PageHeader from '@components/common/PageHeader.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
-import { Icon } from 'astro-icon/components'
 
 let posts = await getCollection('posts')
 
@@ -23,7 +23,10 @@ posts.forEach((post) => {
 })
 ---
 
-<BaseLayout title="Blog">
+<BaseLayout 
+  title="Blog"
+  description="Simon Sorensen's blog where he occasionally writes about technology, programming and software engineering."
+>
   <Navbar activeItem="Blog" />
 
   <main class="px-2 py-8 max-w-5xl mx-auto">
@@ -39,10 +42,7 @@ posts.forEach((post) => {
         .map((year) => <YearList year={year} posts={postsByYear[year]} />)
     }
 
-    <a class="flex items-center gap-2 my-12 bg-amber-600 hover:bg-amber-700 transition-colors w-fit text-black py-2 px-4 rounded" href="/rss.xml" target="_blank">
-      <Icon name="tabler:rss" size={18} />
-      RSS feed
-    </a>
+    <Button href="/rss.xml" icon="tabler:rss" target="_blank" shortcut="r" style="amber">RSS feed</Button>
   </main>
 
   <Footer />

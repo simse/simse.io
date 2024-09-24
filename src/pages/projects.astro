@@ -1,18 +1,21 @@
 ---
 import { getCollection } from 'astro:content'
 import Navbar from '@components/Navbar.astro'
+import Button from '@components/common/Button.astro'
 import Footer from '@components/common/Footer.astro'
 import PageHeader from '@components/common/PageHeader.astro'
 import ProjectCard from '@components/projects/ProjectCard.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { capitalizeFirstLetter } from '@utils/string'
-import { Icon } from 'astro-icon/components'
 
 const projects = await getCollection('projects')
 const featuredProjects = projects.filter((project) => project.data.featured)
 ---
 
-<BaseLayout title="Projects">
+<BaseLayout 
+  title="Projects"
+  description="The full collection of all projects created and maintained by me."
+>
   <Navbar activeItem="Projects" />
 
   <main class="px-4 py-8 max-w-5xl mx-auto">
@@ -37,7 +40,7 @@ const featuredProjects = projects.filter((project) => project.data.featured)
       <h2 class="text-lg mb-2">All Projects <span class="text-zinc-400">({projects.length})</span></h2>
 
       <table class="col-span-3 w-full ">
-        {projects.map(project => (
+        {projects.map((project, index) => (
           <tr class="border-b border-white/20 last:border-transparent">
             <td class="py-3 px-3 pl-0 font-bold w-32 md:w-48">
               {project.data.title}
@@ -45,10 +48,7 @@ const featuredProjects = projects.filter((project) => project.data.featured)
             <td class="py-3 px-3 hidden md:block">{capitalizeFirstLetter(project.data.type)}</td>
             <td class="text-zinc-400">{project.data.description}</td>
             <td>
-              <a class="flex items-center gap-1 bg-blue-700 px-3 py-2 sm:py-0.5 rounded w-fit ml-auto my-1" href={`/${project.data.slug}`}>
-                <span class="hidden sm:block">Read more</span>
-                <Icon name="tabler:arrow-right" size={18} class="mt-0.5" />
-              </a>
+              <Button href={`/${project.data.slug}`}>Read more</Button>
             </td>
           </tr>
         ))}
