@@ -8,11 +8,13 @@ import TerminalRecording from './blocks/TerminalRecording.astro'
 
 interface Props {
   content: any
+  /* Whether all components should span the full width, or fun components should grow larger than text paragraphs */
+  fullWidth?: boolean
 }
 
-const { content } = Astro.props
+const { content, fullWidth = false } = Astro.props
 ---
-<article class="text grid grid-cols-6">
+<article class={`text ${fullWidth ? 'full-width' : ''}`}>
   <PortableText
     value={content}
     components={{

@@ -81,6 +81,9 @@
 }
 
 .text {
+  @apply grid;
+  @apply grid-cols-6;
+
   p,
   h1,
   h2,
@@ -88,13 +91,29 @@
   h4,
   h5,
   h6,
-  ul {
+  ul,
+  hr {
     @apply col-start-1;
     @apply col-end-7;
 
     @media (min-width: 768px) {
       @apply col-start-2;
       @apply col-end-6;
+    }
+  }
+
+  &.full-width {
+    p,
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6,
+    ul,
+    hr {
+      @apply col-start-1;
+      @apply col-end-7;
     }
   }
 

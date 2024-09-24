@@ -3,7 +3,6 @@ import { type CollectionEntry } from 'astro:content'
 import Navbar from '@components/Navbar.astro'
 import Footer from '@components/common/Footer.astro'
 import ImageCarousel from '@components/common/ImageCarousel.astro'
-import Downloads from '@components/projects/Downloads.svelte'
 import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 
@@ -21,9 +20,9 @@ const { project }: Props = Astro.props
 >
   <Navbar activeItem="Projects" />
 
-  <main class="max-w-4xl mx-auto pt-8 px-2 pb-12">
+  <main class="max-w-5xl mx-auto pt-8 px-2">
     <header class="mb-8">
-      <h1 class="text-2xl md:text-3xl mb-2">{project.title}</h1>
+      <h1 class="text-2xl md:text-3xl mb-2 font-bold">{project.title}</h1>
       <span class="text-lg text-white/70"
         >{project.description}</span
       >
@@ -31,73 +30,76 @@ const { project }: Props = Astro.props
 
     {project.images && project.images.length > 0 && <ImageCarousel images={project.images} />}
 
-    <section class="mb-8">
-      <h2 class="text-lg mb-2">Key Information</h2>
 
-      <table class="col-span-3 w-96 bg-zinc-900 rounded-lg overflow-clip">
-        {
-          project.languages.length > 0 && (
-            <tr class="border-b border-white/20 last:border-transparent">
-              <td class="py-3 px-3 font-bold w-32">
-                Language{project.languages.length > 1 && 's'}
-              </td>
-              <td class="py-3 px-3">{project.languages.join(', ')}</td>
-            </tr>
-          )
-        }
+    <div class="grid grid-cols-5 gap-8">
+      <section class="mb-8 col-span-2">
+        <h2 class="text-lg mb-2 font-bold">Key Information</h2>
 
-        {
-          project.technologies.length > 0 && (
-            <tr class="border-b border-white/20 last:border-transparent">
-              <td class="py-3 px-3 font-bold w-32">
-                Technolog{project.technologies.length > 1 ? 'ies' : 'y'}
-              </td>
-              <td class="py-3 px-3">{project.technologies.join(', ')}</td>
-            </tr>
-          )
-        }
-        {
-          project.sourceCode && (
-            <tr class="border-b last:border-transparent border-white/20">
-              <td class="py-3 px-3 font-bold">Source Code</td>
-              <td class="py-3 px-3">
-                <a
-                  href={project.sourceCode}
-                  class="text-purple-400 hover:text-purple-500 hover:border-purple-500 border-purple-400 border-b transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {project.sourceCode.replace('https://', '')}
-                </a>
-              </td>
-            </tr>
-          )
-        }
-        {
-          project.demo && (
-            <tr class="border-b last:border-transparent border-white/20">
-              <td class="py-3 px-3 font-bold">Demo</td>
-              <td class="py-3 px-3">
-                <a
-                  href={project.demo}
-                  class="text-purple-400 hover:text-purple-500 hover:border-purple-500 border-purple-400 border-b transition-colors"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  {project.demo.replace('https://', '')}
-                </a>
-              </td>
-            </tr>
-          )
-        }
-        {/*<Downloads projectSlug={project.slug} client:load />*/}
-      </table>
-    </section>
+        <table class="w-full bg-zinc-900 rounded-lg overflow-clip">
+          {
+            project.languages.length > 0 && (
+              <tr class="border-b border-white/20 last:border-transparent">
+                <td class="py-3 px-3 font-bold w-32">
+                  Language{project.languages.length > 1 && 's'}
+                </td>
+                <td class="py-3 px-3">{project.languages.join(', ')}</td>
+              </tr>
+            )
+          }
 
-    <section class="mb-8">
-      <Text content={project.details} />
-    </section>
-  </main>
+          {
+            project.technologies.length > 0 && (
+              <tr class="border-b border-white/20 last:border-transparent">
+                <td class="py-3 px-3 font-bold w-32">
+                  Technolog{project.technologies.length > 1 ? 'ies' : 'y'}
+                </td>
+                <td class="py-3 px-3">{project.technologies.join(', ')}</td>
+              </tr>
+            )
+          }
+          {
+            project.sourceCode && (
+              <tr class="border-b last:border-transparent border-white/20">
+                <td class="py-3 px-3 font-bold">Source Code</td>
+                <td class="py-3 px-3">
+                  <a
+                    href={project.sourceCode}
+                    class="text-purple-400 hover:text-purple-500 hover:border-purple-500 border-purple-400 border-b transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {project.sourceCode.replace('https://', '')}
+                  </a>
+                </td>
+              </tr>
+            )
+          }
+          {
+            project.demo && (
+              <tr class="border-b last:border-transparent border-white/20">
+                <td class="py-3 px-3 font-bold">Demo</td>
+                <td class="py-3 px-3">
+                  <a
+                    href={project.demo}
+                    class="text-purple-400 hover:text-purple-500 hover:border-purple-500 border-purple-400 border-b transition-colors"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {project.demo.replace('https://', '')}
+                  </a>
+                </td>
+              </tr>
+            )
+          }
+          {/*<Downloads projectSlug={project.slug} client:load />*/}
+        </table>
+      </section>
+
+      <section class="mb-8 col-span-3 pt-8">
+        <Text content={project.details} fullWidth={true} />
+      </section>
+    </div>
+    </main>
 
   <Footer />
 </BaseLayout>

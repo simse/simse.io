@@ -26,7 +26,7 @@ posts.forEach((post) => {
 <BaseLayout title="Blog">
   <Navbar activeItem="Blog" />
 
-  <main class="px-2 py-8 max-w-4xl mx-auto">
+  <main class="px-2 py-8 max-w-5xl mx-auto">
     <PageHeader
       title="Blog"
       subtitle="My corner of The Internet where I write sometimes,<br />but honestly not that often."
@@ -39,7 +39,7 @@ posts.forEach((post) => {
         .map((year) => <YearList year={year} posts={postsByYear[year]} />)
     }
 
-    <a class="flex items-center gap-2 my-12 bg-amber-600 w-fit text-black py-2 px-4 rounded" href="/rss.xml" target="_blank">
+    <a class="flex items-center gap-2 my-12 bg-amber-600 hover:bg-amber-700 transition-colors w-fit text-black py-2 px-4 rounded" href="/rss.xml" target="_blank">
       <Icon name="tabler:rss" size={18} />
       RSS feed
     </a>
