@@ -26,4 +26,6 @@ const { activeItem } = Astro.props
 
 <NavbarSvelte client:load activeItem={activeItem}>
   <Icon name="tabler:search" size={22} slot="search-icon" />
+  <Icon name="tabler:menu-2" size={18} slot="menu-icon" />
+  <Icon name="tabler:x" size={18} slot="close-icon" />
 </NavbarSvelte>

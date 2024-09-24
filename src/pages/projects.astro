@@ -18,7 +18,7 @@ const featuredProjects = projects.filter((project) => project.data.featured)
 >
   <Navbar activeItem="Projects" />
 
-  <main class="px-4 py-8 max-w-5xl mx-auto">
+  <main class="px-4 my-8 max-w-5xl mx-auto">
     <PageHeader
       title="Projects"
       subtitle="A collection of things I've created over the years I've been programming (2013-now)."
@@ -43,11 +43,11 @@ const featuredProjects = projects.filter((project) => project.data.featured)
         {projects.map((project, index) => (
           <tr class="border-b border-white/20 last:border-transparent">
             <td class="py-3 px-3 pl-0 font-bold w-32 md:w-48">
-              {project.data.title}
+              <a href={`/${project.data.slug}`}>{project.data.title}</a>
             </td>
             <td class="py-3 px-3 hidden md:block">{capitalizeFirstLetter(project.data.type)}</td>
             <td class="text-zinc-400">{project.data.description}</td>
-            <td>
+            <td class="hidden md:block">
               <Button href={`/${project.data.slug}`}>Read more</Button>
             </td>
           </tr>

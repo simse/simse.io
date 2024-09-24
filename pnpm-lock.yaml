@@ -13,7 +13,7 @@ importers:
         version: 0.9.3(prettier-plugin-astro@0.14.1)(prettier@3.3.3)(typescript@5.6.2)
       '@astrojs/node':
         specifier: 9.0.0-beta.2
-        version: 9.0.0-beta.2(astro@5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))
+        version: 9.0.0-beta.2(astro@5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))
       '@astrojs/rss':
         specifier: ^4.0.7
         version: 4.0.7
@@ -21,11 +21,11 @@ importers:
         specifier: ^3.1.6
         version: 3.1.6
       '@astrojs/svelte':
-        specifier: ^5.7.1
-        version: 5.7.1(astro@5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(svelte@4.2.19)(typescript@5.6.2)(vite@5.4.6(@types/node@22.5.4)(sass@1.75.0))
+        specifier: 6.0.0-beta.0
+        version: 6.0.0-beta.0(astro@5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(svelte@4.2.19)(typescript@5.6.2)(vite@5.4.6(@types/node@22.5.4)(sass@1.75.0))
       '@astrojs/tailwind':
         specifier: ^5.1.1
-        version: 5.1.1(astro@5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(tailwindcss@3.4.1)
+        version: 5.1.1(astro@5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(tailwindcss@3.4.1)
       '@elysiajs/swagger':
         specifier: ^1.1.1
         version: 1.1.1(elysia@1.1.13(@sinclair/typebox@0.33.12)(openapi-types@12.1.3)(typescript@5.6.2))
@@ -40,7 +40,7 @@ importers:
         version: 1.4.1
       '@sanity/astro':
         specifier: 3.1.6
-        version: 3.1.6(@sanity/client@6.21.3)(@sanity/visual-editing@2.1.3(@sanity/client@6.21.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(svelte@4.2.19))(astro@5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sanity@3.43.0(@types/node@22.5.4)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.75.0)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))
+        version: 3.1.6(@sanity/client@6.21.3)(@sanity/visual-editing@2.1.3(@sanity/client@6.21.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(svelte@4.2.19))(astro@5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sanity@3.43.0(@types/node@22.5.4)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.75.0)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))
       '@sanity/client':
         specifier: 6.21.3
         version: 6.21.3
@@ -51,14 +51,14 @@ importers:
         specifier: ^3.8.0
         version: 3.8.0
       astro:
-        specifier: 5.0.0-beta.1
-        version: 5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
+        specifier: 5.0.0-beta.2
+        version: 5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
       astro-icon:
         specifier: ^1.1.0
         version: 1.1.0
       astro-loading-indicator:
         specifier: 0.6.0
-        version: 0.6.0(astro@5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))
+        version: 0.6.0(astro@5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))
       astro-portabletext:
         specifier: 0.10.0
         version: 0.10.0
@@ -200,11 +200,11 @@ packages:
   '@astrojs/sitemap@3.1.6':
     resolution: {integrity: sha512-1Qp2NvAzVImqA6y+LubKi1DVhve/hXXgFvB0szxiipzh7BvtuKe4oJJ9dXSqaubaTkt4nMa6dv6RCCAYeB6xaQ==}
 
-  '@astrojs/svelte@5.7.1':
-    resolution: {integrity: sha512-VIxEdkrnGMoxjs/heI0SWAwQy9+aHxVrsK5QUmsFihXKeYB9OhbZHUzsRJEmoW3IPpKZn/DEallyr1/4a1zZxQ==}
+  '@astrojs/svelte@6.0.0-beta.0':
+    resolution: {integrity: sha512-PNmVWNsgWAqB+6rTqHWvZO20iHntU4QOUiK0IhfuYzVWiFhfthclAnmk7EYSndPb2utG1ZfXEowzF+AKOt+JTQ==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0}
     peerDependencies:
-      astro: ^4.0.0
+      astro: ^5.0.0-alpha.0
       svelte: ^4.0.0 || ^5.0.0-next.190
       typescript: ^5.3.3
 
@@ -1736,8 +1736,8 @@ packages:
     resolution: {integrity: sha512-oGB+UxlgWcgQkgwo8GcEGwemoTFt3FIO9ababBmaGwXIoBKZ+GTy0pP185beGg7Llih/NSHSV2XAs1lnznocSg==}
     engines: {node: '>= 8'}
 
-  '@oslojs/encoding@0.4.1':
-    resolution: {integrity: sha512-hkjo6MuIK/kQR5CrGNdAPZhS01ZCXuWDRJ187zh6qqF2+yMHZpD9fAYpX8q2bOO6Ryhl3XpCT6kUX76N8hhm4Q==}
+  '@oslojs/encoding@1.1.0':
+    resolution: {integrity: sha512-70wQhgYmndg4GCPxPPxPGevRKqTIJ2Nh4OkiMWmDAVYsTQ+Ta7Sq+rPevXyXGdzr30/qZBnyOalCszoMxlyldQ==}
 
   '@pkgjs/parseargs@0.11.0':
     resolution: {integrity: sha512-+1VkjdD0QBLPodGrJUeqarH8VAIvQODIbwh9XpP5Syisf7YoQgsJKPNFoqqLQlu+VQ/tVSshMR6loPMn8U+dPg==}
@@ -2465,8 +2465,8 @@ packages:
   astro-portabletext@0.10.0:
     resolution: {integrity: sha512-07Un6W3R14bRfAf4TlSzAlBkWBXzyK8NPT3Xelm3+f6sVkr61Jlx5k2dXRB6ZZycqBbbLXIbzey2WOcddTl2AA==}
 
-  astro@5.0.0-beta.1:
-    resolution: {integrity: sha512-i5L+2tky+cYaLba/UX6KGe4oXGdlYfcPWCukT56FLUWLI4CsXqOL9QC/paUH7qG8jAnxdYnST/HtuyREtiYUhg==}
+  astro@5.0.0-beta.2:
+    resolution: {integrity: sha512-PJlq/pbUwme7PXsFiVCRmrQO3ANh/hnhoQ81vxguwHJOJDwEUOYurJ9JgCJIyMCvRvfOP6G3FKnp3Y640b0B/w==}
     engines: {node: ^18.17.1 || ^20.3.0 || >=21.0.0, npm: '>=9.6.5', pnpm: '>=7.1.0'}
     hasBin: true
 
@@ -3676,9 +3676,6 @@ packages:
   hasown@2.0.2:
     resolution: {integrity: sha512-0hJU9SCPvmMzIBdZFqNPXWa6dqh7WdH0cII9y+CyS8rG3nL48Bclra9HmKhVVUHyPWNH5Y7xDwAB7bfgSjkUMQ==}
     engines: {node: '>= 0.4'}
-
-  hast-util-from-html@2.0.1:
-    resolution: {integrity: sha512-RXQBLMl9kjKVNkJTIO6bZyb2n+cUH8LFaSSzo82jiLT6Tfc+Pt7VQCS+/h3YwG4jaNE2TA2sdJisGWR+aJrp0g==}
 
   hast-util-from-html@2.0.3:
     resolution: {integrity: sha512-CUSRHXyKjzHov8yKsQjGOElXy/3EKpyX56ELnkHH34vDVw1N1XSQ1ZcAvTyAPtGqLTuKP/uxM+aLkSPqF/EtMw==}
@@ -6685,9 +6682,9 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  '@astrojs/node@9.0.0-beta.2(astro@5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))':
+  '@astrojs/node@9.0.0-beta.2(astro@5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))':
     dependencies:
-      astro: 5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
+      astro: 5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
       send: 0.18.0
       server-destroy: 1.0.1
     transitivePeerDependencies:
@@ -6708,10 +6705,10 @@ snapshots:
       stream-replace-string: 2.0.0
       zod: 3.23.8
 
-  '@astrojs/svelte@5.7.1(astro@5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(svelte@4.2.19)(typescript@5.6.2)(vite@5.4.6(@types/node@22.5.4)(sass@1.75.0))':
+  '@astrojs/svelte@6.0.0-beta.0(astro@5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(svelte@4.2.19)(typescript@5.6.2)(vite@5.4.6(@types/node@22.5.4)(sass@1.75.0))':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 3.1.2(svelte@4.2.19)(vite@5.4.6(@types/node@22.5.4)(sass@1.75.0))
-      astro: 5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
+      astro: 5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
       svelte: 4.2.19
       svelte2tsx: 0.7.19(svelte@4.2.19)(typescript@5.6.2)
       typescript: 5.6.2
@@ -6719,9 +6716,9 @@ snapshots:
       - supports-color
       - vite
 
-  '@astrojs/tailwind@5.1.1(astro@5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(tailwindcss@3.4.1)':
+  '@astrojs/tailwind@5.1.1(astro@5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(tailwindcss@3.4.1)':
     dependencies:
-      astro: 5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
+      astro: 5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
       autoprefixer: 10.4.20(postcss@8.4.45)
       postcss: 8.4.45
       postcss-load-config: 4.0.2(postcss@8.4.45)
@@ -8226,7 +8223,7 @@ snapshots:
       '@nodelib/fs.scandir': 2.1.5
       fastq: 1.17.1
 
-  '@oslojs/encoding@0.4.1': {}
+  '@oslojs/encoding@1.1.0': {}
 
   '@pkgjs/parseargs@0.11.0':
     optional: true
@@ -8330,11 +8327,11 @@ snapshots:
 
   '@sanity/asset-utils@1.3.0': {}
 
-  '@sanity/astro@3.1.6(@sanity/client@6.21.3)(@sanity/visual-editing@2.1.3(@sanity/client@6.21.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(svelte@4.2.19))(astro@5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sanity@3.43.0(@types/node@22.5.4)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.75.0)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))':
+  '@sanity/astro@3.1.6(@sanity/client@6.21.3)(@sanity/visual-editing@2.1.3(@sanity/client@6.21.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(svelte@4.2.19))(astro@5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2))(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sanity@3.43.0(@types/node@22.5.4)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.75.0)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1)))':
     dependencies:
       '@sanity/client': 6.21.3
       '@sanity/visual-editing': 2.1.3(@sanity/client@6.21.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(svelte@4.2.19)
-      astro: 5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
+      astro: 5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
       sanity: 3.43.0(@types/node@22.5.4)(@types/react@18.3.3)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)(sass@1.75.0)(styled-components@6.1.8(react-dom@18.3.1(react@18.3.1))(react@18.3.1))
@@ -8783,7 +8780,7 @@ snapshots:
   '@sveltejs/vite-plugin-svelte-inspector@2.1.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.6(@types/node@22.5.4)(sass@1.75.0)))(svelte@4.2.19)(vite@5.4.6(@types/node@22.5.4)(sass@1.75.0))':
     dependencies:
       '@sveltejs/vite-plugin-svelte': 3.1.2(svelte@4.2.19)(vite@5.4.6(@types/node@22.5.4)(sass@1.75.0))
-      debug: 4.3.6
+      debug: 4.3.7
       svelte: 4.2.19
       vite: 5.4.6(@types/node@22.5.4)(sass@1.75.0)
     transitivePeerDependencies:
@@ -8792,7 +8789,7 @@ snapshots:
   '@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.6(@types/node@22.5.4)(sass@1.75.0))':
     dependencies:
       '@sveltejs/vite-plugin-svelte-inspector': 2.1.0(@sveltejs/vite-plugin-svelte@3.1.2(svelte@4.2.19)(vite@5.4.6(@types/node@22.5.4)(sass@1.75.0)))(svelte@4.2.19)(vite@5.4.6(@types/node@22.5.4)(sass@1.75.0))
-      debug: 4.3.6
+      debug: 4.3.7
       deepmerge: 4.3.1
       kleur: 4.1.5
       magic-string: 0.30.11
@@ -9232,23 +9229,23 @@ snapshots:
     transitivePeerDependencies:
       - supports-color
 
-  astro-loading-indicator@0.6.0(astro@5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)):
+  astro-loading-indicator@0.6.0(astro@5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)):
     dependencies:
-      astro: 5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
+      astro: 5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2)
 
   astro-portabletext@0.10.0:
     dependencies:
       '@portabletext/toolkit': 2.0.15
       '@portabletext/types': 2.0.13
 
-  astro@5.0.0-beta.1(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2):
+  astro@5.0.0-beta.2(@types/node@22.5.4)(rollup@4.21.2)(sass@1.75.0)(typescript@5.6.2):
     dependencies:
       '@astrojs/compiler': 2.10.3
       '@astrojs/internal-helpers': 0.4.1
       '@astrojs/markdown-remark': 6.0.0-beta.1
       '@astrojs/telemetry': 3.1.0
       '@babel/types': 7.25.6
-      '@oslojs/encoding': 0.4.1
+      '@oslojs/encoding': 1.1.0
       '@rollup/pluginutils': 5.1.0(rollup@4.21.2)
       '@types/cookie': 0.6.0
       acorn: 8.12.1
@@ -9286,7 +9283,6 @@ snapshots:
       ora: 8.1.0
       p-limit: 6.1.0
       p-queue: 8.0.1
-      path-to-regexp: 6.2.2
       preferred-pm: 4.0.0
       prompts: 2.4.2
       rehype: 13.0.1
@@ -10710,15 +10706,6 @@ snapshots:
   hasown@2.0.2:
     dependencies:
       function-bind: 1.1.2
-
-  hast-util-from-html@2.0.1:
-    dependencies:
-      '@types/hast': 3.0.4
-      devlop: 1.1.0
-      hast-util-from-parse5: 8.0.1
-      parse5: 7.1.2
-      vfile: 6.0.3
-      vfile-message: 4.0.2
 
   hast-util-from-html@2.0.3:
     dependencies:
@@ -12534,7 +12521,7 @@ snapshots:
   rehype-parse@9.0.0:
     dependencies:
       '@types/hast': 3.0.4
-      hast-util-from-html: 2.0.1
+      hast-util-from-html: 2.0.3
       unified: 11.0.5
 
   rehype-raw@7.0.0:
