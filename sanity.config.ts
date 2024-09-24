@@ -2,6 +2,7 @@ import { defineConfig, defineField, defineType } from 'sanity'
 import { structureTool } from 'sanity/structure'
 import { visionTool } from '@sanity/vision'
 import { media } from 'sanity-plugin-media'
+import { CodeIcon, RocketIcon } from '@sanity/icons'
 
 const breakBlock = defineType({
   name: 'break',
@@ -372,13 +373,31 @@ const experienceType = defineType({
   ],
 })
 
-export default defineConfig({
-  name: 'simse-io',
-  title: 'simse.io',
-  projectId: process.env.SANITY_PROJECT_ID || '',
-  dataset: process.env.SANITY_PROJECT_DATASET || '',
-  plugins: [structureTool(), visionTool(), media()],
-  schema: {
-    types: [postType, projectType, experienceType, breakBlock, codeBlock, graphBlock, terminalRecordingBlock],
+const types = [postType, projectType, experienceType, breakBlock, codeBlock, graphBlock, terminalRecordingBlock]
+
+export default defineConfig([
+  {
+    name: 'simse-io-prod',
+    title: 'simse.io',
+    basePath: '/prod',
+    icon: RocketIcon,
+    projectId: 'rjqusm5i',
+    dataset: 'production',
+    plugins: [structureTool(), media()],
+    schema: {
+      types,
+    },
   },
-})
+  {
+    name: 'simse-io-test',
+    title: 'simse.io [TEST]',
+    basePath: '/test',
+    icon: CodeIcon,
+    projectId: 'rjqusm5i',
+    dataset: 'test',
+    plugins: [structureTool(), media(), visionTool()],
+    schema: {
+      types,
+    },
+  }
+])

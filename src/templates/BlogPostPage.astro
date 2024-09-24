@@ -21,12 +21,16 @@ const suggestedPosts = (await getCollection('posts')).filter(
 )
 ---
 
-<BaseLayout title={post.title} canonical={`/${post.slug}`}>
+<BaseLayout 
+  title={post.title} 
+  canonical={`/${post.slug}`}
+  description={post.excerpt}
+>
   <Navbar activeItem="Blog" />
 
   <header class="my-8 md:my-16 md:text-center max-w-2xl mx-auto px-2">
     <PublishDate published={post.published} />
-    <h1 class="text-2xl md:text-3xl my-2">{post.title}</h1>
+    <h1 class="text-2xl md:text-3xl my-2 font-bold">{post.title}</h1>
   </header>
 
   {
@@ -38,7 +42,7 @@ const suggestedPosts = (await getCollection('posts')).filter(
           alt={post.image.alt}
         />
 
-        <figcaption class="text-zinc-700 dark:text-zinc-400">
+        <figcaption class="text-zinc-400">
           {post.image.caption}
         </figcaption>
       </figure>
@@ -49,7 +53,7 @@ const suggestedPosts = (await getCollection('posts')).filter(
     <Text content={post.content} />
   </main>
 
-  <section class="my-16 px-3 max-w-5xl mx-auto">
+  {suggestedPosts.length > 0 ? <section class="my-16 px-3 max-w-5xl mx-auto">
     <h2 class="text-lg mb-2">Suggested Posts</h2>
 
     <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
@@ -61,7 +65,7 @@ const suggestedPosts = (await getCollection('posts')).filter(
         ))
       }
     </ul>
-  </section>
+  </section> : null}
 
   <Footer />
 </BaseLayout>
