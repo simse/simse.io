@@ -9,7 +9,9 @@ const { post } = Astro.props
 
 // find all h1 and h2 headings
 // TODO: type content so we don't have to cast to any
-const headingNodes = post.content.filter((node: any) => node.style === 'h1' || node.style === 'h2')
+const headingNodes = post.content.filter(
+  (node: any) => node.style === 'h1' || node.style === 'h2',
+)
 
 const headings: {
   value: string
