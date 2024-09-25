@@ -7,7 +7,7 @@ import PublishDate from '@components/blog/PublishDate.astro'
 import Footer from '@components/common/Footer.astro'
 import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
-
+import TableOfContents from '@components/blog/TableOfContents.astro'
 interface Props {
   post: CollectionEntry<'posts'>['data']
 }
@@ -20,6 +20,16 @@ const suggestedPosts = (await getCollection('posts')).filter(
   (p) => p.data.slug !== post.slug,
 )
 ---
+<script>
+  const toc = document.getElementById('toc');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY < 500) {
+      toc?.classList.add('opacity-0');
+    } else {
+      toc?.classList.remove('opacity-0');
+    }
+  });
+</script>
 
 <BaseLayout 
   title={post.title} 
@@ -27,6 +37,10 @@ const suggestedPosts = (await getCollection('posts')).filter(
   description={post.excerpt}
 >
   <Navbar activeItem="Blog" />
+
+  <nav class="fixed top-20 left-5 z-10 hidden 2xl:block opacity-0 transition-opacity duration-300" id="toc">
+    <TableOfContents post={post} />
+  </nav>
 
   <header class="my-8 md:my-16 md:text-center max-w-2xl mx-auto px-4">
     <PublishDate published={post.published} />
