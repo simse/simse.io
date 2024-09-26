@@ -22,6 +22,4 @@ interface Props {
 
 const props = Astro.props
 ---
-<div class="col-start-1 col-end-7">
-  {props.node.type === 'line' ? <LineChart title={props.node.title} datasetReference={props.node.datasets.asset._ref} /> : null}
-</div>  
+{props.node.type === 'line' ? <LineChart title={props.node.title} datasetReference={props.node.datasets.asset._ref} /> : null}

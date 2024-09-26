@@ -1,9 +1,10 @@
 {
   "extends": "astro/tsconfigs/strict",
   "exclude": ["apps/", "dist/", "src/**/*.test.ts"],
-  "include": [".astro/types.d.ts", "**/*"],
+  "include": [".astro/types.d.ts", "**/*", "./vitest.setup.ts"],
   "compilerOptions": {
     "baseUrl": "./src",
+    "types": ["vitest/globals", "@testing-library/jest-dom"],
     "paths": {
       "@assets/*": ["assets/*"],
       "@components/*": ["components/*"],

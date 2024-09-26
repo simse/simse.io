@@ -1,0 +1,59 @@
+---
+interface Props {
+  post: {
+    content: {
+      _type: 'block'
+      style: string
+      children: {
+        text: string
+      }[]
+    }[]
+  }
+}
+
+const { post } = Astro.props
+
+// find all h1 and h2 headings
+// TODO: type content so we don't have to cast to any
+const headingNodes = post.content.filter(
+  (node) => node.style === 'h1' || node.style === 'h2',
+)
+
+const headings: {
+  value: string
+  level: number
+}[] = headingNodes.map((node: any) => ({
+  value: node.children[0].text,
+  level: node.style === 'h1' ? 1 : 2,
+}))
+---
+<script>
+  const tocButtons = document.querySelectorAll('.toc-button');
+  tocButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const headingValue = button.getAttribute('data-heading-value');
+      const headingLevel = button.getAttribute('data-heading-level');
+      
+      const headers = document.querySelectorAll(`h${headingLevel}`);
+      headers.forEach((header) => {
+        if (header.textContent === headingValue) {
+          const offset = 100;
+          const headerPosition = header.getBoundingClientRect().top + window.pageYOffset - offset;
+          window.scrollTo({ top: headerPosition, behavior: 'smooth' });
+        }
+      });
+    });
+  });
+</script>
+<ul data-testid="table-of-contents" class="bg-zinc-950/80 backdrop-blur-md rounded p-6 w-fit">
+  {headings.map((heading: any) => (
+    <li
+      class={`text-sm mb-1 text-zinc-400 hover:text-zinc-200 transition-colors ${heading.level === 1 ? '' : 'ml-4'}`}
+      data-testid="table-of-contents-item"
+    >
+      <button class="toc-button" data-heading-value={heading.value} data-heading-level={heading.level}>
+        {heading.value}
+      </button>
+    </li>
+  ))}
+</ul>
