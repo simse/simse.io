@@ -103,7 +103,7 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.46.1-jammy
     steps:
       - name: Install unzip
-        run: apt-get install -y unzip
+        run: apt-get update && apt-get install -y unzip
 
       - name: Checkout
         uses: actions/checkout@v4

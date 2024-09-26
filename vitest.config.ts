@@ -7,6 +7,8 @@ export default getViteConfig({
     exclude:[
       ...configDefaults.exclude,
       'tests/*'
-    ]
+    ],
+    environment: 'happy-dom',
+    setupFiles: ['./vitest.setup.ts'],
   },
 })

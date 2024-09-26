@@ -4,7 +4,7 @@ import { getImageBuilder } from '@cms'
 import Navbar from '@components/Navbar.astro'
 import BlogCard from '@components/blog/BlogCard.astro'
 import PublishDate from '@components/blog/PublishDate.astro'
-import TableOfContents from '@components/blog/TableOfContents.astro'
+import TableOfContents from '@components/fragments/TableOfContents.astro'
 import Footer from '@components/common/Footer.astro'
 import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
@@ -39,7 +39,7 @@ const suggestedPosts = (await getCollection('posts')).filter(
   <Navbar activeItem="Blog" />
 
   <nav class="fixed top-20 left-5 z-10 hidden 2xl:block opacity-0 transition-opacity duration-300" id="toc">
-    <TableOfContents post={post} />
+    <TableOfContents post={{ content: post.content }} />
   </nav>
 
   <header class="my-8 md:my-16 md:text-center max-w-2xl mx-auto px-4">
