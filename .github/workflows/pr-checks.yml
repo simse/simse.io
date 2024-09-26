@@ -49,7 +49,7 @@ jobs:
           node-version-file: package.json
           cache: pnpm
       
-          - name: Install dependencies
+      - name: Install dependencies
         run: pnpm i
 
       - name: Generate Astro types
