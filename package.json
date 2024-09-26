@@ -64,7 +64,7 @@
   "engines": {
     "node": "22.9.0"
   },
-  "packageManager": "bun@1.1.29",
+  "packageManager": "pnpm@9.11.0",
   "cacheDirectories": [
     ".astro"
   ]
