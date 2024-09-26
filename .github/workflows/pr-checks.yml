@@ -48,6 +48,9 @@ jobs:
         with:
           node-version-file: package.json
           cache: pnpm
+      
+          - name: Install dependencies
+        run: pnpm i
 
       - name: Generate Astro types
         run: pnpm astro sync
@@ -72,6 +75,9 @@ jobs:
           node-version-file: package.json
           cache: pnpm
 
+      - name: Install dependencies
+        run: pnpm i
+
       - name: Run unit tests
         run: pnpm test
 
@@ -91,7 +97,10 @@ jobs:
         with:
           node-version-file: package.json
           cache: pnpm
-      
+
+      - name: Install dependencies
+        run: pnpm i
+
       - name: Ensure site is building
         run: pnpm build
 
@@ -117,6 +126,9 @@ jobs:
         with:
           node-version-file: package.json
           cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm i
 
       - name: Run Playwright tests
         run: pnpm playwright test --reporter json
