@@ -16,6 +16,11 @@ export default defineConfig({
   adapter: node({
     mode: 'standalone',
   }),
+  trailingSlash: 'ignore',
+  redirects: {
+    '/project/pymitv': '/pymitv',
+    '/posts': '/blog',
+  },
   integrations: [
     tailwind({
       applyBaseStyles: false,
