@@ -50,7 +50,7 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.2",
-    "@playwright/test": "^1.46.0",
+    "@playwright/test": "1.47.2",
     "@sanity/icons": "^3.4.0",
     "@sanity/vision": "^3.48.0",
     "@tailwindcss/typography": "^0.5.10",

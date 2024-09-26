@@ -1,6 +1,6 @@
-import { experimental_AstroContainer as AstroContainer } from 'astro/container'
-import { expect, test, describe } from 'vitest'
 import { findAllByTestId, getByTestId } from '@testing-library/dom'
+import { experimental_AstroContainer as AstroContainer } from 'astro/container'
+import { describe, expect, test } from 'vitest'
 import TableOfContents from './TableOfContents.astro'
 
 const renderTableOfContents = async (props: any) => {
@@ -34,7 +34,10 @@ describe('TableOfContents', () => {
       },
     })
 
-    const items = await findAllByTestId(renderedElement, 'table-of-contents-item')
+    const items = await findAllByTestId(
+      renderedElement,
+      'table-of-contents-item',
+    )
 
     expect(items).toHaveLength(2)
   })
@@ -79,7 +82,10 @@ describe('TableOfContents', () => {
       },
     })
 
-    const items = await findAllByTestId(renderedElement, 'table-of-contents-item')
+    const items = await findAllByTestId(
+      renderedElement,
+      'table-of-contents-item',
+    )
 
     expect(items).toHaveLength(2)
   })
