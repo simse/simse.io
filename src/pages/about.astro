@@ -1,0 +1,36 @@
+---
+import { Picture } from 'astro:assets'
+import Navbar from '@components/Navbar.astro'
+import Footer from '@components/common/Footer.astro'
+import PageHeader from '@components/common/PageHeader.astro'
+import BaseLayout from '@layouts/BaseLayout.astro'
+import pictureOfMe from '../assets/me_2024.jpg';
+---
+<BaseLayout title="About">
+  <Navbar />
+
+  <main class="px-2 mt-16 max-w-5xl mx-auto">
+    <PageHeader title="About Me" subtitle="A little bit about me and my stuff" />
+
+    <header class="mb-8">
+      <Picture 
+        src={pictureOfMe} 
+        formats={['avif', 'webp']} 
+        alt="A description of my image." 
+        class="rounded max-w-3xl mb-2"
+      />
+      <p class="text-zinc-300">Me posing with all my stuff in 2024</p>
+    </header>
+
+    <div class="grid grid-cols-2 gap-4">
+      <div>
+        <h2 class="text-lg font-bold mb-2">Flash Biography</h2>
+        <p>
+          I was born in 2001 and grew up in Denmark. 
+        </p>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</BaseLayout>
