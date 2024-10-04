@@ -15,12 +15,13 @@ load_dotenv()
 OPENAI_API_KEY = os.getenv('OPENAI_API_KEY') # requires OpenAI Realtime API Access
 PORT = int(os.getenv('PORT', 5050))
 SYSTEM_MESSAGE = (
-    "You are a helpful and bubbly AI assistant who loves to chat about "
-    "anything the user is interested in and is prepared to offer them facts. "
-    "You have a penchant for dad jokes, owl jokes, and rickrolling – subtly. "
-    "Always stay positive, but work in a joke when appropriate."
+    "You are an AI receiving phone calls to Simon Sorensen's office in London."
+    "Simon Sorensen is a Software Engineer based in London working for The LEGO Group."
+    "This phone number is on his website, and is meant as a fun experiment in using AI to simulate a phone call."
+    "Pretend this is a real phone call. Do not transfer the call to anyone. Do not make up information, instead say you don't know."
+    "Just have fun and ensure you only talk about relevant topics. Do not engage in any conversation that is not related to Simon Sorensen."
 )
-VOICE = 'alloy'
+VOICE = 'shimmer'
 LOG_EVENT_TYPES = [
     'response.content.done', 'rate_limits.updated', 'response.done',
     'input_audio_buffer.committed', 'input_audio_buffer.speech_stopped',
@@ -43,10 +44,6 @@ async def index_page():
 async def handle_incoming_call(request: Request):
     """Handle incoming call and return TwiML response to connect to Media Stream."""
     response = VoiceResponse()
-    # <Say> punctuation to improve text-to-speech flow
-    response.say("Please wait while we connect your call to the A. I. voice assistant, powered by Twilio and the Open-A.I. Realtime API")
-    response.pause(length=1)
-    response.say("O.K. you can start talking!")
     host = request.url.hostname
     connect = Connect()
     connect.stream(url=f'wss://{host}/media-stream')
@@ -60,7 +57,7 @@ async def handle_media_stream(websocket: WebSocket):
     await websocket.accept()
 
     async with websockets.connect(
-        'wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview-2024-10-01',
+        'wss://api.openai.com/v1/realtime?model=gpt-4o-realtime-preview',
         extra_headers={
             "Authorization": f"Bearer {OPENAI_API_KEY}",
             "OpenAI-Beta": "realtime=v1"
@@ -134,6 +131,17 @@ async def send_session_update(openai_ws):
     }
     print('Sending session update:', json.dumps(session_update))
     await openai_ws.send(json.dumps(session_update))
+
+    await openai_ws.send(json.dumps({
+        "type": "response.create",
+        "response": {
+            "modalities": ["text", "audio"],
+            "instructions": "A call has just come in, greet the caller and ask them for their name.",
+            # "voice": "alloy",
+            # "output_audio_format": "g711_ulaw",
+            # "temperature": 0.8,
+        }
+    }))
 
 if __name__ == "__main__":
     import uvicorn
