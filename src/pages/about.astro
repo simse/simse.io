@@ -1,35 +1,110 @@
 ---
 import { Picture } from 'astro:assets'
+import { Icon } from 'astro-icon/components'
 import Navbar from '@components/Navbar.astro'
 import Footer from '@components/common/Footer.astro'
 import PageHeader from '@components/common/PageHeader.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import pictureOfMe from '../assets/me_2024.jpg';
+
+// get work experience
+import { getWorkExperiences } from '@cms'
+
+const workExperience = await getWorkExperiences()
+
+const formatDate = (date: Date | null): string => {
+  if (!date) {
+    return 'Current'
+  }
+
+  return date.toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'long',
+  })
+}
 ---
-<BaseLayout title="About">
+<BaseLayout 
+  title="About"
+  description="Simon Sorensen is a Software Engineer based in London. He studied Computer Science at Kingston University and has a passion for building web experiences. He has been working for The LEGO Group since 2021."
+>
   <Navbar />
 
-  <main class="px-2 mt-16 max-w-5xl mx-auto">
+  <main class="px-2 mt-16 max-w-3xl mx-auto">
     <PageHeader title="About Me" subtitle="A little bit about me and my stuff" />
 
     <header class="mb-8">
       <Picture 
         src={pictureOfMe} 
         formats={['avif', 'webp']} 
-        alt="A description of my image." 
-        class="rounded max-w-3xl mb-2"
+        alt="Simon wearing a white t-shirt posing for a picture in his flat" 
+        class="rounded mb-2 bg-zinc-900"
       />
       <p class="text-zinc-300">Me posing with all my stuff in 2024</p>
     </header>
 
-    <div class="grid grid-cols-2 gap-4">
-      <div>
-        <h2 class="text-lg font-bold mb-2">Flash Biography</h2>
-        <p>
-          I was born in 2001 and grew up in Denmark. 
-        </p>
-      </div>
-    </div>
+    <section class="my-12 p-4 -ml-4 -mr-4 bg-zinc-900 rounded border border-zinc-800">
+      <h2 class="text-xl font-bold mb-2">Biography</h2>
+      <p class="text-zinc-300 text-lg mb-4">
+        I was born in 👩‍🚀 2001 and grew up in <Icon name="flag:dk-4x3" class="inline-block rounded mx-0.5" /> Denmark.
+        I've lived two years in <Icon name="flag:cn-4x3" class="inline-block rounded mx-0.5" /> Shanghai, China 
+        and I've currently lived three years in <Icon name="flag:gb-4x3" class="inline-block rounded mx-0.5" /> London, England.
+      </p>
+
+      <p class="text-zinc-300 text-lg mb-4">
+        There was never much doubt that I'd end up in tech. I've been messing around with computers since I was 6 years old.
+        Although, admittedly that included breaking them as well.
+      </p>
+
+      <p class="text-zinc-300 text-lg mb-4">
+        I have a Bachelor's degree in Computer Science, but most of what I know is self-taught or learnt during my internship at The LEGO Group.
+      </p>
+
+      <p class="text-zinc-300 text-lg mb-4">
+        In my free time I like going to the cinema, reading books and playing video games. My favourite film is La La Land (2014) and I will not budge on that.
+      </p>
+    </section>
+
+    <section class="my-12">
+      <h2 class="text-xl font-bold mb-2">Career</h2>
+      <ul>
+        {
+          workExperience.map((experience) => (
+            <li class="mb-2">
+              <a
+                /*href={`/cv/${experience.slug}`}*/
+                class="py-3 px-4 -ml-4 -mr-4 rounded block hover:bg-zinc-900 transition-colors"
+              >
+                <div class="flex justify-between items-center">
+                  <div>
+                    <h3 class="text-lg" title={experience.officialTitle}>
+                      {experience.title}
+                    </h3>
+                    <span class="text-zinc-400 font-medium flex items-center gap-2">
+                      <img
+                        src={experience.employerLogo}
+                        alt={`${experience.employer} official logo`}
+                        class="w-4 h-4"
+                      />{' '}
+                      {experience.employer}
+                    </span>
+                  </div>
+    
+                  <div class="text-right">
+                    <span>
+                      {formatDate(experience.startDate)} —{' '}
+                      {formatDate(experience.endDate ?? null)}
+                    </span>
+                    <p class="text-zinc-700 dark:text-zinc-400">
+                      {experience.location}
+                    </p>
+                  </div>
+                </div>
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
   </main>
 
   <Footer />

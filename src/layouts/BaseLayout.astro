@@ -61,7 +61,8 @@ const createTitle = (title: string) => {
     <LoadingIndicator color="#2563eb" />
   </head>
   <body class="text-zinc-100 bg-zinc-950">
-    <img src={`https://analytics.0x1.earth/count?p=${Astro.url.pathname}&t=${title}`} alt="" class="hidden">
+    {import.meta.env.DEV && <script data-recording-token="JM8ju2yDpJUG3E7gM0fPUbJf8RyrspnalOE9hPpa" data-is-production-environment="false" src="https://snippet.meticulous.ai/v1/meticulous.js"></script>}
+    {import.meta.env.PROD && <img src={`https://analytics.0x1.earth/count?p=${Astro.url.pathname}&t=${title}`} alt="" class="hidden">}
 
     <slot />
   </body>
