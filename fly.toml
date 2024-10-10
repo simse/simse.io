@@ -1,0 +1,22 @@
+# fly.toml app configuration file generated for simse-io on 2024-10-09T22:26:44Z
+#
+# See https://fly.io/docs/reference/configuration/ for information about how to use this file.
+#
+
+app = 'simse-io'
+primary_region = 'lhr'
+
+[build]
+
+[http_service]
+  internal_port = 4321
+  force_https = true
+  auto_stop_machines = 'stop'
+  auto_start_machines = true
+  min_machines_running = 2
+  processes = ['app']
+
+[[vm]]
+  memory = '1gb'
+  cpu_kind = 'shared'
+  cpus = 1
