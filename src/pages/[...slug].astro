@@ -1,36 +1,22 @@
 ---
-import { getCollection } from 'astro:content'
+import client from '@lib/client';
 import BlogPostPage from '@templates/BlogPostPage.astro'
 import ProjectPage from '@templates/ProjectPage.astro'
 
-export const prerender = true
-export async function getStaticPaths() {
-  const projects = await getCollection('projects')
-  const posts = await getCollection('posts')
+const { slug } = Astro.params;
 
-  return [
-    ...projects.map((project) => ({
-      params: {
-        slug: project.data.slug,
-      },
-      props: {
-        page: project.data,
-      },
-    })),
-
-    ...posts.map((post) => ({
-      params: {
-        slug: post.data.slug,
-      },
-      props: {
-        page: post.data,
-      },
-    })),
-  ]
+if (!slug) {
+  return Astro.rewrite('/404')
 }
 
-const { page } = Astro.props
----
+// try to get post
+const post = await client.api.posts({
+  slug,
+}).get()
 
-{page && page._type === 'post' && <BlogPostPage post={page} />}
-{page && page._type === 'project' && <ProjectPage project={page} />}
+if (!post.data) return Astro.rewrite('/404')
+
+
+---
+{post && <BlogPostPage post={post.data} />}
+{/*page && page._type === 'project' && <ProjectPage project={page} />*/}

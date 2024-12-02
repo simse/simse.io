@@ -1,14 +1,13 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
+import client from "@lib/client";
 
 import BlogCard from '@components/blog/BlogCard.astro'
 
-const posts = await getCollection('posts')
-posts.sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => {
-  return +new Date(b.data.published) - +new Date(a.data.published)
-})
----
+const postsRequest = await client.api.posts.get();
 
+const posts = postsRequest.data;
+---
+{posts && (
 <section class="my-16 px-3" title="Blog">
   <a href="/blog">
     <h2 class="text-lg mb-2 font-bold">Blog</h2>
@@ -24,3 +23,4 @@ posts.sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => {
     }
   </ul>
 </section>
+)}

@@ -1,11 +1,11 @@
-import { defineConfig, passthroughImageService, envField } from 'astro/config'
+import { defineConfig, envField } from 'astro/config'
 import tailwind from '@astrojs/tailwind'
 import icon from 'astro-icon'
 import sanity from '@sanity/astro'
 import svelte from '@astrojs/svelte'
-import node from '@astrojs/node'
 import { loadEnv } from "vite"
 import sitemap from '@astrojs/sitemap'
+import bun from "@nurodev/astro-bun"
 
 const { SANITY_PROJECT_ID, SANITY_PROJECT_DATASET } = loadEnv(process.env.NODE_ENV, process.cwd(), "")
 
@@ -13,9 +13,7 @@ const { SANITY_PROJECT_ID, SANITY_PROJECT_DATASET } = loadEnv(process.env.NODE_E
 export default defineConfig({
   site: 'https://simse.io',
   output: 'server',
-  adapter: node({
-    mode: 'standalone',
-  }),
+  adapter: bun(),
   trailingSlash: 'ignore',
   redirects: {
     '/project/pymitv': '/pymitv',

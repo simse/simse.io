@@ -12,7 +12,7 @@
       "@layouts/*": ["layouts/*"],
       "@templates/*": ["templates/*"],
       "@utils/*": ["utils/*"],
-      "$lib/*": ["./src/*"]
+      "@lib/*": ["lib/*"]
     },
   }
 }

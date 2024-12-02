@@ -1,5 +1,5 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
+import { type Post } from "@lib/cms/posts";
 import { getImageBuilder } from '@cms'
 import Navbar from '@components/Navbar.astro'
 import BlogCard from '@components/blog/BlogCard.astro'
@@ -9,77 +9,76 @@ import TableOfContents from '@components/fragments/TableOfContents.astro'
 import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 interface Props {
-  post: CollectionEntry<'posts'>['data']
+  post: Post
 }
 
 const { post } = Astro.props
 
-const image = getImageBuilder(post.image)
+const image = getImageBuilder(post.image).width(1200).height(800).url()
 
-const suggestedPosts = (await getCollection('posts')).filter(
-  (p) => p.data.slug !== post.slug,
-)
+//const suggestedPosts = [];
 ---
-<script>
-  const toc = document.getElementById('toc');
-  window.addEventListener('scroll', () => {
-    if (window.scrollY < 500) {
-      toc?.classList.add('opacity-0');
-    } else {
-      toc?.classList.remove('opacity-0');
-    }
-  });
-</script>
-
-<BaseLayout 
-  title={post.title} 
-  canonical={`/${post.slug}`}
-  description={post.excerpt}
->
-  <Navbar activeItem="Blog" />
-
-  <nav class="fixed top-20 left-5 z-10 hidden 2xl:block opacity-0 transition-opacity duration-300" id="toc">
-    <TableOfContents post={{ content: post.content }} />
-  </nav>
-
-  <header class="my-8 md:my-16 md:text-center max-w-2xl mx-auto px-4">
-    <PublishDate published={post.published} />
-    <h1 class="text-2xl md:text-3xl my-2 font-bold">{post.title}</h1>
-  </header>
-
-  {
-    post.image && (
-      <figure class="my-8 md:my-16 max-w-4xl mx-auto px-4">
-        <img
-          class="w-full mb-2 rounded aspect-[3/2] bg-zinc-900 "
-          src={image.width(1200).height(800).url()}
-          alt={post.image.alt}
-        />
-
-        <figcaption class="text-zinc-400">
-          {post.image.caption}
-        </figcaption>
-      </figure>
-    )
-  }
-
-  <main class="mx-auto max-w-4xl px-4 pb-12">
-    <Text content={post.content} />
-  </main>
-
-  {suggestedPosts.length > 0 ? <section class="my-16 px-3 max-w-5xl mx-auto">
-    <h2 class="text-lg mb-2">Suggested Posts</h2>
-
-    <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-      {
-        suggestedPosts.slice(0, 6).map((post) => (
-          <li>
-            <BlogCard post={post} dateWithYear={true} />
-          </li>
-        ))
+<>
+  <script>
+    const toc = document.getElementById('toc');
+    window.addEventListener('scroll', () => {
+      if (window.scrollY < 500) {
+        toc?.classList.add('opacity-0');
+      } else {
+        toc?.classList.remove('opacity-0');
       }
-    </ul>
-  </section> : null}
+    });
+  </script>
+  <BaseLayout 
+    title={post.title} 
+    canonical={`/${post.slug}`}
+    description={post.excerpt}
+  >
+    <Navbar activeItem="Blog" />
 
-  <Footer />
-</BaseLayout>
+    <nav class="fixed top-20 left-5 z-10 hidden 2xl:block opacity-0 transition-opacity duration-300" id="toc">
+      <TableOfContents post={post} />
+    </nav>
+
+    <header class="my-8 md:my-16 md:text-center max-w-2xl mx-auto px-4">
+      <PublishDate published={post.published} />
+      <h1 class="text-2xl md:text-3xl my-2 font-bold">{post.title}</h1>
+    </header>
+
+    {
+      post.image && (
+        <figure class="my-8 md:my-16 max-w-4xl mx-auto px-4">
+          <img
+            class="w-full mb-2 rounded aspect-[3/2] bg-zinc-900 "
+            src={image}
+            alt={post.image.alt}
+          />
+
+          <figcaption class="text-zinc-400">
+            {post.image.caption}
+          </figcaption>
+        </figure>
+      )
+    }
+
+    <main class="mx-auto max-w-4xl px-4 pb-12">
+      <Text content={post.content} />
+    </main>
+
+    {/*suggestedPosts.length > 0 ? <section class="my-16 px-3 max-w-5xl mx-auto">
+      <h2 class="text-lg mb-2">Suggested Posts</h2>
+
+      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+        {
+          suggestedPosts.slice(0, 6).map((post) => (
+            <li>
+              <BlogCard post={post} dateWithYear={true} />
+            </li>
+          ))
+        }
+      </ul>
+    </section> : null*/}
+
+    <Footer />
+  </BaseLayout>
+</>

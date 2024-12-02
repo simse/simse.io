@@ -1,21 +1,15 @@
 ---
+import { formatDateWithYear } from '@utils/date'
+
 interface Props {
-  published: Date
+  published: Date | string
 }
 
 const { published } = Astro.props
-
-const formatDate = (date: Date) => {
-  return new Intl.DateTimeFormat('en-US', {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  }).format(date)
-}
 ---
 
 <span class="text-zinc-400"
   >Published on <span class="text-white"
-    >{formatDate(published)}</span
+    >{formatDateWithYear(published)}</span
   ></span
 >

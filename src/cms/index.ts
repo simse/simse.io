@@ -155,6 +155,36 @@ const getPosts = async () => {
   return postsSchema.parse(sanityResponse)
 }
 
+export const getPost = async (slug: string) => {
+  const { query: postQuery, schema: postSchema } = q('*')
+    .filter("_type == 'post' && slug.current == 'yarn-v2-mistakes'")
+    .order('publishedAt desc')
+    .grab({
+      _type: q.string(),
+      title: q.string(),
+      slug: q.slug('slug'),
+      excerpt: nullToUndefined(q.string().optional()),
+      image: nullToUndefined(
+        q
+          .object({
+            asset: q.object({
+              _ref: q.string(),
+            }),
+            caption: q.string().optional(),
+            alt: q.string(),
+          })
+          .optional(),
+      ),
+      published: q.date(),
+      content: contentBlocks,
+      tags: nullToUndefined(q.string().array().optional()),
+    })
+
+  const sanityResponse = await sanityClient.fetch(postQuery)
+
+  return postSchema.parse(sanityResponse)[0]
+}
+
 const transformWorkExperience = (
   workExperience: SanityWorkExperience,
 ): WorkExperience => {
