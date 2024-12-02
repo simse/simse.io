@@ -1,11 +1,11 @@
 ---
-import client from "@lib/client";
+import client from '@lib/client'
 
 import BlogCard from '@components/blog/BlogCard.astro'
 
-const postsRequest = await client.api.posts.get();
+const postsRequest = await client.api.posts.get()
 
-const posts = postsRequest.data;
+const posts = postsRequest.data
 ---
 {posts && (
 <section class="my-16 px-3" title="Blog">

@@ -1,22 +1,27 @@
 ---
-import client from '@lib/client';
+import client from '@lib/client'
 import BlogPostPage from '@templates/BlogPostPage.astro'
 import ProjectPage from '@templates/ProjectPage.astro'
 
-const { slug } = Astro.params;
+const { slug } = Astro.params
 
 if (!slug) {
   return Astro.rewrite('/404')
 }
 
 // try to get post
-const post = await client.api.posts({
+const post = await client.api
+  .posts({
+    slug,
+  })
+  .get()
+
+// try to get project
+const project = await client.api.projects({
   slug,
 }).get()
 
-if (!post.data) return Astro.rewrite('/404')
-
-
+if (!post.data && !project.data) return Astro.rewrite('/404')
 ---
-{post && <BlogPostPage post={post.data} />}
-{/*page && page._type === 'project' && <ProjectPage project={page} />*/}
+{post && post.data && <BlogPostPage post={post.data} />}
+{project && project.data && <ProjectPage project={project.data} />}

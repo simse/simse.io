@@ -1,4 +1,4 @@
-import { defineConfig, envField } from 'astro/config'
+import { defineConfig, envField, passthroughImageService } from 'astro/config'
 import tailwind from '@astrojs/tailwind'
 import icon from 'astro-icon'
 import sanity from '@sanity/astro'
@@ -48,5 +48,8 @@ export default defineConfig({
         },
       },
     },
+  },
+  image: {
+    service: passthroughImageService()
   }
 })

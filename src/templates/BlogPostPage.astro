@@ -1,5 +1,4 @@
 ---
-import { type Post } from "@lib/cms/posts";
 import { getImageBuilder } from '@cms'
 import Navbar from '@components/Navbar.astro'
 import BlogCard from '@components/blog/BlogCard.astro'
@@ -8,6 +7,7 @@ import Footer from '@components/common/Footer.astro'
 import TableOfContents from '@components/fragments/TableOfContents.astro'
 import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
+import { type Post } from '@lib/cms/posts'
 interface Props {
   post: Post
 }

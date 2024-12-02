@@ -1,5 +1,6 @@
 ---
-import { type CollectionEntry, getCollection } from 'astro:content'
+import type { Post } from '@lib/cms/posts'
+import { getPosts } from '@lib/cms/posts'
 import Navbar from '@components/Navbar.astro'
 import YearList from '@components/blog/YearList.astro'
 import Button from '@components/common/Button.astro'
@@ -7,15 +8,15 @@ import Footer from '@components/common/Footer.astro'
 import PageHeader from '@components/common/PageHeader.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 
-let posts = await getCollection('posts')
+let posts = await getPosts()
 
 // group posts by year
 let postsByYear: {
-  [key: string]: CollectionEntry<'posts'>[]
+  [key: string]: Post[]
 } = {}
 
 posts.forEach((post) => {
-  const year = post.data.published.getFullYear().toString()
+  const year = new Date(post.published).getFullYear().toString()
   if (!postsByYear[year]) {
     postsByYear[year] = []
   }

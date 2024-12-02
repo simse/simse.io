@@ -1,16 +1,16 @@
 ---
-import { type CollectionEntry } from 'astro:content'
+import type { Post } from '@lib/cms/posts'
 import BlogCard from './BlogCard.astro'
 
 interface Props {
   year: string
-  posts: CollectionEntry<'posts'>[]
+  posts: Post[]
 }
 
 const { year, posts } = Astro.props
 
-posts.sort((a: CollectionEntry<'posts'>, b: CollectionEntry<'posts'>) => {
-  return +new Date(b.data.published) - +new Date(a.data.published)
+posts.sort((a: Post, b: Post) => {
+  return +new Date(b.published) - +new Date(a.published)
 })
 ---
 

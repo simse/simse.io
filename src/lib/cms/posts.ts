@@ -1,7 +1,6 @@
 import { sanityClient } from 'sanity:client'
-import { type InferType, q } from 'groqd'
 import { postFields } from '@lib/cms/common'
-
+import { type InferType, q } from 'groqd'
 
 const { query: allPostsQuery, schema: allPostsSchema } = q('*')
   .filter("_type == 'post' && defined(slug)")

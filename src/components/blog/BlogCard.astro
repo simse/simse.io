@@ -1,6 +1,6 @@
 ---
-import type { Post } from '@lib/cms/posts'
 import { getImageBuilder } from '@cms'
+import type { Post } from '@lib/cms/posts'
 import { formatDate, formatDateWithYear } from '@utils/date'
 
 interface Props {
@@ -8,10 +8,7 @@ interface Props {
   dateWithYear?: boolean
 }
 
-const {
-  post,
-  dateWithYear = false,
-} = Astro.props
+const { post, dateWithYear = false } = Astro.props
 ---
 
 <a

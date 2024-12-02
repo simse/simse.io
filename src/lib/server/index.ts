@@ -1,8 +1,22 @@
 import { swagger } from '@elysiajs/swagger'
-import { getPosts, getPost } from '@lib/cms'
-import { Elysia, t} from 'elysia'
+import { getPost, getPosts, getProject, getProjects } from '@lib/cms'
+import { Elysia, t } from 'elysia'
 
 const app = new Elysia()
+  .use(
+    swagger({
+      path: '/api',
+      documentation: {
+        info: {
+          title: 'simse.io API',
+          description: 'Semi-private API used by simse.io',
+          version: '1.0.0',
+        },
+      },
+      exclude: ['/api', '/api/json'],
+    }),
+  )
+  // posts
   .get('/api/posts', async () => {
     return await getPosts()
   })
@@ -13,25 +27,14 @@ const app = new Elysia()
     },
     {
       params: t.Object({
-        slug: t.String()
-      })
-    }
-  )
-
-// @ts-ignore
-app.use(
-  swagger({
-    path: '/api',
-    documentation: {
-      info: {
-        title: 'simse.io API',
-        description: 'Semi-private API used by simse.io',
-        version: '1.0.0',
-      },
+        slug: t.String(),
+      }),
     },
-    exclude: ['/api', '/api/json'],
-  }),
-)
+  )
+  // projects
+  .get('/api/projects', getProjects)
+  .get('/api/projects/:slug', async ({ params: { slug } }) => getProject(slug))
+
 
 export default app
 

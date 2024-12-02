@@ -62,3 +62,39 @@ export const postFields = {
   content: contentBlocks,
   tags: nullToUndefined(q.string().array().optional()),
 }
+
+export const projectFields = {
+  _type: q.string(),
+  title: q.string(),
+  description: q.string(),
+  featured: nullToUndefined(q.boolean().default(false)),
+  slug: q.slug('slug'),
+  icon: nullToUndefined(
+    q
+      .object({
+        asset: q.object({
+          _ref: q.string(),
+        }),
+      })
+      .optional(),
+  ),
+  published: q.date(),
+  details: nullToUndefined(contentBlocks.optional()),
+  languages: nullToUndefined(q.string().array().optional()),
+  technologies: nullToUndefined(q.string().array().optional()),
+  sourceCode: nullToUndefined(q.string().optional()),
+  demo: nullToUndefined(q.string().optional()),
+  type: q.string(),
+  images: nullToUndefined(
+    q
+      .object({
+        alt: q.string().optional(),
+        caption: q.string().optional(),
+        asset: q.object({
+          _ref: q.string(),
+        }),
+      })
+      .array()
+      .optional(),
+  ),
+}
