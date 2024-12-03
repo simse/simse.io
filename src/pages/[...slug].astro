@@ -1,5 +1,5 @@
 ---
-import client from '@lib/client'
+import { getPage } from '@lib/cms'
 import BlogPostPage from '@templates/BlogPostPage.astro'
 import ProjectPage from '@templates/ProjectPage.astro'
 
@@ -10,20 +10,9 @@ if (!slug) {
 }
 
 // try to get post
-const post = await client.api
-  .posts({
-    slug,
-  })
-  .get()
+const page = await getPage(slug)
 
-// try to get project
-const project = await client.api
-  .projects({
-    slug,
-  })
-  .get()
-
-if (!post.data && !project.data) return Astro.rewrite('/404')
+if (page === null) return Astro.rewrite('/404')
 ---
-{post && post.data && <BlogPostPage post={post.data} />}
-{project && project.data && <ProjectPage project={project.data} />}
+{page && page._type === 'post' && <BlogPostPage post={page} />}
+{page && page._type === 'project' && <ProjectPage project={page} />}

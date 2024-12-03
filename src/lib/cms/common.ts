@@ -43,7 +43,7 @@ export const contentBlocks = q
   .array()
 
 export const postFields = {
-  _type: q.string(),
+  _type: q.literal('post'),
   title: q.string(),
   slug: q.slug('slug'),
   excerpt: nullToUndefined(q.string().optional()),
@@ -64,7 +64,7 @@ export const postFields = {
 }
 
 export const projectFields = {
-  _type: q.string(),
+  _type: q.literal('project'),
   title: q.string(),
   description: q.string(),
   featured: nullToUndefined(q.boolean().default(false)),

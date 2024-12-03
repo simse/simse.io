@@ -13,7 +13,7 @@ export const getPosts = async () => {
   return allPostsSchema.parse(sanityResponse)
 }
 
-export const getPost = async (slug: string) => {
+export const getPost = async (slug: string): Promise<Post | null> => {
   const { query: postQuery, schema: postSchema } = q('*')
     .filter(`_type == 'post' && slug.current == '${slug}'`)
     .order('publishedAt desc')
@@ -23,7 +23,7 @@ export const getPost = async (slug: string) => {
   const parsedResponse = postSchema.parse(sanityResponse)
 
   if (!parsedResponse.length) {
-    throw new Error('could not find any posts with slug: ' + slug)
+    return null
   }
 
   return parsedResponse[0]

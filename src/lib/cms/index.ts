@@ -21,7 +21,7 @@ export const getPosts = async (): Promise<Post[]> => {
   return posts
 }
 
-export const getPost = async (slug: string): Promise<Post> => {
+export const getPost = async (slug: string): Promise<Post | null> => {
   const cacheKey = `posts/${slug}`
 
   if (cache.has(cacheKey)) {
@@ -47,7 +47,7 @@ export const getProjects = async (): Promise<Project[]> => {
   return projects
 }
 
-export const getProject = async (slug: string): Promise<Project> => {
+export const getProject = async (slug: string): Promise<Project | null> => {
   const cacheKey = `projects/${slug}`
   const cachedResult = cache.get<Project>(cacheKey)
 
@@ -59,4 +59,31 @@ export const getProject = async (slug: string): Promise<Project> => {
   cache.set(cacheKey, project)
 
   return project
+}
+
+export type Page = Post | Project | null
+
+export const getPage = async (slug: string): Promise<Page> => {
+  const cachedResult = cache.get<Page>(slug)
+
+  if (cachedResult !== undefined) {
+    return cachedResult
+  }
+
+  // try post
+  const post = await getPost(slug)
+  if (post !== null) {
+    cache.set(slug, post)
+    return post
+  }
+
+  // try project
+  const project = await getProject(slug)
+  if (project !== null) {
+    cache.set(slug, project)
+    return project
+  }
+
+  cache.set(slug, null)
+  return null
 }
