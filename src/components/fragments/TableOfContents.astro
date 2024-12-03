@@ -1,14 +1,8 @@
 ---
+import type { Post } from '@lib/cms/posts'
+
 interface Props {
-  post: {
-    content: {
-      _type: 'block'
-      style: string
-      children: {
-        text: string
-      }[]
-    }[]
-  }
+  post: Post
 }
 
 const { post } = Astro.props

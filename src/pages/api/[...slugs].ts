@@ -1,18 +1,6 @@
-import swagger from '@elysiajs/swagger'
-import Elysia, { t } from 'elysia'
+import server from '@lib/server'
 
-const app = new Elysia({
-  prefix: '/api',
-})
-  .use(swagger())
-  .get('/', () => 'hi')
-  .post('/', ({ body }) => body, {
-    body: t.Object({
-      name: t.String(),
-    }),
-  })
-
-const handle = ({ request }: { request: Request }) => app.handle(request)
+const handle = ({ request }: { request: Request }) => server.handle(request)
 
 export const GET = handle
 export const POST = handle

@@ -1,13 +1,13 @@
 ---
-import { type CollectionEntry } from 'astro:content'
 import Navbar from '@components/Navbar.astro'
 import Footer from '@components/common/Footer.astro'
 import ImageCarousel from '@components/common/ImageCarousel.astro'
 import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
+import { type Project } from '@lib/cms/projects'
 
 interface Props {
-  project: CollectionEntry<'projects'>['data']
+  project: Project
 }
 
 const { project }: Props = Astro.props
@@ -37,7 +37,7 @@ const { project }: Props = Astro.props
 
         <table class="w-full bg-zinc-900 rounded-lg overflow-clip">
           {
-            project.languages.length > 0 && (
+            project.languages && project.languages.length > 0 && (
               <tr class="border-b border-white/20 last:border-transparent">
                 <td class="py-3 px-3 font-bold w-32">
                   Language{project.languages.length > 1 && 's'}
@@ -48,7 +48,7 @@ const { project }: Props = Astro.props
           }
 
           {
-            project.technologies.length > 0 && (
+            project.technologies && project.technologies.length > 0 && (
               <tr class="border-b border-white/20 last:border-transparent">
                 <td class="py-3 px-3 font-bold w-32">
                   Technolog{project.technologies.length > 1 ? 'ies' : 'y'}

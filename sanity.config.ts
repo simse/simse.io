@@ -74,22 +74,6 @@ const graphBlock = defineType({
   ],
 })
 
-const terminalRecordingBlock = defineType({
-  name: 'terminalRecordingBlock',
-  type: 'object',
-  title: 'Terminal Recording',
-  fields: [
-    {
-      name: 'title',
-      type: 'string',
-    },
-    {
-      name: 'cast_file',
-      type: 'file',
-    }
-  ],
-})
-
 const postType = defineType({
   name: 'post',
   title: 'Posts',
@@ -165,8 +149,7 @@ const postType = defineType({
         { type: 'image' },
         { type: 'break' },
         { type: 'codeBlock' },
-        { type: 'graphBlock' },
-        { type: 'terminalRecordingBlock' }
+        { type: 'graphBlock' }
       ],
       group: 'post',
     }),
@@ -373,7 +356,7 @@ const experienceType = defineType({
   ],
 })
 
-const types = [postType, projectType, experienceType, breakBlock, codeBlock, graphBlock, terminalRecordingBlock]
+const types = [postType, projectType, experienceType, breakBlock, codeBlock, graphBlock]
 
 export default defineConfig([
   {

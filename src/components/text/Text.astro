@@ -4,7 +4,6 @@ import CodeBlock from './blocks/CodeBlock.astro'
 import Graph from './blocks/Graph.astro'
 import Hr from './blocks/Hr.astro'
 import Image from './blocks/Image.astro'
-import TerminalRecording from './blocks/TerminalRecording.astro'
 
 interface Props {
   content: any
@@ -23,7 +22,6 @@ const { content, fullWidth = false } = Astro.props
         image: Image,
         codeBlock: CodeBlock,
         graphBlock: Graph,
-        terminalRecordingBlock: TerminalRecording,
       },
     }}
     onMissingComponent={(type) => {
