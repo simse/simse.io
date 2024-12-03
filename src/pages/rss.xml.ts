@@ -1,9 +1,9 @@
-import { getCollection } from 'astro:content'
+import { getPosts } from '@lib/cms'
 import rss from '@astrojs/rss'
 import type { APIRoute } from 'astro'
 
-export const GET: APIRoute = async (context) => {
-  const posts = await getCollection('posts')
+export const GET: APIRoute = async () => {
+  const posts = await getPosts()
 
   return rss({
     title: "Simon's Blog",
@@ -11,10 +11,10 @@ export const GET: APIRoute = async (context) => {
       "Simon Sorensen's writings about technology and software engineering",
     site: 'https://simse.io',
     items: posts.map((post) => ({
-      title: post.data.title,
-      pubDate: post.data.published,
-      description: post.data.excerpt,
-      link: `/${post.data.slug}`,
+      title: post.title,
+      pubDate: new Date(post.published),
+      description: post.excerpt,
+      link: `/${post.slug}`,
     })),
     customData: `<language>en-gb</language>`,
   })
