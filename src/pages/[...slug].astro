@@ -17,9 +17,11 @@ const post = await client.api
   .get()
 
 // try to get project
-const project = await client.api.projects({
-  slug,
-}).get()
+const project = await client.api
+  .projects({
+    slug,
+  })
+  .get()
 
 if (!post.data && !project.data) return Astro.rewrite('/404')
 ---

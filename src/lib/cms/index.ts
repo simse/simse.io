@@ -50,7 +50,7 @@ export const getProjects = async (): Promise<Project[]> => {
 export const getProject = async (slug: string): Promise<Project> => {
   const cacheKey = `projects/${slug}`
   const cachedResult = cache.get<Project>(cacheKey)
-  
+
   if (cachedResult) {
     return cachedResult
   }

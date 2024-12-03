@@ -1,12 +1,12 @@
 ---
-import type { Post } from '@lib/cms/posts'
-import { getPosts } from '@lib/cms/posts'
 import Navbar from '@components/Navbar.astro'
 import YearList from '@components/blog/YearList.astro'
 import Button from '@components/common/Button.astro'
 import Footer from '@components/common/Footer.astro'
 import PageHeader from '@components/common/PageHeader.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
+import type { Post } from '@lib/cms/posts'
+import { getPosts } from '@lib/cms/posts'
 
 let posts = await getPosts()
 

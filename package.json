@@ -7,7 +7,8 @@
     "start": "HOST=0.0.0.0 PORT=4321 bun run ./dist/server/entry.mjs",
     "build": "astro build",
     "astro": "astro",
-    "lint": "biome check --write ./src",
+    "format": "biome check --write ./src",
+    "lint": "biome check ./src",
     "types": "tsc --noEmit",
     "test:e2e:ui": "playwright test --ui",
     "test:e2e": "playwright test"

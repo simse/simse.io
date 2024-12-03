@@ -35,7 +35,6 @@ const app = new Elysia()
   .get('/api/projects', getProjects)
   .get('/api/projects/:slug', async ({ params: { slug } }) => getProject(slug))
 
-
 export default app
 
 export type Server = typeof app

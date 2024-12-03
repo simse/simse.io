@@ -1,11 +1,11 @@
 ---
-import { getProjects } from '@lib/cms'
 import Navbar from '@components/Navbar.astro'
 import Button from '@components/common/Button.astro'
 import Footer from '@components/common/Footer.astro'
 import PageHeader from '@components/common/PageHeader.astro'
 import ProjectCard from '@components/projects/ProjectCard.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
+import { getProjects } from '@lib/cms'
 import { capitalizeFirstLetter } from '@utils/string'
 
 const projects = await getProjects()

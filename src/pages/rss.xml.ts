@@ -1,5 +1,5 @@
-import { getPosts } from '@lib/cms'
 import rss from '@astrojs/rss'
+import { getPosts } from '@lib/cms'
 import type { APIRoute } from 'astro'
 
 export const GET: APIRoute = async () => {

@@ -40,7 +40,7 @@ jobs:
         run: bun run astro sync
 
       - name: Run tsc
-        run: brun run types
+        run: bun run types
 
   unit-test:
     runs-on: ubuntu-latest

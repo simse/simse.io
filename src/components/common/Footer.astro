@@ -1,5 +1,5 @@
 ---
-import { getProjects } from "@lib/cms"
+import { getProjects } from '@lib/cms'
 
 const projects = await getProjects()
 
@@ -33,10 +33,12 @@ const links: {
   },
   {
     title: 'Projects',
-    items: projects.map((project) => ({
-      label: project.title,
-      href: `/${project.slug}`,
-    })).slice(0, 5),
+    items: projects
+      .map((project) => ({
+        label: project.title,
+        href: `/${project.slug}`,
+      }))
+      .slice(0, 5),
   },
 ]
 ---

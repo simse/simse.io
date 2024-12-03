@@ -17,14 +17,10 @@ interface Image {
   asset: SanityAsset
 }
 
-
 const getImageBuilder = (image: any) => {
   return builder.image(image)
 }
 
-
-export {
-  getImageBuilder,
-}
+export { getImageBuilder }
 
 export type { Image }
