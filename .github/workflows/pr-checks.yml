@@ -22,7 +22,7 @@ jobs:
         run: bun i
 
       - name: Run linting
-        run: bun run lint:check
+        run: bun run lint
 
   types:
     runs-on: ubuntu-latest

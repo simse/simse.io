@@ -1,5 +1,4 @@
 @import '../node_modules/@glidejs/glide/src/assets/sass/glide.core';
-@import '../node_modules/asciinema-player/dist/bundle/asciinema-player.css';
 
 @tailwind base;
 @tailwind components;
@@ -141,9 +140,4 @@
     @apply col-start-1;
     @apply col-end-13;
   }
-}
-
-/* asciinema style override */
-.ap-play-button {
-  position: initial !important;
 }
