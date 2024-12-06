@@ -8,13 +8,21 @@ import TableOfContents from '@components/fragments/TableOfContents.astro'
 import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { type Post } from '@lib/cms/posts'
+import { imageUrl } from '@lib/image'
 interface Props {
   post: Post
 }
 
 const { post } = Astro.props
 
-const image = getImageBuilder(post.image).width(1200).height(800).url()
+const image = imageUrl(getImageBuilder(post.image).url(), {
+  resizing_type: 'fill',
+  width: 1200,
+  height: 800,
+  gravity: { type: 'no' },
+  enlarge: 1,
+  format: 'avif',
+})
 
 //const suggestedPosts = [];
 ---
@@ -34,8 +42,6 @@ const image = getImageBuilder(post.image).width(1200).height(800).url()
     canonical={`/${post.slug}`}
     description={post.excerpt}
   >
-    <Navbar activeItem="Blog" />
-
     <nav class="fixed top-20 left-5 z-10 hidden 2xl:block opacity-0 transition-opacity duration-300" id="toc">
       <TableOfContents post={post} />
     </nav>

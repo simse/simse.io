@@ -1,8 +1,23 @@
+---
+import { personalise } from '@lib/personalisation'
+
+const personalisation = personalise({
+  url: Astro.url,
+  userAgent: '',
+})
+
+const uwuEnabled = personalisation.flags.includes('UWU_ENABLED')
+---
+
 <header class="my-4 max-w-4xl mx-auto px-2">
-  <div class="my-12">
-    <h1 class="text-2xl mb-2 font-bold">Hej—Welcome to my website!</h1>
-    <p class="opacity-70 text-lg">
-      This is my little slice of the internet, please make yourself at home.
-    </p>
+  <div class="my-12 flex items-center gap-8">
+    {uwuEnabled && <img class="h-32 mb-4" src="/uwu.png" alt="v-tuber style logo that reads Simon Sorensen" />}
+
+    <div class="pb-4">
+      <h1 class="text-2xl mb-2 font-bold">{personalisation.hero?.title || "Hej—Welcome to my website!"}</h1>
+      <p class="opacity-70 text-lg">
+        {personalisation.hero?.subtitle || "This is my little slice of the internet, please make yourself at home."}
+      </p>
+    </div>
   </div>
 </header>
