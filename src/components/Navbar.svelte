@@ -1,4 +1,6 @@
 <script lang="ts">
+import type { Snippet } from 'svelte'
+
 const items = [
   {
     title: 'Home',
@@ -14,15 +16,29 @@ const items = [
   },
 ]
 
-export let activeItem = ''
-let isMenuOpen = false
+const {
+  activeItem,
+  uwuEasterEgg = false,
+  /*searchIcon,
+  closeIcon,
+  menuIcon,*/
+}: {
+  activeItem?: string
+  uwuEasterEgg?: boolean
+  /*searchIcon: Snippet
+  closeIcon: Snippet
+  menuIcon: Snippet*/
+} = $props()
+let isMenuOpen = $state(false)
 </script>
 
 <nav
   class="top-0 sticky z-30 mb-8 bg-zinc-950/70 backdrop-blur"
 >
-  <div class="max-w-7xl mx-auto py-4 px-4 grid grid-cols-2 md:grid-cols-3 items-center">
-    <a class="text-lg transition-opacity" href="/">Simon Sorensen</a>
+  <div class="max-w-7xl mx-auto py-2 px-4 grid grid-cols-2 md:grid-cols-3 items-center min-h-14">
+    <a class="text-lg transition-opacity" href="/">
+      Simon Sorensen
+    </a>
 
     <ul class="sm:flex items-center hidden ml-auto md:mx-auto">
       {#each items as { title, link }}
@@ -39,15 +55,15 @@ let isMenuOpen = false
     </ul>
 
     <button class="ml-auto hidden">
-      <slot name="search-icon" />
+
     </button>
 
-    <button class="sm:hidden uppercase text-sm font-bold ml-auto flex items-center gap-1" on:click={() => isMenuOpen = !isMenuOpen}>
+    <button class="sm:hidden uppercase text-sm font-bold ml-auto flex items-center gap-1" onclick={() => isMenuOpen = !isMenuOpen}>
       {#if isMenuOpen}
-        <slot name="close-icon" />
+
         Close
       {:else}
-        <slot name="menu-icon" />
+
         Menu
       {/if}
     </button>
