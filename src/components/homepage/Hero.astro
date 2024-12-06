@@ -1,12 +1,12 @@
 ---
-import { personalise } from "@lib/personalisation"
+import { personalise } from '@lib/personalisation'
 
 const personalisation = personalise({
   url: Astro.url,
   userAgent: '',
 })
 
-const uwuEnabled = personalisation.flags.includes("UWU_ENABLED")
+const uwuEnabled = personalisation.flags.includes('UWU_ENABLED')
 ---
 
 <header class="my-4 max-w-4xl mx-auto px-2">

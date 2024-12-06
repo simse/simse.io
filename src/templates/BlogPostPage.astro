@@ -16,12 +16,12 @@ interface Props {
 const { post } = Astro.props
 
 const image = imageUrl(getImageBuilder(post.image).url(), {
-  resizing_type: "fill",
-    width: 1200,
-    height: 800,
-    gravity: { type: "no" },
-    enlarge: 1,
-    format: 'avif'
+  resizing_type: 'fill',
+  width: 1200,
+  height: 800,
+  gravity: { type: 'no' },
+  enlarge: 1,
+  format: 'avif',
 })
 
 //const suggestedPosts = [];
