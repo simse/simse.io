@@ -1,25 +1,27 @@
 <script lang="ts">
-import { quadInOut } from "svelte/easing";
-import { fade } from "svelte/transition";
+import { quadInOut } from 'svelte/easing'
+import { fade } from 'svelte/transition'
 
 function slideOut(_: Element, { delay = 0, duration = 400 }) {
-	const directionModifier = direction === 'FORWARDS' ? '-' : '';
+  const directionModifier = direction === 'FORWARDS' ? '-' : ''
 
-	return {
-		delay,
-		duration,
-		css: (t: number) => `transform: translateX(${directionModifier}${100 - quadInOut(t) * 100}%)`
-	};
+  return {
+    delay,
+    duration,
+    css: (t: number) =>
+      `transform: translateX(${directionModifier}${100 - quadInOut(t) * 100}%)`,
+  }
 }
 
 function slideIn(_: Element, { delay = 0, duration = 400 }) {
-	const directionModifier = direction === 'FORWARDS' ? '' : '-';
+  const directionModifier = direction === 'FORWARDS' ? '' : '-'
 
-	return {
-		delay,
-		duration,
-		css: (t: number) => `transform: translateX(${directionModifier}${100 - quadInOut(t) * 100}%)`
-	};
+  return {
+    delay,
+    duration,
+    css: (t: number) =>
+      `transform: translateX(${directionModifier}${100 - quadInOut(t) * 100}%)`,
+  }
 }
 
 const {
@@ -32,11 +34,11 @@ const {
   }[]
 } = $props()
 
-let currentImageIndex = $state(0);
-let direction = $state('FORWARDS');
-let animating = $state(false);
-const currentImage = $derived(images[currentImageIndex]);
-const hasPrevious = $derived(currentImageIndex - 1 >= 0);
+let currentImageIndex = $state(0)
+let direction = $state('FORWARDS')
+let animating = $state(false)
+const currentImage = $derived(images[currentImageIndex])
+const hasPrevious = $derived(currentImageIndex - 1 >= 0)
 const hasNext = $derived(currentImageIndex + 1 < images.length)
 </script>
 

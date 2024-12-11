@@ -1,7 +1,7 @@
-import { defineMiddleware } from "astro/middleware";
+import { defineMiddleware } from 'astro/middleware'
 
 export const onRequest = defineMiddleware((context, next) => {
-    // console.log("MIDDLEWARE");
-  
-    return next();
-  });
+  // console.log("MIDDLEWARE");
+
+  return next()
+})
