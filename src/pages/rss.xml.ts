@@ -17,12 +17,12 @@ export const GET: APIRoute = async () => {
       link: `/${post.slug}`,
     })),
     customData: `<language>en-gb</language>`,
-    stylesheet: '/pretty-feed-v3.xsl'
+    stylesheet: '/pretty-feed-v3.xsl',
   })
 
   return new Response(rssString, {
     headers: {
       'Content-Type': 'application/xml',
     },
-  });
+  })
 }
