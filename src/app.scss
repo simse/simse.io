@@ -33,7 +33,8 @@
     h5,
     h6,
     ul,
-    hr {
+    hr,
+    .astro-code {
       @apply col-start-1;
       @apply col-end-13;
     }
