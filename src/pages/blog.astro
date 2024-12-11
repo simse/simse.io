@@ -1,7 +1,6 @@
 ---
-import Navbar from '@components/Navbar.astro'
 import YearList from '@components/blog/YearList.astro'
-import Button from '@components/common/Button.astro'
+import Button from '@components/common/Button.svelte'
 import Footer from '@components/common/Footer.astro'
 import PageHeader from '@components/common/PageHeader.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
@@ -41,7 +40,7 @@ posts.forEach((post) => {
         .map((year) => <YearList year={year} posts={postsByYear[year]} />)
     }
 
-    <Button href="/rss.xml" icon="tabler:rss" target="_blank" shortcut="r" style="amber">RSS feed</Button>
+    <Button href="/rss.xml" icon="tabler:rss" target="_blank" shortcut="r" style="amber" client:load>RSS feed</Button>
   </main>
 
   <Footer />

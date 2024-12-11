@@ -1,5 +1,5 @@
 <script lang="ts">
-import type { Snippet } from 'svelte'
+import 'iconify-icon'
 
 const items = [
   {
@@ -18,16 +18,9 @@ const items = [
 
 const {
   activeItem,
-  uwuEasterEgg = false,
-  /*searchIcon,
-  closeIcon,
-  menuIcon,*/
 }: {
   activeItem?: string
   uwuEasterEgg?: boolean
-  /*searchIcon: Snippet
-  closeIcon: Snippet
-  menuIcon: Snippet*/
 } = $props()
 let isMenuOpen = $state(false)
 </script>
@@ -54,16 +47,16 @@ let isMenuOpen = $state(false)
       {/each}
     </ul>
 
-    <button class="ml-auto hidden">
-
+    <button class="ml-auto hidden" aria-label="Search">
+      <iconify-icon icon="tabler:search" size={22}></iconify-icon>
     </button>
 
     <button class="sm:hidden uppercase text-sm font-bold ml-auto flex items-center gap-1" onclick={() => isMenuOpen = !isMenuOpen}>
       {#if isMenuOpen}
-
+        <iconify-icon icon="tabler:x" size={18}></iconify-icon>
         Close
       {:else}
-
+        <iconify-icon icon="tabler:menu-2" size={18}></iconify-icon>
         Menu
       {/if}
     </button>

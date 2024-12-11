@@ -1,5 +1,3 @@
-@import '../node_modules/@glidejs/glide/src/assets/sass/glide.core';
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -35,7 +33,8 @@
     h5,
     h6,
     ul,
-    hr {
+    hr,
+    .astro-code {
       @apply col-start-1;
       @apply col-end-13;
     }

@@ -1,11 +1,11 @@
-import rss from '@astrojs/rss'
+import { getRssString } from '@astrojs/rss'
 import { getPosts } from '@lib/cms'
 import type { APIRoute } from 'astro'
 
 export const GET: APIRoute = async () => {
   const posts = await getPosts()
 
-  return rss({
+  const rssString = await getRssString({
     title: "Simon's Blog",
     description:
       "Simon Sorensen's writings about technology and software engineering",
@@ -17,5 +17,12 @@ export const GET: APIRoute = async () => {
       link: `/${post.slug}`,
     })),
     customData: `<language>en-gb</language>`,
+    stylesheet: '/pretty-feed-v3.xsl',
+  })
+
+  return new Response(rssString, {
+    headers: {
+      'Content-Type': 'application/xml',
+    },
   })
 }
