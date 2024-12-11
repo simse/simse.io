@@ -1,10 +1,10 @@
 ---
-import Navbar from '@components/Navbar.astro'
 import Footer from '@components/common/Footer.astro'
-import ImageCarousel from '@components/common/ImageCarousel.astro'
+import ImageCarousel from '@components/common/ImageCarousel.svelte'
 import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { type Project } from '@lib/cms/projects'
+import { imageUrlFromAssetRef } from '@lib/image'
 
 interface Props {
   project: Project
@@ -26,7 +26,16 @@ const { project }: Props = Astro.props
       >
     </header>
 
-    {project.images && project.images.length > 0 && <ImageCarousel images={project.images} />}
+    {project.images && project.images.length > 0 && (
+      <ImageCarousel images={project.images.map(image => ({
+        alt: image.alt,
+        caption: image.caption,
+        url: imageUrlFromAssetRef(image.asset._ref, {
+          width: 1200,
+          height: 800,
+        }),
+      }))} client:load />
+    )}
 
 
     <div class="grid grid-cols-1 md:grid-cols-5 md:gap-8">
