@@ -57,7 +57,6 @@
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
     "@types/bun": "^1.1.14",
-    "@types/glidejs__glide": "^3.6.5",
     "@types/node": "^22.4.0",
     "sass": "1.79.3"
   },
