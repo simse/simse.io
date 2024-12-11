@@ -23,10 +23,9 @@ const createTitle = (title: string) => {
 
 const decision = personalise({
   url: Astro.url,
-  userAgent: Astro.request.headers.get('User-Agent'),
+  userAgent: Astro.request.headers.get('User-Agent') || '',
 })
 ---
-
 <html lang="en" transition:animate="fade">
   <head>
     <meta charset="utf-8" />
@@ -68,7 +67,7 @@ const decision = personalise({
     <LoadingIndicator color="#2563eb" />
   </head>
   <body class="text-zinc-100 bg-zinc-950">
-    <Navbar uwuEasterEgg={decision.flags.includes('UWU_ENABLED')} />
+    <Navbar client:load />
 
     <slot />
   </body>
