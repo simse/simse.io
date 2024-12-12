@@ -1,20 +1,34 @@
-import { useState } from 'preact/hooks'
-import type { CollectionEntry } from 'astro:content'
+import { useEffect, useState } from 'preact/hooks'
 
 import WindowFrame from '../WindowFrame'
 import type { WindowProps } from '../types'
 import { formatDateWithYear } from '@utils/date'
 import BlogPost from './BlogPost'
+import client from 'src/api'
 
 interface BlogListProps extends WindowProps {
-  posts?: CollectionEntry<'blog'>[]
 }
 
 const BlogList = (props: BlogListProps) => {
   const [selectedPost, setSelectedPost] = useState<string | null>(null)
+  const [posts, setPosts] = useState<{
+    title: string;
+    slug: string;
+    published: string;
+  }[]>([])
 
-  const posts = props.posts || []
   const openWindow = props.openWindow
+
+  const loadPosts = async () => {
+    const { data, error } = await client.api.posts.get()
+
+    console.log(data)
+    console.log(error)
+  }
+
+  useEffect(() => {
+    loadPosts()
+  })
 
   return (
     <WindowFrame
@@ -39,16 +53,16 @@ const BlogList = (props: BlogListProps) => {
                     type: 'blogPost',
                     id: `blog-${post.slug}`,
                     meta: {
-                      title: post.data.title,
+                      title: post.title,
                       description: 'A blog post',
                       path: `/blog/${post.slug}`,
                     },
                   })
                 }}
               >
-                <span class="text-xl leading-none">{post.data.title}</span>
+                <span class="text-xl leading-none">{post.title}</span>
                 <p class="font-sans-alt text-[0.65rem]">
-                  {formatDateWithYear(post.data.published)}
+                  {formatDateWithYear(new Date(post.published))}
                 </p>
               </button>
             </li>
