@@ -1,8 +1,14 @@
 import { swagger } from '@elysiajs/swagger'
+import { cors } from '@elysiajs/cors'
 import { getPost, getPosts, getProject, getProjects } from '@lib/cms'
 import { Elysia, t } from 'elysia'
 
 const app = new Elysia()
+  .use(
+    cors({
+      origin: ['localhost:4321', 'os.simse.io', 'simse.io']
+    })
+  )
   .use(
     swagger({
       path: '/api',
