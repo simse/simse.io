@@ -6,7 +6,11 @@ import { Elysia, t } from 'elysia'
 const app = new Elysia()
   .use(
     cors({
-      origin: ['http://localhost:4321', 'https://os.simse.io', 'https://simse.io'],
+      origin: [
+        'http://localhost:4321',
+        'https://os.simse.io',
+        'https://simse.io',
+      ],
     }),
   )
   .use(
