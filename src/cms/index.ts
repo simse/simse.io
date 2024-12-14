@@ -1,12 +1,12 @@
 import { SANITY_PROJECT_DATASET, SANITY_PROJECT_ID } from 'astro:env/server'
-import client from '@lib/cms/client'
+import { sanityClient } from 'sanity:client'
 import imageUrlBuilder from '@sanity/image-url'
 import type { SanityAsset } from '@sanity/image-url/lib/types/types'
 
-const builder = imageUrlBuilder(client)
+const builder = imageUrlBuilder(sanityClient)
 
 export const getSanityFileUrl = (sanityFile: string): string => {
-  const fileName = sanityFile.replace('file-', '').replace(/-(?=[^-]*$)/, '.')
+  let fileName = sanityFile.replace('file-', '').replace(/-(?=[^-]*$)/, '.')
 
   return `https://cdn.sanity.io/files/${SANITY_PROJECT_ID}/${SANITY_PROJECT_DATASET}/${fileName}`
 }
