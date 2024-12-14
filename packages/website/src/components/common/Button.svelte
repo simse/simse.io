@@ -65,7 +65,7 @@ const onKeyDown = (e: KeyboardEvent) => {
     if (target === '_self') {
       navigate(href)
     } else {
-      window.open(href, '_blank')?.focus();
+      window.open(href, '_blank')?.focus()
     }
   }
 }
