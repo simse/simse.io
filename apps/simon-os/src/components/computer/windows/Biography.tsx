@@ -1,6 +1,6 @@
 import type { WindowProps } from '../types'
 import WindowFrame from '../WindowFrame'
-import SimonPicture from '@assets/me_but_dithered.png'
+// import SimonPicture from '@assets/me_but_dithered.png'
 
 interface BiographyWindowProps extends WindowProps {}
 
@@ -13,14 +13,14 @@ const BiographyWindow = (props: BiographyWindowProps) => {
       {...props}
     >
       <div class="float-left mr-3">
-        <img
+        {/*<img
           src={`/cdn-cgi/image/width=200,quality=75,format=avif${SimonPicture.src}`}
           alt="Simon"
           class="w-28 h-28 mb-1 bg-black/10"
           style={{
             imageRendering: 'pixelated',
           }}
-        />
+        />*/}
       </div>
 
       <p class="mb-4">

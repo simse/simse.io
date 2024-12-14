@@ -22,13 +22,14 @@ const BlogList = (props: BlogListProps) => {
   const loadPosts = async () => {
     const { data, error } = await client.api.posts.get()
 
-    console.log(data)
-    console.log(error)
+    if (error === null) {
+      setPosts(data)
+    }
   }
 
   useEffect(() => {
     loadPosts()
-  })
+  }, [])
 
   return (
     <WindowFrame

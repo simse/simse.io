@@ -141,9 +141,9 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
   }
 
   const updateMeta = (window: WindowType) => {
-    if (window.meta) {
-      history.pushState({}, '', window.meta.path)
-      document.title = window.meta.title + '—simonOS'
+    /*if (window.meta) {
+      //history.pushState({}, '', window.meta.path)
+      //document.title = window.meta.title + '—simonOS'
 
       const description = document.querySelector('meta[name="description"]')
       if (description) {
@@ -151,7 +151,7 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
       }
     } else {
       history.pushState({}, '', '/')
-    }
+    }*/
   }
 
   const openWindow = (newWindow: WindowType) => {

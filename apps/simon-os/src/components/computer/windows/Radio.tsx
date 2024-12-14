@@ -1,5 +1,4 @@
 import { useState, useRef, useEffect } from 'preact/hooks'
-import Sockette from 'sockette'
 
 import WindowFrame from '../WindowFrame'
 import type { WindowProps } from '../types'
@@ -16,98 +15,32 @@ const RadioWindow = (props: RadioWindowProps) => {
   const [isPlaying, setIsPlaying] = useState(false)
   const [isReady, setIsReady] = useState(false)
   const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null)
-  const [currentlyPlayingRange, setCurrentlyPlayingRange] = useState<
-    string | null
-  >(null)
 
   useEffect(() => {
-    const socket = new Sockette(
-      'wss://radio-backend.simse.io/api/live/nowplaying/websocket',
-      {
-        onopen: (e) => {
-          socket.send(
-            JSON.stringify({
-              subs: {
-                'station:simons_radio': {},
-              },
-            }),
-          )
-        },
-        onmessage: (e) => {
-          const jsonData = JSON.parse(e.data)
+    getMetadata()
 
-          if ('connect' in jsonData) {
-            setIsReady(true)
-
-            const initialData = jsonData.connect.data ?? []
-            if (initialData.length > 0) {
-              handleData(initialData[0].pub)
-            }
-          } else if ('channel' in jsonData) {
-            handleData(jsonData.pub)
-          }
-        },
-      },
-    )
-
-    const handleData = (input: {
-      data: {
-        np: {
-          cache: string
-          is_online: boolean
-          listeners: {
-            current: number
-            unique: number
-            total: number
-          }
-          now_playing: {
-            sh_id: number
-            duration: number
-            elapsed: number
-            is_request: boolean
-            played_at: number
-            playlist: string
-            remaining: number
-            song: {
-              title: string
-              text: string
-            }
-          }
-        }
-      }
-    }) => {
-      const data = input.data.np
-
-      if (data.is_online) {
-        setCurrentlyPlaying(data.now_playing.song.text)
-
-        const playedAt = new Date(data.now_playing.played_at * 1000)
-        const endsAt = new Date(
-          data.now_playing.played_at * 1000 + data.now_playing.duration * 1000,
-        )
-
-        setCurrentlyPlayingRange(
-          `${playedAt.toLocaleTimeString('en-UK', {
-            hour: 'numeric',
-            minute: 'numeric',
-          })} - ${endsAt.toLocaleTimeString('en-UK', {
-            hour: 'numeric',
-            minute: 'numeric',
-          })}`,
-        )
-      } else {
-        setCurrentlyPlaying('Nothing playing right now')
-        setCurrentlyPlayingRange('')
-      }
-    }
-
-    return () => {
-      socket.close()
-    }
+    setInterval(() => {
+      getMetadata()
+    }, 5000)
   }, [])
 
-  const streamUrl =
-    'https://radio-backend.simse.io/listen/simons_radio/radio.mp3'
+  const getMetadata = () => {
+    fetch('/api/radio-proxy').then(async (resp) => {
+      const parsedResp = await resp.json() as {
+        playedat: number;
+        title: string;
+        base64tag: string;
+        tag: string;
+      }[]
+
+      if (parsedResp.length > 0) {
+        setCurrentlyPlaying(parsedResp[0].title)
+        setIsReady(true)
+      }
+    })
+  }
+
+  const streamUrl = 'https://80.streeemer.com/listen/80s/radio.mp3'
 
   const createAudioContext = () => {
     audioContextRef.current = new AudioContext()
@@ -250,7 +183,7 @@ const RadioWindow = (props: RadioWindowProps) => {
           <div class="mt-2 pb-3 mb-1 border-b border-black flex items-center justify-between">
             <div>
               <span>Current Station</span>
-              <p class="text-xl leading-4">Radio 1988 FOREVER</p>
+              <p class="text-xl leading-4">Wonder 80's</p>
             </div>
 
             <button
@@ -270,13 +203,11 @@ const RadioWindow = (props: RadioWindowProps) => {
 
           {!isReady && <p>Connecting to station...</p>}
 
-          {isReady && currentlyPlaying && currentlyPlayingRange && (
+          {isReady && currentlyPlaying && (
             <>
               <p>Currently Playing</p>
 
               <div class="flex flex-col mb-4">
-                <span class="opacity-70">{currentlyPlayingRange}</span>
-
                 <div class="w-[282px] overflow-hidden">
                   <span
                     class={`text-2xl leading-5 whitespace-nowrap inline-flex ${
