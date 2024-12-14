@@ -9,9 +9,7 @@
     "astro": "astro",
     "format": "biome check --write ./src",
     "lint": "biome check ./src",
-    "types": "tsc --noEmit",
-    "test:e2e:ui": "playwright test --ui",
-    "test:e2e": "playwright test"
+    "types": "tsc --noEmit"
   },
   "dependencies": {
     "@astrojs/check": "0.9.4",
@@ -52,10 +50,6 @@
     "@types/node": "^22.4.0",
     "sass": "1.79.3"
   },
-  "engines": {
-    "node": "22.9.0"
-  },
-  "packageManager": "pnpm@9.11.0",
   "cacheDirectories": [
     ".astro"
   ]
