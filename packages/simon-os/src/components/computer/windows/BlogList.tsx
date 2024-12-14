@@ -20,14 +20,14 @@ const BlogList = (props: BlogListProps) => {
 	const openWindow = props.openWindow;
 
 	const loadPosts = async () => {
-		const resp = await fetch('https://simse.io/api/posts')
-		const parsedResp = await resp.json() as {
+		const resp = await fetch("https://simse.io/api/posts");
+		const parsedResp = (await resp.json()) as {
 			slug: string;
 			title: string;
 			published: string;
 		}[];
 
-		setPosts(parsedResp)
+		setPosts(parsedResp);
 	};
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: on mount
