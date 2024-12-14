@@ -20,3 +20,13 @@ tasks:
 
   start:
     command: 'sanity start'
+
+  lint:
+    command: 'biome check *.ts'
+    options:
+      mergeArgs: 'replace'
+
+  format:
+    command: 'biome check --write *.ts'
+    options:
+      mergeArgs: 'replace'

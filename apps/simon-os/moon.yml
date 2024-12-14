@@ -1,0 +1,9 @@
+language: 'typescript'
+platform: 'bun'
+
+tasks:
+  lint:
+    command: 'echo "not implemented"'
+
+  format:
+    command: 'echo "not implemented"'
