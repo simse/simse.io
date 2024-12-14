@@ -83,7 +83,7 @@ jobs:
       image: mcr.microsoft.com/playwright:v1.47.2-jammy
     defaults:
       run:
-        working-directory: .
+        working-directory: /root
     steps:
       - name: Install unzip
         run: apt-get update && apt-get install -y unzip
