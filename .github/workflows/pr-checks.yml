@@ -8,6 +8,10 @@ env:
   SANITY_PROJECT_ID: rjqusm5i
   SANITY_PROJECT_DATASET: test
 
+defaults:
+ run:
+  working-directory: ./packages/website
+
 jobs:
   lint:
     runs-on: ubuntu-latest

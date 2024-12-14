@@ -1,0 +1,17 @@
+{
+  "extends": "astro/tsconfigs/strict",
+  "exclude": ["apps/", "dist/", "src/**/*.test.ts"],
+  "include": [".astro/types.d.ts", "**/*"],
+  "compilerOptions": {
+    "baseUrl": "./src",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@components/*": ["components/*"],
+      "@cms": ["cms/index"],
+      "@layouts/*": ["layouts/*"],
+      "@templates/*": ["templates/*"],
+      "@utils/*": ["utils/*"],
+      "@lib/*": ["lib/*"]
+    },
+  }
+}
