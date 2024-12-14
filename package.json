@@ -6,6 +6,10 @@
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
+  "packageManager": "bun@1.1.38",
+  "engines": {
+    "bun": ">=1.1"
+  },
   "workspaces": [
     "packages/*"
   ]

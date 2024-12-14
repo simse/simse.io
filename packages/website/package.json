@@ -41,5 +41,9 @@
   },
   "cacheDirectories": [
     ".astro"
-  ]
+  ],
+  "packageManager": "bun@1.1.38",
+  "engines": {
+    "bun": ">=1.1"
+  }
 }
