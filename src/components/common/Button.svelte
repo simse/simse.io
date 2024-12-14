@@ -19,7 +19,7 @@ const {
   href,
   style = 'primary',
   icon,
-  target = '_self',
+  target,
   shortcut,
   bgColor,
   hoverBgColor,
@@ -62,11 +62,7 @@ const textColorClass = () => {
 
 const onKeyDown = (e: KeyboardEvent) => {
   if (e.key === shortcut) {
-    if (target === '_self') {
-      navigate(href)
-    } else {
-      window.open(href, '_blank')?.focus()
-    }
+    navigate(href)
   }
 }
 </script>
