@@ -1,5 +1,5 @@
-import { sanityClient } from 'sanity:client'
 import { type InferType, q } from 'groqd'
+import client from './client'
 import { projectFields } from './common'
 
 const { query: allProjectsQuery, schema: allProjectsSchema } = q('*')
@@ -8,7 +8,7 @@ const { query: allProjectsQuery, schema: allProjectsSchema } = q('*')
   .grab(projectFields)
 
 export const getProjects = async () => {
-  return allProjectsSchema.parse(await sanityClient.fetch(allProjectsQuery))
+  return allProjectsSchema.parse(await client.fetch(allProjectsQuery))
 }
 
 export const getProject = async (slug: string): Promise<Project | null> => {
@@ -17,7 +17,7 @@ export const getProject = async (slug: string): Promise<Project | null> => {
     .order('publishedAt desc')
     .grab(projectFields)
 
-  const sanityResponse = await sanityClient.fetch(projectQuery)
+  const sanityResponse = await client.fetch(projectQuery)
   const parsedResponse = projectSchema.parse(sanityResponse)
 
   if (!parsedResponse.length) {

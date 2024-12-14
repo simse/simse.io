@@ -3,11 +3,11 @@ import {
   IMGPROXY_KEY,
   IMGPROXY_SALT,
 } from 'astro:env/server'
-import { sanityClient } from 'sanity:client'
 import {
   type IGenerateImageUrl,
   generateImageUrl,
 } from '@imgproxy/imgproxy-node'
+import client from '@lib/cms/client'
 import imageUrlBuilder from '@sanity/image-url'
 
 export const imageUrl = (
@@ -29,7 +29,7 @@ export const imageUrlFromAssetRef = (
   ref: string,
   options?: IGenerateImageUrl['options'],
 ): string => {
-  const builder = imageUrlBuilder(sanityClient)
+  const builder = imageUrlBuilder(client)
   const sanityUrl = builder.image(ref).url()
 
   return imageUrl(sanityUrl, options)

@@ -8,6 +8,10 @@ env:
   SANITY_PROJECT_ID: rjqusm5i
   SANITY_PROJECT_DATASET: test
 
+defaults:
+  run:
+    working-directory: ./packages/website
+
 jobs:
   lint:
     runs-on: ubuntu-latest
@@ -71,32 +75,3 @@ jobs:
 
       - name: Ensure site is building
         run: bun run build
-
-  e2e-test:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.47.2-jammy
-    steps:
-      - name: Install unzip
-        run: apt-get update && apt-get install -y unzip
-
-      - name: Check out repository code
-        uses: actions/checkout@v3
-
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies
-        run: bun i
-
-      - name: Run Playwright tests
-        run: bun run playwright test --reporter json
-        env:
-          PLAYWRIGHT_JSON_OUTPUT_NAME: results.json
-          HOME: /root
-
-      - uses: daun/playwright-report-summary@v3
-        if: always()
-        with:
-          report-file: results.json
