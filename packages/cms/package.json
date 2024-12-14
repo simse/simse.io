@@ -5,13 +5,8 @@
   "main": "package.json",
   "license": "UNLICENSED",
   "scripts": {
-    "dev": "sanity dev",
-    "start": "sanity start",
-    "build": "sanity build",
     "deploy": "sanity deploy",
-    "deploy-graphql": "sanity graphql deploy",
-    "format": "biome check --write *.ts",
-    "lint": "biome check *.ts"
+    "deploy-graphql": "sanity graphql deploy"
   },
   "dependencies": {
     "@sanity/icons": "^3.5.2",

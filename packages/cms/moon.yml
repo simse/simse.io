@@ -1,0 +1,22 @@
+language: 'typescript'
+platform: 'bun'
+
+tasks:
+  build:
+    command: 'sanity build'
+    inputs:
+      - 'static/**/*'
+      - 'schemaTypes/**/*'
+      - 'sanity.config.ts'
+      - 'sanity.cli.ts'
+      - 'package.json'
+      - '/bun.lockb'
+    outputs:
+      - 'dist'
+
+  dev:
+    command: 'sanity dev'
+    local: true
+
+  start:
+    command: 'sanity start'
