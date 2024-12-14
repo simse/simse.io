@@ -8,25 +8,20 @@ env:
   SANITY_PROJECT_ID: rjqusm5i
   SANITY_PROJECT_DATASET: test
 
-defaults:
-  run:
-    working-directory: ./packages/website
-
 jobs:
   lint:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies
-        run: bun i
+      - name: Setup toolchain
+        uses: 'moonrepo/setup-toolchain@v0'
 
       - name: Run linting
-        run: bun run lint
+        run: moon website:lint
 
   types:
     runs-on: ubuntu-latest

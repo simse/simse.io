@@ -1,0 +1,22 @@
+language: 'typescript'
+platform: 'bun'
+
+tasks:
+  build:
+    command: 'astro build'
+    inputs:
+      - 'src/**/*'
+      - 'public/**/*'
+      - '*.config.ts'
+      - 'package.json'
+      - '/bun.lockb'
+    outputs:
+      - 'dist'
+  dev:
+    command: 'bun --bun run astro dev'
+    local: true
+  start:
+    command: 'bun run ./dist/server/entry.mjs'
+    env:
+      HOST: '0.0.0.0'
+      PORT: '4321'

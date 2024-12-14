@@ -3,9 +3,6 @@
   "type": "module",
   "version": "0.0.1",
   "scripts": {
-    "dev": "bun --bun run astro dev",
-    "start": "HOST=0.0.0.0 PORT=4321 bun run ./dist/server/entry.mjs",
-    "build": "astro build",
     "astro": "astro",
     "format": "biome check --write ./src",
     "lint": "biome check ./src",

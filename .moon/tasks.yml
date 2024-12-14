@@ -1,0 +1,5 @@
+tasks:
+  lint:
+    command: 'biome check ./src'
+  types:
+    command: 'tsc --noEmit'
