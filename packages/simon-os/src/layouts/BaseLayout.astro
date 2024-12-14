@@ -1,0 +1,69 @@
+---
+import "../app.css";
+
+interface Props {
+	title: string;
+	canonical?: string;
+}
+
+const { title, canonical } = Astro.props;
+
+const createTitle = (title: string) => {
+	if (title.includes("—")) return title;
+
+	return title ? title : "Simon Sorensen—Software Engineer in London";
+};
+---
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" type="image/ico" href="/favicon.ico" />
+    <meta name="viewport" content="width=device-width" />
+    <meta name="generator" content={Astro.generator} />
+    <meta name="robots" content="noindex,nofollow" />
+    <title>{createTitle(title)}</title>
+    {
+      canonical && (
+        <link rel="canonical" href={`https://sorensen.engineer${canonical}`} />
+      )
+    }
+    <style is:inline>
+      @font-face {
+        font-family: 'Chicago';
+        src: url('/fonts/Chicago.woff2') format('woff2');
+        font-weight: 400;
+        font-display: swap;
+      }
+      @font-face {
+        font-family: 'ArialPixel';
+        src: url('/fonts/Arial.woff2') format('woff2');
+        font-weight: 400;
+        font-display: swap;
+      }
+      @keyframes bounceMarquee {
+        0% {
+          transform: translateX(0);
+        }
+        10% {
+          transform: translateX(0);
+        }
+        45% {
+          transform: translateX(calc(-100% + 282px));
+        }
+        55% {
+          transform: translateX(calc(-100% + 282px));
+        }
+        90% {
+          transform: translateX(0);
+        }
+        100% {
+          transform: translateX(0);
+        }
+      }
+    </style>
+  </head>
+  <body class="bg-[#FAF2E8] antialiased">
+    <slot />
+  </body>
+</html>

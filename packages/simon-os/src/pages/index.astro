@@ -1,0 +1,28 @@
+---
+import { getCollection } from "astro:content";
+
+import Computer from "@components/computer";
+import BaseLayout from "@layouts/BaseLayout.astro";
+
+let blogPosts = await getCollection("blog");
+
+// filter out drafts
+blogPosts = blogPosts.filter((post) => !post.data.draft);
+
+// remove body content from blog posts
+blogPosts = blogPosts.map((post) => {
+	return {
+		...post,
+		body: "",
+	};
+});
+
+// sort blog posts by date
+blogPosts.sort((a, b) => {
+	return +new Date(b.data.published) - +new Date(a.data.published);
+});
+---
+
+<BaseLayout title="simonOS">
+  <Computer blogPosts={blogPosts} client:load />
+</BaseLayout>
