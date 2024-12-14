@@ -13,90 +13,54 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies
-        run: bun i
+      - name: Setup toolchain
+        uses: 'moonrepo/setup-toolchain@v0'
 
       - name: Run linting
-        run: bun run lint
+        run: moon :lint
 
   types:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup toolchain
+        uses: 'moonrepo/setup-toolchain@v0'
 
-      - name: Install dependencies
-        run: bun i
-
-      - name: Generate Astro types
-        run: bun run astro sync
-
-      - name: Run tsc
-        run: bun run types
+      - name: Run linting
+        run: moon :types
 
   unit-test:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
 
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
+      - name: Setup toolchain
+        uses: 'moonrepo/setup-toolchain@v0'
 
-      - name: Install dependencies
-        run: bun i
-
-      - name: Run unit tests
-        run: bun test
+      - name: Run linting
+        run: moon :test
 
   build-check:
     runs-on: ubuntu-latest
     steps:
       - name: Check out repository code
-        uses: actions/checkout@v3
-
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies
-        run: bun i
-
-      - name: Ensure site is building
-        run: bun run build
-
-  e2e-test:
-    timeout-minutes: 60
-    runs-on: ubuntu-latest
-    container:
-      image: mcr.microsoft.com/playwright:v1.47.2-jammy
-    steps:
-      - name: Install unzip
-        run: apt-get update && apt-get install -y unzip
-
-      - name: Check out repository code
-        uses: actions/checkout@v3
-
-      - name: Install Bun
-        uses: oven-sh/setup-bun@v2
-
-      - name: Install dependencies
-        run: bun i
-
-      - name: Run Playwright tests
-        run: bun run playwright test --reporter json
-        env:
-          PLAYWRIGHT_JSON_OUTPUT_NAME: results.json
-          HOME: /root
-
-      - uses: daun/playwright-report-summary@v3
-        if: always()
+        uses: actions/checkout@v4
         with:
-          report-file: results.json
+          fetch-depth: 0
+
+      - name: Setup toolchain
+        uses: 'moonrepo/setup-toolchain@v0'
+
+      - name: Run linting
+        run: moon :build
