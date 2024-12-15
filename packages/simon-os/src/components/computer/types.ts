@@ -9,7 +9,6 @@ interface Window {
 	meta?: {
 		title: string;
 		description: string;
-		path: string;
 	};
 }
 
@@ -19,6 +18,10 @@ interface RadioWindowType extends Window {
 
 interface BiograhyWindowType extends Window {
 	type: "biography";
+}
+
+interface ChatWindowType extends Window {
+	type: "chat";
 }
 
 interface BlogListWindowType extends Window {
@@ -39,7 +42,8 @@ type WindowType =
 	| BiograhyWindowType
 	| BlogListWindowType
 	| RadioWindowType
-	| BlogPostWindowType;
+	| BlogPostWindowType
+	| ChatWindowType;
 
 interface WindowProps {
 	title?: string;

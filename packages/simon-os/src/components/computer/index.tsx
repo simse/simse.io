@@ -13,6 +13,7 @@ import BlogIcon from "@assets/desktop_icons/address_book_pad.png";
 import RadioIcon from "@assets/desktop_icons/cd_audio_cd_a-4.png";
 import BiographyIcon from "@assets/desktop_icons/msagent-3.png";
 import useSize from "@utils/useSize";
+import ChatWindow from "./windows/Chat";
 
 interface ComputerProps {
 	blogPosts: CollectionEntry<"blog">[];
@@ -28,7 +29,6 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
 		meta: {
 			title: "Biography",
 			description: "Simon's biography",
-			path: "/",
 		},
 	};
 
@@ -41,7 +41,6 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
 		meta: {
 			title: "Blog",
 			description: "Simon's blog",
-			path: "/blog",
 		},
 	};
 
@@ -53,9 +52,19 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
 		meta: {
 			title: "Radio",
 			description: "Simon's radio",
-			path: "/",
 		},
 	};
+
+	const ChatWindowDefinition: WindowType = {
+		title: "Chat",
+		component: ChatWindow,
+		id: "chat",
+		type: "chat",
+		meta: {
+			title: "Chat",
+			description: "Chat with me",
+		},
+	}
 
 	const [windowWidth, setWindowWidth] = useState(0);
 
@@ -89,14 +98,16 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
 			BiographyWindowDefinition,
 			BlogWindowDefinition,
 			RadioWindowDefinition,
+			ChatWindowDefinition,
 			initialStateWindow(),
 		].filter(Boolean) as WindowType[],
 	);
 	const [windowStack, setWindowStack] = useState<string[]>(
 		[
-			// "radio",
+			"radio",
 			"blog",
 			"biography",
+			"chat",
 			initialStateWindow()?.id,
 		].filter(Boolean) as string[],
 	);
@@ -158,10 +169,6 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
 
 	const openWindow = (newWindow: WindowType) => {
 		// if on mobile, navigate to path instead
-		if (windowWidth <= 640) {
-			window.location.href = newWindow.meta?.path || "/";
-		}
-
 		if (windows.find((prevWindow) => prevWindow.id === newWindow.id)) {
 			touchWindow(newWindow.id);
 			return;

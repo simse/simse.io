@@ -2,8 +2,9 @@ import { useEffect, useRef, useState } from "preact/hooks";
 
 import MuteIcon from "@components/icons/MuteIcon";
 import VolumeThree from "@components/icons/VolumeThree";
-import WindowFrame from "../WindowFrame";
-import type { WindowProps } from "../types";
+import WindowFrame from "../../WindowFrame";
+import type { WindowProps } from "../../types";
+import StationSelect from "./StationSelect";
 
 interface RadioWindowProps extends WindowProps {}
 
@@ -15,13 +16,14 @@ const RadioWindow = (props: RadioWindowProps) => {
 	const [isPlaying, setIsPlaying] = useState(false);
 	const [isReady, setIsReady] = useState(false);
 	const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
+	const [selectingStation, setSelectingStation] = useState(false);
 
 	useEffect(() => {
 		getMetadata();
 
-		setInterval(() => {
+		/*setInterval(() => {
 			getMetadata();
-		}, 5000);
+		}, 5000);*/
 	}, []);
 
 	const getMetadata = () => {
@@ -43,6 +45,7 @@ const RadioWindow = (props: RadioWindowProps) => {
 		const audioElement = new Audio();
 		audioElement.crossOrigin = "anonymous";
 		audioElement.src = streamUrl;
+		audioElement.volume = 0.7;
 		audioElementRef.current = audioElement;
 
 		audioElement.addEventListener("play", () => {
@@ -163,63 +166,74 @@ const RadioWindow = (props: RadioWindowProps) => {
 			initialPosition={{ x: 350, y: 450 }}
 			{...props}
 		>
-			<>
-				<canvas
-					ref={canvasRef}
-					width={WIDHT * ratio}
-					height={HEIGHT * ratio}
-					style={{
-						width: `${WIDHT}px`,
-						height: `${HEIGHT}px`,
-						imageRendering: "pixelated",
-					}}
-				/>
+			{selectingStation ? (
+				<StationSelect onSelect={() => setSelectingStation(false)} />
+			) : (
+				<>
+					<canvas
+						ref={canvasRef}
+						width={WIDHT * ratio}
+						height={HEIGHT * ratio}
+						style={{
+							width: `${WIDHT}px`,
+							height: `${HEIGHT}px`,
+							imageRendering: "pixelated",
+						}}
+					/>
 
-				<div class="mt-2 pb-3 mb-1 border-b border-black flex items-center justify-between">
-					<div>
-						<span>Current Station</span>
-						<p class="text-xl leading-4">Wonder 80's</p>
+					<div class="mt-2 pb-3 mb-1 border-b border-black flex items-center justify-between">
+						<div>
+							<span>
+								Current Station{" "}
+								{/*<button class="opacity-70 underline" type="button" onClick={() => setSelectingStation(true)}>
+									(change)
+								</button>*/}
+							</span>
+							<p class="text-xl leading-4">Wonder 80's</p>
+						</div>
+
+						<button
+							type="button"
+							class="border border-black rounded-sm h-11 w-11 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center"
+							onClick={() => {
+								if (isPlaying) {
+									pause();
+								} else {
+									play();
+								}
+							}}
+							disabled={!isReady}
+						>
+							{isPlaying ? <VolumeThree /> : <MuteIcon />}
+						</button>
 					</div>
 
-					<button
-						type="button"
-						class="border border-black rounded-sm h-11 w-11 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center"
-						onClick={() => {
-							if (isPlaying) {
-								pause();
-							} else {
-								play();
-							}
-						}}
-						disabled={!isReady}
-					>
-						{isPlaying ? <VolumeThree /> : <MuteIcon />}
-					</button>
-				</div>
+					{!isReady && <p>Connecting to station...</p>}
 
-				{!isReady && <p>Connecting to station...</p>}
+					{isReady && currentlyPlaying && (
+						<>
+							<p>Currently Playing</p>
 
-				{isReady && currentlyPlaying && (
-					<>
-						<p>Currently Playing</p>
-
-						<div class="flex flex-col mb-4">
-							<div class="w-[282px] overflow-hidden">
-								<span
-									class={`text-2xl leading-5 whitespace-nowrap inline-flex ${
-										currentlyPlaying.length > 25 ? "animate-bounce-marquee" : ""
-									}`}
-									style={{
-										animationDuration: `${currentlyPlaying.length * 0.4}s`,
-									}}
-								>
-									{currentlyPlaying}
-								</span>
+							<div class="flex flex-col mb-4">
+								<div class="w-[282px] overflow-hidden">
+									<span
+										class={`text-2xl leading-5 whitespace-nowrap inline-flex ${
+											currentlyPlaying.length > 25
+												? "animate-bounce-marquee"
+												: ""
+										}`}
+										style={{
+											animationDuration: `${currentlyPlaying.length * 0.4}s`,
+										}}
+									>
+										{currentlyPlaying}
+									</span>
+								</div>
 							</div>
-						</div>
-					</>
-				)}
-			</>
+						</>
+					)}
+				</>
+			)}
 		</WindowFrame>
 	);
 };

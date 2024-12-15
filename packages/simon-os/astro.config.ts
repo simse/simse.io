@@ -11,10 +11,14 @@ export default defineConfig({
   image: {
     service: passthroughImageService(),
   },
-  prefetch: true,
   markdown: {
     shikiConfig: {
       theme: 'github-light',
     },
+  },
+  env: {
+    schema: {
+      ANTHROPIC_API_KEY: envField.string({ context: "server", access: "secret" })
+    }
   }
 })
