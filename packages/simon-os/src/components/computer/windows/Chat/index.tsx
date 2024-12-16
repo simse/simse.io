@@ -69,6 +69,8 @@ const ChatWindow = (props: ChatWindowProps) => {
     const [isTyping, setIsTyping] = useState(false);
     const messagesRef = useRef<HTMLUListElement | null>(null)
 
+    
+
     const scrollToBottom = () => {
         if (messagesRef) {
             messagesRef.current?.scroll({
@@ -78,20 +80,24 @@ const ChatWindow = (props: ChatWindowProps) => {
         }
     }
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: nah
+    useEffect(() => {
+        scrollToBottom();
+    }, [messages])
+
     const handleSubmit = async () => {
+        messages.push({
+            role: 'user',
+            content: currentMessage,
+            timestamp: new Date().toISOString(),
+        })
+
         setCanSend(false)
         setIsTyping(true)
         setCurrentMessage("")
         const response = await fetch('/api/chat', {
             method: 'POST',
-            body: JSON.stringify([
-                ...messages,
-                {
-                    role: 'user',
-                    content: currentMessage,
-                    timestamp: new Date().toISOString(),
-                }
-            ])
+            body: JSON.stringify(messages)
         });
 
         const parsedResp = await response.json() as {
@@ -102,7 +108,6 @@ const ChatWindow = (props: ChatWindowProps) => {
 
         setIsTyping(false);
         setMessages(parsedResp);
-        scrollToBottom();
         setCanSend(true);
     }
 
@@ -116,7 +121,7 @@ const ChatWindow = (props: ChatWindowProps) => {
 			<div class="flex flex-col h-full">
 				<ul class="flex-1 overflow-y-auto" ref={messagesRef}>
                     {messages.map(message => (
-                        <li key={message.timestamp} class="mb-4">
+                        <li key={message.timestamp} class="mb-2">
                             <span>{message.role === 'user' ? 'You' : 'Simon'}</span>
                             <span class="font-sans-alt text-xs leading-5 block">{message.content}</span>
                         </li>

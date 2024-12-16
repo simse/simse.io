@@ -63,7 +63,7 @@ Remember:
 - Do not include emojies ever.
 
 Example output format:
-Hey there! [Single-sentence, chat-like response relating to the topic and appropriate for 1988]`;
+Hello, [Single-sentence, chat-like response relating to the topic and appropriate for 1988]`;
 
 interface Message {
     role: 'user' | 'assistant';
@@ -93,6 +93,8 @@ export const POST: APIRoute = async ({ request }) => {
             return rest;
         })
     ]
+
+    // console.log(messagesWithoutTimestamp)
 
 	const msg = await anthropic.messages.create({
         model: "claude-3-5-sonnet-20241022",
