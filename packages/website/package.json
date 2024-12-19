@@ -14,7 +14,7 @@
     "@imgproxy/imgproxy-node": "^1.0.6",
     "@isaacs/ttlcache": "^1.4.1",
     "@nurodev/astro-bun": "^1.1.5",
-    "astro": "5.0.5",
+    "astro": "5.0.8",
     "astro-icon": "^1.1.0",
     "astro-loading-indicator": "0.6.1",
     "astro-portabletext": "0.10.0",
