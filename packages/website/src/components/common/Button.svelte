@@ -7,12 +7,14 @@ interface Props {
   href: string
   style?: 'primary' | 'secondary' | 'amber'
   icon?: string
+  iconPlacement?: 'right' | 'left'
   target?: '_blank' | '_self'
   shortcut?: string
   bgColor?: string
   hoverBgColor?: string
   textColor?: string
   children?: Snippet
+  class: string
 }
 
 const {
@@ -20,11 +22,13 @@ const {
   style = 'primary',
   icon,
   target = '_self',
+  iconPlacement = 'left',
   shortcut,
   bgColor,
   hoverBgColor,
   textColor,
   children,
+  class: _class,
 }: Props = $props()
 
 const styleToClass = {
@@ -74,17 +78,21 @@ const onKeyDown = (e: KeyboardEvent) => {
 <svelte:window on:keydown={onKeyDown} />
 
 <a 
-  class={`flex items-center gap-2 transition-colors w-fit py-1.5 px-3 rounded ${bgColorClass()} ${hoverBgColorClass()} ${textColorClass()}`} 
+  class={`flex items-center gap-2 w-fit py-0.5 px-2 ${bgColorClass()} ${hoverBgColorClass()} ${textColorClass()} ${_class}`} 
   href={href} 
   target={target}
   role="button"
 >
-    {#if icon}
+    {#if icon && iconPlacement === 'left'}
     <iconify-icon icon={icon} size={18}></iconify-icon>
     {/if}
 
     {#if children}
     {@render children()}
+    {/if}
+
+    {#if icon && iconPlacement === 'right'}
+    <iconify-icon icon={icon} size={18}></iconify-icon>
     {/if}
 
     {#if shortcut}

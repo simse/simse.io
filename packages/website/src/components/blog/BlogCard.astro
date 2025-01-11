@@ -12,23 +12,24 @@ const { post, dateWithYear = false } = Astro.props
 ---
 
 <a
-  class="relative aspect-[3/2] w-full flex items-end transform-gpu transition-transform duration-300 hover:scale-105"
+  class="relative aspect-[3/2] w-full flex items-end"
   href={`/${post.slug}`}
 >
   {
     post.image && (
-      <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-black/20 rounded mb-2 z-10 h-full" />
+      <div class="absolute inset-0 bg-gradient-to-t from-black/80 to-black/0 mb-2 z-10 h-full" />
     )
   }
   <div
-    class="aspect-[3/2] w-full h-full object-cover bg-zinc-900 rounded mb-2 absolute top-0 z-0 overflow-clip"
+    class="aspect-[3/2] w-full h-full object-cover bg-zinc-900 mb-2 absolute top-0 z-0 overflow-clip"
   >
     {
       post.image && (
         <img
-          class="w-full h-full z-0"
-          src={getImageBuilder(post.image).width(600).height(400).url()}
+          class="w-full h-auto z-0 "
+          src={/*getImageBuilder(post.image).width(600).height(400).url()*/ '/test_image.png'}
           alt={post.image.alt}
+          style="image-rendering: pixelated;"
         />
       )
     }

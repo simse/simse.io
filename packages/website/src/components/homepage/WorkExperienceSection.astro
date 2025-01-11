@@ -1,8 +1,4 @@
 ---
-import { getWorkExperiences } from '../../cms'
-
-const workExperience = await getWorkExperiences()
-
 const formatDate = (date: Date | null): string => {
   if (!date) {
     return 'Current'
@@ -14,48 +10,12 @@ const formatDate = (date: Date | null): string => {
   })
 }
 ---
-
-<section class="my-16" title="CV">
-  <a href="/cv">
-    <h2 class="text-lg mb-2 ml-3 font-bold">Experience</h2>
+<section class=" border-zinc-700 pr-4">
+  <a href="/projects">
+    <p class="border-b text-lg font-bold mb-2 border-zinc-700 text-zinc-300">Work Experience</p>
   </a>
 
-  <ul>
-    {
-      workExperience.map((experience) => (
-        <li class="mb-2">
-          <a
-            href={`/cv/${experience.slug}`}
-            class="p-3 rounded block hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
-          >
-            <div class="flex justify-between items-center">
-              <div>
-                <h3 class="text-lg" title={experience.officialTitle}>
-                  {experience.title}
-                </h3>
-                <span class="text-zinc-400 font-medium flex items-center gap-2">
-                  <img
-                    src={experience.employerLogo}
-                    alt={`${experience.employer} official logo`}
-                    class="w-4 h-4"
-                  />{' '}
-                  {experience.employer}
-                </span>
-              </div>
-
-              <div class="text-right">
-                <span>
-                  {formatDate(experience.startDate)} —{' '}
-                  {formatDate(experience.endDate)}
-                </span>
-                <p class="text-zinc-700 dark:text-zinc-400">
-                  {experience.location}
-                </p>
-              </div>
-            </div>
-          </a>
-        </li>
-      ))
-    }
+  <ul class="">
+    <li>Lead Bruh Engineer</li>
   </ul>
 </section>

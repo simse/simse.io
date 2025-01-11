@@ -26,7 +26,7 @@ const decision = personalise({
   userAgent: Astro.request.headers.get('User-Agent') || '',
 })
 ---
-<html lang="en" transition:animate="fade">
+<html lang="en" transition:animate="none">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/ico" href="/favicon.ico" />
@@ -67,8 +67,11 @@ const decision = personalise({
     <LoadingIndicator color="#2563eb" />
   </head>
   <body class="text-zinc-100 bg-zinc-950">
-    <Navbar client:load />
+    <main class="max-w-4xl mx-auto my-12 bg-zinc-900 border border-zinc-700">
+      <Navbar client:load />
 
-    <slot />
+      <slot />
+    </main>
+    
   </body>
 </html>

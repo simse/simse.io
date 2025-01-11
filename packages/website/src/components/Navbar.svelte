@@ -26,18 +26,18 @@ let isMenuOpen = $state(false)
 </script>
 
 <nav
-  class="top-0 sticky z-30 mb-8 bg-zinc-950/70 backdrop-blur"
+  class="top-0 sticky z-30 mb-8 border-b border-zinc-700 border-dashed bg-zinc-900"
 >
-  <div class="max-w-7xl mx-auto py-2 px-4 grid grid-cols-2 md:grid-cols-3 items-center min-h-14">
-    <a class="text-lg transition-opacity" href="/">
+  <div class="py-2 px-4 flex items-center">
+    <a class="text-lg transition-opacity bg-blue-900 w-fit px-2 -ml-2" href="/">
       Simon Sorensen
     </a>
 
-    <ul class="sm:flex items-center hidden ml-auto md:mx-auto">
+    <ul class="sm:flex items-center hidden ml-auto gap-4">
       {#each items as { title, link }}
         <li>
           <a
-            class={`p-2 px-3 hover:text-white transition-colors
+            class={`hover:text-white
               ${title === activeItem ? 'font-bold text-white' : 'text-white/60'}`}
             href={link}
           >
@@ -46,10 +46,6 @@ let isMenuOpen = $state(false)
         </li>
       {/each}
     </ul>
-
-    <button class="ml-auto hidden" aria-label="Search">
-      <iconify-icon icon="tabler:search" size={22}></iconify-icon>
-    </button>
 
     <button class="sm:hidden uppercase text-sm font-bold ml-auto flex items-center gap-1" onclick={() => isMenuOpen = !isMenuOpen}>
       {#if isMenuOpen}
