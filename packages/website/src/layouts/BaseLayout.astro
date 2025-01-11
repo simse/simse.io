@@ -1,6 +1,7 @@
 ---
 import { ClientRouter } from 'astro:transitions'
 import Navbar from '@components/Navbar.svelte'
+import PageRenderTime from '@components/common/PageRenderTime.svelte'
 import { personalise } from '@lib/personalisation'
 import LoadingIndicator from 'astro-loading-indicator/component'
 import '../app.scss'
@@ -67,11 +68,12 @@ const decision = personalise({
     <LoadingIndicator color="#2563eb" />
   </head>
   <body class="text-zinc-100 bg-zinc-950">
-    <main class="max-w-4xl mx-auto my-12 bg-zinc-900 border border-zinc-700">
+    <main class="max-w-4xl mx-auto mt-12 bg-zinc-900 border border-zinc-700">
       <Navbar client:load />
 
       <slot />
     </main>
     
+    <PageRenderTime client:load />
   </body>
 </html>

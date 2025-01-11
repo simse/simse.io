@@ -27,7 +27,7 @@ const { post, dateWithYear = false } = Astro.props
       post.image && (
         <img
           class="w-full h-auto z-0 "
-          src={/*getImageBuilder(post.image).width(600).height(400).url()*/ '/test_image.png'}
+          src={getImageBuilder(post.image).width(600).height(400).url()}
           alt={post.image.alt}
           style="image-rendering: pixelated;"
         />

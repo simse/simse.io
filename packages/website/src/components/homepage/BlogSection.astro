@@ -14,9 +14,13 @@ const formatDate = (date: string) => {
 ---
 {posts && (
 <section class="my-16" title="Blog">
-  <a href="/blog">
-    <h2 class="border-b text-lg font-bold mb-2 border-zinc-700">Blog Posts</h2>
-  </a>
+  <header class="flex justify-between mb-2 border-zinc-700 pb-1 border-b">
+    <a href="/blog">
+      <h2 class="font-bold">Blog Posts</h2>
+    </a>
+
+    <a class="text-zinc-300 hover:text-white" href="/blog">See all →</a>
+  </header>
 
   <ul class="">
     {
@@ -33,28 +37,20 @@ const formatDate = (date: string) => {
               format: 'avif',
             }) : ''}
           />
-          <span class="font-mono font-bold mr-2 text-zinc-400">{formatDate(post.published)}</span>
-
-          
+          <span class="font-mono font-bold mr-2 text-zinc-400 text-sm">{formatDate(post.published)}</span>
 
           <span class="font-bold">{post.title}</span>
 
           <Button 
             client:load
             class="ml-auto"
-            icon="mdi:arrow-right"
-            iconPlacement="right"
             href={`/${post.slug}`}
           >
-            Read
+            Read →
           </Button>
         </li>
       ))
     }
   </ul>
-
-  {/* <p class="mt-4 text-zinc-300 border-t border-zinc-700 pt-1">
-    Showing {posts.slice(0, 4).length} of {posts.length} blog posts
-  </p> */}
 </section>
 )}

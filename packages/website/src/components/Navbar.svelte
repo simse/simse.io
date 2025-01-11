@@ -26,7 +26,7 @@ let isMenuOpen = $state(false)
 </script>
 
 <nav
-  class="top-0 sticky z-30 mb-8 border-b border-zinc-700 border-dashed bg-zinc-900"
+  class="top-0 sticky z-30 border-b border-zinc-700 border-dashed bg-zinc-900"
 >
   <div class="py-2 px-4 flex items-center">
     <a class="text-lg transition-opacity bg-blue-900 w-fit px-2 -ml-2" href="/">

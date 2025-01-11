@@ -1,0 +1,49 @@
+---
+import Footer from '@components/common/Footer.astro'
+import PageHeader from '@components/common/PageHeader.astro'
+import DataTable from '@components/common/DataTable.svelte'
+import BaseLayout from '@layouts/BaseLayout.astro'
+---
+
+<BaseLayout 
+  title="Engineering behind this website"
+>
+  <main class="max-w-5xl mx-auto px-4 mt-4">
+    <PageHeader title="Engineering" />
+
+    <DataTable
+      title="Tech Stack"
+      rows={[
+        {
+          key: "Language",
+          value: "Typescript"
+        },
+        {
+          key: "Runtime",
+          value: "Bun"
+        },
+        {
+          key: "CMS",
+          value: "Sanity"
+        }
+      ]}
+      class="mb-8"
+    />
+
+    <DataTable
+      title="Reliability"
+      rows={[
+        {
+          key: "Uptime",
+          value: "98.6%"
+        },
+        {
+          key: "Runtime",
+          value: "Bun"
+        }
+      ]}
+    />
+  </main>
+
+  <Footer />
+</BaseLayout>

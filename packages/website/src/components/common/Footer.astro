@@ -44,20 +44,20 @@ const links: {
 ---
 
 <footer
-  class="px-4 mt-32 mb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 max-w-5xl gap-y-8 mx-auto"
+  class="px-4 mt-32 mb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-5xl gap-8 mx-auto"
 >
   {
     links.map((group) => (
-      <ul class="flex flex-col gap-2">
-        <li class="text-zinc-300 font-bold">{group.title}</li>
+      <ul class="flex flex-col gap-1">
+        <li class="text-zinc-300 font-bold border-b border-zinc-700 border-dashed">{group.title}</li>
         {group.items.map((item) => (
           <li>
-            <a href={item.href} class="hover:text-zinc-400 transition-colors">{item.label}</a>
+            <a href={item.href} class="hover:text-zinc-400">{item.label}</a>
           </li>
         ))}
       </ul>
     ))
   }
 
-  <p class="col-start-1 col-span-5 my-12 text-lg">You've officially reached the end.</p>
+  <!-- <p class="col-start-1 col-span-5 my-12 text-lg">You've officially reached the end.</p> -->
 </footer>
