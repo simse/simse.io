@@ -9,8 +9,10 @@ const personalisation = personalise({
 const uwuEnabled = personalisation.flags.includes('UWU_ENABLED')
 ---
 
-<header class="my-4 max-w-4xl mx-auto px-2">
-  <div class="my-12 flex items-center gap-8">
+<header class="my-8">
+  <!-- <p class="border-b text-lg font-bold mb-2 border-zinc-700 text-zinc-300">Welcome</p> -->
+
+  <div class="flex items-center gap-8">
     {uwuEnabled && <img class="h-32 mb-4" src="/uwu.png" alt="v-tuber style logo that reads Simon Sorensen" />}
 
     <div class="pb-4">

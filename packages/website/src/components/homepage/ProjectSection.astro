@@ -1,18 +1,21 @@
 ---
+import SectionHeader from '@components/common/SectionHeader.svelte'
 import { getProjects } from '@lib/cms'
 import ProjectCard from '../projects/ProjectCard.astro'
 
 const projects = await getProjects()
 ---
 
-{projects.length > 0 ? <section class="my-16 px-3" title="Projects">
-  <a href="/projects">
-    <h2 class="text-lg mb-2 font-bold">Projects</h2>
-  </a>
+{projects.length > 0 ? <section class="my-16" title="Projects">
+  <SectionHeader
+    title="Projects"
+    href="/projects"
+    headerAction="See all →"
+  />
 
   <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     {
-      projects.map((project) => (
+      projects.slice(0, 4).map((project) => (
         <li>
           <ProjectCard project={project} />
         </li>

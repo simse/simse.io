@@ -1,4 +1,5 @@
 ---
+import DataTable from '@components/common/DataTable.svelte'
 import Footer from '@components/common/Footer.astro'
 import ImageCarousel from '@components/common/ImageCarousel.svelte'
 import Text from '@components/text/Text.astro'
@@ -19,8 +20,8 @@ const { project }: Props = Astro.props
   description={project.description}
 >
   <main class="max-w-5xl mx-auto px-4">
-    <header class="my-12">
-      <h1 class="text-2xl md:text-3xl mb-2 font-bold">{project.title}</h1>
+    <header class="my-4">
+      <h1 class="text-2xl mb-2 font-bold">{project.title}</h1>
       <span class="text-lg text-white/70"
         >{project.description}</span
       >
@@ -39,70 +40,34 @@ const { project }: Props = Astro.props
 
 
     <div class="grid grid-cols-1 md:grid-cols-5 md:gap-8">
-      <section class="mb-8 md:col-span-2">
-        <h2 class="text-lg mb-2 font-bold">Key Information</h2>
-
-        <table class="w-full bg-zinc-900 rounded-lg overflow-clip">
-          {
-            project.languages && project.languages.length > 0 && (
-              <tr class="border-b border-white/20 last:border-transparent">
-                <td class="py-3 px-3 font-bold w-32">
-                  Language{project.languages.length > 1 && 's'}
-                </td>
-                <td class="py-3 px-3">{project.languages.join(', ')}</td>
-              </tr>
-            )
-          }
-
-          {
-            project.technologies && project.technologies.length > 0 && (
-              <tr class="border-b border-white/20 last:border-transparent">
-                <td class="py-3 px-3 font-bold w-32">
-                  Technolog{project.technologies.length > 1 ? 'ies' : 'y'}
-                </td>
-                <td class="py-3 px-3">{project.technologies.join(', ')}</td>
-              </tr>
-            )
-          }
-          {
-            project.sourceCode && (
-              <tr class="border-b last:border-transparent border-white/20">
-                <td class="py-3 px-3 font-bold">Source Code</td>
-                <td class="py-3 px-3">
-                  <a
-                    href={project.sourceCode}
-                    class="text-purple-400 hover:text-purple-500 hover:border-purple-500 border-purple-400 border-b transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {project.sourceCode.replace('https://', '')}
-                  </a>
-                </td>
-              </tr>
-            )
-          }
-          {
-            project.demo && (
-              <tr class="border-b last:border-transparent border-white/20">
-                <td class="py-3 px-3 font-bold">Demo</td>
-                <td class="py-3 px-3">
-                  <a
-                    href={project.demo}
-                    class="text-purple-400 hover:text-purple-500 hover:border-purple-500 border-purple-400 border-b transition-colors"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    {project.demo.replace('https://', '')}
-                  </a>
-                </td>
-              </tr>
-            )
-          }
-          {/*<Downloads projectSlug={project.slug} client:load />*/}
-        </table>
+      <section class="md:col-span-2">
+        <DataTable
+          title="Key Information"
+          class="w-full mb-8"
+          rows={[
+            (project.languages && {
+              key: `Language${project.languages.length > 1 ? 's' : ''}`,
+              value: project.languages.join(', '),
+            }),
+            (project.technologies && {
+              key: `Technolog${project.technologies.length > 1 ? 'ies' : 'y'}`,
+              value: project.technologies.join(', '),
+            }),
+            (project.sourceCode && {
+              key: 'Source Code',
+              value: project.sourceCode.replace('https://', ''),
+              href: project.sourceCode,
+            }),
+            (project.demo && {
+              key: 'Demo',
+              value: project.demo.replace('https://', ''),
+              href: project.demo,
+            })
+          ]}
+        />
       </section>
 
-      <section class="mb-8 md:col-span-3 pt-8">
+      <section class="md:col-span-3">
         <Text content={project.details} fullWidth={true} />
       </section>
     </div>

@@ -26,18 +26,18 @@ let isMenuOpen = $state(false)
 </script>
 
 <nav
-  class="top-0 sticky z-30 mb-8 bg-zinc-950/70 backdrop-blur"
+  class="top-0 sticky border-b border-zinc-700 border-dashed bg-zinc-900 z-50"
 >
-  <div class="max-w-7xl mx-auto py-2 px-4 grid grid-cols-2 md:grid-cols-3 items-center min-h-14">
-    <a class="text-lg transition-opacity" href="/">
+  <div class="py-2 px-4 flex items-center">
+    <a class="text-lg transition-opacity bg-blue-900 w-fit px-2 -ml-2" href="/">
       Simon Sorensen
     </a>
 
-    <ul class="sm:flex items-center hidden ml-auto md:mx-auto">
+    <ul class="sm:flex items-center hidden ml-auto gap-4">
       {#each items as { title, link }}
         <li>
           <a
-            class={`p-2 px-3 hover:text-white transition-colors
+            class={`hover:text-white
               ${title === activeItem ? 'font-bold text-white' : 'text-white/60'}`}
             href={link}
           >
@@ -46,10 +46,6 @@ let isMenuOpen = $state(false)
         </li>
       {/each}
     </ul>
-
-    <button class="ml-auto hidden" aria-label="Search">
-      <iconify-icon icon="tabler:search" size={22}></iconify-icon>
-    </button>
 
     <button class="sm:hidden uppercase text-sm font-bold ml-auto flex items-center gap-1" onclick={() => isMenuOpen = !isMenuOpen}>
       {#if isMenuOpen}
@@ -64,7 +60,7 @@ let isMenuOpen = $state(false)
 </nav>
 
 <div 
-  class="fixed top-[60px] left-0 w-full h-full bg-zinc-950/70 backdrop-blur z-20 transition-all duration-300"
+  class="fixed top-[46px] left-0 w-full h-fit bg-zinc-900 z-50 border-b border-zinc-700"
   class:opacity-0={!isMenuOpen}
   class:opacity-100={isMenuOpen}
   class:pointer-events-none={!isMenuOpen}
@@ -72,11 +68,20 @@ let isMenuOpen = $state(false)
   class:-translate-y-10={!isMenuOpen}
   class:translate-y-0={isMenuOpen}
 >
-  <ul class="flex flex-col gap-4 p-2">
+  <ul class="flex gap-4 p-2">
     {#each items as { title, link }}
       <li>
-        <a class="p-2 hover:text-white transition-colors text-2xl" href={link}>{title}</a>
+        <a class="" href={link}>{title}</a>
       </li>
     {/each}
   </ul>
 </div>
+
+<div
+  class="fixed top-0 left-0 w-full h-full bg-black z-30"
+  class:opacity-0={!isMenuOpen}
+  class:opacity-80={isMenuOpen}
+  class:pointer-events-none={isMenuOpen}
+  class:pointer-events-auto={!isMenuOpen}
+  class:hidden={!isMenuOpen}
+></div>

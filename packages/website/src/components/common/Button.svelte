@@ -4,15 +4,19 @@ import 'iconify-icon'
 import type { Snippet } from 'svelte'
 
 interface Props {
-  href: string
+  href?: string
   style?: 'primary' | 'secondary' | 'amber'
   icon?: string
+  iconPlacement?: 'right' | 'left'
   target?: '_blank' | '_self'
   shortcut?: string
   bgColor?: string
   hoverBgColor?: string
   textColor?: string
   children?: Snippet
+  class?: string
+  onClick?: () => void
+  disabled?: boolean
 }
 
 const {
@@ -20,11 +24,15 @@ const {
   style = 'primary',
   icon,
   target = '_self',
+  iconPlacement = 'left',
   shortcut,
   bgColor,
   hoverBgColor,
   textColor,
   children,
+  class: _class,
+  onClick,
+  disabled = false,
 }: Props = $props()
 
 const styleToClass = {
@@ -62,29 +70,49 @@ const textColorClass = () => {
 
 const onKeyDown = (e: KeyboardEvent) => {
   if (e.key === shortcut) {
-    if (target === '_self') {
-      navigate(href)
-    } else {
-      window.open(href, '_blank')?.focus()
-    }
+    navigateToHref()
   }
 }
+
+const navigateToHref = () => {
+  if (!href) return
+
+  if (target === '_self') {
+    navigate(href)
+  } else {
+    window.open(href, '_blank')?.focus()
+  }
+}
+
+const classes = `
+  flex items-center gap-2 w-fit py-0.5 px-2 disabled:pointer-events-none
+  disabled:opacity-70
+  ${bgColorClass()} ${hoverBgColorClass()} ${textColorClass()} ${_class}
+`
 </script>
 
 <svelte:window on:keydown={onKeyDown} />
 
-<a 
-  class={`flex items-center gap-2 transition-colors w-fit py-1.5 px-3 rounded ${bgColorClass()} ${hoverBgColorClass()} ${textColorClass()}`} 
-  href={href} 
-  target={target}
-  role="button"
+<button
+  class={classes}
+  onclick={() => {
+    navigateToHref();
+    if (onClick) {
+      onClick();
+    }
+  }}
+  disabled={disabled}
 >
-    {#if icon}
+    {#if icon && iconPlacement === 'left'}
     <iconify-icon icon={icon} size={18}></iconify-icon>
     {/if}
 
     {#if children}
     {@render children()}
+    {/if}
+
+    {#if icon && iconPlacement === 'right'}
+    <iconify-icon icon={icon} size={18}></iconify-icon>
     {/if}
 
     {#if shortcut}
@@ -94,4 +122,4 @@ const onKeyDown = (e: KeyboardEvent) => {
         {shortcut}
     </code>
     {/if}
-</a>
+</button>

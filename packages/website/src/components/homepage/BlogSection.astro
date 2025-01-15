@@ -1,23 +1,53 @@
 ---
 import client from '@lib/client'
 
-import BlogCard from '@components/blog/BlogCard.astro'
+import Button from '@components/common/Button.svelte'
+import { imageUrlFromAssetRef } from '@lib/image'
 
 const postsRequest = await client.api.posts.get()
 
 const posts = postsRequest.data
+
+const formatDate = (date: string) => {
+  return new Date(date).toLocaleDateString('en-gb')
+}
 ---
 {posts && (
-<section class="my-16 px-3" title="Blog">
-  <a href="/blog">
-    <h2 class="text-lg mb-2 font-bold">Blog</h2>
-  </a>
+<section class="my-16" title="Blog">
+  <header class="flex justify-between mb-2 border-zinc-700 pb-1 border-b">
+    <a href="/blog">
+      <h2 class="font-bold">Blog Posts</h2>
+    </a>
 
-  <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <a class="text-zinc-300 hover:text-white" href="/blog">See all →</a>
+  </header>
+
+  <ul class="">
     {
-      posts.slice(0, 4).map((post) => (
-        <li>
-          <BlogCard post={post} dateWithYear={true} />
+      posts.slice(0, 10).map((post) => (
+        <li class="flex items-center py-1 border-b border-zinc-700 border-dashed hover:bg-zinc-800">
+          <img
+            class="bg-zinc-800 aspect-[5/3] h-6 mr-2 hidden sm:block"
+            src={post.image ? imageUrlFromAssetRef(post.image.asset._ref, {
+              resizing_type: 'fill',
+              width: 200,
+              height: 120,
+              gravity: { type: 'no' },
+              enlarge: 1,
+              format: 'avif',
+            }) : ''}
+          />
+          <span class="font-mono font-bold mr-2 text-zinc-400 text-sm hidden sm:block">{formatDate(post.published)}</span>
+
+          <span class="font-bold">{post.title}</span>
+
+          <Button 
+            client:load
+            class="ml-auto"
+            href={`/${post.slug}`}
+          >
+            Read →
+          </Button>
         </li>
       ))
     }

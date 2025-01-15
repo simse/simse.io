@@ -9,6 +9,9 @@ export default {
         sans: ['Soehne', 'sans-serif'],
         mono: ['SoehneMono', 'monospace']
       },
+      boxShadow: {
+        table: '2px 2px #27272a'
+      },
       keyframes: {
         'fade-in': {
           '0%': {
