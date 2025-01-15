@@ -27,7 +27,7 @@ const formatDate = (date: string) => {
       posts.slice(0, 10).map((post) => (
         <li class="flex items-center py-1 border-b border-zinc-700 border-dashed hover:bg-zinc-800">
           <img
-            class="bg-zinc-800 aspect-[5/3] h-6 mr-2"
+            class="bg-zinc-800 aspect-[5/3] h-6 mr-2 hidden sm:block"
             src={post.image ? imageUrlFromAssetRef(post.image.asset._ref, {
               resizing_type: 'fill',
               width: 200,
@@ -37,7 +37,7 @@ const formatDate = (date: string) => {
               format: 'avif',
             }) : ''}
           />
-          <span class="font-mono font-bold mr-2 text-zinc-400 text-sm">{formatDate(post.published)}</span>
+          <span class="font-mono font-bold mr-2 text-zinc-400 text-sm hidden sm:block">{formatDate(post.published)}</span>
 
           <span class="font-bold">{post.title}</span>
 

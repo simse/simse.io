@@ -4,7 +4,7 @@ import 'iconify-icon'
 import type { Snippet } from 'svelte'
 
 interface Props {
-  href: string
+  href?: string
   style?: 'primary' | 'secondary' | 'amber'
   icon?: string
   iconPlacement?: 'right' | 'left'
@@ -14,7 +14,9 @@ interface Props {
   hoverBgColor?: string
   textColor?: string
   children?: Snippet
-  class: string
+  class?: string
+  onClick?: () => void;
+  disabled?: boolean;
 }
 
 const {
@@ -29,6 +31,8 @@ const {
   textColor,
   children,
   class: _class,
+  onClick,
+  disabled = false,
 }: Props = $props()
 
 const styleToClass = {
@@ -66,22 +70,38 @@ const textColorClass = () => {
 
 const onKeyDown = (e: KeyboardEvent) => {
   if (e.key === shortcut) {
-    if (target === '_self') {
+    navigateToHref()
+  }
+}
+
+const navigateToHref = () => {
+  if (!href) return;
+  
+  if (target === '_self') {
       navigate(href)
     } else {
       window.open(href, '_blank')?.focus()
     }
-  }
 }
+
+const classes = `
+  flex items-center gap-2 w-fit py-0.5 px-2 disabled:pointer-events-none
+  disabled:opacity-70
+  ${bgColorClass()} ${hoverBgColorClass()} ${textColorClass()} ${_class}
+`;
 </script>
 
 <svelte:window on:keydown={onKeyDown} />
 
-<a 
-  class={`flex items-center gap-2 w-fit py-0.5 px-2 ${bgColorClass()} ${hoverBgColorClass()} ${textColorClass()} ${_class}`} 
-  href={href} 
-  target={target}
-  role="button"
+<button
+  class={classes}
+  onclick={() => {
+    navigateToHref();
+    if (onClick) {
+      onClick();
+    }
+  }}
+  disabled={disabled}
 >
     {#if icon && iconPlacement === 'left'}
     <iconify-icon icon={icon} size={18}></iconify-icon>
@@ -102,4 +122,4 @@ const onKeyDown = (e: KeyboardEvent) => {
         {shortcut}
     </code>
     {/if}
-</a>
+</button>

@@ -4,12 +4,17 @@
     let renderTime = $state<number | null>(0);
 
     const updateRenderTime = () => {
-        const navEntry = performance.getEntriesByType('navigation')[0];
-        // @ts-expect-error both responseStart and requestStart DO exist on that type
-        const serverTime = navEntry.responseStart - navEntry.requestStart;
-        renderTime = Math.round(serverTime);
+        // @ts-expect-error
+        const linkEntry = window.performance.getEntriesByType('resource').filter(entry => entry.initiatorType === 'fetch').pop();
 
-        console.log(Math.round(serverTime))
+        if (linkEntry) {
+            // @ts-expect-error
+            renderTime = Math.round(linkEntry.serverTiming[0].duration);
+        } else {
+            const navEntry = performance.getEntriesByType('navigation')[0];
+            // @ts-expect-error
+            renderTime = Math.round(navEntry.serverTiming[0].duration);
+        }
     };
 
     onMount(() => {
@@ -23,7 +28,7 @@
 </script>
 
 {#if renderTime}
-<span class="max-w-4xl mx-auto block mt-4 text-zinc-300">
+<span class="max-w-4xl mx-auto block my-4 text-zinc-400 text-sm uppercase">
     Page rendered in <code>{renderTime}ms</code>
 </span>
 {/if}

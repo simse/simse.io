@@ -1,10 +1,11 @@
 <script lang="ts">
     interface TableProps {
         title?: string;
-        rows: {
+        rows: ({
             key: string;
             value: string;
-        }[];
+            href?: string;
+        } | undefined)[];
         class?: string;
     }
 
@@ -22,10 +23,16 @@
     </thead>
     {/if}
     <tbody>
-        {#each rows as row}
+        {#each rows.filter((row) => row !== undefined) as row}
         <tr class="border-b border-zinc-700">
             <td class="p-1 border-r border-zinc-700">{row.key}</td>
-            <td class="p-1 px-2">{row.value}</td>
+            <td class="p-1 px-2">
+                {#if row.href}
+                <a class="underline text-blue-400" href={row.href}>{row.value}</a>
+                {:else}
+                {row.value}
+                {/if}
+            </td>
         </tr>
         {/each}
     </tbody>

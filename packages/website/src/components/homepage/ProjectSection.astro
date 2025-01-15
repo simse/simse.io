@@ -1,16 +1,19 @@
 ---
 import { getProjects } from '@lib/cms'
+import SectionHeader from '@components/common/SectionHeader.svelte'
 import ProjectCard from '../projects/ProjectCard.astro'
 
 const projects = await getProjects()
 ---
 
 {projects.length > 0 ? <section class="my-16" title="Projects">
-  <a href="/projects">
-    <h2 class="text-xl mb-2 font-bold">Projects</h2>
-  </a>
+  <SectionHeader
+    title="Projects"
+    href="/projects"
+    headerAction="See all →"
+  />
 
-  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
     {
       projects.slice(0, 4).map((project) => (
         <li>
@@ -19,8 +22,4 @@ const projects = await getProjects()
       ))
     }
   </ul>
-
-  <p class="mt-4 text-zinc-300 border-t border-zinc-700 pt-1">
-    Showing {projects.slice(0, 4).length} of {projects.length} projects
-  </p>
 </section> : null}

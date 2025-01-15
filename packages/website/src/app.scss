@@ -117,7 +117,9 @@
   }
 
   .astro-code {
-    @apply rounded;
+    @apply border;
+    @apply border-zinc-700;
+    @apply border-dashed;
     @apply p-4;
     @apply my-6;
     @apply col-start-1;
