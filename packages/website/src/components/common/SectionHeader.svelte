@@ -1,12 +1,17 @@
 <script lang="ts">
-    interface SectionHeaderProps {
-        title: string;
-        href?: string;
-        headerAction?: string;
-        secondary?: boolean;
-    }
+interface SectionHeaderProps {
+  title: string
+  href?: string
+  headerAction?: string
+  secondary?: boolean
+}
 
-    const { title, href, headerAction, secondary = false }: SectionHeaderProps = $props();
+const {
+  title,
+  href,
+  headerAction,
+  secondary = false,
+}: SectionHeaderProps = $props()
 </script>
 
 <header class={`flex justify-between mb-2 border-zinc-700 pb-1 border-b ${secondary ? 'border-dashed' : ''}`}>

@@ -15,8 +15,8 @@ interface Props {
   textColor?: string
   children?: Snippet
   class?: string
-  onClick?: () => void;
-  disabled?: boolean;
+  onClick?: () => void
+  disabled?: boolean
 }
 
 const {
@@ -75,20 +75,20 @@ const onKeyDown = (e: KeyboardEvent) => {
 }
 
 const navigateToHref = () => {
-  if (!href) return;
-  
+  if (!href) return
+
   if (target === '_self') {
-      navigate(href)
-    } else {
-      window.open(href, '_blank')?.focus()
-    }
+    navigate(href)
+  } else {
+    window.open(href, '_blank')?.focus()
+  }
 }
 
 const classes = `
   flex items-center gap-2 w-fit py-0.5 px-2 disabled:pointer-events-none
   disabled:opacity-70
   ${bgColorClass()} ${hoverBgColorClass()} ${textColorClass()} ${_class}
-`;
+`
 </script>
 
 <svelte:window on:keydown={onKeyDown} />

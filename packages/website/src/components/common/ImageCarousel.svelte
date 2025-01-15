@@ -1,7 +1,7 @@
 <script lang="ts">
 import { quadInOut } from 'svelte/easing'
 import { fade } from 'svelte/transition'
-    import Button from './Button.svelte';
+import Button from './Button.svelte'
 
 function slideOut(_: Element, { delay = 0, duration = 400 }) {
   const directionModifier = direction === 'FORWARDS' ? '-' : ''

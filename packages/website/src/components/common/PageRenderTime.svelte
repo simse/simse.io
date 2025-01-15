@@ -1,30 +1,33 @@
 <script lang="ts">
-    import { onMount } from "svelte";
+import { onMount } from 'svelte'
 
-    let renderTime = $state<number | null>(0);
+let renderTime = $state<number | null>(0)
 
-    const updateRenderTime = () => {
-        // @ts-expect-error
-        const linkEntry = window.performance.getEntriesByType('resource').filter(entry => entry.initiatorType === 'fetch').pop();
+const updateRenderTime = () => {
+  // @ts-expect-error
+  const linkEntry = window.performance
+    .getEntriesByType('resource')
+    .filter((entry) => entry.initiatorType === 'fetch')
+    .pop()
 
-        if (linkEntry) {
-            // @ts-expect-error
-            renderTime = Math.round(linkEntry.serverTiming[0].duration);
-        } else {
-            const navEntry = performance.getEntriesByType('navigation')[0];
-            // @ts-expect-error
-            renderTime = Math.round(navEntry.serverTiming[0].duration);
-        }
-    };
+  if (linkEntry) {
+    // @ts-expect-error
+    renderTime = Math.round(linkEntry.serverTiming[0].duration)
+  } else {
+    const navEntry = performance.getEntriesByType('navigation')[0]
+    // @ts-expect-error
+    renderTime = Math.round(navEntry.serverTiming[0].duration)
+  }
+}
 
-    onMount(() => {
-        updateRenderTime();
-        document.addEventListener('astro:page-load', updateRenderTime)
+onMount(() => {
+  updateRenderTime()
+  document.addEventListener('astro:page-load', updateRenderTime)
 
-        return () => {
-            document.removeEventListener('astro:page-load', updateRenderTime)
-        }
-    });
+  return () => {
+    document.removeEventListener('astro:page-load', updateRenderTime)
+  }
+})
 </script>
 
 {#if renderTime}

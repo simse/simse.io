@@ -1,15 +1,18 @@
 <script lang="ts">
-    interface TableProps {
-        title?: string;
-        rows: ({
-            key: string;
-            value: string;
-            href?: string;
-        } | undefined)[];
-        class?: string;
-    }
+interface TableProps {
+  title?: string
+  rows: (
+    | {
+        key: string
+        value: string
+        href?: string
+      }
+    | undefined
+  )[]
+  class?: string
+}
 
-    const { title, rows, class: _class }: TableProps = $props();
+const { title, rows, class: _class }: TableProps = $props()
 </script>
 
 <table class={`border-l-4 border-r border-zinc-700 shadow-table min-w-64 ${!title ? 'border-t' : ''} ${_class}`}>
