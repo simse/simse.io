@@ -4,7 +4,6 @@ import { onMount } from 'svelte'
 let renderTime = $state<number | null>(0)
 
 const updateRenderTime = () => {
-  
   const linkEntry = window.performance
     .getEntriesByType('resource')
     // @ts-expect-error
