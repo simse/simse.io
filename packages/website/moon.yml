@@ -22,7 +22,7 @@ tasks:
       - sync
 
   dev:
-    command: 'bun --bun run astro dev'
+    command: 'bun --bun run astro dev --silent'
     local: true
 
   start:

@@ -7,21 +7,12 @@ import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { type Post } from '@lib/cms/posts'
 import { imageUrl } from '@lib/image'
+
 interface Props {
   post: Post
 }
 
 const { post } = Astro.props
-
-const image = imageUrl(getImageBuilder(post.image).url(), {
-  resizing_type: 'fill',
-  width: 1200,
-  height: 800,
-  gravity: { type: 'no' },
-  enlarge: 1,
-  format: 'avif',
-  quality: 90,
-})
 
 //const suggestedPosts = [];
 ---
@@ -49,8 +40,16 @@ const image = imageUrl(getImageBuilder(post.image).url(), {
       post.image && (
         <figure class="mt-4 max-w-4xl mx-auto px-4">
           <img
-            class="w-full mb-2 aspect-[3/2] bg-zinc-900 "
-            src={image}
+            class="w-full mb-2 aspect-[3/2] bg-zinc-900"
+            src={imageUrl(getImageBuilder(post.image).url(), {
+              resizing_type: 'fill',
+              width: 1200,
+              height: 800,
+              gravity: { type: 'no' },
+              enlarge: 1,
+              format: 'avif',
+              quality: 90,
+            })}
             alt={post.image.alt}
           />
 
