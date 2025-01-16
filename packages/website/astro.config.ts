@@ -1,6 +1,5 @@
 import { defineConfig, envField, passthroughImageService } from 'astro/config'
 import tailwind from '@astrojs/tailwind'
-import icon from 'astro-icon'
 import svelte from '@astrojs/svelte'
 import sitemap from '@astrojs/sitemap'
 import bun from "@nurodev/astro-bun"
@@ -19,7 +18,6 @@ export default defineConfig({
     tailwind({
       applyBaseStyles: false,
     }),
-    icon(),
     svelte(),
     sitemap()
   ],
@@ -32,6 +30,8 @@ export default defineConfig({
       IMGPROXY_ENDPOINT: envField.string({ context: 'server', access: 'public', optional: true }),
       IMGPROXY_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
       IMGPROXY_SALT: envField.string({ context: 'server', access: 'secret', optional: true }),
+      AXIOM_DATASET: envField.string({ context: 'server', access: 'secret', default: 'simse-io-dev' }),
+      AXIOM_TOKEN: envField.string({ context: 'server', access: 'secret' }),
     },
   },
   vite: {

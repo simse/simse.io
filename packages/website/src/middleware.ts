@@ -1,6 +1,7 @@
 import { defineMiddleware } from 'astro/middleware'
+import logger from './logger'
 
-export const onRequest = defineMiddleware(async ({ request }, next) => {
+export const onRequest = defineMiddleware(async ({ request, url }, next) => {
   const startTime = performance.now()
 
   // Wait for the response from next middleware/page render
@@ -20,6 +21,18 @@ export const onRequest = defineMiddleware(async ({ request }, next) => {
 
   // Log render time (optional)
   // console.log(`Page render time: ${renderTime.toFixed(2)}ms`);
+
+  logger.info(
+    {
+      renderTime,
+      path: url.pathname,
+      method: request.method,
+      prefecthed:
+        request.headers.has('Purpose') &&
+        request.headers.get('Purpose') === 'prefetch',
+    },
+    'served page',
+  )
 
   return newResponse
 })
