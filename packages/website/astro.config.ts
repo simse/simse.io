@@ -1,8 +1,8 @@
 import { defineConfig, envField, passthroughImageService } from 'astro/config'
-import tailwind from '@astrojs/tailwind'
 import svelte from '@astrojs/svelte'
 import sitemap from '@astrojs/sitemap'
 import bun from "@nurodev/astro-bun"
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
@@ -15,9 +15,6 @@ export default defineConfig({
     '/posts': '/blog',
   },
   integrations: [
-    tailwind({
-      applyBaseStyles: false,
-    }),
     svelte(),
     sitemap()
   ],
@@ -35,6 +32,7 @@ export default defineConfig({
     },
   },
   vite: {
+    plugins: [tailwindcss()],
     css: {
       preprocessorOptions: {
         scss: {
