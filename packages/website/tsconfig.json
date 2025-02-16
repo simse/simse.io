@@ -12,6 +12,6 @@
       "@templates/*": ["templates/*"],
       "@utils/*": ["utils/*"],
       "@lib/*": ["lib/*"]
-    },
+    }
   }
 }

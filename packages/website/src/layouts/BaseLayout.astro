@@ -4,7 +4,7 @@ import Navbar from '@components/Navbar.svelte'
 import PageRenderTime from '@components/common/PageRenderTime.svelte'
 import { personalise } from '@lib/personalisation'
 import LoadingIndicator from 'astro-loading-indicator/component'
-import '../app.scss'
+import '../global.css';
 
 interface Props {
   title: string
@@ -22,10 +22,10 @@ const createTitle = (title: string) => {
     : 'Simon Sorensen—Software Engineer in London'
 }
 
-const decision = personalise({
-  url: Astro.url,
-  userAgent: Astro.request.headers.get('User-Agent') || '',
-})
+//const decision = personalise({
+//  url: Astro.url,
+//  userAgent: Astro.request.headers.get('User-Agent') || '',
+//})
 ---
 <html lang="en" transition:animate="none">
   <head>
@@ -42,38 +42,40 @@ const decision = personalise({
     }
     <style is:global>
       @font-face {
-        font-family: 'Soehne';
-        src: url('/fonts/Soehne-Regular.woff2');
+        font-family: 'Geist';
+        src: url('/fonts/Geist.woff2') format("woff2-variations");
         font-display: swap;
+        font-weight: 125 950;
+        font-stretch: 75% 125%;
       }
-      @font-face {
-        font-family: 'Soehne';
-        src: url('/fonts/Soehne-Bold.woff2');
-        font-weight: 700;
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'SoehneMono';
-        src: url('/fonts/Soehne-Mono-Regular.woff2');
-        font-display: swap;
-      }
-      @font-face {
-        font-family: 'SoehneMono';
-        src: url('/fonts/Soehne-Mono-Bold.woff2');
-        font-weight: 700;
-        font-display: swap;
-      }
+      /*@font-face {*/
+      /*  font-family: 'Soehne';*/
+      /*  src: url('/fonts/Soehne-Bold.woff2');*/
+      /*  font-weight: 700;*/
+      /*  font-display: swap;*/
+      /*}*/
+      /*@font-face {*/
+      /*  font-family: 'SoehneMono';*/
+      /*  src: url('/fonts/Soehne-Mono-Regular.woff2');*/
+      /*  font-display: swap;*/
+      /*}*/
+      /*@font-face {*/
+      /*  font-family: 'SoehneMono';*/
+      /*  src: url('/fonts/Soehne-Mono-Bold.woff2');*/
+      /*  font-weight: 700;*/
+      /*  font-display: swap;*/
+      /*}*/
     </style>
     <ClientRouter />
     <LoadingIndicator color="#2563eb" />
   </head>
   <body class="text-zinc-100 bg-zinc-950">
-    <main class="max-w-4xl mx-auto md:mt-4 bg-zinc-900 border border-transparent md:border-zinc-700">
-      <Navbar client:load />
+    <Navbar client:load />
 
+    <main class="max-w-3xl mx-auto">
       <slot />
     </main>
     
-    <PageRenderTime client:load />
+    <!--<PageRenderTime client:load />-->
   </body>
 </html>
