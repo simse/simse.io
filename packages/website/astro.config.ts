@@ -3,6 +3,7 @@ import svelte from '@astrojs/svelte'
 import sitemap from '@astrojs/sitemap'
 import bun from "@nurodev/astro-bun"
 import tailwindcss from "@tailwindcss/vite";
+import Icons from "unplugin-icons/vite";
 
 // https://astro.build/config
 export default defineConfig({
@@ -32,7 +33,12 @@ export default defineConfig({
     },
   },
   vite: {
-    plugins: [tailwindcss()],
+    plugins: [
+      tailwindcss(),
+      Icons({
+        compiler: 'svelte'
+      })
+    ],
     css: {
       preprocessorOptions: {
         scss: {

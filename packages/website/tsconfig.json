@@ -12,6 +12,7 @@
       "@templates/*": ["templates/*"],
       "@utils/*": ["utils/*"],
       "@lib/*": ["lib/*"]
-    }
+    },
+    "types": ["unplugin-icons/types/svelte"]
   }
 }

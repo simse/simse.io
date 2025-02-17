@@ -33,12 +33,14 @@
   },
   "devDependencies": {
     "@biomejs/biome": "1.9.2",
+    "@iconify/json": "^2.2.307",
     "@playwright/test": "1.47.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.5.0",
     "@types/bun": "^1.1.14",
     "pino-pretty": "^13.0.0",
-    "sass": "1.79.3"
+    "sass": "1.79.3",
+    "unplugin-icons": "^22.0.0"
   },
   "cacheDirectories": [
     ".astro"

@@ -2,4 +2,49 @@
 
 @theme {
   --font-sans: "Geist", sans-serif;
+  --font-mono: "Geist Mono", monospace;
+}
+
+.text p {
+  @apply my-6;
+}
+
+.text h1 {
+  @apply mt-12;
+}
+
+.text h2 {
+  @apply mt-8;
+}
+
+.text h1 {
+  @apply font-semibold;
+  @apply text-2xl;
+}
+
+.text h2 {
+  @apply font-semibold;
+  @apply text-xl;
+}
+
+.text ul {
+  @apply list-disc;
+  @apply list-inside;
+}
+
+.text li {
+  @apply my-2;
+}
+
+.text img {
+  @apply my-8;
+}
+
+.text code {
+  @apply font-medium;
+}
+
+.text .astro-code {
+  @apply p-4;
+  @apply rounded-md;
 }

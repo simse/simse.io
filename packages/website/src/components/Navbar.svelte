@@ -1,5 +1,6 @@
 <script lang="ts">
-  import "iconify-icon";
+  //import "iconify-icon";
+  import MenuIcon from "virtual:icons/tabler/menu-2";
 
   const items = [
     {
@@ -51,7 +52,7 @@
         <iconify-icon icon="tabler:x" size={18}></iconify-icon>
         Close
       {:else}
-        <iconify-icon icon="tabler:menu-2" size={18}></iconify-icon>
+        <MenuIcon />
         Menu
       {/if}
     </button>

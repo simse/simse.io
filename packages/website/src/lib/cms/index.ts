@@ -11,9 +11,9 @@ import {
 } from './projects'
 
 export const getPosts = async (): Promise<Post[]> => {
-  if (cache.has('posts')) {
-    return cache.get<Post[]>('posts') || []
-  }
+  //if (cache.has('posts')) {
+  //  return cache.get<Post[]>('posts') || []
+  //}
 
   const posts = await getPostsRaw()
   cache.set('posts', posts)

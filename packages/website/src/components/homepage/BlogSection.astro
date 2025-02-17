@@ -1,24 +1,17 @@
 ---
 import client from '@lib/client'
-
-import Button from '@components/common/Button.svelte'
 import { imageUrlFromAssetRef } from '@lib/image'
+import BlogCard from '@components/blog/BlogCard.svelte'
 
+// fetch all posts
 const postsRequest = await client.api.posts.get()
-
 const posts = postsRequest.data
 
-const formatDate = (date: string) => {
-  return new Date(date).toLocaleDateString('en-gb', {
-    day: '2-digit',
-    month: 'short'
-  })
-}
-
+// TODO: Replace with list of actual tags
 const tags = ["Web", "Career", "Engineering", "Typescript", "Rust"]
 ---
 {posts && (
-<section class="my-16 max-w-xl mx-auto" title="Blog">
+<section class="my-16 max-w-xl mx-auto">
   <ul class="flex gap-2 my-6">
     {tags.map(tag => {
    
@@ -29,35 +22,8 @@ const tags = ["Web", "Career", "Engineering", "Typescript", "Rust"]
     })}
   </ul>
 
-
   <ul class="">
-    {posts.slice(0, 10).map((post) => (
-      <li class="my-8">
-        <a class="group" href={`/${post.slug}`}> 
-          <div class="flex items-center">
-            <img
-              class="bg-zinc-900 h-8 w-8 mr-4 rounded-lg"
-              src={post.image ? imageUrlFromAssetRef(post.image.asset._ref, {
-                resizing_type: 'fill',
-                width: 200,
-                height: 200,
-                gravity: { type: 'no' },
-                enlarge: 1,
-                format: 'avif',
-            }) : ''}
-            />
-
-            <h2 class="font-bold">{post.title}</h2>
-          </div>
-
-          <div class="text-zinc-300 bg-zinc-800/80 group-hover:bg-zinc-800 group-hover:scale-[1.02] origin-left transition-all mt-2 p-4 rounded-tl-lg rounded-2xl">
-            {post.excerpt}
-
-            <span class="text-sm mt-4 block text-zinc-400">{formatDate(post.published)}</span>
-          </div>
-        </a>
-      </li>
-    ))}
+    {posts.slice(0, 10).map((post) => <BlogCard post={post} />)}
   </ul>
 </section>
 )}

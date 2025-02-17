@@ -21,7 +21,7 @@ const imageBuilder = getImageBuilder(props.node.asset)
 ---
 
 <img
-  src={imageBuilder.width(1000).height(800).crop('focalpoint').url()}
-  class="my-4 rounded aspect-[5/4] w-full bg-zinc-900"
+  src={imageBuilder.width(1000).url()}
+  class="my-4 w-full bg-zinc-900"
   alt=""
 />

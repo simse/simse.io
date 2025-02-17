@@ -2,7 +2,7 @@
 import { getImageBuilder } from '@cms'
 import PublishDate from '@components/blog/PublishDate.astro'
 import Footer from '@components/common/Footer.astro'
-import TableOfContents from '@components/fragments/TableOfContents.astro'
+//import TableOfContents from '@components/fragments/TableOfContents.astro'
 import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { type Post } from '@lib/cms/posts'
@@ -12,21 +12,12 @@ interface Props {
   post: Post
 }
 
-const { post } = Astro.props
+// TODO: Figure out why this is neccesary
+const { post } = Astro.props as Props;
 
 //const suggestedPosts = [];
 ---
 <>
-  <script>
-    const toc = document.getElementById('toc');
-    window.addEventListener('scroll', () => {
-      if (window.scrollY < 500) {
-        toc?.classList.add('opacity-0');
-      } else {
-        toc?.classList.remove('opacity-0');
-      }
-    });
-  </script>
   <BaseLayout 
     title={post.title} 
     canonical={`/${post.slug}`}
@@ -36,11 +27,18 @@ const { post } = Astro.props
       <TableOfContents post={post} />
     </nav> -->
 
+    <header class="mx-auto max-w-xl my-8 text-center">
+      <h1 class="text-xl my-2 font-bold">{post.title}</h1>
+      <PublishDate published={post.published} />
+
+      <hr class="border border-zinc-800 my-8" />
+    </header>
+
     {
       post.image && (
-        <figure class="mt-4 max-w-4xl mx-auto px-4">
+        <figure class="my-12">
           <img
-            class="w-full mb-2 aspect-[3/2] bg-zinc-900"
+            class="w-full mb-4 aspect-[3/2] bg-zinc-900"
             src={imageUrl(getImageBuilder(post.image).url(), {
               resizing_type: 'fill',
               width: 1200,
@@ -53,21 +51,14 @@ const { post } = Astro.props
             alt={post.image.alt}
           />
 
-          <figcaption class="text-zinc-400">
+          <figcaption class="text-zinc-400 max-w-xl">
             {post.image.caption}
           </figcaption>
         </figure>
       )
-    }
+    }  
 
-    <header class="mx-auto max-w-4xl my-8 px-4 md:px-40">
-      <h1 class="text-xl my-2 font-bold">{post.title}</h1>
-      <PublishDate published={post.published} />
-
-      <hr class="border-dashed border-zinc-700 my-8" />
-    </header>
-
-    <main class="mx-auto max-w-4xl px-4 pb-12">
+    <main class="mx-auto max-w-xl pb-12">
       <Text content={post.content} />
     </main>
 

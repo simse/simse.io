@@ -1,8 +1,8 @@
 ---
 import { ClientRouter } from 'astro:transitions'
 import Navbar from '@components/Navbar.svelte'
-import PageRenderTime from '@components/common/PageRenderTime.svelte'
-import { personalise } from '@lib/personalisation'
+//import PageRenderTime from '@components/common/PageRenderTime.svelte'
+//import { personalise } from '@lib/personalisation'
 import LoadingIndicator from 'astro-loading-indicator/component'
 import '../global.css';
 
@@ -10,9 +10,10 @@ interface Props {
   title: string
   description?: string
   canonical?: string
+  layoutWidth?: string
 }
 
-const { title, canonical, description } = Astro.props
+const { title, canonical, description, layoutWidth = "max-w-3xl" } = Astro.props
 
 const createTitle = (title: string) => {
   if (title.includes('—')) return title
@@ -48,23 +49,14 @@ const createTitle = (title: string) => {
         font-weight: 125 950;
         font-stretch: 75% 125%;
       }
-      /*@font-face {*/
-      /*  font-family: 'Soehne';*/
-      /*  src: url('/fonts/Soehne-Bold.woff2');*/
-      /*  font-weight: 700;*/
-      /*  font-display: swap;*/
-      /*}*/
-      /*@font-face {*/
-      /*  font-family: 'SoehneMono';*/
-      /*  src: url('/fonts/Soehne-Mono-Regular.woff2');*/
-      /*  font-display: swap;*/
-      /*}*/
-      /*@font-face {*/
-      /*  font-family: 'SoehneMono';*/
-      /*  src: url('/fonts/Soehne-Mono-Bold.woff2');*/
-      /*  font-weight: 700;*/
-      /*  font-display: swap;*/
-      /*}*/
+
+      @font-face {
+        font-family: 'Geist Mono';
+        src: url('/fonts/GeistMono.woff2') format('woff2-variations');
+        font-display: swap;
+        font-weight: 125 950;
+        font-stretch: 75% 125%;
+      }
     </style>
     <ClientRouter />
     <LoadingIndicator color="#2563eb" />
@@ -72,7 +64,7 @@ const createTitle = (title: string) => {
   <body class="text-zinc-100 bg-zinc-950">
     <Navbar client:load />
 
-    <main class="max-w-3xl mx-auto">
+    <main class={`mx-auto ${layoutWidth}`}>
       <slot />
     </main>
     

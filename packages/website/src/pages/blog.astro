@@ -1,6 +1,6 @@
 ---
 import YearList from '@components/blog/YearList.astro'
-import Button from '@components/common/Button.svelte'
+//import Button from '@components/common/Button.svelte'
 import Footer from '@components/common/Footer.astro'
 import PageHeader from '@components/common/PageHeader.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
@@ -26,22 +26,21 @@ posts.forEach((post) => {
 <BaseLayout 
   title="Blog"
   description="Simon Sorensen's blog where he occasionally writes about technology, programming and software engineering."
+  layoutWidth="max-w-xl"
 >
-  <main class="px-4 pt-4 max-w-5xl mx-auto">
-    <PageHeader
-      title="Blog"
-      subtitle="My corner of The Internet where I write sometimes,<br />but honestly not that often."
-    />
+  <PageHeader
+    title="Blog"
+    subtitle="My corner of The Internet where I write sometimes,<br />but honestly not that often."
+  />
 
-    {
-      Object.keys(postsByYear)
-        .sort()
-        .reverse()
-        .map((year) => <YearList year={year} posts={postsByYear[year]} />)
-    }
+  {
+    Object.keys(postsByYear)
+      .sort()
+      .reverse()
+      .map((year) => <YearList year={year} posts={postsByYear[year]} />)
+  }
 
-    <Button href="/rss.xml" icon="tabler:rss" target="_blank" shortcut="r" style="amber" client:load>RSS feed</Button>
-  </main>
+  <!--<Button href="/rss.xml" icon="tabler:rss" target="_blank" shortcut="r" style="amber" client:load>RSS feed</Button>-->
 
   <Footer />
 </BaseLayout>
