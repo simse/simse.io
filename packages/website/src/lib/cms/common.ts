@@ -16,6 +16,8 @@ export const contentBlocks = q
       _type: q.literal('image'),
       asset: q.object({
         _ref: q.string(),
+        alt: q.string().optional(),
+        caption: q.string().optional(),
       }),
     }),
     q.object({

@@ -1,8 +1,8 @@
 ---
 //import Footer from '@components/common/Footer.astro'
 import BlogSection from '@components/homepage/BlogSection.astro'
-import Hero from '@components/homepage/Hero.astro'
-//import ProjectSection from '@components/homepage/ProjectSection.astro'
+import Hero from '@components/homepage/Hero.svelte'
+import ProjectSection from '@components/homepage/ProjectSection.astro'
 //import WorkExperienceSection from '@components/homepage/WorkExperienceSection.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 ---
@@ -11,7 +11,7 @@ import BaseLayout from '@layouts/BaseLayout.astro'
   title="Simon Sorensen—Software Engineer in London"
   description="Simon Sorensen is software engineer based in London that currently works at a small toy manufacturer called The LEGO Group."
 >
-  <Hero />
+  <Hero client:load />
 
     <!-- <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
       <WorkExperienceSection />
@@ -19,7 +19,7 @@ import BaseLayout from '@layouts/BaseLayout.astro'
     </div> -->
 
   <BlogSection />
-  <!--<ProjectSection />-->
+  <ProjectSection />
 
   <!--<Footer />-->
 </BaseLayout>

@@ -1,63 +1,50 @@
 ---
-import { getProjects } from '@lib/cms'
-
-const projects = await getProjects()
-
-const links: {
-  title: string
-  items: {
-    label: string
-    href: string
-  }[]
-}[] = [
-  {
-    title: 'Index',
-    items: [
-      {
-        label: 'About',
-        href: '/about',
-      },
-      {
-        label: 'Blog',
-        href: '/blog',
-      },
-      {
-        label: 'Projects',
-        href: '/projects',
-      },
-      {
-        label: 'Contact',
-        href: '/contact',
-      },
-    ],
-  },
-  {
-    title: 'Projects',
-    items: projects
-      .map((project) => ({
-        label: project.title,
-        href: `/${project.slug}`,
-      }))
-      .slice(0, 5),
-  },
-]
+//import { getProjects } from '@lib/cms'
+//
+//const projects = await getProjects()
+//
+//const links: {
+//  title: string
+//  items: {
+//    label: string
+//    href: string
+//  }[]
+//}[] = [
+//  {
+//    title: 'Index',
+//    items: [
+//      {
+//        label: 'About',
+//        href: '/about',
+//      },
+//      {
+//        label: 'Blog',
+//        href: '/blog',
+//      },
+//      {
+//        label: 'Projects',
+//        href: '/projects',
+//      },
+//      {
+//        label: 'Contact',
+//        href: '/contact',
+//      },
+//    ],
+//  },
+//  {
+//    title: 'Projects',
+//    items: projects
+//      .map((project) => ({
+//        label: project.title,
+//        href: `/${project.slug}`,
+//      }))
+//      .slice(0, 5),
+//  },
+//]
 ---
 
 <footer
-  class="px-4 mt-12 mb-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 max-w-5xl gap-8 mx-auto"
+  class="mt-12 mb-4"
 >
-  {
-    links.map((group) => (
-      <ul class="flex flex-col gap-1">
-        <li class="text-zinc-300 font-bold border-b border-zinc-700 border-dashed">{group.title}</li>
-        {group.items.map((item) => (
-          <li>
-            <a href={item.href} class="hover:text-zinc-400">{item.label}</a>
-          </li>
-        ))}
-      </ul>
-    ))
-  }
-
-  <!-- <p class="col-start-1 col-span-5 my-12 text-lg">You've officially reached the end.</p> -->
+   <p class="font-medium text-zinc-400">You've officially reached the end of this page.</p> 
 </footer>

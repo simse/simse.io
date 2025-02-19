@@ -8,11 +8,11 @@ const postsRequest = await client.api.posts.get()
 const posts = postsRequest.data
 
 // TODO: Replace with list of actual tags
-const tags = ["Web", "Career", "Engineering", "Typescript", "Rust"]
+//const tags = ["Web", "Career", "Engineering", "Typescript", "Rust"]
 ---
 {posts && (
 <section class="my-16 max-w-xl mx-auto">
-  <ul class="flex gap-2 my-6">
+  <!--<ul class="flex gap-2 my-6">
     {tags.map(tag => {
    
       return (
@@ -20,7 +20,7 @@ const tags = ["Web", "Career", "Engineering", "Typescript", "Rust"]
         <li class="text-zinc-500 last:hidden">/</li>
       )
     })}
-  </ul>
+</ul>-->
 
   <ul class="">
     {posts.slice(0, 10).map((post) => <BlogCard post={post} />)}

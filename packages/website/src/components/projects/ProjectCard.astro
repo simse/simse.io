@@ -1,34 +1,19 @@
 ---
-import { getImageBuilder } from '@cms'
 import type { Project } from '@lib/cms/projects'
+import ExpandedBubble from "@components/common/ExpandedBubble.svelte"
+import { capitalizeFirstLetter } from '@utils/string'
+
 interface Props {
   project: Project
 }
 
 const { project } = Astro.props
+
 ---
-
-<a
-  class="relative aspect-[6/4] w-full block hover:bg-blue-950 bg-zinc-900 border border-zinc-700"
+<ExpandedBubble
+  title={project.title}
   href={`/${project.slug}`}
->
-  <div class="p-4 flex flex-col h-full">
-    <header class="flex justify-between mb-auto">
-      <span class="text-sm text-white/70 font-bold mb-auto block bg-blue-900 w-fit px-2">
-        {project.type.toUpperCase()}
-      </span>
-
-      {project.icon && (
-        <img
-          class="w-8 h-8 mb-2"
-          src={getImageBuilder(project.icon).width(128).height(128).url()}
-          alt={''}
-        />
-      )}
-    </header>
-    <span class="text-lg font-bold">
-      {project.title}
-    </span>
-    <span class="block text-white/70">{project.description}</span>
-  </div>
-</a>
+  description={project.description}
+  smallText={capitalizeFirstLetter(project.type)}
+  image={project.image}
+/>

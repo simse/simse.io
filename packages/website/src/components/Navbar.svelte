@@ -18,24 +18,24 @@
   ];
 
   const {
-    activeItem,
+    path,
   }: {
-    activeItem?: string;
+    path?: string;
     uwuEasterEgg?: boolean;
   } = $props();
   let isMenuOpen = $state(false);
 </script>
 
 <nav class="top-0 sticky bg-zinc-950/90 backdrop-blur z-50">
-  <div class="p-4 grid grid-cols-3">
+  <div class="p-3 grid grid-cols-3">
     <a class="font-bold" href="/">Simon Sorensen</a>
 
-    <ul class="sm:flex items-center hidden gap-4 justify-self-center">
+    <ul class="sm:flex items-center hidden gap-4 justify-self-center text-sm">
       {#each items as { title, link }}
         <li>
           <a
             class={`hover:text-white
-              ${title === activeItem ? "font-bold text-white" : "text-white/60"}`}
+              ${link === path ? "underline text-white" : "text-white/60"}`}
             href={link}
           >
             {title}

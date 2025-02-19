@@ -1,5 +1,6 @@
 ---
-import { getImageBuilder } from '@cms'
+import SvelteImage from "@components/Image.svelte";
+import type { Image } from "@lib/cms/types";
 
 interface Props {
   index: number
@@ -12,16 +13,10 @@ interface Props {
       _ref: string
       _type: string
     }
+    image: Image;
   }
 }
 
 const props = Astro.props
-
-const imageBuilder = getImageBuilder(props.node.asset)
 ---
-
-<img
-  src={imageBuilder.width(1000).url()}
-  class="my-4 w-full bg-zinc-900"
-  alt=""
-/>
+<SvelteImage image={props.node.image} client:visible />

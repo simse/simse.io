@@ -1,4 +1,5 @@
 ---
+import PageHeader from '@components/common/PageHeader.astro'
 import DataTable from '@components/common/DataTable.svelte'
 import Footer from '@components/common/Footer.astro'
 import ImageCarousel from '@components/common/ImageCarousel.svelte'
@@ -20,12 +21,7 @@ const { project }: Props = Astro.props
   description={project.description}
 >
   <main class="max-w-5xl mx-auto px-4">
-    <header class="my-4">
-      <h1 class="text-2xl mb-2 font-bold">{project.title}</h1>
-      <span class="text-lg text-white/70"
-        >{project.description}</span
-      >
-    </header>
+    <PageHeader title={project.title} subtitle={project.description} />
 
     {project.images && project.images.length > 0 && (
       <ImageCarousel images={project.images.map(image => ({

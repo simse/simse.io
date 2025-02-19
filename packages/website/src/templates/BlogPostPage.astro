@@ -1,12 +1,10 @@
 ---
-import { getImageBuilder } from '@cms'
 import PublishDate from '@components/blog/PublishDate.astro'
 import Footer from '@components/common/Footer.astro'
 //import TableOfContents from '@components/fragments/TableOfContents.astro'
 import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { type Post } from '@lib/cms/posts'
-import { imageUrl } from '@lib/image'
 
 interface Props {
   post: Post
@@ -39,15 +37,7 @@ const { post } = Astro.props as Props;
         <figure class="my-12">
           <img
             class="w-full mb-4 aspect-[3/2] bg-zinc-900"
-            src={imageUrl(getImageBuilder(post.image).url(), {
-              resizing_type: 'fill',
-              width: 1200,
-              height: 800,
-              gravity: { type: 'no' },
-              enlarge: 1,
-              format: 'avif',
-              quality: 90,
-            })}
+            src={post.image.src}
             alt={post.image.alt}
           />
 

@@ -62,9 +62,9 @@ const createTitle = (title: string) => {
     <LoadingIndicator color="#2563eb" />
   </head>
   <body class="text-zinc-100 bg-zinc-950">
-    <Navbar client:load />
+    <Navbar path={Astro.url.pathname} client:load />
 
-    <main class={`mx-auto ${layoutWidth}`}>
+    <main class={`mx-auto px-4 ${layoutWidth}`}>
       <slot />
     </main>
     
