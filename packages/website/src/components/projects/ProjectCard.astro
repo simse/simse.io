@@ -1,6 +1,6 @@
 ---
+import ExpandedBubble from '@components/common/ExpandedBubble.svelte'
 import type { Project } from '@lib/cms/projects'
-import ExpandedBubble from "@components/common/ExpandedBubble.svelte"
 import { capitalizeFirstLetter } from '@utils/string'
 
 interface Props {
@@ -8,11 +8,10 @@ interface Props {
 }
 
 const { project } = Astro.props
-
 ---
 <ExpandedBubble
   title={project.title}
-  href={`/${project.slug}`}
+  href={project.url}
   description={project.description}
   smallText={capitalizeFirstLetter(project.type)}
   image={project.image}

@@ -1,8 +1,8 @@
 import { postFields } from '@lib/cms/common'
-import { type InferType, q } from 'groqd'
-import client from './client'
 import type { Image } from '@lib/cms/types'
 import { imageUrlFromAssetRef } from '@lib/image'
+import { type InferType, q } from 'groqd'
+import client from './client'
 
 const { query: allPostsQuery, schema: allPostsSchema } = q('*')
   .filter("_type == 'post' && defined(slug)")
@@ -10,30 +10,31 @@ const { query: allPostsQuery, schema: allPostsSchema } = q('*')
   .grab(postFields)
 
 const blocksToText = (blocks: Post['content']): string => {
-  return blocks.map(block => {
-    if (block._type !== "block" || !block.children) {
-      return "";
-    }
+  return blocks
+    .map((block) => {
+      if (block._type !== 'block' || !block.children) {
+        return ''
+      }
 
-    return block.children.map(child => child.text).join('')
-  })
-    .join(" ")
+      return block.children.map((child) => child.text).join('')
+    })
+    .join(' ')
 }
 
 const shortenText = (text: string, maxChars = 160): string => {
   if (text.length < maxChars) {
-    return text;
+    return text
   }
 
-  return text.slice(0, maxChars) + '...';
+  return text.slice(0, maxChars) + '...'
 }
 
 const excerptFromPost = (post: SanityPost): string => {
   if (post.excerpt) {
-    return post.excerpt;
+    return post.excerpt
   }
 
-  return shortenText(blocksToText(post.content));
+  return shortenText(blocksToText(post.content))
 }
 
 const imageRefToURL = (ref: string, width: number, height?: number): string => {
@@ -45,7 +46,7 @@ const imageRefToURL = (ref: string, width: number, height?: number): string => {
 }
 
 const transformImageBlock = (image: SanityPost['content'][0]): Image | null => {
-  if (image._type !== "image") return null;
+  if (image._type !== 'image') return null
 
   return {
     // @ts-expect-error
@@ -60,7 +61,7 @@ const transformImageBlock = (image: SanityPost['content'][0]): Image | null => {
 
 const transformPost = (post: SanityPost): Post => {
   // transform image
-  let image: Image | undefined = undefined;
+  let image: Image | undefined = undefined
 
   if (post.image) {
     image = {
@@ -71,7 +72,7 @@ const transformPost = (post: SanityPost): Post => {
     }
   }
 
-  const content = post.content.map(block => {
+  const content = post.content.map((block) => {
     if (block._type === 'image') {
       return {
         ...block,
@@ -87,13 +88,13 @@ const transformPost = (post: SanityPost): Post => {
     content,
     excerpt: excerptFromPost(post),
     image,
-  };
-};
+  }
+}
 
 export const getPosts = async (): Promise<Post[]> => {
   const sanityResponse = await client.fetch(allPostsQuery)
 
-  return allPostsSchema.parse(sanityResponse).map(post => transformPost(post));
+  return allPostsSchema.parse(sanityResponse).map((post) => transformPost(post))
 }
 
 export const getPost = async (slug: string): Promise<Post | null> => {
@@ -112,7 +113,7 @@ export const getPost = async (slug: string): Promise<Post | null> => {
   return transformPost(parsedResponse[0])
 }
 
-export type SanityPost = InferType<typeof allPostsSchema>[0];
+export type SanityPost = InferType<typeof allPostsSchema>[0]
 export type Post = Omit<InferType<typeof allPostsSchema>[0], 'image'> & {
-  image?: Image;
+  image?: Image
 }

@@ -1,46 +1,46 @@
 <script lang="ts">
-  import { quadInOut } from "svelte/easing";
-  import { fade } from "svelte/transition";
-  import Button from "./Button.svelte";
+import { quadInOut } from 'svelte/easing'
+import { fade } from 'svelte/transition'
+import Button from './Button.svelte'
 
-  function slideOut(_: Element, { delay = 0, duration = 400 }) {
-    const directionModifier = direction === "FORWARDS" ? "-" : "";
+function slideOut(_: Element, { delay = 0, duration = 400 }) {
+  const directionModifier = direction === 'FORWARDS' ? '-' : ''
 
-    return {
-      delay,
-      duration,
-      css: (t: number) =>
-        `transform: translateX(${directionModifier}${100 - quadInOut(t) * 100}%)`,
-    };
+  return {
+    delay,
+    duration,
+    css: (t: number) =>
+      `transform: translateX(${directionModifier}${100 - quadInOut(t) * 100}%)`,
   }
+}
 
-  function slideIn(_: Element, { delay = 0, duration = 400 }) {
-    const directionModifier = direction === "FORWARDS" ? "" : "-";
+function slideIn(_: Element, { delay = 0, duration = 400 }) {
+  const directionModifier = direction === 'FORWARDS' ? '' : '-'
 
-    return {
-      delay,
-      duration,
-      css: (t: number) =>
-        `transform: translateX(${directionModifier}${100 - quadInOut(t) * 100}%)`,
-    };
+  return {
+    delay,
+    duration,
+    css: (t: number) =>
+      `transform: translateX(${directionModifier}${100 - quadInOut(t) * 100}%)`,
   }
+}
 
-  const {
-    images,
-  }: {
-    images: {
-      alt?: string;
-      caption?: string;
-      url: string;
-    }[];
-  } = $props();
+const {
+  images,
+}: {
+  images: {
+    alt?: string
+    caption?: string
+    url: string
+  }[]
+} = $props()
 
-  let currentImageIndex = $state(0);
-  let direction = $state("FORWARDS");
-  let animating = $state(false);
-  const currentImage = $derived(images[currentImageIndex]);
-  const hasPrevious = $derived(currentImageIndex - 1 >= 0);
-  const hasNext = $derived(currentImageIndex + 1 < images.length);
+let currentImageIndex = $state(0)
+let direction = $state('FORWARDS')
+let animating = $state(false)
+const currentImage = $derived(images[currentImageIndex])
+const hasPrevious = $derived(currentImageIndex - 1 >= 0)
+const hasNext = $derived(currentImageIndex + 1 < images.length)
 </script>
 
 <div class="my-8">

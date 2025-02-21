@@ -1,28 +1,28 @@
 <script lang="ts">
-  import CloseIcon from "virtual:icons/tabler/x";
-  import type { Image } from "@lib/cms/types";
+import CloseIcon from 'virtual:icons/tabler/x'
+import type { Image } from '@lib/cms/types'
 
-  interface ImageProps {
-    image: Image;
+interface ImageProps {
+  image: Image
+}
+
+const { image }: ImageProps = $props()
+
+let dialog: HTMLDialogElement
+
+const openLightbox = () => {
+  dialog.showModal()
+}
+
+const closeLightbox = () => {
+  dialog.close()
+}
+
+const onDialogClick = (event: MouseEvent) => {
+  if (event.target === dialog) {
+    closeLightbox()
   }
-
-  const { image }: ImageProps = $props();
-
-  let dialog: HTMLDialogElement;
-
-  const openLightbox = () => {
-    dialog.showModal();
-  };
-
-  const closeLightbox = () => {
-    dialog.close();
-  };
-
-  const onDialogClick = (event: MouseEvent) => {
-    if (event.target === dialog) {
-      closeLightbox();
-    }
-  };
+}
 </script>
 
 <picture

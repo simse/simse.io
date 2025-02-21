@@ -4,7 +4,7 @@ import Navbar from '@components/Navbar.svelte'
 //import PageRenderTime from '@components/common/PageRenderTime.svelte'
 //import { personalise } from '@lib/personalisation'
 import LoadingIndicator from 'astro-loading-indicator/component'
-import '../global.css';
+import '../global.css'
 
 interface Props {
   title: string
@@ -13,7 +13,7 @@ interface Props {
   layoutWidth?: string
 }
 
-const { title, canonical, description, layoutWidth = "max-w-3xl" } = Astro.props
+const { title, canonical, description, layoutWidth = 'max-w-3xl' } = Astro.props
 
 const createTitle = (title: string) => {
   if (title.includes('—')) return title

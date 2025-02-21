@@ -1,19 +1,23 @@
 <script lang="ts">
-  import type { Image } from "@lib/cms/types";
+import type { Image } from '@lib/cms/types'
 
-  interface ExpandedBubbleProps {
-    title: string;
-    href: string;
-    image?: Image;
-    description?: string;
-    smallText?: string;
-  }
+interface ExpandedBubbleProps {
+  title: string
+  href: string
+  image?: Image
+  description?: string
+  smallText?: string
+}
 
-  const { title, href, image, description, smallText }: ExpandedBubbleProps =
-    $props();
+const { title, href, image, description, smallText }: ExpandedBubbleProps =
+  $props()
 </script>
 
-<a class="block group" {href}>
+<a
+  class="block group"
+  {href}
+  target={href.startsWith("http") ? "_blank" : "_self"}
+>
   <header class="flex justify-between">
     <h2 class="font-semibold mb-2">{title}</h2>
 

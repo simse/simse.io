@@ -85,8 +85,8 @@ const navigateToHref = () => {
 }
 
 const classes = `
-  flex items-center gap-2 w-fit py-0.5 px-2 disabled:pointer-events-none
-  disabled:opacity-70
+  flex items-center gap-2 w-fit py-1 px-3 disabled:pointer-events-none
+  disabled:opacity-70 rounded-lg hover:cursor-pointer transition-all
   ${bgColorClass()} ${hoverBgColorClass()} ${textColorClass()} ${_class}
 `
 </script>
@@ -101,25 +101,26 @@ const classes = `
       onClick();
     }
   }}
-  disabled={disabled}
+  {disabled}
 >
-    {#if icon && iconPlacement === 'left'}
-    <iconify-icon icon={icon} size={18}></iconify-icon>
-    {/if}
+  {#if icon && iconPlacement === "left"}
+    <iconify-icon {icon} size={18}></iconify-icon>
+  {/if}
 
-    {#if children}
+  {#if children}
     {@render children()}
-    {/if}
+  {/if}
 
-    {#if icon && iconPlacement === 'right'}
-    <iconify-icon icon={icon} size={18}></iconify-icon>
-    {/if}
+  {#if icon && iconPlacement === "right"}
+    <iconify-icon {icon} size={18}></iconify-icon>
+  {/if}
 
-    {#if shortcut}
-    <code 
-        class="border border-black/20 bg-black/10 w-4 h-4 rounded font-bold flex items-center justify-center text-xs"
+  {#if shortcut}
+    <code
+      class="border border-black/20 bg-black/10 w-4 h-4 rounded font-bold flex items-center justify-center text-xs"
     >
-        {shortcut}
+      {shortcut}
     </code>
-    {/if}
+  {/if}
 </button>
+

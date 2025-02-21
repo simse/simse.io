@@ -1,19 +1,19 @@
 <script lang="ts">
-  import type { Image } from "@lib/cms/types";
+import type { Image } from '@lib/cms/types'
 
-  interface CompactBubbleProps {
-    title: string;
-    image?: Image;
-    href: string;
-    description: string;
-    smallText?: string;
-  }
+interface CompactBubbleProps {
+  title: string
+  image?: Image
+  href: string
+  description: string
+  smallText?: string
+}
 
-  const { title, image, href, description, smallText }: CompactBubbleProps =
-    $props();
+const { title, image, href, description, smallText }: CompactBubbleProps =
+  $props()
 </script>
 
-<a class="group" {href}>
+<a class="group" {href} target={href.startsWith("http") ? "_blank" : "_self"}>
   <div class="flex items-center">
     {#if image}
       <img

@@ -1,16 +1,16 @@
 <script lang="ts">
-  import CompactBubble from "@components/common/CompactBubble.svelte";
-  import type { Post } from "@lib/cms/posts";
+import CompactBubble from '@components/common/CompactBubble.svelte'
+import type { Post } from '@lib/cms/posts'
 
-  const { post }: { post: Post } = $props();
+const { post }: { post: Post } = $props()
 
-  const formatDate = (date: string): string => {
-    return new Date(date).toLocaleDateString("en-gb", {
-      day: "numeric",
-      month: "short",
-      year: "numeric",
-    });
-  };
+const formatDate = (date: string): string => {
+  return new Date(date).toLocaleDateString('en-gb', {
+    day: 'numeric',
+    month: 'short',
+    year: 'numeric',
+  })
+}
 </script>
 
 <li class="my-8">

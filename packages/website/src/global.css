@@ -9,7 +9,9 @@
   background: rgba(0, 0, 0, 0.8);
 }
 
-body:has(dialog[open]) { overflow: hidden; }
+body:has(dialog[open]) {
+  overflow: hidden;
+}
 
 .text p {
   @apply my-6;
@@ -51,8 +53,12 @@ body:has(dialog[open]) { overflow: hidden; }
   @apply my-2;
 }
 
-.text not(dialog) img {
+.text img {
   @apply my-8;
+}
+
+.text dialog img {
+  @apply my-0;
 }
 
 .text code {

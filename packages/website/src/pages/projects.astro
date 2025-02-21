@@ -1,8 +1,8 @@
 ---
+import CompactBubble from '@components/common/CompactBubble.svelte'
 import Footer from '@components/common/Footer.astro'
 import PageHeader from '@components/common/PageHeader.astro'
 import SectionHeader from '@components/common/SectionHeader.svelte'
-import CompactBubble from '@components/common/CompactBubble.svelte'
 import ProjectCard from '@components/projects/ProjectCard.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { getProjects } from '@lib/cms'
@@ -50,7 +50,8 @@ const featuredProjects = projects.filter((project) => project.featured)
           title={project.title}
           description={project.description}
           image={project.image}
-          href={`/${project.slug}`}
+          href={project.url}
+          target="_blank"
           smallText={capitalizeFirstLetter(project.type)}
         />
       </li>

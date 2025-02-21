@@ -1,7 +1,7 @@
 ---
+import BlogCard from '@components/blog/BlogCard.svelte'
 import client from '@lib/client'
 import { imageUrlFromAssetRef } from '@lib/image'
-import BlogCard from '@components/blog/BlogCard.svelte'
 
 // fetch all posts
 const postsRequest = await client.api.posts.get()
