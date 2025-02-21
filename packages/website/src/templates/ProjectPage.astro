@@ -2,6 +2,7 @@
 import DataTable from '@components/common/DataTable.svelte'
 import Footer from '@components/common/Footer.astro'
 import ImageCarousel from '@components/common/ImageCarousel.svelte'
+import PageHeader from '@components/common/PageHeader.astro'
 import Text from '@components/text/Text.astro'
 import BaseLayout from '@layouts/BaseLayout.astro'
 import { type Project } from '@lib/cms/projects'
@@ -19,59 +20,51 @@ const { project }: Props = Astro.props
   canonical={`/${project.slug}`}
   description={project.description}
 >
-  <main class="max-w-5xl mx-auto px-4">
-    <header class="my-4">
-      <h1 class="text-2xl mb-2 font-bold">{project.title}</h1>
-      <span class="text-lg text-white/70"
-        >{project.description}</span
-      >
-    </header>
+  <PageHeader title={project.title} subtitle={project.description} />
 
-    {project.images && project.images.length > 0 && (
-      <ImageCarousel images={project.images.map(image => ({
-        alt: image.alt,
-        caption: image.caption,
-        url: imageUrlFromAssetRef(image.asset._ref, {
-          width: 1200,
-          height: 800,
-        }),
-      }))} client:load />
-    )}
+  {project.images && project.images.length > 0 && (
+    <ImageCarousel images={project.images.map(image => ({
+      alt: image.alt,
+      caption: image.caption,
+      url: imageUrlFromAssetRef(image.asset._ref, {
+        width: 1200,
+        height: 800,
+      }),
+    }))} client:load />
+  )}
 
+  <div class="max-w-xl mx-auto">
+    <section class="md:col-span-2">
+      <DataTable
+        title="Key Information"
+        class="w-full mb-8"
+        rows={[
+          (project.languages && {
+            key: `Language${project.languages.length > 1 ? 's' : ''}`,
+            value: project.languages.join(', '),
+          }),
+          (project.technologies && {
+            key: `Technolog${project.technologies.length > 1 ? 'ies' : 'y'}`,
+            value: project.technologies.join(', '),
+          }),
+          (project.sourceCode && {
+            key: 'Source Code',
+            value: project.sourceCode.replace('https://', ''),
+            href: project.sourceCode,
+          }),
+          (project.demo && {
+            key: 'Demo',
+            value: project.demo.replace('https://', ''),
+            href: project.demo,
+          })
+        ]}
+      />
+    </section>
 
-    <div class="grid grid-cols-1 md:grid-cols-5 md:gap-8">
-      <section class="md:col-span-2">
-        <DataTable
-          title="Key Information"
-          class="w-full mb-8"
-          rows={[
-            (project.languages && {
-              key: `Language${project.languages.length > 1 ? 's' : ''}`,
-              value: project.languages.join(', '),
-            }),
-            (project.technologies && {
-              key: `Technolog${project.technologies.length > 1 ? 'ies' : 'y'}`,
-              value: project.technologies.join(', '),
-            }),
-            (project.sourceCode && {
-              key: 'Source Code',
-              value: project.sourceCode.replace('https://', ''),
-              href: project.sourceCode,
-            }),
-            (project.demo && {
-              key: 'Demo',
-              value: project.demo.replace('https://', ''),
-              href: project.demo,
-            })
-          ]}
-        />
-      </section>
-
-      <section class="md:col-span-3">
-        <Text content={project.details} fullWidth={true} />
-      </section>
-    </div>
-    </main>
+    <section class="md:col-span-3">
+      <Text content={project.details} fullWidth={true} />
+    </section>
+  </div>
 
   <Footer />
 </BaseLayout>

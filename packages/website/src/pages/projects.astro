@@ -1,5 +1,5 @@
 ---
-import Button from '@components/common/Button.svelte'
+import CompactBubble from '@components/common/CompactBubble.svelte'
 import Footer from '@components/common/Footer.astro'
 import PageHeader from '@components/common/PageHeader.astro'
 import SectionHeader from '@components/common/SectionHeader.svelte'
@@ -15,52 +15,49 @@ const featuredProjects = projects.filter((project) => project.featured)
 <BaseLayout 
   title="Projects"
   description="The full collection of all projects created and maintained by me."
+  layoutWidth="max-w-xl"
 >
-  <main class="px-4 pt-4 max-w-5xl mx-auto">
-    <PageHeader
-      title="Projects"
-      subtitle="A collection of things I've created over the years I've been programming (2013-now)."
+  <PageHeader
+    title="Projects"
+    subtitle="A collection of things I've created over the years I've been programming (2013-now)."
+  />
+
+  {featuredProjects.length > 0 ? <section class="my-12">
+    <SectionHeader
+      title="Featured Projects"
+      secondary={true}
     />
 
-    {featuredProjects.length > 0 ? <section class="my-12">
-      <SectionHeader
-        title="Featured Projects"
-        secondary={true}
-      />
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+      {featuredProjects.map((project) => (
+        <li>
+          <ProjectCard project={project} />
+        </li>
+      ))}
+    </ul>
+  </section> : null}
 
-      <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-        {featuredProjects.map((project) => (
-          <li>
-            <ProjectCard project={project} />
-          </li>
-        ))}
-      </ul>
-    </section> : null}
-
-    <section class="my-4">
-      <SectionHeader
-        title="All Projects"
-        secondary={true}
-      />
-
-      <table class="col-span-3 w-full">
-        {projects.map((project) => (
-          <tr class="border-b border-white/20 last:border-transparent hover:bg-blue-950">
-            <td class="py-3 px-3 pl-0 font-bold w-32 md:w-48">
-              <a href={`/${project.slug}`}>{project.title}</a>
-            </td>
-            <td class="py-3 px-3 hidden md:block">{capitalizeFirstLetter(project.type)}</td>
-            <td class="text-zinc-400">
-              <p class="my-2">{project.description}</p>
-            </td>
-            <td class="justify-end">
-              <Button href={`/${project.slug}`} client:load class="my-2">Read more</Button>
-            </td>
-          </tr>
-        ))}
-      </table>
-    </section>
-  </main>
+  <section class="my-4">
+    <SectionHeader
+      title="All Projects"
+      secondary={true}
+    />
+    
+    <ul>
+    {projects.map(project => (
+      <li class="my-8">
+        <CompactBubble
+          title={project.title}
+          description={project.description}
+          image={project.image}
+          href={project.url}
+          target="_blank"
+          smallText={capitalizeFirstLetter(project.type)}
+        />
+      </li>
+    ))}
+    </ul>
+  </section>
 
   <Footer />
 </BaseLayout>

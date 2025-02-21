@@ -1,13 +1,13 @@
-import { defineConfig, passthroughImageService, envField } from 'astro/config'
+import { defineConfig, passthroughImageService } from 'astro/config'
 import bun from '@nurodev/astro-bun'
-import tailwind from '@astrojs/tailwind'
 import preact from '@astrojs/preact'
+import tailwindcss from "@tailwindcss/vite";
 
 // https://astro.build/config
 export default defineConfig({
   output: 'server',
   adapter: bun(),
-  integrations: [tailwind(), preact()],
+  integrations: [preact()],
   image: {
     service: passthroughImageService(),
   },
@@ -16,5 +16,8 @@ export default defineConfig({
     shikiConfig: {
       theme: 'github-light',
     },
+  },
+  vite: {
+    plugins: [tailwindcss()]
   }
 })

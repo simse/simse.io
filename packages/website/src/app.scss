@@ -1,8 +1,6 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import 'tailwindcss';
 
-.text {
+/*.text {
   @apply grid;
   @apply grid-cols-12;
 
@@ -141,4 +139,4 @@
     @apply col-start-1;
     @apply col-end-13;
   }
-}
+}*/

@@ -1,6 +1,6 @@
 ---
 import type { Post } from '@lib/cms/posts'
-import BlogCard from './BlogCard.astro'
+import BlogCard from './BlogCard.svelte'
 
 interface Props {
   year: string
@@ -13,11 +13,10 @@ posts.sort((a: Post, b: Post) => {
   return +new Date(b.published) - +new Date(a.published)
 })
 ---
+<section class="pb-2 my-4">
+  <h2 class="text-lg font-semibold mb-2">{year}</h2>
 
-<section class="my-2 pb-2 mb-8">
-  <h2 class="text-xl text-white/70 mb-4">{year}</h2>
-
-  <ul class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
+  <ul class="">
     {
       posts.map((post) => (
         <li>
