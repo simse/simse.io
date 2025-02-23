@@ -11,9 +11,9 @@ import {
 } from './projects'
 
 export const getPosts = async (): Promise<Post[]> => {
-  //if (cache.has('posts')) {
-  //  return cache.get<Post[]>('posts') || []
-  //}
+  if (cache.has('posts') && import.meta.env.PROD) {
+    return cache.get<Post[]>('posts') || []
+  }
 
   const posts = await getPostsRaw()
   cache.set('posts', posts)
@@ -24,7 +24,7 @@ export const getPosts = async (): Promise<Post[]> => {
 export const getPost = async (slug: string): Promise<Post | null> => {
   const cacheKey = `posts/${slug}`
 
-  if (cache.has(cacheKey)) {
+  if (cache.has(cacheKey) && import.meta.env.PROD) {
     const cachedResult = cache.get<Post>(cacheKey)
 
     if (cachedResult) return cachedResult
@@ -37,7 +37,7 @@ export const getPost = async (slug: string): Promise<Post | null> => {
 }
 
 export const getProjects = async (): Promise<Project[]> => {
-  if (cache.has('projects')) {
+  if (cache.has('projects') && import.meta.env.PROD) {
     return cache.get<Project[]>('projects') || []
   }
 
@@ -51,7 +51,7 @@ export const getProject = async (slug: string): Promise<Project | null> => {
   const cacheKey = `projects/${slug}`
   const cachedResult = cache.get<Project>(cacheKey)
 
-  if (cachedResult) {
+  if (cachedResult && import.meta.env.PROD) {
     return cachedResult
   }
 

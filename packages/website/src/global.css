@@ -5,8 +5,35 @@
   --font-mono: "Geist Mono", monospace;
 }
 
+@keyframes dialogAnimation {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0px);
+  }
+}
+
+@keyframes backdropAnimation {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+dialog {
+  animation: 0.3s 1 dialogAnimation ease-in-out;
+}
+
 ::backdrop {
   background: rgba(0, 0, 0, 0.8);
+  animation: 0.2s 1 backdropAnimation;
 }
 
 body:has(dialog[open]) {

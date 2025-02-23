@@ -1,7 +1,6 @@
-import { imageUrlFromAssetRef } from '@lib/image'
 import { type InferType, q } from 'groqd'
 import client from './client'
-import { projectFields } from './common'
+import { assetRefToImage, projectFields } from './common'
 import type { Image } from './types'
 
 const { query: allProjectsQuery, schema: allProjectsSchema } = q('*')
@@ -13,16 +12,9 @@ export const transformProject = (rawProject: SanityProject): Project => {
   let image: Image | undefined = undefined
 
   if (rawProject.images && rawProject.images.length > 0) {
-    image = {
-      alt: rawProject.images[0].alt,
-      caption: rawProject.images[0].caption,
-      src: imageUrlFromAssetRef(rawProject.images[0].asset._ref, {
-        width: 1200,
-        height: 900,
-        resize_type: 'fill',
-      }),
-      srcset: [],
-    }
+    const { asset, alt, caption } = rawProject.images[0]
+
+    image = assetRefToImage(asset._ref, alt || '', caption)
   }
 
   return {

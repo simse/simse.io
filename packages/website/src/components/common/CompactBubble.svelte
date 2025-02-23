@@ -18,7 +18,7 @@ const { title, image, href, description, smallText }: CompactBubbleProps =
     {#if image}
       <img
         class="bg-zinc-900 h-8 w-8 mr-4 rounded-lg"
-        src={image.src}
+        src={image.sizes.icon.src}
         alt={image.alt}
       />
     {/if}
