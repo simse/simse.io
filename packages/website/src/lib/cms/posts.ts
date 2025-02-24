@@ -1,6 +1,5 @@
-import { postFields } from '@lib/cms/common'
+import { assetRefToImage, postFields } from '@lib/cms/common'
 import type { Image } from '@lib/cms/types'
-import { imageUrlFromAssetRef } from '@lib/image'
 import { type InferType, q } from 'groqd'
 import client from './client'
 
@@ -37,26 +36,11 @@ const excerptFromPost = (post: SanityPost): string => {
   return shortenText(blocksToText(post.content))
 }
 
-const imageRefToURL = (ref: string, width: number, height?: number): string => {
-  return imageUrlFromAssetRef(ref, {
-    width,
-    height,
-    resizing_type: 'fill',
-  })
-}
-
 const transformImageBlock = (image: SanityPost['content'][0]): Image | null => {
   if (image._type !== 'image') return null
 
-  return {
-    // @ts-expect-error
-    alt: image.asset.alt,
-    // @ts-expect-error
-    caption: image.asset.caption,
-    // @ts-expect-error
-    src: imageRefToURL(image.asset._ref, 1200, 800),
-    srcset: [],
-  }
+  // @ts-expect-error
+  return assetRefToImage(image.asset._ref, image.asset.alt, image.asset.caption)
 }
 
 const transformPost = (post: SanityPost): Post => {
@@ -64,12 +48,11 @@ const transformPost = (post: SanityPost): Post => {
   let image: Image | undefined = undefined
 
   if (post.image) {
-    image = {
-      alt: post.image.alt,
-      caption: post.image.caption,
-      src: imageRefToURL(post.image.asset._ref, 1200, 800),
-      srcset: [],
-    }
+    image = assetRefToImage(
+      post.image.asset._ref,
+      post.image.alt,
+      post.image.caption,
+    )
   }
 
   const content = post.content.map((block) => {

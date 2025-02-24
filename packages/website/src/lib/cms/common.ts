@@ -1,4 +1,6 @@
+import { imageUrlFromAssetRef } from '@lib/image'
 import { nullToUndefined, q } from 'groqd'
+import type { Image, ImageSize } from './types'
 
 export const contentBlocks = q
   .union([
@@ -99,4 +101,57 @@ export const projectFields = {
       .array()
       .optional(),
   ),
+}
+
+/**
+ * Helper function to create ImageSize given Sanity asset ref and size.
+ * The object contains a transform URL and the size.
+ * @param ref - Sanity asset image ref
+ * @param width - Target width of image
+ * @param height - Optional height, if left out image retains original aspect ratio
+ * @param options - Object of extra transform options
+ * @returns Object containing transformed image URL, etc.
+ */
+const imageSize = (
+  ref: string,
+  width: number,
+  height?: number,
+  options?: Record<string, any>,
+): ImageSize => {
+  return {
+    src: imageUrlFromAssetRef(ref, {
+      width,
+      height,
+      resize_type: 'fill',
+      format: 'avif',
+      ...options,
+    }),
+    width,
+    height,
+  }
+}
+
+/**
+ * Returns an image with all sizes given a Sanity asset ref
+ *
+ */
+export const assetRefToImage = (
+  ref: string,
+  alt: string,
+  caption?: string,
+): Image => {
+  return {
+    alt: alt,
+    caption: caption,
+    src: imageUrlFromAssetRef(ref, {
+      width: 1200,
+      height: 900,
+      resize_type: 'fill',
+      format: 'avif',
+    }),
+    sizes: {
+      icon: imageSize(ref, 120, 120),
+      thumbnail: imageSize(ref, 600, 400),
+    },
+  }
 }

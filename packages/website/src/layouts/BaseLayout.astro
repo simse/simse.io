@@ -28,7 +28,7 @@ const createTitle = (title: string) => {
 //  userAgent: Astro.request.headers.get('User-Agent') || '',
 //})
 ---
-<html lang="en" transition:animate="none">
+<html lang="en" transition:animate="fade">
   <head>
     <meta charset="utf-8" />
     <link rel="icon" type="image/ico" href="/favicon.ico" />
@@ -66,8 +66,6 @@ const createTitle = (title: string) => {
 
     <main class={`mx-auto px-4 ${layoutWidth}`}>
       <slot />
-    </main>
-    
-    <!--<PageRenderTime client:load />-->
+    </main>  
   </body>
 </html>
