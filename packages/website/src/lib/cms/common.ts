@@ -103,6 +103,15 @@ export const projectFields = {
   ),
 }
 
+/**
+ * Helper function to create ImageSize given Sanity asset ref and size.
+ * The object contains a transform URL and the size.
+ * @param ref - Sanity asset image ref
+ * @param width - Target width of image
+ * @param height - Optional height, if left out image retains original aspect ratio
+ * @param options - Object of extra transform options
+ * @returns Object containing transformed image URL, etc.
+ */
 const imageSize = (
   ref: string,
   width: number,
@@ -122,6 +131,10 @@ const imageSize = (
   }
 }
 
+/**
+ * Returns an image with all sizes given a Sanity asset ref
+ *
+ */
 export const assetRefToImage = (
   ref: string,
   alt: string,

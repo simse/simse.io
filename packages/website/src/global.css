@@ -90,6 +90,10 @@ body:has(dialog[open]) {
 
 .text code {
   @apply font-medium;
+  @apply border;
+  @apply border-zinc-700;
+  @apply rounded-md;
+  @apply px-0.5;
 }
 
 .text .astro-code {
