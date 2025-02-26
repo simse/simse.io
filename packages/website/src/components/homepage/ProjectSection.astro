@@ -4,18 +4,19 @@ import { getProjects } from '@lib/cms'
 import ProjectCard from '../projects/ProjectCard.astro'
 
 const projects = await getProjects()
+const featuredProjects = projects.filter(project => project.featured)
 ---
 
 {projects.length > 0 ? <section class="my-16 max-w-xl mx-auto">
   <SectionHeader
-    title="Projects"
+    title="Featured Projects"
     href="/projects"
   />
 
-  <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-4 gap-y-8 mt-8">
+  <ul class="mt-8">
     {
-      projects.slice(0, 4).map((project) => (
-        <li>
+      featuredProjects.map((project) => (
+        <li class="my-8">
           <ProjectCard project={project} />
         </li>
       ))

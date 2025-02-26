@@ -150,7 +150,7 @@ export const assetRefToImage = (
       format: 'avif',
     }),
     sizes: {
-      icon: imageSize(ref, 120, 120),
+      icon: imageSize(ref, 64, 64),
       thumbnail: imageSize(ref, 600, 400),
     },
   }
