@@ -1,29 +1,19 @@
 ---
 import BlogCard from '@components/blog/BlogCard.svelte'
+import SectionHeader from '@components/common/SectionHeader.svelte'
 import client from '@lib/client'
-import { imageUrlFromAssetRef } from '@lib/image'
 
 // fetch all posts
 const postsRequest = await client.api.posts.get()
 const posts = postsRequest.data
-
-// TODO: Replace with list of actual tags
-//const tags = ["Web", "Career", "Engineering", "Typescript", "Rust"]
 ---
+
 {posts && (
 <section class="my-16 max-w-xl mx-auto">
-  <!--<ul class="flex gap-2 my-6">
-    {tags.map(tag => {
-   
-      return (
-        <li>{tag}</li>
-        <li class="text-zinc-500 last:hidden">/</li>
-      )
-    })}
-</ul>-->
+  <SectionHeader title="Latest Blog Posts" href="/blog" />
 
-  <ul class="">
-    {posts.slice(0, 10).map((post) => <BlogCard post={post} />)}
+  <ul> 
+    {posts.slice(0, 2).map((post) => <BlogCard post={post} />)}
   </ul>
 </section>
 )}
