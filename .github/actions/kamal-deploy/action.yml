@@ -16,6 +16,7 @@ runs:
       bundler-cache: true
 
   - name: Install dependencies
+    shell: bash
     run: |
       gem install specific_install
       gem specific_install https://github.com/basecamp/kamal.git 
@@ -32,5 +33,6 @@ runs:
     uses: crazy-max/ghaction-github-runtime@v3
 
   - name: Run deploy command
+    shell: bash
     run: kamal deploy
     working-directory: ${{ inputs.working-directory }}
