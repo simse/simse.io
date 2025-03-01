@@ -6,7 +6,7 @@ export const prerender = false
 
 const cache = new TTLCache({ max: 10000, ttl: 60 * 60 * 1000 })
 
-export const GET: APIRoute = async ({ params, request }) => {
+export const GET: APIRoute = async ({ params }) => {
   const slug = params.slug
 
   if (!slug) {
@@ -82,7 +82,7 @@ const getPypiDownloads = async (identifier: string): Promise<number> => {
     `https://api.pepy.tech/api/v2/projects/${identifier}`,
     {
       headers: {
-        'x-api-key': PEPY_API_KEY,
+        'x-api-key': PEPY_API_KEY || '',
       },
     },
   )

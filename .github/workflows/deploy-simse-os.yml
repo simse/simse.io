@@ -1,15 +1,16 @@
-name: Deploy simse.io
+name: Deploy simonOS
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'packages/website/**'
+      - 'packages/simon-os/**'
+  pull_request:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04-arm
 
     env:
       DOCKER_BUILDKIT: 1
@@ -26,5 +27,5 @@ jobs:
       - name: Deploy with Kamal
         uses: ./.github/actions/kamal-deploy
         with:
-          working-directory: ./packages/website
+          working-directory: ./packages/simon-os
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}

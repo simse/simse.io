@@ -18,8 +18,7 @@ FROM base AS skeleton
 
 # Copy entire repository and scaffold
 COPY . .
-
-RUN moon docker scaffold website
+RUN moon docker scaffold simon-os
 
 #### BUILD STAGE
 #### Builds the project.
@@ -39,10 +38,10 @@ RUN moon docker setup
 COPY --from=skeleton /app/.moon/docker/sources .
 
 # Build the project
-RUN moon run website:build
+# RUN moon run simon-os:build
 
 # Prune extraneous dependencies
-# RUN moon docker prune
+RUN moon docker prune
 
 #### START STAGE
 #### Runs the project.
@@ -53,5 +52,5 @@ FROM base AS start
 COPY --from=build /root/.proto /root/.proto
 COPY --from=build /app /app
 
-CMD moon run website:start
+CMD moon run simon-os:start
 
