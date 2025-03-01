@@ -6,11 +6,10 @@ on:
       - main
     paths:
       - 'packages/simon-os/**'
-  pull_request:
 
 jobs:
   deploy:
-    runs-on: ubuntu-24.04-arm
+    runs-on: ubuntu-24.04
 
     env:
       DOCKER_BUILDKIT: 1
