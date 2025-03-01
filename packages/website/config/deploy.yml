@@ -60,8 +60,8 @@ builder:
 
 # Use a different ssh user than root
 #
-ssh:
-  log_level: debug
+# ssh:
+#   log_level: debug
   # key_data: [ "$DEPLOY_KEY" ]
 # Use a persistent storage volume.
 #
