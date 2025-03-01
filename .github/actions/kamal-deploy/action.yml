@@ -1,0 +1,38 @@
+name: 'Kamal Deploy'
+
+inputs:
+  working-directory:
+    required: true
+  ssh-key:
+    required: true
+
+runs:
+  using: 'composite'
+  steps:
+  - name: Set up Ruby
+    uses: ruby/setup-ruby@v1
+    with:
+      ruby-version: 3.2.2
+      bundler-cache: true
+
+  - name: Install dependencies
+    shell: bash
+    run: |
+      gem install specific_install
+      gem specific_install https://github.com/basecamp/kamal.git 
+
+  - uses: webfactory/ssh-agent@v0.7.0
+    with:
+      ssh-private-key: ${{ inputs.ssh-key }}
+
+  # - name: Set up Docker Buildx
+  #   id: buildx
+  #   uses: docker/setup-buildx-action@v2
+
+  - name: Expose GitHub Runtime for cache
+    uses: crazy-max/ghaction-github-runtime@v3
+
+  - name: Run deploy command
+    shell: bash
+    run: kamal deploy
+    working-directory: ${{ inputs.working-directory }}

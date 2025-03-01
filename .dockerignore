@@ -1,0 +1,4 @@
+node_modules
+.moon/cache
+.git
+.env

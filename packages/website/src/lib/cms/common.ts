@@ -122,7 +122,7 @@ const imageSize = (
     src: imageUrlFromAssetRef(ref, {
       width,
       height,
-      resize_type: 'fill',
+      resizing_type: 'fill',
       format: 'avif',
       ...options,
     }),
@@ -146,7 +146,7 @@ export const assetRefToImage = (
     src: imageUrlFromAssetRef(ref, {
       width: 1200,
       height: 900,
-      resize_type: 'fill',
+      resizing_type: 'fill',
       format: 'avif',
     }),
     sizes: {

@@ -22,14 +22,14 @@ export default defineConfig({
   prefetch: true,
   env: {
     schema: {
-      PEPY_API_KEY: envField.string({ context: 'server', access: 'secret' }),
-      SANITY_PROJECT_DATASET: envField.string({ context: "server", access: "public" }),
-      SANITY_PROJECT_ID: envField.string({ context: "server", access: "public" }),
+      PEPY_API_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
+      SANITY_PROJECT_DATASET: envField.string({ context: "server", access: "public", default: "production" }),
+      SANITY_PROJECT_ID: envField.string({ context: "server", access: "public", default: "rjqusm5i" }),
       IMGPROXY_ENDPOINT: envField.string({ context: 'server', access: 'public', optional: true }),
       IMGPROXY_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
       IMGPROXY_SALT: envField.string({ context: 'server', access: 'secret', optional: true }),
       AXIOM_DATASET: envField.string({ context: 'server', access: 'secret', default: 'simse-io-dev' }),
-      AXIOM_TOKEN: envField.string({ context: 'server', access: 'secret' }),
+      AXIOM_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
   vite: {

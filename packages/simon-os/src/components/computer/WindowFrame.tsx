@@ -2,7 +2,7 @@ import type { ComponentChildren } from "preact";
 import type { CSSProperties } from "preact/compat";
 import { useEffect, useRef, useState } from "preact/hooks";
 
-import "./WindowFrame.scss";
+import "./WindowFrame.css";
 import WindowHeaderBackground from "@assets/window_header_background.svg";
 import type { WindowProps } from "./types";
 

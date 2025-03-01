@@ -3,7 +3,7 @@ platform: 'bun'
 
 tasks:
   build:
-    command: 'astro build'
+    command: 'bun --bun run astro build'
 
   dev:
     command: 'astro dev'
