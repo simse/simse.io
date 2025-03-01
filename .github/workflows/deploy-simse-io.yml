@@ -22,28 +22,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Ruby
-        uses: ruby/setup-ruby@v1
+      - name: Deploy with Kamal
+        uses: ./.github/actions/kamal-deploy
         with:
-          ruby-version: 3.2.2
-          bundler-cache: true
-
-      - name: Install dependencies
-        run: |
-          gem install specific_install
-          gem specific_install https://github.com/basecamp/kamal.git 
-
-      - uses: webfactory/ssh-agent@v0.7.0
-        with:
-          ssh-private-key: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Expose GitHub Runtime for cache
-        uses: crazy-max/ghaction-github-runtime@v3
-
-      - name: Run deploy command
-        run: kamal deploy
-        working-directory: ./packages/website
+          working-directory: ./packages/website
+          ssh-key: ${{ secret.SSH_PRIVATE_KEY }}
