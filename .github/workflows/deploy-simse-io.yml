@@ -26,4 +26,4 @@ jobs:
         uses: ./.github/actions/kamal-deploy
         with:
           working-directory: ./packages/website
-          ssh-key: ${{ secret.SSH_PRIVATE_KEY }}
+          ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
