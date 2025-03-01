@@ -56,9 +56,8 @@ builder:
 
 # Use a different ssh user than root
 #
-# ssh:
-#   user: app
-
+ssh:
+  log_level: debug
 # Use a persistent storage volume.
 #
 # volumes:
