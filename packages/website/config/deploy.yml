@@ -36,6 +36,10 @@ registry:
 builder:
   arch: arm64
   context: "../.."
+  cache:
+    type: gha
+    options: mode=max
+    image: kamal-app-build-cache
   # Pass in additional build args needed for your Dockerfile.
   # args:
   #   RUBY_VERSION: <%= ENV["RBENV_VERSION"] || ENV["rvm_ruby_string"] || "#{RUBY_ENGINE}-#{RUBY_ENGINE_VERSION}" %>
@@ -58,6 +62,7 @@ builder:
 #
 ssh:
   log_level: debug
+  # key_data: [ "$DEPLOY_KEY" ]
 # Use a persistent storage volume.
 #
 # volumes:
