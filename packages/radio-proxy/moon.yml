@@ -2,6 +2,9 @@ language: 'typescript'
 platform: 'bun'
 
 tasks:
+  lint:
+    command: 'echo "yuh"'
+
   build:
     command: 'bun build ./index.ts --compile --minify --sourcemap --bytecode --outfile radio-proxy'
 

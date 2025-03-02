@@ -2,13 +2,13 @@ import WindowFrame from "../WindowFrame";
 import type { WindowProps } from "../types";
 
 interface BlogPostProps extends WindowProps {
-  postSlug?: string;
+	postSlug?: string;
 }
 
 const BlogPost = (props: BlogPostProps) => {
-  const postSlug = props.postSlug || "";
+	const postSlug = props.postSlug || "";
 
-  /*useEffect(() => {
+	/*useEffect(() => {
     if (props.prefetchedPost) return;
 
     fetch(`/api/blog/${postSlug}`)
@@ -26,23 +26,23 @@ const BlogPost = (props: BlogPostProps) => {
       });
   }, [postSlug]);*/
 
-  return (
-    <WindowFrame
-      title="Blog"
-      initialSize={{ width: 500, height: 650 }}
-      initialPosition={{ x: 50, y: 50 }}
-      initialPositionLabel="center"
-      {...props}
-    >
-      <p>
-        Go to{" "}
-        <a class="underline" href={`https://simse.io/${postSlug}`}>
-          simse.io
-        </a>{" "}
-        to read this blog post (this limitation is temporary).
-      </p>
-    </WindowFrame>
-  );
+	return (
+		<WindowFrame
+			title="Blog"
+			initialSize={{ width: 500, height: 650 }}
+			initialPosition={{ x: 50, y: 50 }}
+			initialPositionLabel="center"
+			{...props}
+		>
+			<p>
+				Go to{" "}
+				<a class="underline" href={`https://simse.io/${postSlug}`}>
+					simse.io
+				</a>{" "}
+				to read this blog post (this limitation is temporary).
+			</p>
+		</WindowFrame>
+	);
 };
 
 export default BlogPost;

@@ -16,6 +16,9 @@ jobs:
       contents: read
       packages: write
 
+    env:
+      KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
