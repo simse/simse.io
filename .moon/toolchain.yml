@@ -1,7 +1,7 @@
 # Configures Bun within the toolchain.
 bun:
   # The version to use. Must be a semantic version that includes major, minor, and patch.
-  version: '1.1.31'
+  # version: '1.2.4'
 
   # Version format to use when syncing dependencies within the project's `package.json`.
   # dependencyVersionFormat: 'workspace'

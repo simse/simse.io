@@ -11,10 +11,6 @@ jobs:
   deploy:
     runs-on: ubuntu-24.04
 
-    env:
-      DOCKER_BUILDKIT: 1
-      KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
-
     permissions:
       contents: read
       packages: write
@@ -28,3 +24,4 @@ jobs:
         with:
           working-directory: ./packages/simon-os
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
+          registry-password: ${{ secrets.GITHUB_TOKEN }}
