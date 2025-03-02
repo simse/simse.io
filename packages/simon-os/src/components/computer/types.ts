@@ -1,62 +1,52 @@
-import type { CollectionEntry } from "astro:content";
 import type { FunctionalComponent } from "preact";
 
 interface Window {
-	title: string;
-	component: FunctionalComponent<WindowProps>;
-	associatedPath?: string;
-	id: string;
-	meta?: {
-		title: string;
-		description: string;
-		path: string;
-	};
+  title: string;
+  component: FunctionalComponent<WindowProps>;
+  associatedPath?: string;
+  id: string;
+  meta?: {
+    title: string;
+    description: string;
+    path: string;
+  };
 }
 
 interface RadioWindowType extends Window {
-	type: "radio";
+  type: "radio";
 }
 
 interface BiograhyWindowType extends Window {
-	type: "biography";
+  type: "biography";
 }
 
 interface BlogListWindowType extends Window {
-	type: "blogList";
-	posts: CollectionEntry<"blog">[];
+  type: "blogList";
 }
 
 interface BlogPostWindowType extends Window {
-	type: "blogPost";
-	postSlug: string;
-	prefetchedPost?: {
-		html: string;
-		frontmatter: CollectionEntry<"blog">["data"];
-	};
+  type: "blogPost";
+  postSlug: string;
 }
 
 type WindowType =
-	| BiograhyWindowType
-	| BlogListWindowType
-	| RadioWindowType
-	| BlogPostWindowType;
+  | BiograhyWindowType
+  | BlogListWindowType
+  | RadioWindowType
+  | BlogPostWindowType;
 
 interface WindowProps {
-	title?: string;
-	id: string;
-	order: number;
-	onClose: () => void;
-	onTouch: () => void;
-	openWindow: (window: WindowType) => void;
+  title?: string;
+  id: string;
+  order: number;
+  onClose: () => void;
+  onTouch: () => void;
+  openWindow: (window: WindowType) => void;
 }
 
 interface InitialStateAction {
-	type: "openBlogPost";
-	postSlug: string;
-	prefetchedPost: {
-		html: string;
-		frontmatter: CollectionEntry<"blog">["data"];
-	};
+  type: "openBlogPost";
+  postSlug: string;
 }
 
 export type { WindowProps, WindowType, InitialStateAction };

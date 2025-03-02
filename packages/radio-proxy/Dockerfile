@@ -4,8 +4,8 @@
 FROM ubuntu:24.04 AS base
 WORKDIR /app
 
-RUN apt-get update
-RUN apt-get install -y curl
+RUN apt update
+RUN apt install -y curl
 
 # Install moon binary
 RUN curl -fsSL https://moonrepo.dev/install/moon.sh | bash
@@ -18,7 +18,7 @@ FROM base AS skeleton
 
 # Copy entire repository and scaffold
 COPY . .
-RUN moon docker scaffold simon-os
+RUN moon docker scaffold radio-proxy
 
 #### BUILD STAGE
 #### Builds the project.
@@ -38,7 +38,7 @@ RUN moon docker setup
 COPY --from=skeleton /app/.moon/docker/sources .
 
 # Build the project
-RUN moon run simon-os:build
+RUN moon run radio-proxy:build
 
 # Prune extraneous dependencies
 # RUN moon docker prune
@@ -52,5 +52,5 @@ FROM base AS start
 COPY --from=build /root/.proto /root/.proto
 COPY --from=build /app /app
 
-CMD moon run simon-os:start
+ENTRYPOINT [ "moon", "run", "radio-proxy:start" ]
 

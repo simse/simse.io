@@ -1,0 +1,13 @@
+language: 'typescript'
+platform: 'bun'
+
+tasks:
+  build:
+    command: 'bun build ./index.ts --compile --minify --sourcemap --bytecode --outfile radio-proxy'
+
+  dev:
+    command: 'bun --watch index.ts'
+    local: true
+
+  start:
+    command: './radio-proxy'

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "preact/hooks";
+import Sockette from "sockette";
 
 import MuteIcon from "@components/icons/MuteIcon";
 import VolumeThree from "@components/icons/VolumeThree";
@@ -17,25 +18,20 @@ const RadioWindow = (props: RadioWindowProps) => {
 	const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
 
 	useEffect(() => {
-		getMetadata();
+		const ws = new Sockette("wss://radio-proxy.simse.io/currently-playing", {
+			timeout: 5e3,
+			maxAttempts: 10,
+			onmessage: (e) => {
+				setCurrentlyPlaying(e.data);
+				setIsReady(true);
+			},
+			onclose: () => setIsReady(false),
+		});
 
-		setInterval(() => {
-			getMetadata();
-		}, 5000);
+		return () => ws.close();
 	}, []);
 
-	const getMetadata = () => {
-		fetch("/api/radio-proxy").then(async (resp) => {
-			const parsedResp = (await resp.json()) as {
-				song: string;
-			};
-
-			setCurrentlyPlaying(parsedResp.song);
-			setIsReady(true);
-		});
-	};
-
-	const streamUrl = "https://80.streeemer.com/listen/80s/radio.mp3";
+	const streamUrl = "https://radio-proxy.simse.io/stream";
 
 	const createAudioContext = () => {
 		audioContextRef.current = new AudioContext();
