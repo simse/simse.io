@@ -39,4 +39,4 @@ runs:
     run: kamal deploy
     working-directory: ${{ inputs.working-directory }}
     env:
-      KAMAL_REGSITRY_PASSWORD: ${{ inputs.registry-password }}
+      KAMAL_REGISTRY_PASSWORD: ${{ inputs.registry-password }}
