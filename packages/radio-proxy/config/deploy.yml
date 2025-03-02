@@ -1,10 +1,7 @@
-# Name of your application. Used to uniquely configure containers.
 service: radio-proxy
 
-# Name of the container image.
-image: simse/simon-os-radio
+image: simse/radio-proxy.simse.io
 
-# Deploy to these servers.
 servers:
   web:
     - 116.203.73.52
@@ -12,26 +9,22 @@ servers:
 proxy:
   ssl: true
   host: radio-proxy.simse.io
-  # Proxy connects to your container on port 80 by default.
   app_port: 3000
   healthcheck:
     path: /up
   buffering:
     responses: false
 
-# Credentials for your image host.
 registry:
-  # Specify the registry server, if you're not using Docker Hub
   server: ghcr.io
   username: simse
-
-  # Always use an access token rather than real password (pulled from .kamal/secrets).
   password:
     - KAMAL_REGISTRY_PASSWORD
 
-# Configure builder setup.
 builder:
-  arch: arm64
+  arch:
+    - arm64
+    - amd64
   context: "../.."
   cache:
     type: gha
