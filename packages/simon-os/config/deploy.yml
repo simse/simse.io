@@ -5,9 +5,10 @@ image: simse/os.simse.io
 servers:
   web:
     - 116.203.73.52
+    - 165.1.76.236
 
 proxy:
-  ssl: true
+  ssl: false 
   host: os.simse.io
   app_port: 4321
   healthcheck:

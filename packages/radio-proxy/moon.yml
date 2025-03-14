@@ -3,7 +3,16 @@ platform: 'bun'
 
 tasks:
   lint:
-    command: 'echo "yuh"'
+    command: 'bun biome check index.ts'
+    options:
+      mergeArgs: 'replace'
+    inputs:
+      - 'index.ts'
+
+  format:
+    command: 'bun biome check --write index.ts'
+    options:
+      mergeArgs: 'replace'
 
   build:
     command: 'bun build ./index.ts --compile --minify --sourcemap --bytecode --outfile radio-proxy'

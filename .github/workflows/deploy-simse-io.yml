@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'packages/website/**'
+  pull_request:
 
 jobs:
   deploy:
@@ -13,7 +14,6 @@ jobs:
 
     env:
       DOCKER_BUILDKIT: 1
-      KAMAL_REGISTRY_PASSWORD: ${{ secrets.GITHUB_TOKEN }}
 
     permissions:
       contents: read
@@ -28,4 +28,5 @@ jobs:
         with:
           working-directory: ./packages/website
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          registry-password: ${{ secrets.GITHUB_TOKEN }}
+          infisical-client-id: ${{ secrets.INFISICAL_CLIENT_ID }}
+          infisical-client-secret: ${{ secrets.INFISICAL_CLIENT_SECRET }}
