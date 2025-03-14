@@ -33,7 +33,7 @@ runs:
 
   - name: Authenticate Infisical CLI
     shell: bash
-    run: echo "INFISICAL_TOKEN=$(infisical login --method=universal-auth --client-id=${{ inputs.infisical-client-id }} --client-secret=${{ inputs.infisical-client-secret }} --silent --plain)" >> $GITHUB_ENV"
+    run: echo "INFISICAL_TOKEN=$(infisical login --method=universal-auth --client-id=${{ inputs.infisical-client-id }} --client-secret=${{ inputs.infisical-client-secret }} --silent --plain)" >> "$GITHUB_ENV"
 
   - uses: webfactory/ssh-agent@v0.7.0
     with:
