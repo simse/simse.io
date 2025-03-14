@@ -26,11 +26,13 @@ runs:
       gem specific_install https://github.com/basecamp/kamal.git
 
   - name: Install Infisical CLI
+    shell: bash
     run: |
       curl -1sLf 'https://dl.cloudsmith.io/public/infisical/infisical-cli/setup.deb.sh' | sudo -E bash
       sudo apt-get update && sudo apt-get install -y infisical
 
   - name: Authenticate Infisical CLI
+    shell: bash
     run: echo "INFISICAL_TOKEN=$(infisical login --method=universal-auth --client-id=${{ inputs.infisical-client-id }} --client-secret=${{ inputs.infisical-client-secret }} --silent --plain)" >> $GITHUB_ENV"
 
   - uses: webfactory/ssh-agent@v0.7.0
