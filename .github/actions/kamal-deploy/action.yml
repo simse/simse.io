@@ -1,4 +1,5 @@
 name: 'Kamal Deploy'
+description: 'Initialises environment for Kamal and runs a deploy'
 
 inputs:
   working-directory:

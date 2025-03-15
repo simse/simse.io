@@ -12,16 +12,9 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
 
-    env:
-      DOCKER_BUILDKIT: 1
-
-    permissions:
-      contents: read
-      packages: write
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Deploy with Kamal
         uses: ./.github/actions/kamal-deploy

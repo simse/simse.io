@@ -7,7 +7,7 @@ servers:
     - 116.203.73.52
 
 proxy:
-  ssl: true
+  ssl: false 
   host: radio-proxy.simse.io
   app_port: 3000
   healthcheck:

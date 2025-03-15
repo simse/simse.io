@@ -33,6 +33,11 @@ env:
   secret:
     - IMGPROXY_SALT
     - IMGPROXY_KEY
+  tags:
+    eu:
+      SERVER_REGION: Europe
+    us:
+      SERVER_REGION: USA
 
 accessories:
   imgproxy:

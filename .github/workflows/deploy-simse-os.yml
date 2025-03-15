@@ -6,22 +6,20 @@ on:
       - main
     paths:
       - 'packages/simon-os/**'
+  pull_request:
 
 jobs:
   deploy:
     runs-on: ubuntu-24.04
 
-    permissions:
-      contents: read
-      packages: write
-
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Deploy with Kamal
         uses: ./.github/actions/kamal-deploy
         with:
           working-directory: ./packages/simon-os
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
-          registry-password: ${{ secrets.GITHUB_TOKEN }}
+          infisical-client-id: ${{ secrets.INFISICAL_CLIENT_ID }}
+          infisical-client-secret: ${{ secrets.INFISICAL_CLIENT_SECRET }}
