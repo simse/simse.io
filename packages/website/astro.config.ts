@@ -30,6 +30,7 @@ export default defineConfig({
       IMGPROXY_SALT: envField.string({ context: 'server', access: 'secret', optional: true }),
       AXIOM_DATASET: envField.string({ context: 'server', access: 'secret', default: 'simse-io-dev' }),
       AXIOM_TOKEN: envField.string({ context: 'server', access: 'secret', optional: true }),
+      SERVER_REGION: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
   vite: {

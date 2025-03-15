@@ -1,4 +1,3 @@
-import type { CollectionEntry } from "astro:content";
 import type { FunctionalComponent } from "preact";
 
 interface Window {
@@ -23,16 +22,11 @@ interface BiograhyWindowType extends Window {
 
 interface BlogListWindowType extends Window {
 	type: "blogList";
-	posts: CollectionEntry<"blog">[];
 }
 
 interface BlogPostWindowType extends Window {
 	type: "blogPost";
 	postSlug: string;
-	prefetchedPost?: {
-		html: string;
-		frontmatter: CollectionEntry<"blog">["data"];
-	};
 }
 
 type WindowType =
@@ -53,10 +47,6 @@ interface WindowProps {
 interface InitialStateAction {
 	type: "openBlogPost";
 	postSlug: string;
-	prefetchedPost: {
-		html: string;
-		frontmatter: CollectionEntry<"blog">["data"];
-	};
 }
 
 export type { WindowProps, WindowType, InitialStateAction };

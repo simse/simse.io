@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "preact/hooks";
+import Sockette from "sockette";
 
 import MuteIcon from "@components/icons/MuteIcon";
 import VolumeThree from "@components/icons/VolumeThree";
@@ -17,25 +18,20 @@ const RadioWindow = (props: RadioWindowProps) => {
 	const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
 
 	useEffect(() => {
-		getMetadata();
+		const ws = new Sockette("wss://radio-proxy.simse.io/currently-playing", {
+			timeout: 5e3,
+			maxAttempts: 10,
+			onmessage: (e) => {
+				setCurrentlyPlaying(e.data);
+				setIsReady(true);
+			},
+			onclose: () => setIsReady(false),
+		});
 
-		setInterval(() => {
-			getMetadata();
-		}, 5000);
+		return () => ws.close();
 	}, []);
 
-	const getMetadata = () => {
-		fetch("/api/radio-proxy").then(async (resp) => {
-			const parsedResp = (await resp.json()) as {
-				song: string;
-			};
-
-			setCurrentlyPlaying(parsedResp.song);
-			setIsReady(true);
-		});
-	};
-
-	const streamUrl = "https://80.streeemer.com/listen/80s/radio.mp3";
+	const streamUrl = "https://radio-proxy.simse.io/stream";
 
 	const createAudioContext = () => {
 		audioContextRef.current = new AudioContext();
@@ -82,6 +78,7 @@ const RadioWindow = (props: RadioWindowProps) => {
 			if (audioContext.state === "suspended") {
 				await audioContext.resume();
 			}
+			audioElement.volume = 0.5;
 			await audioElement
 				.play()
 				.catch((error) => console.error("Error playing audio:", error));
@@ -159,7 +156,7 @@ const RadioWindow = (props: RadioWindowProps) => {
 	return (
 		<WindowFrame
 			title="Radio"
-			initialSize={{ width: 300, height: 250 }}
+			initialSize={{ width: 300, height: 210 }}
 			initialPosition={{ x: 350, y: 450 }}
 			{...props}
 		>
@@ -183,7 +180,7 @@ const RadioWindow = (props: RadioWindowProps) => {
 
 					<button
 						type="button"
-						class="border border-black rounded-sm h-11 w-11 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center"
+						class="border border-black rounded-sm h-11 w-11 disabled:cursor-not-allowed disabled:opacity-50 flex items-center justify-center hover:cursor-pointer"
 						onClick={() => {
 							if (isPlaying) {
 								pause();
@@ -203,7 +200,7 @@ const RadioWindow = (props: RadioWindowProps) => {
 					<>
 						<p>Currently Playing</p>
 
-						<div class="flex flex-col mb-4">
+						<div class="flex flex-col">
 							<div class="w-[282px] overflow-hidden">
 								<span
 									class={`text-2xl leading-5 whitespace-nowrap inline-flex ${

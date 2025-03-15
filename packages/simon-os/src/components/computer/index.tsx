@@ -15,11 +15,10 @@ import BiographyIcon from "@assets/desktop_icons/msagent-3.png";
 import useSize from "@utils/useSize";
 
 interface ComputerProps {
-	blogPosts: CollectionEntry<"blog">[];
 	initialStateAction?: InitialStateAction;
 }
 
-const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
+const Computer = ({ initialStateAction }: ComputerProps) => {
 	const BiographyWindowDefinition: WindowType = {
 		title: "Biography",
 		component: BiographyWindow,
@@ -37,7 +36,6 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
 		component: BlogList,
 		id: "blog",
 		type: "blogList",
-		posts: blogPosts,
 		meta: {
 			title: "Blog",
 			description: "Simon's blog",
@@ -79,7 +77,6 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
 				type: "blogPost",
 				id: `blog-${initialStateAction.postSlug}`,
 				associatedPath: `/blog/${initialStateAction.postSlug}`,
-				prefetchedPost: initialStateAction.prefetchedPost,
 			};
 		}
 	};
@@ -213,11 +210,11 @@ const Computer = ({ blogPosts, initialStateAction }: ComputerProps) => {
 							icon: BlogIcon,
 							onDoubleClick: () => openWindow(BlogWindowDefinition),
 						},
-						/*{
-              name: "Radio",
-              icon: RadioIcon,
-              onDoubleClick: () => openWindow(RadioWindowDefinition),
-            },*/
+						{
+							name: "Radio",
+							icon: RadioIcon,
+							onDoubleClick: () => openWindow(RadioWindowDefinition),
+						},
 					]}
 				/>
 			</div>

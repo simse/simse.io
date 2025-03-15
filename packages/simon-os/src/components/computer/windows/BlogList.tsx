@@ -14,6 +14,15 @@ const BlogList = (props: BlogListProps) => {
 			title: string;
 			slug: string;
 			published: string;
+			image: {
+				src: string;
+				alt: string;
+				sizes: {
+					icon: {
+						src: string;
+					};
+				};
+			};
 		}[]
 	>([]);
 
@@ -25,6 +34,15 @@ const BlogList = (props: BlogListProps) => {
 			slug: string;
 			title: string;
 			published: string;
+			image: {
+				src: string;
+				alt: string;
+				sizes: {
+					icon: {
+						src: string;
+					};
+				};
+			};
 		}[];
 
 		setPosts(parsedResp);
@@ -49,10 +67,14 @@ const BlogList = (props: BlogListProps) => {
 							class="flex mb-2 pb-2 border-b border-black last:border-transparent items-center"
 							key={post.slug}
 						>
-							<div class="bg-red-100 w-14 h-14 mr-4" />
+							<img
+								src={post.image.sizes.icon.src}
+								alt={post.image.alt}
+								class="bg-black/10 w-14 h-14 mr-4"
+							/>
 
 							<button
-								class={`text-left p-1 border border-dotted border-transparent ${selectedPost === post.slug ? "bg-black text-white border-white" : ""}`}
+								class={`text-left p-1 border border-dotted border-transparent ${selectedPost === post.slug ? "bg-black text-white border-white" : ""} hover:cursor-pointer`}
 								onClick={() => {
 									openWindow({
 										title: "Blog Post",

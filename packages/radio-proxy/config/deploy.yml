@@ -1,18 +1,19 @@
-service: simon-os
+service: radio-proxy
 
-image: simse/os.simse.io
+image: simse/radio-proxy.simse.io
 
 servers:
   web:
     - 116.203.73.52
-    - 165.1.76.236
 
 proxy:
   ssl: false 
-  host: os.simse.io
-  app_port: 4321
+  host: radio-proxy.simse.io
+  app_port: 3000
   healthcheck:
-    path: /
+    path: /up
+  buffering:
+    responses: false
 
 registry:
   server: ghcr.io

@@ -1,6 +1,6 @@
+import SimonPicture from "@assets/me_but_dithered.png";
 import WindowFrame from "../WindowFrame";
 import type { WindowProps } from "../types";
-// import SimonPicture from '@assets/me_but_dithered.png'
 
 interface BiographyWindowProps extends WindowProps {}
 
@@ -13,14 +13,14 @@ const BiographyWindow = (props: BiographyWindowProps) => {
 			{...props}
 		>
 			<div class="float-left mr-3">
-				{/*<img
-          src={`/cdn-cgi/image/width=200,quality=75,format=avif${SimonPicture.src}`}
-          alt="Simon"
-          class="w-28 h-28 mb-1 bg-black/10"
-          style={{
-            imageRendering: 'pixelated',
-          }}
-        />*/}
+				<img
+					src={SimonPicture.src}
+					alt="Simon"
+					class="w-28 h-28 mb-1 bg-black/10"
+					style={{
+						imageRendering: "pixelated",
+					}}
+				/>
 			</div>
 
 			<p class="mb-4">
@@ -30,24 +30,24 @@ const BiographyWindow = (props: BiographyWindowProps) => {
 				</span>
 			</p>
 
-			<div class="font-sans-alt prose text-xs leading-5 mb-4">
-				<p>
+			<div class="font-sans-alt text-xs leading-5 mb-4">
+				<p class="my-4">
 					I've always been fascinated with technology, and as a child I broke
 					many things through tinkering.
 				</p>
 
-				<p>
+				<p class="my-4">
 					Around the age of 10, I learned the HTML, CSS and JS basics from
 					Youtube. When I was 12, my dad got me a subscription to Treehouse,
 					where I learned about PHP, Wordpress and jQuery.{" "}
 				</p>
 
-				<p>
+				<p class="my-4">
 					Since then I've known I wanted to be a Software Engineer, and now 11
 					years later, I am!
 				</p>
 
-				<p>
+				<p class="my-4">
 					Currently I work at The LEGO Group as a Junior Software Engineer doing
 					all sorts of cool stuff.
 				</p>

@@ -1,11 +1,11 @@
-name: Deploy simonOS
+name: Deploy simonOS radio proxy
 
 on:
   push:
     branches:
       - main
     paths:
-      - 'packages/simon-os/**'
+      - 'packages/radio-proxy/**'
 
 jobs:
   deploy:
@@ -18,7 +18,7 @@ jobs:
       - name: Deploy with Kamal
         uses: ./.github/actions/kamal-deploy
         with:
-          working-directory: ./packages/simon-os
+          working-directory: ./packages/radio-proxy
           ssh-key: ${{ secrets.SSH_PRIVATE_KEY }}
           infisical-client-id: ${{ secrets.INFISICAL_CLIENT_ID }}
           infisical-client-secret: ${{ secrets.INFISICAL_CLIENT_SECRET }}

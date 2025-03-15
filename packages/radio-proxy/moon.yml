@@ -1,0 +1,25 @@
+language: 'typescript'
+platform: 'bun'
+
+tasks:
+  lint:
+    command: 'bun biome check index.ts'
+    options:
+      mergeArgs: 'replace'
+    inputs:
+      - 'index.ts'
+
+  format:
+    command: 'bun biome check --write index.ts'
+    options:
+      mergeArgs: 'replace'
+
+  build:
+    command: 'bun build ./index.ts --compile --minify --sourcemap --bytecode --outfile radio-proxy'
+
+  dev:
+    command: 'bun --watch index.ts'
+    local: true
+
+  start:
+    command: './radio-proxy'

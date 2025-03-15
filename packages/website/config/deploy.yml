@@ -1,38 +1,25 @@
-# Name of your application. Used to uniquely configure containers.
 service: simse-io
 
-# Name of the container image.
 image: simse/simse.io
 
-# Deploy to these servers.
 servers:
   web: 
-    - 116.203.73.52
-   # job:
-  #   hosts:
-  #     - 192.168.0.1
-  #   cmd: bin/jobs
+    - 116.203.73.52: eu
+    - 165.1.76.236: us
 
-# Note: If using Cloudflare, set encryption mode in SSL/TLS setting to "Full" to enable CF-to-app encryption.
 proxy:
-  ssl: true
+  ssl: false
   host: simse.io
-  # Proxy connects to your container on port 80 by default.
   app_port: 4321
   healthcheck:
     path: /
 
-# Credentials for your image host.
 registry:
-  # Specify the registry server, if you're not using Docker Hub
   server: ghcr.io
   username: simse
-
-  # Always use an access token rather than real password (pulled from .kamal/secrets).
   password:
     - KAMAL_REGISTRY_PASSWORD
 
-# Configure builder setup.
 builder:
   arch: arm64
   context: "../.."
@@ -40,43 +27,32 @@ builder:
     type: gha
     options: mode=max
     image: kamal-app-build-cache
-  # Pass in additional build args needed for your Dockerfile.
-  # args:
-  #   RUBY_VERSION: <%= ENV["RBENV_VERSION"] || ENV["rvm_ruby_string"] || "#{RUBY_ENGINE}-#{RUBY_ENGINE_VERSION}" %>
+env:
+  clear:
+    IMGPROXY_ENDPOINT: https://img.simse.io
+  secret:
+    - IMGPROXY_SALT
+    - IMGPROXY_KEY
+  tags:
+    eu:
+      SERVER_REGION: Europe
+    us:
+      SERVER_REGION: USA
 
-# Inject ENV variables into containers (secrets come from .kamal/secrets).
-#
-# env:
-#   clear:
-#     DB_HOST: 192.168.0.2
-#   secret:
-#     - RAILS_MASTER_KEY
-
-# Aliases are triggered with "bin/kamal <alias>". You can overwrite arguments on invocation:
-# "bin/kamal app logs -r job" will tail logs from the first server in the job section.
-#
-# aliases:
-#   shell: app exec --interactive --reuse "bash"
-
-# Use a different ssh user than root
-#
-# ssh:
-#   log_level: debug
-  # key_data: [ "$DEPLOY_KEY" ]
-# Use a persistent storage volume.
-#
-# volumes:
-#   - "app_storage:/app/storage"
-
-# Bridge fingerprinted assets, like JS and CSS, between versions to avoid
-# hitting 404 on in-flight requests. Combines all files from new and old
-# version inside the asset_path.
-#
-# asset_path: /app/public/assets
-
-# Configure rolling deploys by setting a wait time between batches of restarts.
-#
-# boot:
-#   limit: 10 # Can also specify as a percentage of total hosts, such as "25%"
-#   wait: 2
-
+accessories:
+  imgproxy:
+    service: imgproxy
+    image: ghcr.io/imgproxy/imgproxy:v3.26.1
+    hosts:
+      - 116.203.73.52
+      - 165.1.76.236
+    env:
+      secret:
+        - IMGPROXY_SALT
+        - IMGPROXY_KEY
+    proxy:
+      ssl: false
+      host: img.simse.io
+      app_port: 8080
+      healthcheck:
+        path: /health

@@ -1,9 +1,14 @@
 name: 'Kamal Deploy'
+description: 'Initialises environment for Kamal and runs a deploy'
 
 inputs:
   working-directory:
     required: true
   ssh-key:
+    required: true
+  infisical-client-id:
+    required: true
+  infisical-client-secret:
     required: true
 
 runs:
@@ -15,19 +20,27 @@ runs:
       ruby-version: 3.2.2
       bundler-cache: true
 
-  - name: Install dependencies
+  - name: Install Kamal
+    shell: bash
+    run: gem install kamal -v 2.5.3
+
+  - name: Install Infisical CLI
     shell: bash
     run: |
-      gem install specific_install
-      gem specific_install https://github.com/basecamp/kamal.git 
+      curl -1sLf 'https://dl.cloudsmith.io/public/infisical/infisical-cli/setup.deb.sh' | sudo -E bash
+      sudo apt-get update && sudo apt-get install -y infisical
+
+  - name: Authenticate Infisical CLI
+    shell: bash
+    run: echo "INFISICAL_TOKEN=$(infisical login --method=universal-auth --client-id=${{ inputs.infisical-client-id }} --client-secret=${{ inputs.infisical-client-secret }} --silent --plain)" >> "$GITHUB_ENV"
 
   - uses: webfactory/ssh-agent@v0.7.0
     with:
       ssh-private-key: ${{ inputs.ssh-key }}
 
-  # - name: Set up Docker Buildx
-  #   id: buildx
-  #   uses: docker/setup-buildx-action@v2
+  - name: Set up Docker Buildx
+    id: buildx
+    uses: docker/setup-buildx-action@v2
 
   - name: Expose GitHub Runtime for cache
     uses: crazy-max/ghaction-github-runtime@v3
