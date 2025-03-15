@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - 'packages/radio-proxy/**'
-  pull_request:
 
 jobs:
   deploy:

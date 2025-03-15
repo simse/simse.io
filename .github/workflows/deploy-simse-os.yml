@@ -6,7 +6,6 @@ on:
       - main
     paths:
       - 'packages/simon-os/**'
-  pull_request:
 
 jobs:
   deploy:
