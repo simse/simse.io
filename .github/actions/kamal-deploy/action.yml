@@ -20,11 +20,9 @@ runs:
       ruby-version: 3.2.2
       bundler-cache: true
 
-  - name: Install dependencies
+  - name: Install Kamal
     shell: bash
-    run: |
-      gem install specific_install
-      gem specific_install https://github.com/basecamp/kamal.git
+    run: gem install kamal -v 2.5.3
 
   - name: Install Infisical CLI
     shell: bash
