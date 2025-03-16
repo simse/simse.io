@@ -1,6 +1,0 @@
-service: simse-io-staging
-
-image: simse.io-staging
-
-proxy:
-  host: staging.simse.io
