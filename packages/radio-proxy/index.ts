@@ -1,3 +1,5 @@
+import type { ServerWebSocket } from "bun";
+
 const intervalMap = new Map();
 const lastEmittedSong = new Map();
 
@@ -82,7 +84,7 @@ Bun.serve({
 	},
 
 	websocket: {
-		open(ws) {
+		open(ws: ServerWebSocket) {
 			updateCurrentlyPlaying();
 
 			intervalMap.set(
@@ -96,13 +98,13 @@ Bun.serve({
 				}, 500),
 			);
 		},
-		close(ws) {
+		close(ws: ServerWebSocket) {
 			clearInterval(intervalMap.get(ws));
 			intervalMap.delete(ws);
 			lastEmittedSong.delete(ws);
 			console.log("cleared interval");
 		},
-		message(_, message) {
+		message(_: ServerWebSocket, message: string) {
 			console.log(`received message: ${message}`);
 		},
 	},
