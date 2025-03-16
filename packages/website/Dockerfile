@@ -1,57 +1,27 @@
-#### BASE STAGE
-#### Installs moon.
+FROM --platform=$BUILDPLATFORM docker.io/oven/bun:1.2.5 AS build
 
-FROM ubuntu:24.04 AS base
 WORKDIR /app
+COPY package.json bun.lock .
 
-RUN apt-get update
-RUN apt-get install -y curl
+RUN bun install --frozen-lockfile
 
-# Install moon binary
-RUN curl -fsSL https://moonrepo.dev/install/moon.sh | bash
-ENV PATH="/root/.moon/bin:$PATH"
-
-#### SKELETON STAGE
-#### Scaffolds repository skeleton structures.
-
-FROM base AS skeleton
-
-# Copy entire repository and scaffold
 COPY . .
 
-RUN moon docker scaffold website
+RUN bun --bun run astro build
 
-#### BUILD STAGE
-#### Builds the project.
+FROM docker.io/oven/bun:1.2.5 AS start
 
-FROM base AS build
+ENV HOST=0.0.0.0
+ENV PORT=4321
+ENV NODE_ENV=production
 
-# Copy toolchain
-COPY --from=skeleton /root/.proto /root/.proto
+WORKDIR /app
 
-# Copy workspace configs
-COPY --from=skeleton /app/.moon/docker/workspace .
+COPY package.json bun.lock .
+RUN bun install --production
 
-# Install dependencies
-RUN moon docker setup
+COPY --from=build /app/dist ./dist
+COPY --from=build /app/public ./public
 
-# Copy project sources
-COPY --from=skeleton /app/.moon/docker/sources .
 
-# Build the project
-RUN moon run website:build
-
-# Prune extraneous dependencies
-# RUN moon docker prune
-
-#### START STAGE
-#### Runs the project.
-
-FROM base AS start
-
-# Copy built sources
-COPY --from=build /root/.proto /root/.proto
-COPY --from=build /app /app
-
-CMD moon run website:start
-
+ENTRYPOINT [ "bun", "/app/dist/server/entry.mjs" ]

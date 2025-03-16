@@ -21,8 +21,9 @@ registry:
     - KAMAL_REGISTRY_PASSWORD
 
 builder:
-  arch: arm64
-  context: "../.."
+  arch:
+    - arm64
+    - amd64
   cache:
     type: gha
     options: mode=max

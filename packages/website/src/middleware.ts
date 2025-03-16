@@ -19,9 +19,6 @@ export const onRequest = defineMiddleware(async ({ request, url }, next) => {
     `render;dur=${renderTime.toFixed(2)}`,
   )
 
-  // Log render time (optional)
-  // console.log(`Page render time: ${renderTime.toFixed(2)}ms`);
-
   logger.info(
     {
       renderTime,
