@@ -19,20 +19,17 @@ export const onRequest = defineMiddleware(async ({ request, url }, next) => {
     `render;dur=${renderTime.toFixed(2)}`,
   )
 
-  // Log render time (optional)
-  // console.log(`Page render time: ${renderTime.toFixed(2)}ms`);
-
-  //logger.info(
-  //  {
-  //    renderTime,
-  //    path: url.pathname,
-  //    method: request.method,
-  //    prefecthed:
-  //      request.headers.has('Purpose') &&
-  //      request.headers.get('Purpose') === 'prefetch',
-  //  },
-  //  'served page',
-  //)
+  logger.info(
+    {
+      renderTime,
+      path: url.pathname,
+      method: request.method,
+      prefecthed:
+        request.headers.has('Purpose') &&
+        request.headers.get('Purpose') === 'prefetch',
+    },
+    'served page',
+  )
 
   return newResponse
 })
