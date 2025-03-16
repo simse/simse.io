@@ -1,0 +1,5 @@
+node_modules
+.git
+.moon/cache
+.env
+dist
