@@ -6,10 +6,11 @@ on:
       - main
     paths:
       - 'packages/website/**'
+    pull_request:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
 
     steps:
       - name: Checkout code
