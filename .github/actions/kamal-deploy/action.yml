@@ -25,7 +25,6 @@ runs:
     run: gem install kamal -v 2.5.3
 
   - name: Set up Node
-    uses: actions/setup-node@v4
     with:
       node-version: 22
 
@@ -40,10 +39,6 @@ runs:
   - uses: webfactory/ssh-agent@v0.7.0
     with:
       ssh-private-key: ${{ inputs.ssh-key }}
-
-  - name: Set up Docker Buildx
-    id: buildx
-    uses: docker/setup-buildx-action@v2
 
   - name: Expose GitHub Runtime for cache
     uses: crazy-max/ghaction-github-runtime@v3

@@ -24,10 +24,10 @@ builder:
   arch:
     - arm64
     - amd64
-  cache:
-    type: gha
-    options: mode=max
-    image: kamal-app-build-cache
+  # cache:
+  #   type: gha
+  #   options: mode=max
+  #   image: kamal-app-build-cache
 env:
   clear:
     IMGPROXY_ENDPOINT: https://img.simse.io

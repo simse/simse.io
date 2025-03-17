@@ -26,12 +26,12 @@ const { title, href, image, description, smallText }: ExpandedBubbleProps =
 
   {#if image}
     <img
-      class="w-full aspect-[4/3] rounded-xl rounded-bl-md bg-zinc-900"
+      class="w-full aspect-[3/2] rounded-xl rounded-bl-md bg-zinc-900"
       src={image.sizes.thumbnail.src}
       alt={image.alt}
     />
   {:else}
-    <div class="w-full aspect-[4/3] rounded-xl rounded-bl-md bg-zinc-900"></div>
+    <div class="w-full aspect-[3/2] rounded-xl rounded-bl-md bg-zinc-900"></div>
   {/if}
 
   <p
