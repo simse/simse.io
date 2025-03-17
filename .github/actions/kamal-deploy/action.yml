@@ -27,6 +27,9 @@ runs:
   - name: Set up Bun
     uses: oven-sh/setup-bun@v2
 
+  - name: Add Bun bin to PATH
+    run: echo "export PATH=\$PATH:/usr/local/bin:/home/runner/.bun/bin" >> $GITHUB_ENV
+
   - name: Install Infisical CLI
     shell: bash
     run: bun install -g @infisical/cli
