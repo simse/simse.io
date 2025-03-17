@@ -1,16 +1,16 @@
 <script lang="ts">
-  import type { Image } from "@lib/cms/types";
+import type { Image } from '@lib/cms/types'
 
-  interface ExpandedBubbleProps {
-    title: string;
-    href: string;
-    image?: Image;
-    description?: string;
-    smallText?: string;
-  }
+interface ExpandedBubbleProps {
+  title: string
+  href: string
+  image?: Image
+  description?: string
+  smallText?: string
+}
 
-  const { title, href, image, description, smallText }: ExpandedBubbleProps =
-    $props();
+const { title, href, image, description, smallText }: ExpandedBubbleProps =
+  $props()
 </script>
 
 <a

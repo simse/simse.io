@@ -4,7 +4,7 @@ import { getProjects } from '@lib/cms'
 import ProjectCard from '../projects/ProjectCard.astro'
 
 const projects = await getProjects()
-const featuredProjects = projects.filter(project => project.featured)
+const featuredProjects = projects.filter((project) => project.featured)
 ---
 
 {projects.length > 0 ? <section class="my-16 max-w-xl mx-auto">

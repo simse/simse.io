@@ -1,13 +1,13 @@
 <script lang="ts">
-  interface SectionHeaderProps {
-    title: string;
-    href?: string;
-    secondary?: boolean;
-  }
+interface SectionHeaderProps {
+  title: string
+  href?: string
+  secondary?: boolean
+}
 
-  const { title, href, secondary = false }: SectionHeaderProps = $props();
+const { title, href, secondary = false }: SectionHeaderProps = $props()
 
-  const styles = `w-fit block bg-zinc-950 z-10 relative ${secondary ? "pr-2" : "px-2 mx-auto"}`;
+const styles = `w-fit block bg-zinc-950 z-10 relative ${secondary ? 'pr-2' : 'px-2 mx-auto'}`
 </script>
 
 <header class={`mb-2 relative font-semibold text-lg`}>

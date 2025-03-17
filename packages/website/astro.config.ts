@@ -24,9 +24,9 @@ export default defineConfig({
     schema: {
       SANITY_PROJECT_DATASET: envField.string({ context: "server", access: "public", default: "production" }),
       SANITY_PROJECT_ID: envField.string({ context: "server", access: "public", default: "rjqusm5i" }),
-      IMGPROXY_ENDPOINT: envField.string({ context: 'server', access: 'public', optional: true }),
-      IMGPROXY_KEY: envField.string({ context: 'server', access: 'secret', optional: true }),
-      IMGPROXY_SALT: envField.string({ context: 'server', access: 'secret', optional: true }),
+      IMGPROXY_ENDPOINT: envField.string({ context: 'server', access: 'secret' }),
+      IMGPROXY_KEY: envField.string({ context: 'server', access: 'secret' }),
+      IMGPROXY_SALT: envField.string({ context: 'server', access: 'secret' }),
       SERVER_REGION: envField.string({ context: 'server', access: 'secret', optional: true }),
     },
   },
