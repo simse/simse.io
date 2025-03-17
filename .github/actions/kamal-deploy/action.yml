@@ -24,14 +24,12 @@ runs:
     shell: bash
     run: gem install kamal -v 2.5.3
 
-  - name: Set up Node
-    uses: actions/setup-node@v4
-    with:
-      node-version: 22
+  - name: Set up Bun
+    uses: oven-sh/setup-bun@v2
 
   - name: Install Infisical CLI
     shell: bash
-    run: npm install -g @infisical/cli
+    run: bun install -g @infisical/cli
 
   - name: Authenticate Infisical CLI
     shell: bash
