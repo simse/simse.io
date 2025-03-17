@@ -24,16 +24,13 @@ runs:
     shell: bash
     run: gem install kamal -v 2.5.3
 
-  - name: Set up Bun
-    uses: oven-sh/setup-bun@v2
-
-  - name: Add Bun bin to PATH
-    shell: bash
-    run: echo "export PATH=\$PATH:/usr/local/bin:/home/runner/.bun/bin" >> $GITHUB_ENV
+  - name: Set up Node
+    with:
+      node-version: 22
 
   - name: Install Infisical CLI
     shell: bash
-    run: bun install -g @infisical/cli
+    run: npm install -g @infisical/cli
 
   - name: Authenticate Infisical CLI
     shell: bash
@@ -42,10 +39,6 @@ runs:
   - uses: webfactory/ssh-agent@v0.7.0
     with:
       ssh-private-key: ${{ inputs.ssh-key }}
-
-  # - name: Set up Docker Buildx
-  #   id: buildx
-  #   uses: docker/setup-buildx-action@v2
 
   - name: Expose GitHub Runtime for cache
     uses: crazy-max/ghaction-github-runtime@v3
