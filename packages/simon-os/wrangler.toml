@@ -1,0 +1,21 @@
+name = "simon-os"
+main = "./dist/_worker.js/index.js"
+compatibility_date = "2025-08-17"
+compatibility_flags = [ "nodejs_compat" ]
+upload_source_maps = true
+
+[observability]
+enabled = true
+head_sampling_rate = 1
+
+[[routes]]
+pattern = "os.simse.io"
+custom_domain = true
+
+[assets]
+binding = "ASSETS"
+directory = "./dist"
+
+[[kv_namespaces]]
+binding = "SESSION"
+id = "8e8571aef33043d68436d5dca4202745"

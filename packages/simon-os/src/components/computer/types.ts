@@ -1,10 +1,14 @@
 import type { FunctionalComponent } from "preact";
 
+// window/app definition
 interface Window {
 	title: string;
 	component: FunctionalComponent<WindowProps>;
 	associatedPath?: string;
 	id: string;
+	type: string;
+	icon: ImageMetadata;
+	openByDefault?: boolean;
 	meta?: {
 		title: string;
 		description: string;
@@ -12,29 +16,9 @@ interface Window {
 	};
 }
 
-interface RadioWindowType extends Window {
-	type: "radio";
-}
+type WindowType = Window;
 
-interface BiograhyWindowType extends Window {
-	type: "biography";
-}
-
-interface BlogListWindowType extends Window {
-	type: "blogList";
-}
-
-interface BlogPostWindowType extends Window {
-	type: "blogPost";
-	postSlug: string;
-}
-
-type WindowType =
-	| BiograhyWindowType
-	| BlogListWindowType
-	| RadioWindowType
-	| BlogPostWindowType;
-
+// props given to a window
 interface WindowProps {
 	title?: string;
 	id: string;
@@ -44,9 +28,4 @@ interface WindowProps {
 	openWindow: (window: WindowType) => void;
 }
 
-interface InitialStateAction {
-	type: "openBlogPost";
-	postSlug: string;
-}
-
-export type { WindowProps, WindowType, InitialStateAction };
+export type { WindowProps, WindowType };

@@ -1,22 +1,28 @@
 {
-  "name": "simon-os",
-  "type": "module",
-  "version": "1.0.0",
-  "dependencies": {
-    "@astrojs/check": "0.9.4",
-    "@astrojs/preact": "4.0.5",
-    "@astrojs/tailwind": "6.0.0",
-    "@nurodev/astro-bun": "2.0.2",
-    "@tailwindcss/vite": "4.0.9",
-    "astro": "5.4.1",
-    "preact": "10.20.1",
-    "sockette": "^2.0.6",
-    "typescript": "5.4.2",
-    "vite": "6.2.0"
-  },
-  "devDependencies": {
-    "@biomejs/biome": "1.9.4",
-    "sass": "1.85.1",
-    "tailwind-scrollbar": "^3.1.0"
-  }
+	"name": "simon-os",
+	"type": "module",
+	"version": "1.0.0",
+	"dependencies": {
+		"@astrojs/check": "0.9.4",
+		"@astrojs/cloudflare": "12.6.8",
+		"@astrojs/preact": "4.1.1",
+		"@astrojs/tailwind": "6.0.2",
+		"@google/genai": "1.20.0",
+		"@tailwindcss/vite": "4.0.9",
+		"astro": "5.13.9",
+		"preact": "10.20.1",
+		"typescript": "5.4.2",
+		"vite": "6.2.0",
+		"zustand": "5.0.8"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"sass": "1.93.0",
+		"tailwind-scrollbar": "4.0.2",
+		"wrangler": "4.38.0"
+	},
+	"overrides": {
+		"react": "npm:@preact/compat@latest",
+		"react-dom": "npm:@preact/compat@latest"
+	}
 }

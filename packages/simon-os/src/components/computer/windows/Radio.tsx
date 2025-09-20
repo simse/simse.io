@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from "preact/hooks";
-import Sockette from "sockette";
 
 import MuteIcon from "@components/icons/MuteIcon";
 import VolumeThree from "@components/icons/VolumeThree";
@@ -12,26 +11,12 @@ const RadioWindow = (props: RadioWindowProps) => {
 	const audioElementRef = useRef<HTMLAudioElement | null>(null);
 	const audioContextRef = useRef<AudioContext | null>(null);
 	const analyserRef = useRef<AnalyserNode | null>(null);
-	const canvasRef = useRef<HTMLCanvasElement>(null);
+	const canvasRef = useRef<HTMLCanvasElement | null>(null);
 	const [isPlaying, setIsPlaying] = useState(false);
-	const [isReady, setIsReady] = useState(false);
-	const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>(null);
+	const [isReady, setIsReady] = useState(true);
+	const [currentlyPlaying, setCurrentlyPlaying] = useState<string | null>('Fast to Past');
 
-	useEffect(() => {
-		const ws = new Sockette("wss://radio-proxy.simse.io/currently-playing", {
-			timeout: 5e3,
-			maxAttempts: 10,
-			onmessage: (e) => {
-				setCurrentlyPlaying(e.data);
-				setIsReady(true);
-			},
-			onclose: () => setIsReady(false),
-		});
-
-		return () => ws.close();
-	}, []);
-
-	const streamUrl = "https://radio-proxy.simse.io/stream";
+	const streamUrl = "https://files.simse.io/walkman/song_2.mp3";
 
 	const createAudioContext = () => {
 		audioContextRef.current = new AudioContext();
@@ -39,6 +24,7 @@ const RadioWindow = (props: RadioWindowProps) => {
 		const audioElement = new Audio();
 		audioElement.crossOrigin = "anonymous";
 		audioElement.src = streamUrl;
+        audioElement.loop = true;
 		audioElementRef.current = audioElement;
 
 		audioElement.addEventListener("play", () => {
@@ -78,7 +64,7 @@ const RadioWindow = (props: RadioWindowProps) => {
 			if (audioContext.state === "suspended") {
 				await audioContext.resume();
 			}
-			audioElement.volume = 0.5;
+			audioElement.volume = 1;
 			await audioElement
 				.play()
 				.catch((error) => console.error("Error playing audio:", error));
@@ -175,7 +161,7 @@ const RadioWindow = (props: RadioWindowProps) => {
 				<div class="mt-2 pb-3 mb-1 border-b border-black flex items-center justify-between">
 					<div>
 						<span>Current Station</span>
-						<p class="text-xl leading-4">Wonder 80's</p>
+						<p class="text-xl leading-4">80s Music</p>
 					</div>
 
 					<button

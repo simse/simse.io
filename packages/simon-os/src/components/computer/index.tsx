@@ -1,37 +1,76 @@
-import type { CollectionEntry } from "astro:content";
 import { useLayoutEffect, useState } from "preact/hooks";
 
 import Desktop from "./Desktop";
 import TopBar from "./TopBar";
-import type { InitialStateAction, WindowType } from "./types";
+import type { WindowType } from "./types";
 import BiographyWindow from "./windows/Biography";
-import BlogList from "./windows/BlogList";
-import BlogPost from "./windows/BlogPost";
+import ChatWindow from "./windows/Chat";
 import RadioWindow from "./windows/Radio";
+import SettingsWindow from "./windows/Settings/Settings";
 
-import BlogIcon from "@assets/desktop_icons/address_book_pad.png";
+// import BlogIcon from "@assets/desktop_icons/address_book_pad.png";
 import RadioIcon from "@assets/desktop_icons/cd_audio_cd_a-4.png";
+import ChatIcon from "@assets/desktop_icons/chat.png";
 import BiographyIcon from "@assets/desktop_icons/msagent-3.png";
-import useSize from "@utils/useSize";
+import SettingsIcon from "@assets/desktop_icons/settings.png";
 
-interface ComputerProps {
-	initialStateAction?: InitialStateAction;
-}
-
-const Computer = ({ initialStateAction }: ComputerProps) => {
-	const BiographyWindowDefinition: WindowType = {
+const windowDefinitions: WindowType[] = [
+	{
 		title: "Biography",
 		component: BiographyWindow,
 		id: "biography",
 		type: "biography",
+		icon: BiographyIcon,
+		openByDefault: true,
 		meta: {
 			title: "Biography",
 			description: "Simon's biography",
 			path: "/",
 		},
-	};
+	},
+	{
+		title: "Radio",
+		component: RadioWindow,
+		id: "radio",
+		type: "radio",
+		icon: RadioIcon,
+		meta: {
+			title: "Radio",
+			description: "Simon's radio",
+			path: "/",
+		},
+	},
+	{
+		title: "Chat",
+		component: ChatWindow,
+		id: "chat",
+		type: "chat",
+		icon: ChatIcon,
+		openByDefault: true,
+		meta: {
+			title: "Chat",
+			description: "Chat with me",
+			path: "/",
+		},
+	},
+	{
+		title: "System Preferences",
+		component: SettingsWindow,
+		id: "settings",
+		type: "settings",
+		icon: SettingsIcon,
+		meta: {
+			title: "Chat",
+			description: "Chat with me",
+			path: "/",
+		},
+	},
+];
 
-	const BlogWindowDefinition: WindowType = {
+const Computer = () => {
+	//const BiographyWindowDefinition: WindowType = ;
+
+	/*const BlogWindowDefinition: WindowType = {
 		title: "Blog",
 		component: BlogList,
 		id: "blog",
@@ -41,19 +80,11 @@ const Computer = ({ initialStateAction }: ComputerProps) => {
 			description: "Simon's blog",
 			path: "/blog",
 		},
-	};
+	};*/
 
-	const RadioWindowDefinition: WindowType = {
-		title: "Radio",
-		component: RadioWindow,
-		id: "radio",
-		type: "radio",
-		meta: {
-			title: "Radio",
-			description: "Simon's radio",
-			path: "/",
-		},
-	};
+	/*const RadioWindowDefinition: WindowType = ;
+
+    const ChatWindowDefinition: WindowType = ;*/
 
 	const [windowWidth, setWindowWidth] = useState(0);
 
@@ -68,34 +99,13 @@ const Computer = ({ initialStateAction }: ComputerProps) => {
 		return () => window.removeEventListener("resize", handleResize);
 	}, []);
 
-	const initialStateWindow = (): WindowType | undefined => {
-		if (initialStateAction?.type === "openBlogPost") {
-			return {
-				title: "Blog Post",
-				component: BlogPost,
-				postSlug: initialStateAction.postSlug,
-				type: "blogPost",
-				id: `blog-${initialStateAction.postSlug}`,
-				associatedPath: `/blog/${initialStateAction.postSlug}`,
-			};
-		}
-	};
-
 	const [windows, setWindows] = useState<WindowType[]>(
-		[
-			BiographyWindowDefinition,
-			BlogWindowDefinition,
-			RadioWindowDefinition,
-			initialStateWindow(),
-		].filter(Boolean) as WindowType[],
+		windowDefinitions.filter((window) => window.openByDefault),
 	);
 	const [windowStack, setWindowStack] = useState<string[]>(
-		[
-			// "radio",
-			"blog",
-			"biography",
-			initialStateWindow()?.id,
-		].filter(Boolean) as string[],
+		windowDefinitions
+			.filter((window) => window.openByDefault)
+			.map((window) => window.id),
 	);
 
 	const getWindow = (id: string) => windows.find((window) => window.id === id);
@@ -107,13 +117,6 @@ const Computer = ({ initialStateAction }: ComputerProps) => {
 		setWindowStack((prevStack) =>
 			prevStack.filter((stackId) => stackId !== id),
 		);
-
-		const newTopWindow = getWindow(windowStack[windowStack.length - 2]);
-		if (newTopWindow) {
-			updateMeta(newTopWindow);
-		} else {
-			history.pushState({}, "", "/");
-		}
 	};
 
 	const touchWindow = (id: string) => {
@@ -199,23 +202,11 @@ const Computer = ({ initialStateAction }: ComputerProps) => {
 				})}
 
 				<Desktop
-					icons={[
-						{
-							name: "Biography",
-							icon: BiographyIcon,
-							onDoubleClick: () => openWindow(BiographyWindowDefinition),
-						},
-						{
-							name: "Blog",
-							icon: BlogIcon,
-							onDoubleClick: () => openWindow(BlogWindowDefinition),
-						},
-						{
-							name: "Radio",
-							icon: RadioIcon,
-							onDoubleClick: () => openWindow(RadioWindowDefinition),
-						},
-					]}
+					icons={windowDefinitions.map((window) => ({
+						name: window.title,
+						icon: window.icon,
+						onDoubleClick: () => openWindow(window),
+					}))}
 				/>
 			</div>
 		</div>

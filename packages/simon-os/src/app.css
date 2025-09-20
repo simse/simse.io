@@ -1,2 +1,9 @@
 @import "tailwindcss";
-@config "../tailwind.config.ts";
+@plugin "tailwind-scrollbar";
+
+@theme {
+	--font-sans: "Chicago", sans-serif;
+	--font-sans-alt: "MonacoTTF", sans-serif;
+	--font-mono: "ArialPixel", monospace;
+	--shadow-window: 4px 4px 0px 0 rgba(0, 0, 0, 0.25);
+}

@@ -26,33 +26,6 @@ const BlogList = (props: BlogListProps) => {
 		}[]
 	>([]);
 
-	const openWindow = props.openWindow;
-
-	const loadPosts = async () => {
-		const resp = await fetch("https://simse.io/api/posts");
-		const parsedResp = (await resp.json()) as {
-			slug: string;
-			title: string;
-			published: string;
-			image: {
-				src: string;
-				alt: string;
-				sizes: {
-					icon: {
-						src: string;
-					};
-				};
-			};
-		}[];
-
-		setPosts(parsedResp);
-	};
-
-	// biome-ignore lint/correctness/useExhaustiveDependencies: on mount
-	useEffect(() => {
-		loadPosts();
-	}, []);
-
 	return (
 		<WindowFrame
 			title="Blog"
@@ -75,20 +48,6 @@ const BlogList = (props: BlogListProps) => {
 
 							<button
 								class={`text-left p-1 border border-dotted border-transparent ${selectedPost === post.slug ? "bg-black text-white border-white" : ""} hover:cursor-pointer`}
-								onClick={() => {
-									openWindow({
-										title: "Blog Post",
-										component: BlogPost,
-										postSlug: post.slug,
-										type: "blogPost",
-										id: `blog-${post.slug}`,
-										meta: {
-											title: post.title,
-											description: "A blog post",
-											path: `/blog/${post.slug}`,
-										},
-									});
-								}}
 								type="button"
 							>
 								<span class="text-xl leading-none">{post.title}</span>

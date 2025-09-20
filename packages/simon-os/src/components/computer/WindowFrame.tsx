@@ -157,7 +157,7 @@ const WindowFrame = ({
 			</header>
 
 			<div
-				class="px-2 pt-2 overflow-y-auto h-full"
+				class="px-2 pt-2 overflow-y-auto h-full scrollbar-thin"
 				style={{
 					maxHeight: "calc(100% - 36px)",
 				}}

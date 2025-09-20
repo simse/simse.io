@@ -25,12 +25,12 @@ const BiographyWindow = (props: BiographyWindowProps) => {
 
 			<p class="mb-4">
 				<h1 class="text-2xl">Simon Sorensen</h1>
-				<span class="font-sans-alt text-xs leading-3">
-					23-year old Software Engineer™ in London, UK.
+				<span class="font-sans-alt leading-3">
+					24-year old Software Engineer™ in London, UK.
 				</span>
 			</p>
 
-			<div class="font-sans-alt text-xs leading-5 mb-4">
+			<div class="font-sans-alt leading-5 mb-4">
 				<p class="my-4">
 					I've always been fascinated with technology, and as a child I broke
 					many things through tinkering.

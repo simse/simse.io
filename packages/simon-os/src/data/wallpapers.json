@@ -1,0 +1,20 @@
+[
+	{
+		"name": "Compact Disc",
+		"id": "cd",
+		"image": {
+			"src": "CD_OS9.png",
+			"repeat": "repeat",
+			"size": "initial"
+		}
+	},
+	{
+		"name": "Blue Pattern",
+		"id": "blue_p",
+		"image": {
+			"src": "128.png",
+			"repeat": "repeat",
+			"size": "initial"
+		}
+	}
+]
