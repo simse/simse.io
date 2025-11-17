@@ -1,0 +1,55 @@
+{
+	"name": "simon-os",
+	"main": "./dist/_worker.js/index.js",
+	"compatibility_date": "2025-08-17",
+	"compatibility_flags": ["nodejs_compat"],
+	"upload_source_maps": true,
+	"vars": {
+		"POSTHOG_API_KEY": "phc_YdxODNgqNSOl3VjzKOxpLKl62IWpbuo1R7NHe0dSENI",
+		"POSTHOG_HOST": "https://us.i.posthog.com"
+	},
+	"observability": {
+		"enabled": true,
+		"head_sampling_rate": 1
+	},
+	"routes": [
+		{
+			"pattern": "simse.io",
+			"custom_domain": true
+		},
+		{
+			"pattern": "os.simse.io",
+			"custom_domain": true
+		}
+	],
+	"assets": {
+		"binding": "ASSETS",
+		"directory": "./dist"
+	},
+	"kv_namespaces": [
+		{
+			"binding": "SESSION",
+			"id": "23c71c93e44a4b5a98296b7db80ee085"
+		}
+	],
+	"env": {
+		"staging": {
+			"routes": [
+				{
+					"pattern": "staging.simse.io",
+					"custom_domain": true
+				}
+			],
+			"vars": {
+				"POSTHOG_API_KEY": "phc_YdxODNgqNSOl3VjzKOxpLKl62IWpbuo1R7NHe0dSENI",
+				"POSTHOG_HOST": "https://us.i.posthog.com"
+			},
+			"kv_namespaces": [
+				{
+					"binding": "SESSION",
+					"id": "d6be234c48334f269ceeda115218fb2d"
+				}
+			]
+		}
+	}
+}

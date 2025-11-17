@@ -1,9 +1,12 @@
 import CheckMarkIcon from "@components/icons/CheckMarkIcon.tsx";
-import wallpapers from "@data/wallpapers.json";
 import useStore from "@store";
+import { useContext } from "preact/hooks";
 import { useShallow } from "zustand/react/shallow";
+import { ReferenceDataContext } from "../../../../../context.ts";
 
 const AppearanceTab = () => {
+	const { wallpapers } = useContext(ReferenceDataContext);
+
 	const { selectedWallpaperId, setSelectedWallpaperId } = useStore(
 		useShallow((state) => ({
 			selectedWallpaperId: state.selectedWallpaperId,
@@ -15,7 +18,7 @@ const AppearanceTab = () => {
 		<div>
 			<h2 class="text-xl mb-4">Wallpaper</h2>
 			<ul class="grid grid-cols-3 gap-2">
-				{wallpapers.map((wallpaper) => (
+				{wallpapers.map(({ data: wallpaper }) => (
 					<li
 						key={wallpaper.id}
 						class="mb-2 hover:cursor-pointer"

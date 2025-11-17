@@ -3,7 +3,30 @@
 
 @theme {
 	--font-sans: "Chicago", sans-serif;
-	--font-sans-alt: "MonacoTTF", sans-serif;
+	--font-sans-alt: "Homebrew", sans-serif;
 	--font-mono: "ArialPixel", monospace;
+	--font-logo: "Adams", sans-serif;
 	--shadow-window: 4px 4px 0px 0 rgba(0, 0, 0, 0.25);
+	--animate-bounce-marquee: bounceMarquee 10s linear infinite;
+
+	@keyframes bounceMarquee {
+		0% {
+			transform: translateX(0);
+		}
+		10% {
+			transform: translateX(0);
+		}
+		45% {
+			transform: translateX(calc(-100% + 282px));
+		}
+		55% {
+			transform: translateX(calc(-100% + 282px));
+		}
+		90% {
+			transform: translateX(0);
+		}
+		100% {
+			transform: translateX(0);
+		}
+	}
 }

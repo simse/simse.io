@@ -4,16 +4,11 @@ import type { FunctionalComponent } from "preact";
 interface Window {
 	title: string;
 	component: FunctionalComponent<WindowProps>;
-	associatedPath?: string;
 	id: string;
 	type: string;
 	icon: ImageMetadata;
 	openByDefault?: boolean;
-	meta?: {
-		title: string;
-		description: string;
-		path: string;
-	};
+	showOnDesktop?: boolean;
 }
 
 type WindowType = Window;

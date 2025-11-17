@@ -1,6 +1,6 @@
 import type { ImageMetadata } from "astro";
-import { useState } from "preact/hooks";
-import wallpapers from "../../data/wallpapers.json";
+import { useContext, useState } from "preact/hooks";
+import { ReferenceDataContext } from "../../context.ts";
 import useStore from "../../store";
 
 interface DesktopProps {
@@ -14,10 +14,12 @@ interface DesktopProps {
 const Desktop = ({ icons }: DesktopProps) => {
 	const [selectedIcon, setSelectedIcon] = useState<string | null>(null);
 	const selectedWallpaperId = useStore((state) => state.selectedWallpaperId);
+	const { wallpapers } = useContext(ReferenceDataContext);
 
-	const selectedWallpaper =
+	const selectedWallpaper = (
 		wallpapers.find((wallpaper) => wallpaper.id === selectedWallpaperId) ??
-		wallpapers[0];
+		wallpapers[0]
+	).data;
 
 	return (
 		<div
@@ -26,6 +28,7 @@ const Desktop = ({ icons }: DesktopProps) => {
 				backgroundImage: `url(/wallpapers/${selectedWallpaper.image.src})`,
 				backgroundRepeat: selectedWallpaper.image.repeat ?? "no-repeat",
 				backgroundSize: selectedWallpaper.image.size ?? "100%",
+				color: selectedWallpaper.contrastColour ?? "black",
 			}}
 		>
 			<div
@@ -37,7 +40,10 @@ const Desktop = ({ icons }: DesktopProps) => {
 			{icons.map((icon) => (
 				<button
 					class="flex flex-col items-center gap-2 z-10 w-24"
-					onDblClick={() => icon.onDoubleClick()}
+					onDblClick={() => {
+						icon.onDoubleClick();
+						setSelectedIcon(null);
+					}}
 					onClick={() => setSelectedIcon(icon.name)}
 					type="button"
 					key={icon.name}

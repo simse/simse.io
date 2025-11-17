@@ -23,33 +23,30 @@ const BiographyWindow = (props: BiographyWindowProps) => {
 				/>
 			</div>
 
-			<p class="mb-4">
-				<h1 class="text-2xl">Simon Sorensen</h1>
-				<span class="font-sans-alt leading-3">
+			<div class="mb-4">
+				<h1 class="text-2xl font-logo">Simon Sorensen</h1>
+				<span class="font-sans-alt tracking-tighter leading-3">
 					24-year old Software Engineer™ in London, UK.
 				</span>
-			</p>
 
-			<div class="font-sans-alt leading-5 mb-4">
-				<p class="my-4">
-					I've always been fascinated with technology, and as a child I broke
-					many things through tinkering.
+				<hr class="mt-2" />
+			</div>
+
+			<div class="font-sans-alt leading-5 tracking-tighter mb-4">
+				<p className="my-4">
+					Hello! Welcome to my website, feel free to have a look around.
 				</p>
 
-				<p class="my-4">
-					Around the age of 10, I learned the HTML, CSS and JS basics from
-					Youtube. When I was 12, my dad got me a subscription to Treehouse,
-					where I learned about PHP, Wordpress and jQuery.{" "}
+				<p className="my-4">
+					I've spent my entire working life at The LEGO Group, first as a
+					student worker, then a software engineering intern and now a full-time
+					software engineer.
 				</p>
 
-				<p class="my-4">
-					Since then I've known I wanted to be a Software Engineer, and now 11
-					years later, I am!
-				</p>
-
-				<p class="my-4">
-					Currently I work at The LEGO Group as a Junior Software Engineer doing
-					all sorts of cool stuff.
+				<p className="my-4">
+					Currently I'm on the Pick a Brick team, but I've previously worked on
+					platform services, cart services, payment services, cart and checkout,
+					experiences, and finally internal applications.
 				</p>
 			</div>
 		</WindowFrame>

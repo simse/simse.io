@@ -13,3 +13,9 @@ tasks:
     deps:
         - build
     command: 'wrangler deploy'
+
+  deploy-staging:
+    local: true
+    deps:
+        - build
+    command: 'wrangler deploy --env staging'

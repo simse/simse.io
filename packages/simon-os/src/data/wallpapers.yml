@@ -1,0 +1,42 @@
+- name: Compact Disc
+  id: cd
+  contrastColour: "#000"
+  image:
+    src: CD_OS9.png
+    repeat: repeat
+    size: initial
+- name: Blue Pattern
+  id: blue_p
+  contrastColour: "#fff"
+  image:
+    src: 128.png
+    repeat: repeat
+    size: initial
+- name: Ripples Moss
+  id: ripples_moss
+  contrastColour: "#fff"
+  image:
+    src: ripples_moss.jpg
+    repeat: repeat
+    size: initial
+- name: Ripples Blue
+  id: ripples_blue
+  contrastColour: "#fff"
+  image:
+    src: ripples_blue.jpg
+    repeat: repeat
+    size: initial
+- name: Rio Pistachio
+  id: rio_pistachio
+  contrastColour: "#000"
+  image:
+    src: rio_pistachio.jpg
+    repeat: repeat
+    size: initial
+- name: Stars
+  id: stars
+  contrastColour: "#fff"
+  image:
+    src: 131.png
+    repeat: repeat
+    size: initial

@@ -1,17 +1,28 @@
 import { useLayoutEffect, useState } from "preact/hooks";
+import { ReferenceDataContext } from "../../context.ts";
+import type { ReferenceData } from "../../types.ts";
 
+import ContextMenuWrapper from "@components/computer/ContextMenuWrapper.tsx";
+import LoadingWrapper from "@components/computer/LoadingWrapper.tsx";
+import ClockWindow from "@components/computer/windows/Clock";
+import PaintWindow from "@components/computer/windows/Paint";
 import Desktop from "./Desktop";
 import TopBar from "./TopBar";
 import type { WindowType } from "./types";
+import AboutWindow from "./windows/About.tsx";
 import BiographyWindow from "./windows/Biography";
 import ChatWindow from "./windows/Chat";
+import ProjectsWindow from "./windows/Projects";
 import RadioWindow from "./windows/Radio";
 import SettingsWindow from "./windows/Settings/Settings";
 
-// import BlogIcon from "@assets/desktop_icons/address_book_pad.png";
+import ProjectsIcon from "@assets/desktop_icons/bear.png";
 import RadioIcon from "@assets/desktop_icons/cd_audio_cd_a-4.png";
 import ChatIcon from "@assets/desktop_icons/chat.png";
+import ClockIcon from "@assets/desktop_icons/clock.png";
+import AboutIcon from "@assets/desktop_icons/info.png";
 import BiographyIcon from "@assets/desktop_icons/msagent-3.png";
+import PaintIcon from "@assets/desktop_icons/paint.png";
 import SettingsIcon from "@assets/desktop_icons/settings.png";
 
 const windowDefinitions: WindowType[] = [
@@ -22,11 +33,16 @@ const windowDefinitions: WindowType[] = [
 		type: "biography",
 		icon: BiographyIcon,
 		openByDefault: true,
-		meta: {
-			title: "Biography",
-			description: "Simon's biography",
-			path: "/",
-		},
+		showOnDesktop: true,
+	},
+	{
+		title: "Projects",
+		component: ProjectsWindow,
+		id: "projects",
+		type: "projects",
+		icon: ProjectsIcon,
+		openByDefault: false,
+		showOnDesktop: false,
 	},
 	{
 		title: "Radio",
@@ -34,11 +50,7 @@ const windowDefinitions: WindowType[] = [
 		id: "radio",
 		type: "radio",
 		icon: RadioIcon,
-		meta: {
-			title: "Radio",
-			description: "Simon's radio",
-			path: "/",
-		},
+		showOnDesktop: true,
 	},
 	{
 		title: "Chat",
@@ -47,11 +59,23 @@ const windowDefinitions: WindowType[] = [
 		type: "chat",
 		icon: ChatIcon,
 		openByDefault: true,
-		meta: {
-			title: "Chat",
-			description: "Chat with me",
-			path: "/",
-		},
+		showOnDesktop: true,
+	},
+	{
+		title: "Paint",
+		component: PaintWindow,
+		id: "paint",
+		type: "paint",
+		icon: PaintIcon,
+		showOnDesktop: true,
+	},
+	{
+		title: "Clock",
+		component: ClockWindow,
+		id: "clock",
+		type: "clock",
+		icon: ClockIcon,
+		showOnDesktop: true,
 	},
 	{
 		title: "System Preferences",
@@ -59,33 +83,23 @@ const windowDefinitions: WindowType[] = [
 		id: "settings",
 		type: "settings",
 		icon: SettingsIcon,
-		meta: {
-			title: "Chat",
-			description: "Chat with me",
-			path: "/",
-		},
+		showOnDesktop: true,
+	},
+	{
+		title: "About simonOS",
+		component: AboutWindow,
+		id: "about",
+		type: "about",
+		icon: AboutIcon,
+		showOnDesktop: true,
 	},
 ];
 
-const Computer = () => {
-	//const BiographyWindowDefinition: WindowType = ;
+interface ComputerProps {
+	referenceData: ReferenceData;
+}
 
-	/*const BlogWindowDefinition: WindowType = {
-		title: "Blog",
-		component: BlogList,
-		id: "blog",
-		type: "blogList",
-		meta: {
-			title: "Blog",
-			description: "Simon's blog",
-			path: "/blog",
-		},
-	};*/
-
-	/*const RadioWindowDefinition: WindowType = ;
-
-    const ChatWindowDefinition: WindowType = ;*/
-
+const Computer = ({ referenceData }: ComputerProps) => {
 	const [windowWidth, setWindowWidth] = useState(0);
 
 	useLayoutEffect(() => {
@@ -108,9 +122,12 @@ const Computer = () => {
 			.map((window) => window.id),
 	);
 
+	// window utilities
 	const getWindow = (id: string) => windows.find((window) => window.id === id);
 
 	const closeWindow = (id: string) => {
+		window.posthog?.capture("Close Window", { window: id });
+
 		setWindows((prevWindows) =>
 			prevWindows.filter((prevWindow) => prevWindow.id !== id),
 		);
@@ -158,9 +175,12 @@ const Computer = () => {
 
 	const openWindow = (newWindow: WindowType) => {
 		// if on mobile, navigate to path instead
-		if (windowWidth <= 640) {
+		/*if (windowWidth <= 640) {
 			window.location.href = newWindow.meta?.path || "/";
-		}
+		}*/
+
+		// capture event
+		window.posthog?.capture("Open Window", { window: newWindow.id });
 
 		if (windows.find((prevWindow) => prevWindow.id === newWindow.id)) {
 			touchWindow(newWindow.id);
@@ -177,39 +197,50 @@ const Computer = () => {
 	};
 
 	return (
-		<div class="sm:max-h-screen sm:overflow-hidden pb-4 sm:pb-0 sm:h-screen">
-			<TopBar />
+		<ReferenceDataContext.Provider value={referenceData}>
+			<LoadingWrapper>
+				<ContextMenuWrapper>
+					<div class="sm:max-h-screen sm:overflow-hidden pb-4 sm:pb-0 sm:h-screen">
+						<TopBar />
 
-			<div class="relative w-full h-full flex flex-col-reverse gap-4 p-2 sm:block sm:p-0">
-				{windows.map((window) => {
-					const WindowComponent = window.component;
+						<div class="relative w-full h-full flex flex-col-reverse gap-4 p-2 sm:block sm:p-0">
+							{windows.map((window) => {
+								const WindowComponent = window.component;
 
-					return (
-						<WindowComponent
-							key={window.id}
-							order={windowStack.indexOf(window.id)}
-							onClose={() => closeWindow(window.id)}
-							onTouch={() => {
-								// if on desktop
-								if (windowWidth > 640) {
-									touchWindow(window.id);
-								}
-							}}
-							openWindow={openWindow}
-							{...window}
-						/>
-					);
-				})}
+								// check if window is opened in stack
+								if (!windowStack.includes(window.id)) return null;
 
-				<Desktop
-					icons={windowDefinitions.map((window) => ({
-						name: window.title,
-						icon: window.icon,
-						onDoubleClick: () => openWindow(window),
-					}))}
-				/>
-			</div>
-		</div>
+								return (
+									<WindowComponent
+										key={window.id}
+										order={windowStack.indexOf(window.id)}
+										onClose={() => closeWindow(window.id)}
+										onTouch={() => {
+											// if on desktop
+											if (windowWidth > 640) {
+												touchWindow(window.id);
+											}
+										}}
+										openWindow={openWindow}
+										{...window}
+									/>
+								);
+							})}
+
+							<Desktop
+								icons={windowDefinitions
+									.filter((window) => window.showOnDesktop)
+									.map((window) => ({
+										name: window.title,
+										icon: window.icon,
+										onDoubleClick: () => openWindow(window),
+									}))}
+							/>
+						</div>
+					</div>
+				</ContextMenuWrapper>
+			</LoadingWrapper>
+		</ReferenceDataContext.Provider>
 	);
 };
 

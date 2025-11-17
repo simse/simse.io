@@ -41,7 +41,33 @@ const createTitle = (title: string) => {
           font-weight: 400;
           font-display: swap;
       }
+      @font-face {
+          font-family: 'Adams';
+          src: url('/fonts/Adams.woff2') format('woff2');
+          font-weight: 400;
+          font-display: swap;
+      }
+
     </style>
+      <script>
+          import posthog from 'posthog-js'
+          import { POSTHOG_API_KEY, POSTHOG_HOST } from 'astro:env/client';
+
+          posthog.init(POSTHOG_API_KEY, {
+              api_host: POSTHOG_HOST,
+              defaults: '2025-05-24',
+              capture_heatmaps: false,
+              capture_exceptions: true,
+              capture_performance: true,
+              capture_pageview: true,
+              cookieless_mode: 'always',
+              disable_surveys: true,
+              disable_session_recording: true,
+              loaded: (posthogInstance) => {
+                  window.posthog = posthogInstance
+              },
+          })
+      </script>
   </head>
   <body class="bg-[#FAF2E8] antialiased">
     <slot />

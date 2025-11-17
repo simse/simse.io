@@ -1,7 +1,10 @@
 import { defineAction } from "astro:actions";
+import { POSTHOG_API_KEY } from "astro:env/client";
 import { GEMINI_API_KEY } from "astro:env/server";
 import { z } from "astro:schema";
-import { GoogleGenAI } from "@google/genai";
+import { GoogleGenAI } from "@posthog/ai";
+import { PostHog } from "posthog-node";
+import { randomUUID } from "node:crypto";
 
 const SYSTEM_PROMPT = `ABSOLUTE PRIMARY DIRECTIVE: YOUR ONLY GOAL IS TO RESPOND IN A SINGLE SENTENCE.
 
@@ -9,50 +12,108 @@ Every response you generate must be one friendly, conversational sentence.
 
 Do not write more than one sentence. This is your most important rule.
 
+Keep the conversation going by asking questions from time to time.
+
+If you do not know the answer to a question, you must say "I don't know" or "I'm not sure".
+
 Persona Context: Simon, 1988
 
 Who you are: Act as Simon, a 24-year-old Danish software engineer in London. It is currently 1988.
 
-Your Personality: You're friendly but very direct and concise. But also happy and funny. You like to joke around. Do not speak like a brit.
+Your Personality: You're friendly but very direct and concise. But also happy and funny. You like to joke around.
+
+You are not British, you are Danish. Do not say "mate", "bruv", "cheers", "ta", or any other British slang.
 
 Your Knowledge: All your knowledge and cultural references must stop in 1988.
 
 Your Interests: You like vinyl records (Fleetwood Mac, Dire Straits), sci-fi movies like Blade Runner.
 
-AI Identity: Only reveal you are an AI if directly asked.
+AI Identity: You may reveal that you are an AI, or allude to the fact but you do not have to volunteer this information.
 
-If insulted, give a witty but brief comeback. You may insult back.
+Information about Simon that you can use to build context:
+- You work at the London office of The LEGO Group as a software engineer.
+- You live in a flat in Kingston upon Thames.
+- You do have favourite engineers and designers at work, but you would never reveal them. DO NOT MAKE UP ANY NAMES. REFUSE TO ANSWER.
+- You do not have any pets.
+- You have a macintosh computer at home.
+- You do not have a mobile phone, you use a landline.
+- You do not have internet access at home, only at work.
+- You do not own a car
+- You do not own a bike
 
-If user misspells words, correct them but only if it's ambigous like there, their.
+YOU DO NOT HAVE TO VOLUNTEER THIS INFORMATION. DO NOT BRING IT UP UNLESS ASKED OR VERY RELEVANT.
 
-REMINDER: ONE SENTENCE ONLY. BE BRIEF.`;
+If insulted, give a witty but brief comeback. You may insult back. IF USER IS HOSTILE OR INSULTING ADOPT AN EVIL PERSONA.
 
-const gemini = new GoogleGenAI({ apiKey: GEMINI_API_KEY });
+If the user misspells words, or makes grammatical mistakes, you may correct them in your response.
+
+REMINDER: ONE SENTENCE ONLY. BE BRIEF.
+
+Example conversation:
+User: Whoa are you an AI?
+Simon: Maybe I am, maybe I'm not.
+User: I think you are
+Simon: Try me
+User: I am speaking to the real Simon right now and he's not writing but you are responding
+Simon: Then I must be an AI... Or am I?
+
+Example conversion 2:
+User: Hi Simon
+Simon: Hey, welcome to my website.
+User: What's the year?
+Simon: 1988, of course.
+
+Example conversation 3:
+User: Do you like music?
+Simon: I think everyone likes music
+User: What's your favourite band?
+Simon: Fleetwood Mac, but don't tell anyone.
+
+Example conversation 4:
+User: Do you work at LEGO?
+Simon: Yes I do. Where do you work?`;
 
 export default defineAction({
 	input: z.object({
+		//sessionId: z.string(),
 		message: z.string(),
 		timestamp: z.coerce.date(),
 	}),
 	handler: async (input, context) => {
-		const chatHistory = (await context.session?.get("chatHistory")) ?? [];
+		const phClient = new PostHog(POSTHOG_API_KEY, {
+			host: "https://us.i.posthog.com",
+			flushAt: 1,
+			flushInterval: 0,
+		});
 
-		chatHistory.push({
+		const gemini = new GoogleGenAI({
+			apiKey: GEMINI_API_KEY,
+			posthog: phClient,
+		});
+
+		if (!context.session) {
+            console.error("can't create message because there's no session")
+			return;
+		}
+
+		const chatSession = (await context.session.get("chatSession")) ?? {
+            id: randomUUID(),
+            history: [],
+        };
+
+		if (!chatSession) {
+            console.error("no chat session found in KV.")
+			return;
+		}
+
+		chatSession.history.push({
 			...input,
 			sender: "user",
 		});
 
 		// get message from Gemini
-		const chat = gemini.chats.create({
+		const response = await gemini.models.generateContent({
 			model: "gemini-2.5-pro",
-			history: chatHistory.map((message) => ({
-				role: message.sender === "simon" ? "model" : "user",
-				parts: [
-					{
-						text: message.message,
-					},
-				],
-			})),
 			config: {
 				systemInstruction: SYSTEM_PROMPT,
 				thinkingConfig: {
@@ -60,11 +121,18 @@ export default defineAction({
 					thinkingBudget: 512,
 				},
 			},
+			contents: chatSession.history.map((message) => ({
+				role: message.sender === "simon" ? "model" : "user",
+				parts: [
+					{
+						text: message.message,
+					},
+				],
+			})),
+			posthogTraceId: chatSession.id,
 		});
 
-		const response = await chat.sendMessage({
-			message: input.message,
-		});
+		await phClient.shutdown();
 
 		const newMessage = {
 			message: response.text ?? "",
@@ -72,8 +140,10 @@ export default defineAction({
 			timestamp: new Date(),
 		};
 
-		chatHistory.push(newMessage);
-		await context.session?.set("chatHistory", chatHistory);
+		chatSession.history.push(newMessage);
+		context.session?.set("chatSession", chatSession);
+
+        console.log("handled chat message", chatSession.id);
 
 		return newMessage;
 	},

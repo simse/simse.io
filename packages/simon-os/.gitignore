@@ -22,3 +22,5 @@ pnpm-debug.log*
 
 .vscode
 .wrangler
+*storybook.log
+storybook-static

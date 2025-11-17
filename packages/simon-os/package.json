@@ -8,18 +8,27 @@
 		"@astrojs/preact": "4.1.1",
 		"@astrojs/tailwind": "6.0.2",
 		"@google/genai": "1.20.0",
+		"@posthog/ai": "6.4.1",
 		"@tailwindcss/vite": "4.0.9",
 		"astro": "5.13.9",
-		"preact": "10.20.1",
-		"typescript": "5.4.2",
-		"vite": "6.2.0",
+		"posthog-js": "1.268.4",
+		"posthog-node": "5.9.1",
+		"preact": "10.27.2",
+		"typescript": "5.9.2",
+		"vite": "6.3.6",
 		"zustand": "5.0.8"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.9.4",
+		"@chromatic-com/storybook": "4.1.1",
+		"@storybook/addon-a11y": "9.1.7",
+		"@storybook/addon-docs": "9.1.7",
+		"@storybook/addon-vitest": "9.1.7",
+		"@storybook/preact-vite": "9.1.7",
 		"sass": "1.93.0",
+		"storybook": "^9.1.7",
 		"tailwind-scrollbar": "4.0.2",
-		"wrangler": "4.38.0"
+		"wrangler": "4.40.0"
 	},
 	"overrides": {
 		"react": "npm:@preact/compat@latest",

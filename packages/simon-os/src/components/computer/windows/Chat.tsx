@@ -4,7 +4,7 @@ import type { WindowProps } from "@components/computer/types.ts";
 import { useEffect, useState } from "preact/hooks";
 
 const MAX_MESSAGE_LENGTH = 400;
-const MAX_MESSAGE_HISTORY = 20;
+const MAX_MESSAGE_HISTORY = 30;
 
 interface ChatProps extends WindowProps {}
 
@@ -17,6 +17,7 @@ type Message = {
 const ChatWindow = (props: ChatProps) => {
 	const [currentMessage, setCurrentMessage] = useState("");
 	const [messages, setMessages] = useState<Message[]>([]);
+	//const [chatSessionId, setChatSessionId] = useState<string | null>(null);
 	const [isSendingMessage, setSendingMessage] = useState<boolean>(false);
 	const [isReceivingMessage, setIsReceivingMessage] = useState<boolean>(false);
 	const [isLoadingInitially, setIsLoadingInitially] = useState<boolean>(true);
@@ -29,7 +30,8 @@ const ChatWindow = (props: ChatProps) => {
 				return;
 			}
 
-			setMessages(response.data);
+			setMessages(response.data.history);
+			//setChatSessionId(response.data.id);
 			setIsLoadingInitially(false);
 		});
 	}, []);
@@ -122,11 +124,11 @@ const ChatWindow = (props: ChatProps) => {
 	return (
 		<WindowFrame
 			title="Chat"
-			initialSize={{ width: 500, height: 800 }}
+			initialSize={{ width: 500, height: 600 }}
 			initialPosition={{ x: 550, y: 20 }}
 			{...props}
 		>
-			<div class="flex flex-col h-full">
+			<div className="flex flex-col h-full">
 				<ul
 					class="flex overflow-y-scroll flex-1 flex-col-reverse pr-2
                     scrollbar-thin"
@@ -142,7 +144,7 @@ const ChatWindow = (props: ChatProps) => {
 							    
 							`}
 						>
-							<div>
+							<div class="select-none">
 								<span class="font-medium mr-4">
 									{message.sender === "simon" ? "Simon" : "You"}
 								</span>
@@ -155,41 +157,56 @@ const ChatWindow = (props: ChatProps) => {
 					))}
 				</ul>
 
-				<form
-					class="flex gap-2 border-t border-dotted pt-2"
-					onSubmit={handleSend}
-				>
-					<input
-						type="text"
-						class="border rounded-sm w-4/5 py-1 px-2 font-sans-alt"
-						onInput={(e) => setCurrentMessage(e.currentTarget.value)}
-						value={currentMessage}
-						maxlength={MAX_MESSAGE_LENGTH}
-					/>
-					<button
-						type="submit"
-						disabled={disableSendButton}
-						class="flex-1 border rounded-sm active:bg-black active:text-white hover:cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
-					>
-						Send
-					</button>
-				</form>
+				<div className="border-t border-dotted pt-2">
+					{messages.length >= MAX_MESSAGE_HISTORY ? (
+						<div class="py-2 flex justify-between">
+							<p>You've reached the message limit.</p>
 
-				<div class="flex justify-between">
-					<span>
-						{currentMessage.length}/{MAX_MESSAGE_LENGTH}
-					</span>
+							<button
+								type="button"
+								onClick={clearChat}
+								className="cursor-pointer active:bg-black active:text-white px-2 border rounded-sm"
+							>
+								Start new chat
+							</button>
+						</div>
+					) : (
+						<>
+							<form class="flex gap-2" onSubmit={handleSend}>
+								<input
+									type="text"
+									class="border rounded-sm w-4/5 py-1 px-2 font-sans-alt"
+									onInput={(e) => setCurrentMessage(e.currentTarget.value)}
+									value={currentMessage}
+									maxlength={MAX_MESSAGE_LENGTH}
+								/>
+								<button
+									type="submit"
+									disabled={disableSendButton}
+									class="flex-1 border rounded-sm active:bg-black active:text-white hover:cursor-pointer disabled:opacity-50 disabled:pointer-events-none"
+								>
+									Send
+								</button>
+							</form>
 
-					<button
-						type="button"
-						onClick={clearChat}
-						class="cursor-pointer active:bg-black active:text-white px-1"
-						disabled={
-							isLoadingInitially || isReceivingMessage || isSendingMessage
-						}
-					>
-						x Clear chat
-					</button>
+							<div className="flex justify-between">
+								<span>
+									{currentMessage.length}/{MAX_MESSAGE_LENGTH}
+								</span>
+
+								<button
+									type="button"
+									onClick={clearChat}
+									class="cursor-pointer active:bg-black active:text-white px-1"
+									disabled={
+										isLoadingInitially || isReceivingMessage || isSendingMessage
+									}
+								>
+									x Clear chat
+								</button>
+							</div>
+						</>
+					)}
 				</div>
 			</div>
 		</WindowFrame>

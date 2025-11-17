@@ -24,7 +24,6 @@ export default defineConfig({
 	},
 	vite: {
 		plugins: [
-			// @ts-expect-error
 			tailwindcss(),
 		],
 	},
@@ -33,6 +32,14 @@ export default defineConfig({
 			GEMINI_API_KEY: envField.string({
 				context: "server",
 				access: "secret",
+			}),
+			POSTHOG_API_KEY: envField.string({
+				context: "client",
+				access: "public",
+			}),
+			POSTHOG_HOST: envField.string({
+				context: "client",
+				access: "public",
 			}),
 		},
 	},

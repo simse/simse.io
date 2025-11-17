@@ -2,7 +2,12 @@ import { defineAction } from "astro:actions";
 
 export default defineAction({
 	handler: async (_input, context) => {
-		await context.session?.set("chatHistory", []);
+		context.session?.set("chatSession", {
+			id: crypto.randomUUID(),
+			history: [],
+		});
+
+		context.session?.delete("chatHistory");
 
 		return {};
 	},

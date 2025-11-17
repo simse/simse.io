@@ -2,28 +2,19 @@ import AppearanceTab from "@components/computer/windows/Settings/tabs/Appearance
 import BrushIcon from "@components/icons/BrushIcon.tsx";
 import SettingsIcon from "@components/icons/SettingsIcon.tsx";
 import { useState } from "preact/hooks";
-import { useShallow } from "zustand/react/shallow";
-import useStore from "../../../../store";
 import WindowFrame from "../../WindowFrame.tsx";
 import type { WindowProps } from "../../types.ts";
 
 interface SettingsWindowProps extends WindowProps {}
 
 const SettingsWindow = (props: SettingsWindowProps) => {
-	const { selectedWallpaperId, setSelectedWallpaperId } = useStore(
-		useShallow((state) => ({
-			selectedWallpaperId: state.selectedWallpaperId,
-			setSelectedWallpaperId: state.setSelectedWallpaperId,
-		})),
-	);
-
 	const settingsCategories = [
-		{
+		/*{
 			id: "general",
 			name: "General",
 			icon: SettingsIcon,
 			tabComponent: () => <div>General Settings</div>,
-		},
+		},*/
 		{
 			id: "appearance",
 			name: "Appearance",
@@ -32,7 +23,7 @@ const SettingsWindow = (props: SettingsWindowProps) => {
 		},
 	];
 
-	const [selectedTabId, setSelectedTabId] = useState<string>();
+	const [selectedTabId, setSelectedTabId] = useState<string>("appearance");
 
 	return (
 		<WindowFrame
