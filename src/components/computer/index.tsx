@@ -42,7 +42,7 @@ const windowDefinitions: WindowType[] = [
 		type: "projects",
 		icon: ProjectsIcon,
 		openByDefault: false,
-		showOnDesktop: false,
+		showOnDesktop: true,
 	},
 	{
 		title: "Radio",

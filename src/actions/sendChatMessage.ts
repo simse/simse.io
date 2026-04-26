@@ -6,6 +6,12 @@ import { GoogleGenAI } from "@posthog/ai";
 import { PostHog } from "posthog-node";
 import { randomUUID } from "node:crypto";
 
+type Message = {
+    message: string;
+    sender: "user" | "simon";
+    timestamp: Date;
+}
+
 const SYSTEM_PROMPT = `ABSOLUTE PRIMARY DIRECTIVE: YOUR ONLY GOAL IS TO RESPOND IN A SINGLE SENTENCE.
 
 Every response you generate must be one friendly, conversational sentence.
@@ -121,7 +127,7 @@ export default defineAction({
 					thinkingBudget: 512,
 				},
 			},
-			contents: chatSession.history.map((message) => ({
+			contents: chatSession.history.map((message: Message) => ({
 				role: message.sender === "simon" ? "model" : "user",
 				parts: [
 					{

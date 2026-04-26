@@ -1,6 +1,6 @@
 {
 	"name": "simon-os",
-	"main": "./dist/_worker.js/index.js",
+	"main": "@astrojs/cloudflare/entrypoints/server",
 	"compatibility_date": "2025-08-17",
 	"compatibility_flags": ["nodejs_compat"],
 	"upload_source_maps": true,

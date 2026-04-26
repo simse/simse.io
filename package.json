@@ -1,0 +1,44 @@
+{
+	"name": "simse-io",
+	"type": "module",
+	"version": "1.0.0",
+	"packageManager": "pnpm@10.33.0",
+	"scripts": {
+		"dev": "astro dev",
+		"build": "astro build",
+		"deploy": "pnpm run build && wrangler deploy",
+		"deploy:staging": "pnpm run build && wrangler deploy --env staging",
+		"lint": "biome check ./src",
+		"format": "biome check --write ./src",
+		"types": "tsc --noEmit"
+	},
+	"dependencies": {
+		"@astrojs/check": "0.9.8",
+		"@astrojs/cloudflare": "13.2.1",
+		"@astrojs/preact": "5.1.2",
+		"@google/genai": "1.20.0",
+		"@posthog/ai": "6.4.1",
+		"@tailwindcss/vite": "4.0.9",
+		"astro": "6.1.9",
+		"posthog-js": "1.268.4",
+		"posthog-node": "5.9.1",
+		"preact": "10.27.2",
+		"tailwindcss": "^4.0.9",
+		"typescript": "5.9.2",
+		"vite": "6.3.6",
+		"zustand": "5.0.8"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.9.4",
+		"sass": "1.93.0",
+		"storybook": "^9.1.7",
+		"tailwind-scrollbar": "4.0.2",
+		"wrangler": "4.85.0"
+	},
+	"pnpm": {
+		"overrides": {
+			"react": "npm:@preact/compat@latest",
+			"react-dom": "npm:@preact/compat@latest"
+		}
+	}
+}

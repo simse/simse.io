@@ -1,5 +1,6 @@
 import WindowFrame from "../WindowFrame";
 import type { WindowProps } from "../types";
+import {VERSION} from "../../../constants.ts";
 
 interface AboutWindowProps extends WindowProps {}
 
@@ -14,7 +15,7 @@ const AboutWindow = (props: AboutWindowProps) => {
 			<div class="flex flex-col items-center text-center h-full">
 				<header class="select-none">
 					<p class="text-3xl font-logo">simonOS</p>
-					<p>Version 1.0</p>
+					<p>Version {VERSION}</p>
 				</header>
 				<p class="font-sans-alt text-sm tracking-tighter leading-4 mt-4">
 					simonOS is developed in London, United Kingdom. Due to technical

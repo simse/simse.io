@@ -1,3 +1,5 @@
+import {VERSION} from "../../constants.ts";
+
 type LoadingScreenProps = {
 	loadingProgress: number;
 	loadingText: string;
@@ -11,7 +13,7 @@ const LoadingScreen = ({
 		<div class="w-full h-full flex flex-col items-center">
 			<header class="my-36">
 				<h1 class="text-6xl font-logo">simonOS</h1>
-				<p class="text-lg">Version 1.0</p>
+				<p class="text-lg">Version {VERSION}</p>
 			</header>
 
 			<div>
