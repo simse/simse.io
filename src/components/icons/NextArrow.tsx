@@ -7,7 +7,8 @@ export function NextArrow(props: SVGProps<SVGSVGElement>) {
 			width="32"
 			height="32"
 			viewBox="0 0 24 24"
-			alt="next arrow icon"
+			role="img"
+			aria-label="next arrow icon"
 			{...props}
 		>
 			<path

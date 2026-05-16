@@ -23,23 +23,14 @@ export default defineConfig({
 		},
 	},
 	vite: {
-		plugins: [
-			tailwindcss(),
-		],
+		// biome-ignore lint/suspicious/noExplicitAny: vite 6/7 type duplication between astro and @tailwindcss/vite
+		plugins: [tailwindcss() as any],
 	},
 	env: {
 		schema: {
-			GEMINI_API_KEY: envField.string({
+			OPENROUTER_API_KEY: envField.string({
 				context: "server",
 				access: "secret",
-			}),
-			POSTHOG_API_KEY: envField.string({
-				context: "client",
-				access: "public",
-			}),
-			POSTHOG_HOST: envField.string({
-				context: "client",
-				access: "public",
 			}),
 		},
 	},

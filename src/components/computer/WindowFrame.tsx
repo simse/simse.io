@@ -68,7 +68,6 @@ const WindowFrame = ({
 		setOnGrabCursorPosition({ x: event.clientX, y: event.clientY });
 		setOnGrabWindowPosition({ x: windowPosition?.x, y: windowPosition?.y });
 		setIsDragging(true);
-		window.posthog?.capture("Move Window", { window: id });
 	};
 
 	const handleMouseMove = (event: MouseEvent) => {

@@ -126,8 +126,6 @@ const Computer = ({ referenceData }: ComputerProps) => {
 	const getWindow = (id: string) => windows.find((window) => window.id === id);
 
 	const closeWindow = (id: string) => {
-		window.posthog?.capture("Close Window", { window: id });
-
 		setWindows((prevWindows) =>
 			prevWindows.filter((prevWindow) => prevWindow.id !== id),
 		);
@@ -178,9 +176,6 @@ const Computer = ({ referenceData }: ComputerProps) => {
 		/*if (windowWidth <= 640) {
 			window.location.href = newWindow.meta?.path || "/";
 		}*/
-
-		// capture event
-		window.posthog?.capture("Open Window", { window: newWindow.id });
 
 		if (windows.find((prevWindow) => prevWindow.id === newWindow.id)) {
 			touchWindow(newWindow.id);

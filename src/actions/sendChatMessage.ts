@@ -1,15 +1,17 @@
 import { defineAction } from "astro:actions";
-import { POSTHOG_API_KEY } from "astro:env/client";
-import { GEMINI_API_KEY } from "astro:env/server";
+import { OPENROUTER_API_KEY } from "astro:env/server";
 import { z } from "astro:schema";
-import { GoogleGenAI } from "@posthog/ai";
-import { PostHog } from "posthog-node";
-import { randomUUID } from "node:crypto";
+import { OpenRouter } from "@openrouter/sdk";
 
 type Message = {
     message: string;
     sender: "user" | "simon";
     timestamp: Date;
+}
+
+type ChatSession = {
+    id: string;
+    history: Message[];
 }
 
 const SYSTEM_PROMPT = `ABSOLUTE PRIMARY DIRECTIVE: YOUR ONLY GOAL IS TO RESPOND IN A SINGLE SENTENCE.
@@ -81,67 +83,43 @@ Simon: Yes I do. Where do you work?`;
 
 export default defineAction({
 	input: z.object({
-		//sessionId: z.string(),
 		message: z.string(),
 		timestamp: z.coerce.date(),
 	}),
 	handler: async (input, context) => {
-		const phClient = new PostHog(POSTHOG_API_KEY, {
-			host: "https://us.i.posthog.com",
-			flushAt: 1,
-			flushInterval: 0,
-		});
-
-		const gemini = new GoogleGenAI({
-			apiKey: GEMINI_API_KEY,
-			posthog: phClient,
-		});
+		const openrouter = new OpenRouter({ apiKey: OPENROUTER_API_KEY });
 
 		if (!context.session) {
             console.error("can't create message because there's no session")
 			return;
 		}
 
-		const chatSession = (await context.session.get("chatSession")) ?? {
-            id: randomUUID(),
+		const chatSession: ChatSession = (await context.session.get("chatSession")) ?? {
+            id: crypto.randomUUID(),
             history: [],
         };
-
-		if (!chatSession) {
-            console.error("no chat session found in KV.")
-			return;
-		}
 
 		chatSession.history.push({
 			...input,
 			sender: "user",
 		});
 
-		// get message from Gemini
-		const response = await gemini.models.generateContent({
-			model: "gemini-2.5-pro",
-			config: {
-				systemInstruction: SYSTEM_PROMPT,
-				thinkingConfig: {
-					includeThoughts: false,
-					thinkingBudget: 512,
-				},
-			},
-			contents: chatSession.history.map((message: Message) => ({
-				role: message.sender === "simon" ? "model" : "user",
-				parts: [
-					{
-						text: message.message,
-					},
+		const response = await openrouter.chat.send({
+			chatRequest: {
+				model: "google/gemini-2.5-pro",
+				messages: [
+					{ role: "system", content: SYSTEM_PROMPT },
+					...chatSession.history.map((message) => ({
+						role: message.sender === "simon" ? "assistant" as const : "user" as const,
+						content: message.message,
+					})),
 				],
-			})),
-			posthogTraceId: chatSession.id,
+				reasoning: { maxTokens: 512, exclude: true },
+			},
 		});
 
-		await phClient.shutdown();
-
 		const newMessage = {
-			message: response.text ?? "",
+			message: response.choices[0]?.message?.content ?? "",
 			sender: "simon" as const,
 			timestamp: new Date(),
 		};

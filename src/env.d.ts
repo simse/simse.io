@@ -1,6 +1,5 @@
 /// <reference path="../.astro/types.d.ts" />
 /// <reference types="astro/client" />
-import type { PostHog } from "posthog-js";
 
 declare namespace App {
 	interface SessionData {
@@ -18,12 +17,6 @@ declare namespace App {
 				timestamp: Date;
 			}[];
 		};
-	}
-}
-
-declare global {
-	interface Window {
-		posthog?: PostHog;
 	}
 }
 
