@@ -1,28 +1,35 @@
-import { defineCollection, z } from "astro:content";
-import { file } from "astro/loaders";
+import { z } from "astro/zod";
+import { defineCollection } from "astro:content";
 
-const wallpapers = defineCollection({
-	loader: file("src/data/wallpapers.yml"),
-	schema: z.object({
-		id: z.string(),
-		name: z.string(),
-		contrastColour: z.string(),
-		image: z.object({
-			src: z.string(),
-			repeat: z.string().optional(),
-			size: z.string().optional(),
-		}),
-	}),
+import { titleLayout } from "./components/cards/primitives/types";
+import { thingsLoader } from "./loaders/things";
+
+const imageMetaSchema = z
+  .object({
+    placeholder: z.string(),
+    contrastTop: z.enum(["light", "dark"]),
+    contrastBottom: z.enum(["light", "dark"]),
+  })
+  .optional();
+
+const things = defineCollection({
+  loader: thingsLoader(),
+  schema: ({ image }) =>
+    z.object({
+      type: z.enum(["project", "hobby", "former_hobby", "writing", "other"]),
+      href: z.string().optional(),
+      title: z.string().optional(),
+      titleLayout: z.enum(titleLayout).default("prominent"),
+      description: z.string().optional(),
+      updatedDate: z.coerce.date().optional(),
+      backgroundImage: image().optional(),
+      backgroundImageMeta: imageMetaSchema,
+      screenshotImage: image().optional(),
+      screenshotImageMeta: imageMetaSchema,
+      size: z
+        .union([z.literal(1), z.literal(2)])
+        .default(1),
+    }),
 });
 
-const music = defineCollection({
-	loader: file("src/data/music.yml"),
-	schema: z.object({
-		id: z.string(),
-		title: z.string(),
-		artist: z.string(),
-		url: z.string(),
-	}),
-});
-
-export const collections = { wallpapers, music };
+export const collections = { things };

@@ -1,0 +1,14 @@
+---
+import ThingRenderer from "./ThingRenderer.astro";
+import { Biography } from "./Biography";
+import { getCollection } from 'astro:content';
+
+const allThings = await getCollection('things');
+---
+<main transition:persist="homepage-grid" class="p-4 grid grid-cols-4 gap-4">
+	<div class="col-span-2">
+		<Biography />
+	</div>
+	
+	{allThings.map(thing => <ThingRenderer thing={thing} />)}
+</main>

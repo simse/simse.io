@@ -1,47 +1,13 @@
 {
-	"name": "simon-os",
-	"main": "@astrojs/cloudflare/entrypoints/server",
-	"compatibility_date": "2025-08-17",
-	"compatibility_flags": ["nodejs_compat"],
-	"upload_source_maps": true,
-	"observability": {
-		"enabled": true,
-		"head_sampling_rate": 1
-	},
-	"routes": [
-		{
-			"pattern": "simse.io",
-			"custom_domain": true
-		},
-		{
-			"pattern": "os.simse.io",
-			"custom_domain": true
-		}
-	],
-	"assets": {
-		"binding": "ASSETS",
-		"directory": "./dist"
-	},
-	"kv_namespaces": [
-		{
-			"binding": "SESSION",
-			"id": "23c71c93e44a4b5a98296b7db80ee085"
-		}
-	],
-	"env": {
-		"staging": {
-			"routes": [
-				{
-					"pattern": "staging.simse.io",
-					"custom_domain": true
-				}
-			],
-			"kv_namespaces": [
-				{
-					"binding": "SESSION",
-					"id": "d6be234c48334f269ceeda115218fb2d"
-				}
-			]
-		}
-	}
+  "compatibility_date": "2026-05-16",
+  "compatibility_flags": ["global_fetch_strictly_public"],
+  "name": "simse-io-v2",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+  },
+  "observability": {
+    "enabled": true,
+  },
 }

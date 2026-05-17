@@ -21,6 +21,7 @@ pnpm-debug.log*
 
 .vscode
 .idea
+.nova
 .wrangler
 *storybook.log
 storybook-static

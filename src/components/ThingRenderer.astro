@@ -1,0 +1,62 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPictureData } from "../components/cards/primitives/picture";
+import { BasicCard } from "./cards/BasicCard";
+import { FullBleedCard } from "./cards/FullBleedCard";
+import { ScreenshotCard } from "./cards/ScreenshotCard";
+
+const typeMap: Record<string, string> = {
+	'hobby': "Hobby",
+	'former_hobby': "Former hobby",
+	"project": "Project",
+	"other": "Other"
+};
+
+interface Props {
+    thing: CollectionEntry<"things">;
+}
+
+const { thing }: Props = Astro.props;
+
+const backgroundImage = thing.data.backgroundImage ? await getPictureData(thing.data.backgroundImage) : null;
+const screenshotImage = thing.data.screenshotImage ? await getPictureData(thing.data.screenshotImage) : null;
+const backgroundMeta = thing.data.backgroundImageMeta;
+const screenshotMeta = thing.data.screenshotImageMeta;
+
+let cardToRender = 'basic';
+
+if (backgroundImage) {
+	cardToRender = 'full_bleed';
+}
+
+if (screenshotImage) {
+	cardToRender = 'screenshot';
+}
+
+const href = thing.data.href ? thing.data.href : thing.body ? `/${thing.id}` : undefined;
+---
+{cardToRender === 'basic' ? (
+<BasicCard {...thing.data} href={href} tag={typeMap[thing.data.type]} />
+) : null}
+
+{cardToRender === 'full_bleed' && backgroundImage ? (
+	<FullBleedCard
+		{...thing.data}
+		href={href}
+		picture={backgroundImage}
+		placeholder={backgroundMeta?.placeholder}
+		contrastTop={backgroundMeta?.contrastTop}
+		contrastBottom={backgroundMeta?.contrastBottom}
+		tag={typeMap[thing.data.type]}
+	/>
+) : null}
+
+{cardToRender === 'screenshot' && screenshotImage ? (
+	<ScreenshotCard
+		{...thing.data}
+		href={href}
+		picture={screenshotImage}
+		placeholder={screenshotMeta?.placeholder}
+		tag={typeMap[thing.data.type]}
+	/>
+) : null}
