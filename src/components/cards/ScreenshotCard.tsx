@@ -12,14 +12,15 @@ export const ScreenshotCard = ({
   tag,
   href,
   title,
+  titleConfig,
   description,
   picture,
   placeholder,
 }: ScreenshotCardProps) => {
   return (
-    <Card.Base href={href}>
+    <Card.Base href={href} title={title} titleConfig={titleConfig}>
       <Card.Header tag={tag} />
-      <Card.Body title={title} description={description} />
+      <Card.Body description={description} />
       <Card.Picture
         picture={picture}
         placeholder={placeholder}

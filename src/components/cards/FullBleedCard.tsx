@@ -20,31 +20,18 @@ export const FullBleedCard = ({
   href,
   size = 1,
   title,
-  titleLayout,
+  titleConfig,
   description,
   picture,
   placeholder,
   contrastTop,
   contrastBottom,
 }: FullBleedCardProps) => {
-  const isTitleSubtle = titleLayout === "subtle";
-
   return (
-    <Card.Base href={href} size={size}>
+    <Card.Base href={href} size={size} title={title} titleConfig={titleConfig}>
       <Card.BackgroundImage picture={picture} placeholder={placeholder} />
-      <Card.Header
-        tag={tag}
-        subtleTitle={isTitleSubtle ? title : undefined}
-        tone={toneFor(contrastTop)}
-      />
-      {title ? (
-        <Card.Body
-          title={!isTitleSubtle ? title : undefined}
-          description={description}
-          tone={toneFor(contrastBottom)}
-          pinToBottom
-        />
-      ) : null}
+      <Card.Header tag={tag} tone={toneFor(contrastTop)} />
+      <Card.Body description={description} tone={toneFor(contrastBottom)} />
     </Card.Base>
   );
 };

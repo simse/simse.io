@@ -1,9 +1,11 @@
+import type { ImageMetadata } from "astro";
 import { createContext, type ComponentChildren } from "preact";
 import { useContext } from "preact/hooks";
 import InternalLinkIcon from "~icons/lucide/arrow-right";
 import ExternalLinkIcon from "~icons/lucide/arrow-up-right";
 
 import type { PictureData } from "./picture";
+import type { TitleConfig, TitleFontStyle, TitlePosition, TitleLayout } from "./titleConfig";
 
 type Tone = "surface" | "image-light" | "image-dark";
 
@@ -15,34 +17,66 @@ const CardLinkContext = createContext<{ isLink: boolean; isExternalLink: boolean
   isExternalLink: false,
 });
 
+interface TitleContextValue {
+  title?: string;
+  layout: TitleLayout;
+  fontStyle: TitleFontStyle;
+  position: TitlePosition;
+  image?: ImageMetadata;
+}
+
+const TitleContext = createContext<TitleContextValue>({
+  title: undefined,
+  layout: "prominent",
+  fontStyle: "sans",
+  position: "bottom",
+  image: undefined,
+});
+
+const fontClass: Record<TitleFontStyle, string> = {
+  sans: "",
+  serif: "font-sans-serif",
+};
+
 interface BaseProps {
   href?: string;
   children: ComponentChildren;
   size?: 1 | 2;
+  title?: string;
+  titleConfig?: TitleConfig;
 }
 
-const Base = ({ href, children, size = 1 }: BaseProps) => {
+const Base = ({ href, children, size = 1, title, titleConfig }: BaseProps) => {
   const className = `group relative flex flex-col overflow-clip rounded-lg bg-zinc-100 transition-colors hover:bg-zinc-200 ${size === 2 ? "col-span-2 aspect-[2/1]" : "aspect-square"}`;
-  const value = { isLink: !!href, isExternalLink: isExternalHref(href ?? "") };
+  const linkValue = { isLink: !!href, isExternalLink: isExternalHref(href ?? "") };
+  const titleValue: TitleContextValue = {
+    title,
+    layout: titleConfig?.layout ?? "prominent",
+    fontStyle: titleConfig?.fontStyle ?? "sans",
+    position: titleConfig?.position ?? "bottom",
+    image: titleConfig?.image,
+  };
+
+  const inner = <TitleContext.Provider value={titleValue}>{children}</TitleContext.Provider>;
 
   if (href) {
     const external = isExternalHref(href);
     return (
-      <CardLinkContext.Provider value={value}>
+      <CardLinkContext.Provider value={linkValue}>
         <a
           class={className}
           href={href}
           {...(external ? { target: "_blank", rel: "noreferrer" } : {})}
         >
-          {children}
+          {inner}
         </a>
       </CardLinkContext.Provider>
     );
   }
 
   return (
-    <CardLinkContext.Provider value={value}>
-      <div class={className}>{children}</div>
+    <CardLinkContext.Provider value={linkValue}>
+      <div class={className}>{inner}</div>
     </CardLinkContext.Provider>
   );
 };
@@ -50,7 +84,6 @@ const Base = ({ href, children, size = 1 }: BaseProps) => {
 interface HeaderProps {
   tag?: string;
   tone?: Tone;
-  subtleTitle?: string;
 }
 
 const headerContainerClass: Record<Tone, string> = {
@@ -67,18 +100,34 @@ const pillClass: Record<Tone, string> = {
     "rounded-full bg-black/10 px-3 py-1 text-sm font-medium text-zinc-900 backdrop-blur-sm",
 };
 
-const Header = ({ tag, tone = "surface", subtleTitle }: HeaderProps) => {
+const Header = ({ tag, tone = "surface" }: HeaderProps) => {
   const { isLink, isExternalLink } = useContext(CardLinkContext);
+  const { title, layout, fontStyle, image } = useContext(TitleContext);
 
-  if (!tag && !subtleTitle && !isLink) {
+  const showTitle = layout === "subtle" && (image || title);
+
+  if (!tag && !showTitle && !isLink) {
     return null;
   }
+
+  const titleTextClass = ["ml-4 text-sm", fontClass[fontStyle]].filter(Boolean).join(" ");
 
   return (
     <header class={headerContainerClass[tone]}>
       <div class="flex items-center">
         {tag ? <span class={pillClass[tone]}>{tag}</span> : null}
-        {subtleTitle ? <span class="ml-4 text-sm">{subtleTitle}</span> : null}
+        {showTitle && image ? (
+          <div>
+            <img
+              class="ml-4"
+              src={image.src}
+              width={image.width}
+              height={image.height}
+              alt={title ?? ""}
+            />
+          </div>
+        ) : null}
+        {showTitle && !image && title ? <span class={titleTextClass}>{title}</span> : null}
         {isLink && isExternalLink ? <ExternalLinkIcon class="ml-auto" /> : null}
         {isLink && !isExternalLink ? <InternalLinkIcon class="ml-auto" /> : null}
       </div>
@@ -87,10 +136,8 @@ const Header = ({ tag, tone = "surface", subtleTitle }: HeaderProps) => {
 };
 
 interface BodyProps {
-  title?: string;
   description?: string;
   tone?: Tone;
-  pinToBottom?: boolean;
 }
 
 const bodyTitleClass: Record<Tone, string> = {
@@ -105,17 +152,33 @@ const bodyDescriptionClass: Record<Tone, string> = {
   "image-dark": "text-zinc-800",
 };
 
-const Body = ({ title, description, tone = "surface", pinToBottom = false }: BodyProps) => {
-  if (!title && !description) {
+const Body = ({ description, tone = "surface" }: BodyProps) => {
+  const { title, layout, fontStyle, position, image } = useContext(TitleContext);
+
+  const showTitle = layout === "prominent" && (image || title);
+  const pinToBottom = position === "bottom";
+
+  if (!showTitle && !description) {
     return null;
   }
+
+  const titleClass = [bodyTitleClass[tone], fontClass[fontStyle]].filter(Boolean).join(" ");
   const containerClass = ["relative px-6 pb-6", pinToBottom ? "mt-auto" : ""]
     .filter(Boolean)
     .join(" ");
 
   return (
     <div class={containerClass}>
-      {title ? <h2 class={bodyTitleClass[tone]}>{title}</h2> : null}
+      {showTitle && image ? (
+        <img
+          class="my-2 max-h-6 w-auto max-w-4/5"
+          src={image.src}
+          width={image.width}
+          height={image.height}
+          alt={title ?? ""}
+        />
+      ) : null}
+      {showTitle && !image && title ? <h2 class={titleClass}>{title}</h2> : null}
       {description ? <p class={bodyDescriptionClass[tone] || undefined}>{description}</p> : null}
     </div>
   );

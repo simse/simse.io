@@ -5,13 +5,11 @@ interface BasicCardProps extends CommonProps {
   description?: string;
 }
 
-export const BasicCard = ({ title, description, tag, size, href }: BasicCardProps) => {
+export const BasicCard = ({ title, titleConfig, description, tag, size, href }: BasicCardProps) => {
   return (
-    <Card.Base href={href} size={size}>
+    <Card.Base href={href} size={size} title={title} titleConfig={titleConfig}>
       <Card.Header tag={tag} tone="surface" />
-      {title ? (
-        <Card.Body title={title} description={description} tone="surface" pinToBottom />
-      ) : null}
+      <Card.Body description={description} tone="surface" />
     </Card.Base>
   );
 };

@@ -1,7 +1,6 @@
-type CardSize = 1 | 2;
+import type { TitleConfig } from "./titleConfig";
 
-const titleLayout = ["prominent", "subtle"] as const;
-type TitleLayout = (typeof titleLayout)[number];
+type CardSize = 1 | 2;
 
 // props that all card types accept and respect
 interface CommonProps {
@@ -9,9 +8,7 @@ interface CommonProps {
   href?: string;
   tag?: string;
   title?: string;
-  titleLayout?: TitleLayout;
+  titleConfig?: TitleConfig;
 }
 
-export { titleLayout };
-
-export type { CommonProps, CardSize, TitleLayout };
+export type { CommonProps, CardSize };

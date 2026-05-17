@@ -1,7 +1,7 @@
 import { z } from "astro/zod";
 import { defineCollection } from "astro:content";
 
-import { titleLayout } from "./components/cards/primitives/types";
+import { titleConfigSchema } from "./components/cards/primitives/titleConfig";
 import { thingsLoader } from "./loaders/things";
 
 const imageMetaSchema = z
@@ -19,7 +19,7 @@ const things = defineCollection({
       type: z.enum(["project", "hobby", "former_hobby", "writing", "other"]),
       href: z.string().optional(),
       title: z.string().optional(),
-      titleLayout: z.enum(titleLayout).default("prominent"),
+      titleConfig: titleConfigSchema({ image }).optional(),
       description: z.string().optional(),
       updatedDate: z.coerce.date().optional(),
       backgroundImage: image().optional(),

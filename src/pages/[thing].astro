@@ -1,5 +1,5 @@
 ---
-import { getEntry } from 'astro:content';
+import { getEntry, render } from 'astro:content';
 import BaseLayout from "../layouts/BaseLayout.astro";
 import HomepageGrid from "../components/HomepageGrid.astro";
 import { Navigation } from "../components/Navigation";
@@ -15,6 +15,8 @@ const thing = await getEntry('things', thingSlug);
 if (!thing) {
 	return Astro.rewrite('/404');
 }
+
+const { Content } = await render(thing);
 ---
 <BaseLayout>
 	<Navigation client:load transition:persist="site-nav" />
@@ -31,30 +33,36 @@ if (!thing) {
 
 		<div
 			transition:name="modal-box"
-			class="bg-white w-fit h-fit min-w-3xl min-h-96 my-auto p-8 rounded-lg z-50"
+			class="bg-white w-fit h-fit min-w-3xl min-h-128 my-auto rounded-lg z-50 overflow-clip"
 		>
-			<p>hello world!</p>
+			<header class="bg-zinc-200 w-full h-48">
+				image would potentially go here
+			</header>
+			
+			<main class="p-8">
+				<Content />
+			</main>
 		</div>
 	</div>
-
-	<style is:global>
-		html {
-			overflow: hidden;
-		}
-	</style>
-
-	<script>
-		document.addEventListener('astro:page-load', () => {
-			const close = document.querySelector('[data-close-modal]');
-			if (!close) return;
-			close.addEventListener('click', (event) => {
-				const ref = document.referrer;
-				const cameFromSameOrigin = ref && new URL(ref).origin === location.origin;
-				if (cameFromSameOrigin && history.length > 1) {
-					event.preventDefault();
-					history.back();
-				}
-			});
-		});
-	</script>
 </BaseLayout>
+
+<style is:global>
+	html {
+		overflow: hidden;
+	}
+</style>
+
+<script>
+	document.addEventListener('astro:page-load', () => {
+		const close = document.querySelector('[data-close-modal]');
+		if (!close) return;
+		close.addEventListener('click', (event) => {
+			const ref = document.referrer;
+			const cameFromSameOrigin = ref && new URL(ref).origin === location.origin;
+			if (cameFromSameOrigin && history.length > 1) {
+				event.preventDefault();
+				history.back();
+			}
+		});
+	});
+</script>
