@@ -15,6 +15,13 @@ interface GetPictureDataOptions {
   formats?: ImageFormat[];
   widths?: number[];
   densities?: Array<number | `${number}x`>;
+  aspectRatio?: number | `${number}:${number}`;
+}
+
+function parseAspectRatio(ratio: number | `${number}:${number}`): number {
+  if (typeof ratio === "number") return ratio;
+  const [w, h] = ratio.split(":").map(Number);
+  return w / h;
 }
 
 export async function getPictureData(
@@ -22,10 +29,25 @@ export async function getPictureData(
   options: GetPictureDataOptions = {},
 ): Promise<PictureData> {
   const formats: ImageFormat[] = options.formats ?? ["avif", "webp"];
+  const aspectRatio =
+    options.aspectRatio !== undefined ? parseAspectRatio(options.aspectRatio) : undefined;
+  const baseWidth =
+    aspectRatio !== undefined
+      ? options.widths?.length
+        ? Math.max(...options.widths)
+        : image.width
+      : undefined;
   const baseOptions = {
     src: image,
     ...(options.widths ? { widths: options.widths } : {}),
     ...(options.densities ? { densities: options.densities } : {}),
+    ...(aspectRatio !== undefined && baseWidth
+      ? {
+          width: baseWidth,
+          height: Math.round(baseWidth / aspectRatio),
+          fit: "cover" as const,
+        }
+      : {}),
   };
 
   const sources = await Promise.all(
@@ -43,8 +65,8 @@ export async function getPictureData(
   return {
     src: fallback.src,
     srcset: fallback.srcSet?.attribute || undefined,
-    width: image.width,
-    height: image.height,
+    width: fallback.attributes.width ?? image.width,
+    height: fallback.attributes.height ?? image.height,
     sources,
   };
 }

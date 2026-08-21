@@ -1,6 +1,6 @@
 import type { ImageMetadata } from "astro";
 import { createContext, type ComponentChildren } from "preact";
-import { useContext } from "preact/hooks";
+import { useContext, useRef } from "preact/hooks";
 import InternalLinkIcon from "~icons/lucide/arrow-right";
 import ExternalLinkIcon from "~icons/lucide/arrow-up-right";
 
@@ -47,7 +47,6 @@ interface BaseProps {
 }
 
 const Base = ({ href, children, size = 1, title, titleConfig }: BaseProps) => {
-  const className = `group relative flex flex-col overflow-clip rounded-lg bg-zinc-100 transition-colors hover:bg-zinc-200 ${size === 2 ? "col-span-2 aspect-[2/1]" : "aspect-square"}`;
   const linkValue = { isLink: !!href, isExternalLink: isExternalHref(href ?? "") };
   const titleValue: TitleContextValue = {
     title,
@@ -56,6 +55,8 @@ const Base = ({ href, children, size = 1, title, titleConfig }: BaseProps) => {
     position: titleConfig?.position ?? "bottom",
     image: titleConfig?.image,
   };
+
+  const className = `group relative flex flex-col overflow-clip rounded-lg bg-zinc-100 aspect-square col-span-1 ${linkValue.isLink ? "transition-colors hover:bg-zinc-200" : ""} ${size === 2 ? "sm:col-span-2 sm:aspect-[2/1]" : ""}`;
 
   const inner = <TitleContext.Provider value={titleValue}>{children}</TitleContext.Provider>;
 
@@ -110,7 +111,7 @@ const Header = ({ tag, tone = "surface" }: HeaderProps) => {
     return null;
   }
 
-  const titleTextClass = ["ml-4 text-sm", fontClass[fontStyle]].filter(Boolean).join(" ");
+  const titleTextClass = ["ml-2 text-sm", fontClass[fontStyle]].filter(Boolean).join(" ");
 
   return (
     <header class={headerContainerClass[tone]}>
@@ -119,7 +120,7 @@ const Header = ({ tag, tone = "surface" }: HeaderProps) => {
         {showTitle && image ? (
           <div>
             <img
-              class="ml-4"
+              class="ml-2"
               src={image.src}
               width={image.width}
               height={image.height}
@@ -179,7 +180,14 @@ const Body = ({ description, tone = "surface" }: BodyProps) => {
         />
       ) : null}
       {showTitle && !image && title ? <h2 class={titleClass}>{title}</h2> : null}
-      {description ? <p class={bodyDescriptionClass[tone] || undefined}>{description}</p> : null}
+      {description ? (
+        <p
+          class={bodyDescriptionClass[tone] || undefined}
+          dangerouslySetInnerHTML={{
+            __html: description,
+          }}
+        ></p>
+      ) : null}
     </div>
   );
 };
@@ -236,15 +244,64 @@ interface BackgroundImageProps {
 }
 
 const BackgroundImage = ({ picture, alt = "", placeholder }: BackgroundImageProps) => {
+  const { isLink } = useContext(CardLinkContext);
+
   return (
     <Picture
       picture={picture}
       alt={alt}
       class="absolute inset-0 h-full w-full"
-      imgClass="h-full w-full object-cover transition-transform group-hover:scale-105"
+      imgClass={`h-full w-full object-cover ${isLink ? "transition-transform group-hover:scale-105" : ""}`}
       placeholder={placeholder}
     />
   );
 };
 
-export const Card = { Base, Header, Body, Picture, BackgroundImage };
+interface AnimatedBackgroundProps {
+  src: string;
+  autoplay: boolean;
+  resetOnLeave: boolean;
+  loop: boolean;
+  poster?: string;
+}
+
+const AnimatedBackground = ({
+  src,
+  autoplay,
+  resetOnLeave,
+  loop,
+  poster,
+}: AnimatedBackgroundProps) => {
+  const { isLink } = useContext(CardLinkContext);
+  const ref = useRef<HTMLVideoElement>(null);
+
+  const onEnter = () => {
+    if (autoplay) return;
+    ref.current?.play().catch(() => {});
+  };
+  const onLeave = () => {
+    if (autoplay) return;
+    const v = ref.current;
+    if (!v) return;
+    v.pause();
+    if (resetOnLeave) v.currentTime = 0;
+  };
+
+  return (
+    <div class="absolute inset-0 h-full w-full" onMouseEnter={onEnter} onMouseLeave={onLeave}>
+      <video
+        ref={ref}
+        src={src}
+        poster={poster}
+        muted
+        playsInline
+        loop={loop}
+        autoPlay={autoplay}
+        preload="metadata"
+        class={`h-full w-full object-cover ${isLink ? "transition-transform group-hover:scale-105" : ""}`}
+      />
+    </div>
+  );
+};
+
+export const Card = { Base, Header, Body, Picture, BackgroundImage, AnimatedBackground };

@@ -3,12 +3,53 @@ import ThingRenderer from "./ThingRenderer.astro";
 import { Biography } from "./Biography";
 import { getCollection } from 'astro:content';
 
+// TODO: clean up this abomination
+function sortForGrid<T extends { data: { size: 1 | 2; lastUpdated?: Date } }>(things: T[]): T[] {
+	const byDateDesc = (a: T, b: T) =>
+		(b.data.lastUpdated?.getTime() ?? 0) - (a.data.lastUpdated?.getTime() ?? 0);
+
+	const datedS2 = things.filter(t => t.data.size === 2 && t.data.lastUpdated).sort(byDateDesc);
+	const datedS1 = things.filter(t => t.data.size !== 2 && t.data.lastUpdated).sort(byDateDesc);
+	const undatedS2 = things.filter(t => t.data.size === 2 && !t.data.lastUpdated);
+	const undatedS1 = things.filter(t => t.data.size !== 2 && !t.data.lastUpdated);
+
+	// A "half" is a 2-column slot: one size-2 item, or up to two size-1 items.
+	const takeHalf = (s2: T[], s1: T[]): T[] => {
+		if (s2.length > 0) return [s2.shift()!];
+		if (s1.length === 0) return [];
+		const half = [s1.shift()!];
+		if (s1.length > 0) half.push(s1.shift()!);
+		return half;
+	};
+	const datedHalf = () => takeHalf(datedS2, datedS1);
+	const undatedHalf = () => takeHalf(undatedS2, undatedS1);
+	const hasDated = () => datedS2.length > 0 || datedS1.length > 0;
+	const hasUndated = () => undatedS2.length > 0 || undatedS1.length > 0;
+
+	const result: T[] = [];
+	// Row 1: Biography fills the left half. Right half prefers a dated item.
+	if (hasDated()) result.push(...datedHalf());
+	else if (hasUndated()) result.push(...undatedHalf());
+
+	// Subsequent rows: dated fills the left half, undated fills the right half.
+	while (hasDated() || hasUndated()) {
+		if (hasDated()) result.push(...datedHalf());
+		else result.push(...undatedHalf());
+
+		if (hasUndated()) result.push(...undatedHalf());
+		else if (hasDated()) result.push(...datedHalf());
+	}
+
+	return result;
+}
+
 const allThings = await getCollection('things');
+const sortedThings = sortForGrid(allThings);
 ---
-<main transition:persist="homepage-grid" class="p-4 grid grid-cols-4 gap-4">
-	<div class="col-span-2">
+<main transition:persist="homepage-grid" class="p-4 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+	<div class="md:col-span-2">
 		<Biography />
 	</div>
-	
-	{allThings.map(thing => <ThingRenderer thing={thing} />)}
+
+	{sortedThings.map(thing => <ThingRenderer thing={thing} />)}
 </main>

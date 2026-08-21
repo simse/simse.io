@@ -1,0 +1,18 @@
+---
+import { getCollection } from "astro:content";
+import Computer from "@components/computer";
+import OsLayout from "@layouts/OsLayout.astro";
+
+const wallpapers = await getCollection("wallpapers");
+const music = await getCollection("music");
+---
+
+<OsLayout title="simonOS">
+  <Computer
+    client:load
+    referenceData={{
+      wallpapers,
+      music,
+    }}
+  />
+</OsLayout>

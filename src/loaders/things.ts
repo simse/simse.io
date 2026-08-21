@@ -1,8 +1,9 @@
-import path from "node:path";
 import { promises as fs } from "node:fs";
+import path from "node:path";
 
 import { glob } from "astro/loaders";
 import type { Loader } from "astro/loaders";
+import { marked } from "marked";
 import sharp from "sharp";
 import { decode, encode } from "splathash-ts";
 
@@ -69,6 +70,14 @@ async function enrichEntryData(
       }
     } catch (error) {
       logger.warn(`things-loader: failed to compute meta for ${imagePath}: ${error}`);
+    }
+  }
+
+  if (typeof data.description === "string") {
+    const html = await marked.parseInline(data.description);
+    if (html !== data.description) {
+      next ??= { ...data };
+      next.description = html;
     }
   }
 

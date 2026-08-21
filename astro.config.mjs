@@ -3,7 +3,7 @@ import cloudflare from "@astrojs/cloudflare";
 import markdoc from "@astrojs/markdoc";
 import preact from "@astrojs/preact";
 import tailwindcss from "@tailwindcss/vite";
-import { defineConfig, fontProviders } from "astro/config";
+import { defineConfig, envField, fontProviders } from "astro/config";
 import { default as icons } from "unplugin-icons/vite";
 
 // https://astro.build/config
@@ -12,7 +12,7 @@ export default defineConfig({
   adapter: cloudflare({
     imageService: "cloudflare-binding",
   }),
-  integrations: [preact(), markdoc()],
+  integrations: [preact({ compat: true }), markdoc()],
   fonts: [
     {
       provider: fontProviders.google(),
@@ -31,6 +31,14 @@ export default defineConfig({
   ],
   devToolbar: {
     enabled: false,
+  },
+  env: {
+    schema: {
+      OPENROUTER_API_KEY: envField.string({
+        context: "server",
+        access: "secret",
+      }),
+    },
   },
   vite: {
     plugins: [

@@ -1,0 +1,32 @@
+@import "tailwindcss";
+@plugin "tailwind-scrollbar";
+
+@theme {
+  --font-os-sans: "Chicago", sans-serif;
+  --font-os-alt: "Homebrew", sans-serif;
+  --font-os-mono: "ArialPixel", monospace;
+  --font-os-logo: "Adams", sans-serif;
+  --shadow-os-window: 4px 4px 0px 0 rgba(0, 0, 0, 0.25);
+  --animate-os-bounce-marquee: bounceMarquee 10s linear infinite;
+
+  @keyframes bounceMarquee {
+    0% {
+      transform: translateX(0);
+    }
+    10% {
+      transform: translateX(0);
+    }
+    45% {
+      transform: translateX(calc(-100% + 282px));
+    }
+    55% {
+      transform: translateX(calc(-100% + 282px));
+    }
+    90% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(0);
+    }
+  }
+}

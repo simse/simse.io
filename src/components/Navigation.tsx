@@ -17,7 +17,7 @@ const externalLinks = [
 export const Navigation = () => {
   const [isScrolled, setIsScrolled] = useState(false);
 
-  useEffect(() => {
+  /*useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 0);
     };
@@ -28,10 +28,10 @@ export const Navigation = () => {
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
-  }, []);
+  }, []);*/
 
   return (
-    <nav class="sticky top-0 z-10 mb-4 flex justify-between px-2 py-3">
+    <nav class="z-10 mb-4 flex justify-between px-2 py-3">
       <div
         class={`border bg-white/80 px-2 py-1 backdrop-blur-2xl ${isScrolled ? "border-zinc-200" : "border-transparent"} flex items-center overflow-clip rounded-xl`}
       >
@@ -47,13 +47,13 @@ export const Navigation = () => {
           Simon Sorensen
         </h1>
 
-        <ul
+        {/*<ul
           class={`flex gap-2 text-zinc-700 transition-opacity ${isScrolled ? "opacity-100" : "opacity-0"}`}
         >
           <li>Projects</li>
           <li>Hobbies</li>
           <li>Musings</li>
-        </ul>
+        </ul>*/}
       </div>
 
       <ul class={`flex gap-4 p-2 transition-opacity ${isScrolled ? "opacity-0" : "opacity-100"}`}>
