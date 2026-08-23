@@ -1,0 +1,30 @@
+name: Deploy website Worker
+description: Build the Astro website and deploy it to a Cloudflare Worker Custom Domain.
+
+inputs:
+  cloudflare-environment:
+    description: Wrangler environment selected while Astro builds the Worker configuration.
+    required: true
+  worker-name:
+    description: Name of the Cloudflare Worker to deploy.
+    required: true
+  domain:
+    description: Custom Domain to attach to the Worker.
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Build website
+      shell: bash
+      env:
+        CLOUDFLARE_ENV: ${{ inputs.cloudflare-environment }}
+      run: pnpm build
+
+    - name: Deploy Worker
+      shell: bash
+      env:
+        CLOUDFLARE_ENV: ${{ inputs.cloudflare-environment }}
+        WORKER_NAME: ${{ inputs.worker-name }}
+        WORKER_DOMAIN: ${{ inputs.domain }}
+      run: pnpm exec wrangler deploy --name "$WORKER_NAME" --domain "$WORKER_DOMAIN"

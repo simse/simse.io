@@ -1,6 +1,5 @@
 import AppearanceTab from "@components/computer/windows/Settings/tabs/Appearance.tsx";
 import BrushIcon from "@components/icons/BrushIcon.tsx";
-import SettingsIcon from "@components/icons/SettingsIcon.tsx";
 import { useState } from "preact/hooks";
 
 import type { WindowProps } from "../../types.ts";

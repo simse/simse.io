@@ -22,7 +22,7 @@ const RadioWindow = (props: RadioWindowProps) => {
   const song = music[songIndex].data;
 
   const [isPlaying, setIsPlaying] = useState(false);
-  const [isReady, setIsReady] = useState(true);
+  const isReady = true;
   const currentlyPlaying = `${song.artist} - ${song.title}`;
 
   const streamUrl = `/songs/${song.url}`;

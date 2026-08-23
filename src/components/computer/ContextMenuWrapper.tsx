@@ -6,8 +6,8 @@ interface ContextMenuWrapperProps {
 }
 
 const ContextMenuWrapper = ({ children }: ContextMenuWrapperProps) => {
-  const [posX, setPosX] = useState(0);
-  const [posY, setPosY] = useState(0);
+  const posX = 0;
+  const posY = 0;
   const [isVisible, setIsVisible] = useState(false);
 
   return (

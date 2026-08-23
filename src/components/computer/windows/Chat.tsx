@@ -126,9 +126,7 @@ const ChatWindow = (props: ChatProps) => {
       {...props}
     >
       <div className="flex h-full flex-col">
-        <ul
-          class="flex flex-1 scrollbar-thin flex-col-reverse overflow-y-scroll pr-2"
-        >
+        <ul class="flex flex-1 scrollbar-thin flex-col-reverse overflow-y-scroll pr-2">
           {isReceivingMessage && <li>Simon is typing...</li>}
 
           {messages.toReversed().map((message, index) => (

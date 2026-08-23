@@ -1,30 +1,27 @@
 import { formatDateWithYear } from "@utils/date";
-import { useEffect, useState } from "preact/hooks";
+import { useState } from "preact/hooks";
 
 import type { WindowProps } from "../types";
 import WindowFrame from "../WindowFrame";
-import BlogPost from "./BlogPost";
 
 interface BlogListProps extends WindowProps {}
 
 const BlogList = (props: BlogListProps) => {
   const [selectedPost, setSelectedPost] = useState<string | null>(null);
-  const [posts, setPosts] = useState<
-    {
-      title: string;
-      slug: string;
-      published: string;
-      image: {
-        src: string;
-        alt: string;
-        sizes: {
-          icon: {
-            src: string;
-          };
+  const posts: Array<{
+    title: string;
+    slug: string;
+    published: string;
+    image: {
+      src: string;
+      alt: string;
+      sizes: {
+        icon: {
+          src: string;
         };
       };
-    }[]
-  >([]);
+    };
+  }> = [];
 
   return (
     <WindowFrame

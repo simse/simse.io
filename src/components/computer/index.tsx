@@ -1,4 +1,3 @@
-import ProjectsIcon from "@assets/desktop_icons/bear.png";
 import RadioIcon from "@assets/desktop_icons/cd_audio_cd_a-4.png";
 import ChatIcon from "@assets/desktop_icons/chat.png";
 import ClockIcon from "@assets/desktop_icons/clock.png";
@@ -20,7 +19,6 @@ import type { WindowType } from "./types";
 import AboutWindow from "./windows/About.tsx";
 import BiographyWindow from "./windows/Biography";
 import ChatWindow from "./windows/Chat";
-import ProjectsWindow from "./windows/Projects";
 import RadioWindow from "./windows/Radio";
 import SettingsWindow from "./windows/Settings/Settings";
 
@@ -146,11 +144,11 @@ const Computer = ({ referenceData }: ComputerProps) => {
 
     const window = getWindow(id);
     if (window) {
-      updateMeta(window);
+      updateMeta();
     }
   };
 
-  const updateMeta = (window: WindowType) => {
+  const updateMeta = () => {
     /*if (window.meta) {
       //history.pushState({}, '', window.meta.path)
       //document.title = window.meta.title + '—simonOS'
@@ -181,7 +179,7 @@ const Computer = ({ referenceData }: ComputerProps) => {
       newStack.push(newWindow.id);
       return newStack;
     });
-    updateMeta(newWindow);
+    updateMeta();
   };
 
   return (

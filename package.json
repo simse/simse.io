@@ -12,12 +12,13 @@
     "preview": "astro preview",
     "generate-types": "wrangler types",
     "deploy": "astro build && wrangler deploy",
-    "typecheck": "tsc --noEmit",
+    "typecheck": "astro sync && wrangler types && tsc --noEmit",
     "check": "astro check",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
     "lint": "oxlint",
-    "lint:fix": "oxlint --fix"
+    "lint:fix": "oxlint --fix",
+    "render-cv": "uvx 'rendercv[full]' render cv.yaml"
   },
   "dependencies": {
     "@astrojs/check": "0.9.9",
@@ -50,13 +51,11 @@
     "vite": "^7"
   },
   "devEngines": {
-    "packageManager": {
-      "name": "pnpm",
-      "version": "11.1.2"
-    },
     "runtime": {
       "name": "node",
-      "version": "25.8.2"
+      "version": "26.7.0",
+      "onFail": "download"
     }
-  }
+  },
+  "packageManager": "pnpm@12.0.0-rc.8"
 }

@@ -25,3 +25,5 @@ pnpm-debug.log*
 .wrangler
 *storybook.log
 storybook-static
+public/simon-sorensen-cv.pdf
+rendercv_output

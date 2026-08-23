@@ -1,4 +1,3 @@
-import { useEffect, useState } from "preact/hooks";
 import ArrowIcon from "~icons/lucide/arrow-up-right";
 
 import Memoji from "../assets/icon.png";
@@ -12,10 +11,14 @@ const externalLinks = [
     label: "LinkedIn",
     href: "https://www.linkedin.com/in/simse/",
   },
+  {
+    label: "CV",
+    href: "/simon-sorensen-cv.pdf",
+  },
 ];
 
 export const Navigation = () => {
-  const [isScrolled, setIsScrolled] = useState(false);
+  const isScrolled = false;
 
   /*useEffect(() => {
     const handleScroll = () => {

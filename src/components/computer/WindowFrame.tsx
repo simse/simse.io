@@ -41,7 +41,7 @@ const WindowFrame = ({
     x: 0,
     y: 0,
   });
-  const [windowSize, setWindowSize] = useState(initialSize);
+  const [windowSize] = useState(initialSize);
   const windowRef = useRef<HTMLDivElement | null>(null);
 
   // on initial render, calculate window position if the source is layout
@@ -115,7 +115,7 @@ const WindowFrame = ({
       style={{
         ...calculateWindowPosition(),
         "--width": `min(${windowSize.width}px, 100%)`,
-        "--height": `${windowSize.height}px` || "fit-content",
+        "--height": windowSize.height === undefined ? "fit-content" : `${windowSize.height}px`,
         zIndex: order * 10 + 100,
         order: order,
       }}
