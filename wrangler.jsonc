@@ -1,7 +1,7 @@
 {
   "$schema": "./node_modules/wrangler/config-schema.json",
-  "compatibility_date": "2026-05-16",
-  "compatibility_flags": ["global_fetch_strictly_public", "nodejs_compat"],
+  "compatibility_date": "2026-08-23",
+  "compatibility_flags": ["global_fetch_strictly_public"],
   "name": "simse-io",
   "main": "@astrojs/cloudflare/entrypoints/server",
   "assets": {

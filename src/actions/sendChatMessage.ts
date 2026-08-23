@@ -1,7 +1,7 @@
 import { OpenRouter } from "@openrouter/sdk";
+import { z } from "astro/zod";
 import { defineAction } from "astro:actions";
 import { OPENROUTER_API_KEY } from "astro:env/server";
-import { z } from "astro:schema";
 
 type Message = {
   message: string;
@@ -115,11 +115,24 @@ export default defineAction({
           })),
         ],
         reasoning: { effort: "low" },
+        stream: false,
       },
     });
 
+    if (!("choices" in response)) {
+      throw new Error("OpenRouter returned a stream for a non-streaming request");
+    }
+
+    const responseContent = response.choices[0]?.message?.content;
+    const message =
+      typeof responseContent === "string"
+        ? responseContent
+        : (responseContent ?? [])
+            .map((part) => ("text" in part && typeof part.text === "string" ? part.text : ""))
+            .join("");
+
     const newMessage = {
-      message: response.choices[0]?.message?.content ?? "",
+      message,
       sender: "simon" as const,
       timestamp: new Date(),
     };
