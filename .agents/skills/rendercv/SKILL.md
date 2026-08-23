@@ -44,10 +44,10 @@ rendercv render cv.yaml --cv.name "Jane Doe" --design.theme "moderncv"
 A RenderCV input has four sections. Only `cv` is required — the others have sensible defaults.
 
 ```yaml
-cv:         # Your content: name, contact info, and all sections
-design:     # Visual styling: theme, colors, fonts, margins, spacing, layouts
-locale:     # Language: month names, phrases, translations
-settings:   # Behavior: output paths, bold keywords, current date
+cv: # Your content: name, contact info, and all sections
+design: # Visual styling: theme, colors, fonts, margins, spacing, layouts
+locale: # Language: month names, phrases, translations
+settings: # Behavior: output paths, bold keywords, current date
 ```
 
 **Single file vs. separate files:** All four sections can live in one YAML file, or each can be a separate file. Separate files are useful for reusing the same design/locale across multiple CVs:
@@ -123,44 +123,44 @@ class CustomConnection(BaseModelWithoutExtraKeys):
 
 **Shared fields** — these are available on entry types that support dates and complex fields (ExperienceEntry, EducationEntry, NormalEntry, PublicationEntry):
 
-| Field | Type | Default | Notes |
-|---|---|---|---|
-| `date` | `str \| int \| null` | `null` | Free-form: `"2020-09"`, `"Fall 2023"`, etc. Mutually exclusive with `start_date`/`end_date`. |
-| `start_date` | `str \| int \| null` | `null` | Strict format: YYYY-MM-DD, YYYY-MM, or YYYY. |
-| `end_date` | `str \| int \| "present" \| null` | `null` | Same formats as `start_date`, or `"present"`. Omitting defaults to `"present"` when `start_date` is set. |
-| `location` | `str \| null` | `null` | |
-| `summary` | `str \| null` | `null` | |
-| `highlights` | `list[str] \| null` | `null` | Bullet points. |
+| Field        | Type                              | Default | Notes                                                                                                    |
+| ------------ | --------------------------------- | ------- | -------------------------------------------------------------------------------------------------------- |
+| `date`       | `str \| int \| null`              | `null`  | Free-form: `"2020-09"`, `"Fall 2023"`, etc. Mutually exclusive with `start_date`/`end_date`.             |
+| `start_date` | `str \| int \| null`              | `null`  | Strict format: YYYY-MM-DD, YYYY-MM, or YYYY.                                                             |
+| `end_date`   | `str \| int \| "present" \| null` | `null`  | Same formats as `start_date`, or `"present"`. Omitting defaults to `"present"` when `start_date` is set. |
+| `location`   | `str \| null`                     | `null`  |                                                                                                          |
+| `summary`    | `str \| null`                     | `null`  |                                                                                                          |
+| `highlights` | `list[str] \| null`               | `null`  | Bullet points.                                                                                           |
 
 **9 entry types:**
 
-| Entry Type | Required Fields | Optional Fields | Typical Use |
-|---|---|---|---|
-| **ExperienceEntry** | `company`, `position` | all shared fields | Jobs, positions |
-| **EducationEntry** | `institution`, `area` | `degree` + all shared fields | Degrees, schools |
-| **PublicationEntry** | `title`, `authors` | `doi`, `url`, `journal`, `summary`, `date` | Papers, articles |
-| **NormalEntry** | `name` | all shared fields | Projects, awards |
-| **OneLineEntry** | `label`, `details` | — | Skills, languages |
-| **BulletEntry** | `bullet` | — | Simple bullet points |
-| **NumberedEntry** | `number` | — | Numbered list items |
-| **ReversedNumberedEntry** | `reversed_number` | — | Reverse-numbered items (5, 4, 3...) |
-| **TextEntry** | *(plain string)* | — | Free-form paragraphs |
+| Entry Type                | Required Fields       | Optional Fields                            | Typical Use                         |
+| ------------------------- | --------------------- | ------------------------------------------ | ----------------------------------- |
+| **ExperienceEntry**       | `company`, `position` | all shared fields                          | Jobs, positions                     |
+| **EducationEntry**        | `institution`, `area` | `degree` + all shared fields               | Degrees, schools                    |
+| **PublicationEntry**      | `title`, `authors`    | `doi`, `url`, `journal`, `summary`, `date` | Papers, articles                    |
+| **NormalEntry**           | `name`                | all shared fields                          | Projects, awards                    |
+| **OneLineEntry**          | `label`, `details`    | —                                          | Skills, languages                   |
+| **BulletEntry**           | `bullet`              | —                                          | Simple bullet points                |
+| **NumberedEntry**         | `number`              | —                                          | Numbered list items                 |
+| **ReversedNumberedEntry** | `reversed_number`     | —                                          | Reverse-numbered items (5, 4, 3...) |
+| **TextEntry**             | _(plain string)_      | —                                          | Free-form paragraphs                |
 
 Example:
 
 ```yaml
 cv:
   sections:
-    experience:          # list of ExperienceEntry (detected by company + position)
+    experience: # list of ExperienceEntry (detected by company + position)
       - company: Google
         position: Engineer
         start_date: 2020-01
         highlights:
           - Did something impactful
-    skills:              # list of OneLineEntry (detected by label + details)
+    skills: # list of OneLineEntry (detected by label + details)
       - label: Languages
         details: Python, C++
-    about_me:            # list of TextEntry (plain strings)
+    about_me: # list of TextEntry (plain strings)
       - This is a free-form paragraph about me.
 ```
 
@@ -254,24 +254,24 @@ highlights:
 
 Generate a starter YAML file.
 
-| Option | Short | What it does |
-|---|---|---|
-| `--theme THEME` | | Theme to use (default: `classic`) |
-| `--locale LOCALE` | | Locale to use (default: `english`) |
-| `--create-typst-templates` | | Also create editable Typst template files for full design control |
+| Option                     | Short | What it does                                                      |
+| -------------------------- | ----- | ----------------------------------------------------------------- |
+| `--theme THEME`            |       | Theme to use (default: `classic`)                                 |
+| `--locale LOCALE`          |       | Locale to use (default: `english`)                                |
+| `--create-typst-templates` |       | Also create editable Typst template files for full design control |
 
 ### `rendercv render <input.yaml>`
 
 Generate PDF, Typst, Markdown, HTML, and PNG from a YAML file.
 
-| Option | Short | What it does |
-|---|---|---|
-| `--watch` | `-w` | Re-render automatically when the YAML file changes |
-| `--quiet` | `-q` | Suppress all output messages |
-| `--design FILE` | `-d` | Load design section from a separate YAML file |
-| `--locale-catalog FILE` | `-lc` | Load locale section from a separate YAML file |
-| `--settings FILE` | `-s` | Load settings section from a separate YAML file |
-| `--output-folder DIR` | `-o` | Custom output directory |
+| Option                  | Short | What it does                                       |
+| ----------------------- | ----- | -------------------------------------------------- |
+| `--watch`               | `-w`  | Re-render automatically when the YAML file changes |
+| `--quiet`               | `-q`  | Suppress all output messages                       |
+| `--design FILE`         | `-d`  | Load design section from a separate YAML file      |
+| `--locale-catalog FILE` | `-lc` | Load locale section from a separate YAML file      |
+| `--settings FILE`       | `-s`  | Load settings section from a separate YAML file    |
+| `--output-folder DIR`   | `-o`  | Custom output directory                            |
 
 Per-format controls: `--{format}-path PATH` sets custom output path, `--dont-generate-{format}` skips generation. Formats: `pdf`, `typst`, `markdown`, `html`, `png`.
 
@@ -308,131 +308,130 @@ cv:
   phone:
   website: https://rendercv.com/
   social_networks:
-  - network: LinkedIn
-    username: rendercv
-  - network: GitHub
-    username: rendercv
+    - network: LinkedIn
+      username: rendercv
+    - network: GitHub
+      username: rendercv
   custom_connections:
   sections:
     Welcome to RenderCV:
-    - RenderCV reads a CV written in a YAML file, and generates a PDF with 
-      professional typography.
-    - Each section title is arbitrary.
+      - RenderCV reads a CV written in a YAML file, and generates a PDF with
+        professional typography.
+      - Each section title is arbitrary.
     education:
-    - institution: Princeton University
-      area: Computer Science
-      degree: PhD
-      date:
-      start_date: 2018-09
-      end_date: 2023-05
-      location: Princeton, NJ
-      summary:
-      highlights:
-      - 'Thesis: Efficient Neural Architecture Search for Resource-Constrained Deployment'
-      - 'Advisor: Prof. Sanjeev Arora'
-      - NSF Graduate Research Fellowship, Siebel Scholar (Class of 2022)
-    - institution: Boğaziçi University
-      area: Computer Engineering
-      degree: BS
-      date:
-      start_date: 2014-09
-      end_date: 2018-06
-      location: Istanbul, Türkiye
-      summary:
-      highlights:
-      - 'GPA: 3.97/4.00, Valedictorian'
-      - Fulbright Scholarship recipient for Graduate Studies
+      - institution: Princeton University
+        area: Computer Science
+        degree: PhD
+        date:
+        start_date: 2018-09
+        end_date: 2023-05
+        location: Princeton, NJ
+        summary:
+        highlights:
+          - "Thesis: Efficient Neural Architecture Search for Resource-Constrained Deployment"
+          - "Advisor: Prof. Sanjeev Arora"
+          - NSF Graduate Research Fellowship, Siebel Scholar (Class of 2022)
+      - institution: Boğaziçi University
+        area: Computer Engineering
+        degree: BS
+        date:
+        start_date: 2014-09
+        end_date: 2018-06
+        location: Istanbul, Türkiye
+        summary:
+        highlights:
+          - "GPA: 3.97/4.00, Valedictorian"
+          - Fulbright Scholarship recipient for Graduate Studies
     experience:
-    - company: Nexus AI
-      position: Co-Founder & CTO
-      date:
-      start_date: 2023-06
-      end_date: present
-      location: San Francisco, CA
-      summary:
-      highlights:
-      - Built foundation model infrastructure serving 2M+ monthly API requests 
-        with 99.97% uptime
-      - Raised $18M Series A led by Sequoia Capital, with participation from 
-        a16z and Founders Fund
-      - Scaled engineering team from 3 to 28 across ML research, platform, and 
-        applied AI divisions
-      - Developed proprietary inference optimization reducing latency by 73% 
-        compared to baseline
-    - company: NVIDIA Research
-      position: Research Intern
-      date:
-      start_date: 2022-05
-      end_date: 2022-08
-      location: Santa Clara, CA
-      summary:
-      highlights:
-      - Designed sparse attention mechanism reducing transformer memory 
-        footprint by 4.2x
-      - Co-authored paper accepted at NeurIPS 2022 (spotlight presentation, top 
-        5% of submissions)
+      - company: Nexus AI
+        position: Co-Founder & CTO
+        date:
+        start_date: 2023-06
+        end_date: present
+        location: San Francisco, CA
+        summary:
+        highlights:
+          - Built foundation model infrastructure serving 2M+ monthly API requests
+            with 99.97% uptime
+          - Raised $18M Series A led by Sequoia Capital, with participation from
+            a16z and Founders Fund
+          - Scaled engineering team from 3 to 28 across ML research, platform, and
+            applied AI divisions
+          - Developed proprietary inference optimization reducing latency by 73%
+            compared to baseline
+      - company: NVIDIA Research
+        position: Research Intern
+        date:
+        start_date: 2022-05
+        end_date: 2022-08
+        location: Santa Clara, CA
+        summary:
+        highlights:
+          - Designed sparse attention mechanism reducing transformer memory
+            footprint by 4.2x
+          - Co-authored paper accepted at NeurIPS 2022 (spotlight presentation, top
+            5% of submissions)
     projects:
-    - name: '[FlashInfer](https://github.com/)'
-      date:
-      start_date: 2023-01
-      end_date: present
-      location:
-      summary: Open-source library for high-performance LLM inference kernels
-      highlights:
-      - Achieved 2.8x speedup over baseline attention implementations on A100 
-        GPUs
-      - Adopted by 3 major AI labs, 8,500+ GitHub stars, 200+ contributors
-    - name: '[NeuralPrune](https://github.com/)'
-      date: '2021'
-      start_date:
-      end_date:
-      location:
-      summary: Automated neural network pruning toolkit with differentiable 
-        masks
-      highlights:
-      - Reduced model size by 90% with less than 1% accuracy degradation on 
-        ImageNet
-      - Featured in PyTorch ecosystem tools, 4,200+ GitHub stars
+      - name: "[FlashInfer](https://github.com/)"
+        date:
+        start_date: 2023-01
+        end_date: present
+        location:
+        summary: Open-source library for high-performance LLM inference kernels
+        highlights:
+          - Achieved 2.8x speedup over baseline attention implementations on A100
+            GPUs
+          - Adopted by 3 major AI labs, 8,500+ GitHub stars, 200+ contributors
+      - name: "[NeuralPrune](https://github.com/)"
+        date: "2021"
+        start_date:
+        end_date:
+        location:
+        summary: Automated neural network pruning toolkit with differentiable
+          masks
+        highlights:
+          - Reduced model size by 90% with less than 1% accuracy degradation on
+            ImageNet
+          - Featured in PyTorch ecosystem tools, 4,200+ GitHub stars
     publications:
-    - title: 'Sparse Mixture-of-Experts at Scale: Efficient Routing for Trillion-Parameter
-        Models'
-      authors:
-      - '*John Doe*'
-      - Sarah Williams
-      - David Park
-      summary:
-      doi: 10.1234/neurips.2023.1234
-      url:
-      journal: NeurIPS 2023
-      date: 2023-07
-    - title: Neural Architecture Search via Differentiable Pruning
-      authors:
-      - James Liu
-      - '*John Doe*'
-      summary:
-      doi: 10.1234/neurips.2022.5678
-      url:
-      journal: NeurIPS 2022, Spotlight
-      date: 2022-12
+      - title: "Sparse Mixture-of-Experts at Scale: Efficient Routing for Trillion-Parameter
+          Models"
+        authors:
+          - "*John Doe*"
+          - Sarah Williams
+          - David Park
+        summary:
+        doi: 10.1234/neurips.2023.1234
+        url:
+        journal: NeurIPS 2023
+        date: 2023-07
+      - title: Neural Architecture Search via Differentiable Pruning
+        authors:
+          - James Liu
+          - "*John Doe*"
+        summary:
+        doi: 10.1234/neurips.2022.5678
+        url:
+        journal: NeurIPS 2022, Spotlight
+        date: 2022-12
     selected_honors:
-    - bullet: MIT Technology Review 35 Under 35 Innovators (2024)
-    - bullet: Forbes 30 Under 30 in Enterprise Technology (2024)
+      - bullet: MIT Technology Review 35 Under 35 Innovators (2024)
+      - bullet: Forbes 30 Under 30 in Enterprise Technology (2024)
     skills:
-    - label: Languages
-      details: Python, C++, CUDA, Rust, Julia
-    - label: ML Frameworks
-      details: PyTorch, JAX, TensorFlow, Triton, ONNX
+      - label: Languages
+        details: Python, C++, CUDA, Rust, Julia
+      - label: ML Frameworks
+        details: PyTorch, JAX, TensorFlow, Triton, ONNX
     patents:
-    - number: Adaptive Quantization for Neural Network Inference on Edge Devices
-        (US Patent 11,234,567)
-    - number: Dynamic Sparsity Patterns for Efficient Transformer Attention (US 
-        Patent 11,345,678)
+      - number: Adaptive Quantization for Neural Network Inference on Edge Devices
+          (US Patent 11,234,567)
+      - number: Dynamic Sparsity Patterns for Efficient Transformer Attention (US
+          Patent 11,345,678)
     invited_talks:
-    - reversed_number: Scaling Laws for Efficient Inference — Stanford HAI 
-        Symposium (2024)
-    - reversed_number: Building AI Infrastructure for the Next Decade — 
-        TechCrunch Disrupt (2024)
-
+      - reversed_number: Scaling Laws for Efficient Inference — Stanford HAI
+          Symposium (2024)
+      - reversed_number: Building AI Infrastructure for the Next Decade —
+          TechCrunch Disrupt (2024)
 ```
 
 ### Sample Design (classic — complete reference)
@@ -502,7 +501,7 @@ design:
       hyperlink: true
       show_icons: true
       display_urls_instead_of_usernames: false
-      separator: ''
+      separator: ""
       space_between_connections: 0.5cm
   section_titles:
     type: with_partial_line
@@ -533,19 +532,19 @@ design:
       space_between_items: 0cm
       space_between_bullet_and_text: 0.5em
   templates:
-    footer: '*NAME -- PAGE_NUMBER/TOTAL_PAGES*'
-    top_note: '*LAST_UPDATED CURRENT_DATE*'
+    footer: "*NAME -- PAGE_NUMBER/TOTAL_PAGES*"
+    top_note: "*LAST_UPDATED CURRENT_DATE*"
     single_date: MONTH_ABBREVIATION YEAR
     date_range: START_DATE – END_DATE
     time_span: HOW_MANY_YEARS YEARS HOW_MANY_MONTHS MONTHS
     one_line_entry:
-      main_column: '**LABEL:** DETAILS'
+      main_column: "**LABEL:** DETAILS"
     education_entry:
       main_column: |-
         **INSTITUTION**, AREA
         SUMMARY
         HIGHLIGHTS
-      degree_column: '**DEGREE**'
+      degree_column: "**DEGREE**"
       date_and_location_column: |-
         LOCATION
         DATE
@@ -572,7 +571,6 @@ design:
         AUTHORS
         URL (JOURNAL)
       date_and_location_column: DATE
-
 ```
 
 ### Other Theme Overrides
@@ -648,7 +646,7 @@ design:
       name: false
   header:
     connections:
-      separator: '|'
+      separator: "|"
       show_icons: false
       display_urls_instead_of_usernames: true
   colors:
@@ -802,4 +800,3 @@ design:
       space_between_items: 0.1cm
       space_between_bullet_and_text: 0.3em
 ```
-

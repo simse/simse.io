@@ -3,11 +3,7 @@ import styles from "./Home.module.css";
 const Home = () => (
   <main class={styles.container}>
     <div class={styles.inner}>
-      <img
-        class={styles.image}
-        src="/simse.jpg"
-        alt="A picture of Simon Sorensen smiling"
-      />
+      <img class={styles.image} src="/simse.jpg" alt="A picture of Simon Sorensen smiling" />
 
       <h1 class={styles.name}>Simon Sorensen</h1>
       <p class={styles.location}>Software Engineer in London</p>

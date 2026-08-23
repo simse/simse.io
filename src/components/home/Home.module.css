@@ -1,44 +1,44 @@
 .container {
-    --font-size: 1.3rem;
-    --font-weight: 410;
+  --font-size: 1.3rem;
+  --font-weight: 410;
 
-    height: 80vh;
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: start;
-    font-size: var(--font-size);
-    font-weight: var(--font-weight);
+  height: 80vh;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: start;
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
 
-    @media (min-width: 800px) {
-        align-items: center;
-    }
+  @media (min-width: 800px) {
+    align-items: center;
+  }
 }
 
 .inner {
-    padding: 1rem;
-    margin: 2rem 0;
-    width: 100%;
-    max-width: 40rem;
+  padding: 1rem;
+  margin: 2rem 0;
+  width: 100%;
+  max-width: 40rem;
 }
 
 .image {
-    width: 100px;
-    height: 100px;
-    margin-bottom: 1rem;
+  width: 100px;
+  height: 100px;
+  margin-bottom: 1rem;
 }
 
 .name {
-    margin: 0.2rem 0;
-    font-size: var(--font-size);
-    font-weight: var(--font-weight);
+  margin: 0.2rem 0;
+  font-size: var(--font-size);
+  font-weight: var(--font-weight);
 }
 
 .location {
-    margin: 0.2rem 0;
-    color: rgba(0, 0, 0, 0.6);
+  margin: 0.2rem 0;
+  color: rgba(0, 0, 0, 0.6);
 }
 
 .bio {
-    margin: 1rem 0;
+  margin: 1rem 0;
 }
