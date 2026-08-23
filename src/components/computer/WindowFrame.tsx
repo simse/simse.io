@@ -1,6 +1,5 @@
 import WindowHeaderBackground from "@assets/window_header_background.svg";
-import type { ComponentChildren } from "preact";
-import type { CSSProperties } from "preact/compat";
+import type { ComponentChildren, CSSProperties } from "preact";
 
 import "./WindowFrame.css";
 import { useEffect, useRef, useState } from "preact/hooks";
