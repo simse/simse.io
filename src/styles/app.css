@@ -11,5 +11,5 @@
 }
 
 body {
-  font-family: "Die Grotesk", sans-serif;
+  font-family: var(--font-sans);
 }

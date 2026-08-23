@@ -7,12 +7,12 @@
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro",
-    "typecheck": "tsc",
+    "typecheck": "astro sync && wrangler types && tsc",
     "lint": "oxlint",
     "lint:fix": "oxlint --fix",
     "fmt": "oxfmt",
     "fmt:check": "oxfmt --check",
-    "generate-types": "wrangler types",
+    "generate-types": "astro sync && wrangler types",
     "render-cv": "uvx 'rendercv[full]' render cv.yaml"
   },
   "dependencies": {
@@ -23,6 +23,7 @@
     "wrangler": "4.125.0"
   },
   "devDependencies": {
+    "@types/node": "26.2.0",
     "oxfmt": "0.64.0",
     "oxlint": "1.79.0",
     "typescript": "7.0.2"

@@ -1,0 +1,43 @@
+.container {
+  margin: 0 auto;
+  max-width: var(--container-6xl);
+  padding: 0.5rem 0 2rem 0;
+}
+
+.header {
+  margin: 2rem 0;
+}
+
+.title {
+  font-size: 1.5rem;
+  font-weight: 500;
+}
+
+.subtitle {
+    max-width: 34rem;
+}
+
+.list {
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(1fr, auto);
+    column-gap: 1rem;
+    row-gap: 4rem;
+}
+
+.version {}
+
+.version .previewImage {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    background-color: red;
+}
+
+.version .title {
+    font-size: 1.2rem;
+    font-weight: 400;
+}

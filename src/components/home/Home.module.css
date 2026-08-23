@@ -42,3 +42,7 @@
 .bio {
   margin: 1rem 0;
 }
+
+.bio p {
+  margin: 0.5rem 0;
+}

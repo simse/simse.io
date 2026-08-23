@@ -1,4 +1,4 @@
-name: Deploy website
+name: deploy website
 
 on:
   pull_request:
@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   deploy-pr:
-    name: Deploy PR preview
+    name: deploy PR preview
     if: >-
       github.event_name == 'pull_request' &&
       github.event.action != 'closed' &&
@@ -34,6 +34,12 @@ jobs:
       - name: Set up pnpm
         uses: pnpm/setup@v2
 
+      - name: Render CV
+        uses: ./.github/actions/render-cv
+        with:
+          source: cv.yaml
+          destination: public/simon-sorensen-cv.pdf
+
       - name: Deploy PR preview
         uses: ./.github/actions/deploy-worker
         with:
@@ -53,7 +59,7 @@ jobs:
             PR preview: [${{ env.PR_PREVIEW_URL }}](${{ env.PR_PREVIEW_URL }})
 
   remove-pr:
-    name: Remove PR preview
+    name: remove PR preview
     if: >-
       github.event_name == 'pull_request' &&
       github.event.action == 'closed' &&
@@ -77,7 +83,7 @@ jobs:
         run: pnpm exec wrangler delete --name "simse-io-pr-${PR_NUMBER}"
 
   deploy-prod:
-    name: Deploy production
+    name: deploy production
     if: github.event_name == 'push'
     runs-on: ubuntu-26.04-arm
     concurrency:
@@ -95,6 +101,12 @@ jobs:
 
       - name: Set up pnpm
         uses: pnpm/setup@v2
+
+      - name: Render CV
+        uses: ./.github/actions/render-cv
+        with:
+          source: cv.yaml
+          destination: public/simon-sorensen-cv.pdf
 
       - name: Deploy production
         uses: ./.github/actions/deploy-worker

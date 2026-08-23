@@ -2,8 +2,8 @@
 node_modules
 .astro
 .wrangler
-public
 dist
+public/simon-sorensen-cv.pdf
 
 # code editor stuff
 .idea

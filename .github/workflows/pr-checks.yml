@@ -1,4 +1,4 @@
-name: Deploy website
+name: pr checks
 
 on:
   pull_request:
@@ -39,7 +39,7 @@ jobs:
           CLOUDFLARE_ENV: prod
 
   types:
-    name: build-check
+    name: types
     runs-on: ubuntu-26.04-arm
     steps:
       - name: Check out repository
@@ -49,4 +49,4 @@ jobs:
         uses: pnpm/setup@v2
 
       - name: Check types
-        run: pnpm generate-types && pnpm typecheck
+        run: pnpm typecheck
