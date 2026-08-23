@@ -1,0 +1,67 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "compatibility_date": "2026-05-16",
+  "compatibility_flags": ["global_fetch_strictly_public", "nodejs_compat"],
+  "name": "simse-io",
+  "main": "@astrojs/cloudflare/entrypoints/server",
+  "assets": {
+    "directory": "./dist",
+    "binding": "ASSETS",
+  },
+  "kv_namespaces": [
+    {
+      "binding": "SESSION",
+      "id": "23c71c93e44a4b5a98296b7db80ee085",
+    },
+  ],
+  "images": {
+    "binding": "IMAGES",
+    "remote": true,
+  },
+  "observability": {
+    "enabled": true,
+  },
+  "env": {
+    "ci": {
+      "name": "simse-io-ci",
+      "workers_dev": false,
+      "kv_namespaces": [{ "binding": "SESSION", "remote": false }],
+      "images": { "binding": "IMAGES", "remote": false },
+    },
+    "pr": {
+      "name": "simse-io-pr",
+      "workers_dev": false,
+      "kv_namespaces": [
+        {
+          "binding": "SESSION",
+          "id": "23c71c93e44a4b5a98296b7db80ee085",
+        },
+      ],
+      "images": { "binding": "IMAGES", "remote": true },
+    },
+    "preview": {
+      "name": "simse-io-preview",
+      "workers_dev": false,
+      "routes": [{ "pattern": "preview.simse.io", "custom_domain": true }],
+      "kv_namespaces": [
+        {
+          "binding": "SESSION",
+          "id": "23c71c93e44a4b5a98296b7db80ee085",
+        },
+      ],
+      "images": { "binding": "IMAGES", "remote": true },
+    },
+    "prod": {
+      "name": "simse-io-prod",
+      "workers_dev": false,
+      "routes": [{ "pattern": "simse.io", "custom_domain": true }],
+      "kv_namespaces": [
+        {
+          "binding": "SESSION",
+          "id": "23c71c93e44a4b5a98296b7db80ee085",
+        },
+      ],
+      "images": { "binding": "IMAGES", "remote": true },
+    },
+  },
+}

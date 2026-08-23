@@ -1,0 +1,116 @@
+name: deploy website
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-pr:
+    name: deploy PR preview
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.action != 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-26.04-arm
+    concurrency:
+      group: deploy-pr-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    permissions:
+      contents: read
+      pull-requests: write
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      PR_PREVIEW_URL: https://pr-${{ github.event.pull_request.number }}.simse.io
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        uses: pnpm/setup@v2
+
+      - name: Render CV
+        uses: ./.github/actions/render-cv
+        with:
+          source: cv.yaml
+          destination: public/simon-sorensen-cv.pdf
+
+      - name: Deploy PR preview
+        uses: ./.github/actions/deploy-worker
+        with:
+          cloudflare-environment: pr
+          worker-name: simse-io-pr-${{ github.event.pull_request.number }}
+          domain: pr-${{ github.event.pull_request.number }}.simse.io
+
+      - name: Add preview URL to job summary
+        run: |
+          echo "PR preview: ${PR_PREVIEW_URL}" >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Post or update PR preview comment
+        uses: marocchino/sticky-pull-request-comment@5770ad5eb8f42dd2c4f34da00c94c5381e49af88 # v3.0.5
+        with:
+          header: simse-pr-preview
+          message: |
+            PR preview: [${{ env.PR_PREVIEW_URL }}](${{ env.PR_PREVIEW_URL }})
+
+  remove-pr:
+    name: remove PR preview
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-26.04-arm
+    concurrency:
+      group: deploy-pr-${{ github.event.pull_request.number }}
+      cancel-in-progress: false
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        uses: pnpm/setup@v2
+
+      - name: Delete PR preview
+        run: pnpm exec wrangler delete --name "simse-io-pr-${PR_NUMBER}"
+
+  deploy-prod:
+    name: deploy production
+    if: github.event_name == 'push'
+    runs-on: ubuntu-26.04-arm
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: true
+    environment:
+      name: production
+      url: https://simse.io
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        uses: pnpm/setup@v2
+
+      - name: Render CV
+        uses: ./.github/actions/render-cv
+        with:
+          source: cv.yaml
+          destination: public/simon-sorensen-cv.pdf
+
+      - name: Deploy production
+        uses: ./.github/actions/deploy-worker
+        with:
+          cloudflare-environment: prod
+          worker-name: simse-io-prod
+          domain: simse.io

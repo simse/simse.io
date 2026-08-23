@@ -1,0 +1,41 @@
+name: Render CV
+description: Render a RenderCV YAML file to a PDF.
+
+inputs:
+  destination:
+    description: Path where the rendered PDF will be written.
+    required: true
+  source:
+    description: Path to the RenderCV YAML file.
+    required: false
+    default: cv.yaml
+  python-version:
+    description: Python version to install and use.
+    required: false
+    default: "3.13"
+
+runs:
+  using: composite
+  steps:
+    - name: Install uv
+      uses: astral-sh/setup-uv@c771a70e6277c0a99b617c7a806ffedaca235ff9 # v9.0.0
+
+    - name: Install Python
+      shell: bash
+      env:
+        PYTHON_VERSION: ${{ inputs.python-version }}
+      run: uv python install "$PYTHON_VERSION"
+
+    - name: Render CV
+      shell: bash
+      env:
+        DESTINATION: ${{ inputs.destination }}
+        PYTHON_VERSION: ${{ inputs.python-version }}
+        SOURCE: ${{ inputs.source }}
+      run: |
+        mkdir -p "$(dirname "$DESTINATION")"
+        uvx --python "$PYTHON_VERSION" "rendercv[full]" render "$SOURCE" \
+          --pdf-path "$DESTINATION" \
+          --dont-generate-markdown \
+          --dont-generate-html \
+          --dont-generate-png

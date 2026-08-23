@@ -1,0 +1,76 @@
+@import "tailwindcss";
+
+@font-face {
+  font-family: "GT Alpina";
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: normal;
+  src: url("/fonts/GT-Alpina.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "GT Alpina";
+  font-weight: 100 900;
+  font-display: swap;
+  font-style: italic;
+  src: url("/fonts/GT-Alpina-Italic.woff2") format("woff2");
+}
+
+@theme inline {
+  --font-sans: var(--font-figtree);
+  --font-sans-serif: "GT Alpina", serif;
+}
+
+@keyframes modal-overlay-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes modal-overlay-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes modal-box-in {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modal-box-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+}
+
+::view-transition-old(modal-overlay) {
+  animation: modal-overlay-out 180ms ease-out forwards;
+}
+::view-transition-new(modal-overlay) {
+  animation: modal-overlay-in 180ms ease-out forwards;
+}
+
+::view-transition-old(modal-box) {
+  animation: modal-box-out 220ms cubic-bezier(0.4, 0, 1, 1) forwards;
+}
+::view-transition-new(modal-box) {
+  animation: modal-box-in 280ms cubic-bezier(0, 0, 0.2, 1) forwards;
+}

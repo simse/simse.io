@@ -1,0 +1,11 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import HomepageGrid from "../components/HomepageGrid.astro";
+import { Navigation } from "../components/Navigation";
+---
+
+<BaseLayout>
+    <Navigation client:load transition:persist="site-nav" />
+
+    <HomepageGrid />
+</BaseLayout>

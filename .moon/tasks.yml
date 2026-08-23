@@ -1,7 +1,0 @@
-tasks:
-  lint:
-    command: 'biome check ./src'
-  format:
-    command: 'biome check --write ./src'
-  types:
-    command: 'tsc --noEmit'

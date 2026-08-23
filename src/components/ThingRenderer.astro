@@ -1,0 +1,96 @@
+---
+import type { CollectionEntry } from "astro:content";
+import { getPictureData } from "../components/cards/primitives/picture";
+import { BasicCard } from "./cards/BasicCard";
+import { FullBleedCard } from "./cards/FullBleedCard";
+import { ScreenshotCard } from "./cards/ScreenshotCard";
+import { TextCard } from "./cards/TextCard";
+
+const typeMap: Record<string, string> = {
+	'hobby': "Hobby",
+	'former_hobby': "Former hobby",
+	"project": "Project",
+	"musing": "A thought",
+	"other": "Other"
+};
+
+interface Props {
+    thing: CollectionEntry<"things">;
+}
+
+const { thing }: Props = Astro.props;
+
+const isWide = thing.data.size === 2;
+const backgroundImage = thing.data.backgroundImage
+	? await getPictureData(thing.data.backgroundImage, {
+		aspectRatio: isWide ? 2 : 1,
+		widths: isWide ? [600, 900, 1400, 1800] : [300, 450, 700, 900],
+	})
+	: null;
+const screenshotImage = thing.data.screenshotImage
+	? await getPictureData(thing.data.screenshotImage, {
+		widths: [300, 450, 700, 900],
+	})
+	: null;
+const backgroundMeta = thing.data.backgroundImageMeta;
+const screenshotMeta = thing.data.screenshotImageMeta;
+const contrastTop = thing.data.contrastTop ?? backgroundMeta?.contrastTop;
+const contrastBottom = thing.data.contrastBottom ?? backgroundMeta?.contrastBottom;
+
+let cardToRender = 'basic';
+
+if (backgroundImage || thing.data.animatedBackground) {
+	cardToRender = 'full_bleed';
+}
+
+if (screenshotImage) {
+	cardToRender = 'screenshot';
+}
+
+if (thing.data.type === "musing") {
+	cardToRender = 'writing';
+}
+
+const href = thing.data.href ? thing.data.href : thing.body ? `/${thing.id}` : undefined;
+---
+{cardToRender === 'basic' ? (
+<BasicCard {...thing.data} href={href} tag={typeMap[thing.data.type]} />
+) : null}
+
+{cardToRender === 'full_bleed' && thing.data.animatedBackground ? (
+	<FullBleedCard
+		{...thing.data}
+		href={href}
+		picture={backgroundImage ?? undefined}
+		placeholder={backgroundMeta?.placeholder}
+		contrastTop={contrastTop}
+		contrastBottom={contrastBottom}
+		animated={thing.data.animatedBackground}
+		tag={typeMap[thing.data.type]}
+		client:visible
+	/>
+) : cardToRender === 'full_bleed' ? (
+	<FullBleedCard
+		{...thing.data}
+		href={href}
+		picture={backgroundImage ?? undefined}
+		placeholder={backgroundMeta?.placeholder}
+		contrastTop={contrastTop}
+		contrastBottom={contrastBottom}
+		tag={typeMap[thing.data.type]}
+	/>
+) : null}
+
+{cardToRender === 'screenshot' && screenshotImage ? (
+	<ScreenshotCard
+		{...thing.data}
+		href={href}
+		picture={screenshotImage}
+		placeholder={screenshotMeta?.placeholder}
+		tag={typeMap[thing.data.type]}
+	/>
+) : null}
+
+{cardToRender === 'writing' ? (
+<TextCard {...thing.data} href={href} tag={typeMap[thing.data.type]} />
+) : null}

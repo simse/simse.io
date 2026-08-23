@@ -1,0 +1,36 @@
+---
+import { Font } from "astro:assets";
+import { ClientRouter } from "astro:transitions";
+import "../app.css";
+---
+
+<html>
+    <head>
+        <title>Simon Sorensen</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <ClientRouter />
+        <meta charset="utf-8" />
+        <Font cssVariable="--font-figtree" />
+    </head>
+
+    <body>
+        <slot />
+        <script>
+            import type { TransitionBeforePreparationEvent } from "astro:transitions/client";
+
+            let savedScrollY: number | null = null;
+
+            document.addEventListener("astro:before-preparation", (event) => {
+                const e = event as TransitionBeforePreparationEvent;
+                savedScrollY = e.navigationType === "push" ? window.scrollY : null;
+            });
+
+            document.addEventListener("astro:after-swap", () => {
+                if (savedScrollY !== null) {
+                    window.scrollTo({ top: savedScrollY, left: 0, behavior: "instant" });
+                }
+                savedScrollY = null;
+            });
+        </script>
+    </body>
+</html>

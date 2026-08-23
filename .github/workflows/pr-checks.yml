@@ -1,66 +1,54 @@
-name: 'PR Checks'
+name: pr checks
 
 on:
   pull_request:
 
-env:
-  PEPY_API_KEY: 'bruh'
-  SANITY_PROJECT_ID: rjqusm5i
-  SANITY_PROJECT_DATASET: test
+permissions:
+  contents: read
 
 jobs:
   lint:
-    runs-on: ubuntu-latest
+    name: lint
+    runs-on: ubuntu-26.04-arm
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Check out repository
+        uses: actions/checkout@v7
 
-      - name: Setup toolchain
-        uses: 'moonrepo/setup-toolchain@v0'
+      - name: Set up pnpm
+        uses: pnpm/setup@v2
 
-      - name: Run linting
-        run: moon :lint
+      - name: Run lint
+        run: pnpm lint
 
-  types:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup toolchain
-        uses: 'moonrepo/setup-toolchain@v0'
-
-      - name: Run linting
-        run: moon :types
-
-  unit-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Setup toolchain
-        uses: 'moonrepo/setup-toolchain@v0'
-
-      - name: Run linting
-        run: moon :test
+      - name: Run fmt:check
+        run: pnpm fmt:check
 
   build-check:
-    runs-on: ubuntu-latest
+    name: build-check
+    runs-on: ubuntu-26.04-arm
     steps:
-      - name: Check out repository code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+      - name: Check out repository
+        uses: actions/checkout@v7
 
-      - name: Setup toolchain
-        uses: 'moonrepo/setup-toolchain@v0'
+      - name: Set up pnpm
+        uses: pnpm/setup@v2
 
-      - name: Run linting
-        run: moon :build
+      - name: Run build check
+        run: pnpm build
+        env:
+          CLOUDFLARE_ENV: ci
+
+  types:
+    name: types
+    runs-on: ubuntu-26.04-arm
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        uses: pnpm/setup@v2
+
+      - name: Check types
+        run: pnpm typecheck
+        env:
+          CLOUDFLARE_ENV: ci
