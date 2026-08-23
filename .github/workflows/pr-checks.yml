@@ -36,7 +36,7 @@ jobs:
       - name: Run build check
         run: pnpm build
         env:
-          CLOUDFLARE_ENV: prod
+          CLOUDFLARE_ENV: ci
 
   types:
     name: types
@@ -50,3 +50,5 @@ jobs:
 
       - name: Check types
         run: pnpm typecheck
+        env:
+          CLOUDFLARE_ENV: ci
