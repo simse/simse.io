@@ -1,0 +1,15 @@
+@font-face {
+  font-family: "Die Grotesk";
+  font-style: normal;
+  src: url("/fonts/DieGroteskVF.woff2");
+}
+
+@font-face {
+  font-family: "Die Grotesk";
+  font-style: italic;
+  src: url("/fonts/DieGroteskVF-Italic.woff2");
+}
+
+body {
+    font-family: "Die Grotesk", sans-serif;
+}

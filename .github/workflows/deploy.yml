@@ -1,0 +1,106 @@
+name: Deploy website
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, closed]
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  deploy-pr:
+    name: Deploy PR preview
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.action != 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-26.04-arm
+    concurrency:
+      group: deploy-pr-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ENV: pr
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        uses: pnpm/setup@v2
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build PR preview
+        run: pnpm build
+
+      - name: Deploy PR preview
+        run: >-
+          pnpm exec wrangler deploy
+          --name "simse-io-pr-${PR_NUMBER}"
+          --domain "pr-${PR_NUMBER}.simse.io"
+
+      - name: Add preview URL to job summary
+        run: |
+          echo "PR preview: https://pr-${PR_NUMBER}.simse.io" >> "$GITHUB_STEP_SUMMARY"
+
+  remove-pr:
+    name: Remove PR preview
+    if: >-
+      github.event_name == 'pull_request' &&
+      github.event.action == 'closed' &&
+      github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-26.04-arm
+    concurrency:
+      group: deploy-pr-${{ github.event.pull_request.number }}
+      cancel-in-progress: false
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      PR_NUMBER: ${{ github.event.pull_request.number }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        uses: pnpm/setup@v2
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Delete PR preview
+        run: pnpm exec wrangler delete --name "simse-io-pr-${PR_NUMBER}"
+
+  deploy-prod:
+    name: Deploy production
+    if: github.event_name == 'push'
+    runs-on: ubuntu-26.04-arm
+    concurrency:
+      group: deploy-production
+      cancel-in-progress: true
+    environment:
+      name: production
+      url: https://simse.io
+    env:
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ENV: prod
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v7
+
+      - name: Set up pnpm
+        uses: pnpm/setup@v2
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build production
+        run: pnpm build
+
+      - name: Deploy production
+        run: pnpm exec wrangler deploy

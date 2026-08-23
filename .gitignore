@@ -1,6 +1,12 @@
-.vscode
-
+# website stuff
 node_modules
-# moon
-.moon/cache
-.moon/docker
+.astro
+.wrangler
+public
+dist
+
+# code editor stuff
+.idea
+
+# CV stuff
+rendercv_output
